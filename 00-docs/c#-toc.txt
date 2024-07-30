@@ -369,7 +369,7 @@ File I/O and Debugging using Visual Studio
 		3.	Serialization and deserialization
 		4.	Exception handling in file operations
 		5.	Visual Studio debugging tools-NUnit
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^WinForms & WPF^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 WinForms 
 	Learning Outcomes:
 		•	Identify the need of GUI with buttons, check boxes, radio buttons, panels, group boxes, list boxes and picture boxes and create using WinForms

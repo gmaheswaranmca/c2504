@@ -1,0 +1,16 @@
+19. to find average of two numbers. Sarika
+Shilpa
+
+pseudo: (Shilpa)
+    Enter First Number "number1"
+    Enter Second Number "number2"
+    sum of the number1 and number2 into "sum"
+    find averge into "average"
+    Print the average 
+
+pseudo: (Shilpa)
+    Input number1
+    Input number2
+    sum = number1 + number2 
+    average = sum / 2
+    Print average 

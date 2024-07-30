@@ -1,2 +1,63 @@
-TOC  
-Repo for our learning 
+TOC - delivered to learners
+Repo for our learning - setup 
+Software Required - 
+    VS 2022 
+        [x] .NET desktop development 
+        [x] Data storage and processing
+    !!! Check VS 2022 is installed:
+Try to create c# console app (.Net Framework):
+    .Net Framework Version: 4.7.2
+    Project: ProgramingFundamentalsProject
+    Solution: ProgramingFundamentalsSolution
+
+
+19. to find average of two numbers. Sarika 
+20. to find cube of number. Sahla 
+15. to find square of the number. Anjana E R 
+9. swap two numbers. Minnu
+
+28. to check nubmer is divisible by 3. Ashwin.
+11. number divisible by 27. Abijith 
+
+14. to print N natural numbers. Shilpa
+
+1. to check a number palindrome. Sarika 
+
+2. to check a number amstrong. Collin 
+3. to check a number prime. Ann Maria 
+7. to check a number perfect number. Anjana N K
+
+17. to check number is odd or even. Neha
+18. to check a year leap. Anugrah Krishnan
+21. to check a number perfect square or not. Athulya 
+
+5. Reverse the number. Alan 
+ 
+6. Factorials of the number. Ashna
+4. Fibonacci. Gladsy, Anurag 
+
+22. to print prime numbers between in the limit. Shilpa 
+
+
+12. to find an element from the array. Gopika
+13. to find the largest number from array. Mohammed Riza 
+24. to sort the elements in the array. Alan
+8. to find sum of n numbers. Yahkoob, Aaryaka
+10. to display the duplicate numbers in the array. Girish.
+
+
+16. to check string anagram. Dijol
+    SILENT LISTEN : 
+        number of letters - matched 
+        same letters to be in both words, 
+            arrangements may be different 
+    RACE CARE       Ann Maria 
+    MEAT TEAM 
+    BEAR BARE   
+    NO ON 
+    NO NO   
+23. to find length of the string. Nivya 
+25. to delete duplicates strings in sting list. Roshith 
+26. to count vowels in a string. Gayathri 
+27. to count whitespaces in a sentence. Rishwin 
+

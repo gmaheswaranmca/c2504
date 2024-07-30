@@ -1,0 +1,28 @@
+20. to find cube of number. Sahla 
+Neha
+pseudo: 
+    Input num 
+    cube = num * num * num 
+    Print cube 
+
+Gopika 
+pseudo: routine 
+    Function FindCube(num)
+        cube = num * num * num 
+        Return cube 
+    
+Shilpa
+pseudo: routine test
+    Procedure TestFindCube()
+        Input num 
+        cube = FindCube(num)
+        Print cube 
+
+Mahesh      | Alan particpated in knowing how to write test routine 
+pseudo: routine test
+    Procedure TestFindCube2()
+        Read num of the first row from "numbers" table of sqlite database "compute_db"
+        cube = FindCube(num)
+        Update square column of the first row of the numbers table 
+
+

@@ -1,0 +1,23 @@
+11. number divisible by 27. Abijith 
+
+Gopika 
+pseudo: routine 
+    function IsDivisibleBy27(num)
+        if num % 27 == 0
+            return True 
+        else 
+            return False 
+        
+Abijith
+pseudo: routine test 
+    function TestIsDivisibleBy27()
+        input num 
+        if IsDivisibleBy27(num)
+            print "Divisible By 27"
+        else 
+            print "Not Divisible By 27"
+            
+Mahesh
+pseudo: test routine in the driver code / main function 
+    function __Main__()
+        TestIsDivisibleBy27()

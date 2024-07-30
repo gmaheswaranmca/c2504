@@ -1,0 +1,27 @@
+12. to find an element from the array. Gopika
+    array : unsorted 
+    to find key or target in the array 
+    to find the unsorted array only, dont sort it 
+    linear search : approach 
+
+    to find index of the key in array 
+Sarika 
+pseudo: Routine 
+    function FindIndex(numbers, size, key)
+        for index in 0 to size-1
+            if numbers[index] == key 
+                return index 
+            end if 
+        end for 
+        return -1
+
+Gopika: TestRoutine 
+    function TestFindIndex()
+        Input size 
+        Input numbers ie array of 'size' numbers
+        Input key 
+        index = FindIndex(numbers, size, key)
+        if index != -1
+            print index 
+        else 
+            print 'Not found'
