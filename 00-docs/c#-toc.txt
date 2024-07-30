@@ -1,0 +1,547 @@
+*******************************LaunchPadFY25 | C#.NET with WPF*******************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Foundation Course^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Programming Fundamentals
+	Learning Outcomes:
+		1.	Able to explain machine language, assembly language, 
+			assembler, high level language with examples, compiler, 
+			interpreter, editor and Visual Studio
+		2.	Given a simple problem statement, find the solution and 
+			represent the solution as a pseudo code. 
+			(Simple problem is one that can be solved 
+			using the basic control statements of a programming language)
+		3.	Convert the pseudocode into a program 
+			using C# programming language 
+			following the coding standards 
+			by doing one or more of the following operations
+			a.	Store data and perform input/output operations
+			b.	Perform arithmetic operations
+			c.	Perform relational operation and logical operations
+			d.	Perform branching using the if-else statement
+			e.	Write nested if-else statement
+			f.	Perform fixed number of looping using the for statement
+			g.	Perform looping where the number of times is undefined 
+				using while and do-while statements
+			h.	Write break and continue statements 
+				to alter the normal flow of looping
+			i.	Write nested loops using all the 3 looping constructs
+			j.	Choose the most suitable looping construct for the solution
+			k.	Write the switch-case statement
+
+	Topics:
+		1.	Introduction to programming
+		2.	Machine Language
+		3.	Assembly Language and Assembler
+		4.	High Level Language, Interpreters and Compilers
+		5.	Problem solving techniques
+		6.	Algorithm
+		7.	Flowchart
+		8.	Pseudocode
+		9.	Hello World Program using C#
+		10.	Introduction to Visual Studio IDE
+		11.	Variables and constants
+		12.	C# coding standards
+		13.	Assignment Operator
+		14.	Arithmetic Operators
+		15.	Relational and Logical Operators
+		16.	The “if” statement
+		17.	The “if-else” statement
+		18.	Nested “if” statements
+		19.	The “else-if” ladder statement
+		20.	The “for” loop
+		21.	The nested “for” loop
+		22.	The “while” loop
+		23.	The nested “while” loop
+		24.	The “do-while” loop
+		25.	The nested “do-while” loop
+		26.	The “break” and “continue” statements
+		27.	The “switch-case” statement
+
+Introduction to DBMS &MS SQLServer
+	Learning Outcomes:
+		1.	Able to explain different Database models and purpose of DB and RDBMS
+		2.	For a given requirement, the participant should able to write queries for following scenarios 
+		a.	Calculate information across result sets using aggregate queries (sum, min, max, avg, etc.)
+		b.	Insert, update, and delete data
+		c.	Retrieve data from single table based on conditions
+		d.	Retrieve data from multiple tables using Joins
+		e.	Retrieving data using Sub-queries
+	Topics:
+		1.	Introduction to database and RDBMS
+		2.	Characteristics of Database Management System
+		3.	Data modelling
+		4.	Relational Data modelling
+		5.	Normalization
+		6.	Transaction
+		7.	Types of Keys
+		8.	Introduction to SQL
+		9.	SQL Datatypes
+		10.	SQL Commands (DDL, DML, TCL)
+		11.	SQL Operator
+		12.	SQL Table
+		13.	Select Statement
+		14.	Insert Statement
+		15.	Update Statement
+		16.	DeleteStatement
+		17.	Views
+		18.	Sub Queries
+		19.	Aggregate Function
+		20.	SQL Joins
+
+Introduction to Web Applications
+	Learning Outcomes:
+		1.	Able to explain the client and server architecture.
+		2.	Able to explain the various tiers of Web Application and examples of technologies used in these tiers
+	Topics:
+		1.	Client server architecture
+		2.	Web Applications
+		3.	Flow of control in a web application
+		4.	Browser as a thin client and Web Server
+		5.	Introduction to HTML, CSS and JavaScript
+		6.	Benefits of web applications
+		7.	Static pages and Dynamic pages
+		8.	Application servers
+		9.	N-tier architecture
+		10.	Difference between web server and application server
+		
+Software Engineering
+	Learning Outcomes:
+		1.	Able to explain various phases Software Development Life Cycle
+		2.	Able to explain the Waterfall model
+		3.	Able to explain the Agile Scrum methodologies
+		4.	Understand modern project management techniques and tools
+		5.	Explain DevOps practices and continuous integration/continuous deployment (CI/CD).
+	Topics:
+		1.	Introduction to Software Engineering
+		2.	SDLC
+		3.	STLC
+		4.	Software Engineering models
+			a.	Waterfall model
+			b.	Spiral model 
+			c.	Prototyping model
+		5.	Project Management
+			a.	Various roles (Developer to Program Manager)
+			b.	Project planning and tracking
+			c.	Risk management
+		6.	Agile Scrum methodologies
+			a.	Introduction to Agile
+			b.	Scrum framework (roles, events, artifacts)
+			c.	Modern Project Management Techniques
+				o	Kanban
+				o	Lean
+		7.	Code sharing and version control systems
+			a.	Gitlab 
+			b.	Github
+		8.	Continuous Integration/Continuous Deployment (CI/CD)
+			a.	Introduction to CI/CD
+			b.	Setting up CI/CD pipelines
+			c.	Tools like GitLab, Jenkins CI/CD
+		9.	DevOps Practices
+			a.	Introduction to DevOps
+			b.	Tools and techniques (GitLab, Docker)
+		10.	Types of projects
+			a.	Application development and maintenance (Enterprise Applications, Embedded Applications)
+			b.	Application testing
+			c.	Product engineering
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C#.NET Programming^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.NET Framework
+	Learning Outcomes:
+		1.	Explain .NET framework, CLR, CLI, CTS, CLS, BCL, CIL/MSIL
+	Topics:
+		1.	The .NET Framework - an Overview
+		2.	Architecture of .NET Applications
+		3.	Technologies used in these tiers (in .NET Frameworks)
+			a.	Legacy .NET framework.
+			b.	ASP.NET Web Forms 
+			c.	ASP.NET MVC Applications
+			d.	SOAP-based web services 
+		4.	RESTful web services
+			a.	.NET Core Framework
+			b.	SP.NET Core MVC
+			c.	ASP.NET Core Web API (RESTful services)
+			d.	gRPC services
+		5.	Types of Applications developed using MS.NET.
+		6.	CLR, CTS, MSIL & other tools.
+		7.	Multiple Language Interaction & support l Moving from Project to Assemblies…
+		8.	Security in .NET – CAS
+		9.	Assemblies in Detail
+		10.	GAC, Strong Names
+		11.	Language Interop
+		
+OOPs- Object Oriented Programming
+	Learning Outcomes:
+		1.	Given a problem statement, identify the classes, properties and methods and write appropriate C# code to create the class
+		2.	Create objects from classes and use them by calling the appropriate methods
+		3.	Identify the need of default and parameterized constructors and code them
+		4.	Identify the need of getters and setters and code them
+		5.	Identify the need of read only and write only properties and code them
+		6.	Identify the right access level of the members in a class and code them
+	Topics:
+		1.	Classes
+		2.	Objects
+		3.	Encapsulation
+		4.	Inheritance
+		5.	Polymorphism
+		
+Classes & Objects
+	Learning Outcomes:
+		1.	Given a problem statement, identify the classes, properties and methods and write appropriate C# code to create the class
+		2.	Create objects from classes and use them by calling the appropriate methods
+		3.	Identify the need of default and parameterized constructors and code them
+		4.	Identify the need of getters and setters and code them
+		5.	Identify the need of method overloading
+	Topics:
+		1.	Components of a Class
+		2.	Types of Variables and its uses.
+		3.	Method Advantages, Categories and Types
+		4.	Constructor advantages and its types
+		5.	Ways to initialize the Object
+		6.	“this” keyword
+		7.	Static Block & Instance Block
+		8.	Nested classes
+		
+Inheritance
+		Topics:
+		1.	Inheritance and its advantages
+		2.	The “extends” keyword
+		3.	Types of Inheritance
+		4.	Single Inheritance
+		5.	Multilevel Inheritance
+		6.	Multiple Inheritance
+		7.	Hierarchical Inheritance
+		8.	Hybrid Inheritance
+		9.	Difference between IS-A and HAS-A relationship
+		10.	Use of “super” keyword and forms of “super” keyword
+		
+Polymorphism
+	Learning Outcomes:
+		1.	Explain polymorphism with the example of method overloading
+		2.	Identify the need of static data and methods and code them
+		3.	Identify the need of final data members, final methods and final parameters and code them
+		4.	Identify the need of arrays as properties of a class and code them
+		5.	Explain polymorphism with the example of method overriding
+		6.	Explain early binding (compile time polymorphism) and late/dynamic binding (runtime polymorphism) with method overloading and method overriding
+		7.	Identify the need of interfaces and write code
+		8.	Explain how runtime polymorphism is achieved with the help of abstract classes and interfaces
+		9.	Identify the need for multiple inheritance of interfaces and write code
+	Topics:
+		1.	Polymorphism and its advantages
+		2.	Types of Polymorphism
+		3.	Types of Binding
+		4.	Method Overloading and its uses.
+		5.	Conditions of Overloading
+		6.	Method Overriding
+		7.	Scenario of Overriding
+		8.	Difference between Overloading and Overriding
+		9.	About Class Casting
+		
+C# Concepts: Abstract Class, Interface and Partial Class
+	Learning Outcomes:
+		1.	Identify the need of method overloading
+		2.	Explain polymorphism with the example of method overloading
+		3.	Identify the need of static data and methods and code them
+		4.	Identify the need of static classes and code them
+		5.	Identify the need of constant data members and local data code them
+	Topics:
+		1.	Abstract Class
+		2.	Virtual Functions
+		3.	Interface
+		4.	Interface vs. Abstract Class
+		5.	Static Class
+		6.	Extension Methods
+		7.	Partial Class
+		8.	Partial Methods
+		
+C#: Property, Indexer, Attributes and Exception Handling
+	Learning Outcomes:
+		1.	Identify the need of single and multidimensional arrays as properties of a class and code them
+		2.	Identify the need of array of objects and code them
+		3.	Identify the need of enumerations and code them
+		4.	Identify the need of value types and reference types and write code
+		5.	Identify the need of pass by reference and use ref keyword
+		6.	Identify the need of out parameters and code them
+	Topics:
+		1.	Property
+		2.	Indexer
+		3.	Exceptional Handling
+		4.	Enum
+		5.	Attributes
+		
+Arrays and Strings
+	Learning Outcomes:
+		1.	Able to write programs on Matrix Addition, Multiplication, Transpose Count the number of vowels, consonants, special characters in the given String.
+		2.	Able to write programs on Sorting arrays using different algorithms 
+		3.	Able to search a value in an array (linear and binary)
+		4.	Able to create programs for finding median, mode value , highest, second highest and duplicate elements in an array
+	Topics:
+		1.	Arrays
+		2.	Types of Arrays
+		3.	Strings
+		4.	String Methods
+
+
+Exception Handling& Logging
+	Learning Outcomes:
+	1.	Identify the probable exceptions and write necessary code to handle them to avoid the program from crashing
+	2.	Identify the need of user defined exceptions, create them and throw them
+	3.	Explain the difference between Exception (checked exceptions) and RuntimeException (unchecked exceptions)
+	4.	Implement practical logging of exceptions to aid in debugging and maintenance
+	Topics:
+	1.	What is Exception and its types
+	2.	How to handle exception?
+	3.	Multiple catch blocks
+	4.	Finally block
+	5.	Difference between throw and throws
+	6.	Custom Exception
+	7.	Logging Exceptions
+		a.	Install log4net via NuGet.
+		b.	Configure log4net in App.config or Web.config.
+		c.	Initialize log4net by creating a Logger class.
+		d.	Use the Logger to log exceptions in the application.
+		
+Anonymous Type, Delegates, Events and Lambda
+	Learning Outcomes:
+		1.	Identify the need of lambda expressions and use Where, First, FirstOrDefault, Min, Max, MinBy and MaxBy to write code
+		2.	Identify the use of Delegate and able to create a program which can hold same signature as delegate that can be assigned to delegates.
+	Topics:
+		1.	Extension Methods
+		2.	Anonymous Type
+		3.	Var and Dynamic
+		4.	Delegates
+		5.	Events
+		6.	Anonymous Methods
+		7.	Lambda Expression
+		8.	Expression Tree
+		9.	Async/Await and Task Parallel Library (TPL) Basics.
+		a.	Introduction to asynchronous programming
+		b.	Async and await keywords
+		c.	Task and Task<T>
+		d.	Handling exceptions in asynchronous methods
+		e.	Parallel programming with TPL
+		10.	LINQ Usage Basics.
+		a.	LINQ query syntax and method syntax
+		b.	LINQ operators (Select, Where,GroupBy, Join, etc.)
+		c.	LINQ to Objects
+		d.	LINQ to XML
+		e.	LINQ to SQL
+	
+Practical OOAD
+	1.	SOLID Design Principles
+		a.	Single Responsibility Principle
+		b.	Open/Closed Principle
+		c.	Liskov Substitution Principle
+		d.	Interface Segregation Principle
+		e.	Dependency Inversion Principle
+	2.	Practical Implementation Adhering to SOLID Principles
+		a.	Provide a simple domain-specific use case scenario from a real healthcare/semi or digital engineering service project at Quest.
+		b.	Implement a simple Patient Management or Device Monitoring system that adheres to SOLID principles.
+	3.	Design Patterns Basics
+		a.	Importance of design patterns in software development.
+		b.	Creational Pattern: Singleton
+			a.	Learning Outcome: Understand and implement the Singleton pattern to ensure a class has only one instance.
+			b.	Practical Example: Implement a configuration manager that uses the Singleton pattern to provide a single access point for application settings.
+		c.	Structural Pattern: Adapter
+			a.	Learning Outcome: Understand and implement the Adapter pattern to allow incompatible interfaces to work together.
+			b.	Practical Example: Create an adapter for a legacy system to work with new code without modifying the existing system.
+		d.	Behavioral Pattern: Observer
+			a.	Learning Outcome: Understand and implement the Observer pattern to define a one-to-many dependency between objects.
+			b.	Practical Example: Implement an event notification system where multiple components are updated when the state of a subject changes.
+			
+Socket Programming in C# 
+	Learning Outcomes:
+		1.	Able to explain the fundamentals of network communication
+		2.	Able to create TCP and UDP clients and servers using C# sockets
+	Topics:
+		1.	Introduction to network programming
+		2.	TCP/IP basics
+		3.	Socket class in C#
+		4.	Asynchronous socket operations
+		5.	Client-server model
+	
+File I/O and Debugging using Visual Studio 
+	Learning Outcomes:
+		1.	Perform common file and directory operations using C# classes
+		2.	Implement efficient file reading and writing using streams 
+	
+	Topics:
+		1.	File and directory operations in C#
+		2.	Stream-based I/O
+		3.	Serialization and deserialization
+		4.	Exception handling in file operations
+		5.	Visual Studio debugging tools-NUnit
+
+WinForms 
+	Learning Outcomes:
+		•	Identify the need of GUI with buttons, check boxes, radio buttons, panels, group boxes, list boxes and picture boxes and create using WinForms
+		•	Identify the need of event driven programming in WinForms and write programs to handle various events
+		•	Design and implement a simple practical project using WinForms.
+
+	Topics:
+		1.	Introduction to Windows Forms
+		2.	Visual Studio and the Forms Designer
+		3.	Using Controls
+		4.	List Controls
+		5.	Working with Dialogs
+		6.	Menus, Toolbars and Status Bars
+		7.	Practical Project: Contact Management System
+			a.	Develop a WinForms application to manage contacts. The application will allow users to add, update, delete, and view contacts. It will use various WinForms controls and demonstrate event-driven programming.
+			b.	Main Form: Contains buttons to add, update, delete, and view contacts.
+			c.	Add/Update Form: Allows the user to enter contact details such as name, phone number, and email.
+			d.	Contact List: Displays the list of contacts using a ListBox or DataGridView.
+
+Windows Presentation Foundation		
+	Learning Outcomes:
+		1.	Create Windows applications using the classes provided by WPF
+		2.	Create applications following MVVM design pattern using WPF
+		3.	Create XAML with WPF application
+		4.	Create Windows applications using a combination of code and XAML
+		5.	Use the layout features of WPF to create flexible and attractive user interfaces using Panels
+		6.	Use static and dynamic resources for different WPF controls like rectangle, ellipse and Border
+		7.	Use element binding, property binding and two way binding in WPF
+		8.	Implement event and command-driven applications 
+			with windows, menus, dialogs, toolbars and other common user interface features
+		9.	Use threading in WPF
+		10.	Create thread and multithread applications using WPF
+		11.	Able to create and use Behaviours to enhance interactivity and reduce code-behind in WPF applications.
+		12.	
+	Topics:
+		1.	Introduction to WPF
+			a.	Why WPF?
+			b.	What Is WPF?
+			c.	.NET Framework  (WinFX)
+			d.	WPF Overview
+			e.	Application and Window
+			f.	A Simple WPF Application
+			g.	Using Visual Studio
+			h.	Brushes
+			i.	Panels
+		2.	MVVM
+			a.	MVVM Introduction
+			b.	MVVM Advantages
+			c.	MVVM First application
+			d.	MVVM- Hooking up views
+			e.	MVVM- Hooking up view model
+			f.	MVVM- WPF Data binding
+			g.	MVVM-WPF Data templates
+			h.	MVVM- View model communications
+			i.	MVVM-Hierarchies & Navigation
+			j.	MVVM- Validations
+		3.	XAML
+			a.	Role of XAML
+			b.	Elements and Attributes
+			c.	Namespaces
+			d.	Property Elements
+			e.	Type Converters
+			f.	Content Property
+			g.	Collections
+			h.	XAML and Procedural Code
+			i.	Visual Tree and Logical tree
+		4.	Dependency Properties and Routed Events
+			a.	Dependency Properties
+			b.	Change Notification
+			c.	Property Value Inheritance
+			d.	Support for Multiple Providers
+			e.	Routed Events
+			f.	Routing Strategies
+			5.	WPF GUI
+			a.	WPF Controls(Button,Label,TextBox,ToolTip,RadioButton,CheckBox,ListBox,ComboBox)
+			b.	Layouts (sizing, positioning, Transforms, canvas, shapes, stackpanel, wrappanel, dockpanel, Grid, scrolling, scalling)
+			c.	Dialogs (Message boxes, Win32 common dialogs, Custom modal dialogs, Custom modeless dialogs)
+			d.	Custom Controls of WPF
+		6.	Data Binding
+			a.	Binding Sources
+			b.	Sharing Sources with DataContext
+			c.	Data Templates
+			d.	Value Converters
+			e.	Collection Views
+			f.	Data Providers
+			g.	Validation Rules
+			h.	(More focus on how to use binding & controls together)
+		7.	Menus & Commands, Toolbars & Status bars
+			a.	Menus & Commands
+				i.	Menus
+				ii.	Context Menus
+				iii.	Icons on Menu Items
+				iv.	Commands
+				v.	Keyboard Shortcuts
+				vi.	Disabling Menu Items
+				vii.	Checking Menu Item
+			b.	Toolbars and Status Bars
+				i.	Toolbars
+				ii.	Toolbars and Commands
+				iii.	Status Bars
+		8.	Styles, Templates, Skins and Themes
+			a.	Styles
+			b.	Style Sharing
+			c.	Triggers
+			d.	Templates
+			e.	Templated Parent’s Properties
+			f.	Skins
+			g.	Themes
+		9.	Behaviors 
+			a.	 Introduction to Behaviors 
+				a.	Understanding the concept of Behaviors in WPF
+				b.	Behaviors vs. event handlers
+				c.	Benefits of using Behaviors
+			b. Creating Custom Behaviors
+				a.	Inheriting from Behavior<T> class
+				b.	Implementing AttachedProperty for Behaviors
+				c.	Overriding OnAttached and OnDetaching methods
+			c. Using Microsoft.Xaml.Behaviors NuGet package
+				a.	Installing and referencing the package
+				b.	Namespace declarations in XAML
+			d. Common Built-in Behaviors
+				a.	EventTriggerBehavior
+				b.	InvokeCommandAction
+				c.	ChangePropertyAction
+			e. Attaching Behaviors to Controls
+				a.	XAML syntax for attaching Behaviors
+				b.	Binding Behaviors to ViewModel properties
+		10.	Dispatcher Timer 
+			i.	Introduction to Dispatcher Timer 
+			ii.	Understanding the DispatcherTimer class
+			iii.	Differences between DispatcherTimer and System.Threading.Timer
+			b.	Creating and Configuring DispatcherTimer
+			i.	Instantiating DispatcherTimer
+			ii.	Setting Interval property
+			iii.	Handling the Tick event
+			c.	Starting and Stopping the Timer 
+			i.	Using Start() and Stop() methods
+			ii.	IsEnabled property
+			d.	Timer Accuracy and Performance Considerations 
+			i.	Understanding timer resolution
+			ii.	Best practices for timer intervals
+			e.	Using DispatcherTimer in MVVM 
+			i.	Integrating DispatcherTimer with ViewModels
+			ii.	Binding timer state to UI elements
+			11.	Background Worker
+			i.	Introduction to BackgroundWorker
+			ii.	Purpose and benefits of BackgroundWorker
+			iii.	Comparison with other asynchronous patterns
+			b.	Creating and Configuring BackgroundWorker
+			i.	Instantiating BackgroundWorker
+			ii.	Setting WorkerReportsProgress and WorkerSupportsCancellation properties
+			c.	Implementing DoWork Event Handler 
+			i.	Writing long-running operations
+			ii.	Passing arguments to the worker
+			d.	Progress Reporting 
+			i.	Using ReportProgress method
+			ii.	Handling ProgressChanged event
+			iii.	Updating UI with progress information
+			e.	Handling Work Completion 
+			i.	Implementing RunWorkerCompleted event handler
+			ii.	Accessing results and handling errors
+		12.	Multi-threaded Applications
+			a.	Creating multi-threaded applications in WPF
+			b.	Handling UI updates from background threads
+		13.	Capstone Project
+			a.	Design & implement a functional dashboard for any engineering service app using MVVM.
+			b.	Showcase integration with real-time data sources.
+			c.	Demonstrate the use of advanced WPF features in a cohesive application.
+		14.	Integration with Restful Services
+			a.	Introduction to RESTful services.
+			b.	Implementing data retrieval and updates from multiple RESTful services.
+			c.	Consuming RESTful services in a WPF application.
+			d.	Utilizing WPF in a front-end microservices architecture.
+			e.	Demonstrating practical examples of WPF and local RESTful service integration.
+

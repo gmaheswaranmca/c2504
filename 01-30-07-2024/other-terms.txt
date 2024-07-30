@@ -1,0 +1,8 @@
+flowchart:
+    A flowchart is a graphical representation of a process, 
+    showing the steps as boxes of various kinds, and 
+    their order by connecting them with arrows. 
+    Flowcharts are used to visualize the sequence of steps 
+    in a process and can help 
+    in understanding, analyzing, and improving workflows.
+
