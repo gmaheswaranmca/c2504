@@ -1,0 +1,361 @@
+conditional statements, 
+branching, 
+looping, and 
+unconditional statements 
+in C#.
+
+============================Conditional Statements============================
+if Statement
+    The if statement is used 
+    to execute a block of code 
+    if a specified condition is true.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+if (condition)
+{
+    // Code to execute if condition is true
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+int age = 18;
+if (age >= 18)
+{
+    Console.WriteLine("You are an adult.");
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+if-else Statement
+    The if-else statement is used 
+    to execute one block of code if a condition is true and 
+    another block of code if the condition is false.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+if (condition)
+{
+    // Code to execute if condition is true
+}
+else
+{
+    // Code to execute if condition is false
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+int age = 17;
+if (age >= 18)
+{
+    Console.WriteLine("You are an adult.");
+}
+else
+{
+    Console.WriteLine("You are not an adult.");
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+else if Statement
+    The else if statement is used 
+    to specify a new condition 
+    if the first condition is false.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+if (condition1)
+{
+    // Code to execute if condition1 is true
+}
+else if (condition2)
+{
+    // Code to execute if condition1 is false and condition2 is true
+}
+else
+{
+    // Code to execute if both conditions are false
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+int age = 15;
+if (age >= 18)
+{
+    Console.WriteLine("You are an adult.");
+}
+else if (age >= 13)
+{
+    Console.WriteLine("You are a teenager.");
+}
+else
+{
+    Console.WriteLine("You are a child.");
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+switch Statement
+    The switch statement is used 
+    to execute one block of code among many, 
+    based on the value of a variable.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+switch (expression)
+{
+    case value1:
+        // Code to execute if expression == value1
+        break;
+    case value2:
+        // Code to execute if expression == value2
+        break;
+    // Add more cases as needed
+    default:
+        // Code to execute if expression doesn't match any case
+        break;
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+int day = 3;
+switch (day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+    case 2:
+        Console.WriteLine("Tuesday");
+        break;
+    case 3:
+        Console.WriteLine("Wednesday");
+        break;
+    default:
+        Console.WriteLine("Another day");
+        break;
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+============================Unconditional Statements============================
+
+break Statement
+    The break statement is used 
+    to exit a loop or a switch statement.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+break;
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+for (int i = 0; i < 10; i++)
+{
+    if (i == 5)
+    {
+        break;
+    }
+    Console.WriteLine(i);
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+continue Statement
+    The continue statement is used 
+    to skip the current iteration of a loop and 
+    proceed with the next iteration.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+continue;
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+for (int i = 0; i < 10; i++)
+{
+    if (i % 2 == 0)
+    {
+        continue;
+    }
+    Console.WriteLine(i);
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+============================Looping Statements============================
+
+for Loop
+    The for loop is used 
+    to execute a block of code 
+    a specific number of times.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+for (initialization; condition; increment)
+{
+    // Code to execute
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+for (int i = 0; i < 5; i++)
+{
+    Console.WriteLine(i);
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+foreach Loop
+    The foreach loop is used 
+    to iterate over a collection or array.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+foreach (type variable in collection)
+{
+    // Code to execute
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+int[] numbers = { 1, 2, 3, 4, 5 };
+foreach (int number in numbers)
+{
+    Console.WriteLine(number);
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+while Loop
+    The while loop is used 
+    to execute a block of code 
+    as long as a specified condition is true.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+while (condition)
+{
+    // Code to execute
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+int i = 0;
+while (i < 5)
+{
+    Console.WriteLine(i);
+    i++;
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+do-while Loop
+    The do-while loop is similar to the while loop, 
+    but it ensures that the block of code is executed 
+    at least once.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+do
+{
+    // Code to execute
+} while (condition);
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+int i = 0;
+do
+{
+    Console.WriteLine(i);
+    i++;
+} while (i < 5);
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+============================Unconditional Statements============================
+
+return Statement
+    The return statement is used 
+    to exit from a method and optionally return a value.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+return; // For void methods
+return value; // For methods that return a value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+public int Add(int a, int b)
+{
+    return a + b;
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+throw Statement
+    The throw statement is used 
+    to signal the occurrence of an exception.
+
+Syntax:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+throw new Exception("Error message");
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example:
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+if (age < 0)
+{
+    throw new ArgumentOutOfRangeException("age", "Age cannot be negative");
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+============================Example Program============================
+Example program:
+    - demonstrates various conditional, branching, looping, and unconditional statements:
+
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Conditional statement
+        int age = 20;
+        if (age >= 18)
+        {
+            Console.WriteLine("You are an adult.");
+        }
+        else
+        {
+            Console.WriteLine("You are not an adult.");
+        }
+
+        // Branching statement
+        for (int i = 0; i < 10; i++)
+        {
+            if (i == 5)
+            {
+                break;
+            }
+            Console.WriteLine(i);
+        }
+
+        // Looping statement
+        int[] numbers = { 1, 2, 3, 4, 5 };
+        foreach (int number in numbers)
+        {
+            Console.WriteLine(number);
+        }
+
+        // Unconditional statement
+        int result = Add(5, 3);
+        Console.WriteLine("Result: " + result);
+    }
+
+    static int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

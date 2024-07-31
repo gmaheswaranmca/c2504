@@ -1,0 +1,202 @@
+Lists the types of operators in C#:
+
+Arithmetic Operators
+| Operator | Description        | Example     |
+|----------|--------------------|-------------|
+| +      | Addition           | a + b     |
+| -      | Subtraction        | a - b     |
+| *      | Multiplication     | a * b     |
+| /      | Division           | a / b     |
+| %      | Modulus            | a % b     |
+
+Relational Operators
+| Operator | Description           | Example    |
+|----------|-----------------------|------------|
+| ==     | Equal to              | a == b   |
+| !=     | Not equal to          | a != b   |
+| >      | Greater than          | a > b    |
+| <      | Less than             | a < b    |
+| >=     | Greater than or equal to | a >= b|
+| <=     | Less than or equal to | a <= b   |
+
+Logical Operators
+| Operator | Description           | Example    |
+|----------|-----------------------|------------|
+| &&     | Logical AND           | a && b   |
+| ||     | Logical OR            | a || b   |
+| !      | Logical NOT           | !a       |
+
+Bitwise Operators
+| Operator | Description           | Example    |
+|----------|-----------------------|------------|
+| &      | Bitwise AND           | a & b    |
+| |      | Bitwise OR            | a | b   |
+| ^      | Bitwise XOR           | a ^ b    |
+| ~      | Bitwise NOT           | ~a       |
+| <<     | Left shift            | a << 2   |
+| >>     | Right shift           | a >> 2   |
+
+Conditional Operator
+| Operator | Description           | Example                    |
+|----------|-----------------------|----------------------------|
+| ?:     | Ternary (conditional) | condition ? trueValue : falseValue |
+
+Increment / Decrement Operators
+| Operator | Description           | Example    |
+|----------|-----------------------|------------|
+| ++     | Increment             | a++ or ++a |
+| --     | Decrement             | a-- or --a |
+
+Assignment Operators
+| Operator | Description           | Example    |
+|----------|-----------------------|------------|
+| =      | Assignment            | a = b    |
+| +=     | Addition assignment   | a += b   |
+| -=     | Subtraction assignment| a -= b   |
+| *=     | Multiplication assignment | a *= b |
+| /=     | Division assignment   | a /= b   |
+| %=     | Modulus assignment    | a %= b   |
+| &=     | Bitwise AND assignment| a &= b   |
+| |=     | Bitwise OR assignment | a \|= b  |
+| ^=     | Bitwise XOR assignment| a ^= b   |
+| <<=    | Left shift assignment | a <<= 2  |
+| >>=    | Right shift assignment| a >>= 2  |
+
+
+Type Testing Operators
+| Operator | Description                     | Example       |
+|----------|---------------------------------|---------------|
+| is     | Checks if an object is compatible with a given type | obj is string |
+| as     | Attempts to cast an object to a given type, returns null if the cast fails | obj as string |
+
+Null-Coalescing Operators
+| Operator | Description                                | Example     |
+|----------|--------------------------------------------|-------------|
+| ??     | Returns the left-hand operand if it is not null; otherwise, it returns the right-hand operand | a ?? b   |
+| ??=    | Assigns the right-hand operand to the left-hand operand only if the left-hand operand is null | a ??= b |
+
+Null-Conditional Operators
+| Operator | Description                                | Example     |
+|----------|--------------------------------------------|-------------|
+| ?.     | Accesses a member only if the operand is not null | a?.b    |
+| ?[ ]   | Accesses an element only if the operand is not null | a?[i]   |
+
+Member Access and Pointer Operators
+| Operator | Description                     | Example       |
+|----------|---------------------------------|---------------|
+| .      | Member access                   | obj.Method() |
+| ->     | Pointer to member access        | ptr->member |
+| *      | Pointer dereference             | *ptr        |
+| &      | Address-of                      | &variable   |
+
+Other Operators
+| Operator | Description                     | Example       |
+|----------|---------------------------------|---------------|
+| ()     | Parentheses for method calls and precedence | Method() |
+| []     | Array or indexer access         | array[i]    |
+| ,      | Comma                           | int a, b;   |
+| =>     | Lambda expression               | x => x + 1  |
+| $""    | String interpolation            | $"Hello, {name}" |
+| @      | Verbatim string literal         | @"C:\path"  |
+
+Example: 
+    Type testing, 
+    Null-coalescing, 
+    Null-conditional, 
+    String interpolation, 
+    Lambda expression
+----------------------------------------------------------
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Type testing
+        object obj = "Hello";
+        if (obj is string str)
+        {
+            Console.WriteLine(str); // Output: Hello
+        }
+
+        // Null-coalescing
+        string a = null;
+        string b = "World";
+        string result = a ?? b;
+        Console.WriteLine(result); // Output: World
+
+        // Null-conditional
+        string c = null;
+        int? length = c?.Length;
+        Console.WriteLine(length); // Output: (null)
+
+        // String interpolation
+        string name = "Alice";
+        string greeting = $"Hello, {name}";
+        Console.WriteLine(greeting); // Output: Hello, Alice
+
+        // Lambda expression
+        Func<int, int> square = x => x * x;
+        Console.WriteLine(square(5)); // Output: 25
+    }
+}
+----------------------------------------------------------
+
+
+Operator Precedence Table
+
+| Precedence | Operator                                     | Description                                       | Associativity |
+|------------|----------------------------------------------|---------------------------------------------------|---------------|
+| 1          | x++ x--                                  | Postfix increment, Postfix decrement              | Left-to-right |
+| 2          | ++x --x + - ~ !                  | Prefix increment, Prefix decrement, Unary plus, Unary minus, Bitwise NOT, Logical NOT | Right-to-left |
+| 3          | (type)x checked unchecked default sizeof typeof | Type cast, Checked context, Unchecked context, Default value, Sizeof, Typeof | Right-to-left |
+| 4          | * / %                                  | Multiplication, Division, Modulus                 | Left-to-right |
+| 5          | + -                                      | Addition, Subtraction                             | Left-to-right |
+| 6          | << >>                                    | Bitwise left shift, Bitwise right shift           | Left-to-right |
+| 7          | < > <= >= is as == != <>   | Relational, Type testing, Equality                | Left-to-right |
+| 8          | &                                          | Bitwise AND                                       | Left-to-right |
+| 9          | ^                                          | Bitwise XOR                                       | Left-to-right |
+| 10         | |                                          | Bitwise OR                                        | Left-to-right |
+| 11         | &&                                         | Logical AND                                       | Left-to-right |
+| 12         | ||                                         | Logical OR                                        | Left-to-right |
+| 13         | ??                                         | Null-coalescing                                   | Left-to-right |
+| 14         | ? :                                        | Conditional (ternary)                             | Right-to-left |
+| 15         | =, +=, -=, *=, /=, %=, &=, |=, ^=, <<=, >>= | Assignment, Compound assignment                   | Right-to-left |
+| 16         | =>                                         | Lambda expression                                 | Right-to-left |
+| 17         | + - * / %                          | Addition, Subtraction, Multiplication, Division, Modulus in lambda expression | Left-to-right |
+| 18         | . [] () -> : $"" @""           | Member access, Array access, Method call, Pointer to member, Named argument, String interpolation, Verbatim string | Left-to-right |
+
+Notes
+- Operators with higher precedence are evaluated 
+    before operators with lower precedence.
+- Associativity determines the direction 
+    in which operators of the same precedence level are evaluated. 
+    For example, most arithmetic operators are left-to-right associative, 
+    which means they are evaluated from left to right.
+- Unary operators like increment (++) and decrement (--) 
+    have both prefix and postfix forms, 
+    which can affect their precedence and associativity.
+
+Example Usage
+----------------------------------------------------------
+Here is a brief example to illustrate operator precedence:
+
+csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int a = 5;
+        int b = 10;
+        int c = 15;
+
+        int result = a + b * c; // Multiplication has higher precedence than addition
+        Console.WriteLine(result); // Output: 155 (10 * 15 + 5)
+
+        result = (a + b) * c; // Parentheses change the order of evaluation
+        Console.WriteLine(result); // Output: 225 ((5 + 10) * 15)
+    }
+}
+----------------------------------------------------------

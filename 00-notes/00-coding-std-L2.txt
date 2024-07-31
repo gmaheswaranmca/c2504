@@ -1,0 +1,204 @@
+List of C# coding standards and best practices to help us write 
+    clean, 
+    consistent, and 
+    maintainable code.
+
+============================Naming Conventions============================
+General
+- Use PascalCase for class names, method names, and property names.
+- Use camelCase for local variables and method parameters.
+- Use SCREAMING_SNAKE_CASE for constants.
+- Prefix interfaces with `I` (e.g., `IService`).
+- Use nouns for class names (e.g., `Customer`, `OrderProcessor`).
+- Use verbs for method names (e.g., `CalculateTotal`, `SaveCustomer`).
+
+Example
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+public class OrderProcessor
+{
+    private const int MAX_ORDERS = 100;
+    private int orderCount;
+
+    public void ProcessOrder(int orderId)
+    {
+        // Method implementation
+    }
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+============================Layout and Indentation============================
+
+General
+- Use 4 spaces per indentation level.
+- Keep lines of code under 100 characters if possible.
+- Group related code together (e.g., properties, methods).
+
+Example
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+public class Customer
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public void Save()
+    {
+        // Method implementation
+    }
+^^^^^^^^^^^^^^^^
+
+Braces and Spacing
+
+Braces
+- Use braces for all control structures, even single-line statements.
+- Place opening braces on the same line as the statement.
+
+Spacing
+- Place a single space before and after binary operators.
+- Place spaces after commas.
+- Do not place a space after unary operators.
+- Use blank lines to separate logically related blocks of code.
+
+Example
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+if (condition)
+{
+    DoSomething();
+}
+else
+{
+    DoSomethingElse();
+}
+^^^^^^^^^^^^^^^^
+
+============================Commenting and Documentation============================
+
+General
+- Use XML comments (`///`) for public members.
+- Write meaningful comments that explain the why, not the what.
+- Update comments if you change the code they refer to.
+
+Example
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+/// <summary>
+/// This class processes orders.
+/// </summary>
+public class OrderProcessor
+{
+    /// <summary>
+    /// Processes an order by its ID.
+    /// </summary>
+    /// <param name="orderId">The ID of the order to process.</param>
+    public void ProcessOrder(int orderId)
+    {
+        // Method implementation
+    }
+}
+^^^^^^^^^^^^^^^^
+
+============================Exception Handling============================
+
+General
+- Use exceptions for exceptional conditions.
+- Catch specific exceptions, not `System.Exception`.
+- Provide meaningful messages in exception constructors.
+- Avoid swallowing exceptions without handling or logging them.
+
+Example
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+try
+{
+    // Code that may throw an exception
+}
+catch (FileNotFoundException ex)
+{
+    // Handle specific exception
+    Console.WriteLine("File not found: " + ex.Message);
+}
+^^^^^^^^^^^^^^^^
+
+============================Code Structure============================
+
+General
+- Order elements in a class by visibility: 
+    public, protected, internal, private.
+- Place static members above instance members.
+- Use regions to group related members in large classes.
+
+Example
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+public class MyClass
+{
+    #region Static Members
+    public static int StaticMember;
+    #endregion
+
+    #region Instance Members
+    public int InstanceMember;
+    #endregion
+
+    #region Methods
+    public void InstanceMethod() { }
+    private void PrivateMethod() { }
+    #endregion
+}
+^^^^^^^^^^^^^^^^
+
+============================Best Practices============================
+
+General
+- Avoid using magic numbers; use named constants instead.
+- Prefer `var` when the type is obvious from the right-hand side of the assignment.
+- Initialize variables where you declare them.
+- Use `readonly` for fields that are assigned once.
+- Use `string.IsNullOrEmpty` and `string.IsNullOrWhiteSpace` for string checks.
+- Dispose of disposable objects with `using` statements.
+
+LINQ
+- Prefer LINQ for collections and query operations.
+- Use method syntax (`.Where()`, `.Select()`) for complex queries.
+
+Asynchronous Programming
+- Use `async` and `await` for asynchronous programming.
+- Avoid `async void`; prefer `async Task`.
+
+Example
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+public class MyClass
+{
+    private readonly int maxItems;
+
+    public MyClass(int maxItems)
+    {
+        this.maxItems = maxItems;
+    }
+
+    public async Task ProcessItemsAsync(List<int> items)
+    {
+        var processedItems = await Task.Run(() => items.Where(i => i > 0).Select(i => i * 2).ToList());
+        
+        foreach (var item in processedItems)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
+^^^^^^^^^^^^^^^^
+
+============================Performance Considerations============================
+General
+- Avoid unnecessary object creation.
+- Use `StringBuilder` for string concatenation in loops.
+- Use `foreach` instead of `for` when iterating collections.
+- Prefer `Array` over `List<T>` when the size is fixed and known.
+
+Security Practices
+
+General
+- Validate all input data.
+- Avoid hardcoding sensitive information.
+- Use parameterized queries to prevent SQL injection.
+- Follow the principle of least privilege for accessing resources.
+
+============================Summary============================
+These standards and practices help ensure that our C# code is maintainable, readable, and efficient. 
+They also facilitate collaboration among team members by promoting consistency and clarity.

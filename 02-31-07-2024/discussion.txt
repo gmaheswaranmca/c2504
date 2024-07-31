@@ -1,0 +1,180 @@
+simple if : 
+1. [Sharika] To print the one is adust based his/her age 
+   Note: Dont print if not adult 
+2. [Dijol] Take a num 10, if num greater than 5
+   print "num as 'greater than 5'"
+3. [neha] To print 'number is positive' if num > 0
+       it should not print if not positive 
+4. [galdsy] if temp > 25, print it is hot outside.
+
+-------------------------------------------------------
+1. [Sharika] To print the one is adust based his/her age 
+   Note: Dont print if not adult
+    function IsAdult(age) -> boolean 
+        isAdult = (age >= 18);
+        return isAdult; 
+
+    function TestIsAdult(): -> None
+        Input age 
+        if(IsAdult(age)) 
+            print 'You are an adult.'
+        end if
+
+if..else :
+[Ashna] 
+5. To print the is adult or not based his/her age. 
+function TestIsAdultNotAdult(): -> None
+        Input age 
+        if(IsAdult(age)) 
+            print 'You are an adult.'
+        else 
+            print 'You are not an adult.'
+        end if
+
+6. [Kuriakose] Input mark, if IsMarkGreaterThan40(mark) 
+    print pass else fail  
+Mohammed - network issue 
+[Yahkoob]
+function IsMarkGreaterThan40(mark): -> boolean
+    return (mark > 40)
+
+function IsMarkGreaterThan40(mark): -> boolean
+    isMarkGreaterThan40 = (mark > 40)
+    return isMarkGreaterThan40
+
+function TestIsMarkGreaterThan40(): -> None
+    Input mark 
+    if IsMarkGreaterThan40(mark)
+        print "pass" 
+    else 
+        print "fail" 
+7. [Aaryaka] Input number, check it is positive or negative 
+healthcare or digital engineering service 
+8. [Ashwin] input doctorSalary/month, 
+    check if is 6 digit salary or not 
+9. [Sahla] check tumour 
+                is cancerous if  malignant 
+                or not cancerous if benign
+            Note: tumour is string of text either malignant or benign
+To Solve: [Anjana]
+    to check tumour
+function IsCancerous(tumour->string): -> boolean
+    isCancerous = (tumour == "malignant")
+    return isCancerous
+  
+10.else.if[Gayathri]  
+    To check the person adult, teenager or child 
+    for given age 
+    function IsAdult(age) -> boolean 
+        isAdult = (age >= 18);
+        return isAdult; 
+    function IsTeenager(age) -> boolean 
+        isTeenager = (age >= 13);
+        return isTeenager; 
+    function TestIsAdultTeenagerOrChild(): -> None
+        Input age 
+        if(IsAdult(age)) 
+            print 'You are an adult.'
+        else if(IsTeenager(age)) 
+            print 'You are a teenager.'
+        else
+            print 'You are a child.'
+        end if
+11. [Girish] to check health risk based body mass index?
+    get BMI, [underweight < 18.5, normal weight <= 24.9, overweight]
+12. nested..if[Alan Preeth] 
+    heart rate | blood temperature 
+    to check heart rate | temperature for treatment prescription:
+    if heart rate >= 100
+        temperature > 38 -> patient is critical -> emergency care 
+        else -> patient not critical -> prescribed treatement 
+    if heart rate < 100
+        temperature > 38 -> fewer -> fewer treatment 
+        else patient is healthy  
+13. [Collin] to print day name for given day number
+14. [Rishwin] to get response code from the user 
+        -- digital engineering service 
+        if 400 -> bad request
+        if 401 -> unauthorized 
+        if 200 -> response with ok status 
+        if 500 -> server error 
+        else unknown error 
+[Roshith] ??? network issue 
+[Nivya] ??? network issue 
+15. [Gopika] 
+    --- digital service 
+    check for car maintenance
+    cases :
+        'O' = Oil Change, "Change Oil and Replace Oil Filter"
+        'T' = Tire Rotaion, "Rotate Tire and align them properly"
+        'B' = Brake, "Inspect the brake and replace them if necessary" 
+        'A' = Battery,         "Battery Check and Replace them"
+        Default: "Some other reason"
+16. [Shilpa] 
+    function SuggestMaintenance(serviceOption->char) -> string
+        string suggestion;
+        switch serviceOption
+            case 'O':
+                suggestion = "Change Oil and Replace Oil Filter"
+                break
+            case 'T':
+                suggestion = "Rotate Tire and align them properly"
+                break
+            case 'B':
+                suggestion = "Inspect the brake and replace them if necessary"
+                break
+            case 'A':
+                suggestion = "Battery Check and Replace them"
+                break
+            default: 
+                suggestion = "Some other reason"
+                break 
+        end switch 
+        return suggestion
+    function TestSuggestMaintenance() -> None       marks: 100
+        Input serviceOption 
+        suggestion = SuggestMaintenance(serviceOption)
+        print suggestion        
+    function TestSuggestMaintenance() -> None       marks: 99
+        Input serviceOption 
+        print SuggestMaintenance(serviceOption)
+    
+17. [Abhijith] To print N whole numbers 
+18. [Krishnan] To print name of passenger in a air bus.
+        get list of passengers and print.
+        --digital engineering service 
+19. nested for [Mariya]
+    nested if in for loop: 
+    classify the patients based on age and their blood pressure 
+    get patients age and blood pressure in two arrays. 
+    then form classification array based on age and blood pressure.
+    
+    solution function:
+    function FormClassifications(ages -> int array, bloodPresseures -> int array) -> string array
+        for loop 
+            if statement 
+while, do..while[Minnu]
+20.while [Minnu] to print N whole numbers 
+21.do..while [Minnu] to print N whole numbers 
+22. while [Sharon] 
+    patient for proper medication remainder 
+    schedule interval 
+    use while loop.
+    time_intervals array having number of minutes as element 
+    time_intervals = [60 minutes, 120 minutes, 240 minutes]
+    first time before processing : remainder "Started medication" 
+    for first interval: "In 60 minutes, Time to take care medication" 
+    for all others 
+        "Next Remainder(after 120 minutes): Time to take care medication" 
+        "Next Remainder(after 240 minutes): Time to take care medication" 
+
+23. do..while [Athulya] 
+    for an accident, 
+    based body part injured,
+    call specilist
+    do for all the accidents cases from our array.
+    function SegregateToSpecialistAccidents(accidents -> string array of body parts injured) -> specialists string array
+        do..while 
+
+ 
+

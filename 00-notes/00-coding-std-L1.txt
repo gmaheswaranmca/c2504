@@ -1,0 +1,170 @@
+Coding standards are important 
+    for maintaining readability, 
+        consistency, and 
+        quality in a codebase. 
+
+By adhering to these standards, 
+you ensure your C# code is 
+    clean, 
+    consistent, and 
+    maintainable.
+
+Some commonly accepted C# coding standards and best practices.
+
+General Guidelines
+1. Consistency: Follow a consistent style throughout the codebase.
+2. Clarity: Write clear and understandable code.
+3. Comments: Use comments to explain the purpose of the code, 
+  not how the code works.
+
+Naming Conventions
+- PascalCase for class, property, method, and namespace names.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  class MyClass { }
+  void MyMethod() { }
+  namespace MyNamespace { }
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- camelCase for local variables and method parameters.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  int localVariable = 0;
+  void MyMethod(int parameter) { }
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- SCREAMING_SNAKE_CASE for constants.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  const int MAX_SIZE = 100;
+^^^^^^^^^^^^^^^^
+
+Layout and Indentation
+- Use 4 spaces per indentation level.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  if (condition)
+  {
+      DoSomething();
+  }
+^^^^^^^^^^^^^^^^
+
+Braces
+- Use braces for all control structures.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  if (condition)
+  {
+      DoSomething();
+  }
+  else
+  {
+      DoSomethingElse();
+  }
+^^^^^^^^^^^^^^^^
+
+Spacing
+- Place a single space before and after binary operators.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  int sum = a + b;
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Do not place a space after unary operators.
+ ^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  int value = -number;
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Place spaces after commas.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  MyMethod(a, b, c);
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Class and Method Structure
+- Order elements in a class by accessibility: 
+  public, internal, protected internal, protected, private.
+- Place static members above instance members.
+ ^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  public class MyClass
+  {
+      public static int StaticMember;
+      
+      public int InstanceMember;
+
+      public void InstanceMethod() { }
+      private void PrivateMethod() { }
+  }
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Documentation
+- Use XML comments for public members.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  /// <summary>
+  /// This method does something.
+  /// </summary>
+  public void MyMethod() { }
+^^^^^^^^^^^^^^^^
+
+Error Handling
+- Use exceptions for exceptional conditions.
+- Always catch specific exceptions, not `System.Exception`.
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+  try
+  {
+      // Code that may throw an exception
+  }
+  catch (SpecificException ex)
+  {
+      // Handle specific exception
+  }
+^^^^^^^^^^^^^^^^
+
+Example Code
+Here's a simple example applying these coding standards:
+
+^^^^^^^^^^^^^^^^csharp^^^^^^^^^^^^^^^^
+using System;
+
+namespace MyNamespace
+{
+    /// <summary>
+    /// This class represents a simple example.
+    /// </summary>
+    public class MyClass
+    {
+        // Static member
+        public static int StaticMember;
+
+        // Instance member
+        public int InstanceMember;
+
+        /// <summary>
+        /// This method does something.
+        /// </summary>
+        /// <param name="parameter">An example parameter.</param>
+        public void MyMethod(int parameter)
+        {
+            if (parameter > 0)
+            {
+                Console.WriteLine("Positive number");
+            }
+            else if (parameter < 0)
+            {
+                Console.WriteLine("Negative number");
+            }
+            else
+            {
+                Console.WriteLine("Zero");
+            }
+        }
+
+        /// <summary>
+        /// Private helper method.
+        /// </summary>
+        private void PrivateMethod()
+        {
+            // Implementation
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            MyClass myClass = new MyClass();
+            myClass.MyMethod(10);
+        }
+    }
+}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
