@@ -15,22 +15,22 @@ function IsDoctorSalaryMin6Digits(doctorSalary)
     return doctorSalary >= 100000
 
 
-function TestIsDoctorSalary6Digits()
+function TestIsDoctorSalaryMin6Digits()
     Input doctorSalary
     if IsDoctorSalaryMin6Digits(doctorSalary)
-        print "Doctor gets 6 digits salary"
+        print "Doctor gets Min 6 digits salary"
     end if 
 
-function TestIsDoctorSalary6DigitsOrNot()
+function TestIsDoctorSalaryMin6DigitsOrNot()
     Input doctorSalary
     if IsDoctorSalaryMin6Digits(doctorSalary)
-        print "Doctor gets 6 digits salary"
+        print "Doctor gets Min 6 digits salary"
     else 
-        print "Doctor does not get 6 digits salary"
+        print "Doctor does not get Min 6 digits salary"
     end if 
 
 //Note: Salaries -> array of salaries 
-function Count6DigitsSalariedDoctors(salaries, size)
+function CountMin6DigitsSalariedDoctors(salaries, size)
     count = 0
     for  I = 0 .. size-1
         if IsDoctorSalaryMin6Digits(salaries[I])
@@ -39,16 +39,16 @@ function Count6DigitsSalariedDoctors(salaries, size)
     end for 
     return count 
 
-function TestCount6DigitsSalariedDoctors() 
+function TestCountMin6DigitsSalariedDoctors() 
     Input size 
     Input salaries <- iterate and get 
-    sixDigitsSalariedCount = Count6DigitsSalariedDoctors(salaries, size)
+    sixDigitsSalariedCount = CountMin6DigitsSalariedDoctors(salaries, size)
     print sixDigitsSalariedCount
 
 //[Ashok, Ann Maria, Shilpa, Minnu..]
-CountDoctors6DigitsSalaried without array or N salaries
+CountDoctorsMin6DigitsSalaried without array or N salaries
 
-function ReadAndCountDoctors6DigitsSalaried(): 
+function ReadAndCountDoctorsMin6DigitsSalaried(): 
 [Minnu: without array]
     count = 0 
     Input N //number of salaries 

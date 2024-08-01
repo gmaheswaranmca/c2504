@@ -1,0 +1,18 @@
+write pseudo code for following functions and c# code for the same:
+    1. IsDoctorSalaryMin6Digits(doctorSalary)
+        2. TestIsDoctorSalaryMin6Digits
+        3. TestIsDoctorSalaryMin6DigitsOrNot
+        4. CountMin6DigitsSalariedDoctors(salaries, size)
+        5. TestCountMin6DigitsSalariedDoctors
+    6. ReadAndCountDoctorsMin6DigitsSalaried(): without array 
+    7. ReadAndFindMinSalaryOfNDoctors() without array
+    8. ReadAndFindSumOfDoctorsSalariesTillZero() use do..while loop 
+    9. ReadAndFindSumOfDoctorsSalariesTillZero() use while loop 
+
+
+pseudo code Answers: at file "/03-01-08-2024/programs/IsDoctorSalary6Digits.pseudo"
+
+Few answers are in folder: "/03-01-08-2024/programs/"
+
+
+Note: Test with many test cases. minimum tests cases are three.
