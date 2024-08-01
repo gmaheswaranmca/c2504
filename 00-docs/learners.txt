@@ -1,10 +1,26 @@
-[x+]Aaryaka P Nath, 	    [x+]Abijith K, 			[x+]Alan Kuriakose Cherian,			
-[x]Alan Preeth, 		[x=]Anjana E R, 		    [x]Anjana N K,
+02/08/2024: 
+[]Aaryaka P Nath, 	    []Abijith K, 			[]Alan Kuriakose Cherian,			
+[]Alan Preeth, 		    []Anjana E R, 		    []Anjana N K,
+[]Ann Mariya Jaimon, 	[]Anugrah Krishnan, 	[]Anurag C Ashok, 					
+[]Ashna Mariya Shaji,   []Ashwin V, 			[]Athulya Shaji,
+[]Collin Francy, 		[]Dijol Davis,			[]Gayathri T L, 		
+[]Girish K V, 		    []Gladsy Joshy,			[]Gopika V, 			
+[]Keerthana Jayalal K   []Minnu Sudhakaran V A, []Mohammed Riza Nazeer, 
+[]Neha Joy, 			[]Nivya Ignatious, 	    []Rishwin R Kanth,	
+[]Roshith Ramesh T,		[]Sahla. R, 			[]Sarika S Nair, 		
+[]Sharon Rose, 			[]Shilpa Sha Eapen, 	[]Yahkoob P,							
+Alan Preeth, Anjana N K, Gayathri T L,
+Sahla. R, Sharon Rose, Ashwin V, 
+Athulya Shaji, 
+
+On Or Before 01/08/2024: 
+[x+]Aaryaka P Nath, 	    [x+]Abijith K, 			[x++]Alan Kuriakose Cherian,			
+[x?]Alan Preeth, 		[x+]Anjana E R, 		    [x?]Anjana N K,
 [x++]Ann Mariya Jaimon, 	[x+]Anugrah Krishnan, 	[+]Anurag C Ashok, 					
 [x+]Ashna Mariya Shaji,  [x+]Collin Francy, 		[x+]Dijol Davis,					
-[x]Gayathri T L, 		[x+]Girish K V, 		    [x=]Gladsy Joshy,					
+[x?]Gayathri T L, 		[x+]Girish K V, 		    [x+]Gladsy Joshy,					
 [x+]Gopika V, 			[x++]Minnu Sudhakaran V A,[.+]Mohammed Riza Nazeer, 			
 [x++]Neha Joy, 			[.+]Nivya Ignatious, 	[x+]Rishwin R Kanth,					 
-[x.]Sahla. R, 			[x+]Sarika S Nair, 		[x]Sharon Rose, 					 
+[x.?]Sahla. R, 			[x+]Sarika S Nair, 		[x?]Sharon Rose, 					 
 [x++]Shilpa Sha Eapen, 	[x+]Yahkoob P,			[.+]Roshith Ramesh T,				
-[x]Ashwin V, 			[x]Athulya Shaji, 		[++]Keerthana Jayalal K	
+[x?]Ashwin V, 			[x?]Athulya Shaji, 		[++]Keerthana Jayalal K	
