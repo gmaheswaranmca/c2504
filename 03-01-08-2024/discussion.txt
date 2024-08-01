@@ -1,0 +1,14 @@
+1. [Ashmin] 
+    IsDoctorSalary6Digits
+[Grish] 
+    Note: doctorSalary->integer, IsDoctorSalary6Digits returns boolean
+    function IsDoctorSalary6Digits(doctorSalary) //676432 | 56784
+        salary = doctorSalary
+
+        count = 0
+        while salary > 0            // 676432  67643 6764 676  67  6  0X
+            digit = salary % 10     // 2         3    4   6    7   6
+            count += 1                 1         2    3    4   5   6
+            salary = salary / 10    // 67643    6764 676  67   6   0
+        end while 
+        return count >= 6

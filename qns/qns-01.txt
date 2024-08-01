@@ -1,0 +1,9 @@
+AverageOfTwoNums, CubeOfNum, SquareOfNum
+SwapTwoNums, IsNumDivisibleBy3, IsNumDivisibleBy27
+PrintN_NaturalNums, IsNumPalindrome, IsNumAmstrong,
+IsNumAmstrong, IsPerfectNum, IsNumPerfectSquare,
+IsNumPrime, IsOdd, IsEven, IsLeapYear,
+ReverseNum, FactorialsOfNum, PrintFibonacciSeries, 
+PrintPrimeNums, FindTargetInNums, LargestNum, 
+SortNums, CollectDuplicateNums, IsStrAnagram,
+ 

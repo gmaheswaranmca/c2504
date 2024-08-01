@@ -1,0 +1,129 @@
+// [Grish] solving 
+function IsDoctorSalaryMin6Digits(doctorSalary) 
+        salary = doctorSalary
+
+        count = 0
+        while salary > 0            
+            digit = salary % 10     
+            count += 1               
+            salary = salary / 10    
+        end while 
+        return count >= 6
+
+// [Ann Mariya] modified solution for O(1) 
+function IsDoctorSalaryMin6Digits(doctorSalary) 
+    return doctorSalary >= 100000
+
+
+function TestIsDoctorSalary6Digits()
+    Input doctorSalary
+    if IsDoctorSalaryMin6Digits(doctorSalary)
+        print "Doctor gets 6 digits salary"
+    end if 
+
+function TestIsDoctorSalary6DigitsOrNot()
+    Input doctorSalary
+    if IsDoctorSalaryMin6Digits(doctorSalary)
+        print "Doctor gets 6 digits salary"
+    else 
+        print "Doctor does not get 6 digits salary"
+    end if 
+
+//Note: Salaries -> array of salaries 
+function Count6DigitsSalariedDoctors(salaries, size)
+    count = 0
+    for  I = 0 .. size-1
+        if IsDoctorSalaryMin6Digits(salaries[I])
+            count += 1
+        end if
+    end for 
+    return count 
+
+function TestCount6DigitsSalariedDoctors() 
+    Input size 
+    Input salaries <- iterate and get 
+    sixDigitsSalariedCount = Count6DigitsSalariedDoctors(salaries, size)
+    print sixDigitsSalariedCount
+
+//[Ashok, Ann Maria, Shilpa, Minnu..]
+CountDoctors6DigitsSalaried without array or N salaries
+
+function ReadAndCountDoctors6DigitsSalaried(): 
+[Minnu: without array]
+    count = 0 
+    Input N //number of salaries 
+    for I = 1 .. N 
+        Input salary 
+        isMin6Digits = IsDoctorSalaryMin6Digits(salary)
+        if isMin6Digits then 
+            count += 1
+        end if 
+
+//[Ashok / Shilpa]
+ReadAndFindMinSalaryOfNDoctors without array 
+
+function ReadAndFindMinSalaryOfNDoctors():
+    MinSalary = -1
+    Input N //number of salaries 
+    for I = 1 .. N 
+        Input salary
+        if I == 1 then 
+             MinSalary = salary 
+             continue 
+        end if 
+
+        if salary < MinSalary then 
+            MinSalary = salary
+        end if 
+
+//[Nivya | Roshith | Alan Kuriakose]
+ReadAndFindSumOfDoctorsSalariesTillZero: without array 
+    [sal1, sal2, ... 0]
+    
+    loop pick : for | while | do..while 
+
+function ReadAndFindSumOfDoctorsSalariesTillZero()
+    sum = 0 
+    do 
+        input salary 
+        if !(salary > 0 || salary == 0) //Invalid salary
+            print "Input valid salary"
+            continue 
+        end if 
+        sum += salary 
+    while salary != 0
+    print sum 
+
+// Rule: If zero, we should sum up 
+function ReadAndFindSumOfDoctorsSalariesTillZero()
+    sum = 0 
+    do 
+        input salary 
+        if !(salary > 0 || salary == 0) //Invalid salary
+            print "Input valid salary"
+            continue 
+        end if 
+        
+        if salary != 0 // Business Rule 
+            sum += salary
+        end if  
+    while salary != 0
+    print sum 
+
+//[Keerthana | Ashna | Minnu*** | Anugrah | Rishwin | Abhijith] convert to while loop 
+function ReadAndFindSumOfDoctorsSalariesTillZero()
+    sum = 0 
+
+    input salary
+    while salary != 0
+        if (salary < 0) //Invalid salary
+            print "Input valid salary"
+            input salary
+            continue
+        end if         
+        
+        sum += salary
+        input salary
+    end while 
+    print sum 
+
