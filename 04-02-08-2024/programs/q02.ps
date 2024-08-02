@@ -1,7 +1,7 @@
 P1. print series 10, 12, 14, 16, ... N terms 
-    Q1: use for loop
+    Q1: use while looping
+[Anjana, Gayathri, Sahla[...mobile joined], Sharon[...], Ashwin, Collin]
 ----plan ps----
-[Girish, Anjana NK]
 function PrintSeries10_12_14(numOfTerms)
 function TestPrintSeries10_12_14()
 Here, 
@@ -10,10 +10,12 @@ Here,
 ----ps----
 function PrintSeries10_12_14(numOfTerms)
     term = 10
-    for I = 1; I <= numOfTerms ; I++ 
+    I = 1
+    while  I <= numOfTerms  
         Print term + ' '
         term = term + 2
-    end for 
+        I++
+    end while 
 function TestPrintSeries10_12_14()
     Input numOfTerms
     PrintSeries10_12_14(numOfTerms)

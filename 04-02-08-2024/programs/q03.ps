@@ -1,0 +1,53 @@
+P1. print series 10, 12, 14, 16, ... N terms 
+    Q1: use do.while loop
+----plan ps----
+[Collin, Gladsy, Athulya(mobile / issue in mobile connectivy also),
+    Alan Kuriakose[qn]]
+function PrintSeries10_12_14(numOfTerms)
+function TestPrintSeries10_12_14()
+Here, 
+    1. PrintSeries10_12_14 -> void, numOfTerms -> int 
+    2. TestPrintSeries10_12_14 -> void 
+----ps----
+function PrintSeries10_12_14(numOfTerms)
+    term = 10
+    I = 1;
+    do  
+        if numOfTerms == 0
+            break
+        then   
+        Print term + ' '
+        term = term + 2
+
+        I++
+    end while I <= numOfTerms
+function TestPrintSeries10_12_14()
+    Input numOfTerms
+    PrintSeries10_12_14(numOfTerms)
+----ps 2----
+function PrintSeries10_12_14(numOfTerms)
+    term = 10
+    I = 1;
+    do  
+        if numOfTerms < I
+            break
+        then   
+        Print term + ' '
+        term = term + 2
+
+        I++
+    end while I <= numOfTerms
+----ps 2----
+function PrintSeries10_12_14(numOfTerms)
+    term = 10
+    I = 1;
+    if numOfTerms > 0
+        do          
+            Print term + ' '
+            term = term + 2
+
+            I++
+        end while I <= numOfTerms
+    then   
+    
+----cs----
