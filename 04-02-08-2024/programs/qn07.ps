@@ -1,0 +1,74 @@
+P3. print the following pattern 
+        1
+      1 2
+    1 2 3
+  1 2 3 4
+1 2 3 4 5 
+Here, N = number of lines = 5
+    Q7: use for loop
+    Q8: use while loop
+    Q9: use do..while loop
+----plan ps----
+[Ashna, Neha, Nivya, Kuriakose[doubt]]
+function PrintNumTriangleMirroredRightAngle(N)
+function TestPrintNumTriangleMirroredRightAngle()
+Here, 1. PrintNumTriangleMirroredRightAngle -> void, N -> int = number of lines 
+      2. TestPrintNumTriangleMirroredRightAngle -> void 
+----ps----
+function PrintNumTriangleMirroredRightAngle(N) = 5
+    for I = 1; I <= N; I++          
+        for J = 1; J <= N-I; J++     
+            Print "  "                 
+        end for 
+        for J = 1; J <= I; J++       
+            Print J + " "           
+        end for 
+        Print NewLine 
+    end for 
+function TestPrintNumTriangleMirroredRightAngle()
+    Input N 
+    PrintNumTriangleMirroredRightAngle(N)
+----ps with comments----
+function PrintNumTriangleMirroredRightAngle(N)
+    for I = 1; I <= N; I++  //N times = Number of Lines
+        for J = 1; J <= N-I; J++ //Number of Spaces before Number print
+            Print "  " //Two Spaces, No Newline Printing 
+        end for 
+        for J = 1; J <= I; J++ //Number of Numbers is I times
+            Print J + " "      // Print number and space, no new line 
+        end for 
+        Print NewLine 
+    end for 
+function TestPrintNumTriangleMirroredRightAngle()
+    Input N 
+    PrintNumTriangleMirroredRightAngle(N)
+----ps explained code----
+########1#
+######1#2#
+####1#2#3#
+##1#2#3#4#
+1#2#3#4#5#
+
+function PrintNumTriangleMirroredRightAngle(N) = 5
+    for I = 1; I <= N; I++          // 1 2 3 4 5[]
+        for J = 1; J <= N-I; J++    //    0 times 
+            Print "  "              //    
+        end for 
+        for J = 1; J <= I; J++      //    5 time 
+            Print J + " "           //    
+        end for 
+        Print NewLine 
+    end for 
+function TestPrintNumTriangleMirroredRightAngle()
+    Input N 
+    PrintNumTriangleMirroredRightAngle(N)
+----cs----
+
+Line No = I               5-I I  
+1        ########1#    8#=4##,1num  = 1#      (N-I)##,I nums 
+2        ######1#2#    6#=3##,2nums = 1#2#    (N-I)##,I nums
+3        ####1#2#3#    4#=2##,3nums = 1#2#3#  (N-I)##,I nums
+4        ##1#2#3#4#    2#=1##,4nums = 1#2#3#4#  (N-I)##,I nums
+5        1#2#3#4#5#    0#=0##,5nums = 1#2#3#4#5# (N-I)##,I nums
+
+how many lines ? N=5

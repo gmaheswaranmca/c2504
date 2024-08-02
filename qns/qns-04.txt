@@ -1,0 +1,45 @@
+02-08-2024 lab questions
+
+P1. print series 10, 12, 14, 16, ... N terms 
+    Q1: use for loop
+    Q2: use while loop
+    Q3: use do..while loop
+P2. print the N th term in the series 21, 22, 24, 27, 31, ...
+    Q4: use for loop
+    Q5: use while loop
+    Q6: use do..while loop
+Note: 
+    21, 22, 24, 27, 31, ...
+      1   2   3   4           diff
+P3. print the following pattern 
+        1
+      1 2
+    1 2 3
+  1 2 3 4
+1 2 3 4 5 
+Here, N = number of lines = 5
+    Q7: use for loop
+    Q8: use while loop
+    Q9: use do..while loop
+
+02-08-2024 lab questions [extra questions]
+
+P4. print series 0, 1, 1, 2, 3, 5, 8, 13, ... N terms 
+    Q10: use for loop
+    Q11: use while loop
+    Q12: use do..while loop
+P5. print the N th term in the series 0, 1, 1, 2, 3, 5, 8, 13, ... N terms 
+    Q13: use for loop
+    Q14: use while loop
+    Q15: use do..while loop
+
+P6. print the following pattern 
+        5
+      5 4
+    5 4 3
+  5 4 3 2
+5 4 3 2 1 
+Here, N = number of lines = 5
+    Q16: use for loop
+    Q17: use while loop
+    Q18: use do..while loop
