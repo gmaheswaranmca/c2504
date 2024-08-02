@@ -1,0 +1,84 @@
+P2. print the N th term in the series 21, 22, 24, 27, 31, ...
+    Q4: use for loop
+Note: 
+    21, 22, 24, 27, 31, ...
+      1   2   3   4           diff    
+[Gladsy, Dijol, Ann Mariya[qn], Keerthana[qn-base cond], Alan Preeth[qn-instead of diff use I], 
+Yahkoob[qn-diff doubt], Riza[qn-clarification of N-1 times],
+Athula(joined in chat box for discussion),
+Kuriakose[doubt/qn]]
+----plan ps----
+function GetNthTerm_21_22_24_27(N)
+function TestGetNthTerm_21_22_24_27()
+Here, 
+    1. GetNthTerm_21_22_24_27 -> int, N -> int 
+    2. TestGetNthTerm_21_22_24_27 -> void 
+        N is number of terms 
+----ps----
+function GetNthTerm_21_22_24_27(N)    
+    term = 21
+    difference = 1
+    for I = 1; I <= N ; I++   
+        if I == N
+            break
+        end if         
+        //
+        term = term + difference
+        difference = difference + 1
+    end for 
+    return term
+function TestGetNthTerm_21_22_24_27()
+    Input N                             
+    nthTerm = GetNthTerm_21_22_24_27(N)
+    Print nthTerm
+----ps----
+[Alan Preeth]
+function GetNthTerm_21_22_24_27(N)    
+    term = 21
+    
+    for I = 1; I <= N ; I++   
+        if I == N
+            break
+        end if         
+        //
+        term = term + I //difference is I only 
+       
+    end for 
+    return term
+----ps----
+[Keerthana]
+function GetNthTerm_21_22_24_27(N)    
+    term = 21
+    for I = 1; I < N ; I++ //run N-1 times
+        term = term + I        //difference is I only 
+    end for 
+    return term
+
+
+----ps----
+term = term + I //
+term += I       // replace with shorthand assignment [Minnu]
+[Minnu]
+function GetNthTerm_21_22_24_27(N)    
+    term = 21
+    for I = 1; I < N ; I++ //run N-1 times
+        term += I        //difference is I only 
+    end for 
+    return term
+----cs explained----
+static int GetNthTerm_21_22_24_27(int N) //5
+{
+    int term = 21;  //21 22 24 27 31
+    int difference = 1;//1 2 3 4 5
+    for (int I = 1; I <= N; I++) //1 2 3 4 5
+    {
+        if( I == N )
+        {
+            break;
+        }
+        //
+        term = term + difference;//21+1=22,22+2=24,24+3=27, 27+4=31
+        difference = difference + 1;
+    }
+    return term;
+}
