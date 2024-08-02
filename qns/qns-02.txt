@@ -1,0 +1,2 @@
+To print the one is adust based his/her age
+Take a num 10, if num greater than 5

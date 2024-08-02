@@ -1,0 +1,28 @@
+P1. print series 10, 12, 14, 16, ... N terms 
+    Q1: use for loop
+----plan ps----
+function PrintSeries10_12_14(numOfTerms)
+function TestPrintSeries10_12_14()
+Here, 
+    1. PrintSeries10_12_14 -> void, numOfTerms -> int 
+    2. TestPrintSeries10_12_14 -> void 
+----ps----
+function PrintSeries10_12_14(numOfTerms)
+    term = 10
+    for I = 1; I <= numOfTerms ; I++ 
+        Print term + ' '
+        term = term + 2
+    end for 
+function TestPrintSeries10_12_14()
+    Input numOfTerms
+    PrintSeries10_12_14(numOfTerms)
+----cs----
+function PrintSeries10_12_14(numOfTerms)
+    term = 10
+    for I = 1; I <= numOfTerms ; I++ 
+        Print term + ' '
+        term = term + 2
+    end for 
+function TestPrintSeries10_12_14()
+    Input numOfTerms
+    PrintSeries10_12_14(numOfTerms)

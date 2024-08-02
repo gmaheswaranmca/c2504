@@ -1,0 +1,25 @@
+problems solved on pseudo code and C#.
+P1. print series 10, 12, 14, 16, ... N terms 
+    Q1: use for loop
+    Q2: use while loop
+    Q3: use do..while loop
+P2. print the N th term in the series 21, 22, 24, 27, 31, ...
+    Q4: use for loop
+    Q5: use while loop
+    Q6: use do..while loop
+Note: 
+    21, 22, 24, 27, 31, ...
+      1   2   3   4           diff
+P3. print the following pattern 
+        1
+      1 2
+    1 2 3
+  1 2 3 4
+1 2 3 4 5 
+Here, N = number of lines = 5
+    Q7: use for loop
+    Q8: use while loop
+    Q9: use do..while loop
+
+
+ 
