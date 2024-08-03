@@ -1,0 +1,12 @@
+1. 
+Practice on SQL Server:
+    trainer_search_app
+    1. resource: trainer_search_db / trainer CRUD operations 
+    trainer : {id, name, skill, place} 
+actor/user of app: vendor/client 
+2. Do vendor_search_app :: vendor resource/table CRUD operations 
+   db: vendor_search_db
+    table: vendor {id, name, ratings, place, type} - 10 vendors 
+        !!! type: 1-corporate | 2-college | 3-institute 
+    table: admin {id, username, password} // preloaded create 3 admin users 
+    actor/user of app: trainers  

@@ -1,0 +1,61 @@
+SQL Server:
+------------------------------------------------
+Data Base:
+    1. flat / file 
+    2. relational data model [normalized data model] 
+        RDMBS - SQL Server, SQLite, MySQL, Oracle, Postgres 
+        foundation: table: rows    [row is a record]
+        SQL - Structured Query Language 
+
+        orders : id, date, bill_number, bill_amount 
+        order_items: id, order_id, item_id, qty, price, amount 
+    3. hierarchical data models
+        noSQL (not only SQL)
+        vendors: mongo db (document-based no-sql), cassandra (CQL - denormalized)
+
+        orders : {id, date, bill_number, bill_amount,  
+                  items: [{id, item_id, qty, price, amount}]
+                 } 
+    
+    mongo db: 
+        - normalized data model 
+        - hierarchical data model 
+------------------------------------------------
+SQL Server:
+    ANSI SQL : Standard - SQL is standarized by ANSI 
+    SQL Server : Implemented of the ANSI SQL.
+    So, SQL in SQL Server is named T(transaction)-SQL.
+    TSQL = ANSI SQL + specialized cmds available TSQL.
+------------------------------------------------
+CRUD operations on trainer table. 
+   table = rows 
+   table = definition of columns/fields and constraints 
+------------------------------------------------
+Practice on SQL Server:
+    trainer_search_app
+    1. resource: trainer_search_db / trainer 
+    trainer : {id, name, skill, place}   
+------------------------------------------------
+ACID : Automocity, Consistency, Isolation, Durability 
+------------------------------------------------
+ANSI SQL
+    DDL - Data Definition Language : objects like table, view, procedure, trigger etc
+        CREATE TABLE, CREATE PROCEDURE, CREATE VIEW 
+        DROP TABLE
+        ALTER TABLE 
+        TRUCATE TABLE 
+    DML - Data Manipulation Language : data 
+        INSERT, UPDATE, DELETE 
+        "SELECT" <- DQL - Data Query Language 
+    TCL : Trasaction Control Language 
+        Example:
+            to make a order: bundle activities = it a single unit | ACID properties 
+                insert into table:orders        1 row 
+                insert into table:order_items   5 rows 
+                                                6 rows total inserted 
+                                                1 row update orders 
+        commands: BEGIN TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT
+    DCL: Data Control Language 
+        GRANT the privileges to the db user 
+        REVOKE the privileges from the db user 
+------------------------------------------------
