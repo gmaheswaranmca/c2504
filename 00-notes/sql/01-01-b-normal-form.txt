@@ -1,0 +1,224 @@
+Examples and explain the conversion process 
+for each one from unnormalized form (UNF) 
+to third normal form (3NF).
+
+ Example 1: Student, Course, and Grades
+
+ Unnormalized Form (UNF)
+STUDENT_COURSE_GRADES_UNF
+------------------------------------------------------------------
+STUDENT_ID | STUDENT_NAME | COURSE_ID | COURSE_NAME | GRADE
+-----------|--------------|-----------|-------------|-----------
+1          | Alice        | 101       | Math        | A, B
+1          | Alice        | 102       | Science     | A
+2          | Bob          | 101       | Math        | B
+2          | Bob          | 103       | History     | C, B
+------------------------------------------------------------------
+Here, the `GRADE` column contains repeating values.
+
+ First Normal Form (1NF)
+Remove repeating groups by creating separate rows 
+for each repeating value in the `GRADE` column.
+
+STUDENT_COURSE_GRADES_1NF
+------------------------------------------------------------------
+STUDENT_ID | STUDENT_NAME | COURSE_ID | COURSE_NAME | GRADE
+-----------|--------------|-----------|-------------|-------
+1          | Alice        | 101       | Math        | A
+1          | Alice        | 101       | Math        | B
+1          | Alice        | 102       | Science     | A
+2          | Bob          | 101       | Math        | B
+2          | Bob          | 103       | History     | C
+2          | Bob          | 103       | History     | B
+------------------------------------------------------------------
+
+ Second Normal Form (2NF)
+Remove partial dependencies by creating separate tables 
+for `STUDENT`, `COURSE`, and `GRADES`.
+
+STUDENT
+------------------------------------------------------------------
+STUDENT_ID | STUDENT_NAME
+-----------|--------------
+1          | Alice
+2          | Bob
+------------------------------------------------------------------
+
+COURSE
+------------------------------------------------------------------
+COURSE_ID | COURSE_NAME
+----------|-------------
+101       | Math
+102       | Science
+103       | History
+------------------------------------------------------------------
+
+GRADES
+------------------------------------------------------------------
+STUDENT_ID | COURSE_ID | GRADE
+-----------|-----------|------
+1          | 101       | A
+1          | 101       | B
+1          | 102       | A
+2          | 101       | B
+2          | 103       | C
+2          | 103       | B
+------------------------------------------------------------------
+
+ Third Normal Form (3NF)
+Ensure there are no transitive dependencies.
+
+STUDENT and COURSE tables are already in 3NF. 
+The `GRADES` table is also 
+in 3NF because there are no transitive dependencies.
+
+---
+
+ Example 2: Employee, Department, and Projects
+
+ Unnormalized Form (UNF)
+EMP_DEPT_PROJECT_UNF
+------------------------------------------------------------------
+EMP_ID | EMP_NAME | DEPT_ID | DEPT_NAME | PROJECTS
+-------|----------|---------|-----------|--------------
+1      | John     | 10      | Sales     | ProjectA, ProjectB
+2      | Jane     | 20      | HR        | ProjectC
+3      | Joe      | 10      | Sales     | ProjectB, ProjectD
+4      | Mary     | 30      | IT        | ProjectE, ProjectF
+------------------------------------------------------------------
+The `PROJECTS` column contains repeating values.
+
+ First Normal Form (1NF)
+Remove repeating groups by creating separate rows for each project.
+
+EMP_DEPT_PROJECT_1NF
+------------------------------------------------------------------
+EMP_ID | EMP_NAME | DEPT_ID | DEPT_NAME | PROJECT
+-------|----------|---------|-----------|---------
+1      | John     | 10      | Sales     | ProjectA
+1      | John     | 10      | Sales     | ProjectB
+2      | Jane     | 20      | HR        | ProjectC
+3      | Joe      | 10      | Sales     | ProjectB
+3      | Joe      | 10      | Sales     | ProjectD
+4      | Mary     | 30      | IT        | ProjectE
+4      | Mary     | 30      | IT        | ProjectF
+------------------------------------------------------------------
+
+ Second Normal Form (2NF)
+Remove partial dependencies by creating separate tables 
+for `EMPLOYEE`, `DEPARTMENT`, and `EMP_PROJECT`.
+
+EMPLOYEE
+------------------------------------------------------------------
+EMP_ID | EMP_NAME | DEPT_ID
+-------|----------|---------
+1      | John     | 10
+2      | Jane     | 20
+3      | Joe      | 10
+4      | Mary     | 30
+------------------------------------------------------------------
+
+DEPARTMENT
+------------------------------------------------------------------
+DEPT_ID | DEPT_NAME
+--------|-----------
+10      | Sales
+20      | HR
+30      | IT
+------------------------------------------------------------------
+
+EMP_PROJECT
+------------------------------------------------------------------
+EMP_ID | PROJECT
+-------|---------
+1      | ProjectA
+1      | ProjectB
+2      | ProjectC
+3      | ProjectB
+3      | ProjectD
+4      | ProjectE
+4      | ProjectF
+------------------------------------------------------------------
+
+ Third Normal Form (3NF)
+Ensure there are no transitive dependencies.
+
+EMPLOYEE, DEPARTMENT, and EMP_PROJECT tables are already 
+in 3NF as there are no transitive dependencies.
+
+---
+
+ Example 3: Order, Customer, and Product
+
+ Unnormalized Form (UNF)
+ORDER_CUSTOMER_PRODUCT_UNF
+------------------------------------------------------------------
+ORDER_ID | ORDER_DATE | CUSTOMER_ID | CUSTOMER_NAME | PRODUCT_ID | PRODUCT_NAME | QUANTITY | PRICE
+---------|------------|-------------|---------------|------------|--------------|----------|------
+1        | 2024-01-01 | 101         | Alice         | 501        | Laptop       | 1        | 800
+1        | 2024-01-01 | 101         | Alice         | 502        | Mouse        | 2        | 20
+2        | 2024-02-15 | 102         | Bob           | 501        | Laptop       | 1        | 800
+2        | 2024-02-15 | 102         | Bob           | 503        | Keyboard     | 1        | 50
+------------------------------------------------------------------
+Here, we have repeating customer and product information.
+
+ First Normal Form (1NF)
+Remove repeating groups by creating separate rows 
+for each product in an order.
+
+ORDER_CUSTOMER_PRODUCT_1NF
+------------------------------------------------------------------
+ORDER_ID | ORDER_DATE | CUSTOMER_ID | CUSTOMER_NAME | PRODUCT_ID | PRODUCT_NAME | QUANTITY | PRICE
+---------|------------|-------------|---------------|------------|--------------|----------|------
+1        | 2024-01-01 | 101         | Alice         | 501        | Laptop       | 1        | 800
+1        | 2024-01-01 | 101         | Alice         | 502        | Mouse        | 2        | 20
+2        | 2024-02-15 | 102         | Bob           | 501        | Laptop       | 1        | 800
+2        | 2024-02-15 | 102         | Bob           | 503        | Keyboard     | 1        | 50
+------------------------------------------------------------------
+
+ Second Normal Form (2NF)
+Remove partial dependencies by creating separate tables 
+for `ORDER`, `CUSTOMER`, `PRODUCT`, and `ORDER_PRODUCT`.
+
+ORDER
+------------------------------------------------------------------
+ORDER_ID | ORDER_DATE | CUSTOMER_ID
+---------|------------|-------------
+1        | 2024-01-01 | 101
+2        | 2024-02-15 | 102
+------------------------------------------------------------------
+
+CUSTOMER
+------------------------------------------------------------------
+CUSTOMER_ID | CUSTOMER_NAME
+------------|---------------
+101         | Alice
+102         | Bob
+------------------------------------------------------------------
+
+PRODUCT
+------------------------------------------------------------------
+PRODUCT_ID | PRODUCT_NAME | PRICE
+-----------|--------------|------
+501        | Laptop       | 800
+502        | Mouse        | 20
+503        | Keyboard     | 50
+------------------------------------------------------------------
+
+ORDER_PRODUCT
+------------------------------------------------------------------
+ORDER_ID | PRODUCT_ID | QUANTITY
+---------|------------|---------
+1        | 501        | 1
+1        | 502        | 2
+2        | 501        | 1
+2        | 503        | 1
+------------------------------------------------------------------
+
+ Third Normal Form (3NF)
+Ensure there are no transitive dependencies.
+
+ORDER, CUSTOMER, PRODUCT, and ORDER_PRODUCT tables are already 
+in 3NF as there are no transitive dependencies.
+
+---

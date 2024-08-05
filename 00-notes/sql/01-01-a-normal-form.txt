@@ -1,0 +1,246 @@
+Normalization is a process in database design 
+that organizes columns (attributes) and tables (relations) 
+to minimize data redundancy and improve data integrity. 
+It typically involves dividing large tables 
+into smaller tables and defining relationships among them. 
+Here’s how you can normalize the `EMP` and `DEPT` tables starting 
+from an unnormalized form to 1NF, 2NF, and 3NF.
+
+ 1. Unnormalized Form (UNF)
+In the unnormalized form, 
+all the data is stored in a single table 
+without any normalization rules applied. 
+It can have redundant and repeating groups of data.
+
+EMP_DEPT_UNF
+------------------------------------------------------------------
+EMP_DEPT_UNF
+EMPNO | ENAME | SAL  | DEPTNO | DNAME | DLOC
+------|-------|------|--------|-------|-----
+101   | John  | 3000 | 10     | Sales | NY
+102   | Jane  | 1500 | 20     | HR    | LA
+103   | Joe   | 2500 | 10     | Sales | NY
+104   | Mary  | 1800 | 30     | IT    | SF
+------------------------------------------------------------------
+
+ 2. First Normal Form (1NF)
+1NF requires the elimination of repeating groups 
+by ensuring that each column contains atomic values, 
+and each row is unique.
+
+EMP
+------------------------------------------------------------------
+EMPNO | ENAME | SAL  | DEPTNO
+------|-------|------|-------
+101   | John  | 3000 | 10
+102   | Jane  | 1500 | 20
+103   | Joe   | 2500 | 10
+104   | Mary  | 1800 | 30
+------------------------------------------------------------------
+
+DEPT
+------------------------------------------------------------------
+DEPTNO | DNAME | DLOC
+-------|-------|-----
+10     | Sales | NY
+20     | HR    | LA
+30     | IT    | SF
+------------------------------------------------------------------
+
+ 3. Second Normal Form (2NF)
+
+2NF eliminates partial dependencies, 
+ensuring that non-key attributes are fully dependent on the primary key. 
+It requires the table to be in 1NF.
+
+Since `EMP` and `DEPT` tables are already in 1NF, 
+we need to ensure 
+that all non-key attributes are fully functionally 
+dependent on the primary key. 
+In this case, `ENAME` and `SAL` are dependent on `EMPNO`, 
+and `DNAME` and `DLOC` are dependent on `DEPTNO`.
+
+EMP
+------------------------------------------------------------------
+EMPNO | ENAME | SAL  | DEPTNO
+------|-------|------|-------
+101   | John  | 3000 | 10
+102   | Jane  | 1500 | 20
+103   | Joe   | 2500 | 10
+104   | Mary  | 1800 | 30
+------------------------------------------------------------------
+
+DEPT
+------------------------------------------------------------------
+DEPTNO | DNAME | DLOC
+-------|-------|-----
+10     | Sales | NY
+20     | HR    | LA
+30     | IT    | SF
+------------------------------------------------------------------
+
+ 4. Third Normal Form (3NF)
+3NF eliminates transitive dependencies, 
+ensuring that non-key attributes are 
+not only fully functionally dependent on the primary key 
+but also independent of each other.
+
+In our case, the `EMP` and `DEPT` tables are already in 2NF and 
+do not contain any transitive dependencies. 
+Hence, they are also in 3NF.
+
+EMP
+------------------------------------------------------------------
+EMPNO | ENAME | SAL  | DEPTNO
+------|-------|------|-------
+101   | John  | 3000 | 10
+102   | Jane  | 1500 | 20
+103   | Joe   | 2500 | 10
+104   | Mary  | 1800 | 30
+------------------------------------------------------------------
+
+DEPT
+------------------------------------------------------------------
+DEPTNO | DNAME | DLOC
+-------|-------|-----
+10     | Sales | NY
+20     | HR    | LA
+30     | IT    | SF
+------------------------------------------------------------------
+
+Summary of the Normalization Process
+
+1. Unnormalized Form (UNF): 
+    A single table with repeating groups and redundant data.
+2. First Normal Form (1NF): 
+    Eliminate repeating groups, 
+    ensure each column has atomic values, and each row is unique.
+3. Second Normal Form (2NF): 
+    Eliminate partial dependencies, ensure non-key attributes are fully dependent on the primary key.
+4. Third Normal Form (3NF): 
+    Eliminate transitive dependencies, 
+    ensure non-key attributes are independent of each other and 
+    fully functionally dependent on the primary key.
+
+
+To understand normalization step by step, 
+we'll start with an example table 
+in its unnormalized form and 
+progressively apply the rules of normalization 
+to reach the third normal form (3NF). 
+We'll use an example related to employee and department data.
+
+ Unnormalized Form (UNF)
+In the unnormalized form, data can have repeating groups and redundant data. 
+
+EMP_DEPT_UNF
+------------------------------------------------------------------
+EMPNO | ENAME | SAL  | DEPTNO | DNAME | DLOC   | PROJECTS
+------|-------|------|--------|-------|--------|-------------------
+101   | John  | 3000 | 10     | Sales | NY     | ProjectA, ProjectB
+102   | Jane  | 1500 | 20     | HR    | LA     | ProjectC
+103   | Joe   | 2500 | 10     | Sales | NY     | ProjectB, ProjectD
+104   | Mary  | 1800 | 30     | IT    | SF     | ProjectE, ProjectF
+------------------------------------------------------------------
+Here, the `PROJECTS` column contains a repeating group of project names.
+
+ First Normal Form (1NF)
+Definition: 1NF requires the elimination of repeating groups and 
+ensures each column contains atomic values. Each row must be unique.
+
+Conversion from UNF to 1NF: Remove repeating groups 
+by creating separate rows for each repeating value in the `PROJECTS` column.
+
+EMP_DEPT_1NF
+------------------------------------------------------------------
+EMPNO | ENAME | SAL  | DEPTNO | DNAME | DLOC   | PROJECT
+------|-------|------|--------|-------|--------|---------
+101   | John  | 3000 | 10     | Sales | NY     | ProjectA
+101   | John  | 3000 | 10     | Sales | NY     | ProjectB
+102   | Jane  | 1500 | 20     | HR    | LA     | ProjectC
+103   | Joe   | 2500 | 10     | Sales | NY     | ProjectB
+103   | Joe   | 2500 | 10     | Sales | NY     | ProjectD
+104   | Mary  | 1800 | 30     | IT    | SF     | ProjectE
+104   | Mary  | 1800 | 30     | IT    | SF     | ProjectF
+------------------------------------------------------------------
+
+ Second Normal Form (2NF)
+Definition: 2NF requires the table to be in 1NF and eliminates partial dependencies, 
+ensuring that all non-key attributes are fully dependent on the primary key.
+
+Conversion from 1NF to 2NF: Identify and remove partial dependencies. 
+Split the table into two: one for employee and project information, 
+and another for department information.
+
+EMP
+------------------------------------------------------------------
+EMPNO | ENAME | SAL  | DEPTNO
+------|-------|------|-------
+101   | John  | 3000 | 10
+102   | Jane  | 1500 | 20
+103   | Joe   | 2500 | 10
+104   | Mary  | 1800 | 30
+------------------------------------------------------------------
+
+DEPT
+------------------------------------------------------------------
+DEPTNO | DNAME | DLOC
+-------|-------|-----
+10     | Sales | NY
+20     | HR    | LA
+30     | IT    | SF
+------------------------------------------------------------------
+
+EMP_PROJECT
+------------------------------------------------------------------
+EMPNO | PROJECT
+------|---------
+101   | ProjectA
+101   | ProjectB
+102   | ProjectC
+103   | ProjectB
+103   | ProjectD
+104   | ProjectE
+104   | ProjectF
+------------------------------------------------------------------
+
+ Third Normal Form (3NF)
+Definition: 3NF requires the table to be in 2NF and eliminates transitive dependencies, 
+ensuring that non-key attributes are not only fully functionally dependent 
+on the primary key but also independent of each other.
+
+Conversion from 2NF to 3NF: Ensure no transitive dependencies exist. 
+This means attributes in a table should only depend on the primary key.
+
+In our case, the tables `EMP`, `DEPT`, and `EMP_PROJECT` are already in 3NF 
+because there are no transitive dependencies. 
+Each non-key attribute is fully functionally dependent on the primary key, 
+and no non-key attribute depends on another non-key attribute.
+
+ Summary of Normalization Steps
+
+1. Unnormalized Form (UNF): 
+A single table with repeating groups and redundant data.
+   - Example: `EMP_DEPT_UNF`
+
+2. First Normal Form (1NF): 
+Eliminate repeating groups and ensure each column contains atomic values.
+   - Conversion: Remove repeating groups and create new rows for each atomic value.
+   - Example: `EMP_DEPT_1NF`
+
+3. Second Normal Form (2NF): 
+Eliminate partial dependencies, 
+ensuring non-key attributes are 
+fully dependent on the primary key.
+   - Conversion: Split the table into two or more tables to remove partial dependencies.
+   - Example: `EMP`, `DEPT`, `EMP_PROJECT`
+
+4. Third Normal Form (3NF): 
+Eliminate transitive dependencies, 
+ensuring non-key attributes are 
+fully functionally dependent on the primary key and independent of each other.
+   - Conversion: Ensure no non-key attribute depends on another non-key attribute.
+   - Example: The tables `EMP`, `DEPT`, and `EMP_PROJECT` are already in 3NF.
+
+
+   

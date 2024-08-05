@@ -1,0 +1,1517 @@
+Sample `EMP` and `DEPT` tables with data 
+
+------------------------------------------
+ `DEPT` Table
+---------------------sql---------------------
+CREATE TABLE DEPT (
+    DEPTNO INT PRIMARY KEY,
+    DNAME VARCHAR(50),
+    LOC VARCHAR(50)
+);
+
+INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES
+(10, 'ACCOUNTING', 'NEW YORK'),
+(20, 'RESEARCH', 'DALLAS'),
+(30, 'SALES', 'CHICAGO'),
+(40, 'OPERATIONS', 'BOSTON');
+------------------------------------------
+
+------------------------------------------
+ `EMP` Table
+---------------------sql---------------------
+CREATE TABLE EMP (
+    EMPNO INT PRIMARY KEY,
+    ENAME VARCHAR(50),
+    JOB VARCHAR(50),
+    MGR INT,
+    HIREDATE DATE,
+    SAL DECIMAL(10, 2),
+    COMM DECIMAL(10, 2),
+    DEPTNO INT,
+    FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO)
+);
+
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES
+(7369, 'SMITH', 'CLERK', 7902, '2010-12-17', 800.00, NULL, 20),
+(7499, 'ALLEN', 'SALESMAN', 7698, '2011-02-20', 1600.00, 300.00, 30),
+(7521, 'WARD', 'SALESMAN', 7698, '2011-02-22', 1250.00, 500.00, 30),
+(7566, 'JONES', 'MANAGER', 7839, '2011-04-02', 2975.00, NULL, 20),
+(7654, 'MARTIN', 'SALESMAN', 7698, '2011-09-28', 1250.00, 1400.00, 30),
+(7698, 'BLAKE', 'MANAGER', 7839, '2011-05-01', 2850.00, NULL, 30),
+(7782, 'CLARK', 'MANAGER', 7839, '2011-06-09', 2450.00, NULL, 10),
+(7788, 'SCOTT', 'ANALYST', 7566, '2012-12-09', 3000.00, NULL, 20),
+(7839, 'KING', 'PRESIDENT', NULL, '2011-11-17', 5000.00, NULL, 10),
+(7844, 'TURNER', 'SALESMAN', 7698, '2011-09-08', 1500.00, 0.00, 30),
+(7876, 'ADAMS', 'CLERK', 7788, '2013-01-12', 1100.00, NULL, 20),
+(7900, 'JAMES', 'CLERK', 7698, '2011-12-03', 950.00, NULL, 30),
+(7902, 'FORD', 'ANALYST', 7566, '2011-12-03', 3000.00, NULL, 20),
+(7934, 'MILLER', 'CLERK', 7782, '2012-01-23', 1300.00, NULL, 10);
+------------------------------------------
+
+ Example Queries
+
+1. Select all employees:
+    ---------------------sql---------------------
+    SELECT * FROM EMP;
+    ------------------------------------------
+
+2. Select employees from a specific department:
+    ---------------------sql---------------------
+    SELECT * FROM EMP WHERE DEPTNO = 20;
+    ------------------------------------------
+
+3. Join `EMP` and `DEPT` tables:
+    ---------------------sql---------------------
+    SELECT E.EMPNO, E.ENAME, E.JOB, D.DNAME 
+    FROM EMP E
+    JOIN DEPT D ON E.DEPTNO = D.DEPTNO;
+    ------------------------------------------
+
+4. Find the highest salary in each department:
+    ---------------------sql---------------------
+    SELECT DEPTNO, MAX(SAL) AS MAX_SALARY 
+    FROM EMP
+    GROUP BY DEPTNO;
+    ------------------------------------------
+
+5. Count the number of employees in each job category:
+    ---------------------sql---------------------
+    SELECT JOB, COUNT(*) AS NUM_EMPLOYEES 
+    FROM EMP
+    GROUP BY JOB;
+    ------------------------------------------
+
+6. Find employees who earn more than the average salary:
+    ---------------------sql---------------------
+    SELECT * 
+    FROM EMP 
+    WHERE SAL > (SELECT AVG(SAL) FROM EMP);
+    ------------------------------------------
+
+7. List departments with no employees:
+    ---------------------sql---------------------
+    SELECT D.DEPTNO, D.DNAME 
+    FROM DEPT D
+    LEFT JOIN EMP E ON D.DEPTNO = E.DEPTNO
+    WHERE E.EMPNO IS NULL;
+    ------------------------------------------
+
+Brief overview of 
+    Operators, 
+    data types, 
+    string functions, and 
+    date functions in SQL Server:
+
+ Operators
+1. Arithmetic Operators:
+    - `+` (Addition)
+    - `-` (Subtraction)
+    - `*` (Multiplication)
+    - `/` (Division)
+    - `%` (Modulo)
+
+2. Comparison Operators:
+    - `=` (Equal to)
+    - `<>` or `!=` (Not equal to)
+    - `>` (Greater than)
+    - `<` (Less than)
+    - `>=` (Greater than or equal to)
+    - `<=` (Less than or equal to)
+
+3. Logical Operators:
+    - `AND`
+    - `OR`
+    - `NOT`
+
+4. Bitwise Operators:
+    - `&` (Bitwise AND)
+    - `|` (Bitwise OR)
+    - `^` (Bitwise XOR)
+    - `~` (Bitwise NOT)
+    - `<<` (Left shift)
+    - `>>` (Right shift)
+
+ Data Types
+1. Numeric:
+    - `int`
+    - `smallint`
+    - `tinyint`
+    - `bigint`
+    - `decimal`
+    - `numeric`
+    - `float`
+    - `real`
+
+2. String:
+    - `char`
+    - `varchar`
+    - `text`
+    - `nchar`
+    - `nvarchar`
+    - `ntext`
+
+3. Date and Time:
+    - `date`
+    - `time`
+    - `datetime`
+    - `datetime2`
+    - `smalldatetime`
+    - `datetimeoffset`
+    - `timestamp`
+
+4. Binary:
+    - `binary`
+    - `varbinary`
+    - `image`
+
+5. Other:
+    - `bit`
+    - `uniqueidentifier`
+    - `sql_variant`
+    - `xml`
+    - `cursor`
+    - `table`
+
+ String Functions
+1. `LEN` - Returns the length of a string.
+    ---------------------------------sql---------------------------------
+    SELECT LEN('Hello World');
+    ------------------------------------------------------------------
+
+2. `UPPER` - Converts a string to uppercase.
+    ---------------------------------sql---------------------------------
+    SELECT UPPER('hello world');
+    ------------------------------------------------------------------
+
+3. `LOWER` - Converts a string to lowercase.
+    ---------------------------------sql---------------------------------
+    SELECT LOWER('HELLO WORLD');
+    ------------------------------------------------------------------
+
+4. `SUBSTRING` - Extracts a substring from a string.
+    ---------------------------------sql---------------------------------
+    SELECT SUBSTRING('Hello World', 1, 5);
+    ------------------------------------------------------------------
+
+5. `REPLACE` - Replaces all occurrences of a substring with another substring.
+    ---------------------------------sql---------------------------------
+    SELECT REPLACE('Hello World', 'World', 'SQL');
+    ------------------------------------------------------------------
+
+6. `LTRIM` and `RTRIM` - Removes leading and trailing spaces.
+    ---------------------------------sql---------------------------------
+    SELECT LTRIM('   Hello'), RTRIM('World   ');
+    ------------------------------------------------------------------
+
+7. `CHARINDEX` - Returns the starting position of a substring.
+    ---------------------------------sql---------------------------------
+    SELECT CHARINDEX('World', 'Hello World');
+    ------------------------------------------------------------------
+
+8. `CONCAT` - Concatenates two or more strings.
+    ---------------------------------sql---------------------------------
+    SELECT CONCAT('Hello', ' ', 'World');
+    ------------------------------------------------------------------
+
+ Date Functions
+1. `GETDATE` - Returns the current date and time.
+    ---------------------------------sql---------------------------------
+    SELECT GETDATE();
+    ------------------------------------------------------------------
+
+2. `DATEADD` - Adds a specified number of units to a date.
+    ---------------------------------sql---------------------------------
+    SELECT DATEADD(day, 5, GETDATE());
+    ------------------------------------------------------------------
+
+3. `DATEDIFF` - Returns the difference between two dates.
+    ---------------------------------sql---------------------------------
+    SELECT DATEDIFF(day, '2023-01-01', GETDATE());
+    ------------------------------------------------------------------
+
+4. `FORMAT` - Formats a date using a specified format.
+    ---------------------------------sql---------------------------------
+    SELECT FORMAT(GETDATE(), 'yyyy-MM-dd');
+    ------------------------------------------------------------------
+
+5. `YEAR`, `MONTH`, `DAY` - Extracts the year, month, or day from a date.
+    ---------------------------------sql---------------------------------
+    SELECT YEAR(GETDATE()), MONTH(GETDATE()), DAY(GETDATE());
+    ------------------------------------------------------------------
+
+6. `EOMONTH` - Returns the last day of the month for a specified date.
+    ---------------------------------sql---------------------------------
+    SELECT EOMONTH(GETDATE());
+    ------------------------------------------------------------------
+
+7. `SWITCHOFFSET` - Adjusts a datetimeoffset value to a new time zone.
+    ---------------------------------sql---------------------------------
+    SELECT SWITCHOFFSET(SYSDATETIMEOFFSET(), '-08:00');
+    ------------------------------------------------------------------
+
+
+IIF, ISNULL, and CASE WHEN in SQL Server
+    These functions are commonly used in SQL Server for 
+        conditional logic and 
+        handling NULL values.
+
+IIF
+    The `IIF` function returns one of two values, 
+    depending on whether a Boolean expression evaluates to true or false. 
+    It is similar to the `IF` statement in other programming languages.
+
+Syntax:
+---------------------------------sql---------------------------------
+IIF(condition, true_value, false_value)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+SELECT ENAME, IIF(SAL > 2000, 'High Salary', 'Low Salary') AS SalaryCategory
+FROM EMP;
+------------------------------------------------------------------
+
+ISNULL
+The `ISNULL` function replaces `NULL` with a specified replacement value.
+
+Syntax:
+---------------------------------sql---------------------------------
+ISNULL(expression, replacement_value)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+SELECT ENAME, ISNULL(COMM, 0) AS Commission
+FROM EMP;
+------------------------------------------------------------------
+
+CASE WHEN
+The `CASE WHEN` statement is a powerful conditional expression that allows for multiple conditions and corresponding results.
+
+Syntax:
+---------------------------------sql---------------------------------
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ...
+    ELSE resultN
+END
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+SELECT ENAME,
+       CASE 
+           WHEN SAL < 1000 THEN 'Low Salary'
+           WHEN SAL BETWEEN 1000 AND 2000 THEN 'Medium Salary'
+           ELSE 'High Salary'
+       END AS SalaryCategory
+FROM EMP;
+------------------------------------------------------------------
+
+Combining IIF, ISNULL, and CASE WHEN
+
+These functions can be used together in more complex queries to handle conditional logic and NULL values effectively.
+
+Example:
+---------------------------------sql---------------------------------
+SELECT ENAME,
+       ISNULL(COMM, 0) AS Commission,
+       IIF(SAL > 2000, 'High Salary', 'Low Salary') AS SalaryCategory,
+       CASE 
+           WHEN JOB = 'MANAGER' THEN 'Management'
+           WHEN JOB = 'SALESMAN' THEN 'Sales'
+           ELSE 'Other'
+       END AS JobCategory
+FROM EMP;
+------------------------------------------------------------------
+
+Practical Examples
+
+1. IIF Example:
+    ---------------------------------sql---------------------------------
+    -- Categorize employees based on salary
+    SELECT ENAME, SAL, 
+           IIF(SAL > 2000, 'High Salary', 'Low Salary') AS SalaryCategory
+    FROM EMP;
+    ------------------------------------------------------------------
+
+2. ISNULL Example:
+    ---------------------------------sql---------------------------------
+    -- Replace NULL commission values with 0
+    SELECT ENAME, COMM, 
+           ISNULL(COMM, 0) AS Commission
+    FROM EMP;
+    ------------------------------------------------------------------
+
+3. CASE WHEN Example:
+    ---------------------------------sql---------------------------------
+    -- Categorize employees based on salary range
+    SELECT ENAME, SAL, 
+           CASE 
+               WHEN SAL < 1000 THEN 'Low Salary'
+               WHEN SAL BETWEEN 1000 AND 2000 THEN 'Medium Salary'
+               ELSE 'High Salary'
+           END AS SalaryCategory
+    FROM EMP;
+    ------------------------------------------------------------------
+
+
+Aggregation functions in SQL Server 
+are used to perform calculations 
+on a set of values and return a single value. 
+
+1. `COUNT()`
+Returns the number of rows that match a specified condition.
+
+Syntax:
+---------------------------------sql---------------------------------
+COUNT(expression)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Count the number of employees
+SELECT COUNT(*) AS EmployeeCount FROM EMP;
+------------------------------------------------------------------
+
+2. `SUM()`
+Returns the total sum of a numeric column.
+
+Syntax:
+---------------------------------sql---------------------------------
+SUM(expression)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Sum of all salaries
+SELECT SUM(SAL) AS TotalSalaries FROM EMP;
+------------------------------------------------------------------
+
+3. `AVG()`
+Returns the average value of a numeric column.
+
+Syntax:
+---------------------------------sql---------------------------------
+AVG(expression)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Average salary of employees
+SELECT AVG(SAL) AS AverageSalary FROM EMP;
+------------------------------------------------------------------
+
+4. `MIN()`
+Returns the minimum value in a set of values.
+
+Syntax:
+---------------------------------sql---------------------------------
+MIN(expression)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Minimum salary among employees
+SELECT MIN(SAL) AS MinimumSalary FROM EMP;
+------------------------------------------------------------------
+
+5. `MAX()`
+Returns the maximum value in a set of values.
+
+Syntax:
+---------------------------------sql---------------------------------
+MAX(expression)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Maximum salary among employees
+SELECT MAX(SAL) AS MaximumSalary FROM EMP;
+------------------------------------------------------------------
+
+6. `GROUP BY`
+Used with aggregation functions to group the result set by one or more columns.
+
+Syntax:
+---------------------------------sql---------------------------------
+SELECT column1, aggregation_function(column2)
+FROM table
+GROUP BY column1;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Total salaries by department
+SELECT DEPTNO, SUM(SAL) AS TotalSalary
+FROM EMP
+GROUP BY DEPTNO;
+------------------------------------------------------------------
+
+7. `HAVING`
+Used to filter groups based on a condition, often used with `GROUP BY`.
+
+Syntax:
+---------------------------------sql---------------------------------
+SELECT column1, aggregation_function(column2)
+FROM table
+GROUP BY column1
+HAVING condition;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Departments with total salary greater than 5000
+SELECT DEPTNO, SUM(SAL) AS TotalSalary
+FROM EMP
+GROUP BY DEPTNO
+HAVING SUM(SAL) > 5000;
+------------------------------------------------------------------
+
+Practical Examples
+
+1. Counting Rows:
+    ---------------------------------sql---------------------------------
+    -- Count the number of employees in each department
+    SELECT DEPTNO, COUNT(*) AS EmployeeCount
+    FROM EMP
+    GROUP BY DEPTNO;
+    ------------------------------------------------------------------
+
+2. Summing Values:
+    ---------------------------------sql---------------------------------
+    -- Total salary and commission by department
+    SELECT DEPTNO, SUM(SAL) AS TotalSalary, SUM(COMM) AS TotalCommission
+    FROM EMP
+    GROUP BY DEPTNO;
+    ------------------------------------------------------------------
+
+3. Average Values:
+    ---------------------------------sql---------------------------------
+    -- Average salary by job title
+    SELECT JOB, AVG(SAL) AS AverageSalary
+    FROM EMP
+    GROUP BY JOB;
+    ------------------------------------------------------------------
+
+4. Minimum and Maximum Values:
+    ---------------------------------sql---------------------------------
+    -- Minimum and maximum salary in each department
+    SELECT DEPTNO, MIN(SAL) AS MinimumSalary, MAX(SAL) AS MaximumSalary
+    FROM EMP
+    GROUP BY DEPTNO;
+    ------------------------------------------------------------------
+
+5. Using HAVING:
+    ---------------------------------sql---------------------------------
+    -- Departments with more than 3 employees
+    SELECT DEPTNO, COUNT(*) AS EmployeeCount
+    FROM EMP
+    GROUP BY DEPTNO
+    HAVING COUNT(*) > 3;
+    ------------------------------------------------------------------
+
+In SQL Server, joins are used 
+to combine rows from two or more tables based 
+on a related column between them. 
+They are crucial for querying relational databases 
+where data is spread across multiple tables. 
+Here’s an overview of the different types of joins:
+
+ 1. INNER JOIN
+Returns rows when there is a match in both tables.
+
+Syntax:
+---------------------------------sql---------------------------------
+SELECT columns
+FROM table1
+INNER JOIN table2
+ON table1.column = table2.column;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve employee names and department names for employees with matching department IDs
+SELECT EMP.ENAME, DEPT.DNAME
+FROM EMP
+INNER JOIN DEPT
+ON EMP.DEPTNO = DEPT.DEPTNO;
+------------------------------------------------------------------
+
+ 2. LEFT JOIN (or LEFT OUTER JOIN)
+Returns all rows from the left table and 
+the matched rows from the right table. 
+If no match is found, 
+NULL values are returned 
+for columns from the right table.
+
+Syntax:
+---------------------------------sql---------------------------------
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.column = table2.column;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve all employees and their department names, including those without a department
+SELECT EMP.ENAME, DEPT.DNAME
+FROM EMP
+LEFT JOIN DEPT
+ON EMP.DEPTNO = DEPT.DEPTNO;
+------------------------------------------------------------------
+
+ 3. RIGHT JOIN (or RIGHT OUTER JOIN)
+Returns all rows from the right table and 
+the matched rows from the left table. 
+If no match is found, 
+NULL values are returned for columns from the left table.
+
+Syntax:
+---------------------------------sql---------------------------------
+SELECT columns
+FROM table1
+RIGHT JOIN table2
+ON table1.column = table2.column;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve all departments and the names of employees in those departments, including departments without employees
+SELECT EMP.ENAME, DEPT.DNAME
+FROM EMP
+RIGHT JOIN DEPT
+ON EMP.DEPTNO = DEPT.DEPTNO;
+------------------------------------------------------------------
+
+ 4. FULL JOIN (or FULL OUTER JOIN)
+Returns all rows when there is a match in either left or right table. 
+Rows with no match in one of the tables 
+will have NULL values for columns from that table.
+
+Syntax:
+---------------------------------sql---------------------------------
+SELECT columns
+FROM table1
+FULL JOIN table2
+ON table1.column = table2.column;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve all employees and all departments, including those without matches in either table
+SELECT EMP.ENAME, DEPT.DNAME
+FROM EMP
+FULL JOIN DEPT
+ON EMP.DEPTNO = DEPT.DEPTNO;
+------------------------------------------------------------------
+
+ 5. CROSS JOIN
+Returns the Cartesian product of both tables, i.e., all possible combinations of rows from the two tables.
+
+Syntax:
+---------------------------------sql---------------------------------
+SELECT columns
+FROM table1
+CROSS JOIN table2;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve all combinations of employees and departments
+SELECT EMP.ENAME, DEPT.DNAME
+FROM EMP
+CROSS JOIN DEPT;
+------------------------------------------------------------------
+
+ 6. SELF JOIN
+A self join is a regular join but the table is joined with itself. 
+Its used to compare rows within the same table.
+
+Syntax:
+---------------------------------sql---------------------------------
+SELECT a.columns, b.columns
+FROM table a
+INNER JOIN table b
+ON a.column = b.column;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve employees and their managers (assuming MGR is an EMPNO referring to another employee)
+SELECT e.ENAME AS Employee, m.ENAME AS Manager
+FROM EMP e
+LEFT JOIN EMP m
+ON e.MGR = m.EMPNO;
+------------------------------------------------------------------
+
+ Summary
+
+- INNER JOIN: 
+    Only returns rows with matching values in both tables.
+- LEFT JOIN: 
+    Returns all rows from the left table and matched rows 
+    from the right table, 
+    with NULLs for non-matching rows in the right table.
+- RIGHT JOIN: 
+    Returns all rows from the right table and matched rows 
+    from the left table, 
+    with NULLs for non-matching rows in the left table.
+- FULL JOIN: 
+    Returns all rows from both tables, 
+    with NULLs where there is no match.
+- CROSS JOIN: 
+    Returns all possible combinations of rows from both tables.
+- SELF JOIN: 
+    Joins the table with itself to compare rows within the same table.
+
+A subquery, also known as a nested query, 
+is a query within another query. 
+It allows you to perform operations and 
+make decisions based on the results of the inner query. 
+Subqueries can be used in various SQL statements, 
+such as `SELECT`, `INSERT`, `UPDATE`, and `DELETE`.
+
+ Types of Subqueries
+
+1. Single-Row Subquery
+   - Returns a single row with one or more columns.
+   - Often used with comparison operators (`=`, `<`, `>`, etc.).
+
+   Example:
+   ---------------------------------sql---------------------------------
+   -- Find employees with a salary higher than the average salary in the department
+   SELECT ENAME
+   FROM EMP
+   WHERE SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = 10);
+   ------------------------------------------------------------------
+
+2. Multiple-Row Subquery
+   - Returns multiple rows with one or more columns.
+   - Often used with `IN`, `ANY`, or `ALL` operators.
+
+   Example:
+   ---------------------------------sql---------------------------------
+   -- Find employees who work in departments with more than 10 employees
+   SELECT ENAME
+   FROM EMP
+   WHERE DEPTNO IN (SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 10);
+   ------------------------------------------------------------------
+
+3. Correlated Subquery
+   - References columns from the outer query and is executed once 
+   for each row processed by the outer query.
+   - Useful for row-by-row comparisons.
+
+   Example:
+   ---------------------------------sql---------------------------------
+   -- Find employees who earn more than any employee in department 10
+   SELECT ENAME
+   FROM EMP e1
+   WHERE SAL > (SELECT MAX(SAL) FROM EMP e2 WHERE e2.DEPTNO = 10);
+   ------------------------------------------------------------------
+
+4. Nested Subquery
+   - A subquery within another subquery.
+   - Used for more complex queries where multiple layers of queries are required.
+
+   Example:
+   ---------------------------------sql---------------------------------
+   -- Find departments with the highest average salary
+   SELECT DEPTNO
+   FROM EMP
+   GROUP BY DEPTNO
+   HAVING AVG(SAL) = (SELECT MAX(avg_sal) FROM (SELECT AVG(SAL) AS avg_sal FROM EMP GROUP BY DEPTNO) AS DeptAvg);
+   ------------------------------------------------------------------
+
+ Subquery in `SELECT` Clause
+
+Subqueries can be used in the `SELECT` clause to compute a value that is returned with each row.
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve employees and their department's average salary
+SELECT ENAME, SAL,
+       (SELECT AVG(SAL) FROM EMP e2 WHERE e2.DEPTNO = e1.DEPTNO) AS DeptAvgSal
+FROM EMP e1;
+------------------------------------------------------------------
+
+ Subquery in `WHERE` Clause
+
+Subqueries in the `WHERE` clause help filter results based on criteria derived from other queries.
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve employees whose salaries are greater than the average salary of their department
+SELECT ENAME, SAL, DEPTNO
+FROM EMP
+WHERE SAL > (SELECT AVG(SAL) FROM EMP e2 WHERE e2.DEPTNO = EMP.DEPTNO);
+------------------------------------------------------------------
+
+ Subquery in `FROM` Clause
+
+Subqueries in the `FROM` clause act as temporary tables or views for the outer query to use.
+
+Example:
+---------------------------------sql---------------------------------
+-- Retrieve departments and the average salary of employees in each department
+SELECT DEPTNO, AVG_SAL
+FROM (SELECT DEPTNO, AVG(SAL) AS AVG_SAL FROM EMP GROUP BY DEPTNO) AS DeptAvg;
+------------------------------------------------------------------
+
+ Summary
+
+- Single-Row Subquery: Returns a single row and is used with comparison operators.
+- Multiple-Row Subquery: Returns multiple rows and is used with `IN`, `ANY`, `ALL`.
+- Correlated Subquery: References columns from the outer query and is evaluated per row.
+- Nested Subquery: Multiple layers of subqueries for complex queries.
+
+
+A correlated subquery is a type of subquery 
+that references columns from the outer query. 
+Unlike non-correlated subqueries, 
+which are executed once and return a result set, 
+correlated subqueries are executed once for each row processed by the outer query. 
+This allows the subquery to return different results 
+for each row of the outer query.
+
+ Syntax
+
+---------------------------------sql---------------------------------
+SELECT columns
+FROM outer_table
+WHERE column OPERATOR (SELECT columns
+                        FROM inner_table
+                        WHERE outer_table.column = inner_table.column);
+------------------------------------------------------------------
+
+ Key Characteristics
+
+- References Outer Query: 
+    The subquery includes a reference to a column 
+    from the outer query, 
+    making it dependent on the outer query.
+- Row-by-Row Evaluation: 
+    The subquery is evaluated for each row of the outer query, 
+    which can affect performance if not optimized properly.
+
+ Examples
+
+1. Finding Employees Earning More Than Average in Their Department
+
+   Suppose you want to find employees 
+   whose salaries are higher than the average salary 
+   in their own department.
+
+   ---------------------------------sql---------------------------------
+   SELECT ENAME, SAL, DEPTNO
+   FROM EMP e1
+   WHERE SAL > (SELECT AVG(SAL)
+                FROM EMP e2
+                WHERE e2.DEPTNO = e1.DEPTNO);
+   ------------------------------------------------------------------
+
+   - Explanation: For each employee in `EMP e1`, 
+   the subquery calculates the average salary 
+   in the same department (`e2.DEPTNO = e1.DEPTNO`). 
+   The outer query then selects employees 
+   whose salary is greater than this average.
+
+2. Finding Products with Prices Higher Than Any Product in a Category
+
+   Suppose you have a `PRODUCT` table and you want 
+   to find products priced higher than any product in a given category.
+
+   ---------------------------------sql---------------------------------
+   SELECT ProductName, Price
+   FROM PRODUCTS p1
+   WHERE Price > (SELECT MAX(Price)
+                  FROM PRODUCTS p2
+                  WHERE p2.CategoryID = p1.CategoryID);
+   ------------------------------------------------------------------
+
+   - Explanation: For each product in `PRODUCTS p1`, 
+   the subquery finds the maximum price in the same category (`p2.CategoryID = p1.CategoryID`). 
+   The outer query selects products with prices higher than this maximum price.
+
+3. Finding Orders with More Items Than the Average
+
+   Suppose you want to find orders with more items than the average number of items per order.
+
+   ---------------------------------sql---------------------------------
+   SELECT OrderID, COUNT(ItemID) AS NumberOfItems
+   FROM OrderItems oi1
+   GROUP BY OrderID
+   HAVING COUNT(ItemID) > (SELECT AVG(ItemCount)
+                           FROM (SELECT OrderID, COUNT(ItemID) AS ItemCount
+                                 FROM OrderItems
+                                 GROUP BY OrderID) AS AvgItems);
+   ------------------------------------------------------------------
+
+   - Explanation: For each order in `OrderItems oi1`, 
+   the subquery calculates the average item count per order. 
+   The outer query selects orders with item counts greater than this average.
+
+ Performance Considerations
+
+- Optimization: 
+    Correlated subqueries can be slow because 
+    they involve repeated execution of the inner query. 
+    Indexing and query optimization techniques 
+    can help improve performance.
+- Alternative Approaches: 
+    Sometimes, joins or common table expressions (CTEs) can be used as alternatives 
+    to correlated subqueries, potentially offering better performance.
+
+ Summary
+
+- Correlated Subquery: 
+    A subquery that references columns from the outer query and 
+    is executed once per row of the outer query.
+- Use Cases: 
+    Useful for row-by-row comparisons and 
+    when the inner query depends on the outer query’s row.
+
+
+In SQL Server, 
+`CREATE TABLE` and `ALTER TABLE` 
+are used to define and modify tables. 
+
+ `CREATE TABLE`
+The `CREATE TABLE` statement is used to create a new table in the database.
+
+Syntax:
+---------------------------------sql---------------------------------
+CREATE TABLE table_name (
+    column1 datatype constraints,
+    column2 datatype constraints,
+    ...
+);
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Create a table for employees
+CREATE TABLE EMP (
+    EMPNO INT PRIMARY KEY,
+    ENAME VARCHAR(50),
+    JOB VARCHAR(50),
+    MGR INT,
+    HIREDATE DATE,
+    SAL DECIMAL(10, 2),
+    COMM DECIMAL(10, 2),
+    DEPTNO INT,
+    FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO)
+);
+------------------------------------------------------------------
+
+ `ALTER TABLE`
+The `ALTER TABLE` statement is used 
+to modify an existing table, 
+including adding, 
+deleting, or 
+modifying columns, and 
+adding constraints.
+
+Syntax:
+---------------------------------sql---------------------------------
+ALTER TABLE table_name
+    [ADD column_name datatype constraints, ...]
+    [DROP COLUMN column_name, ...]
+    [ALTER COLUMN column_name datatype constraints, ...]
+    [ADD CONSTRAINT constraint_name constraint_definition, ...]
+    [DROP CONSTRAINT constraint_name, ...];
+------------------------------------------------------------------
+
+Examples:
+
+1. Add a Column:
+    ---------------------------------sql---------------------------------
+    -- Add a new column for email addresses
+    ALTER TABLE EMP
+    ADD EMAIL VARCHAR(100);
+    ------------------------------------------------------------------
+
+2. Drop a Column:
+    ---------------------------------sql---------------------------------
+    -- Remove the email column
+    ALTER TABLE EMP
+    DROP COLUMN EMAIL;
+    ------------------------------------------------------------------
+
+3. Modify a Column:
+    ---------------------------------sql---------------------------------
+    -- Change the data type of SAL to allow more precision
+    ALTER TABLE EMP
+    ALTER COLUMN SAL DECIMAL(12, 2);
+    ------------------------------------------------------------------
+
+4. Add a Constraint:
+    ---------------------------------sql---------------------------------
+    -- Add a unique constraint to the ENAME column
+    ALTER TABLE EMP
+    ADD CONSTRAINT UQ_ENAME UNIQUE (ENAME);
+    ------------------------------------------------------------------
+
+5. Drop a Constraint:
+    ---------------------------------sql---------------------------------
+    -- Drop the unique constraint on ENAME
+    ALTER TABLE EMP
+    DROP CONSTRAINT UQ_ENAME;
+    ------------------------------------------------------------------
+
+6. Add a Foreign Key Constraint:
+    ---------------------------------sql---------------------------------
+    -- Add a foreign key constraint to link EMP.DEPTNO with DEPT.DEPTNO
+    ALTER TABLE EMP
+    ADD CONSTRAINT FK_DEPTNO FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO);
+    ------------------------------------------------------------------
+
+7. Drop a Foreign Key Constraint:
+    ---------------------------------sql---------------------------------
+    -- Drop the foreign key constraint on DEPTNO
+    ALTER TABLE EMP
+    DROP CONSTRAINT FK_DEPTNO;
+    ------------------------------------------------------------------
+
+ Summary
+- `CREATE TABLE`: 
+Used to create a new table with specified columns and constraints.
+- `ALTER TABLE`: 
+Used to modify an existing table by adding, deleting, 
+or modifying columns and constraints.
+
+
+
+The `INSERT INTO` statement in SQL Server 
+is used to add new rows of data into a table. 
+Here’s a breakdown of how to use it:
+
+ Syntax
+
+1. Insert into All Columns:
+   ---------------------------------sql---------------------------------
+   INSERT INTO table_name (column1, column2, column3, ...)
+   VALUES (value1, value2, value3, ...);
+   ------------------------------------------------------------------
+
+2. Insert into Specific Columns:
+   ---------------------------------sql---------------------------------
+   INSERT INTO table_name (column1, column2)
+   VALUES (value1, value2);
+   ------------------------------------------------------------------
+
+3. Insert Using a Select Statement:
+   ---------------------------------sql---------------------------------
+   INSERT INTO table_name (column1, column2, ...)
+   SELECT column1, column2, ...
+   FROM another_table
+   WHERE condition;
+   ------------------------------------------------------------------
+
+ Examples
+
+1. Insert into All Columns:
+   ---------------------------------sql---------------------------------
+   -- Insert a new employee record into the EMP table
+   INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+   VALUES (8001, 'JOHN DOE', 'CLERK', 7839, '2024-08-01', 1200.00, NULL, 10);
+   ------------------------------------------------------------------
+
+2. Insert into Specific Columns:
+   ---------------------------------sql---------------------------------
+   -- Insert a new employee record, only specifying some columns
+   INSERT INTO EMP (EMPNO, ENAME, SAL)
+   VALUES (8002, 'JANE SMITH', 1500.00);
+   ------------------------------------------------------------------
+
+3. Insert Using a Select Statement:
+   ---------------------------------sql---------------------------------
+   -- Insert employee records into the EMP table from another table, EMP_TEMP
+   INSERT INTO EMP (EMPNO, ENAME, JOB, SAL)
+   SELECT EMPNO, ENAME, JOB, SAL
+   FROM EMP_TEMP
+   WHERE HIREDATE > '2024-01-01';
+   ------------------------------------------------------------------
+
+ Key Points
+- Specify Columns: 
+    Ensure that the number of values matches 
+    the number of columns you specify 
+    in the `INSERT INTO` statement.
+- Data Types: 
+    The values inserted must be compatible
+     with the data types of the corresponding columns.
+- NULL Values: 
+    If a column allows `NULL` values and you do not provide a value, 
+    it will be set to `NULL` unless a default value is defined.
+- Default Values: 
+    If a column has a default value and 
+    you do not provide a value for it, the default value will be used.
+
+
+To insert multiple rows into a SQL Server table 
+in a single `INSERT INTO` statement, 
+you can use the following approaches:
+
+ 1. Multiple Row Insert
+
+You can insert multiple rows of data 
+by listing multiple sets of values separated by commas.
+
+Syntax:
+---------------------------------sql---------------------------------
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES
+    (value1a, value2a, value3a, ...),
+    (value1b, value2b, value3b, ...),
+    (value1c, value2c, value3c, ...);
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Insert multiple employee records into the EMP table
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+VALUES
+    (8003, 'ALICE JOHNSON', 'MANAGER', 7839, '2024-08-01', 3500.00, NULL, 10),
+    (8004, 'BOB WILLIAMS', 'CLERK', 7902, '2024-08-02', 1200.00, 200.00, 20),
+    (8005, 'CAROL MARTIN', 'SALESMAN', 7698, '2024-08-03', 1700.00, 500.00, 30);
+------------------------------------------------------------------
+
+ 2. Insert from Another Table
+
+You can insert multiple rows from one table into another using a `SELECT` statement.
+
+Syntax:
+---------------------------------sql---------------------------------
+INSERT INTO target_table (column1, column2, ...)
+SELECT column1, column2, ...
+FROM source_table
+WHERE condition;
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+-- Insert employee records from EMP_TEMP into EMP table
+INSERT INTO EMP (EMPNO, ENAME, JOB, SAL, DEPTNO)
+SELECT EMPNO, ENAME, JOB, SAL, DEPTNO
+FROM EMP_TEMP
+WHERE HIREDATE > '2024-01-01';
+------------------------------------------------------------------
+
+ 3. Using Table-Valued Parameters (Advanced)
+
+For inserting many rows, you might also use table-valued parameters if working with a stored procedure.
+
+Example:
+
+Define a table type:
+---------------------------------sql---------------------------------
+CREATE TYPE EmployeeTableType AS TABLE
+(
+    EMPNO INT,
+    ENAME VARCHAR(50),
+    JOB VARCHAR(50),
+    MGR INT,
+    HIREDATE DATE,
+    SAL DECIMAL(10, 2),
+    COMM DECIMAL(10, 2),
+    DEPTNO INT
+);
+------------------------------------------------------------------
+
+Create a stored procedure:
+---------------------------------sql---------------------------------
+CREATE PROCEDURE InsertEmployees
+    @EmployeeTable EmployeeTableType READONLY
+AS
+BEGIN
+    INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+    SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO
+    FROM @EmployeeTable;
+END;
+------------------------------------------------------------------
+
+Call the procedure:
+---------------------------------sql---------------------------------
+DECLARE @NewEmployees EmployeeTableType;
+
+INSERT INTO @NewEmployees (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+VALUES
+    (8006, 'DAVID KIM', 'ANALYST', 7839, '2024-08-04', 2800.00, NULL, 10),
+    (8007, 'EVE BLACK', 'CLERK', 7902, '2024-08-05', 1100.00, 150.00, 20);
+
+EXEC InsertEmployees @EmployeeTable = @NewEmployees;
+------------------------------------------------------------------
+
+ Summary
+- Multiple Row Insert: 
+    Use a single `INSERT INTO` statement with multiple `VALUES` clauses.
+- Insert from Another Table: 
+    Use a `SELECT` statement to insert rows from one table to another.
+- Table-Valued Parameters: 
+    Use for bulk inserts with stored procedures.
+
+
+
+
+The `UPDATE` statement in SQL Server 
+is used to modify existing records in a table. 
+You can update one or more columns 
+for one or more rows based on specified conditions.
+
+ Syntax
+
+---------------------------------sql---------------------------------
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2,
+    ...
+WHERE condition;
+------------------------------------------------------------------
+
+ Key Components
+
+- `table_name`: 
+    The name of the table where you want to make updates.
+- `SET`: 
+    Specifies the columns and the new values to be assigned.
+- `WHERE`: 
+    Defines the condition that identifies which rows should be updated. 
+    If omitted, all rows in the table will be updated.
+
+ Examples
+
+1. Update a Single Column for a Single Row:
+
+    ---------------------------------sql---------------------------------
+    -- Update the salary of a specific employee
+    UPDATE EMP
+    SET SAL = 2500.00
+    WHERE EMPNO = 8001;
+    ------------------------------------------------------------------
+
+2. Update Multiple Columns for a Single Row:
+
+    ---------------------------------sql---------------------------------
+    -- Update multiple columns for a specific employee
+    UPDATE EMP
+    SET SAL = 3000.00,
+        JOB = 'SENIOR CLERK'
+    WHERE EMPNO = 8002;
+    ------------------------------------------------------------------
+
+3. Update a Single Column for Multiple Rows:
+
+    ---------------------------------sql---------------------------------
+    -- Increase salary by 10% for all employees in department 10
+    UPDATE EMP
+    SET SAL = SAL * 1.10
+    WHERE DEPTNO = 10;
+    ------------------------------------------------------------------
+
+4. Update Multiple Columns for Multiple Rows Based on a Condition:
+
+    ---------------------------------sql---------------------------------
+    -- Set default commission to 0 for employees who do not have a commission
+    UPDATE EMP
+    SET COMM = ISNULL(COMM, 0);
+    ------------------------------------------------------------------
+
+5. Update Using a Subquery:
+
+    ---------------------------------sql---------------------------------
+    -- Increase salary of employees who work in departments where the total salary is less than 5000
+    UPDATE EMP
+    SET SAL = SAL * 1.05
+    WHERE DEPTNO IN (
+        SELECT DEPTNO
+        FROM EMP
+        GROUP BY DEPTNO
+        HAVING SUM(SAL) < 5000
+    );
+    ------------------------------------------------------------------
+
+ Important Points
+
+- Using `WHERE` Clause: 
+    Always use the `WHERE` clause 
+    to specify which rows should be updated. 
+    Without it, all rows 
+    in the table will be updated.
+- Transactions: 
+    For critical updates, 
+    consider using transactions 
+    to ensure data integrity.
+- Backups: 
+    It’s a good practice 
+    to back up your data 
+    before performing bulk updates.
+
+
+
+In SQL Server, transactions 
+are used to ensure that a series of operations are executed 
+in a manner that maintains data integrity and consistency. 
+Transactions allow you to group multiple SQL statements 
+into a single unit of work, 
+which can be committed or rolled back as a whole.
+
+ Key Concepts
+
+1. Transaction: 
+    A sequence of operations performed as a single logical unit of work. 
+    Transactions are used to ensure data consistency and integrity.
+
+2. ACID Properties: 
+    Transactions are designed to adhere to ACID properties:
+   - Atomicity: 
+   Ensures that all operations in a transaction are completed successfully. 
+   If any operation fails, the entire transaction is rolled back.
+   - Consistency: 
+   Ensures that a transaction brings the database 
+   from one valid state to another valid state, 
+   maintaining database integrity.
+   - Isolation: Ensures that transactions are isolated from one another, 
+   so the execution of one transaction does not affect the execution of another.
+   - Durability: 
+   Ensures that once a transaction is committed, 
+   the changes are permanent and will survive system failures.
+
+ Transaction Control Statements
+
+1. BEGIN TRANSACTION: Starts a new transaction.
+
+    ---------------------------------sql---------------------------------
+    BEGIN TRANSACTION;
+    ------------------------------------------------------------------
+
+2. COMMIT: Saves all changes made during the transaction and makes them permanent.
+
+    ---------------------------------sql---------------------------------
+    COMMIT;
+    ------------------------------------------------------------------
+
+3. ROLLBACK: Undoes all changes made during the transaction, reverting the database to its previous state.
+
+    ---------------------------------sql---------------------------------
+    ROLLBACK;
+    ------------------------------------------------------------------
+
+4. SAVE TRANSACTION: Creates a savepoint within a transaction. You can roll back to this savepoint if needed.
+
+    ---------------------------------sql---------------------------------
+    SAVE TRANSACTION savepoint_name;
+    ------------------------------------------------------------------
+
+ Example Usage
+
+1. Basic Transaction Example:
+
+---------------------------------sql---------------------------------
+BEGIN TRANSACTION;
+
+    -- Insert a new employee
+    INSERT INTO EMP (EMPNO, ENAME, JOB, SAL, DEPTNO)
+    VALUES (8008, 'JACK WHITE', 'ANALYST', 2700.00, 10);
+
+    -- Update the department total salary
+    UPDATE DEPT
+    SET TOTAL_SALARY = TOTAL_SALARY + 2700.00
+    WHERE DEPTNO = 10;
+
+    -- Commit the transaction
+    COMMIT;
+------------------------------------------------------------------
+
+2. Transaction with Error Handling:
+
+---------------------------------sql---------------------------------
+BEGIN TRANSACTION;
+
+BEGIN TRY
+    -- Insert a new employee
+    INSERT INTO EMP (EMPNO, ENAME, JOB, SAL, DEPTNO)
+    VALUES (8009, 'SARA GREEN', 'CLERK', 1400.00, 20);
+
+    -- Update the department total salary
+    UPDATE DEPT
+    SET TOTAL_SALARY = TOTAL_SALARY + 1400.00
+    WHERE DEPTNO = 20;
+
+    -- Commit the transaction
+    COMMIT;
+END TRY
+BEGIN CATCH
+    -- Rollback the transaction if an error occurs
+    ROLLBACK;
+
+    -- Capture and handle the error
+    SELECT ERROR_MESSAGE() AS ErrorMessage;
+END CATCH;
+------------------------------------------------------------------
+
+3. Using Savepoints:
+
+---------------------------------sql---------------------------------
+BEGIN TRANSACTION;
+
+    -- Insert a new employee
+    INSERT INTO EMP (EMPNO, ENAME, JOB, SAL, DEPTNO)
+    VALUES (8010, 'MIA BROWN', 'MANAGER', 3500.00, 30);
+
+    -- Create a savepoint
+    SAVE TRANSACTION BeforeUpdate;
+
+    -- Update the department total salary
+    UPDATE DEPT
+    SET TOTAL_SALARY = TOTAL_SALARY + 3500.00
+    WHERE DEPTNO = 30;
+
+    -- Rollback to savepoint if needed
+    --ROLLBACK TRANSACTION BeforeUpdate;
+
+    -- Commit the transaction
+    COMMIT;
+------------------------------------------------------------------
+
+ Summary
+
+- BEGIN TRANSACTION: Start a new transaction.
+- COMMIT: Make all changes permanent.
+- ROLLBACK: Undo all changes.
+- SAVE TRANSACTION: Create a savepoint to roll back to if needed.
+
+
+In SQL Server, 
+data control refers to the mechanisms and commands 
+used to manage access to and permissions on database objects.
+ This is crucial for maintaining security, 
+ ensuring that users have appropriate access to data, 
+ and preventing unauthorized access or modifications.
+
+Key Data Control Commands
+
+1. GRANT
+   - Grants specific permissions to users or roles.
+   - Syntax:
+     ---------------------------------sql---------------------------------
+     GRANT permission_type
+     ON object_name
+     TO user_or_role;
+     ------------------------------------------------------------------
+
+   - Example:
+     ---------------------------------sql---------------------------------
+     -- Grant SELECT permission on the EMP table to user 'JohnDoe'
+     GRANT SELECT
+     ON EMP
+     TO JohnDoe;
+     ------------------------------------------------------------------
+
+2. REVOKE
+   - Removes specific permissions from users or roles.
+   - Syntax:
+     ---------------------------------sql---------------------------------
+     REVOKE permission_type
+     ON object_name
+     FROM user_or_role;
+     ------------------------------------------------------------------
+
+   - Example:
+     ---------------------------------sql---------------------------------
+     -- Revoke SELECT permission on the EMP table from user 'JohnDoe'
+     REVOKE SELECT
+     ON EMP
+     FROM JohnDoe;
+     ------------------------------------------------------------------
+
+3. DENY
+   - Explicitly denies specific permissions to users or roles. Deny takes precedence over grant.
+   - Syntax:
+     ---------------------------------sql---------------------------------
+     DENY permission_type
+     ON object_name
+     TO user_or_role;
+     ------------------------------------------------------------------
+
+   - Example:
+     ---------------------------------sql---------------------------------
+     -- Deny INSERT permission on the EMP table to user 'JohnDoe'
+     DENY INSERT
+     ON EMP
+     TO JohnDoe;
+     ------------------------------------------------------------------
+
+Types of Permissions
+
+- SELECT: Allows users to read data from a table or view.
+- INSERT: Allows users to add new rows to a table.
+- UPDATE: Allows users to modify existing rows in a table.
+- DELETE: Allows users to remove rows from a table.
+- EXECUTE: Allows users to execute stored procedures or functions.
+- ALTER: Allows users to modify the structure of a table, view, or procedure.
+- CONTROL: Provides full control over the object.
+
+Examples
+
+1. Granting Permissions:
+   ---------------------------------sql---------------------------------
+   -- Grant INSERT and UPDATE permissions on the EMP table to user 'JaneDoe'
+   GRANT INSERT, UPDATE
+   ON EMP
+   TO JaneDoe;
+   ------------------------------------------------------------------
+
+2. Revoking Permissions:
+   ---------------------------------sql---------------------------------
+   -- Revoke UPDATE permission on the EMP table from user 'JaneDoe'
+   REVOKE UPDATE
+   ON EMP
+   FROM JaneDoe;
+   ------------------------------------------------------------------
+
+3. Denying Permissions:
+   ---------------------------------sql---------------------------------
+   -- Deny DELETE permission on the EMP table to user 'JaneDoe'
+   DENY DELETE
+   ON EMP
+   TO JaneDoe;
+   ------------------------------------------------------------------
+
+Managing Roles
+
+In addition to managing individual user permissions, 
+SQL Server allows you to create and manage roles, 
+which can simplify permission management 
+by grouping multiple users together.
+
+- Creating a Role:
+  ---------------------------------sql---------------------------------
+  -- Create a new database role
+  CREATE ROLE SalesRole;
+  ------------------------------------------------------------------
+
+- Adding Users to a Role:
+  ---------------------------------sql---------------------------------
+  -- Add user 'JohnDoe' to the 'SalesRole' role
+  EXEC sp_addrolemember 'SalesRole', 'JohnDoe';
+  ------------------------------------------------------------------
+
+- Granting Permissions to a Role:
+  ---------------------------------sql---------------------------------
+  -- Grant SELECT and INSERT permissions on the EMP table to the 'SalesRole' role
+  GRANT SELECT, INSERT
+  ON EMP
+  TO SalesRole;
+  ------------------------------------------------------------------
+
+- Removing Users from a Role:
+  ---------------------------------sql---------------------------------
+  -- Remove user 'JohnDoe' from the 'SalesRole' role
+  EXEC sp_droprolemember 'SalesRole', 'JohnDoe';
+  ------------------------------------------------------------------
+
+

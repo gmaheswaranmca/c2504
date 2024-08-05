@@ -1,0 +1,98 @@
+To convert tables into the Third Normal Form (3NF), 
+it's important to understand the basic definitions and steps involved in normalization. 
+Here's a quick overview of the normal forms leading up to 3NF:
+
+1. First Normal Form (1NF): 
+    A table is in 1NF if it contains only atomic (indivisible) values and 
+    each column contains values of a single type.
+
+2. Second Normal Form (2NF): 
+    A table is in 2NF if it is in 1NF and 
+    every non-prime attribute (non-key attribute) 
+    is fully functionally dependent 
+    on the whole primary key (no partial dependency).
+
+3. Third Normal Form (3NF): 
+    A table is in 3NF if it is in 2NF and 
+    no transitive dependency exists 
+    (i.e., non-key attributes are not dependent on other non-key attributes).
+
+Let's go through an example to illustrate how to convert a table to 3NF.
+
+ Example Table (Not in 3NF)
+
+Consider a table `Orders` with the following structure and data:
+
+| OrderID | CustomerID | CustomerName | ProductID | ProductName | Quantity | UnitPrice | TotalPrice |
+|---------|------------|--------------|-----------|-------------|----------|-----------|------------|
+| 1       | 101        | John Doe     | P01       | Widget      | 10       | 5.00      | 50.00      |
+| 2       | 102        | Jane Smith   | P02       | Gizmo       | 5        | 15.00     | 75.00      |
+| 3       | 101        | John Doe     | P03       | Thingamajig | 7        | 8.00      | 56.00      |
+
+ Problems with the Current Design
+
+1. Redundancy: CustomerName is repeated for each order by the same customer.
+2. Update Anomalies: If a customer's name changes, it must be updated in multiple rows.
+3. Insertion Anomalies: To insert a new customer, an order must be created.
+4. Deletion Anomalies: Deleting an order might remove important customer information.
+
+ Steps to Normalize to 3NF
+
+1. Ensure 1NF: Each column should contain atomic values.
+    - The current table is already in 1NF.
+
+2. Ensure 2NF: Remove partial dependencies.
+    - Identify the primary key: `OrderID`.
+    - Remove columns that are dependent on a part of the primary key.
+
+3. Ensure 3NF: Remove transitive dependencies.
+    - Identify columns dependent on non-key attributes.
+
+ Convert to 2NF
+
+Separate the `Orders` table into two tables to remove partial dependencies:
+
+ Orders Table
+
+| OrderID | CustomerID | ProductID | Quantity | UnitPrice | TotalPrice |
+|---------|------------|-----------|----------|-----------|------------|
+| 1       | 101        | P01       | 10       | 5.00      | 50.00      |
+| 2       | 102        | P02       | 5        | 15.00     | 75.00      |
+| 3       | 101        | P03       | 7        | 8.00      | 56.00      |
+
+ Customers Table
+
+| CustomerID | CustomerName |
+|------------|--------------|
+| 101        | John Doe     |
+| 102        | Jane Smith   |
+
+ Convert to 3NF
+
+Separate the `Orders` table further to remove transitive dependencies:
+
+ Orders Table
+
+| OrderID | CustomerID | ProductID | Quantity |
+|---------|------------|-----------|----------|
+| 1       | 101        | P01       | 10       |
+| 2       | 102        | P02       | 5        |
+| 3       | 101        | P03       | 7        |
+
+ Products Table
+
+| ProductID | ProductName | UnitPrice |
+|-----------|-------------|-----------|
+| P01       | Widget      | 5.00      |
+| P02       | Gizmo       | 15.00     |
+| P03       | Thingamajig | 8.00      |
+
+ Final 3NF Design
+
+Now we have three tables: 
+`Orders`, `Customers`, and `Products`. 
+All non-key attributes depend only on the primary key and 
+not on other non-key attributes.
+
+This design eliminates redundancy and anomalies, 
+ensuring that the database is in 3NF.
