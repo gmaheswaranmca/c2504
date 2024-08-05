@@ -1,0 +1,38 @@
+1. trainer 
+2. emp 
+    dept - classical examle
+    step 1: [Ashwin V, Athulya Shaji, Collin Francy, Dijol]
+        create dept table 
+        insert data to dept 
+        create emp table 
+        insert data to emp 
+        -- 
+        query dept by id, name, loc 
+        query emp by id, name, dept, job, hiredate year
+        sort emp by name a-z, z-a 
+        sort emp by sal asc / desc 
+    step 2: [Neha, Riza, Gayathri, Sarika...]
+        selectors, filtering / where cond, 
+        selectors 
+        - column 
+        - expression 
+        - constant
+        filtering / where cond 
+        [Yahkoop, Shilpa, Ashna Mariya, Anjana N K]
+    step 3: [Sharon Rose, Nivya, Keerthana, Rishwin]
+        aggregators, group by | having
+
+        aggregators 
+        count, sum, avg, min, max, 
+        
+        group by | having 
+        [Sahla, Gladsy, Anjana E R, Ann Mariya]
+    step 4: [Anugrah Krishnan, Abijith, Alan Preeth, Gopika, Girish]
+        sub query 
+        joins 
+        [Anurag C Ashok, Minnu, Alan Kuriakose, Roshith, Aaryaka]
+    step 5: 
+        views, correlated sub query, 
+        normalization 
+        stored procedures, functions, 
+        triggers, stored types 

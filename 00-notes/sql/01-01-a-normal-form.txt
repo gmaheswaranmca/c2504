@@ -116,7 +116,8 @@ Summary of the Normalization Process
     Eliminate repeating groups, 
     ensure each column has atomic values, and each row is unique.
 3. Second Normal Form (2NF): 
-    Eliminate partial dependencies, ensure non-key attributes are fully dependent on the primary key.
+    Eliminate partial dependencies, ensure non-key attributes 
+    are fully dependent on the primary key.
 4. Third Normal Form (3NF): 
     Eliminate transitive dependencies, 
     ensure non-key attributes are independent of each other and 
