@@ -1,0 +1,734 @@
+^^^^^^^^^^^^^^^^^^^^^^^MediConnect: Streamlined Patient Management System^^^^^^^^^^^^^^^^^^^^^^^
+
+MediConnect: Streamlined Patient Management System
+
+===============================================================
+^^^^^^^^^^^^^^^^^^^^^^^Abstract:^^^^^^^^^^^^^^^^^^^^^^^
+===============================================================
+   "MediConnect is 
+        a comprehensive patient management system 
+        designed to streamline healthcare operations. 
+   
+   Utilizing the "Winforms / WPF, C#, and SQL Server" stack, 
+   this platform allows healthcare providers 
+        to efficiently manage 
+            patient records, 
+            appointments, and 
+            communications. 
+
+   It enhances patient care 
+        by 
+            integrating with 
+                    electronic health records (EHRs) 
+            and providing 
+                    real-time updates and 
+                    notifications."
+
+===============================================================
+^^^^^^^^^^^^^^^^^^^^^^^Database Design^^^^^^^^^^^^^^^^^^^^^^^
+===============================================================
+"MediConnect" using SQL Server. 
+Tables for 
+    users, 
+    patients, 
+    appointments, and 
+    messages.
+
+Table Design
+
+ 1. Users Table
+---------------------------------sql---------------------------------
+CREATE TABLE Users (
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    Role NVARCHAR(50) CHECK (Role IN ('admin', 'doctor', 'nurse', 'staff')) NOT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+------------------------------------------------------------------
+
+ 2. Patients Table
+---------------------------------sql---------------------------------
+CREATE TABLE Patients (
+    PatientId INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Dob DATE NOT NULL,
+    Gender NVARCHAR(10) CHECK (Gender IN ('Male', 'Female', 'Other')) NOT NULL,
+    Phone NVARCHAR(20),
+    Email NVARCHAR(100),
+    Address NVARCHAR(255),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+------------------------------------------------------------------
+
+ 3. MedicalHistory Table
+---------------------------------sql---------------------------------
+CREATE TABLE MedicalHistory (
+    MedicalHistoryId INT IDENTITY(1,1) PRIMARY KEY,
+    PatientId INT FOREIGN KEY REFERENCES Patients(PatientId) ON DELETE CASCADE,
+    Condition NVARCHAR(255) NOT NULL,
+    DiagnosisDate DATE NOT NULL,
+    Notes NVARCHAR(MAX),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+------------------------------------------------------------------
+
+ 4. Appointments Table
+---------------------------------sql---------------------------------
+CREATE TABLE Appointments (
+    AppointmentId INT IDENTITY(1,1) PRIMARY KEY,
+    PatientId INT FOREIGN KEY REFERENCES Patients(PatientId) ON DELETE CASCADE,
+    DoctorId INT FOREIGN KEY REFERENCES Users(UserId) ON DELETE CASCADE,
+    Date DATE NOT NULL,
+    Time TIME NOT NULL,
+    Reason NVARCHAR(255),
+    Status NVARCHAR(50) CHECK (Status IN ('scheduled', 'completed', 'canceled')) DEFAULT 'scheduled' NOT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+------------------------------------------------------------------
+
+ 5. Messages Table
+---------------------------------sql---------------------------------
+CREATE TABLE Messages (
+    MessageId INT IDENTITY(1,1) PRIMARY KEY,
+    FromUserId INT FOREIGN KEY REFERENCES Users(UserId) ON DELETE CASCADE,
+    ToUserId INT FOREIGN KEY REFERENCES Users(UserId) ON DELETE CASCADE,
+    Message NVARCHAR(MAX) NOT NULL,
+    Timestamp DATETIME2 DEFAULT GETDATE(),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+------------------------------------------------------------------
+
+Integration with Electronic Health Records (EHRs)
+To integrate with EHRs, you might have additional tables 
+for EHR system interaction logs or mappings. 
+Here is an example:
+
+ 6. EHR_IntegrationLogs Table
+---------------------------------sql---------------------------------
+CREATE TABLE EHR_IntegrationLogs (
+    LogId INT IDENTITY(1,1) PRIMARY KEY,
+    EHRSystem NVARCHAR(100) NOT NULL,
+    PatientId INT FOREIGN KEY REFERENCES Patients(PatientId) ON DELETE CASCADE,
+    Operation NVARCHAR(50) CHECK (Operation IN ('import', 'update')) NOT NULL,
+    Status NVARCHAR(50) CHECK (Status IN ('success', 'failure')) NOT NULL,
+    Details NVARCHAR(MAX),
+    Timestamp DATETIME2 DEFAULT GETDATE()
+);
+------------------------------------------------------------------
+
+Real-time Updates and Notifications
+For real-time updates and notifications, 
+you might want to add a table for storing notification preferences and logs:
+
+ 7. Notifications Table
+---------------------------------sql---------------------------------
+CREATE TABLE Notifications (
+    NotificationId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT FOREIGN KEY REFERENCES Users(UserId) ON DELETE CASCADE,
+    Message NVARCHAR(255) NOT NULL,
+    IsRead BIT DEFAULT 0,
+    CreatedAt DATETIME2 DEFAULT GETDATE()
+);
+------------------------------------------------------------------
+
+``````````````````````Example Data``````````````````````
+
+1. Users Table
+---------------------------------sql---------------------------------
+INSERT INTO Users (Username, Email, PasswordHash, Role, CreatedAt, UpdatedAt)
+VALUES
+('admin', 'admin@mediconnect.com', 'hashed_password1', 'admin', GETDATE(), GETDATE()),
+('dr_john', 'john.doe@mediconnect.com', 'hashed_password2', 'doctor', GETDATE(), GETDATE()),
+('nurse_anna', 'anna.smith@mediconnect.com', 'hashed_password3', 'nurse', GETDATE(), GETDATE()),
+('staff_mike', 'mike.jones@mediconnect.com', 'hashed_password4', 'staff', GETDATE(), GETDATE());
+------------------------------------------------------------------
+
+2. Patients Table
+---------------------------------sql---------------------------------
+INSERT INTO Patients (Name, Dob, Gender, Phone, Email, Address, CreatedAt, UpdatedAt)
+VALUES
+('Alice Johnson', '1985-04-12', 'Female', '123-456-7890', 'alice.johnson@gmail.com', '123 Elm St, Springfield', GETDATE(), GETDATE()),
+('Bob Smith', '1990-08-22', 'Male', '234-567-8901', 'bob.smith@gmail.com', '456 Oak St, Springfield', GETDATE(), GETDATE());
+------------------------------------------------------------------
+
+3. MedicalHistory Table
+---------------------------------sql---------------------------------
+INSERT INTO MedicalHistory (PatientId, Condition, DiagnosisDate, Notes, CreatedAt, UpdatedAt)
+VALUES
+(1, 'Hypertension', '2020-01-15', 'Taking medication daily', GETDATE(), GETDATE()),
+(1, 'Diabetes', '2019-06-22', 'On insulin therapy', GETDATE(), GETDATE()),
+(2, 'Asthma', '2018-11-05', 'Using inhaler as needed', GETDATE(), GETDATE());
+------------------------------------------------------------------
+
+4. Appointments Table
+---------------------------------sql---------------------------------
+INSERT INTO Appointments (PatientId, DoctorId, Date, Time, Reason, Status, CreatedAt, UpdatedAt)
+VALUES
+(1, 2, '2024-08-10', '10:00', 'Routine Checkup', 'scheduled', GETDATE(), GETDATE()),
+(2, 2, '2024-08-11', '11:00', 'Follow-up on asthma', 'scheduled', GETDATE(), GETDATE());
+------------------------------------------------------------------
+
+5. Messages Table
+---------------------------------sql---------------------------------
+INSERT INTO Messages (FromUserId, ToUserId, Message, Timestamp, CreatedAt, UpdatedAt)
+VALUES
+(2, 1, 'Please review the patient records before our meeting.', GETDATE(), GETDATE(), GETDATE()),
+(1, 3, 'Schedule a meeting with the new patient.', GETDATE(), GETDATE(), GETDATE());
+------------------------------------------------------------------
+
+6. EHR_IntegrationLogs Table
+---------------------------------sql---------------------------------
+INSERT INTO EHR_IntegrationLogs (EHRSystem, PatientId, Operation, Status, Details, Timestamp)
+VALUES
+('Epic', 1, 'import', 'success', 'Imported patient records successfully.', GETDATE()),
+('Cerner', 2, 'update', 'failure', 'Failed to update patient records.', GETDATE());
+------------------------------------------------------------------
+
+7. Notifications Table
+---------------------------------sql---------------------------------
+INSERT INTO Notifications (UserId, Message, IsRead, CreatedAt)
+VALUES
+(2, 'You have a new appointment scheduled for Alice Johnson on 2024-08-10 at 10:00.', 0, GETDATE()),
+(3, 'Please confirm the new meeting with the patient.', 0, GETDATE());
+------------------------------------------------------------------
+
+
+
+``````````````````````Sample Queries``````````````````````
+
+1. Query to Get All Patients
+---------------------------------sql---------------------------------
+SELECT * FROM Patients;
+------------------------------------------------------------------
+
+2. Query to Get All Appointments for a Specific Doctor
+---------------------------------sql---------------------------------
+SELECT * FROM Appointments WHERE DoctorId = 2;
+------------------------------------------------------------------
+
+3. Query to Get Medical History for a Specific Patient
+---------------------------------sql---------------------------------
+SELECT * FROM MedicalHistory WHERE PatientId = 1;
+------------------------------------------------------------------
+
+4. Query to Get All Messages Sent by a Specific User
+---------------------------------sql---------------------------------
+SELECT * FROM Messages WHERE FromUserId = 2;
+------------------------------------------------------------------
+
+5. Query to Get All Users with the Role of 'doctor'
+---------------------------------sql---------------------------------
+SELECT * FROM Users WHERE Role = 'doctor';
+------------------------------------------------------------------
+
+6. Query to Get All Notifications for a Specific User
+---------------------------------sql---------------------------------
+SELECT * FROM Notifications WHERE UserId = 2;
+------------------------------------------------------------------
+
+7. Query to Get All Successful EHR Imports
+---------------------------------sql---------------------------------
+SELECT * FROM EHR_IntegrationLogs WHERE Operation = 'import' AND Status = 'success';
+------------------------------------------------------------------
+
+8. Query to Update the Status of an Appointment
+---------------------------------sql---------------------------------
+UPDATE Appointments
+SET Status = 'completed'
+WHERE AppointmentId = 1;
+------------------------------------------------------------------
+
+9. Query to Delete a Patient Record
+---------------------------------sql---------------------------------
+DELETE FROM Patients
+WHERE PatientId = 2;
+------------------------------------------------------------------
+
+10. Query to Insert a New User
+---------------------------------sql---------------------------------
+INSERT INTO Users (Username, Email, PasswordHash, Role, CreatedAt, UpdatedAt)
+VALUES ('dr_jane', 'jane.doe@mediconnect.com', 'hashed_password5', 'doctor', GETDATE(), GETDATE());
+------------------------------------------------------------------
+
+
+
+
+====================================================================================
+^^^^^^^^^^^^^^^^^^^^^^^App : Pages Design^^^^^^^^^^^^^^^^^^^^^^^
+====================================================================================
+
+Pages to manage users, patients, appointments, and other functionalities.
+``````````````````````1. Authentication Pages``````````````````````
+1. Login Page
+   - Description: Allows users to log in to the system.
+   - Features: 
+        Email and password fields, 
+        "Forgot Password" link, 
+        "Sign Up" link.
+
+2. Register Page
+   - Description: Allows new users to create an account.
+   - Features: 
+        Username, email, password, and confirm password fields.
+
+3. Forgot Password Page
+   - Description: Allows users to reset their password.
+   - Features: 
+        Email field, 
+        "Send Reset Link" button.
+
+4. Reset Password Page
+   - Description: Allows users to set a new password after receiving a reset link.
+   - Features: 
+        New password and confirm password fields.
+
+``````````````````````2. User Management Pages``````````````````````
+5. User Dashboard
+   - Description: Displays an overview of user activities and quick links to different sections.
+   - Features: 
+        Summary of appointments, 
+        notifications, and 
+        quick access links.
+
+6. User Profile Page
+   - Description: Allows users to view and update their profile information.
+   - Features: 
+        Username, email, role, and profile picture upload.
+
+``````````````````````3. Patient Management Pages``````````````````````
+7. Patients List Page
+   - Description: Displays a list of all patients.
+   - Features: 
+        Search, filter, and sort options; 
+        add, edit, and delete patient buttons.
+
+8. Add Patient Page
+   - Description: Allows users to add a new patient.
+   - Features: 
+        Name, DOB, gender, contact info, address, and 
+        medical history fields.
+
+9. Edit Patient Page
+   - Description: Allows users to edit an existing patient's information.
+   - Features: 
+        Same as the add patient page with 
+        pre-filled fields.
+
+10. Patient Details Page
+    - Description: Displays detailed information about a specific patient.
+    - Features: 
+        Patient info, 
+        medical history, and 
+        list of appointments.
+
+``````````````````````4. Appointment Management Pages``````````````````````
+11. Appointments List Page
+    - Description: Displays a list of all appointments.
+    - Features: 
+        Search, filter, and sort options; 
+        add, edit, and delete appointment buttons.
+
+12. Add Appointment Page
+    - Description: Allows users to schedule a new appointment.
+    - Features: 
+        Patient selection, doctor selection, date, time, reason fields.
+
+13. Edit Appointment Page
+    - Description: Allows users to update an existing appointment.
+    - Features: 
+        Same as the add appointment page with pre-filled fields.
+
+14. Appointment Details Page
+    - Description: Displays detailed information about a specific appointment.
+    - Features: 
+        Appointment info, patient details, and doctor details.
+
+``````````````````````5. Communication Pages``````````````````````
+15. Messages Page
+    - Description: Displays a list of messages for the user.
+    - Features: 
+        Message threads, 
+        compose new message, 
+        search messages.
+
+16. Compose Message Page
+    - Description: Allows users to send a new message.
+    - Features: 
+        Recipient selection, message body, 
+        send button.
+
+``````````````````````6. Notifications Page``````````````````````
+17. Notifications Page
+    - Description: Displays a list of notifications for the user.
+    - Features: 
+        Mark as read/unread, 
+        delete notifications.
+
+``````````````````````7. Integration and Logs Pages``````````````````````
+18. EHR Integration Logs Page
+    - Description: Displays logs related to EHR integration.
+    - Features: 
+        Search, filter, and sort options; 
+        view log details.
+
+``````````````````````8. Settings and Administration Pages``````````````````````
+19. Settings Page
+    - Description: Allows users to configure their account settings.
+    - Features: 
+        Change password, 
+        notification preferences.
+
+20. Admin Dashboard
+    - Description: For admin users to manage the system.
+    - Features: 
+        Overview of system activities, 
+        user management, 
+        system settings.
+
+``````````````````````9. Help and Support Pages``````````````````````
+21. Help Page
+    - Description: Provides help and documentation about using the system.
+    - Features: 
+        FAQs, 
+        user guides, 
+        contact support.
+
+22. Contact Support Page
+    - Description: Allows users to contact support for assistance.
+    - Features: 
+        Contact form, support email, phone number.
+
+ Additional Considerations
+- Responsive Design: 
+    Ensure all pages are for all screen resolutions.
+    For example, if web app, mobile-friendly.
+- Role-Based Access Control: 
+    Different users (admin, doctor, nurse, staff) should have access 
+    to specific pages and functionalities based on their roles.
+
+====================================================================================
+^^^^^^^^^^^^^^^^^^^^^^^App : Pages SQL /Query Design^^^^^^^^^^^^^^^^^^^^^^^
+====================================================================================
+SQL statements required 
+for the various functionalities of the MediConnect system, 
+beyond just table creation. 
+These include queries for CRUD operations, 
+user authentication, searching, and updating records. 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~Authentication Pages~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1. Login Page
+- Validate User Credentials:
+ ------------------------------sql------------------------------
+  SELECT UserId, Username, Role
+  FROM Users
+  WHERE Email = 'user_email' AND PasswordHash = 'user_password_hash';
+ ------------------------------------------------------------
+
+ 2. Register Page
+- Insert New User:
+ ------------------------------sql------------------------------
+  INSERT INTO Users (Username, Email, PasswordHash, Role, CreatedAt, UpdatedAt)
+  VALUES ('new_username', 'new_email', 'new_password_hash', 'user_role', GETDATE(), GETDATE());
+ ------------------------------------------------------------
+
+ 3. Forgot Password Page
+- Find User by Email:
+ ------------------------------sql------------------------------
+  SELECT UserId, Email
+  FROM Users
+  WHERE Email = 'user_email';
+ ------------------------------------------------------------
+
+ 4. Reset Password Page
+- Update User Password:
+ ------------------------------sql------------------------------
+  UPDATE Users
+  SET PasswordHash = 'new_password_hash', UpdatedAt = GETDATE()
+  WHERE UserId = 'user_id';
+ ------------------------------------------------------------
+
+``````````````````````User Management Pages``````````````````````
+
+ 5. User Dashboard
+- Get User Overview Data (Example: Recent Appointments):
+ ------------------------------sql------------------------------
+  SELECT TOP 5 * FROM Appointments
+  WHERE DoctorId = 'user_id'
+  ORDER BY Date DESC, Time DESC;
+ ------------------------------------------------------------
+
+ 6. User Profile Page
+- Get User Profile Data:
+ ------------------------------sql------------------------------
+  SELECT Username, Email, Role
+  FROM Users
+  WHERE UserId = 'user_id';
+ ------------------------------------------------------------
+
+- Update User Profile:
+ ------------------------------sql------------------------------
+  UPDATE Users
+  SET Username = 'new_username', Email = 'new_email', UpdatedAt = GETDATE()
+  WHERE UserId = 'user_id';
+ ------------------------------------------------------------
+
+``````````````````````Patient Management Pages``````````````````````
+
+ 7. Patients List Page
+- Get All Patients:
+ ------------------------------sql------------------------------
+  SELECT * FROM Patients;
+ ------------------------------------------------------------
+
+- Search Patients:
+ ------------------------------sql------------------------------
+  SELECT * FROM Patients
+  WHERE Name LIKE '%search_term%' OR Email LIKE '%search_term%';
+ ------------------------------------------------------------
+
+ 8. Add Patient Page
+- Insert New Patient:
+ ------------------------------sql------------------------------
+  INSERT INTO Patients (Name, Dob, Gender, Phone, Email, Address, CreatedAt, UpdatedAt)
+  VALUES ('new_name', 'new_dob', 'new_gender', 'new_phone', 'new_email', 'new_address', GETDATE(), GETDATE());
+ ------------------------------------------------------------
+
+ 9. Edit Patient Page
+- Get Patient Data:
+ ------------------------------sql------------------------------
+  SELECT * FROM Patients
+  WHERE PatientId = 'patient_id';
+ ------------------------------------------------------------
+
+- Update Patient Data:
+ ------------------------------sql------------------------------
+  UPDATE Patients
+  SET Name = 'new_name', Dob = 'new_dob', Gender = 'new_gender', Phone = 'new_phone', Email = 'new_email', Address = 'new_address', UpdatedAt = GETDATE()
+  WHERE PatientId = 'patient_id';
+ ------------------------------------------------------------
+
+ 10. Patient Details Page
+- Get Patient Details:
+ ------------------------------sql------------------------------
+  SELECT * FROM Patients
+  WHERE PatientId = 'patient_id';
+ ------------------------------------------------------------
+
+- Get Patient Medical History:
+ ------------------------------sql------------------------------
+  SELECT * FROM MedicalHistory
+  WHERE PatientId = 'patient_id';
+ ------------------------------------------------------------
+
+- Get Patient Appointments:
+ ------------------------------sql------------------------------
+  SELECT * FROM Appointments
+  WHERE PatientId = 'patient_id';
+ ------------------------------------------------------------
+
+``````````````````````Appointment Management Pages``````````````````````
+
+ 11. Appointments List Page
+- Get All Appointments:
+ ------------------------------sql------------------------------
+  SELECT * FROM Appointments;
+ ------------------------------------------------------------
+
+- Search Appointments:
+ ------------------------------sql------------------------------
+  SELECT * FROM Appointments
+  WHERE Reason LIKE '%search_term%' OR Status LIKE '%search_term%';
+ ------------------------------------------------------------
+
+ 12. Add Appointment Page
+- Insert New Appointment:
+ ------------------------------sql------------------------------
+  INSERT INTO Appointments (PatientId, DoctorId, Date, Time, Reason, Status, CreatedAt, UpdatedAt)
+  VALUES ('new_patient_id', 'new_doctor_id', 'new_date', 'new_time', 'new_reason', 'scheduled', GETDATE(), GETDATE());
+ ------------------------------------------------------------
+
+ 13. Edit Appointment Page
+- Get Appointment Data:
+ ------------------------------sql------------------------------
+  SELECT * FROM Appointments
+  WHERE AppointmentId = 'appointment_id';
+ ------------------------------------------------------------
+
+- Update Appointment Data:
+ ------------------------------sql------------------------------
+  UPDATE Appointments
+  SET PatientId = 'new_patient_id', DoctorId = 'new_doctor_id', Date = 'new_date', Time = 'new_time', Reason = 'new_reason', Status = 'new_status', UpdatedAt = GETDATE()
+  WHERE AppointmentId = 'appointment_id';
+ ------------------------------------------------------------
+
+ 14. Appointment Details Page
+- Get Appointment Details:
+ ------------------------------sql------------------------------
+  SELECT * FROM Appointments
+  WHERE AppointmentId = 'appointment_id';
+ ------------------------------------------------------------
+
+- Get Patient and Doctor Details for Appointment:
+ ------------------------------sql------------------------------
+  SELECT p.*, u.*
+  FROM Appointments a
+  JOIN Patients p ON a.PatientId = p.PatientId
+  JOIN Users u ON a.DoctorId = u.UserId
+  WHERE a.AppointmentId = 'appointment_id';
+ ------------------------------------------------------------
+
+``````````````````````Communication Pages``````````````````````
+
+ 15. Messages Page
+- Get Messages for User:
+ ------------------------------sql------------------------------
+  SELECT * FROM Messages
+  WHERE ToUserId = 'user_id' OR FromUserId = 'user_id'
+  ORDER BY Timestamp DESC;
+ ------------------------------------------------------------
+
+ 16. Compose Message Page
+- Insert New Message:
+ ------------------------------sql------------------------------
+  INSERT INTO Messages (FromUserId, ToUserId, Message, Timestamp, CreatedAt, UpdatedAt)
+  VALUES ('from_user_id', 'to_user_id', 'message_body', GETDATE(), GETDATE(), GETDATE());
+ ------------------------------------------------------------
+
+``````````````````````Notifications Page``````````````````````
+
+ 17. Notifications Page
+- Get Notifications for User:
+ ------------------------------sql------------------------------
+  SELECT * FROM Notifications
+  WHERE UserId = 'user_id'
+  ORDER BY CreatedAt DESC;
+ ------------------------------------------------------------
+
+- Mark Notification as Read:
+ ------------------------------sql------------------------------
+  UPDATE Notifications
+  SET IsRead = 1
+  WHERE NotificationId = 'notification_id';
+ ------------------------------------------------------------
+
+``````````````````````Integration and Logs Pages``````````````````````
+
+ 18. EHR Integration Logs Page
+- Get EHR Integration Logs:
+ ------------------------------sql------------------------------
+  SELECT * FROM EHR_IntegrationLogs;
+ ------------------------------------------------------------
+
+- Search EHR Integration Logs:
+ ------------------------------sql------------------------------
+  SELECT * FROM EHR_IntegrationLogs
+  WHERE EHRSystem LIKE '%search_term%' OR Status LIKE '%search_term%';
+ ------------------------------------------------------------
+
+``````````````````````Settings and Administration Pages``````````````````````
+
+ 19. Settings Page
+- Get User Settings:
+ ------------------------------sql------------------------------
+  SELECT * FROM Users
+  WHERE UserId = 'user_id';
+ ------------------------------------------------------------
+
+- Update User Settings:
+ ------------------------------sql------------------------------
+  UPDATE Users
+  SET Email = 'new_email', PasswordHash = 'new_password_hash', UpdatedAt = GETDATE()
+  WHERE UserId = 'user_id';
+ ------------------------------------------------------------
+
+ 20. Admin Dashboard
+- Get System Overview (Example: Total Users):
+ ------------------------------sql------------------------------
+  SELECT COUNT(*) AS TotalUsers FROM Users;
+ ------------------------------------------------------------
+
+- Get Recent Activities:
+ ------------------------------sql------------------------------
+  SELECT * FROM Appointments
+  ORDER BY CreatedAt DESC;
+ ------------------------------------------------------------
+
+``````````````````````Help and Support Pages``````````````````````
+
+ 21. Help Page
+- Get Help Articles:
+ ------------------------------sql------------------------------
+  SELECT * FROM HelpArticles;
+ ------------------------------------------------------------
+
+ 22. Contact Support Page
+- Insert Support Request:
+ ------------------------------sql------------------------------
+  INSERT INTO SupportRequests (UserId, Subject, Message, CreatedAt)
+  VALUES ('user_id', 'subject', 'message_body', GETDATE());
+ ------------------------------------------------------------
+
+``````````````````````SQL statements for the additional functionalities:``````````````````````
+
+1. SQL to Upload Profile Picture
+To handle profile pictures, 
+you would typically store the image path or URL in the database and 
+save the actual image in a file storage system.
+
+Add a column to the `Users` table to store the profile picture path:
+------------------------------sql------------------------------
+ALTER TABLE Users
+ADD ProfilePicturePath NVARCHAR(255);
+------------------------------------------------------------
+
+Update the user's profile picture:
+------------------------------sql------------------------------
+UPDATE Users
+SET ProfilePicturePath = 'new_profile_picture_path', UpdatedAt = GETDATE()
+WHERE UserId = 'user_id';
+------------------------------------------------------------
+
+2. Search Patients SQL with Sort
+Search and sort patients by name, email, or other fields:
+------------------------------sql------------------------------
+SELECT * FROM Patients
+WHERE Name LIKE '%search_term%' OR Email LIKE '%search_term%'
+ORDER BY Name ASC; 
+-- Change 'Name' to the column you want 
+-- to sort by and 'ASC' to 'DESC' for descending order.
+------------------------------------------------------------
+
+3. SQL for Patient Delete
+Delete a patient by `PatientId`:
+------------------------------sql------------------------------
+DELETE FROM Patients
+WHERE PatientId = 'patient_id';
+------------------------------------------------------------
+
+4. SQL for Adding Medical History Fields
+Add a new medical history record:
+------------------------------sql------------------------------
+INSERT INTO MedicalHistory (PatientId, Condition, DiagnosisDate, Notes, CreatedAt, UpdatedAt)
+VALUES ('patient_id', 'condition_description', 'diagnosis_date', 'notes', GETDATE(), GETDATE());
+------------------------------------------------------------
+
+5. SQL for Appointment Delete
+Delete an appointment by `AppointmentId`:
+------------------------------sql------------------------------
+DELETE FROM Appointments
+WHERE AppointmentId = 'appointment_id';
+------------------------------------------------------------
+
+6. SQL for Deleting an Appointment (Repeated)
+Delete an appointment by `AppointmentId` (same as above):
+------------------------------sql------------------------------
+DELETE FROM Appointments
+WHERE AppointmentId = 'appointment_id';
+------------------------------------------------------------

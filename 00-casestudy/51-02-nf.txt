@@ -1,0 +1,112 @@
+
+
+Normalization is the process of structuring a relational database 
+to reduce redundancy and improve data integrity. 
+Let's explain 
+    how each table in the "MediConnect" patient management system is normalized.
+
+First Normal Form (1NF)
+    1NF requires that each table has a primary key, 
+    and each column contains atomic, indivisible values. 
+    All tables listed satisfy 1NF.
+
+Second Normal Form (2NF)
+    2NF requires that the database is in 1NF and 
+    that all non-key attributes are fully dependent on the primary key. 
+    This means that there should be no partial dependency 
+    of any column on the primary key. 
+    All tables satisfy 2NF because each non-key attribute 
+    is dependent on the primary key.
+
+Third Normal Form (3NF)
+    3NF requires that the database is in 2NF and 
+    that all columns are not only dependent 
+    on the primary key but also are non-transitively dependent on it. 
+    This means there should be no transitive dependency 
+    for non-prime attributes.
+
+Users Table
+- Primary Key: `UserId`
+- Normalization: 
+    The columns `Username`, `Email`, `PasswordHash`, and `Role` 
+    are directly dependent on the primary key `UserId`. 
+    There are no transitive dependencies.
+
+Patients Table
+- Primary Key: `PatientId`
+- Normalization: The columns `Name`, `Dob`, `Gender`, `Phone`, `Email`, and `Address` 
+are directly dependent on the primary key `PatientId`. 
+There are no transitive dependencies.
+
+MedicalHistory Table
+- Primary Key: `MedicalHistoryId`
+- Foreign Key: `PatientId`
+- Normalization: The columns `Condition`, `DiagnosisDate`, and `Notes` 
+are directly dependent on the primary key `MedicalHistoryId`. 
+The `PatientId` is a foreign key 
+that references the `Patients` table, 
+ensuring the medical history is linked 
+to a specific patient without redundancy. 
+There are no transitive dependencies.
+
+Appointments Table
+- Primary Key: `AppointmentId`
+- Foreign Keys: `PatientId`, `DoctorId`
+- Normalization: The columns `Date`, `Time`, `Reason`, and `Status` 
+are directly dependent on the primary key `AppointmentId`. 
+The `PatientId` and `DoctorId` are foreign keys 
+that reference the `Patients` and `Users` tables, respectively. 
+This ensures appointments are linked to specific patients and doctors without redundancy. 
+There are no transitive dependencies.
+
+Messages Table
+- Primary Key: `MessageId`
+- Foreign Keys: `FromUserId`, `ToUserId`
+- Normalization: The columns `Message` and `Timestamp` 
+are directly dependent on the primary key `MessageId`. 
+The `FromUserId` and `ToUserId` are foreign keys 
+that reference the `Users` table, ensuring 
+that messages are linked to specific users without redundancy. 
+There are no transitive dependencies.
+
+EHR_IntegrationLogs Table
+- Primary Key: `LogId`
+- Foreign Key: `PatientId`
+- Normalization: The columns `EHRSystem`, `Operation`, 
+`Status`, `Details`, and `Timestamp` are directly 
+dependent on the primary key `LogId`. 
+The `PatientId` is a foreign key that references 
+the `Patients` table, ensuring logs 
+are linked to specific patients without redundancy. 
+There are no transitive dependencies.
+
+Notifications Table
+- Primary Key: `NotificationId`
+- Foreign Key: `UserId`
+- Normalization: The columns `Message`, `IsRead`, and `CreatedAt` 
+are directly dependent on the primary key `NotificationId`. 
+The `UserId` is a foreign key that references 
+the `Users` table, ensuring notifications 
+are linked to specific users without redundancy. 
+There are no transitive dependencies.
+
+Summary of Normalization
+- 1NF: 
+Each table has a primary key, 
+and all columns contain atomic values.
+- 2NF: 
+All non-key attributes are 
+fully dependent on the primary key.
+- 3NF: 
+All columns are non-transitively dependent on the primary key, 
+with no transitive dependencies.
+
+By structuring the tables in this manner, 
+    redundancy is minimized, and data integrity is ensured, 
+    which facilitates efficient data management and 
+    retrieval in the "MediConnect" system.
+
+
+Data entries for each table 
+to help with learning queries using 
+the designed SQL Server tables.
