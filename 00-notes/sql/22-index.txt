@@ -7,28 +7,39 @@ by allowing the database to find rows more quickly.
 Types of Indexes
 
 1. Clustered Index
-   - Determines the physical order of data in a table. A table can have only one clustered index.
+   - Determines the physical order of data in a table. 
+        A table can have only one clustered index.
    - Example: `PRIMARY KEY` constraint creates a clustered index by default.
 
 2. Non-Clustered Index
-   - Does not alter the physical order of the table and creates a separate object within the table. A table can have multiple non-clustered indexes.
-   - Example: Indexes created on columns that are frequently searched but not primary keys.
+   - Does not alter the physical order of the table and 
+   creates a separate object within the table. 
+   A table can have multiple non-clustered indexes.
+   - Example: Indexes created on columns 
+   that are frequently searched but not primary keys.
 
 3. Unique Index
-   - Ensures that the values in the indexed column(s) are unique. It can be created automatically when a `UNIQUE` constraint is defined.
-   - Example: Indexes created on columns with unique values, such as email addresses.
+   - Ensures that the values in the indexed column(s) are unique. 
+   It can be created automatically when a `UNIQUE` constraint is defined.
+   - Example: 
+   Indexes created on columns with unique values, such as email addresses.
 
 4. Composite Index
-   - An index on multiple columns. Useful for queries that filter on more than one column.
-   - Example: Indexes created on a combination of columns like `FirstName` and `LastName`.
+   - An index on multiple columns. 
+   Useful for queries that filter on more than one column.
+   - Example: Indexes created on a combination of columns 
+   like `FirstName` and `LastName`.
 
 5. Filtered Index
-   - An index that includes a subset of rows in the table. Useful for improving query performance on well-defined subsets of data.
+   - An index that includes a subset of rows in the table. 
+   Useful for improving query performance on well-defined subsets of data.
    - Example: Indexes created on a column with a limited range of values.
 
 6. Full-Text Index
-   - Enables full-text search capabilities. Useful for complex search requirements.
-   - Example: Indexes created on large text columns for searching specific words or phrases.
+   - Enables full-text search capabilities. 
+   Useful for complex search requirements.
+   - Example: Indexes created on large text columns 
+   for searching specific words or phrases.
 
 Creating Indexes
 

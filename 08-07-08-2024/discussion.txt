@@ -6,5 +6,130 @@
         -- optimized database 
         -- optimization of queries 
 3. mediconnect formed sql by team for SM learnings 
-4. 11:30am - 12:10pm - team learnings / doings 
-    - 
+4. 12:20pm - 1:00pm - team learnings / doings 
+
+
+SELECT * FROM DEPT; -- normalized
+SELECT * FROM EMP;	-- normalized 
+-- unormalized table [Sarika, Minnu, Nivya] 
+	-- join 
+SELECT EMP.*, DEPT.* 
+FROM EMP INNER JOIN DEPT ON (EMP.DEPTNO = DEPT.DEPTNO);
+
+
+-- to display emp cols, dept cols for matched dept
+DROP VIEW IF EXISTS EMP_DEPT;
+CREATE VIEW EMP_DEPT 
+AS 
+SELECT EMP.*, DEPT.DNAME, DEPT.LOC  
+FROM EMP INNER JOIN DEPT ON (EMP.DEPTNO = DEPT.DEPTNO);
+
+-- what is view?
+	-- stored query 
+	-- view can be seen as table 
+		-- view has columns -- result table columns of the stored query 
+	-- in view, result table not allows duplicates columns 
+	-- in view, query where condition is not allowed for variable filtering
+	-- syntax: CREATE VIEW DEPT_SAL AS <query>
+
+-- display all emp cols and dept cols using view "EMP_DEPT"
+SELECT * FROM EMP_DEPT;
+
+-- display ENAME, DNAME
+SELECT ENAME, DNAME FROM EMP_DEPT;
+
+DROP VIEW IF EXISTS DEPT_SAL;
+CREATE VIEW DEPT_SAL
+AS 
+SELECT DEPTNO, SUM(SAL) as DEPT_SAL FROM EMP GROUP BY DEPTNO;
+
+SELECT * FROM DEPT_SAL;
+
+sp_help DEPT_SAL;
+sp_help EMP_DEPT;
+
+DROP TABLE IF EXISTS MedicalHistory;
+CREATE TABLE MedicalHistory (
+    MedicalHistoryId INT IDENTITY(1,1),
+    PatientId INT,
+    Condition NVARCHAR(255),
+    DiagnosisDate DATE,
+    Notes NVARCHAR(MAX),
+    CreatedAt DATETIME2 ,
+    UpdatedAt DATETIME2 
+);
+
+ALTER TABLE MedicalHistory
+ADD CONSTRAINT PK_MedicalHistory_MedicalHistoryId PRIMARY KEY(MedicalHistoryId);
+
+ALTER TABLE MedicalHistory
+ADD CONSTRAINT FK_MedicalHistory_PatientId_Patient_PatientId 
+    FOREIGN KEY(PatientId) REFERENCES Patient(PatientId);
+
+ALTER TABLE MedicalHistory
+ALTER  Condition  NVARCHAR(255) NOT NULL;
+
+ALTER TABLE MedicalHistory
+ALTER  DiagnosisDate  DATE NOT NULL;
+
+ALTER TABLE MedicalHistory
+ADD CONSTRAINT DEF_MedicalHistory_CreatedAt DEFAULT GETDATE() FOR CreatedAt;
+
+ALTER TABLE MedicalHistory
+ADD CONSTRAINT DEF_MedicalHistory_UpdatedAt DEFAULT GETDATE() FOR UpdatedAt;
+
+
+SQL Server has following keys:
+    1. primary key 
+    2. unique key 
+    3. foreign key 
+    4. composite key 
+    5. secondary key 
+
+
+    Primary key
+        A constraint that uniquely identifies each record in a table. 
+        It must contain unique values throughout the row and 
+        none of the values can be NULL. 
+        Only one primary key can be defined per table.
+
+    Unique key
+        A collection of one or more table fields or columns 
+        that uniquely identifies a record in a database table. 
+        It's similar to a primary key, 
+        but it can only accept one null value and 
+        cannot have duplicate values.
+Foreign key
+    Enforces domain referential integrity by limiting the values stored 
+    in a column or set of columns. Foreign keys reference columns in other tables, which must be either primary keys or have unique constraints.
+Composite key
+    A combination of more than one field or column of a table 
+    that can be defined as the primary key. 
+    This is done using SQL statements at the time of table creation.
+
+    ORDER       : ID, ORDER_NUMBER, ...
+    ORDER_ITEM  : ID, ORDER_ID, ITEM_ID, QTY, PRICE, AMOUNT 
+
+    CREATE TABLE ORDER_ITEM(
+        ORDER_ID INT, 
+        ITEM_ID INT, ....,
+        PRIMARY KEY(ORDER_ID, ITEM_ID)
+
+Secondary key
+    Creates indexes in SQL and can be defined 
+    in both table objects and table extension objects. 
+    Multiple secondary keys can be defined 
+    for a single table object or table extension object.
+
+
+
+Alternate key
+    Contains all the properties needed to become a Candidate Key and 
+    can uniquely identify a row in a table.    
+Super key
+    A single key or a group of multiple keys 
+    that can uniquely identify tuples in a table.
+Candidate key
+    A key of a table that can be used as the primary key. 
+    A table can have multiple candidate keys, 
+    but only one can be selected as the primary key.

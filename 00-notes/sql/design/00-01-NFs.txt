@@ -1,17 +1,15 @@
 0. UNF : with duplicates and with repeating-groups  
-1. 1NF: Each column should contain atomic values
-2. 2NF: Remove partial dependencies
-3. 3NF: Remove transitive dependencies
+1. 1NF: Each column should contain atomic values    : without repeating groups 
+2. 2NF: Remove partial dependencies                 : without duplicates 
+3. 3NF: Remove transitive dependencies              : without duplicates, ensure referencial integrity
 
                 Example 
 UNF to 1NF :    "Student#	Advisor	Adv-Room	Class1	Class2	Class3"
                 to "Student#	Advisor	Adv-Room	Class#"
-
 1NF to 2NF : "OrderID | CustomerID | CustomerName | ProductID | ProductName | Quantity | UnitPrice | TotalPrice |"
              to 
              "| OrderID | CustomerID | ProductID | ProductName | Quantity | UnitPrice | TotalPrice "
              and "| CustomerID | CustomerName |"
-             
 2NF to 3NF:  "| OrderID | CustomerID | ProductID | ProductName | Quantity | UnitPrice | TotalPrice "
             to 
                 "| OrderID | CustomerID | ProductID | Quantity |"

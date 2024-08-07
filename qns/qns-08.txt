@@ -1,0 +1,17 @@
+views 
+constraints 
+index 
+    folder in github:
+        /00-notes/sql/
+            31-views.txt
+            ...
+            01-types.sql
+
+
+teams solved queries 
+    folder in github:
+    /00-casestudy/51/teamOn0608/
+        51-11-SE-01.sql
+        51-11-SE-02.sql
+        51-11-SE-03.sql
+        51-11-SE-04.sql
