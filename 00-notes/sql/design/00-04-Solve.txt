@@ -1,0 +1,14 @@
+Solve: 
+    Problem: EMPLOYEE_PROJECT {EmployeeID, EmployeeName,
+        DepartmentID, DepartmentName, 
+        Project1ID, Project1Name, Project1Hours, 
+        Project2ID, Project2Name, Project2Hours}
+Solve: 
+    Problem: LIBRARY_TRANSACTIONS {TransactionID, MemberID, MemberName, TransactionDate, 
+        Book1ID, Book1Title, Book1DueDate, 
+        Book2ID, Book2Title, Book2DueDate}
+Solve: 
+    Problem: Table: SALES_DATA{SaleID, StoreID, StoreLocation, SaleDate, 
+        Product1ID, Product1Name, Product1Quantity, Product1Revenue, 
+        Product2ID, Product2Name, Product2Quantity, Product2Revenue}
+    

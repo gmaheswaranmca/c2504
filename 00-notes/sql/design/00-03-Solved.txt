@@ -1,0 +1,45 @@
+Solve:
+    Problem:
+        UNF: STUDENT_COURSES {StudentID, StudentName, Address, 
+                Course1ID, Course1Name, Course1Grade, 
+                Course2ID, Course2Name, Course2Grade,
+                Course3ID, Course3Name, Course3Grade}
+        Repeating Columns Set: CourseID, CourseName, CourseGrade
+            as Course1ID, Course1Name, Course1Grade, 
+                Course2ID, Course2Name, Course2Grade,
+                Course3ID, Course3Name, Course3Grade
+        1NF: STUDENT_COURSES {StudentID, StudentName, Address, 
+                CourseID, CourseName, CourseGrade} PK(StudentID,CourseID)
+        Partial Dependencies: CourseName, CourseGrade
+        2NF: STUDENT {StudentID, StudentName, Address, CourseID} PK(StudentID) FK(CourseID)
+             Course {CourseID, CourseName, CourseGrade} PK(CourseID)
+        Transitive Dependencies: None 
+    Solution:
+        STUDENT {StudentID, StudentName, Address, CourseID} PK(StudentID) FK(CourseID)
+        Course {CourseID, CourseName, CourseGrade} PK(CourseID)
+Solve: 
+    Problem:
+        UNF: Order_Details {OrderID,  CustomerID,  CustomerName,  OrderDate,  
+                    Product1ID,  Product1Name,  Product1Quantity,  Product1Price,  
+                    Product2ID,  Product2Name,  Product2Quantity,  Product2Price}
+        Repeating Columns: ProductID,  ProductName,  ProductQuantity,  ProductPrice
+            as 
+                Product1ID,  Product1Name,  Product1Quantity,  Product1Price,
+                Product2ID,  Product2Name,  Product2Quantity,  Product2Price
+        1NF: Order_Details {OrderID,  CustomerID,  CustomerName,  OrderDate,  
+                    ProductID,  ProductName,  ProductQuantity,  ProductPrice} PK(OrderID, ProductID)
+        Partial Dependecies: ProductName, ProductPrice
+        1NF: Order_Details {OrderID,  CustomerID,  CustomerName,  OrderDate,  
+                    ProductID,  ProductQuantity} PK(OrderID) FK(ProductID)
+            Product{ProductID,  ProductName, ProductPrice} PK (ProductID)
+        Transitive Dependencies: CustomerName -> CustomerID -> Key, CustomerID -> CustomerName -> Key
+        2NF: Order_Details {OrderID,  CustomerID,  OrderDate,  
+                    ProductID,  ProductQuantity} PK(OrderID) FK(ProductID) FK(CustomerID)
+            Customer {CustomerID,  CustomerName} PK(CustomerID)
+            --
+            Product{ProductID,  ProductName, ProductPrice} PK (ProductID)
+    Solution:
+        Order_Details {OrderID,  CustomerID,  OrderDate,  
+                ProductID,  ProductQuantity} PK(OrderID) FK(ProductID) FK(CustomerID)
+        Customer {CustomerID,  CustomerName} PK(CustomerID)
+        Product{ProductID,  ProductName, ProductPrice} PK (ProductID)

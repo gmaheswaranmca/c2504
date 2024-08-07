@@ -7,7 +7,7 @@
         -- optimization of queries 
 3. mediconnect formed sql by team for SM learnings 
 4. 12:20pm - 1:00pm - team learnings / doings 
-
+                -------------------- views --------------------------------
 
 SELECT * FROM DEPT; -- normalized
 SELECT * FROM EMP;	-- normalized 

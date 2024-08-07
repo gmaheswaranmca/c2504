@@ -1,0 +1,149 @@
+#i
+Normalization:
+    process of organizing the fields and tables 
+    of a relational database 
+    to minimize 
+        redundancy and 
+        dependency.
+#ii
+Normalization decomposes a Relation into rows or more smaller relations.
+
+#iii
+After normalization, 
+the data may be retrieved after joined several relations.
+
+#iv 
+Relation is in 1NF
+    if each column contains atomic values.
+Note: 
+    atomic value means single valued.
+    ie no repeating group 
+
+Example:
+UNF
+    Teacher | Subjects              | Dept 
+    Raja      Calculus, Algebra       Math 
+    Hari      Radio Physics           Physics 
+    Rani      Discete Math,           Math
+              Calculus                 
+To 
+There, repeating groups in relation. 
+So, remove it to get 1NF.
+1NF:
+    Teacher | Subject               | Dept 
+    Raja      Calculus                Math 
+    Raja      Algebra                 Math 
+    Hari      Radio Physics           Physics 
+    Rani      Discete Math            Math
+    Rani      Calculus                Math 
+
+databse is in 1NF 
+    all non-key depends on the key
+    and all attributes in R are atomic.
+
+#v 
+Relation is in 2NF 
+    if it is in 1NF 
+    and every non-key depends fully on key.
+Note: 
+    partial functional dependency : if each non-key depends on sub set of key 
+    Fully   functional dependency : if non-key does not depend on sub set of key 
+                            or 
+                            if each non-key depends only on key (not any sub set of key)
+1NF:
+    Teacher | Subject               | Dept 
+    Raja      Calculus                Math 
+    Raja      Algebra                 Math 
+    Hari      Radio Physics           Physics 
+    Rani      Discete Math            Math
+    Rani      Calculus                Math 
+To 
+Key: (Teacher, Subject) 
+Dependency: Dept depends on key (Teacher, Subject).
+            Dept depends on partial key (Subject) also.
+2NF:
+    R1 {Teacher, Subject}
+    R2 {Subject, Dept}
+
+#vi
+Relation is in 3NF 
+    if it is in 2NF 
+    and non-key does not depend on another non-key. 
+Note: 
+    transitive functional dependency: if non-key depends on another non-key. 
+To 
+2NF: R {Course, Trainer, Room No}
+    Course | Trainer  | Room No 
+    AI      Raja        101
+    DSA     Raja        101    
+    OS      Hari        103         
+    DBMS    Rani        102     
+    ML      Rani        102       
+Key: Course
+Non-Key 'Trainer' depends on 'Course'. 
+        'Trainer' depends on 'Room No' also.
+To 
+3NF:
+    R1 {Course, Trainer} PK(Course) FK(Trainer)
+    R2 {Trainer, Room No} PK(Trainer)
+
+#vii
+Relation is in BCNF 
+    if it is in 3NF     
+    and part of key does not depend on non-key. 
+Note: 
+    nontrivial functional dependency: 
+        if non-key fully depends on key and non-key is not subset of key.
+3NF: R{Student, Course, Trainer}
+    Student | Course  |  Trainer
+    Anugrah     AI        Raja
+    Neha        DSA       Raja    
+    Sarika      OS        Hari         
+    Anugrah     DBMS      Rani     
+    Kuriakose    ML       Rani       
+Key: (Student, Course)
+Part of Key 'Course' depends on 'Trainer'.
+To 
+BCNF:
+    R1 {Student, Trainer} PK(Student)
+    R2 {Course, Trainer} PK(Course) 
+
+#viii
+Relation is in 4NF 
+    if it is in BCNF     
+    and has no multi-valued attr.
+Note: 
+    mvd (multivalued dependency)
+    multi-valued dependencies: 
+        where one attribute determines a set of values 
+        independently of other attributes.
+
+Eliminate multi-valued dependencies 
+to avoid redundancy and maintain data integrity.
+BCNF:
+    R{Student, Course, Hobby}
+To
+4NF 
+    R1{Student, Course}
+    R2{Student, Hobby}
+
+#ix
+Relation is in 5NF (PJNF - Projection-Join Normal Form) 
+    if it is in 4NF     
+    and if every join dependency is implied by the candidate keys.
+
+Decompose tables to remove redundancy that arises from join dependencies.
+4NF:
+    R{Student, Course, Project}
+To
+5NF 
+    R1{Student, Course}
+    R2{Student, Project}
+    R3{Course, Project}
+    
+
+
+
+
+
+    
