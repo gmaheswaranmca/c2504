@@ -1,0 +1,153 @@
+====================================================================================
+^^^^^^^^^^^^^^^^^^^^^^^App : Pages Design^^^^^^^^^^^^^^^^^^^^^^^
+====================================================================================
+
+Pages to manage users, patients, appointments, and other functionalities.
+``````````````````````1. Authentication Pages``````````````````````
+1. Login Page
+   - Description: Allows users to log in to the system.
+   - Features: 
+        Email and password fields, 
+        "Forgot Password" link, 
+        "Sign Up" link.
+
+2. Register Page
+   - Description: Allows new users to create an account.
+   - Features: 
+        Username, email, password, and confirm password fields.
+
+3. Forgot Password Page
+   - Description: Allows users to reset their password.
+   - Features: 
+        Email field, 
+        "Send Reset Link" button.
+
+4. Reset Password Page
+   - Description: Allows users to set a new password after receiving a reset link.
+   - Features: 
+        New password and confirm password fields.
+
+``````````````````````2. User Management Pages``````````````````````
+5. User Dashboard
+   - Description: Displays an overview of user activities and quick links to different sections.
+   - Features: 
+        Summary of appointments, 
+        notifications, and 
+        quick access links.
+
+6. User Profile Page
+   - Description: Allows users to view and update their profile information.
+   - Features: 
+        Username, email, role, and profile picture upload.
+
+``````````````````````3. Patient Management Pages``````````````````````
+7. Patients List Page
+   - Description: Displays a list of all patients.
+   - Features: 
+        Search, filter, and sort options; 
+        add, edit, and delete patient buttons.
+
+8. Add Patient Page
+   - Description: Allows users to add a new patient.
+   - Features: 
+        Name, DOB, gender, contact info, address, and 
+        medical history fields.
+
+9. Edit Patient Page
+   - Description: Allows users to edit an existing patient's information.
+   - Features: 
+        Same as the add patient page with 
+        pre-filled fields.
+
+10. Patient Details Page
+    - Description: Displays detailed information about a specific patient.
+    - Features: 
+        Patient info, 
+        medical history, and 
+        list of appointments.
+
+``````````````````````4. Appointment Management Pages``````````````````````
+11. Appointments List Page
+    - Description: Displays a list of all appointments.
+    - Features: 
+        Search, filter, and sort options; 
+        add, edit, and delete appointment buttons.
+
+12. Add Appointment Page
+    - Description: Allows users to schedule a new appointment.
+    - Features: 
+        Patient selection, doctor selection, date, time, reason fields.
+
+13. Edit Appointment Page
+    - Description: Allows users to update an existing appointment.
+    - Features: 
+        Same as the add appointment page with pre-filled fields.
+
+14. Appointment Details Page
+    - Description: Displays detailed information about a specific appointment.
+    - Features: 
+        Appointment info, patient details, and doctor details.
+
+``````````````````````5. Communication Pages``````````````````````
+15. Messages Page
+    - Description: Displays a list of messages for the user.
+    - Features: 
+        Message threads, 
+        compose new message, 
+        search messages.
+
+16. Compose Message Page
+    - Description: Allows users to send a new message.
+    - Features: 
+        Recipient selection, message body, 
+        send button.
+
+``````````````````````6. Notifications Page``````````````````````
+17. Notifications Page
+    - Description: Displays a list of notifications for the user.
+    - Features: 
+        Mark as read/unread, 
+        delete notifications.
+
+``````````````````````7. Integration and Logs Pages``````````````````````
+18. EHR Integration Logs Page
+    - Description: Displays logs related to EHR integration.
+    - Features: 
+        Search, filter, and sort options; 
+        view log details.
+
+``````````````````````8. Settings and Administration Pages``````````````````````
+19. Settings Page
+    - Description: Allows users to configure their account settings.
+    - Features: 
+        Change password, 
+        notification preferences.
+
+20. Admin Dashboard
+    - Description: For admin users to manage the system.
+    - Features: 
+        Overview of system activities, 
+        user management, 
+        system settings.
+
+``````````````````````9. Help and Support Pages``````````````````````
+21. Help Page
+    - Description: Provides help and documentation about using the system.
+    - Features: 
+        FAQs, 
+        user guides, 
+        contact support.
+
+22. Contact Support Page
+    - Description: Allows users to contact support for assistance.
+    - Features: 
+        Contact form, support email, phone number.
+
+ Additional Considerations
+- Responsive Design: 
+    Ensure all pages are for all screen resolutions.
+    For example, if web app, mobile-friendly.
+- Role-Based Access Control: 
+    Different users (admin, doctor, nurse, staff) should have access 
+    to specific pages and functionalities based on their roles.
+

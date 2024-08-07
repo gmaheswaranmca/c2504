@@ -1,2 +1,53 @@
 mediconnect by 
     ashwin team 
+
+case study: mediconnect
+step 1: [Ashwin V, Athulya Shaji, Collin Francy, Dijol]
+    setting up  database              -- !!!  
+    sharing the constraints knowledge -- !!!DONE
+step 2: [Anugrah Krishnan, Abijith, Alan Preeth, Gopika, Girish]
+    sub query | joins 
+    [Anurag C Ashok, Minnu, Alan Kuriakose, Roshith, Aaryaka]
+step 3: [Sharon Rose, Nivya, Keerthana, Rishwin]
+    aggregators, group by | having
+
+    aggregators 
+    count, sum, avg, min, max, 
+    
+    group by | having 
+    [Sahla, Gladsy, Anjana E R, Ann Mariya]
+step 4: [Neha, Riza, Gayathri, Sarika...]
+    selectors, filtering / where cond, 
+    selectors 
+    - column 
+    - expression 
+    - constant
+    filtering / where cond 
+    sortings
+    [Yahkoop, Shilpa, Ashna Mariya, Anjana N K]
+---------------------------------------------------------------
+
+teams jobs are allocated 
+    to present "subject matters learnt in sql server"
+
+
+-- #1
+-- to display patients names of the appointments 
+--   on dates between '2024-08-10' and '2024-08-10'
+
+-- #2
+-- the doctors scheduled appointments 
+
+-- #3
+-- each user's number of unread notifications :: use sub query in selectors 
+
+-- each user's number of unread notifications :: use group by  
+SELECT u.UserName, Count(*) as UnreadCount   
+FROM Users as u 
+    INNER JOIN Notifications n ON(u.UserID = n.UserID)
+WHERE n.IsRead=0
+Group By u.UserName; 
+-- #4
+-- 
+
+Refer folder "/00-casestudy/51/teamOn0608"
