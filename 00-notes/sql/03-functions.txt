@@ -1,0 +1,249 @@
+ String Functions
+1. `LEN` - Returns the length of a string.
+    ---------------------------------sql---------------------------------
+    SELECT LEN('Hello World');
+    ------------------------------------------------------------------
+
+2. `UPPER` - Converts a string to uppercase.
+    ---------------------------------sql---------------------------------
+    SELECT UPPER('hello world');
+    ------------------------------------------------------------------
+
+3. `LOWER` - Converts a string to lowercase.
+    ---------------------------------sql---------------------------------
+    SELECT LOWER('HELLO WORLD');
+    ------------------------------------------------------------------
+
+4. `SUBSTRING` - Extracts a substring from a string.
+    ---------------------------------sql---------------------------------
+    SELECT SUBSTRING('Hello World', 1, 5);
+    ------------------------------------------------------------------
+
+5. `REPLACE` - Replaces all occurrences of a substring with another substring.
+    ---------------------------------sql---------------------------------
+    SELECT REPLACE('Hello World', 'World', 'SQL');
+    ------------------------------------------------------------------
+
+6. `LTRIM` and `RTRIM` - Removes leading and trailing spaces.
+    ---------------------------------sql---------------------------------
+    SELECT LTRIM('   Hello'), RTRIM('World   ');
+    ------------------------------------------------------------------
+
+7. `CHARINDEX` - Returns the starting position of a substring.
+    ---------------------------------sql---------------------------------
+    SELECT CHARINDEX('World', 'Hello World');
+    ------------------------------------------------------------------
+
+8. `CONCAT` - Concatenates two or more strings.
+    ---------------------------------sql---------------------------------
+    SELECT CONCAT('Hello', ' ', 'World');
+    ------------------------------------------------------------------
+
+
+
+
+
+
+
+
+ Date Functions
+1. `GETDATE` - Returns the current date and time.
+    ---------------------------------sql---------------------------------
+    SELECT GETDATE();
+    ------------------------------------------------------------------
+
+2. `DATEADD` - Adds a specified number of units to a date.
+    ---------------------------------sql---------------------------------
+    SELECT DATEADD(day, 5, GETDATE());
+    ------------------------------------------------------------------
+
+3. `DATEDIFF` - Returns the difference between two dates.
+    ---------------------------------sql---------------------------------
+    SELECT DATEDIFF(day, '2023-01-01', GETDATE());
+    ------------------------------------------------------------------
+
+4. `FORMAT` - Formats a date using a specified format.
+    ---------------------------------sql---------------------------------
+    SELECT FORMAT(GETDATE(), 'yyyy-MM-dd');
+    ------------------------------------------------------------------
+
+5. `YEAR`, `MONTH`, `DAY` - Extracts the year, month, or day from a date.
+    ---------------------------------sql---------------------------------
+    SELECT YEAR(GETDATE()), MONTH(GETDATE()), DAY(GETDATE());
+    ------------------------------------------------------------------
+
+6. `EOMONTH` - Returns the last day of the month for a specified date.
+    ---------------------------------sql---------------------------------
+    SELECT EOMONTH(GETDATE());
+    ------------------------------------------------------------------
+
+7. `SWITCHOFFSET` - Adjusts a datetimeoffset value to a new time zone.
+    ---------------------------------sql---------------------------------
+    SELECT SWITCHOFFSET(SYSDATETIMEOFFSET(), '-08:00');
+    ------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Server provides a variety of mathematical functions 
+to perform calculations on numeric data. 
+These functions can be categorized into several groups such as 
+basic arithmetic functions, trigonometric functions, 
+and statistical functions. 
+Here are some commonly used math functions in SQL Server:
+
+Basic Arithmetic Functions
+
+1. ABS (Absolute Value)
+   - Returns the absolute value of a number.
+   ------------------------sql------------------------
+   SELECT ABS(-10) AS AbsoluteValue;
+   ------------------------------------------------
+
+2. CEILING
+   - Returns the smallest integer greater than or equal to the specified number.
+   ------------------------sql------------------------
+   SELECT CEILING(4.2) AS CeilingValue;
+   ------------------------------------------------
+
+3. FLOOR
+   - Returns the largest integer less than or equal to the specified number.
+   ------------------------sql------------------------
+   SELECT FLOOR(4.8) AS FloorValue;
+   ------------------------------------------------
+
+4. ROUND
+   - Rounds a number to a specified number of decimal places.
+   ------------------------sql------------------------
+   SELECT ROUND(123.4567, 2) AS RoundedValue;
+   ------------------------------------------------
+
+5. POWER
+   - Returns the value of a number raised to the power of another number.
+   ------------------------sql------------------------
+   SELECT POWER(2, 3) AS PowerValue;  -- 2^3 = 8
+   ------------------------------------------------
+
+6. SQRT (Square Root)
+   - Returns the square root of a specified number.
+   ------------------------sql------------------------
+   SELECT SQRT(16) AS SquareRootValue;
+   ------------------------------------------------
+
+7. SIGN
+   - Returns the sign of a number: -1 for negative, 0 for zero, and 1 for positive.
+   ------------------------sql------------------------
+   SELECT SIGN(-10) AS SignValue;
+   ------------------------------------------------
+
+Trigonometric Functions
+
+1. SIN (Sine)
+   - Returns the sine of the specified angle (in radians).
+   ------------------------sql------------------------
+   SELECT SIN(PI() / 2) AS SineValue;  -- PI()/2 radians = 90 degrees
+   ------------------------------------------------
+
+2. COS (Cosine)
+   - Returns the cosine of the specified angle (in radians).
+   ------------------------sql------------------------
+   SELECT COS(0) AS CosineValue;  -- 0 radians = 0 degrees
+   ------------------------------------------------
+
+3. TAN (Tangent)
+   - Returns the tangent of the specified angle (in radians).
+   ------------------------sql------------------------
+   SELECT TAN(PI() / 4) AS TangentValue;  -- PI()/4 radians = 45 degrees
+   ------------------------------------------------
+
+4. ASIN (Arcsine)
+   - Returns the arcsine of the specified number.
+   ------------------------sql------------------------
+   SELECT ASIN(1) AS ArcsineValue;
+   ------------------------------------------------
+
+5. ACOS (Arccosine)
+   - Returns the arccosine of the specified number.
+   ------------------------sql------------------------
+   SELECT ACOS(0) AS ArccosineValue;
+   ------------------------------------------------
+
+6. ATAN (Arctangent)
+   - Returns the arctangent of the specified number.
+   ------------------------sql------------------------
+   SELECT ATAN(1) AS ArctangentValue;
+   ------------------------------------------------
+
+Statistical Functions
+
+1. AVG (Average)
+   - Returns the average value of a numeric column.
+   ------------------------sql------------------------
+   SELECT AVG(Salary) AS AverageSalary FROM Employees;
+   ------------------------------------------------
+
+2. SUM (Sum)
+   - Returns the sum of all values in a numeric column.
+   ------------------------sql------------------------
+   SELECT SUM(Salary) AS TotalSalary FROM Employees;
+   ------------------------------------------------
+
+3. MIN (Minimum)
+   - Returns the minimum value in a numeric column.
+   ------------------------sql------------------------
+   SELECT MIN(Salary) AS MinimumSalary FROM Employees;
+   ------------------------------------------------
+
+4. MAX (Maximum)
+   - Returns the maximum value in a numeric column.
+   ------------------------sql------------------------
+   SELECT MAX(Salary) AS MaximumSalary FROM Employees;
+   ------------------------------------------------
+
+5. COUNT (Count)
+   - Returns the number of rows in a table or the number of non-NULL values in a column.
+   ------------------------sql------------------------
+   SELECT COUNT(*) AS EmployeeCount FROM Employees;
+   ------------------------------------------------
+
+Examples Using Math Functions
+
+Here are some examples demonstrating the use of these functions with the `Employees` table:
+
+------------------------sql------------------------
+-- Calculate the average salary of employees
+SELECT AVG(Salary) AS AverageSalary FROM Employees;
+
+-- Calculate the total salary expense
+SELECT SUM(Salary) AS TotalSalary FROM Employees;
+
+-- Find the minimum and maximum salaries
+SELECT MIN(Salary) AS MinimumSalary, MAX(Salary) AS MaximumSalary FROM Employees;
+
+-- Count the number of employees
+SELECT COUNT(*) AS EmployeeCount FROM Employees;
+
+-- Round the average salary to 2 decimal places
+SELECT ROUND(AVG(Salary), 2) AS RoundedAverageSalary FROM Employees;
+
+-- Calculate the square root of the total salary expense
+SELECT SQRT(SUM(Salary)) AS SquareRootOfTotalSalary FROM Employees;
+
+-- Calculate the sine, cosine, and tangent of PI()/4 radians (45 degrees)
+SELECT SIN(PI() / 4) AS SineValue, COS(PI() / 4) AS CosineValue, TAN(PI() / 4) AS TangentValue;
+------------------------------------------------
+
+These functions are powerful tools for performing calculations and 
+statistical analysis directly within SQL queries, 
+enabling efficient data manipulation and reporting.

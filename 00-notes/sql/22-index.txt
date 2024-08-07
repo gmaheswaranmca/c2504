@@ -1,0 +1,139 @@
+Indexes in SQL Server are special lookup tables 
+that the database search engine uses to speed up data retrieval. 
+They are created on columns in tables or views. 
+Indexes help improve the performance of queries 
+by allowing the database to find rows more quickly.
+
+Types of Indexes
+
+1. Clustered Index
+   - Determines the physical order of data in a table. A table can have only one clustered index.
+   - Example: `PRIMARY KEY` constraint creates a clustered index by default.
+
+2. Non-Clustered Index
+   - Does not alter the physical order of the table and creates a separate object within the table. A table can have multiple non-clustered indexes.
+   - Example: Indexes created on columns that are frequently searched but not primary keys.
+
+3. Unique Index
+   - Ensures that the values in the indexed column(s) are unique. It can be created automatically when a `UNIQUE` constraint is defined.
+   - Example: Indexes created on columns with unique values, such as email addresses.
+
+4. Composite Index
+   - An index on multiple columns. Useful for queries that filter on more than one column.
+   - Example: Indexes created on a combination of columns like `FirstName` and `LastName`.
+
+5. Filtered Index
+   - An index that includes a subset of rows in the table. Useful for improving query performance on well-defined subsets of data.
+   - Example: Indexes created on a column with a limited range of values.
+
+6. Full-Text Index
+   - Enables full-text search capabilities. Useful for complex search requirements.
+   - Example: Indexes created on large text columns for searching specific words or phrases.
+
+Creating Indexes
+
+Clustered Index:
+-------------------------------sql-------------------------------
+CREATE CLUSTERED INDEX IX_EmployeeID ON Employees (EmployeeID);
+--------------------------------------------------------------
+
+Non-Clustered Index:
+-------------------------------sql-------------------------------
+CREATE NONCLUSTERED INDEX IX_LastName ON Employees (LastName);
+--------------------------------------------------------------
+
+Unique Index:
+-------------------------------sql-------------------------------
+CREATE UNIQUE INDEX IX_DepartmentName ON Department (DepartmentName);
+--------------------------------------------------------------
+
+Composite Index:
+-------------------------------sql-------------------------------
+CREATE NONCLUSTERED INDEX IX_FullName ON Employees (FirstName, LastName);
+--------------------------------------------------------------
+
+Filtered Index:
+-------------------------------sql-------------------------------
+CREATE NONCLUSTERED INDEX IX_ActiveEmployees ON Employees (Salary) WHERE Age > 30;
+--------------------------------------------------------------
+
+Full-Text Index:
+-------------------------------sql-------------------------------
+CREATE FULLTEXT INDEX ON Employees(FirstName, LastName)
+KEY INDEX PK_EmployeeID;
+--------------------------------------------------------------
+
+Managing Indexes
+
+View Indexes:
+-------------------------------sql-------------------------------
+SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID('Employees');
+--------------------------------------------------------------
+
+Drop Index:
+-------------------------------sql-------------------------------
+DROP INDEX IX_LastName ON Employees;
+--------------------------------------------------------------
+
+Rebuild Index:
+-------------------------------sql-------------------------------
+ALTER INDEX IX_LastName ON Employees REBUILD;
+--------------------------------------------------------------
+
+Example with Indexes
+
+Let's create the `Employees` and `Department` tables with appropriate indexes:
+
+-------------------------------sql-------------------------------
+-- Department Table with a Unique Index on DepartmentName
+CREATE TABLE Department (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName NVARCHAR(50) UNIQUE NOT NULL
+);
+
+-- Employees Table with a Clustered Index on EmployeeID, 
+-- Non-Clustered Index on LastName, 
+-- Composite Index on FirstName and LastName
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY CLUSTERED,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    Age INT CHECK (Age >= 18) NOT NULL,
+    DepartmentID INT NOT NULL,
+    Salary DECIMAL(10, 2) DEFAULT 50000.00 NOT NULL,
+    ManagerID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+
+-- Non-Clustered Index on LastName
+CREATE NONCLUSTERED INDEX IX_LastName ON Employees (LastName);
+
+-- Composite Index on FirstName and LastName
+CREATE NONCLUSTERED INDEX IX_FullName ON Employees (FirstName, LastName);
+--------------------------------------------------------------
+
+Benefits of Indexes
+
+- Faster Data Retrieval: 
+    Indexes improve the speed of data retrieval operations 
+    by allowing the database engine to find data more efficiently.
+- Efficient Query Performance: 
+    Properly indexed columns can significantly 
+    enhance the performance of SELECT, JOIN, and WHERE clauses.
+- Reduced I/O Operations: 
+    Indexes help reduce the number of disk I/O operations required 
+    to retrieve data, leading to better performance.
+
+Drawbacks of Indexes
+
+- Storage Overhead: 
+    Indexes require additional storage space.
+- Insert, Update, and Delete Performance: 
+    Indexes can slow down data modification operations 
+    because the index itself must be updated.
+
+Indexes are crucial for optimizing query performance, especially 
+for large tables with frequent read operations. 
+Properly designed indexes can lead 
+to significant performance improvements 
+while balancing the overhead they introduce.

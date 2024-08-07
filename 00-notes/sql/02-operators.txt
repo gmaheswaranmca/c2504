@@ -1,0 +1,237 @@
+            arithmetic operators
+Arithmetic operators in SQL Server are used 
+to perform mathematical operations on numeric data. 
+Here are the main arithmetic operators:
+
+1. Addition (`+`)
+   - Use Case: Add two numbers.
+   - Example: `SELECT Salary + Bonus AS TotalCompensation FROM Employees;`
+   - Explanation: This query returns the total compensation by adding the salary and bonus for each employee.
+
+2. Subtraction (`-`)
+   - Use Case: Subtract one number from another.
+   - Example: `SELECT Price - Discount AS FinalPrice FROM Products;`
+   - Explanation: This query returns the final price by subtracting the discount from the price for each product.
+
+3. Multiplication (`*`)
+   - Use Case: Multiply two numbers.
+   - Example: `SELECT Quantity * UnitPrice AS TotalCost FROM OrderDetails;`
+   - Explanation: This query returns the total cost by multiplying the quantity by the unit price for each order detail.
+
+4. Division (`/`)
+   - Use Case: Divide one number by another.
+   - Example: `SELECT TotalAmount / NumberOfPayments AS AveragePayment FROM Payments;`
+   - Explanation: This query returns the average payment by dividing the total amount by the number of payments.
+
+5. Modulus (`%`)
+   - Use Case: Return the remainder of a division operation.
+   - Example: `SELECT EmployeeID % 2 AS IsOdd FROM Employees;`
+   - Explanation: This query returns 1 if the EmployeeID is odd, and 0 if it is even.
+
+ Using Arithmetic Operators in Queries
+
+You can use arithmetic operators in various parts of an SQL query, such as in the `SELECT` clause, `WHERE` clause, and others.
+
+Example:
+------------------------sql
+SELECT ProductID, 
+       UnitPrice, 
+       Quantity, 
+       UnitPrice * Quantity AS TotalPrice
+FROM OrderDetails
+WHERE UnitPrice * Quantity > 100;
+------------------------
+- Explanation: This query calculates the total price for each order detail and only returns those where the total price is greater than 100.
+
+ Combining Arithmetic Operators
+
+You can combine multiple arithmetic operators in a single expression. When doing so, SQL Server follows the standard operator precedence rules, which are:
+
+1. Multiplication (`*`), Division (`/`), Modulus (`%`)
+2. Addition (`+`), Subtraction (`-`)
+
+Example:
+------------------------sql------------------------
+SELECT ProductID, 
+       UnitPrice, 
+       Quantity, 
+       UnitPrice * Quantity - Discount AS FinalPrice
+FROM OrderDetails;
+------------------------------------------------
+- Explanation: 
+This query calculates the final price 
+by multiplying the unit price 
+by the quantity and 
+then subtracting the discount.
+
+ Using Parentheses for Clarity
+
+To ensure the correct order of operations, 
+or to make the expression more readable, 
+you can use parentheses.
+
+Example:
+------------------------sql------------------------
+SELECT ProductID, 
+       UnitPrice, 
+       Quantity, 
+       (UnitPrice * Quantity) - Discount AS FinalPrice
+FROM OrderDetails;
+------------------------------------------------
+- Explanation: Using parentheses makes it clear 
+that the multiplication should be performed 
+before the subtraction.
+
+By understanding and using arithmetic operators, 
+you can perform a wide range of mathematical calculations directly 
+within your SQL queries, 
+making data manipulation and analysis more efficient.
+
+
+
+
+
+                     Relational operators                               
+Relational operators are used 
+to compare two values and determine the relationship between them. 
+They are commonly used in SQL queries 
+to filter data based on certain conditions. 
+Here are the main relational operators in SQL:
+
+1. Equals (`=`)
+   - Use Case: Check if two values are equal.
+   - Example: `SELECT * FROM Employees WHERE Age = 30;`
+
+2. Not Equals (`<>` or `!=`)
+   - Use Case: Check if two values are not equal.
+   - Example: `SELECT * FROM Employees WHERE Age <> 30;`
+
+3. Greater Than (`>`)
+   - Use Case: Check if the value on the left is greater than the value on the right.
+   - Example: `SELECT * FROM Employees WHERE Salary > 50000;`
+
+4. Less Than (`<`)
+   - Use Case: Check if the value on the left is less than the value on the right.
+   - Example: `SELECT * FROM Employees WHERE Salary < 50000;`
+
+5. Greater Than or Equal To (`>=`)
+   - Use Case: Check if the value on the left is greater than or equal to the value on the right.
+   - Example: `SELECT * FROM Employees WHERE Age >= 30;`
+
+6. Less Than or Equal To (`<=`)
+   - Use Case: Check if the value on the left is less than or equal to the value on the right.
+   - Example: `SELECT * FROM Employees WHERE Age <= 30;`
+
+7. BETWEEN
+   - Use Case: Check if a value is within a specific range.
+   - Example: `SELECT * FROM Employees WHERE Age BETWEEN 25 AND 35;`
+
+8. NOT BETWEEN
+   - Use Case: Check if a value is not within a specific range.
+   - Example: `SELECT * FROM Employees WHERE Age NOT BETWEEN 25 AND 35;`
+
+9. IN
+   - Use Case: Check if a value is within a set of values.
+   - Example: `SELECT * FROM Employees WHERE Department IN ('HR', 'Finance', 'IT');`
+
+10. NOT IN
+    - Use Case: Check if a value is not within a set of values.
+    - Example: `SELECT * FROM Employees WHERE Department NOT IN ('HR', 'Finance', 'IT');`
+
+11. LIKE
+    - Use Case: Check if a value matches a specified pattern (commonly used with wildcard characters `%` and `_`).
+    - Example: `SELECT * FROM Employees WHERE Name LIKE 'A%';` (Names starting with 'A')
+    - Wildcard Characters:
+        - `%` : Represents zero or more characters.
+        - `_` : Represents a single character.
+    
+12. NOT LIKE
+    - Use Case: Check if a value does not match a specified pattern.
+    - Example: `SELECT * FROM Employees WHERE Name NOT LIKE 'A%';`
+
+13. IS NULL
+    - Use Case: Check if a value is NULL.
+    - Example: `SELECT * FROM Employees WHERE ManagerID IS NULL;`
+
+14. IS NOT NULL
+    - Use Case: Check if a value is not NULL.
+    - Example: `SELECT * FROM Employees WHERE ManagerID IS NOT NULL;`
+
+Using these relational operators, 
+you can create complex queries 
+to filter and retrieve data 
+based on specific conditions in SQL Server.
+
+
+
+
+                            Logical operators
+Logical operators in SQL are used 
+to combine multiple conditions 
+in a `WHERE` clause to refine the selection 
+of rows returned by a query. 
+Here are the main logical operators in SQL Server:
+
+1. AND
+   - Use Case: Combine two or more conditions, where all conditions must be true.
+   - Example: `SELECT * FROM Employees WHERE Age > 30 AND Department = 'IT';`
+   - Explanation: This query returns employees who are older than 30 and work in the IT department.
+
+2. OR
+   - Use Case: Combine two or more conditions, where at least one condition must be true.
+   - Example: `SELECT * FROM Employees WHERE Age < 25 OR Salary > 80000;`
+   - Explanation: This query returns employees who are either younger than 25 or have a salary greater than 80,000.
+
+3. NOT
+   - Use Case: Negate a condition.
+   - Example: `SELECT * FROM Employees WHERE NOT Department = 'HR';`
+   - Explanation: This query returns employees who do not work in the HR department.
+
+4. ALL
+   - Use Case: Compare a value to all values in another result set.
+   - Example: `SELECT * FROM Employees WHERE Salary > ALL (SELECT Salary FROM Employees WHERE Department = 'Sales');`
+   - Explanation: This query returns employees whose salary is greater than every salary in the Sales department.
+
+5. ANY
+   - Use Case: Compare a value to any value in another result set.
+   - Example: `SELECT * FROM Employees WHERE Salary > ANY (SELECT Salary FROM Employees WHERE Department = 'Sales');`
+   - Explanation: This query returns employees whose salary is greater than at least one salary in the Sales department.
+
+6. EXISTS
+   - Use Case: Check for the existence of rows in a subquery.
+   - Example: `SELECT * FROM Employees WHERE EXISTS (SELECT * FROM Projects WHERE Projects.EmployeeID = Employees.EmployeeID);`
+   - Explanation: This query returns employees who are assigned to at least one project.
+
+ Combining Logical Operators
+
+Logical operators can be combined to form complex conditions. When combining multiple logical operators, it’s essential to use parentheses to ensure the correct order of evaluation:
+
+Example:
+------------------------sql------------------------
+SELECT * FROM Employees 
+WHERE (Age > 30 AND Department = 'IT') OR (Salary > 80000 AND NOT Department = 'HR');
+------------------------------------------------
+- Explanation: This query returns employees who are either over 30 and work in IT, or have a salary greater than 80,000 and do not work in HR.
+
+ Precedence of Logical Operators
+
+When multiple logical operators are used without parentheses, SQL Server evaluates them in the following order of precedence:
+
+1. `NOT`
+2. `AND`
+3. `OR`
+
+Example:
+------------------------sql------------------------
+SELECT * FROM Employees 
+WHERE Age > 30 OR Department = 'IT' AND Salary > 50000;
+------------------------------------------------
+- Explanation: This query is evaluated as: `(Age > 30) OR (Department = 'IT' AND Salary > 50000)`. To change the order of evaluation, use parentheses:
+------------------------sql------------------------
+SELECT * FROM Employees 
+WHERE (Age > 30 OR Department = 'IT') AND Salary > 50000;
+------------------------------------------------
+
+Understanding and using these logical operators allows you 
+to create more refined and precise queries, 
+enabling efficient data retrieval in SQL Server.

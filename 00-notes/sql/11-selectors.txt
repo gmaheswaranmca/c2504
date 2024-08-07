@@ -1,0 +1,90 @@
+Selectors in SQL queries allow you 
+to specify the columns you want to retrieve or manipulate. 
+These selectors form the core of the 
+`SELECT` statement and play a crucial role in data retrieval. 
+Here are the main types of selectors used in SQL queries:
+
+1. Column Selectors
+
+a. Single Column
+   - Use Case: Retrieve data from a specific column.
+   - Example: `SELECT FirstName FROM Employees;`
+   - Explanation: This query retrieves the `FirstName` column from the `Employees` table.
+
+b. Multiple Columns
+   - Use Case: Retrieve data from multiple columns.
+   - Example: `SELECT FirstName, LastName, Age FROM Employees;`
+   - Explanation: This query retrieves the `FirstName`, `LastName`, and `Age` columns from the `Employees` table.
+
+2. All Columns
+
+a. Asterisk (`*`)
+   - Use Case: Retrieve all columns from a table.
+   - Example: `SELECT * FROM Employees;`
+   - Explanation: This query retrieves all columns from the `Employees` table.
+
+3. Derived Columns
+
+a. Aliases
+   - Use Case: Rename columns in the result set.
+   - Example: `SELECT FirstName AS FName, LastName AS LName FROM Employees;`
+   - Explanation: This query renames `FirstName` to `FName` and `LastName` to `LName` in the result set.
+
+b. Expressions
+   - Use Case: Perform calculations or combine columns.
+   - Example: `SELECT FirstName + ' ' + LastName AS FullName FROM Employees;`
+   - Explanation: This query combines `FirstName` and `LastName` into a single column named `FullName`.
+
+4. Distinct Selector
+
+a. DISTINCT
+   - Use Case: Retrieve unique values from a column or combination of columns.
+   - Example: `SELECT DISTINCT Department FROM Employees;`
+   - Explanation: This query retrieves unique values from the `Department` column.
+
+5. Aggregate Functions
+
+a. COUNT, SUM, AVG, MAX, MIN
+   - Use Case: Perform aggregate calculations on columns.
+   - Example: `SELECT COUNT(*), AVG(Salary), MAX(Age) FROM Employees;`
+   - Explanation: This query retrieves the total number of rows, the average salary, and the maximum age from the `Employees` table.
+
+6. Subqueries
+
+a. Subquery in SELECT Clause
+   - Use Case: Use a subquery to retrieve a value or set of values.
+   - Example: `SELECT FirstName, (SELECT COUNT(*) FROM Orders WHERE Orders.EmployeeID = Employees.EmployeeID) AS OrderCount FROM Employees;`
+   - Explanation: This query retrieves the `FirstName` and the count of orders for each employee.
+
+7. Case Statements
+
+a. CASE
+   - Use Case: Return values based on conditions.
+   - Example: `SELECT FirstName, LastName, CASE WHEN Age < 30 THEN 'Young' ELSE 'Experienced' END AS Category FROM Employees;`
+   - Explanation: This query categorizes employees as 'Young' or 'Experienced' based on their age.
+
+Using Selectors Together
+
+Selectors can be combined to form complex queries, allowing for powerful data retrieval and manipulation.
+
+Example:
+-------------------------------sql-------------------------------
+SELECT FirstName, LastName, 
+       Department, 
+       Salary, 
+       Salary * 1.1 AS IncreasedSalary, 
+       (SELECT COUNT(*) FROM Orders WHERE Orders.EmployeeID = Employees.EmployeeID) AS OrderCount,
+       CASE WHEN Age < 30 THEN 'Young' ELSE 'Experienced' END AS Category
+FROM Employees
+WHERE Department = 'IT' AND Salary > 50000
+ORDER BY LastName;
+--------------------------------------------------------------
+- Explanation: 
+This query retrieves the first name, last name, department, salary, 
+a 10% increased salary, the number of orders, 
+and an age category for employees in the IT department 
+with a salary greater than 50,000, ordered by last name.
+
+Selectors in SQL provide the flexibility 
+to tailor the result set to your specific needs, 
+enabling efficient and precise data retrieval.

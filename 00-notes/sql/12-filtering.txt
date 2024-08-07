@@ -1,0 +1,112 @@
+Filtering in SQL allows you to specify criteria 
+to retrieve a subset of data from a database. 
+The primary way to filter data in SQL is 
+by using the `WHERE` clause. 
+Here's an overview of how filtering works in SQL:
+
+Basic Filtering with `WHERE`
+
+1. Equal To (`=`)
+   - Example: `SELECT * FROM Employees WHERE Department = 'IT';`
+   - Explanation: This query retrieves all employees who work in the IT department.
+
+2. Not Equal To (`<>` or `!=`)
+   - Example: `SELECT * FROM Employees WHERE Age <> 30;`
+   - Explanation: This query retrieves all employees who are not 30 years old.
+
+3. Greater Than (`>`)
+   - Example: `SELECT * FROM Employees WHERE Salary > 50000;`
+   - Explanation: This query retrieves all employees with a salary greater than 50,000.
+
+4. Less Than (`<`)
+   - Example: `SELECT * FROM Employees WHERE Salary < 50000;`
+   - Explanation: This query retrieves all employees with a salary less than 50,000.
+
+5. Greater Than or Equal To (`>=`)
+   - Example: `SELECT * FROM Employees WHERE Age >= 30;`
+   - Explanation: This query retrieves all employees who are 30 years old or older.
+
+6. Less Than or Equal To (`<=`)
+   - Example: `SELECT * FROM Employees WHERE Age <= 30;`
+   - Explanation: This query retrieves all employees who are 30 years old or younger.
+
+Filtering with Logical Operators
+
+1. AND
+   - Example: `SELECT * FROM Employees WHERE Department = 'IT' AND Age > 30;`
+   - Explanation: This query retrieves employees who work in the IT department and are older than 30.
+
+2. OR
+   - Example: `SELECT * FROM Employees WHERE Department = 'IT' OR Age > 30;`
+   - Explanation: This query retrieves employees who either work in the IT department or are older than 30.
+
+3. NOT
+   - Example: `SELECT * FROM Employees WHERE NOT Department = 'HR';`
+   - Explanation: This query retrieves all employees who do not work in the HR department.
+
+Filtering with Special Operators
+
+1. BETWEEN
+   - Example: `SELECT * FROM Employees WHERE Age BETWEEN 25 AND 35;`
+   - Explanation: This query retrieves employees who are between 25 and 35 years old, inclusive.
+
+2. IN
+   - Example: `SELECT * FROM Employees WHERE Department IN ('IT', 'HR', 'Finance');`
+   - Explanation: This query retrieves employees who work in the IT, HR, or Finance departments.
+
+3. LIKE
+   - Example: `SELECT * FROM Employees WHERE FirstName LIKE 'A%';`
+   - Explanation: This query retrieves employees whose first name starts with 'A'.
+   - Wildcards: 
+     - `%` : Represents zero or more characters.
+     - `_` : Represents a single character.
+
+4. IS NULL / IS NOT NULL
+   - Example: `SELECT * FROM Employees WHERE ManagerID IS NULL;`
+   - Explanation: This query retrieves employees who do not have a manager.
+   - Example: `SELECT * FROM Employees WHERE ManagerID IS NOT NULL;`
+   - Explanation: This query retrieves employees who have a manager.
+
+Filtering with Subqueries
+
+1. Subquery in `WHERE` Clause
+   - Example: `SELECT * FROM Employees WHERE Salary > (SELECT AVG(Salary) FROM Employees);`
+   - Explanation: This query retrieves employees whose salary is greater than the average salary of all employees.
+
+Combining Multiple Filters
+
+You can combine multiple filters to create complex queries.
+
+Example:
+-------------------------------sql
+SELECT * FROM Employees 
+WHERE Department = 'IT' 
+  AND Age > 25 
+  AND Salary > 60000 
+  AND FirstName LIKE 'J%';
+-------------------------------
+- Explanation: This query retrieves employees who:
+  - Work in the IT department
+  - Are older than 25
+  - Have a salary greater than 60,000
+  - Have a first name starting with 'J'
+
+Ordering the Results
+
+After filtering the data, you might want 
+to order the results using the `ORDER BY` clause.
+
+Example:
+-------------------------------sql
+SELECT * FROM Employees 
+WHERE Department = 'IT' 
+  AND Salary > 50000 
+ORDER BY Salary DESC, Age ASC;
+-------------------------------
+- Explanation: This query retrieves employees 
+in the IT department with a salary greater than 50,000, 
+ordered by salary in descending order and age in ascending order.
+
+By using the `WHERE` clause and various filtering techniques, 
+you can refine your queries 
+to retrieve precisely the data you need from a SQL Server database.

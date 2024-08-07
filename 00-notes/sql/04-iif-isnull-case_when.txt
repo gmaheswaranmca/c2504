@@ -1,0 +1,105 @@
+IIF, ISNULL, and CASE WHEN in SQL Server
+    These functions are commonly used in SQL Server for 
+        conditional logic and 
+        handling NULL values.
+
+IIF
+    The `IIF` function returns one of two values, 
+    depending on whether a Boolean expression evaluates to true or false. 
+    It is similar to the `IF` statement in other programming languages.
+
+Syntax:
+---------------------------------sql---------------------------------
+IIF(condition, true_value, false_value)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+SELECT ENAME, IIF(SAL > 2000, 'High Salary', 'Low Salary') AS SalaryCategory
+FROM EMP;
+------------------------------------------------------------------
+
+ISNULL
+The `ISNULL` function replaces `NULL` with a specified replacement value.
+
+Syntax:
+---------------------------------sql---------------------------------
+ISNULL(expression, replacement_value)
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+SELECT ENAME, ISNULL(COMM, 0) AS Commission
+FROM EMP;
+------------------------------------------------------------------
+
+CASE WHEN
+The `CASE WHEN` statement is a powerful conditional expression that allows for multiple conditions and corresponding results.
+
+Syntax:
+---------------------------------sql---------------------------------
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ...
+    ELSE resultN
+END
+------------------------------------------------------------------
+
+Example:
+---------------------------------sql---------------------------------
+SELECT ENAME,
+       CASE 
+           WHEN SAL < 1000 THEN 'Low Salary'
+           WHEN SAL BETWEEN 1000 AND 2000 THEN 'Medium Salary'
+           ELSE 'High Salary'
+       END AS SalaryCategory
+FROM EMP;
+------------------------------------------------------------------
+
+Combining IIF, ISNULL, and CASE WHEN
+
+These functions can be used together in more complex queries to handle conditional logic and NULL values effectively.
+
+Example:
+---------------------------------sql---------------------------------
+SELECT ENAME,
+       ISNULL(COMM, 0) AS Commission,
+       IIF(SAL > 2000, 'High Salary', 'Low Salary') AS SalaryCategory,
+       CASE 
+           WHEN JOB = 'MANAGER' THEN 'Management'
+           WHEN JOB = 'SALESMAN' THEN 'Sales'
+           ELSE 'Other'
+       END AS JobCategory
+FROM EMP;
+------------------------------------------------------------------
+
+Practical Examples
+
+1. IIF Example:
+    ---------------------------------sql---------------------------------
+    -- Categorize employees based on salary
+    SELECT ENAME, SAL, 
+           IIF(SAL > 2000, 'High Salary', 'Low Salary') AS SalaryCategory
+    FROM EMP;
+    ------------------------------------------------------------------
+
+2. ISNULL Example:
+    ---------------------------------sql---------------------------------
+    -- Replace NULL commission values with 0
+    SELECT ENAME, COMM, 
+           ISNULL(COMM, 0) AS Commission
+    FROM EMP;
+    ------------------------------------------------------------------
+
+3. CASE WHEN Example:
+    ---------------------------------sql---------------------------------
+    -- Categorize employees based on salary range
+    SELECT ENAME, SAL, 
+           CASE 
+               WHEN SAL < 1000 THEN 'Low Salary'
+               WHEN SAL BETWEEN 1000 AND 2000 THEN 'Medium Salary'
+               ELSE 'High Salary'
+           END AS SalaryCategory
+    FROM EMP;
+    ------------------------------------------------------------------

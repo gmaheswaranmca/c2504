@@ -1,0 +1,173 @@
+In SQL Server, constraints are rules enforced on data columns 
+to ensure the integrity, accuracy, and reliability 
+of the data in the database. 
+Here are the primary types of constraints you can use:
+
+Types of Constraints
+
+1. Primary Key Constraint
+   - Ensures that each row in a table is unique and 
+   that no row can have a NULL value in the primary key column(s).
+
+------------------------sql------------------------
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Age INT,
+    DepartmentID INT,
+    Salary DECIMAL(10, 2),
+    ManagerID INT
+);
+
+CREATE TABLE Department (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName NVARCHAR(50)
+);
+------------------------------------------------
+
+2. Foreign Key Constraint
+   - Ensures the referential integrity of data 
+   between two tables by enforcing a link between columns.
+
+------------------------sql------------------------
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Age INT,
+    DepartmentID INT,
+    Salary DECIMAL(10, 2),
+    ManagerID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+------------------------------------------------
+
+3. Unique Constraint
+   - Ensures that all values in a column or a set of columns 
+   are unique across the rows in the table.
+
+------------------------sql------------------------
+CREATE TABLE Department (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName NVARCHAR(50) UNIQUE
+);
+------------------------------------------------
+
+4. Check Constraint
+   - Ensures that all values in a column satisfy a specific condition.
+
+------------------------sql------------------------
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Age INT CHECK (Age >= 18),  -- Age must be 18 or older
+    DepartmentID INT,
+    Salary DECIMAL(10, 2),
+    ManagerID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+------------------------------------------------
+
+5. Default Constraint
+   - Provides a default value for a column when no value 
+   is specified during the insertion of a row.
+
+------------------------sql------------------------
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Age INT,
+    DepartmentID INT,
+    Salary DECIMAL(10, 2) DEFAULT 50000.00,  -- Default salary is 50000.00
+    ManagerID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+------------------------------------------------
+
+6. Not Null Constraint
+   - Ensures that a column cannot have a NULL value.
+
+------------------------sql------------------------
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    Age INT NOT NULL,
+    DepartmentID INT NOT NULL,
+    Salary DECIMAL(10, 2) NOT NULL,
+    ManagerID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+------------------------------------------------
+
+Adding Constraints to Existing Tables
+
+You can also add constraints to existing tables 
+using the `ALTER TABLE` statement.
+
+Adding a Primary Key Constraint:
+------------------------sql------------------------
+ALTER TABLE Employees
+ADD CONSTRAINT PK_EmployeeID PRIMARY KEY (EmployeeID);
+------------------------------------------------
+
+Adding a Foreign Key Constraint:
+------------------------sql------------------------
+ALTER TABLE Employees
+ADD CONSTRAINT FK_DepartmentID FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID);
+------------------------------------------------
+
+Adding a Unique Constraint:
+------------------------sql------------------------
+ALTER TABLE Department
+ADD CONSTRAINT UQ_DepartmentName UNIQUE (DepartmentName);
+------------------------------------------------
+
+Adding a Check Constraint:
+------------------------sql------------------------
+ALTER TABLE Employees
+ADD CONSTRAINT CHK_Age CHECK (Age >= 18);
+------------------------------------------------
+
+Adding a Default Constraint:
+------------------------sql------------------------
+ALTER TABLE Employees
+ADD CONSTRAINT DF_Salary DEFAULT 50000.00 FOR Salary;
+------------------------------------------------
+
+Adding a Not Null Constraint:
+------------------------sql------------------------
+ALTER TABLE Employees
+ALTER COLUMN FirstName NVARCHAR(50) NOT NULL;
+------------------------------------------------
+
+Examples with Constraints
+
+Here are the `Employees` and `Department` tables with constraints applied:
+
+------------------------sql------------------------
+CREATE TABLE Department (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName NVARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    Age INT CHECK (Age >= 18) NOT NULL,
+    DepartmentID INT NOT NULL,
+    Salary DECIMAL(10, 2) DEFAULT 50000.00 NOT NULL,
+    ManagerID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+------------------------------------------------
+
+In these examples, the constraints ensure 
+that the data integrity and consistency are maintained. 
+Each employee must belong to a valid department, 
+must have unique identifiers, and must meet the specified conditions 
+for age, salary, and other attributes.
