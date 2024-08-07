@@ -1,0 +1,10 @@
+0. design, normalization [3NF]
+1. view 
+2. CREATE TABLE, ALTER TABLE 
+    - constraints 
+    - index 
+        -- optimized database 
+        -- optimization of queries 
+3. mediconnect formed sql by team for SM learnings 
+4. 11:30am - 12:10pm - team learnings / doings 
+    - 

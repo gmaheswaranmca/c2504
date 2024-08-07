@@ -54,11 +54,11 @@ Separate the `Orders` table into two tables to remove partial dependencies:
 
  Orders Table
 
-| OrderID | CustomerID | ProductID | Quantity | UnitPrice | TotalPrice |
+| OrderID | CustomerID | ProductID | Quantity | UnitPrice | TotalPrice | ProductName
 |---------|------------|-----------|----------|-----------|------------|
-| 1       | 101        | P01       | 10       | 5.00      | 50.00      |
-| 2       | 102        | P02       | 5        | 15.00     | 75.00      |
-| 3       | 101        | P03       | 7        | 8.00      | 56.00      |
+| 1       | 101        | P01       | 10       | 5.00      | 50.00      | Widget
+| 2       | 102        | P02       | 5        | 15.00     | 75.00      | Gizmo
+| 3       | 101        | P03       | 7        | 8.00      | 56.00      | Thingamajig
 
  Customers Table
 

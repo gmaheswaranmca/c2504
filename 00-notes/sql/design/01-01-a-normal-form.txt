@@ -1,6 +1,6 @@
 Normalization is a process in database design 
 that organizes columns (attributes) and tables (relations) 
-to minimize data redundancy and improve data integrity. 
+to minimize "data redundancy" and improve "data integrity". 
 It typically involves dividing large tables 
 into smaller tables and defining relationships among them. 
 Here’s how you can normalize the `EMP` and `DEPT` tables starting 
