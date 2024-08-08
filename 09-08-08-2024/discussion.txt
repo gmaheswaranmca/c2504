@@ -1,0 +1,145 @@
+1. Subject Matter 
+    on programming fundas
+    on sql server 
+2. Solve NF questions 
+3. Interview questions P1:1-7, P2:8-16, P3:17-18, P4:19-20
+    -- 30 mins 
+        -- 5 mins plan 
+        -- 15 mins prepare individually 
+4. Today learnings : Introduction to Web Technlogies 
+
+Anugrah Krishnan [CO]
+	Girish K V [CO]	[Class CO]
+        What is diff bt FK and PK in SQL Server? 
+            How they are related? 
+            FK
+                primary key of another table
+                the another table is called foreign table 
+                the key columns in the same table is 
+                    foreign key  
+                FK ensures the referential integrity
+        What are the contraints in SQL Server? 
+            PK, FK, UK, Not Null, Check, Default 
+        What are indexes in SQL Server?
+            clustered, non-clustered: unique / filtered, full-text searh
+	Abijith K
+        what is diff bt PK and UK in SQL Server?
+            PK: 
+                1. a. 'one column key' or 'composite key' 
+                to identify row uniquely.
+                   b. UNIQUE and NOT NULL
+                2. It is constraint in SQL Server. 
+                3. We have Only one PK per table 
+            UK: 
+                1. a. 'one column key' or 'composite key' 
+                to identify row uniquely other than PK.  
+                    b. Only UNIQUE 
+                        to make 'NOT NULL'
+                        define 'NOT NULL' constraint also 
+                2. It is constraint in SQL Server.
+                3. We have zero or more UKs per table
+	Alan Preeth ????????        		
+	Gopika V
+        what is difference between PK and index?
+        when you create PK, any index is created there?
+            what is name of the index for PK? clustered index 
+Anurag C Ashok [CO]
+	Aaryaka P Nath [CO]
+	Alan Kuriakose Cherian [Class CO]	
+	Minnu Sudhakaran V A
+	----- Roshith Ramesh T ---
+Ashwin V [CO]
+	Dijol Davis [CO]
+	Athulya Shaji
+	Collin Francy
+Neha Joy [CO] [Class CO]            
+        key - uniquely identifing each row
+            single column key 
+            composite (multi-column) key 
+        keys: super, candidate, alternate | PK|FK|UK| SK
+            super key: one column - multi-column to identify each row uniquely 
+                stud{id, roll_number, name, dob, standard, school}   
+                (id, name) (id) (id, name, dob) (id,.......)
+            candidate key: sub set super key, minimal cols from super key   
+                        which identifies row uniquely                
+                (id) (roll_number)
+                It may be one or more keys 
+            PK [ANSI SQL]
+                candidate key 
+            alternate key [Design]
+                other than the PK, but the candidate key 
+            UK  [ANSI SQL]
+                alternate key which is candidate key other than PK 
+            FK 
+                reference key which is PK of another table
+            SK [Design]
+                to make search faster for the queries 
+                we create secondary key ie index 
+            index [example, SQL Server] 
+        Design     : super key, candidate key, alternate key
+        SQL Server : PK, UK, FK, index(SK)
+	Mohammed Riza Nazeer [CO]	
+	Sarika S Nair                   
+	----- Gayathri T L ----- 
+Sahla. R [CO]
+	Ann Mariya Jaimon [CO]
+	Anjana E R	
+	Gladsy Joshy 	
+Sharon Rose  [CO]
+	Rishwin R Kanth [CO]
+	Keerthana Jayalal K
+	Nivya Ignatious 
+Yahkoob P [CO]
+	Ashna Mariya Shaji [CO]
+	Anjana N K	
+	Shilpa Sha Eapen
+
+
+
+CREATE TABLE t1
+	(
+		id int primary key,
+		roll_num int unique,
+		name nvarchar(255)
+	);
+
+transaction [Transaction Control Language ]
+    BEGIN TRANSACTION 
+    COMMIT 
+    ROLLBACK 
+
+sp_help t1;
+SELECT * FROM t1;
+BEGIN TRANSACTION;
+	INSERT INTO t1(id, roll_num, name) VALUES(101,1001, 'girish');
+	INSERT INTO t1(id, roll_num, name) VALUES(102,1002, 'neha');
+	INSERT INTO t1(id, roll_num, name) VALUES(103,1003, 'nivya');
+COMMIT;
+
+BEGIN TRANSACTION;
+	INSERT INTO t1(id, roll_num, name) VALUES(104,1004, 'sharon');
+	INSERT INTO t1(id, roll_num, name) VALUES(104,1005, 'kuriakose');
+	INSERT INTO t1(id, roll_num, name) VALUES(106,1006, 'yahkoop');
+ROLLBACK;
+
+
+App:
+try
+	"BEGIN TRANSACTION;
+		INSERT INTO t1(id, roll_num, name) VALUES(101,1001, 'girish');
+		INSERT INTO t1(id, roll_num, name) VALUES(101,1002, 'neha');
+		INSERT INTO t1(id, roll_num, name) VALUES(103,1003, 'nivya');
+	COMMIT;"
+catch 
+	ROLLBACK;
+
+----------------------------------------------------------------------
+
+team meeting: sql server 
+    10:50 am 
+    10:50-10:55 am standup meetings 
+    10:55 - break 15 mins 
+    11:10am - each player prepare interview qns 
+            - 11:25am all you discuss the answers of qns 
+            - 11:40am ends 
+    11:50am / 11:55am come back 
