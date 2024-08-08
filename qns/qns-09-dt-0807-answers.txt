@@ -1,0 +1,438 @@
+1. What is SQL Server and what are its main components?
+   - Answer: SQL Server is a relational database management system (RDBMS) developed by Microsoft. Its main components include the Database Engine, SQL Server Agent, SQL Server Management Studio (SSMS), Analysis Services, Integration Services, and Reporting Services.
+
+2. Explain the difference between SQL Server and MySQL.
+   - Answer: SQL Server is a product of Microsoft with extensive integration with other Microsoft products, while MySQL is an open-source RDBMS owned by Oracle Corporation. SQL Server uses T-SQL, and MySQL uses SQL. SQL Server is known for its rich features and enterprise-level support, whereas MySQL is popular for its speed and reliability in web applications.
+
+3. What is a database in SQL Server?
+   - Answer: A database in SQL Server is a structured set of data held in a computer, especially one that is accessible in various ways. It stores and organizes data, enabling efficient retrieval and management.
+
+4. What is a table in SQL Server?
+   - Answer: A table in SQL Server is a collection of related data entries and it consists of columns and rows. Each column in a table holds a specific type of data, and each row represents a single data item.
+
+5. Define a primary key and a foreign key.
+   - Answer: A primary key is a column (or a combination of columns) that uniquely identifies each row in a table. A foreign key is a column that creates a relationship between two tables. It refers to the primary key in another table.
+
+6. What is a unique key?
+   - Answer: A unique key is a constraint that ensures all values in a column or a group of columns are distinct across all rows in the table.
+
+7. What is normalization? Explain its types.
+   - Answer: Normalization is the process of organizing data to minimize redundancy and improve data integrity. Types include:
+     - 1NF (First Normal Form): Ensures each column contains atomic values.
+     - 2NF (Second Normal Form): Meets all requirements of 1NF and removes subsets of data that apply to multiple rows.
+     - 3NF (Third Normal Form): Meets all requirements of 2NF and removes columns that are not dependent on the primary key.
+
+8. What is denormalization?
+   - Answer: Denormalization is the process of combining tables to optimize read performance by reducing the number of joins needed to retrieve data. It can lead to some redundancy but can improve query performance.
+
+9. What are constraints in SQL Server?
+   - Answer: Constraints are rules enforced on data columns to ensure data integrity and consistency. Common constraints include PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, and DEFAULT.
+
+10. Explain the different types of joins in SQL Server.
+    - Answer: Joins in SQL Server combine rows from two or more tables based on a related column. Types include:
+      - INNER JOIN: Returns only the rows with matching values in both tables.
+      - LEFT JOIN (LEFT OUTER JOIN): Returns all rows from the left table and the matched rows from the right table, with NULLs for unmatched rows.
+      - RIGHT JOIN (RIGHT OUTER JOIN): Returns all rows from the right table and the matched rows from the left table, with NULLs for unmatched rows.
+      - FULL JOIN (FULL OUTER JOIN): Returns all rows when there is a match in either left or right table.
+
+11. What is a stored procedure?
+    - Answer: A stored procedure is a set of SQL statements that can be stored in the database and executed repeatedly. It allows for modular programming, code reusability, and better security.
+
+12. What is a view?
+    - Answer: A view is a virtual table based on the result-set of an SQL query. It contains rows and columns, just like a real table, and can be used to simplify complex queries, enhance security, and present data in a specific format.
+
+13. What is an index? Explain the different types of indexes.
+    - Answer: An index is a database object that improves the speed of data retrieval operations on a table. Types include:
+      - Clustered Index: Physically reorders the data in the table to match the index.
+      - Non-Clustered Index: Creates a separate structure that references the table data without altering its physical order.
+
+14. What is a clustered index and a non-clustered index?
+    - Answer: A clustered index sorts and stores the data rows of the table based on the index key. Each table can have only one clustered index. A non-clustered index, on the other hand, creates a separate structure that points to the data rows in the table without changing the physical order.
+
+15. What are the differences between DELETE and TRUNCATE commands?
+    - Answer: DELETE removes rows one at a time and logs each row deletion, allowing for rollbacks. TRUNCATE removes all rows in a table by deallocating the data pages, making it faster and not logging individual row deletions, but it cannot be rolled back if not within a transaction.
+
+16. What is a transaction in SQL Server?
+    - Answer: A transaction is a sequence of operations performed as a single logical unit of work. A transaction ensures that either all operations succeed (commit) or none of them do (rollback), maintaining data integrity.
+
+17. Explain ACID properties.
+    - Answer: ACID properties ensure reliable transaction processing:
+      - Atomicity: Ensures that all operations within a transaction are completed; otherwise, the transaction is aborted.
+      - Consistency: Ensures that a transaction transforms the database from one consistent state to another.
+      - Isolation: Ensures that the operations of one transaction are isolated from those of other transactions.
+      - Durability: Ensures that the results of a committed transaction are permanently stored in the database.
+
+18. What is the difference between CHAR and VARCHAR?
+    - Answer: CHAR is a fixed-length data type, meaning it reserves a set amount of space regardless of the string length. VARCHAR is a variable-length data type, which only uses as much space as needed for the string.
+
+19. What is the use of the GROUP BY clause?
+    - Answer: The GROUP BY clause groups rows that have the same values in specified columns into summary rows, like “find the number of customers in each country.” It is often used with aggregate functions such as COUNT, MAX, MIN, SUM, and AVG.
+
+20. What is a subquery?
+    - Answer: A subquery is a query nested inside another query. It can be used in SELECT, INSERT, UPDATE, or DELETE statements to provide a value to the outer query.
+
+21. Explain the difference between an INNER JOIN and an OUTER JOIN.
+    - Answer: INNER JOIN returns rows when there is a match in both tables being joined. OUTER JOIN returns all rows from one table and the matched rows from the other table. There are three types of OUTER JOINs: LEFT OUTER JOIN, RIGHT OUTER JOIN, and FULL OUTER JOIN.
+
+22. What is a self-join?
+    - Answer: A self-join is a regular join but the table is joined with itself. It is useful for finding relationships within the same table.
+
+23. What is a cross join?
+    - Answer: A cross join returns the Cartesian product of the two tables, which means it returns all possible combinations of rows from the tables. If one table has 10 rows and the other has 20, the result set will have 200 rows.
+
+24. What is a trigger in SQL Server?
+    - Answer: A trigger is a special type of stored procedure that automatically executes or fires when certain events occur in the database, such as INSERT, UPDATE, or DELETE operations on a table.
+
+25. What is a cursor?
+    - Answer: A cursor is a database object used to retrieve, manipulate, and navigate through a result set row by row, allowing more granular control over data operations than a set-based approach.
+
+26. What is a SQL Server Agent?
+    - Answer: SQL Server Agent is a component of SQL Server that schedules and executes jobs, which can include running T-SQL scripts, backups, SSIS packages, and more.
+
+27. What are the different types of backups in SQL Server?
+    - Answer: The different types of backups in SQL Server include:
+      - Full Backup: Backs up the entire database.
+      - Differential Backup: Backs up only the data that has changed since the last full backup.
+      - Transaction Log Backup: Backs up the transaction log, which contains all the log records generated since the last log backup.
+
+28. What is the difference between FULL, DIFFERENTIAL, and TRANSACTION LOG backups?
+    - Answer: Full backups include the entire database. Differential backups include only the changes since the last full backup. Transaction log backups include all transactions that have occurred since the last transaction log backup.
+
+29. What is a deadlock in SQL Server?
+    - Answer: A deadlock occurs when two or more sessions permanently block each other by each holding a lock and requesting a lock held by the other session. SQL Server automatically detects deadlocks and resolves them by terminating one of the sessions.
+
+30. How do you optimize a query in SQL Server?
+    - Answer: To optimize a query in SQL Server, you can:
+      - Use appropriate indexes.
+      - Avoid unnecessary columns in SELECT statements.
+      - Use joins instead of subqueries where applicable.
+      - Use query hints and execution plans to identify
+
+31. What is SQL Server Management Studio (SSMS)?
+    - Answer: SSMS is an integrated environment for managing any SQL infrastructure, from SQL Server to Azure SQL Database. It provides tools to configure, monitor, and administer instances of SQL Server and databases.
+
+32. What is T-SQL?
+    - Answer: T-SQL (Transact-SQL) is an extension of SQL used in SQL Server. It includes procedural programming, local variables, and various support functions for string processing, date processing, and mathematics.
+
+33. What is the difference between a WHERE clause and a HAVING clause?
+    - Answer: WHERE is used to filter rows before any groupings are made, while HAVING is used to filter groups after the GROUP BY clause has been applied.
+
+34. What is a temporary table? How is it different from a table variable?
+    - Answer: A temporary table is a table that is created and used within a session. It is stored in the tempdb database. A table variable is a variable that can store table data and is stored in memory. Table variables are generally faster for smaller data sets and do not participate in transactions, logging, or locking.
+
+35. What is the use of the COALESCE function?
+    - Answer: COALESCE returns the first non-null value from a list of arguments. It is used to handle NULL values in queries.
+
+36. What are the different data types available in SQL Server?
+    - Answer: Data types in SQL Server include numeric (INT, FLOAT, DECIMAL), string (CHAR, VARCHAR, TEXT), date and time (DATE, TIME, DATETIME), binary (BINARY, VARBINARY), and special types (XML, JSON, UNIQUEIDENTIFIER).
+
+37. What is an identity column?
+    - Answer: An identity column is a column that automatically generates a unique value for each new row. It is commonly used for primary key columns.
+
+38. How do you retrieve the last inserted identity value in SQL Server?
+    - Answer: You can retrieve the last inserted identity value using the `SCOPE_IDENTITY()` function.
+
+39. What is a schema in SQL Server?
+    - Answer: A schema is a logical container for database objects such as tables, views, and procedures. It helps in organizing objects and controlling access to them.
+
+40. Explain the concept of a common table expression (CTE).
+    - Answer: A CTE is a temporary result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement. It is defined using the WITH clause.
+
+41. What is a primary key constraint?
+    - Answer: A primary key constraint uniquely identifies each row in a table. It ensures that the column (or combination of columns) contains unique values and does not allow NULLs.
+
+42. What is a foreign key constraint?
+    - Answer: A foreign key constraint ensures referential integrity by linking a column or a group of columns in one table to the primary key in another table.
+
+43. What is referential integrity?
+    - Answer: Referential integrity ensures that relationships between tables remain consistent. It means that a foreign key in one table must always have a corresponding value in the referenced table.
+
+44. What are the differences between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN?
+    - Answer: 
+      - INNER JOIN returns rows with matching values in both tables.
+      - LEFT JOIN returns all rows from the left table and matched rows from the right table; unmatched rows will have NULLs.
+      - RIGHT JOIN returns all rows from the right table and matched rows from the left table; unmatched rows will have NULLs.
+      - FULL JOIN returns rows when there is a match in one of the tables; unmatched rows will have NULLs from the other table.
+
+45. How can you improve the performance of a slow-running query?
+    - Answer: To improve the performance of a slow-running query, you can:
+      - Create and use appropriate indexes.
+      - Optimize the query structure and avoid unnecessary columns.
+      - Use query hints and execution plans.
+      - Break down complex queries into simpler ones.
+      - Avoid functions in WHERE clauses.
+      - Optimize joins and subqueries.
+
+46. What is an execution plan? How do you view it in SQL Server?
+    - Answer: An execution plan is a detailed map showing how SQL Server executes a query. You can view it in SSMS by enabling the "Include Actual Execution Plan" option or by using the `EXPLAIN` statement.
+
+47. Explain the difference between UNION and UNION ALL.
+    - Answer: UNION combines the results of two queries and removes duplicate rows. UNION ALL combines the results of two queries and includes all duplicates.
+
+48. What is the purpose of the CASE statement in SQL Server?
+    - Answer: The CASE statement provides conditional logic in SQL. It evaluates a list of conditions and returns one of multiple possible result expressions.
+
+49. What is a composite key?
+    - Answer: A composite key is a primary key that consists of two or more columns. It uniquely identifies a row in a table based on the combination of these columns.
+
+50. How do you handle NULL values in SQL Server?
+    - Answer: You can handle NULL values using functions like `ISNULL()`, `COALESCE()`, and conditional logic in queries to replace or manage NULL values appropriately.
+
+51. What are the different types of triggers?
+    - Answer: Types of triggers include:
+      - DML Triggers: Fires when a DML operation (INSERT, UPDATE, DELETE) occurs.
+      - DDL Triggers: Fires in response to DDL events (CREATE, ALTER, DROP).
+      - Logon Triggers: Fires when a user session is established.
+
+52. What is the use of the RANK() function?
+    - Answer: The RANK() function assigns a unique rank to each row within a partition of a result set. Rows with equal values receive the same rank, and the next rank value is incremented by the number of rows with the same rank.
+
+53. How do you update data in a table?
+    - Answer: You can update data in a table using the `UPDATE` statement:
+      -------------------------sql-------------------------
+      UPDATE table_name
+      SET column1 = value1, column2 = value2
+      WHERE condition;
+      --------------------------------------------------
+
+54. How do you delete data from a table?
+    - Answer: You can delete data from a table using the `DELETE` statement:
+      -------------------------sql-------------------------
+      DELETE FROM table_name
+      WHERE condition;
+      --------------------------------------------------
+
+55. What is a function in SQL Server? Explain the difference between scalar and table-valued functions.
+    - Answer: A function in SQL Server is a set of SQL statements that perform a specific task. 
+      - Scalar functions return a single value.
+      - Table-valued functions return a table.
+
+56. What is the difference between a local and a global temporary table?
+    - Answer: A local temporary table is created with a single `#` and is visible only to the session that created it. A global temporary table is created with `##` and is visible to all sessions.
+
+57. What are the different isolation levels in SQL Server?
+    - Answer: Isolation levels include:
+      - Read Uncommitted
+      - Read Committed
+      - Repeatable Read
+      - Serializable
+      - Snapshot
+
+58. What is the use of the SET NOCOUNT ON statement?
+    - Answer: `SET NOCOUNT ON` prevents SQL Server from sending the DONE_IN_PROC message for each statement in a stored procedure, reducing network traffic and improving performance.
+
+59. What is a UNION operator?
+    - Answer: The UNION operator combines the results of two or more SELECT statements into a single result set, removing duplicate rows.
+
+60. How do you create a new user in SQL Server?
+    - Answer: You can create a new user in SQL Server using the `CREATE USER` statement:
+      -------------------------sql-------------------------
+      CREATE USER username FOR LOGIN loginname;
+      --------------------------------------------------
+      You must first have a login created with `CREATE LOGIN` before creating a user.
+
+61. What is the default port for SQL Server?
+    - Answer: The default port for SQL Server is 1433.
+
+62. How do you create a new database in SQL Server?
+    - Answer: You can create a new database using the `CREATE DATABASE` statement:
+      -------------------------sql-------------------------
+      CREATE DATABASE database_name;
+      --------------------------------------------------
+
+63. What is the difference between DROP and DELETE commands?
+    - Answer: `DROP` removes a table (or database) and its structure permanently from the database. `DELETE` removes rows from a table but leaves the table structure intact.
+
+64. What is the purpose of the DISTINCT keyword?
+    - Answer: The `DISTINCT` keyword is used to return only unique values in the result set, eliminating duplicate rows.
+
+65. What is a logical operator in SQL Server? Give examples.
+    - Answer: Logical operators are used to combine multiple conditions in a query. Examples include `AND`, `OR`, and `NOT`.
+
+66. How do you rename a column in a table?
+    - Answer: You can rename a column using the `sp_rename` stored procedure:
+      -------------------------sql-------------------------
+      EXEC sp_rename 'table_name.old_column_name', 'new_column_name', 'COLUMN';
+      --------------------------------------------------
+
+67. What is a case-sensitive collation?
+    - Answer: A case-sensitive collation distinguishes between uppercase and lowercase letters in text comparison. For example, 'A' and 'a' are treated as different characters.
+
+68. Explain the use of the LIKE operator.
+    - Answer: The `LIKE` operator is used to search for a specified pattern in a column. Wildcards such as `%` (percent) and `_` (underscore) are used to define the pattern.
+
+69. What is the difference between GETDATE() and SYSDATETIME() functions?
+    - Answer: `GETDATE()` returns the current date and time with a precision of milliseconds. `SYSDATETIME()` returns the current date and time with a higher precision of nanoseconds.
+
+70. How do you retrieve the current user in SQL Server?
+    - Answer: You can retrieve the current user using the `CURRENT_USER` or `USER_NAME()` function.
+
+71. What is the use of the DATEDIFF function?
+    - Answer: The `DATEDIFF` function calculates the difference between two dates, returning the result in the specified date part (year, month, day, etc.).
+
+72. What are user-defined functions?
+    - Answer: User-defined functions are custom functions created by the user to encapsulate reusable logic. They can return a single value (scalar) or a table.
+
+73. What is the difference between a function and a stored procedure?
+    - Answer: Functions must return a value and cannot modify database state, while stored procedures do not need to return a value and can perform modifications like `INSERT`, `UPDATE`, and `DELETE`.
+
+74. What are system databases in SQL Server? Name a few.
+    - Answer: System databases are essential for the operation of SQL Server. Examples include `master`, `model`, `msdb`, and `tempdb`.
+
+75. How do you convert data from one datatype to another in SQL Server?
+    - Answer: You can convert data types using the `CAST()` or `CONVERT()` functions.
+
+76. What is a CHECK constraint?
+    - Answer: A `CHECK` constraint enforces domain integrity by limiting the values that can be placed in a column based on a Boolean expression.
+
+77. How do you handle errors in SQL Server?
+    - Answer: Errors in SQL Server can be handled using `TRY...CATCH` blocks to capture and manage exceptions in T-SQL code.
+
+78. What is a composite index?
+    - Answer: A composite index is an index on two or more columns of a table. It is useful for queries that filter or sort on multiple columns.
+
+79. What is the use of the ROW_NUMBER() function?
+    - Answer: The `ROW_NUMBER()` function assigns a unique sequential integer to rows within a result set, starting from 1 for the first row in each partition of the result set.
+
+80. What is a correlated subquery?
+    - Answer: A correlated subquery is a subquery that references columns from the outer query. It is evaluated once for each row processed by the outer query.
+
+81. How do you export data from SQL Server to a CSV file?
+    - Answer: Data can be exported using the SQL Server Import and Export Wizard, the `bcp` command-line utility, or using `SQLCMD` along with a query to save results to a CSV file.
+
+82. What is a table alias?
+    - Answer: A table alias is a temporary name assigned to a table in a query. It is used to simplify the query or to create self-joins.
+      -------------------------sql-------------------------
+      SELECT a.column1, b.column2
+      FROM table1 AS a
+      JOIN table2 AS b
+      ON a.id = b.id;
+      --------------------------------------------------
+
+83. What is a sequence in SQL Server?
+    - Answer: A sequence is a user-defined schema-bound object that generates a sequence of numeric values according to a specified specification. It is often used to generate unique numbers.
+
+84. How do you create an auto-increment column in SQL Server?
+    - Answer: You can create an auto-increment column using the `IDENTITY` property.
+      -------------------------sql-------------------------
+      CREATE TABLE table_name (
+          id INT IDENTITY(1,1) PRIMARY KEY,
+          column_name data_type
+      );
+      --------------------------------------------------
+
+85. What is the purpose of the EXISTS keyword?
+    - Answer: The `EXISTS` keyword is used to test for the existence of any record in a subquery. It returns true if the subquery returns one or more records.
+      -------------------------sql-------------------------
+      SELECT column_name
+      FROM table_name
+      WHERE EXISTS (
+          SELECT 1
+          FROM another_table
+          WHERE condition
+      );
+      --------------------------------------------------
+
+86. How do you list all tables in a database?
+    - Answer: You can list all tables using the `INFORMATION_SCHEMA.TABLES` view or the `sys.tables` catalog view.
+      -------------------------sql-------------------------
+      SELECT table_name
+      FROM INFORMATION_SCHEMA.TABLES
+      WHERE table_type = 'BASE TABLE';
+      --------------------------------------------------
+
+87. What is a synonym in SQL Server?
+    - Answer: A synonym is an alias or alternate name for a database object like a table, view, or stored procedure. It provides a layer of abstraction and simplifies access to the object.
+      -------------------------sql-------------------------
+      CREATE SYNONYM synonym_name FOR object_name;
+      --------------------------------------------------
+
+88. How do you update multiple columns in a table?
+    - Answer: You can update multiple columns using the `UPDATE` statement.
+      -------------------------sql-------------------------
+      UPDATE table_name
+      SET column1 = value1, column2 = value2
+      WHERE condition;
+      --------------------------------------------------
+
+89. What is a MERGE statement?
+    - Answer: The `MERGE` statement allows you to perform `INSERT`, `UPDATE`, and `DELETE` operations in a single statement based on certain conditions. It is used to synchronize two tables.
+      -------------------------sql-------------------------
+      MERGE target_table AS target
+      USING source_table AS source
+      ON target.id = source.id
+      WHEN MATCHED THEN
+          UPDATE SET target.column1 = source.column1
+      WHEN NOT MATCHED THEN
+          INSERT (column1) VALUES (source.column1);
+      --------------------------------------------------
+
+90. How do you drop a database in SQL Server?
+    - Answer: You can drop a database using the `DROP DATABASE` statement.
+      -------------------------sql-------------------------
+      DROP DATABASE database_name;
+      --------------------------------------------------
+
+91. What is a recursive query?
+    - Answer: A recursive query is a query that refers to itself. It is often used to query hierarchical data, like organizational charts or folder structures. CTEs (Common Table Expressions) can be used to write recursive queries.
+
+92. How do you find duplicate rows in a table?
+    - Answer: You can find duplicate rows using the `GROUP BY` and `HAVING` clauses.
+      -------------------------sql-------------------------
+      SELECT column1, COUNT(*)
+      FROM table_name
+      GROUP BY column1
+      HAVING COUNT(*) > 1;
+      --------------------------------------------------
+
+93. What is the use of the PATINDEX function?
+    - Answer: The `PATINDEX` function returns the starting position of a pattern in a specified expression, or zero if the pattern is not found.
+      -------------------------sql-------------------------
+      SELECT PATINDEX('%pattern%', column_name)
+      FROM table_name;
+      --------------------------------------------------
+
+94. How do you change the data type of a column in SQL Server?
+    - Answer: You can change the data type of a column using the `ALTER TABLE` statement with `ALTER COLUMN`.
+      -------------------------sql-------------------------
+      ALTER TABLE table_name
+      ALTER COLUMN column_name new_data_type;
+      --------------------------------------------------
+
+95. What is a collation in SQL Server?
+    - Answer: Collation specifies the rules for how data is sorted and compared, including character set, case sensitivity, and accent sensitivity. It can be set at the server, database, column, or query level.
+
+96. How do you grant and revoke permissions in SQL Server?
+    - Answer: Permissions can be granted or revoked using the `GRANT`, `REVOKE`, and `DENY` statements.
+     -------------------------sql-------------------------
+      GRANT SELECT ON table_name TO user_name;
+      REVOKE SELECT ON table_name FROM user_name;
+      --------------------------------------------------
+
+97. What is a cursor in SQL Server?
+    - Answer: A cursor is a database object that allows row-by-row processing of result sets. It is used when you need to perform operations on each row individually.
+      -------------------------sql-------------------------
+      DECLARE cursor_name CURSOR FOR
+      SELECT column1 FROM table_name;
+      OPEN cursor_name;
+      FETCH NEXT FROM cursor_name;
+      CLOSE cursor_name;
+      DEALLOCATE cursor_name;
+      --------------------------------------------------
+
+98. What is a subquery?
+    - Answer: A subquery is a query nested inside another query. It can be used in `SELECT`, `INSERT`, `UPDATE`, or `DELETE` statements to provide results for the outer query.
+
+99. How do you optimize a query in SQL Server?
+    - Answer: To optimize a query, you can:
+      - Use appropriate indexing.
+      - Avoid unnecessary columns in SELECT.
+      - Use joins instead of subqueries.
+      - Optimize WHERE clauses.
+      - Analyze execution plans.
+      - Use proper data types and normalize data.
+
+100. What is database normalization?
+    - Answer: Database normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. It involves decomposing tables into smaller tables and defining relationships between them based on normalization rules (1NF, 2NF, 3NF, etc.).
+
+

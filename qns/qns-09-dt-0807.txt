@@ -1,0 +1,167 @@
+Beginner Level 
+    SQL Server 
+        Interview Questions
+    1. What is SQL Server and what are its main components?
+    2. Explain the difference between SQL Server and MySQL.
+    3. What is a database in SQL Server?
+    4. What is a table in SQL Server?
+    61. What is the default port for SQL Server?
+    
+    31. What is SQL Server Management Studio (SSMS)?
+    32. What is T-SQL?
+    62. How do you create a new database in SQL Server?
+
+    63. What is the difference between DROP and DELETE commands?    
+    36. What are the different data types available in SQL Server?
+    18. What is the difference between CHAR and VARCHAR?
+    37. What is an identity column?
+    38. How do you retrieve the last inserted identity value in SQL Server?
+    39. What is a schema in SQL Server?
+    66. How do you rename a column in a table?
+    74. What are system databases in SQL Server? Name a few.
+    84. How do you create an auto-increment column in SQL Server?
+    90. How do you drop a database in SQL Server?
+    94. How do you change the data type of a column in SQL Server?
+
+    5. Define a primary key and a foreign key.
+    6. What is a unique key?
+    7. What is normalization? Explain its types.
+    8. What is denormalization?
+    9. What are constraints in SQL Server?    
+    41. What is a primary key constraint?
+    42. What is a foreign key constraint?
+    43. What is referential integrity?
+    49. What is a composite key?
+    50. How do you handle NULL values in SQL Server?
+    76. What is a CHECK constraint?
+
+    30. How do you optimize a query in SQL Server?
+    45. How can you improve the performance of a slow-running query?
+    46. What is an execution plan? How do you view it in SQL Server?
+    
+    85. What is the purpose of the EXISTS keyword?
+    86. How do you list all tables in a database?
+    64. What is the purpose of the DISTINCT keyword?
+        92. How do you find duplicate rows in a table?
+    70. How do you retrieve the current user in SQL Server?
+    
+    12. What is a view?
+
+    13. What is an index? Explain the different types of indexes.
+    14. What is a clustered index and a non-clustered index?
+    78. What is a composite index?
+
+    53. How do you update data in a table?
+    54. How do you delete data from a table?
+    88. How do you update multiple columns in a table?
+    89. What is a MERGE statement?
+
+    15. What are the differences between DELETE and TRUNCATE commands?
+    16. What is a transaction in SQL Server?
+    17. Explain ACID properties.
+    29. What is a deadlock in SQL Server?
+
+    77. How do you handle errors in SQL Server?
+
+    57. What are the different isolation levels in SQL Server?
+    58. What is the use of the SET NOCOUNT ON statement?
+    
+    96. How do you grant and revoke permissions in SQL Server?
+    
+
+    65. What is a logical operator in SQL Server? Give examples.
+   19. What is the use of the GROUP BY clause?
+    33. What is the difference between a WHERE clause and a HAVING clause?
+    20. What is a subquery?
+    80. What is a correlated subquery?
+    91. What is a recursive query?
+
+
+    82. What is a table alias?
+
+    10. Explain the different types of joins in SQL Server.
+    21. Explain the difference between an INNER JOIN and an OUTER JOIN.
+    22. What is a self-join?
+    23. What is a cross join?
+    44. What are the differences between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN?
+
+    47. Explain the difference between UNION and UNION ALL.
+    59. What is a UNION operator?
+
+    79. What is the use of the ROW_NUMBER() function?
+    52. What is the use of the RANK() function?
+    93. What is the use of the PATINDEX function?
+        
+    69. What is the difference between GETDATE() and SYSDATETIME() functions?
+    
+    67. What is a case-sensitive collation?
+    95. What is a collation in SQL Server?
+    
+    68. Explain the use of the LIKE operator.
+    35. What is the use of the COALESCE function?
+    48. What is the purpose of the CASE statement in SQL Server?
+    100. What is the purpose of the ISNULL function?
+    71. What is the use of the DATEDIFF function?
+    75. How do you convert data from one datatype to another in SQL Server?
+    
+
+    55. What is a function in SQL Server? 
+        Explain the difference between scalar and table-valued functions.
+    72. What are user-defined functions?
+    73. What is the difference between a function and a stored procedure?
+    11. What is a stored procedure?
+    25. What is a cursor?
+    34. What is a temporary table? How is it different from a table variable?
+    56. What is the difference between a local and a global temporary table?
+
+    24. What is a trigger in SQL Server?
+    51. What are the different types of triggers?
+    83. What is a sequence in SQL Server?
+    87. What is a synonym in SQL Server?
+
+    60. How do you create a new user in SQL Server?
+    99. What is an orp
+    haned user in SQL Server?
+    26. What is a SQL Server Agent?
+
+    27. What are the different types of backups in SQL Server?
+    81. How do you export data from SQL Server to a CSV file?    
+    28. What is the difference between FULL, DIFFERENTIAL, and TRANSACTION LOG backups?
+    97. What is a database snapshot?    
+    98. How do you schedule a job in SQL Server?
+
+
+
+    40. Explain the concept of a common table expression (CTE).
+
+
+    
+
+    
+
+    
+    
+ 
+
+
+ 
+
+
+
+    
+   
+   
+    
+    
+  
+
+
+     
+
+
+    
+    
+    
+
+
+
