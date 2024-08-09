@@ -1,0 +1,322 @@
+61. Find the Products with the Greatest Sales Increase Compared to Last Year
+
+Problem: Given a `Sales` table with `ProductID`, `SaleAmount`, and `SaleDate`, 
+find products with the greatest increase in sales compared to the previous year.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH SalesByYear AS (
+    SELECT ProductID, 
+           YEAR(SaleDate) AS SalesYear,
+           SUM(SaleAmount) AS TotalSales
+    FROM Sales
+    GROUP BY ProductID, YEAR(SaleDate)
+),
+YearlySalesDifference AS (
+    SELECT s1.ProductID,
+           s1.SalesYear AS CurrentYear,
+           s1.TotalSales AS CurrentYearSales,
+           ISNULL(s2.TotalSales, 0) AS PreviousYearSales,
+           s1.TotalSales - ISNULL(s2.TotalSales, 0) AS SalesIncrease
+    FROM SalesByYear s1
+    LEFT JOIN SalesByYear s2 ON s1.ProductID = s2.ProductID AND s1.SalesYear = s2.SalesYear + 1
+) /* s1 - current_year, s2 - previous_year
+    s1.SalesYear = s2.SalesYear + 1      
+            "'current_year' matched with 'previous_year next year'"*/
+SELECT ProductID, CurrentYear, SalesIncrease
+FROM YearlySalesDifference
+ORDER BY SalesIncrease DESC
+LIMIT 10;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+62. Find Customers Who Have Placed Orders in All Months of the Current Year
+
+Problem: Given an `Orders` table with `CustomerID` and `OrderDate`, 
+find customers who have placed orders in every month of the current year.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH OrdersThisYear AS (
+    SELECT CustomerID, MONTH(OrderDate) AS OrderMonth
+    FROM Orders
+    WHERE YEAR(OrderDate) = YEAR(GETDATE())
+    GROUP BY CustomerID, MONTH(OrderDate)
+),
+MonthlyCounts AS (
+    SELECT CustomerID, COUNT(DISTINCT OrderMonth) AS MonthsOrdered
+    FROM OrdersThisYear
+    GROUP BY CustomerID
+)
+SELECT CustomerID
+FROM MonthlyCounts
+WHERE MonthsOrdered = 12;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+63. Find the Most Expensive Order for Each Customer
+
+Problem: Given an `Orders` table with `CustomerID`, `OrderID`, and `OrderValue`, 
+find the most expensive order for each customer.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH MaxOrderValues AS (
+    SELECT CustomerID, MAX(OrderValue) AS MaxOrderValue
+    FROM Orders
+    GROUP BY CustomerID
+)
+SELECT o.CustomerID, o.OrderID, o.OrderValue
+FROM Orders o
+JOIN MaxOrderValues m ON o.CustomerID = m.CustomerID AND o.OrderValue = m.MaxOrderValue;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+64. Find the Number of Days Each Employee Has Worked
+
+Problem: Given an `Employees` table with `EmployeeID`, `StartDate`, and `EndDate`, find the number of days each employee has worked. Assume that `EndDate` can be NULL, in which case it should be considered as the current date.
+
+Solution:
+-------------------------------sql-------------------------------
+SELECT EmployeeID, 
+       DATEDIFF(DAY, StartDate, ISNULL(EndDate, GETDATE())) AS DaysWorked
+FROM Employees;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+65. Find the Longest Consecutive Streak of Sales for Each Product
+
+Problem: Given a `Sales` table with `ProductID` and `SaleDate`, find the longest consecutive streak of days with sales for each product.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH SalesWithRow AS (
+    SELECT ProductID, SaleDate,
+           ROW_NUMBER() OVER (PARTITION BY ProductID ORDER BY SaleDate) AS RowNum
+    FROM Sales
+),
+StreakGroups AS (
+    SELECT ProductID, SaleDate,
+           DATEADD(DAY, -ROW_NUMBER() OVER (PARTITION BY ProductID ORDER BY SaleDate), SaleDate) AS StreakGroup
+    FROM SalesWithRow
+),
+StreakLengths AS (
+    SELECT ProductID, StreakGroup, COUNT(*) AS StreakLength
+    FROM StreakGroups
+    GROUP BY ProductID, StreakGroup
+)
+SELECT ProductID, MAX(StreakLength) AS LongestStreak
+FROM StreakLengths
+GROUP BY ProductID;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+66. Find the Top N Categories by Average Sales per Product
+
+Problem: Given a `Sales` table with `ProductID`, `SaleAmount`, and a `Products` table with `ProductID` and `CategoryID`, find the top N categories by average sales per product.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH ProductSales AS (
+    SELECT p.CategoryID, p.ProductID, SUM(s.SaleAmount) AS TotalSales
+    FROM Sales s
+    JOIN Products p ON s.ProductID = p.ProductID
+    GROUP BY p.CategoryID, p.ProductID
+),
+CategoryAverages AS (
+    SELECT CategoryID, AVG(TotalSales) AS AverageSalesPerProduct
+    FROM ProductSales
+    GROUP BY CategoryID
+)
+SELECT TOP N CategoryID, AverageSalesPerProduct
+FROM CategoryAverages
+ORDER BY AverageSalesPerProduct DESC;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+67. Find the Employee with the Highest Average Sales in Each Department
+
+Problem: Given an `Employees` table with `EmployeeID` and `DepartmentID`, and a `Sales` table with `EmployeeID` and `SaleAmount`, find the employee with the highest average sales in each department.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH EmployeeSales AS (
+    SELECT e.DepartmentID, e.EmployeeID, AVG(s.SaleAmount) AS AverageSales
+    FROM Employees e
+    JOIN Sales s ON e.EmployeeID = s.EmployeeID
+    GROUP BY e.DepartmentID, e.EmployeeID
+),
+RankedEmployees AS (
+    SELECT DepartmentID, EmployeeID, AverageSales,
+           RANK() OVER (PARTITION BY DepartmentID ORDER BY AverageSales DESC) AS SalesRank
+    FROM EmployeeSales
+)
+SELECT DepartmentID, EmployeeID, AverageSales
+FROM RankedEmployees
+WHERE SalesRank = 1;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+68. Find the Employees with the Most Overlapping Working Periods
+
+Problem: Given an `Employees` table with `EmployeeID`, `StartDate`, and `EndDate`, find the employees who have the most overlapping working periods with other employees.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH Overlaps AS (
+    SELECT e1.EmployeeID AS Emp1, e2.EmployeeID AS Emp2
+    FROM Employees e1
+    JOIN Employees e2 ON e1.EmployeeID != e2.EmployeeID
+    WHERE e1.StartDate <= e2.EndDate AND e1.EndDate >= e2.StartDate
+),
+OverlapCounts AS (
+    SELECT Emp1, COUNT(DISTINCT Emp2) AS OverlapCount
+    FROM Overlaps
+    GROUP BY Emp1
+)
+SELECT Emp1 AS EmployeeID, OverlapCount
+FROM OverlapCounts
+ORDER BY OverlapCount DESC;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+69. Find the Product with the Largest Price Difference Between Sales
+
+Problem: Given a `Sales` table with `ProductID` and `SalePrice`, find the product with the largest difference between its highest and lowest sale prices.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH PriceRanges AS (
+    SELECT ProductID, 
+           MAX(SalePrice) AS MaxPrice, 
+           MIN(SalePrice) AS MinPrice
+    FROM Sales
+    GROUP BY ProductID
+)
+SELECT ProductID, MaxPrice - MinPrice AS PriceDifference
+FROM PriceRanges
+ORDER BY PriceDifference DESC
+LIMIT 1;
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+70. Find the Product with the Most Frequent Sales Date
+
+Problem: Given a `Sales` table with `ProductID` and `SaleDate`, find the product that has the most frequent sales date.
+
+Solution:
+-------------------------------sql-------------------------------
+WITH DateFrequency AS (
+    SELECT ProductID, SaleDate, COUNT(*) AS Frequency
+    FROM Sales
+    GROUP BY ProductID, SaleDate
+),
+MaxFrequency AS (
+    SELECT ProductID, MAX(Frequency) AS MaxFrequency
+    FROM DateFrequency
+    GROUP BY ProductID
+)
+SELECT d.ProductID, d.SaleDate, d.Frequency
+FROM DateFrequency d
+JOIN MaxFrequency m ON d.ProductID = m.ProductID AND d.Frequency = m.MaxFrequency;
+--------------------------------------------------------------

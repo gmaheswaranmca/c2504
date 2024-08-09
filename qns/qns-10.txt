@@ -1,0 +1,320 @@
+61. Find the Products with the Greatest Sales Increase Compared to Last Year
+Problem: Given a `Sales` table with `ProductID`, `SaleAmount`, and `SaleDate`, 
+find products with the greatest increase in sales compared to the previous year.
+
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Sales (
+    ProductID INT,
+    SaleAmount DECIMAL(10, 2),
+    SaleDate DATE
+);
+--------------------------------------------------------------
+
+Description:
+- `Sales`: Contains records of each sale with `ProductID`, `SaleAmount`, and `SaleDate`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+62. Find Customers Who Have Placed Orders in All Months of the Current Year
+
+Problem: Given an `Orders` table with `CustomerID` and `OrderDate`, 
+find customers who have placed orders in every month of the current year.
+
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Orders (
+    CustomerID INT,
+    OrderDate DATE
+);
+--------------------------------------------------------------
+
+Description:
+- `Orders`: Contains records of each order with `CustomerID` and `OrderDate`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+63. Find the Most Expensive Order for Each Customer
+Problem: Given an `Orders` table with `CustomerID`, `OrderID`, and `OrderValue`, 
+find the most expensive order for each customer.
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Orders (
+    CustomerID INT,
+    OrderID INT,
+    OrderValue DECIMAL(10, 2)
+);
+--------------------------------------------------------------
+
+Description:
+- `Orders`: Contains records of each order with `CustomerID`, `OrderID`, and `OrderValue`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64. Find the Number of Days Each Employee Has Worked
+Problem: Given an `Employees` table with `EmployeeID`, `StartDate`, and `EndDate`, 
+find the number of days each employee has worked. Assume that `EndDate` can be NULL, 
+in which case it should be considered as the current date.
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Employees (
+    EmployeeID INT,
+    StartDate DATE,
+    EndDate DATE
+);
+--------------------------------------------------------------
+
+Description:
+- `Employees`: Contains records of each employee's `EmployeeID`, `StartDate`, and `EndDate`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+65. Find the Longest Consecutive Streak of Sales for Each Product
+Problem: Given a `Sales` table with `ProductID` and `SaleDate`, 
+find the longest consecutive streak of days with sales for each product.
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Sales (
+    ProductID INT,
+    SaleDate DATE
+);
+--------------------------------------------------------------
+
+Description:
+- `Sales`: Contains records of each sale with `ProductID` and `SaleDate`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+66. Find the Top N Categories by Average Sales per Product
+Problem: Given a `Sales` table with `ProductID`, `SaleAmount`, 
+and a `Products` table with `ProductID` and `CategoryID`, 
+find the top N categories by average sales per product.
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Sales (
+    ProductID INT,
+    SaleAmount DECIMAL(10, 2)
+);
+
+CREATE TABLE Products (
+    ProductID INT,
+    CategoryID INT
+);
+--------------------------------------------------------------
+
+Description:
+- `Sales`: Contains records of each sale with `ProductID` and `SaleAmount`.
+- `Products`: Contains records of each product with `ProductID` and `CategoryID`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+67. Find the Employee with the Highest Average Sales in Each Department
+Problem: Given an `Employees` table with `EmployeeID` and `DepartmentID`, 
+and a `Sales` table with `EmployeeID` and `SaleAmount`, 
+find the employee with the highest average sales in each department.
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Employees (
+    EmployeeID INT,
+    DepartmentID INT
+);
+
+CREATE TABLE Sales (
+    EmployeeID INT,
+    SaleAmount DECIMAL(10, 2)
+);
+--------------------------------------------------------------
+
+Description:
+- `Employees`: Contains records of each employee with `EmployeeID` and `DepartmentID`.
+- `Sales`: Contains records of each sale with `EmployeeID` and `SaleAmount`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+68. Find the Employees with the Most Overlapping Working Periods
+Problem: Given an `Employees` table with `EmployeeID`, `StartDate`, and `EndDate`, 
+find the employees who have the most overlapping working periods with other employees.
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Employees (
+    EmployeeID INT,
+    StartDate DATE,
+    EndDate DATE
+);
+--------------------------------------------------------------
+
+Description:
+- `Employees`: Contains records of each employee's `EmployeeID`, `StartDate`, and `EndDate`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+69. Find the Product with the Largest Price Difference Between Sales
+Problem: Given a `Sales` table with `ProductID` and `SalePrice`, 
+find the product with the largest difference between its highest and lowest sale prices.
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Sales (
+    ProductID INT,
+    SalePrice DECIMAL(10, 2)
+);
+--------------------------------------------------------------
+
+Description:
+- `Sales`: Contains records of each sale with `ProductID` and `SalePrice`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+70. Find the Product with the Most Frequent Sales Date
+Problem: Given a `Sales` table with `ProductID` and `SaleDate`, 
+find the product that has the most frequent sales date.
+
+Tables:
+
+-------------------------------sql-------------------------------
+CREATE TABLE Sales (
+    ProductID INT,
+    SaleDate DATE,
+    SaleAmount DECIMAL(10, 2) -- Optional, if needed
+);
+--------------------------------------------------------------
