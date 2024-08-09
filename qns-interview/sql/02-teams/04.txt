@@ -1,0 +1,396 @@
+#Sahla, Ann, Anjana, Gladsy
+Introduction to database and RDBMS
+		2.	Characteristics of Database Management System
+		3.	Data modelling
+		4.	Relational Data modelling
+		5.	Normalization
+		6.	Transaction
+		7.	Types of Keys
+		8.	Introduction to SQL
+		9.	SQL Datatypes
+		10.	SQL Commands (DDL, DML, TCL)
+		11.	SQL Operator
+		12.	SQL Table
+		13.	Select Statement
+		14.	Insert Statement
+		15.	Update Statement
+		16.	DeleteStatement
+		17.	Views
+		18.	Sub Queries
+		19.	Aggregate Function
+		20.	SQL Joins
+
+
+1-5 Ann
+6-10 Anjana
+11-15 gldsy
+15-20 sahla
+
+
+
+Introduction to Database and RDBMS
+
+Q1: What is a database, and why is it used? 
+
+A1: A database is a collection of organized data that is stored in a way that allows for efficient retrieval and manipulation. It is used to store and manage large amounts of data in a structured and controlled manner.
+
+Q2: What is the difference between a database and a database management system? A2: A database is the collection of data itself, while a database management system (DBMS) is the software that manages and provides access to the database.
+
+Q3:What is a Relational Database Management System (RDBMS)?
+
+An RDBMS is a type of DBMS that stores data in tables, allowing for relationships between different data entities using keys. Examples include MySQL, PostgreSQL, and Oracle.
+
+Q4: What are the advantages of using a relational database management system (RDBMS)? A3: The advantages of using an RDBMS include data integrity, data security, data sharing, and improved data consistency.
+
+Q5. Can you explain the ACID properties in a database context?
+
+ACID stands for Atomicity, Consistency, Isolation, and Durability, which are principles to ensure reliable processing of database transactions.
+
+Q6: Name some popular RDBMS software. A4: Some popular RDBMS software includes MySQL, Oracle, Microsoft SQL Server, and PostgreSQL.
+
+Characteristics of Database Management System
+
+Q1: What are the main characteristics of a database management system? 
+A1: The main characteristics of a DBMS include data definition, data manipulation, data security, data integrity, data abstraction,data redundancy and data recovery.
+
+Q2:How does a DBMS provide data abstraction and independence?
+ A DBMS separates the logical view of data from the physical storage, allowing users to interact with data without knowing how it is stored or organized.
+
+Data Modelling
+
+Q1: What is data modelling, and why is it important in database design?
+ A1: Data modelling is the process of creating a conceptual representation of data structures and relationships. It is important in database design because it helps to identify the entities, attributes, and relationships that need to be represented in the database.
+
+Q2: Explain the concept of entity-relationship modelling.
+
+ A2: Entity-relationship modelling is a data modelling approach that represents data as entities, attributes, and relationships.
+
+Q3: What are the different types of data models?
+
+A3.The different types of data models include the hierarchical model,  Networkmodel, relational model, and object-oriented model. The relational model is the most commonly used model in RDBMS.
+
+Relational Data Modelling
+
+Q1: What is relational data modelling, and how does it differ from other data modelling approaches?
+ A1: Relational data modelling represents data as tables with rows and columns, where each row represents a single record and each column represents a field or attribute. 
+ It differs from other data modelling approaches in that it uses tables to represent relationships between data.
+
+Q2: Explain the concept of normalization in relational data modelling.
+ A2: Normalization is the process of organizing data in a database to minimize data redundancy and improve data integrity.
+
+Q4: What is the role of primary and foreign keys in a relational database?
+A3. A primary key uniquely identifies each record in a table, while a foreign key is a field in one table that links to a primary key in another table to establish relationships
+
+Q5.How do you establish relationships between tables?
+
+Relationships are established using foreign keys and constraints that link the related data across different tables.
+Normalization
+
+Q1: What is normalization, and why is it important in database design?
+ A1: Normalization is the process of organizing data in a database to minimize data redundancy and improve data integrity.
+ It is important because it helps to reduce data anomalies and improve data consistency.
+
+Q2: Explain the different normal forms (1NF, 2NF, 3NF, etc.).
+ A2: The different normal forms are:
+
+1NF: Each table cell must contain a single value.
+2NF: Each non-key attribute in a table must depend on the entire primary key.
+3NF:  Ensures 2NF and no transitive dependencies.
+
+Q3: How do you normalize a database table? 
+A3: A database table is normalized by applying the rules of normalization, such as eliminating repeating groups and minimizing data redundancy.
+
+Transaction
+
+Q1: What is a transaction in a database, and why is it important?
+ A1: A transaction is a sequence of operations that are executed as a single, all-or-nothing unit of work. 
+It is important because it ensures data consistency and integrity by guaranteeing that either all changes are made or none are made.
+
+Q2: What are the properties of a transaction?
+A2: The properties of a transaction are Atomicity, Consistency, Isolation, and Durability (ACID).
+
+
+Q3: How do you manage transactions in a database? 
+A3: Transactions are managed using commit and rollback statements.
+Commit saves the changes made by the transaction, while rollback reverses the changes.
+
+Q4: What is a deadlock, and how can it be avoided in a transaction? 
+A4: A deadlock is a situation where two or more transactions are blocked, waiting for each other to release a resource. 
+It can be avoided by using techniques such as locking, timeouts, and deadlock detection.
+
+Types of Keys
+
+Q1: What is a key in a database, and why is it important?
+A1: A key is a column or set of columns that uniquely identifies a record in a table. It is important because it enables efficient data retrieval and manipulation.
+
+Q2: What are the different types of keys in a database? 
+A2:
+Primary key: A unique identifier for each record in a table.
+Foreign key: A field in a table that refers to the primary key of another table.
+Composite key: A key that consists of multiple columns.
+Candidate key: A column or set of columns that can be used as a primary key.
+Superkey: A set of columns that includes all the candidate keys.
+secondary key:to make search faster for the queries 
+              we create secondary key ie index
+Q3:when you create PK, any index is created there?what is name of the index for PK? yes,clustered index
+
+Q3: What is the difference between a primary key and a unique key? 
+A3: A primary key is a unique identifier for each record in a table, while a unique key is a column or set of columns that uniquely identifies a record,
+ but is not necessarily the primary key.
+            PK : 1. a. 'one column key' or 'composite key' 
+                to identify row uniquely.
+                   b. UNIQUE and NOT NULL
+                2. It is constraint in SQL Server. 
+                3. We have Only one PK per table 
+            UK: 
+                1. a. 'one column key' or 'composite key' 
+                to identify row uniquely other than PK.  
+                    b. Only UNIQUE 
+                        to make 'NOT NULL'
+                        define 'NOT NULL' constraint and also 
+                2. It is constraint in SQL Server.
+                3. We have zero or more UKs per table
+Q4: What is diff bt FK and PK in SQL Server? 
+
+            How they are related? 
+            FK
+                primary key of another table
+                the another table is called foreign table 
+                the key columns in the same table is 
+                    foreign key  
+                FK ensures the referential integrity
+            PK : 1. a. 'one column key' or 'composite key' 
+                to identify row uniquely.
+                   b. UNIQUE and NOT NULL
+                2. It is constraint in SQL Server. 
+                3. We have Only one PK per table 
+
+Q5:
+What are the contraints in SQL Server? 
+            PK, FK, UK, Not Null, Check, Default 
+Q6: What are indexes in SQL Server?
+            clustered, non-clustered: unique / filtered, full-text searh
+
+Introduction to SQL
+
+Q1: What is SQL, and what is it used for? 
+
+A1: SQL (Structured Query Language) is a language used to manage and manipulate data in relational database management systems. 
+It is used to create, modify, and query databases.
+
+Q2: What are the different types of SQL statements? A2:
+The different types of SQL statements are:
+
+DDL (Data Definition Language): Used to create and modify database structures.
+DML (Data Manipulation Language): Used to manipulate data in a database.
+TCL (Transaction Control Language): Used to manage transactions in a database.
+
+Q3: Explain the difference between SQL and MySQL.
+SQL is a language, while MySQL is a relational database management system that uses SQL to interact with data.
+
+
+SQL Datatypes
+
+
+
+Q1: What is a datatype in SQL, and why is it important?
+
+ A1: A datatype is a type of data that can be stored in a column, such as integer, string, or date. 
+It is important because it determines the type of data that can be stored in a column and how it is stored.
+
+Q2: What are the different types of datatypes in SQL? A2: The different types of datatypes in SQL are:
+
+Numeric: Integer, float, decimal, etc.
+Character: Char, varchar, text, etc.
+Date and time: Date, time, timestamp, etc.
+Boolean: Boolean, bit, etc.
+
+Q3.What is the difference between CHAR and VARCHAR?
+*Answer:* CHAR is a fixed-length character datatype, while VARCHAR is a variable-length character datatype.Non unicode characters.
+
+
+SQL Commands (DDL, DML, TCL)
+
+Q1: What is DDL, and what are some common DDL commands? 
+A1: DDL (Data Definition Language) is used to create and modify database structures. 
+Some common DDL commands are CREATE, ALTER, and DROP.
+
+Q2: What is DML, and what are some common DML commands? 
+A2: DML (Data Manipulation Language) is used to manipulate data in a database. Some common DML commands are INSERT, UPDATE, and DELETE.
+
+
+Q3: What are TCL commands? Provide examples.
+TCL (Transaction Control Language) commands manage transactions. Examples: COMMIT, ROLLBACK, SAVEPOINT.
+
+How do DDL and DML commands differ?
+DDL commands define and modify the database schema, while DML commands manipulate data within the schema.
+
+SQL OPERATORS
+
+What are SQL operators?
+SQL operators are symbols or keywords that perform operations on one or more expressions, such as arithmetic, comparison, and logical operations.
+
+Explain the difference between the WHERE and HAVING clauses.
+WHERE filters records before grouping, while HAVING filters groups after aggregation.
+
+What is the BETWEEN operator used for?
+The BETWEEN operator filters records within a specified range.
+
+
+Select Statement
+
+Q1: What is the purpose of the SELECT statement in SQL?
+A1: The SELECT statement is used to retrieve data from a database table.
+
+Q2: What is the basic syntax of the SELECT statement?
+A2: The basic syntax of the SELECT statement is
+
+ SELECT column1, column2, ... FROM tablename;
+
+Q3: How do you specify conditions for which rows to retrieve using the SELECT statement? 
+
+A3: Conditions can be specified using the WHERE clause, such as 
+SELECT * FROM employees WHERE salary > 50000;
+
+Q4: How do you sort the results of a SELECT statement? 
+
+A4: The results can be sorted using the ORDER BY clause, such as 
+
+SELECT * FROM employees ORDER BY last_name ASC;
+
+Insert Statement
+
+Q1: What is the purpose of the INSERT statement in SQL? 
+
+A1: The INSERT statement is used to add new data to a database table.
+
+Q2: What is the basic syntax of the INSERT statement? 
+
+A2: The basic syntax of the INSERT statement is 
+
+INSERT INTO tablename (column1, column2, ...) VALUES (value1, value2, ...);
+
+Q3: How do you insert multiple rows into a table using a single INSERT statement?
+
+A3: Multiple rows can be inserted using a single INSERT statement by separating the values with commas, such as INSERT INTO employees (first_name, last_name, email) VALUES ('John', 'Doe', 'johndoe@example.com'), ('Jane', 'Doe', 'janedoe@example.com');
+
+Q4: What is the difference between INSERT and INSERT INTO? A4: INSERT is used to insert data into a table, while INSERT INTO is used to specify the columns into which the data should be inserted.
+
+Update Statement
+
+Q1: What is the purpose of the UPDATE statement in SQL? A1: The UPDATE statement is used to modify existing data in a database table.
+
+Q2: What is the basic syntax of the UPDATE statement? A2: The basic syntax of the UPDATE statement is UPDATE tablename SET column1 = value1, column2 = value2, ... WHERE condition;
+
+Q3: How do you update multiple rows in a table using a single UPDATE statement? A3: Multiple rows can be updated using a single UPDATE statement by specifying the conditions in the WHERE clause, such as UPDATE employees SET salary = salary * 1.1 WHERE department = 'Sales';
+
+Q4: What is the difference between UPDATE and UPDATE SET? A4: UPDATE is used to update data in a table, while UPDATE SET is used to specify the columns and values to be updated.
+
+Delete Statement
+
+Q1: What is the purpose of the DELETE statement in SQL? A1: The DELETE statement is used to delete data from a database table.
+
+Q2: What is the basic syntax of the DELETE statement? A2: The basic syntax of the DELETE statement is DELETE FROM tablename WHERE condition;
+
+Q3: How do you delete multiple rows in a table using a single DELETE statement? A3: Multiple rows can be deleted using a single DELETE statement by specifying the conditions in the WHERE clause, such as DELETE FROM employees WHERE department = 'HR';
+
+Q4: What is the difference between DELETE and TRUNCATE? A4: DELETE is used to delete specific rows from a table, while TRUNCATE is used to delete all rows from a table.
+
+Views
+
+Q1: What is a view in SQL, and why is it used? A1: A view is a virtual table based on the result of a SELECT statement. It is used to simplify complex queries and provide a layer of abstraction.
+
+Q2: How do you create a view in SQL? A2: A view is created using the CREATE VIEW statement, such as CREATE VIEW employee_info AS SELECT * FROM employees WHERE department = 'Sales';
+
+Q3: What are the advantages of using views? A3: The advantages of using views include improved data security, simplified queries, and improved data consistency.
+
+Q4: Can you update data through a view? A4: Yes, data can be updated through a view, but it depends on the complexity of the view and the underlying tables.
+
+Sub Queries
+
+Q1: What is a subquery in SQL, and why is it used? A1: A subquery is a query nested inside another query. It is used to retrieve data from multiple tables or to perform complex operations.
+
+Q2: How do you write a subquery in SQL? A2: A subquery is written using parentheses to enclose the inner query, such as SELECT * FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);
+
+
+
+
+What are the different types of subqueries? A3: The different types of subqueries are:
+
+
+Here are the different types of subqueries:
+
+1. Correlated Subquery: A subquery that references a table in the outer query. The subquery is executed for each row in the outer query.
+
+Example: SELECT * FROM employees e WHERE salary > (SELECT AVG(salary) FROM employees WHERE department = e.department);
+
+2. Non-Correlated Subquery: A subquery that does not reference a table in the outer query. The subquery is executed only once.
+
+Example: SELECT * FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);
+
+3. Nested Subquery: A subquery that is nested inside another subquery.
+
+Example: SELECT * FROM employees WHERE salary > (SELECT AVG(salary) FROM (SELECT salary FROM employees WHERE department = 'Sales'));
+
+4. Inline View: A subquery that is used as a table in the FROM clause.
+
+Example: SELECT * FROM (SELECT * FROM employees WHERE department = 'Sales') AS sales_employees;
+
+5. Common Table Expression (CTE): A temporary result set that is defined within a SELECT, INSERT, UPDATE, or DELETE statement.
+
+Example: WITH sales_employees AS (SELECT * FROM employees WHERE department = 'Sales') SELECT * FROM sales_employees;
+
+6. Derived Table: A subquery that is used as a table in the FROM clause, similar to an inline view.
+
+Example: SELECT * FROM (SELECT * FROM employees WHERE department = 'Sales') AS sales_employees;
+
+Here are the interview questions and answers for Aggregate Functions and SQL Joins:
+
+Aggregate Functions
+
+Q1: What is an aggregate function in SQL? A1: An aggregate function is a function that performs a calculation on a set of values and returns a single value.
+
+Q2: What are some common aggregate functions in SQL? A2: Some common aggregate functions in SQL are SUM, AVG, MAX, MIN, COUNT, and GROUPING SETS.
+
+Q3: How do you use the SUM aggregate function? A3: The SUM aggregate function is used to calculate the total value of a column, such as SELECT SUM(salary) FROM employees;
+
+Q4: How do you use the AVG aggregate function? A4: The AVG aggregate function is used to calculate the average value of a column, such as SELECT AVG(salary) FROM employees;
+
+Q5: How do you use the MAX and MIN aggregate functions? A5: The MAX aggregate function is used to find the maximum value in a column, while the MIN aggregate function is used to find the minimum value, such as SELECT MAX(salary) FROM employees; and SELECT MIN(salary) FROM employees;
+
+Q6: How do you use the COUNT aggregate function? A6: The COUNT aggregate function is used to count the number of rows in a table, such as SELECT COUNT(*) FROM employees;
+
+Q7: What is the difference between COUNT() and COUNT(column_name)? A7: COUNT() counts all rows, including null values, while COUNT(column_name) counts only the rows where the specified column is not null.
+
+Q8: How do you use the GROUPING SETS aggregate function? A8: The GROUPING SETS aggregate function is used to group data by multiple columns and perform calculations on each group, such as SELECT department, AVG(salary) FROM employees GROUP BY GROUPING SETS (department, region);
+
+SQL Joins
+
+Q1: What is a join in SQL, and why is it used? A1: A join is a way to combine data from two or more tables based on a common column. It is used to retrieve data from multiple tables in a single query.
+
+Q2: What are the different types of joins in SQL? A2: The different types of joins in SQL are INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN, and CROSS JOIN.
+
+Q3: How do you write an INNER JOIN in SQL? A3: An INNER JOIN is written using the INNER JOIN keyword, such as SELECT * FROM employees INNER JOIN departments ON employees.department_id = departments.department_id;
+
+Q4: How do you write a LEFT JOIN in SQL? A4: A LEFT JOIN is written using the LEFT JOIN keyword, such as SELECT * FROM employees LEFT JOIN departments ON employees.department_id = departments.department_id;
+
+Q5: How do you write a RIGHT JOIN in SQL? A5: A RIGHT JOIN is written using the RIGHT JOIN keyword, such as SELECT * FROM employees RIGHT JOIN departments ON employees.department_id = departments.department_id;
+
+Q6: How do you write a FULL OUTER JOIN in SQL? A6: A FULL OUTER JOIN is written using the FULL OUTER JOIN keyword, such as SELECT * FROM employees FULL OUTER JOIN departments ON employees.department_id = departments.department_id;
+
+Q7: How do you write a CROSS JOIN in SQL? A7: A CROSS JOIN is written using the CROSS JOIN keyword, such as SELECT * FROM employees CROSS JOIN departments;
+
+Q8: What is the difference between a NATURAL JOIN and an INNER JOIN? A8: A NATURAL JOIN is a type of INNER JOIN that automatically joins tables based on all columns with the same names, while an INNER JOIN requires specifying the join columns explicitly.
+
+Q9: How do you optimize join performance in SQL? A9: Join performance can be optimized by using indexes, rewriting queries, and using efficient join types.
+
+Q10: What is a self-join, and how is it used? A10: A self-join is a join where a table is joined with itself, often used to compare rows within the same table. It is used to retrieve hierarchical data or to compare rows with each other.
+
+
+
+
+
+
+
+
+

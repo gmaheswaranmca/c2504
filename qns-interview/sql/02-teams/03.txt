@@ -1,0 +1,220 @@
+#Ashwin & Neha
+VIEWS============================
+
+1. What is a view in SQL?
+
+	 A view is a virtual table based on the result set of a SQL query. 
+	 Does not store data itself but displays data stored in other tables.
+			
+2. How do you create a view in SQL?
+
+	CREATE VIEW view_name AS
+	SELECT column1, column2, ...
+	FROM table_name
+	WHERE condition;
+
+
+3. Explain the difference between a view and a table.
+		
+	 A table is a physical storage of data, 
+	 View is a virtual table representing the result of a query. 
+	 A view does not store data itself but provides a way to look at data in one or more tables
+
+4.Can you drop a view? If so, how?
+		
+	DROP VIEW view_name;
+
+5.Create a view to show all employees with their department names.
+
+	 CREATE VIEW EmployeeDepartment AS
+	 SELECT e.EmployeeID, e.Name, d.DepartmentName
+	 FROM Employees e
+	 JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+6.What limitations exist when working with views?
+
+	Views cannot contain certain constructs like temporary tables, cannot be indexed directly,limitations on updating data
+      if the view involves complex queries such as those with GROUP BY, aggregate functions, or DISTINCT.
+
+			
+7. What are the advantages of using views?
+
+	->Simplify complex queries, 
+	->Enhance security by restricting access to specific columns or rows 
+	->Provide a level of Abstraction from the underlying table structures.
+			
+
+
+SUBQUERY
+
+1.What is a subquery in SQL?
+
+	A subquery, also known as an inner query or nested query, is a query within another SQL query. 
+
+
+	SELECT employee_id, name
+	FROM employees
+	WHERE department_id IN (
+    	SELECT department_id
+    	FROM departments
+    	WHERE location = 'New York'
+);
+
+
+		
+2. What are the types of subqueries?
+		
+	-> Single-row subquery: Returns a single row.
+	-> Multiple-row subquery: Returns multiple rows.
+	-> Multiple-column subquery: Returns multiple columns.
+	->Correlated subquery: References columns from the outer query.
+		
+4. What is the difference between a sub-query and a join?
+
+	 A sub-query is a nested query that can return a single value or a list of values, 
+	 whereas a join combines columns from two or more tables based on a related column.
+			
+5. Explain the difference between correlated and uncorrelated sub-queries.
+
+	 An uncorrelated sub-query is independent of the outer query and can be run on its own. 
+	 Correlated sub-query depends on the outer query for its values and is executed once for each row processed by the outer query.
+		
+	 
+6. What are the limitations of using sub-queries in SQL?
+
+	 ->Sub-queries can sometimes lead to Performance issues, particularly if they are not well-optimized. 
+	 ->Less readable and Harder to Maintain than equivalent queries using joins.
+	
+		
+7. Create a sub-query to list all departments with more than 10 employees.
+
+	 SELECT DepartmentID, DepartmentName FROM Departments 
+	 WHERE DepartmentID IN 
+	 (SELECT DepartmentID FROM Employees 
+	 GROUP BY DepartmentID HAVING COUNT(*) > 10);
+=======================================================================================================================================
+AGGREGATE FUNCTIONS
+
+1. What are aggregate functions in SQL?
+
+	 Aggregate functions in SQL are used to perform calculations on a set of values and return a single value.
+	 They are commonly used for summarizing data, such as calculating averages, totals, counts, and more.
+
+
+2. List the most commonly used aggregate functions in SQL.
+
+    The most commonly used aggregate functions in SQL include:
+	COUNT()
+	SUM()
+	AVG()
+	MIN()
+	MAX()
+
+3.What does the COUNT() function do?
+
+    The COUNT() function returns the number of rows in a result set or the number of non-NULL values in a specific column.
+
+	SELECT COUNT(*) AS total_employees
+	FROM employees;
+
+4. What does the SUM() function do?
+
+	The SUM() function calculates the total sum of a numeric column.
+
+
+	SELECT SUM(salary) AS total_salarY
+
+	FROM employees;
+
+5.What does the AVG() function do?
+
+	 The AVG() function calculates the average value of a numeric column
+
+	SELECT AVG(salary) AS average_salary
+	FROM employees;
+
+6.What does the MIN() function do?
+
+	The MIN() function returns the smallest value in a specified column
+
+	SELECT MIN(salary) AS minimum_salary
+	FROM employees;
+
+7.What does the MAX() function do?
+	The MAX() function returns the largest value in a specified column.
+
+
+	SELECT MAX(salary) AS maximum_salary
+	FROM employees;
+
+8. Explain the difference between COUNT(*) and COUNT(column_name).
+
+
+	COUNT(*) counts all rows, including those with NULL values.
+
+	COUNT(column_name) counts only non-NULL values in the specified column.
+
+9.What is the difference between WHERE and HAVING clauses?
+
+
+	The WHERE clause is used to filter rows before aggregation and is applied to individual records.
+
+	The HAVING clause is used to filter records after aggregation and is applied to groups.
+=======================================================================================================
+
+JOINS
+
+1.what are joins
+
+  -->A join is a SQL operation used to combine rows from two or more tables based on a related column between them. 
+  -->Joins are crucial for retrieving data from multiple tables in a relational database.
+
+2. What are the different types of joins in SQL?
+
+
+	INNER JOIN
+	LEFT JOIN (LEFT OUTER JOIN)
+	RIGHT JOIN (RIGHT OUTER JOIN)
+	FULL JOIN (FULL OUTER JOIN)
+	CROSS JOIN
+
+
+3.What is an INNER JOIN and how does it work?
+
+   An INNER JOIN returns only the rows from both tables where there is a match in the joined columns.
+   If there is no match, the rows are not included in the result set.
+
+	SELECT employees.name, departments.dept_name
+	FROM employees INNER JOIN departments 
+	ON employees.dept_id = departments.id;
+
+4.What is a LEFT JOIN (LEFT OUTER JOIN)?
+	
+	A LEFT JOIN returns all the rows from the left table, along with the matching rows from the right table. 
+	If there is no match, the result is NULL on the side of the right table.
+
+	SELECT employees.name, departments.dept_name
+	FROM employees
+	LEFT JOIN departments ON employees.dept_id = departments.id;
+
+5.What is a RIGHT JOIN (RIGHT OUTER JOIN)?
+
+	A RIGHT JOIN returns all the rows from the right table, along with the matching rows from the left table. 
+	If there is no match, the result is NULL on the side of the left table.
+
+	SELECT employees.name, departments.dept_name
+	FROM employees
+	RIGHT JOIN departments ON employees.dept_id = departments.id;
+
+6. Explain the difference between INNER JOIN and OUTER JOIN.
+
+	INNER JOIN: Returns only the matching rows from both tables.
+	OUTER JOIN: Returns all rows from one or both tables, filling in NULLs for missing matches. Variants include LEFT, RIGHT JOIN.
+
+7.How can we join more than two tables?
+
+	we can join more than two tables by chaining multiple join operations together.
+	 For each additional table, specify the join type and condition.
+
+
+

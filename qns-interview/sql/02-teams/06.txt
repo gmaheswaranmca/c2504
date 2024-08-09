@@ -1,0 +1,805 @@
+#Yahkoop
+Introduction to Database and RDBMS
+
+ 1. What is a database ?
+ 2. Explain what a Relational Database Management System (RDBMS) ?
+ 3. What are the advantages using a database?
+ 4. Give some examples for common RDBMS systems ?
+
+Characteristics of Database Management System
+
+ 5. What are the key characteristics of a Database Management System (DBMS)?
+ 6. How does DBMS allows load balancing ?
+
+Data Modeling
+ 7. Explain the different types of data models.
+ 8. Explain the difference between relational and hierarchical data model
+
+Relational Data Modeling
+ 9. Explain the components of relational data modeling
+10.How do you represent relationships in a relational model?
+
+Normalization
+11. Explain about normalization
+12. Explain about different levels of normalization
+13. Explain functional dependency with examples
+14. Explain partial and transitive dependencies with examples
+
+Transactions
+
+15. Explain TCL language
+16. Explain about ACID properties
+17. Explain BEGIN TRANSACTION , COMMIT , SAVEPOINT and ROLLBACK in transaction
+
+Types of Keys
+
+18. List different types of keys in SQL
+19. Explain different types of keys in SQL
+20. Explain the difference between primary key and unique key in SQL
+21. Explain about difference between foreign key and primary key
+
+
+Introduction to SQL
+
+22. What is SQL
+23. Difference between MS SQL and SQL
+24. What are the differences between SQL and NoSQL databases?
+25. Explain different constraints in SQL
+
+SQL Datatypes
+
+26. What are the different data types in SQL
+27. Explain the difference between var() and varchar()
+28. Explain difference between DATETIME and TIMESTAMP in sql
+29. Explain difference between varchar() and nvarchar()
+30. Explain about date function in SQL
+31. Explain the string functions in SQL
+
+SQL Commands (DDL, DML, TCL)
+
+32. Explain DDL , DML and TCL
+33. Explain the difference between DROP and TRUNCATE
+34. Explain the difference between DELETE and TRUNCATE in SQL
+ 
+SQL Operator
+
+35. Explain different types of operators in SQL
+36. Explain about arithmetic operators in SQL
+37. Explain about relational operators in SQL
+38. Explain about logical operators in SQL
+
+SQL Table
+
+39. How do you create a table in SQL?
+40. What is the syntax for altering a table?
+41. What are all the ways to define constraints in SQL
+42. How do you define a foreign key constraint in a table?
+43. What is identity function in SQL
+
+Select Statement
+
+44. Explain select statement in SQL with examples
+45. Give the syntax for select command
+46. Explain the use of ORDER BY in SQL with examples
+47. Explain the use of WHERE in SQL
+48. Explain the use of IN in SQL with examples
+49. Explain the use of LIKE in sql
+
+Insert Statement
+
+50. Explain INSERT statement in SQL
+51. Give the syntax for INSERT statement with examples
+52. Explain how can we insert data from one table in to another
+
+Update Statement
+
+53. Explain UPDATE statement in SQL
+54. Give the syntax for UPDATE statement with examples
+55. How can we update a single column in SQL
+
+DeleteStatement
+
+56. Explain DELETE statement in SQL
+57. Give the syntax for DELETE statement with examples
+
+Views
+
+58. What is a VIEW
+59. Explain the advantage of VIEW in SQL
+60. Give the syntax TO create VIEW in SQL with example
+
+Sub Queries
+
+61. Explain subQueries in SQL
+62. Explain types of subqueries
+63. Give the syntax for subqueries
+
+Aggregate Function
+
+64. Explain different aggregate functions in SQL (MIN , MAX , COUNT , AVG , SUM )
+65. Explain GROUP BY and HAVING clauses in SQL with examples
+
+
+SQL Joins
+
+66. Explain JOIN IN sql
+67. What are the types of JOIN s in SQL with examples
+
+indexes
+
+68. What indexing in sql
+69. Explain different types of indexes
+70. How indexing helps in query optimization
+
+Introduction to Database and RDBMS
+
+1. What is a database?
+
+a) A database is an organized collection of data that is stored and accessed electronically. It allows for efficient storage, retrieval, and manipulation of data, ensuring data consistency and integrity.
+
+2. Explain what a Relational Database Management System (RDBMS) is.
+
+a) An RDBMS is a type of database management system that organizes data into tables (or relations) that can be linked based on data relationships. It supports operations such as querying, updating, and administration of the data. SQL is the standard language used to interact with RDBMS.
+
+3. What are the advantages of using a database?
+
+a) Data Integrity: Ensures data accuracy and consistency.
+   Data Security: Restricts access to data to authorized users.
+   Data Sharing: Multiple users can access data simultaneously.
+   Data Backup and Recovery: Provides mechanisms to recover data in case of failure.
+   Efficient Data Management: Enables efficient storage, retrieval, and update of data.
+
+4. Give some examples of common RDBMS systems.
+
+a) Oracle Database
+   MySQL
+   Microsoft SQL Server
+   PostgreSQL
+   SQLite
+
+Characteristics of Database Management System
+
+5. What are the key characteristics of a Database Management System (DBMS)?
+
+a) Data Independence: Applications are insulated from changes in data structure.
+   Data Security: Controls access to data.
+   Data Integrity: Ensures accuracy and consistency of data.
+   Concurrency Control: Manages simultaneous data access by multiple users.
+   Backup and Recovery: Provides data recovery options after a failure.
+
+6. How does DBMS allow load balancing?
+
+a) Load balancing in a DBMS is achieved by distributing database queries and workloads across multiple servers or nodes, ensuring optimal resource use, minimizing response time, and avoiding server overload.
+
+Data Modeling
+
+7. Explain the different types of data models.
+
+a) Hierarchical Model: Organizes data in a tree-like structure with parent-child relationships.
+   Network Model: Allows more complex relationships by supporting many-to-many connections.
+   Relational Model: Organizes data into tables with relationships based on common attributes.
+   Object-Oriented Model: Represents data as objects, similar to object-oriented programming.
+
+8. Explain the difference between relational and hierarchical data models.
+
+a) Relational Model: Data is organized into tables with rows and columns, and relationships are managed through foreign keys. It is flexible and supports complex      queries.
+   Hierarchical Model: Data is organized in a tree-like structure with parent-child relationships, making it less flexible as it doesn’t support many-to-many       relationships directly.
+
+Relational Data Modeling
+
+9. Explain the components of relational data modeling.
+
+a) Entities: Objects or concepts that can be distinctly identified (e.g., customers, orders).
+   Attributes: Properties or details of entities (e.g., name, address).
+   Relationships: Associations between entities (e.g., a customer places an order).
+   Primary Keys: Unique identifiers for rows in a table.
+   Foreign Keys: Fields in a table that create a link between two tables.
+
+10. How do you represent relationships in a relational model?
+
+a) Relationships are represented using foreign keys. A foreign key in one table refers to the primary key in another table, establishing a link between the data in the  two tables.
+
+Normalization
+
+11. Explain normalization.
+
+a) Normalization is the process of organizing a database into tables and columns to reduce data redundancy and improve data integrity. It involves dividing large    tables into smaller ones and linking them using relationships.
+
+12. Explain different levels of normalization.
+
+a) 1NF (First Normal Form): Ensures each column contains atomic (indivisible) values, and each record is unique.
+   2NF (Second Normal Form): Achieves 1NF and removes partial dependencies by ensuring non-key attributes depend on the entire primary key.
+   3NF (Third Normal Form): Achieves 2NF and removes transitive dependencies by ensuring non-key attributes depend only on the primary key.
+   BCNF (Boyce-Codd Normal Form): A stronger version of 3NF where every determinant is a candidate key.
+
+13. Explain functional dependency with examples.
+
+a) Functional dependency occurs when the value of one attribute (or a set of attributes) determines the value of another attribute within a table.
+Example: In a table with Student_ID and Student_Name, if each Student_ID uniquely determines a Student_Name, then Student_Name is functionally dependent on Student_ID.
+
+14. Explain partial and transitive dependencies with examples.
+
+a) Partial Dependency: A non-key attribute depends only on part of the composite primary key.
+Example: In a table with Order_ID (part of the key) and Product_ID (other part of the key), if Product_Name depends only on Product_ID, then it’s a partial dependency.
+Transitive Dependency: A non-key attribute depends on another non-key attribute.
+Example: If A → B and B → C, then C is transitively dependent on A through B.
+
+Transactions
+
+15) Explain TCL language.
+
+a) TCL (Transaction Control Language) is a subset of SQL commands used to manage transactions in a database. It includes commands like:
+   COMMIT: Saves the changes made by the transaction permanently in the database.
+   ROLLBACK: Undoes the changes made by the current transaction, reverting the database to its previous state.
+   SAVEPOINT: Sets a point within a transaction to which you can later roll back.
+   SET TRANSACTION: Defines the properties of a transaction, such as its isolation level.
+
+16. Explain ACID properties.
+
+a) ACID properties ensure reliable processing of database transactions:
+   Atomicity: Ensures that all operations within a transaction are completed successfully; if not, the transaction is aborted, and the database remains unchanged.
+   Consistency: Ensures that a transaction takes the database from one valid state to another, maintaining the integrity of the data.
+   Isolation: Ensures that concurrent transactions do not interfere with each other, keeping them independent.
+   Durability: Ensures that once a transaction is committed, the changes are permanent, even in the case of a system failure.
+
+17. Explain BEGIN TRANSACTION, COMMIT, SAVEPOINT, and ROLLBACK in transaction.
+
+a) BEGIN TRANSACTION: Marks the beginning of a transaction.
+   COMMIT: Ends the transaction by saving all the changes made during the transaction to the database.
+   SAVEPOINT: Creates a point within a transaction to which you can roll back later if needed.
+   ROLLBACK: Reverts the database to the state it was in before the transaction began or to a specific SAVEPOINT.
+
+Types of Keys
+
+18. List different types of keys in SQL.
+
+  Primary Key
+  Foreign Key
+  Candidate Key
+  Super Key
+  Unique Key
+  Composite Key
+  Alternate Key
+
+19. Explain different types of keys in SQL.
+
+  Primary Key: A unique identifier for each record in a table. It cannot contain NULL values.
+  Foreign Key: A field (or collection of fields) in one table that uniquely identifies a row in another table, creating a relationship between the two tables.
+  Candidate Key: A column, or set of columns, that can qualify as a unique key in a database. There can be multiple candidate keys in a table.
+  Super Key: A set of one or more columns that, together, uniquely identify a row in a table.
+  Unique Key: Ensures that all values in a column are different. Unlike primary keys, unique keys can accept NULL values.
+  Composite Key: A key that consists of two or more columns that uniquely identify a row in a table.
+  Alternate: An Alternate Key is a key in a relational database that is a candidate key but is not the primary key. 
+
+20. Explain the difference between primary key and unique key in SQL.
+
+a) Primary Key:
+  Uniquely identifies each record in a table.
+  Cannot contain NULL values.
+  A table can have only one primary key, which may consist of a single or multiple columns (composite key).
+
+  Unique Key:
+  Also ensures that all values in a column or a set of columns are unique.
+  Can contain a single NULL value.
+  A table can have multiple unique keys.
+  
+21. Explain the difference between foreign key and primary key.
+
+a) Primary Key:
+  Uniquely identifies each record in a table.
+  Ensures that no duplicate values are entered in the column(s) defining the primary key.
+  Cannot have NULL values.
+
+  Foreign Key:
+  A field in one table that references the primary key of another table.
+  Used to establish a relationship between two tables.
+  Can have duplicate values and can also contain NULL values if it’s not part of a composite foreign key.
+
+Introduction to SQL
+
+22. What is SQL?
+a) SQL (Structured Query Language) is a standard language used to interact with and manage relational databases. It is used for querying, inserting, updating, and deleting data, as well as for managing database structure and control access to the data.
+
+23. Difference between MS SQL and SQL.
+a) MS SQL refers to Microsoft SQL Server, which is a relational database management system (RDBMS) developed by Microsoft. It provides tools and features specifically   tailored to work within the Microsoft ecosystem.
+SQL, on the other hand, is the standard language used to interact with any relational database, not limited to Microsoft SQL Server. SQL commands and queries can be executed on various RDBMS like Oracle, MySQL, PostgreSQL, and more.
+
+24. What are the differences between SQL and NoSQL databases?
+
+a) SQL Databases:
+   Relational databases that use structured query language (SQL) for defining and manipulating data.
+   Data is stored in tables with rows and columns.
+   They are best suited for structured data with a clear schema.
+   Examples: MySQL, PostgreSQL, Oracle, Microsoft SQL Server.
+   NoSQL Databases:
+   Non-relational databases that can store and retrieve data in a variety of formats (e.g., document, key-value, graph, column-family).
+   They are designed for unstructured or semi-structured data with flexible schema.
+   Better suited for handling large-scale data and real-time applications.
+   Examples: MongoDB, Cassandra, Redis, Couchbase.
+
+25. Explain different constraints in SQL.
+
+a) Constraints are rules enforced on data columns in a table to ensure the integrity and accuracy of the data. Common SQL constraints include:
+   NOT NULL: Ensures that a column cannot have a NULL value.
+   UNIQUE: Ensures all values in a column are different.
+   PRIMARY KEY: Uniquely identifies each record in a table; it is a combination of NOT NULL and UNIQUE.
+   FOREIGN KEY: Ensures referential integrity by linking a column in one table to the primary key in another table.
+   CHECK: Ensures that all values in a column satisfy a specific condition.
+   DEFAULT: Assigns a default value to a column if no value is specified.
+
+SQL Datatypes
+
+26. What are the different data types in SQL?
+
+a) Numeric:
+INT: Integer values.
+FLOAT: Floating-point numbers.
+DECIMAL: Fixed-point numbers with precision and scale.
+BIT: Boolean values (0 or 1).
+Character/String:
+CHAR: Fixed-length strings.
+VARCHAR: Variable-length strings.
+TEXT: Large text data.
+Date/Time:
+DATE: Date values.
+TIME: Time values.
+DATETIME: Date and time values.
+TIMESTAMP: Date and time values, usually in UTC.
+Binary:
+BINARY: Fixed-length binary data.
+VARBINARY: Variable-length binary data.
+Miscellaneous:
+BOOLEAN: True/False values.
+ENUM: Enumerated list of values.
+SET: A set of values.
+
+27. Explain the difference between CHAR and VARCHAR.
+
+a) CHAR:
+  Fixed-length character data type.
+  It reserves a set amount of space regardless of the actual data length.
+  For example, CHAR(10) will always take 10 bytes, even if the string is shorter.
+  VARCHAR:
+  Variable-length character data type.
+  It uses only the required amount of space based on the string length.
+  For example, VARCHAR(10) will only take as much space as needed by the actual string length, plus one byte for length storage.
+
+28. Explain the difference between DATETIME and TIMESTAMP in SQL.
+
+a) DATETIME:
+   Stores date and time values in a format that is independent of the time zone.
+   Typically has a range from '1000-01-01 00:00:00' to '9999-12-31 23:59:59'.
+   TIMESTAMP:
+   Stores date and time values that are automatically converted to UTC and back to the current time zone when retrieved.
+   Typically used for tracking changes in records.
+   Has a range from '1970-01-01 00:00:01' UTC to '2038-01-19 03:14:07' UTC.
+
+29. Explain the difference between VARCHAR and NVARCHAR.
+
+a) VARCHAR:
+   Stores non-Unicode string data.
+   Uses one byte per character (or more for special characters).
+   Limited to the ASCII character set.
+   NVARCHAR:
+   Stores Unicode string data, which can represent a wider range of characters from multiple languages.
+   Uses two bytes per character.
+   Useful when storing multilingual data.
+
+30. Explain the date function in SQL.
+
+a) SQL provides various date functions to manipulate and query date and time data. Some common ones include:
+   GETDATE(): Returns the current date and time.
+   DATEADD(): Adds a specified interval to a date.
+   DATEDIFF(): Returns the difference between two dates.
+   CONVERT(): Converts a date to a different format.
+   YEAR(), MONTH(), DAY(): Extracts the year, month, or day from a date.
+
+31. Explain the string functions in SQL.
+
+a) SQL includes various string functions for manipulating text data:
+   LEN(): Returns the length of a string.
+   SUBSTRING(): Extracts a portion of a string.
+   UPPER() / LOWER(): Converts a string to uppercase or lowercase.
+   REPLACE(): Replaces occurrences of a substring within a string.
+   TRIM(): Removes leading and trailing spaces from a string.
+   CONCAT(): Concatenates two or more strings.
+
+SQL Commands (DDL, DML, TCL)
+
+32. Explain DDL, DML, and TCL.
+
+a) DDL (Data Definition Language):
+   Commands that define the structure of a database, such as creating, altering, or dropping tables.
+   Examples: CREATE, ALTER, DROP, TRUNCATE.
+   DML (Data Manipulation Language):
+   Commands used to manage and manipulate the data within the database.
+   Examples: SELECT, INSERT, UPDATE, DELETE.
+   TCL (Transaction Control Language):
+   Commands used to manage transactions in a database.
+   Examples: COMMIT, ROLLBACK, SAVEPOINT.
+
+33. Explain the difference between DROP and TRUNCATE.
+
+a) DROP:
+   Removes the entire table structure and data from the database.
+   Once a table is dropped, it cannot be recovered without backup.
+   Syntax: DROP TABLE table_name;
+   TRUNCATE:
+   Removes all the data from a table, but the table structure remains intact.
+   It’s faster than DELETE since it doesn’t log individual row deletions.
+   Syntax: TRUNCATE TABLE table_name;
+
+34. Explain the difference between DELETE and TRUNCATE in SQL.
+
+a) DELETE:
+   Removes rows from a table based on a condition.
+   Can be rolled back if used within a transaction.
+   Slower because it logs individual row deletions.
+   Syntax: DELETE FROM table_name WHERE condition;
+   TRUNCATE:
+   Removes all rows from a table without logging individual row deletions.
+   Cannot be rolled back (in most RDBMS) and does not fire triggers.
+   Faster and uses fewer system resources than DELETE.
+   Syntax: TRUNCATE TABLE table_name;
+
+SQL Operator
+
+35. Explain different types of operators in SQL.
+
+a) SQL operators are used to perform operations on data within the database. Types include:
+   Arithmetic Operators: Perform mathematical operations.
+   Comparison/Relational Operators: Compare two values.
+   Logical Operators: Combine multiple conditions.
+   Bitwise Operators: Perform bitwise operations on binary data.
+   Assignment Operators: Assign values to variables.
+  
+36. Explain arithmetic operators in SQL.
+
+a) Arithmetic Operators are used to perform basic mathematical operations:
+   + (Addition): Adds two numbers.
+   - (Subtraction): Subtracts one number from another.
+   * (Multiplication): Multiplies two numbers.
+   / (Division): Divides one number by another.
+   % (Modulus): Returns the remainder of a division.
+
+37. Explain relational operators in SQL.
+
+a) Relational Operators are used to compare two values, returning TRUE or FALSE:
+   = (Equal to): Checks if two values are equal.
+   <> or != (Not equal to): Checks if two values are not equal.
+   > (Greater than): Checks if one value is greater than another.
+   < (Less than): Checks if one value is less than another.
+   >= (Greater than or equal to): Checks if one value is greater than or equal to another.
+   <= (Less than or equal to): Checks if one value is less than or equal to another.
+
+38. Explain logical operators in SQL.
+
+a) Logical Operators are used to combine multiple conditions in SQL:
+   AND: Returns TRUE if all conditions are TRUE.
+   OR: Returns TRUE if any condition is TRUE.
+   NOT: Reverses the result of a condition (TRUE becomes FALSE and vice versa).
+   SQL Table
+
+39. How do you create a table in SQL?
+
+a) You create a table using the CREATE TABLE statement, specifying the table name and columns with their data types.
+Example:
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    BirthDate DATE,
+    HireDate DATE
+);
+
+40. What is the syntax for altering a table?
+
+a) The ALTER TABLE statement is used to modify the structure of an existing table. You can add, modify, or drop columns.
+Examples:
+Add a column:
+
+ALTER TABLE Employees ADD Email VARCHAR(100);
+Modify a column:
+
+ALTER TABLE Employees ALTER COLUMN LastName VARCHAR(100);
+Drop a column:
+
+ALTER TABLE Employees DROP COLUMN BirthDate;
+
+41. What are all the ways to define constraints in SQL?
+
+a) Constraints can be defined at the column level (inline) or table level (out-of-line).
+Column-Level Constraint:
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL
+);
+Table-Level Constraint:
+
+CREATE TABLE Employees (
+    EmployeeID INT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    CONSTRAINT PK_EmployeeID PRIMARY KEY (EmployeeID)
+);
+42. How do you define a foreign key constraint in a table?
+
+a) A foreign key constraint is defined using the FOREIGN KEY keyword and references another table's primary key.
+Example:
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    OrderDate DATE,
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+43. What is the identity function in SQL?
+
+a) The IDENTITY function in SQL Server is used to automatically generate unique values for a column, typically used for primary key columns.
+Example:
+CREATE TABLE Employees (
+    EmployeeID INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50)
+);
+Here, IDENTITY(1,1) starts the column value at 1 and increments it by 1 for each new row.
+
+Select Statement
+
+44. Explain the SELECT statement in SQL with examples.
+
+The SELECT statement is used to retrieve data from one or more tables in a database.
+Example:
+SELECT FirstName, LastName FROM Employees;
+This query retrieves the FirstName and LastName columns from the Employees table.
+
+45. Give the syntax for the SELECT command.
+
+Basic syntax:
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition
+GROUP BY column_name
+HAVING condition
+ORDER BY column_name;
+
+46. Explain the use of ORDER BY in SQL with examples.
+
+a) The ORDER BY clause is used to sort the result set by one or more columns.
+Example:
+SELECT FirstName, LastName FROM Employees ORDER BY LastName ASC;
+This query sorts the results by LastName in ascending order. To sort in descending order, you would use DESC instead of ASC.
+
+47. Explain the use of WHERE in SQL.
+
+a) The WHERE clause is used to filter records based on a specified condition.
+SELECT * FROM Employees WHERE LastName = 'Smith';
+This query retrieves all rows from the Employees table where the LastName is 'Smith'.
+
+48. Explain the use of IN in SQL with examples.
+
+a) The IN operator allows you to specify multiple values in a WHERE clause, filtering records that match any of the specified values.
+Example:
+sql
+SELECT * FROM Employees WHERE LastName IN ('Smith', 'Johnson', 'Williams');
+This query retrieves rows where the LastName is either 'Smith', 'Johnson', or 'Williams'.
+
+49. Explain the use of LIKE in SQL.
+
+The LIKE operator is used for pattern matching in a WHERE clause, allowing you to search for a specified pattern in a column.
+Example:
+SELECT * FROM Employees WHERE FirstName LIKE 'J%';
+This query retrieves all rows where the FirstName starts with the letter 'J'. The % wildcard represents zero or more characters.
+
+Insert Statement
+
+50. Explain the INSERT statement in SQL.
+
+The INSERT statement is used to add new rows of data into a table.
+Example:
+INSERT INTO Employees (FirstName, LastName, BirthDate)
+VALUES ('John', 'Doe', '1985-05-15');
+This inserts a new row into the Employees table with the specified values.
+
+51. Give the syntax for the INSERT statement with examples.
+
+a) Basic syntax:
+INSERT INTO table_name (column1, column2, ...)
+VALUES (value1, value2, ...);
+Example:
+INSERT INTO Employees (FirstName, LastName, HireDate)
+VALUES ('Jane', 'Doe', '2022-01-10');
+
+52. Explain how you can insert data from one table into another.
+
+You can insert data into a table by selecting data from another table.
+Example:
+INSERT INTO EmployeesArchive (FirstName, LastName, BirthDate)
+SELECT FirstName, LastName, BirthDate
+FROM Employees
+WHERE HireDate < '2020-01-01';
+This inserts rows into EmployeesArchive by selecting data from Employees where the HireDate is before January 1, 2020.
+Update Statement
+
+53. Explain the UPDATE statement in SQL.
+
+a) The UPDATE statement is used to modify existing data in a table.
+Example:
+UPDATE Employees
+SET LastName = 'Smith'
+WHERE EmployeeID = 1;
+This updates the LastName to 'Smith' for the employee with EmployeeID 1.
+
+54. Give the syntax for the UPDATE statement with examples.
+
+Basic syntax:
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+Example:
+UPDATE Employees
+SET HireDate = '2023-05-01'
+WHERE EmployeeID = 2;
+
+55. How can we update a single column in SQL?
+
+You can update a single column by specifying just that column in the SET clause.
+Example:
+UPDATE Employees
+SET FirstName = 'Michael'
+WHERE EmployeeID = 3;
+Delete Statement
+
+56. Explain the DELETE statement in SQL.
+
+a) The DELETE statement is used to remove rows from a table based on a condition.
+Example:
+DELETE FROM Employees
+WHERE EmployeeID = 4;
+This deletes the row where EmployeeID is 4.
+
+57. Give the syntax for the DELETE statement with examples.
+
+a) Basic syntax:
+DELETE FROM table_name
+WHERE condition;
+Example:
+DELETE FROM Employees
+WHERE LastName = 'Doe';
+
+Views
+
+58. What is a VIEW?
+
+a) A VIEW is a virtual table that is based on the result set of a SQL query. It does not store data itself but provides a way to look at the data from one or more tables.
+Example:
+CREATE VIEW EmployeeView AS
+SELECT FirstName, LastName, HireDate
+FROM Employees
+WHERE HireDate > '2020-01-01';
+
+59. Explain the advantage of a VIEW in SQL.
+
+a) Simplifies complex queries: A VIEW can encapsulate a complex query and present it as a simple table.
+Security: Restricts access to specific rows or columns in the database.
+Data abstraction: Hides the underlying table structure from users.
+Reuse: Allows you to reuse the same query in multiple places without repeating it.
+
+60. Give the syntax to create a VIEW in SQL with an example.
+
+a) Syntax:
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+Example:
+CREATE VIEW ActiveEmployees AS
+SELECT FirstName, LastName, HireDate
+FROM Employees
+WHERE Status = 'Active';
+Subqueries
+61. Explain subqueries in SQL.
+
+A subquery is a query nested inside another query. It is used to perform operations that require the result of another query.
+Example:
+SELECT FirstName, LastName
+FROM Employees
+WHERE EmployeeID IN (SELECT ManagerID FROM Departments);
+
+62. Explain the types of subqueries.
+
+a) Single-row subquery: Returns a single row of data.
+Example:
+SELECT FirstName FROM Employees WHERE EmployeeID = (SELECT ManagerID FROM Departments WHERE DepartmentID = 1);
+Multi-row subquery: Returns multiple rows of data.
+Example:
+
+SELECT FirstName FROM Employees WHERE DepartmentID IN (SELECT DepartmentID FROM Departments WHERE Location = 'NY');
+Correlated subquery: Depends on the outer query for its values.
+Example:
+SELECT e.FirstName, e.LastName
+FROM Employees e
+WHERE EXISTS (SELECT 1 FROM Departments d WHERE d.ManagerID = e.EmployeeID);
+
+63. Give the syntax for subqueries.
+
+Basic syntax:
+SELECT column1, column2, ...
+FROM table_name
+WHERE column_name = (SELECT column FROM table WHERE condition);
+Aggregate Functions
+
+64. Explain different aggregate functions in SQL (MIN, MAX, COUNT, AVG, SUM).
+
+a) MIN: Returns the smallest value in a set.
+Example: SELECT MIN(Salary) FROM Employees;
+MAX: Returns the largest value in a set.
+Example: SELECT MAX(Salary) FROM Employees;
+COUNT: Returns the number of rows that match a condition.
+Example: SELECT COUNT(*) FROM Employees;
+AVG: Returns the average value of a numeric column.
+Example: SELECT AVG(Salary) FROM Employees;
+SUM: Returns the total sum of a numeric column.
+Example: SELECT SUM(Salary) FROM Employees;
+
+65. Explain GROUP BY and HAVING clauses in SQL with examples.
+
+a) GROUP BY: Groups rows that have the same values in specified columns into aggregated data.
+HAVING: Filters the results of a GROUP BY based on a condition.
+Example:
+SELECT DepartmentID, COUNT(*)
+FROM Employees
+GROUP BY DepartmentID
+HAVING COUNT(*) > 10;
+This query groups the Employees table by DepartmentID and returns only those departments with more than 10 employees.
+
+SQL Joins
+
+66. Explain JOIN in SQL.
+
+a) JOIN is used to combine rows from two or more tables based on a related column between them.
+Types of joins include:
+INNER JOIN: Returns rows with matching values in both tables.
+LEFT JOIN: Returns all rows from the left table and matched rows from the right table.
+RIGHT JOIN: Returns all rows from the right table and matched rows from the left table.
+FULL JOIN: Returns all rows when there is a match in either left or right table.
+
+67. What are the types of JOINs in SQL with examples?
+
+INNER JOIN:
+SELECT e.FirstName, d.DepartmentName
+FROM Employees e
+INNER JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+LEFT JOIN:
+SELECT e.FirstName, d.DepartmentName
+FROM Employees e
+LEFT JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+RIGHT JOIN:
+SELECT e.FirstName, d.DepartmentName
+FROM Employees e
+RIGHT JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+FULL JOIN:
+SELECT e.FirstName, d.DepartmentName
+FROM Employees e
+FULL JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+Indexes
+
+68. What is indexing in SQL?
+
+a) Indexing is a technique used to speed up the retrieval of data from a database table by creating an entry for each value.
+Indexes help in optimizing the performance of queries.
+
+69. Explain different types of indexes.
+
+a) Clustered Index:
+Sorts and stores the data rows in the table based on the key values.
+A table can have only one clustered index.
+Non-Clustered Index:
+Does not alter the physical order of the rows in the table.
+A table can have multiple non-clustered indexes.
+
+70. How indexing helps in query optimization 
+a) Indexing speeds up query performance by allowing the database to quickly locate and retrieve data, reducing the need for full table scans and optimizing search, sorting, and join operations.

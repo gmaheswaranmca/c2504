@@ -1,0 +1,407 @@
+#Sharon Rose 
+
+
+
+1. What is MSSQL and its use?
+
+MSSQL (Microsoft SQL Server) is a relational database management system (RDBMS) developed by Microsoft. It is used for storing, retrieving, and managing data in databases. MSSQL is commonly used in applications that require structured data storage, such as web applications, enterprise-level applications, and data analytics.
+
+2.Explain CRUD operations with an example.
+
+CRUD stands for Create, Read, Update, and Delete—the four basic operations that can be performed on database records.
+Create: Insert new data into the database.
+Read: Retrieve data from the database.
+Update: Modify existing data in the database.
+Delete: Remove data from the database.
+Example:Create: INSERT INTO Employees (Name, Position) VALUES ('John Doe', 'Developer');
+Read: SELECT * FROM Employees WHERE Name = 'John Doe';
+Update: UPDATE Employees SET Position = 'Senior Developer' WHERE Name = 'John Doe';
+Delete: DELETE FROM Employees WHERE Name = 'John Doe';
+
+3.Which are the different types of data types?
+
+Data types in databases specify the type of data that can be stored in a column. Common data types include:
+Integer: Whole numbers (e.g., INT, BIGINT).
+Float/Decimal: Floating-point numbers (e.g., FLOAT, DECIMAL).
+String: Text data (e.g., VARCHAR, CHAR).Date/Time: 
+Dates and times (e.g., DATE, DATETIME).
+Boolean: True/False values (e.g., BIT).
+Binary: Binary data (e.g., BINARY, VARBINARY).
+
+4.Which are the MSSQL commands?
+
+MSSQL commands can be categorized as follows:
+Data Definition Language (DDL): Defines the structure of the database (e.g., CREATE, ALTER, DROP).
+Data Manipulation Language (DML): Manages data within tables (e.g., SELECT, INSERT, UPDATE, DELETE).
+Data Control Language (DCL): Manages access permissions (e.g., GRANT, REVOKE).
+Transaction Control Language (TCL): Manages transactions (e.g., COMMIT, ROLLBACK).
+
+5.How many relational operators and which are they?
+
+Relational operators are used to compare values in SQL. 
+The common ones include:= :
+Equal to!= or <> : 
+Not equal to< : 
+Less than> : 
+Greater than<= : 
+Less than or equal to>= : 
+Greater than or equal to <=
+BETWEEN : 
+Within a range LIKE : 
+Pattern matching IN : Matches any value in a list
+
+6.What is DML?
+
+DML (Data Manipulation Language) consists of SQL commands used to manage data 
+within database objects like tables. Examples of DML commands are SELECT, INSERT, UPDATE, and DELETE.
+
+7.What is the difference between DROP and TRUNCATE?
+
+DROP: Removes the entire table (or database) from the database schema. It is irreversible, 
+and all data, indexes, and relationships are deleted.
+TRUNCATE: Deletes all rows from a table, but the table structure and its columns, constraints, 
+and indexes remain. It is faster than DELETE because it does not log individual row deletions.
+
+
+
+====
+1.What is a database?
+    A database is an organized collection of data that is stored and managed electronically. 
+    It allows for efficient storage, retrieval, and manipulation of data. 
+    Databases are designed to support various applications by storing data in a structured way, 
+    often in tables, so that it can be easily accessed, managed, and updated.
+
+2.What is an RDBMS (Relational Database Management System)?
+    An RDBMS (Relational Database Management System) is a type of database management system (DBMS) 
+    that stores data in a structured format using tables. The tables are organized into rows and columns, 
+    and the relationships between the tables are maintained through keys. 
+    RDBMSs provide tools for managing and querying relational databases,
+    making it easier to handle large amounts of data efficiently.
+
+    
+3.What is normalization in databases?
+    Normalization in databases is a process used to organize and structure data in such a way that
+    redundancy is minimized, and data integrity is maximized. The goal of normalization is to ensure
+    that the data is stored in a logical and efficient manner, reducing the chances of anomalies like 
+    data duplication or inconsistency.
+
+    
+4.Explain the different normal forms: 1NF, 2NF, and 3NF
+    1NF ensures that each column in a table contains only atomic (indivisible) values, with no repeating
+    groups or arrays. Essentially, data should be stored in a tabular format where each entry is unique.
+    2NF builds on 1NF by ensuring that all non-key attributes are fully dependent on the entire primary key. 
+    This removes partial dependencies, especially in tables with composite keys.
+    3NF further refines the table by removing transitive dependencies. In 3NF, non-key attributes should 
+    depend only on the primary key, not on other non-key attributes.
+
+    
+5.What are dependencies in the context of databases?
+    Dependencies in the context of databases refer to the relationships between different attributes (columns) within a table.
+    They describe how one attribute's value is determined by the value of another attribute
+
+    
+6.What is a partial dependency
+    A partial dependency in database normalization occurs when a non-prime attribute 
+    (an attribute that is not part of a candidate key)
+    is functionally dependent on only a part of a composite primary key, 
+    rather than on the whole key.
+    Partial dependency is a concern in Second Normal Form (2NF) and needs to be 
+    eliminated to achieve 2NF. When a partial dependency exists, it means that some 
+    non-prime attributes depend only on part of the composite key, leading to redundancy and potential 
+    anomalies in the database.
+
+    
+7.What is a transitive dependency?
+    A transitive dependency in a database occurs when a non-prime attribute 
+    (an attribute that is not part of any candidate key) depends on another non-prime attribute,
+    which in turn depends on the primary key. Essentially, it's an indirect dependency where one non-key
+    attribute is dependent on another non-key attribute, which itself depends on the primary key.
+    Transitive dependencies are a concern in Third Normal Form (3NF) and need to be eliminated to achieve 3NF.
+    The presence of transitive dependencies can lead to data redundancy and anomalies.
+
+    
+8.What are the different types of keys in a database?
+      Primary Key: A primary key is a unique identifier for a record in a table. 
+             It ensures that no duplicate records exist and that each record can be uniquely identified.
+             A table can have only one primary key, and it cannot contain NULL values.
+      Candidate Key:  A candidate key is any column or a combination of columns that can qualify as a unique key in the table. 
+                There can be multiple candidate keys in a table, and each one could be chosen as the primary key.
+      Super Key:   A super key is a set of one or more columns (attributes) that can uniquely identify a row in a table.
+             A super key can include additional attributes that are not necessary for unique identification, 
+             making it a superset of the candidate key.
+      Alternate Key:   An alternate key is any candidate key that is not chosen as the primary key. 
+                 If there are multiple candidate keys, one becomes the primary key, and the others are alternate keys.
+      Foreign Key:     A foreign key is a column or set of columns in one table that establishes a link between data in two tables.
+               It references the primary key in another table, ensuring referential integrity by enforcing a 
+               relationship between the tables.
+      Composite Key:    A composite key is a key that consists of two or more columns to uniquely identify a record in a table.
+                  It is used when a single column is not sufficient to uniquely identify records.
+      Unique Key:   A unique key is a key that ensures that all values in a column or a set of columns are unique across the
+              database table. Unlike the primary key, a table can have multiple unique keys, and they can accept NULL values 
+              (although each NULL must be unique).
+
+              
+9.What are transactions in a database?
+      A transaction is a sequence of one or more SQL operations executed as a single unit of work.
+      Begin Transaction: Marks the start of a transaction.
+      Commit:     Finalizes the transaction and makes all changes permanent.
+      Rollback:   Undoes all changes made during the transaction, reverting the database to
+          its previous state in case of an error or explicit abort.
+
+10.What are the ACID properties in database transactions?
+      1. Atomicity:
+
+      Definition: A transaction is an indivisible unit of work; it either completes entirely or does not happen at all.
+      Implication: If a transaction involves multiple operations, all operations must succeed for the transaction to be 
+            considered successful. If any part of the transaction fails, the entire transaction is rolled back, and none of the operations are applied.
+
+      2.Consistency:
+
+      Definition: A transaction must transition the database from one consistent state to another consistent state.
+      Implication: The database must adhere to all predefined rules, constraints, and relationships before and after a transaction.
+              If a transaction would violate any integrity constraints or rules, it is rolled back to ensure consistency.
+
+      3.Isolation:
+
+      Definition: Transactions must be isolated from one another, meaning that the operations of one transaction should not be visible to other transactions until the transaction is complete.
+      Implication: Intermediate results of a transaction are not visible to other transactions. This ensures that transactions do not interfere with each other and maintains data integrity in concurrent environments.
+
+      4.Durability:
+
+      Definition: Once a transaction is committed, its changes are permanent and must survive system failures.
+      Implication: Committed transactions are saved to non-volatile storage and are not lost even if there is a
+            power outage, system crash, or other failure. The database must ensure that the effects of committed transactions persist.
+====
+
+
+
+SubQueries :
+----------
+
+	1. What is a sub-query in SQL?
+		Ans : A sub-query is a query nested inside another query, often used to perform operations that require more than one step.
+		
+	2. Can you provide an example of a basic sub-query?
+		Ans : SELECT * FROM Employees WHERE DepartmentID IN (SELECT DepartmentID FROM Departments WHERE Location = 'New York');
+		
+	3. What are the types of subqueries?
+		Ans:
+			1. Single-row subquery: Returns a single row.
+			2. Multiple-row subquery: Returns multiple rows.
+			3. Multiple-column subquery: Returns multiple columns.
+			4. Correlated subquery: References columns from the outer query.
+		
+	4. What is the difference between a sub-query and a join?
+		Ans: A sub-query is a nested query that can return a single value or a list of values, 
+			whereas a join combines columns from two or more tables based on a related column.
+			
+	5. Explain the difference between correlated and uncorrelated sub-queries.
+		Ans: An uncorrelated sub-query is independent of the outer query and can be run on its own. 
+			Correlated sub-query depends on the outer query for its values and is executed once for each row processed by the outer query.
+			(works like a loop)
+			
+	6. Describe a scenario where a sub-query might be more advantageous than a join.
+		Ans: When you need to perform a calculation or retrieve a value that depends on a single row 
+			or a small set of rows that are not directly related to the main query, 
+			a sub-query might be more readable and easier to maintain than a join.
+
+	7. What are the limitations of using sub-queries in SQL?
+		Ans: Sub-queries can sometimes lead to Performance issues, particularly if they are not well-optimized. 
+			Less readable and 
+			Harder to Maintain than equivalent queries using joins.
+			
+	8. Write a query to find the employee with highest salary in the Employees table using a sub-query
+		Ans: SELECT EmployeeID, Name, Salary
+			FROM Employees
+			WHERE Salary = (SELECT MAX(Salary) FROM Employees);
+		
+	9. Using a sub-query, find the employees who earn more than the average salary in their department.
+		Ans: SELECT EmployeeID, Name FROM Employees e 
+			WHERE Salary > (SELECT AVG(Salary) 
+			FROM Employees 
+			WHERE DepartmentID = e.DepartmentID);
+		
+	10. Create a sub-query to list all departments with more than 10 employees.
+		Ans: SELECT DepartmentID, DepartmentName FROM Departments 
+			WHERE DepartmentID IN 
+			(SELECT DepartmentID FROM Employees 
+			GROUP BY DepartmentID HAVING COUNT(*) > 10);
+			
+VIEWS :
+-------
+
+	1. What is a view in SQL?
+		Ans: A view is a virtual table based on the result set of a SQL query. 
+			Does not store data itself but displays data stored in other tables.
+			
+	2. How do you create a view in SQL?
+		Ans: You can create a view using the CREATE VIEW statement.
+			CREATE VIEW view_name AS
+			SELECT column1, column2, ...
+			FROM table_name
+			WHERE condition;
+			
+	3. What are the advantages of using views?
+		Ans: Simplify complex queries, 
+			Enhance security by restricting access to specific columns or rows, and 
+			provide a level of Abstraction from the underlying table structures.
+			
+	4.	Can you update data through a view?
+		Ans: Yes, you can update data through a view if the view is updatable. 
+			Requires that the view is based on a single table, 
+			and does not include certain SQL constructs like GROUP BY, DISTINCT, or aggregate function	
+			
+	5. Explain the difference between a view and a table.
+		Ans: A table is a physical storage of data, 
+			View is a virtual table representing the result of a query. 
+			A view does not store data itself but provides a way to look at data in one or more tables.
+			
+	6. How do you modify an existing view?
+		Ans: You can modify an existing view using the CREATE OR REPLACE VIEW statement. 
+			CREATE OR REPLACE VIEW view_name AS
+			SELECT column1, column2, ...
+			FROM table_name
+			WHERE condition;
+
+	7. Can you drop a view? If so, how?
+		Ans: Yes, you can drop a view using the DROP VIEW statement.
+			DROP VIEW view_name;
+
+	8. How would you create a view that includes data from multiple tables?
+		Ans: You can create a view that includes data from multiple tables using joins.
+		CREATE VIEW view_name AS
+		SELECT a.column1, b.column2
+		FROM table1 a
+		JOIN table2 b ON a.common_column = b.common_column;
+		
+	9. What limitations exist when working with views?
+		Ans: Views cannot contain certain constructs like temporary tables, 
+			cannot be indexed directly,
+			limitations on updating data if the view involves complex queries such as those with GROUP BY, aggregate functions, or DISTINCT.
+			
+	10. Create a view to show all employees with their department names.
+		Ans: CREATE VIEW EmployeeDepartment AS
+			SELECT e.EmployeeID, e.Name, d.DepartmentName
+			FROM Employees e
+			JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+		
+	11. Write a query to update a view showing the salary of employees.
+		Ans: UPDATE EmployeeSalaryView
+			SET Salary = Salary * 1.10
+			WHERE DepartmentID = 1;
+
+
+1. Different types of aggregators functions?
+ans.
+    a. SUM: Calculates the total sum of a set of values.
+    b. AVG: Calculates the average value of a set of values.
+    c. MAX: Returns the maximum value in a set of values.
+    d. MIN: Returns the minimum value in a set of values.
+    e. COUNT: Returns the number of rows in a table or the number of non-NULL values in a column.
+    f. GROUPING SETS: Groups a result set into groups based on one or more columns.
+
+2.Write an example for each aggregators?
+ans.
+    a. SUM
+       Example: SELECT SUM(salary) FROM employees;
+       -- Calculate the total sales by region
+        SELECT region, SUM(sales) AS total_sales
+        FROM sales_data
+        GROUP BY region;
+    b. AVG
+      Example: SELECT AVG(price) FROM products;
+      -- Calculate the average order value by customer
+      SELECT customer_id, AVG(order_value) AS avg_order_value
+      FROM orders
+      GROUP BY customer_id;
+
+    c. MAX
+       Example: SELECT MAX(salary) FROM employees;
+    d. MIN
+       Example: SELECT MIN(price) FROM products;
+       -- Calculate the maximum and minimum prices by product category
+      SELECT category, MAX(price) AS max_price, MIN(price) AS min_price
+      FROM products
+      GROUP BY category;
+
+    e. COUNT
+       Example: SELECT COUNT(*) FROM customers;
+       
+    f. GROUPING SETS
+      Example: SELECT department, AVG(salary) FROM employees
+      GROUP BY department;
+
+ 3.USES OF THE AGGREGATORS IN SQL
+ans.
+    A.Data Analysis
+      a.Analyze and summarize large datasets,
+      b.Providing insights into trends patterns, and correlations.
+    B.Reporting
+      a.To generate reports, such as sales reports, financial reports
+      b.Performance metrics.
+    C.Business Intelligence
+      a.Business intelligence applications to analyze and visualize data, supporting informed decision-making.
+    D.Data Mining
+      a.To identify patterns and relationships in large datasets.
+    E.Scientific Research
+      a.To analyze and summarize data, supporting hypothesis testing and theory development.
+
+4.Define joins in SQL?
+ans.
+    SQL JOINS are used to combine rows from two or more tables based on a related column between them.
+
+5.What are the different types of joins explain with examples?
+ans.
+    1. 1nner joints
+    Returns only the rows that have a match in both tables
+    
+    SELECT *
+    FROM customers
+    INNER JOIN orders
+    ON customers.customer_id = orders.customer_id;
+    
+    2.Left joints
+    Returns all the rows from the left table and the matching rows from the right table. If there are no matches, the result set will contain NULL values.
+    
+    SELECT *
+    FROM customers
+    LEFT JOIN orders
+    ON customers.customer_id = orders.customer_id;
+    
+    3.Right joins
+    Returns all the rows from the right table and the matching rows from the left table. If there are no matches, the result set will contain NULL values.
+    
+    SELECT *
+    FROM customers
+    RIGHT JOIN orders
+    ON customers.customer_id = orders.customer_id;
+    
+    4.FULL join
+    Returns all the rows from both tables, with NULL values in the columns where there are no matches.
+    
+    SELECT *
+    FROM customers
+    FULL JOIN orders
+    ON customers.customer_id = orders.customer_id;
+    
+    5.CROSS join
+    
+    Returns the Cartesian product of both tables, with each row of one table combined with each row of the other table.
+    
+    SELECT *
+    FROM customers
+    CROSS JOIN orders;
+
+7. Explain about the join conditions?
+ans. 
+   a.ON: Specifies the column(s) to join on.
+   b.USING: Specifies the column(s) to join on, without the need to specify the table names.
+   c.NATURAL: Joins the tables based on all columns with the same names.
+
+8.Key difference between aggregators and joins?
+ans.
+  a.Purpose: Aggregates are used to perform calculations on a set of data, while joins are used to combine data from multiple tables.
+  b.Output: Aggregates produce a single value or a set of summary statistics, while joins produce a combined set of rows from multiple tables.
+  c.Syntax: Aggregates use functions like SUM, AVG, and COUNT, while joins use keywords like INNER JOIN, LEFT JOIN, and RIGHT JOIN.
+  
+  In summary, aggregates are used to analyze and summarize data, while joins are used to combine data from multiple tables.

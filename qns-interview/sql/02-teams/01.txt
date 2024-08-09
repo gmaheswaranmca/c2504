@@ -1,0 +1,380 @@
+#Anugrah
+ INTERVIEW QUESTION AND ANSWERS
+
+
+***************GOPIKA****************************1 to 7 in CO*****************************************
+1.Different types of query  language in sql?
+
+SQL (Structured Query Language) is used to communicate with and manipulate databases. 
+Data Definition Language (DDL):
+DDL is used to define and manage database schema and structure. The primary DDL commands are:
+CREATE: Creates a new table, view, index, or other database object.
+ALTER: Modifies an existing database object, such as a table
+DROP: Deletes a database object
+TRUNCATE: Removes all records from a table but keeps its structure.
+Data Manipulation Language (DML):
+DML is used for managing data within database tables. The primary DML commands are:
+SELECT: Retrieves data from one or more tables
+INSERT: Adds new rows to a table
+UPDATE: Modifies existing data within a table
+DELETE: Removes rows from a table
+Data Control Language (DCL):
+DCL is used to control access to data in the database. The primary DCL commands are:
+GRANT: Provides users with access privileges.
+REVOKE: Removes access privileges.
+Transaction Control Language (TCL):
+TCL is used to manage transactions in the database. The primary TCL commands are:
+BEGIN TRANSACTION: Starts a new transaction.
+COMMIT: Saves all changes made during the transaction
+ROLLBACK: Undoes all changes made during the transaction
+SAVEPOINT: Sets a savepoint within a transaction.
+
+2.What is RDBMS?
+
+DBMS stands for Relational Database Management System. It is a type of database management system (DBMS) that stores data in a structured format, using rows and columns. This structure allows for easy access, management, and manipulation of data using structured query language (SQL). 
+
+3.Give examples for RDBMS?
+
+Oracle,MYSQL,PostgreSQL,Microsoft SQL Server
+
+4.What is Data Modelling?
+
+Data modeling in database management systems (DBMS) is the process of creating a conceptual representation of the data structures and relationships within a database. 
+It involves defining how data is stored, accessed, and manipulated, allowing for efficient data management and retrieval.
+
+5. What is relational Data Modelling?
+
+Relational data modeling is a methodology used to design and organize data in a relational database. 
+This approach focuses on structuring data into tables (also known as relations) that are linked to each other based on defined relationships. 
+Each table consists of rows and columns, where rows represent records, and columns represent attributes or fields.
+
+6.What is normalization and explain the purpose of it?
+
+Normalization is a systematic approach in database design used to minimize data redundancy and ensure data integrity
+purpose of normalization are the follows:
+Eliminating Data Redundancy
+Ensuring Data Integrity
+Enhancing Data Organization
+Improving Data Maintenance
+
+7.What are the different type of normalization?
+
+First Normal Form (1NF) ensures that the values in each column of a table are atomic and that there are no repeating groups or arrays.
+
+Second Normal Form (2NF) eliminates partial dependencies, where non-key attributes depend only on a part of a composite primary key.
+
+Third Normal Form (3NF) eliminates transitive dependencies, where non-key attributes depend on other non-key attributes.
+
+8. Explain transaction DBMS?
+
+Transactions are crucial for maintaining data integrity and ensuring that the database reflects a consistent state. 
+They provide a mechanism to guarantee that a series of operations either all succeed or all fail, preventing partial updates that could leave the database in an inconsistent state.
+
+9. What are the commands in Transaction?
+   
+1. BEGIN TRANSACTION:Starts a new transaction.
+2. COMMIT:Commits the current transaction, making all changes made by the transaction permanent.
+3. ROLLBACK:Rolls back the current transaction, undoing all changes made during the transaction.
+4.SAVEPOINT:Creates a savepoint within a transaction. Savepoints allow you to roll back to a specific point within a transaction without    rolling back the entire transaction.
+
+10. Transactions are characterized by four fundamental properties known as ACID explain them?
+
+Atomicity:Atomicity ensures that a transaction is an indivisible unit of work. Either all operations within the transaction are completed successfully, or none of them are applied.
+
+Consistency:Consistency ensures that a transaction takes the database from one valid state to another, maintaining all predefined rules and constraints.
+
+Isolation:Isolation ensures that transactions occur independently without interference from other concurrent transactions. The intermediate state of a transaction is not visible to other transactions.
+
+Durability:Durability guarantees that once a transaction is committed, the changes made are permanent and will persist even in the event of a system crash or failure.
+
+11.Explain the different type of keys in DBMS?
+
+Primary Key:A primary key is a field or a combination of fields that uniquely identifies each record in a table. 
+Composite Key:A composite key is a primary key consisting of two or more columns that together uniquely identify a record in a table.
+Candidate Key:A candidate key is a column or a set of columns that can uniquely identify any record in a table. It can be considered a potential primary key
+Alternate Key:An alternate key is a candidate key that is not chosen as the primary key. It serves as a secondary unique identifier.
+Foreign Key:A foreign key is a column or a set of columns that establishes a relationship between tables by referencing the primary key of another table.
+Super Key:A super key is a set of one or more columns that can uniquely identify records in a table. It is a broader concept that encompasses candidate keys and primary keys.
+Unique Key: A unique key is a constraint that ensures all values in a column or a set of columns are distinct across rows in a table.
+
+12.Difference between primary and foreign key
+
+Primary Key:A column or set of columns that uniquely identifies each record in a table.
+Foreign Key:A column or set of columns in one table that refers to the primary key in another table.
+***************ABIJITH************************************8-16 in co*********************************
+
+1. What is SQL?
+	SQL (Structured Query Language) is a standard programming language designed for managing and manipulating relational databases. It is used to perform various tasks such as querying, updating, inserting, and deleting data, as well as managing database structures and access permissions.
+
+2. What are the datatypes in SQL?
+	a. Numeric
+		-INT
+		-BIGINT
+		-SMALLINT
+		-TINYINT
+		-FLOAT
+		-DECIMAL
+		-DOUBLE
+	b. Character and string data types
+		-CHAR- fixed size string
+		-VARCHAR- Variable size string
+		-TEXT
+		  -NCHAR,NVARCHAR- To store Unicode text
+	c. Date and Time
+		-DATE
+		-TIME
+	D. Boolean
+		-Boolean
+
+3. What are commands in SQL? (DDL, DML, TCL)
+	a. DDL(Data Definition Language ) 	 
+		-CREATE TABLE
+		-ALTER TABLE
+		-DROP TABLE
+		-CREATE INDEX
+		-CREATE VIEW
+	b. DML( Data Manipulation Language)
+		-INSERT INTO
+		-UPDATE
+		-DELETE FROM
+	c. TCL(Transaction Control Language)
+		-COMMIT
+		-ROLLBACK
+
+4.What are the operators in SQL?
+	a. Arithmetic Operators : '+', '-', '*', '/', '%'
+	b. Comparison Operators : '=', '<> or !=', '<', '>', '<=', '>='
+	c. Logical operators : AND, OR, NOT
+	D. IS NULL and IS NOT NULL
+	e. BETWEEN
+	f. LIKE('a%' '%a')
+
+5. Write a SQL query to select all columns from a table named Employees?
+	SELECT * FROM Employees;
+
+6. Write a SQL query to find all employees who have a salary greater than 10,000 rs?
+	SELECT *
+	FROM Employees
+	WHERE Salary > 10000;
+
+7. Write a SQL query to insert a row into the table.
+	INSERT INTO Employees (id, Name, Salary, DepartmentID)
+        VALUES (10, 'anu ', 20000, 5);
+
+8. Write a SQL query to update the salary of an employee with EmployeeID 10 to 45000.
+	UPDATE Employees
+	SET Salary = 46000
+	WHERE EmployeeID = 10;
+
+9. Write a SQL query to delete a record from the Employees table where the id is 10.
+	DELETE FROM Employees
+	WHERE id = 10.
+
+
+
+***************GIRISH***************************************17 -18 in co******************************
+
+****************VIEWS*********
+1.What is a view in SQL?
+
+A view is a virtual table that is based on the result set of a SELECT query. . It does not store data physically but provides a way to simplify complex queries and enhance security.
+
+
+2.Why use views?
+
+To simplify complex queries.
+To enhance security by restricting access to specific rows or columns.
+To provide a consistent, abstracted view of the data.
+To encapsulate logic and reuse SQL code.
+
+3.How do you create a view?
+
+sql
+
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+4.Can you update data through a view?
+
+Yes, you can update data through a view if it is based on a single table and does not include any complex joins, aggregates, or group by clauses. The view must be updatable.
+
+5.What are the limitations of views?
+
+Views cannot have triggers.
+Some views are read-only.
+You cannot index a view directly (though we can create indexed views/materialized views in some databases).
+
+6.What is the difference between a view and a table?
+
+A table physically stores data, whereas a view is a virtual table representing the result of a query
+
+7.How can you ensure security using views?
+
+By creating views that expose only specific columns or rows of data to certain users, limiting their access to the underlying table data.	
+9.How do you drop a view?
+
+
+DROP VIEW view_name;
+
+10What is an indexed view?
+
+An indexed view, also known as a materialized view, is a view that has been physically stored in the database with an index, improving performance for certain types of queries.
+
+******************SUBQUERIES*****************
+
+1.What is a subquery in SQL?
+
+A subquery is a query nested inside another query, used to return data that will be used in the main query as a condition to further restrict the data retrieved.
+
+2.Where can subqueries be used?
+
+In SELECT, INSERT, UPDATE, and DELETE statements.
+In the WHERE, HAVING, and FROM clauses.
+
+3.What are the types of subqueries?
+
+Single-row subquery: Returns zero or one row.
+Multiple-row subquery: Returns more than one row.
+Correlated subquery: References columns from the outer query.
+
+4.How do you use a subquery in the WHERE clause?
+
+sql
+
+SELECT column1, column2
+FROM table1
+WHERE column1 IN (SELECT column1 FROM table2 WHERE condition);
+
+5.What is the difference between a subquery and a join?
+
+A subquery is a query nested inside another query, often used to filter results or perform a calculation. A join combines rows from two or more tables based on a related column between them.
+
+6.Write a query to create a view that shows the employee names and their department names.eg
+
+CREATE VIEW EmployeeDepartment AS
+SELECT e.EmployeeName, d.DepartmentName
+FROM Employees e
+JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+**ANUGRAH**********************************************19-20in co*************************************
+
+*********JOINS**************
+
+
+1. What is a join?
+
+A join is a SQ clause used to combine and retrieve records from two or multiple tables. SQL tables can be joined based on the relationship between the columns of those tables. Check out our SQL joins tutorial to know all the details about them.
+
+2. What are the main types of joins?
+
+There are six main types of joins:
+
+INNER JOIN
+LEFT JOIN
+RIGHT JOIN
+FULL JOIN
+SELF JOIN
+CROSS JOIN
+
+3. What is the difference between a LEFT JOIN and a RIGHT JOIN?
+
+
+The LEFT JOIN includes all records from the left side and matched rows from the right table, whereas the RIGHT JOIN returns all rows from the right side and unmatched rows from the left table. Essentially, both joins will throw the same result if we exchange the table order, provided that there are only two tables involved.
+
+4. Why are joins important in SQL management?
+
+SQL joins are crucial in SQL management for multiple reasons, including:
+
+SQL JOINS are key methods to integrate multiple tables so they are easy to read and
+They provide an efficient and accessible way to access and combine information in your database.
+Using JOINS can reduce data usage and storage on the database.
+5. What is an OUTER JOIN?
+Outer joins are joins that return matched values and unmatched values from either or both tables. LEFT JOIN, RIGHT JOIN, AND FULL JOIN are considered outer joins.
+
+6. What is an INNER JOIN?
+
+An INNER JOIN returns only those records that satisfy a defined join condition in both (or all) tables. It's a default SQL join.
+
+7. What is a CROSS JOIN?
+
+A CROSS JOIN returns a paired combination of each row of the first table with each row of the second table. This join type is also known as cartesian join.
+
+8. Is it possible to join a SQL table to itself?
+
+Yes, this is normally done through a so-called self-join. A self-join is a type of JOIN used to compare rows within the same table. Unlike other SQL JOIN queries that join two or more tables, a self-join joins a table to itself.
+
+9. What is the difference between FULL JOIN and CROSS JOIN?
+
+A FULL JOIN returns all records from both tables. When the ON condition is not satisfied, it returns a NULL value. By contrast, a CROSS JOIN returns all possible combinations of all rows of both tables, resulting in a cartesian product between the two tables. This results in a larger table than the result of a FULL JOIN.
+
+10. What is the purpose of using aliases in SQL JOINS?
+
+As queries get more complex, names can get long and unwieldy. To help make things clearer, we can use aliases to assign new names to items in the query, including columns and tables. To give an alias to an object, we can use the AS clause.
+
+***********Aggregators***************
+
+1.What are aggregate functions in SQL?
+
+Aggregate functions perform calculations on a set of values and return a single value. Common aggregate functions include COUNT, SUM, AVG, MIN, MAX, etc.
+
+2.Can you explain how the COUNT function works
+
+The COUNT function returns the number of rows that match a specified criterion. You can use COUNT(*) to count all rows, or COUNT(column_name) to count non-null values in a specific column.
+
+3.SUM () WORKING
+
+The SUM function calculates the total sum of a numeric column. It is commonly used to calculate totals, such as total sales or total revenue.
+
+4.AVG() WORKING
+
+The AVG function calculates the average value of a numeric column. For example, to find the average salary of employees:
+
+5.MIN() WORKING
+
+MIN returns the smallest value in a column, while MAX returns the largest value. They are useful for finding extreme values in a dataset.
+
+6.MAX() WORKING
+
+MAX returns the largest value. They are useful for finding extreme values in a dataset.
+
+7.What is the difference between COUNT(column_name) and COUNT(*)?
+
+COUNT(column_name) counts only non-null values in the specified column, whereas COUNT(*) counts all rows, including those with null values in any column.
+
+8.What is the difference between HAVING and WHERE clauses?
+
+The WHERE clause filters rows before aggregation, while the HAVING clause filters groups after aggregation. HAVING is used to apply conditions to aggregated data.
+
+9.Can you perform calculations using multiple aggregate functions in a single query?
+
+Yes, you can use multiple aggregate functions in a single query to perform different calculations on the same set of data.
+
+SELECT COUNT(*) AS TotalOrders, AVG(Sales) AS AverageSales
+FROM Orders;
+
+
+10.Explain the use of DISTINCT with aggregate functions.
+
+The DISTINCT keyword can be used with aggregate functions like COUNT to count only unique values.
+
+11.NORMAL FUNCTIONS AND AGGREGATE FUNCTIONS
+
+Scalar functions operate on a single value or row and return a single value as output. They do not perform calculations across multiple rows.
+Aggregate functions perform calculations on a set of values and return a single value. They are used to summarize data across multiple rows.
+
+12.How would you find the second highest salary from a table?
+
+SELECT DISTINCT Salary
+FROM Employees
+ORDER BY Salary DESC
+LIMIT 1 OFFSET 1;
+
+The LIMIT clause is used to specify the maximum number of rows that should be returned by the query.
+
+The OFFSET clause is used to skip a specified number of rows before beginning to return rows from the query result.
+
+13.Will GROUP BY work without aggregator function
+
+Yes, the GROUP BY clause can be used without aggregate functions in SQL. In such cases, GROUP BY is used primarily to eliminate duplicate rows and organize the result set into groups based on the specified columns.
