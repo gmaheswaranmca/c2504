@@ -1,0 +1,207 @@
+01
+"Find the Top N Salespersons by Sales
+Problem: 
+Given a table `Sales` 
+with columns `SalesPersonID`, `SaleAmount`, and `SaleDate`, 
+find the top 3 salespersons by total sales amount.
+
+Table Structure:
+```
+CREATE TABLE Sales (
+    SalesPersonID INT,
+    SaleAmount DECIMAL(10, 2),
+    SaleDate DATE
+);
+```"
+
+02
+"Find Employees with No Manager
+Problem:
+ Given an `Employees` table 
+ with columns `EmployeeID`, `Name`, and `ManagerID` 
+ (which refers to `EmployeeID` of the manager), 
+ find all employees who do not have a manager.
+
+Table Structure:
+```
+CREATE TABLE Employees (
+    EmployeeID INT,
+    Name VARCHAR(100),
+    ManagerID INT
+);
+```"
+
+03
+"Find Customers with Multiple Orders
+Problem: Given a `Customers` table and an `Orders` table 
+where `Orders` contains a `CustomerID`, 
+find customers who have placed more than one order.
+
+Table Structure:
+```
+CREATE TABLE Customers (
+    CustomerID INT,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Orders (
+    OrderID INT,
+    CustomerID INT,
+    OrderDate DATE
+);
+```"
+
+04
+"Find the Average Salary by Department
+Problem: Given an `Employees` table 
+with columns `EmployeeID`, `DepartmentID`, and `Salary`, 
+find the average salary for each department.
+
+Table Structure:
+```
+CREATE TABLE Employees (
+    EmployeeID INT,
+    DepartmentID INT,
+    Salary DECIMAL(10, 2)
+);
+```"
+
+05
+"Find the Most Recent Order for Each Customer
+Problem: Given an `Orders` table 
+with columns `OrderID`, `CustomerID`, and `OrderDate`, 
+find the most recent order date for each customer.
+
+Table Structure:
+```
+CREATE TABLE Orders (
+    OrderID INT,
+    CustomerID INT,
+    OrderDate DATE
+);
+```"
+
+06
+"Find Employees Who Report to More Than One Manager
+Problem: Given an `Employees` table 
+with columns `EmployeeID`, `Name`, and `ManagerID`, 
+find employees who report to more than one manager."
+
+
+07
+"Find Departments with No Employees
+Problem: Given a `Departments` table and an `Employees` table, 
+find departments that do not have any employees.
+Table Structure:
+```
+CREATE TABLE Departments (
+    DepartmentID INT,
+    DepartmentName VARCHAR(100)
+);
+
+CREATE TABLE Employees (
+    EmployeeID INT,
+    DepartmentID INT
+);
+```"
+
+08
+"Find the Second Highest Salary
+Problem: Given an `Employees` table 
+with columns `EmployeeID`, `Name`, and `Salary`, 
+find the second highest salary."
+
+09
+"Find Customers with No Orders in the Last Year
+Problem: Given a `Customers` table and an `Orders` table, 
+find customers who have not placed any orders in the last year."
+
+10
+"Find Total Sales per Month
+Problem: Given a `Sales` table 
+with columns `SaleAmount` and `SaleDate`, 
+find the total sales amount for each month."
+
+11
+"Find Employees with the Most Orders
+Problem: Given an `Employees` table and an `Orders` table, 
+find the employee who has processed the most orders.
+
+Table Structure:
+```
+CREATE TABLE Employees (
+    EmployeeID INT,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Orders (
+    OrderID INT,
+    EmployeeID INT
+);
+```"
+
+12
+"Find Average Salary and Number of Employees in Each Department
+Problem: Given an `Employees` table, 
+find the average salary and number of employees 
+in each department.
+Table: 
+Employees {EmployeeID, DepartmentID, Salary}"
+
+13
+"Find Orders with the Largest Order Value
+Problem: Given an `Orders` table 
+with columns `OrderID`, `CustomerID`, and `OrderValue`, 
+find the order with the largest order value."
+
+14
+"Find the Total Number of Orders and Total Order Value by Customer
+Problem: Given an `Orders` table, 
+find the total number of orders and 
+total order value for each customer."
+
+15
+"Find the Oldest and Youngest Employees
+Problem: Given an `Employees` table 
+with columns `EmployeeID`, `Name`, and `DateOfBirth`, 
+find the oldest and youngest employees."
+
+16
+"Find the Monthly Average Sales for Each Salesperson
+Problem: Given a `Sales` table 
+with columns `SalesPersonID`, `SaleAmount`, and `SaleDate`, 
+find the monthly average sales for each salesperson."
+
+17
+"Find Employees Who Earn More Than Their Managers
+Problem: Given an `Employees` table 
+with columns `EmployeeID`, `ManagerID`, and `Salary`, 
+find employees who earn more than their managers."
+
+18
+"Find the Top N Products by Sales Volume
+Problem: Given a `Sales` table 
+with columns `ProductID`, `SaleAmount`, and `SaleDate`, 
+find the top 5 products by total sales volume.
+
+Table Structure:
+```
+CREATE TABLE Sales (
+    ProductID INT,
+    SaleAmount DECIMAL(10, 2),
+    SaleDate DATE
+);
+```"
+
+19
+"Find the Day with the Highest Sales
+Problem: Given a `Sales` table 
+with columns `SaleAmount` and `SaleDate`, 
+find the day with the highest total sales."
+
+20
+"Find the Average Sales Per Customer
+Problem: 
+Given an `Orders` table 
+with columns `OrderID`, `CustomerID`, and `SaleAmount`, 
+calculate the average sales amount per customer."
