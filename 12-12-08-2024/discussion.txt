@@ -48,6 +48,56 @@ static bool IsPrime(int salary)
 // number after 49 .. before 64
 // 49, 50, 51, ..., 63
 
+minnu and gladsy
+v2
+#1
+to find 2nd min 
+//51 53 55 -1 min=51, 2ndMin=53
+
+#2
+to find 2nd min 
+//51 55 53 -1 min=51, 2ndMin=53
+
+#3
+to find 2nd min 
+//55 53 51 -1 min=51, 2ndMin=53
+
+#4
+to find 2nd min 
+//51  -1 min=51, 2ndMin=51
+
+#5
+to find 2nd min 
+//51 53 -1 min=51, 2ndMin=53
+
+
+static void Main()
+{
+    int minSal = int.MaxValue;
+    int secondMinSal = int.MaxValue;
+
+    while (true)
+    {
+        Console.Write("Enter salary (-1 to stop): ");
+        int sal = Convert.ToInt32(Console.ReadLine());
+        if (sal == -1)
+            break;
+        if (sal < minSal)
+        {
+            secondMinSal = minSal;
+            minSal = sal;
+        }
+        else if (sal < secondMinSal && sal != minSal)
+            secondMinSal = sal;
+    }
+
+    if (secondMinSal == int.MaxValue)
+        Console.WriteLine("There is no second minimum salary.");
+    else
+        Console.WriteLine("The second minimum salary is: " + secondMinSal);
+}
+
+v1
 #1
 to find 2nd min odd
 // 51 52 53 54 55 
