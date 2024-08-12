@@ -1,0 +1,40 @@
+04
+"Read doctors' salaries (integer) from keyboard till we read -1 
+    by using array / collection."
+Find average salary (integer), 
+prime salaries count(example: Rs.101, prime number salary), 
+minimum 4 digit salaries count, 
+maximum salary, 
+odd salaries sum (example: Rs.5001), and
+2nd minimum odd salary.  
+Check maximum salary is also prime salary.
+Use coding standards and best practices to write pseudo code and c# code.
+Plan the task codes to make as reusable functions.
+
+
+05
+"Read patients' ages (integer) from keyboard till we read less than zero 
+    by using array / collection."
+Find average age (integer), 
+prime ages sum(example: 11, prime number age), 
+teenager ages sum, 
+minimum age, 
+odd ages sum (example: 51), and
+2nd maximum adult age.  
+Check minimum age is also prime age.
+Use coding standards and best practices to write pseudo code and c# code.
+Plan the task codes to make as reusable functions.
+
+
+06
+"Read patients' temperatures (integer) from keyboard till we read 0
+    by using array / collection."
+Find average temperature (integer), 
+prime temperatures sum(example: 41, prime number temperature), 
+minimum 3 digit temperatures sum, 
+minimum temperature, 
+odd temperatures sum (example: 31), and
+2nd maximum odd temperature.  
+Check minimum temperature is also prime temperature.
+Use coding standards and best practices to write pseudo code and c# code.
+Plan the task codes to make as reusable functions.

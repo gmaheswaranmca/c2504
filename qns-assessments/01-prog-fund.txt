@@ -32,11 +32,11 @@ Plan the task codes to make as reusable functions.
 [Anurag, Ann Mariya, Dijol]
 "Read patients' temperatures (integer) from keyboard till we read 0
 without using array / collection."
-Find average temperature (integer), 
-prime temperatures sum(example: 41, prime number temperature), 
-minimum 4 digit temperatures sum, 
+Find average temperature (integer), Done 
+prime temperatures sum(example: 41, prime number temperature), Done 
+minimum 3 digit temperatures sum, Done 
 minimum temperature, 
-odd temperatures sum (example: 31), and
+odd temperatures sum (example: 31), and Done 
 2nd maximum odd temperature.  
 Check minimum temperature is also prime temperature.
 Use coding standards and best practices to write pseudo code and c# code.
@@ -76,7 +76,7 @@ Plan the task codes to make as reusable functions.
     by using array / collection."
 Find average temperature (integer), 
 prime temperatures sum(example: 41, prime number temperature), 
-minimum 4 digit temperatures sum, 
+minimum 3 digit temperatures sum, 
 minimum temperature, 
 odd temperatures sum (example: 31), and
 2nd maximum odd temperature.  
