@@ -1,0 +1,102 @@
+"Language Independent" in the .NET 
+    We have, 
+        C# Console App for .NET Framework 
+    We will add, 
+        VB Class Lib for .NET Framework 
+        In the solution of Solution Explorer, 
+        Right Click -> Add -> New Project
+        "VB Class Lib for .NET Framework"
+        under category "VB - Windows - Library" 
+
+        Project Name: C2504VbFirstLib
+        Class Name: MyUtil
+
+        VB has two procedures:
+            1. Function     - return function 
+            2. Sub          - no-return / void function
+
+    -----------------------------------------------------
+    Public Class MyUtil
+        Public Shared Function FindSum(first As Integer, second As Integer) As Integer
+            Dim sum As Integer = first + second
+            Return sum
+        End Function
+
+    End Class
+    -----------------------------------------------------
+
+        Build the VB library 
+
+
+
+    C# Console App
+        In our "C# Console App",
+        add the project library as reference. 
+
+        Right Click "C# App" Project'References -> 
+            Add Reference ->
+            Reference Manager -> 
+            Left Panel - Projects -> 
+            Tick "C2504VbFirstLib" -> 
+            OK 
+        "C2504VbFirstLib" is added as refrence to C# app project.
+
+        -----------------------------------------------------
+        //...
+        using C2504VbFirstLib;
+
+
+        namespace ProgramingFundamentalsProject
+        {
+            internal class Program
+            {
+                static void Main(string[] args) 
+                {
+                    int a = 10, b = 5;
+                    int s = MyUtil.FindSum(a, b);
+                    Console.WriteLine(s);
+                    Console.ReadKey();
+                }
+
+            
+            }
+        }
+        -----------------------------------------------------
+
+
+Terminologies:
+    Root Namespace 
+        Logical Name of types like class, interface, etc in language is called root namespace.
+    Assembly 
+        Physical File Name after built the project is called assembly.
+    IL - Intermediate Language 
+        .NET language will translate into IL.
+        IL in .NET Framework so that each .NET Language will be translated as IL code. 
+
+        Each .NET language will have compiler to translate code in .NET langage into IL code.
+
+        CTS - Common Type System 
+            IL has its own types called Common Type System.
+            Each language types are translated as CTS types. 
+    CLR - Common Language Runtime (Just-in-time)
+        Runtime of .NET frawork 
+            which translates IL code into native code and run line-by-line 
+    Interoperability
+        The code written in one .NET lang will run in another lang. 
+        VB code will run in C# using "Interoperability"
+    
+
+
+    
+OOPs:
+    class: user-defined type 
+        for composite data 
+            trainer {id, name, skill, place, commercial }
+            employee {id, code, name, dob, doj, dept_id, job_title,....}
+        "blueprint to construct objects"
+        "collection of attributes and behaviours" -> encapsulation -> data hiding 
+        "user-defined type to construct objects" 
+    object: 
+        physical entity created using data type "class"
+        "real-world entity constructed using the blueprint named 'class'"
+    
