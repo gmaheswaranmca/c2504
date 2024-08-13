@@ -100,3 +100,25 @@ OOPs:
         physical entity created using data type "class"
         "real-world entity constructed using the blueprint named 'class'"
     
+Terminlologies:
+    1. public field/attribute [access specifier]
+        visibility outside the class 
+        ie to access outside the class  
+    2. private field [access specifier]
+        visibility only inside the class 
+        ie to access only inside the class
+    3. constructor 
+        special object function 
+        which is called at the time object creation 
+        and used to initialize the object fields 
+        and name is same as class name.
+
+        it takes arguments, any number of arguments, no arguments.
+        if no arg, we call it default constructor.
+
+      
+        parameter/argument 
+
+        types:
+            1. parameterized constructor 
+            2. no parametrized constructor 

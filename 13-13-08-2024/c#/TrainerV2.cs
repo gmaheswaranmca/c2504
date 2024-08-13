@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgramingFundamentalsProject
+class Program
 {
-    internal class TrainerV2
+    static void Main(string[] args) 
     {
         private int id;
         private string name;

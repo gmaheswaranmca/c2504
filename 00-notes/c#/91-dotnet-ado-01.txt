@@ -10,24 +10,36 @@ CRUD operations with a SQL Server database using C#:
 This class represents the data model for a `Trainer`.
 
 ```csharp
-public class Trainer
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProgramingFundamentalsProject.TrainerApp
 {
-    public int Id { get; set; }  // Identity column, auto-incremented
-    public string Name { get; set; }
-    public string Place { get; set; }
-    public string Skill { get; set; }
-
-    // Constructor
-    public Trainer() { }
-
-    public Trainer(int id, string name, string place, string skill)
+    internal class Trainer
     {
-        Id = id;
-        Name = name;
-        Place = place;
-        Skill = skill;
+        public int id;
+        public string name;
+        public string skill;
+        public string place;
+
+        public Trainer(int _id, string _name, string _skill, string _place)
+        {
+            id = _id;
+            name = _name;
+            skill = _skill;
+            place = _place;
+        }
+
+        public override string ToString()
+        {
+            return $"[id={id},name={name},skill={skill},place={place}]";
+        }
     }
 }
+
 ```
 
 2. Define the `TrainerDAO` Class
@@ -38,110 +50,107 @@ This class handles CRUD operations for the `Trainer` class.
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class TrainerDAO
+namespace ProgramingFundamentalsProject.TrainerApp
 {
-    private string connectionString = "your_connection_string_here";
-
-    // Create a new Trainer
-    public void Create(Trainer trainer)
+    internal class TrainerDAO
     {
-        using (SqlConnection conn = new SqlConnection(connectionString))
+        private string connectionString = "your_connection_string_here";
+
+        // Create a new Trainer
+        public void Create(Trainer trainer)
         {
-            string query = "INSERT INTO Trainers (Name, Place, Skill) VALUES (@Name, @Place, @Skill)";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@Name", trainer.Name);
-            cmd.Parameters.AddWithValue("@Place", trainer.Place);
-            cmd.Parameters.AddWithValue("@Skill", trainer.Skill);
-
-            conn.Open();
-            cmd.ExecuteNonQuery();
-        }
-    }
-
-    // Read a Trainer by ID
-    public Trainer Read(int id)
-    {
-        Trainer trainer = null;
-        using (SqlConnection conn = new SqlConnection(connectionString))
-        {
-            string query = "SELECT Id, Name, Place, Skill FROM Trainers WHERE Id = @Id";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@Id", id);
-
-            conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                trainer = new Trainer
-                {
-                    Id = (int)reader["Id"],
-                    Name = reader["Name"].ToString(),
-                    Place = reader["Place"].ToString(),
-                    Skill = reader["Skill"].ToString()
-                };
+                string query = "INSERT INTO Trainers (Name, Place, Skill) VALUES (@Name, @Place, @Skill)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Name", trainer.name);
+                cmd.Parameters.AddWithValue("@Place", trainer.place);
+                cmd.Parameters.AddWithValue("@Skill", trainer.skill);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
-        return trainer;
-    }
 
-    // Update a Trainer
-    public void Update(Trainer trainer)
-    {
-        using (SqlConnection conn = new SqlConnection(connectionString))
+        // Read a Trainer by ID
+        public Trainer Read(int id)
         {
-            string query = "UPDATE Trainers SET Name = @Name, Place = @Place, Skill = @Skill WHERE Id = @Id";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@Id", trainer.Id);
-            cmd.Parameters.AddWithValue("@Name", trainer.Name);
-            cmd.Parameters.AddWithValue("@Place", trainer.Place);
-            cmd.Parameters.AddWithValue("@Skill", trainer.Skill);
-
-            conn.Open();
-            cmd.ExecuteNonQuery();
-        }
-    }
-
-    // Delete a Trainer by ID
-    public void Delete(int id)
-    {
-        using (SqlConnection conn = new SqlConnection(connectionString))
-        {
-            string query = "DELETE FROM Trainers WHERE Id = @Id";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@Id", id);
-
-            conn.Open();
-            cmd.ExecuteNonQuery();
-        }
-    }
-
-    // List all Trainers
-    public List<Trainer> ListAll()
-    {
-        List<Trainer> trainers = new List<Trainer>();
-        using (SqlConnection conn = new SqlConnection(connectionString))
-        {
-            string query = "SELECT Id, Name, Place, Skill FROM Trainers";
-            SqlCommand cmd = new SqlCommand(query, conn);
-
-            conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            Trainer trainer = null;
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                Trainer trainer = new Trainer
+                string query = "SELECT Id, Name, Place, Skill FROM Trainers WHERE Id = @Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", id);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
                 {
-                    Id = (int)reader["Id"],
-                    Name = reader["Name"].ToString(),
-                    Place = reader["Place"].ToString(),
-                    Skill = reader["Skill"].ToString()
-                };
-                trainers.Add(trainer);
+                    trainer = new Trainer((int)reader["Id"], reader["Name"].ToString(),
+                         reader["Place"].ToString(), reader["Skill"].ToString());
+                }
+            }
+            return trainer;
+        }
+
+        // Update a Trainer
+        public void Update(Trainer trainer)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "UPDATE Trainers SET Name = @Name, Place = @Place, Skill = @Skill WHERE Id = @Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", trainer.id);
+                cmd.Parameters.AddWithValue("@Name", trainer.name);
+                cmd.Parameters.AddWithValue("@Place", trainer.place);
+                cmd.Parameters.AddWithValue("@Skill", trainer.skill);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
-        return trainers;
+
+        // Delete a Trainer by ID
+        public void Delete(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Trainers WHERE Id = @Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", id);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // List all Trainers
+        public List<Trainer> ListAll()
+        {
+            List<Trainer> trainers = new List<Trainer>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT Id, Name, Place, Skill FROM Trainers";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Trainer trainer = new Trainer( (int)reader["Id"], reader["Name"].ToString(),
+                         reader["Place"].ToString(), reader["Skill"].ToString());
+                    trainers.Add(trainer);
+                }
+            }
+            return trainers;
+        }
     }
 }
+
 ```
 
 3. Define the `TrainerUI` Class
@@ -151,10 +160,15 @@ This class is used for interacting with the user through the console.
 ```csharp
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class TrainerUI
+namespace ProgramingFundamentalsProject.TrainerApp
 {
-    private TrainerDAO trainerDAO = new TrainerDAO();
+    internal class TrainerUI
+    {
+         private TrainerDAO trainerDAO = new TrainerDAO();
 
     public void CreateTrainer()
     {
@@ -165,12 +179,7 @@ public class TrainerUI
         Console.Write("Enter Skill: ");
         string skill = Console.ReadLine();
 
-        Trainer trainer = new Trainer
-        {
-            Name = name,
-            Place = place,
-            Skill = skill
-        };
+        Trainer trainer = new Trainer(0, name, place, skill);
 
         trainerDAO.Create(trainer);
         Console.WriteLine("Trainer created successfully.");
@@ -184,10 +193,10 @@ public class TrainerUI
         Trainer trainer = trainerDAO.Read(id);
         if (trainer != null)
         {
-            Console.WriteLine($"ID: {trainer.Id}");
-            Console.WriteLine($"Name: {trainer.Name}");
-            Console.WriteLine($"Place: {trainer.Place}");
-            Console.WriteLine($"Skill: {trainer.Skill}");
+            Console.WriteLine($"ID: {trainer.id}");
+            Console.WriteLine($"Name: {trainer.name}");
+            Console.WriteLine($"Place: {trainer.place}");
+            Console.WriteLine($"Skill: {trainer.skill}");
         }
         else
         {
@@ -204,11 +213,11 @@ public class TrainerUI
         if (trainer != null)
         {
             Console.Write("Enter new Name: ");
-            trainer.Name = Console.ReadLine();
+            trainer.name = Console.ReadLine();
             Console.Write("Enter new Place: ");
-            trainer.Place = Console.ReadLine();
+            trainer.place = Console.ReadLine();
             Console.Write("Enter new Skill: ");
-            trainer.Skill = Console.ReadLine();
+            trainer.skill = Console.ReadLine();
 
             trainerDAO.Update(trainer);
             Console.WriteLine("Trainer updated successfully.");
@@ -233,65 +242,103 @@ public class TrainerUI
         List<Trainer> trainers = trainerDAO.ListAll();
         foreach (Trainer trainer in trainers)
         {
-            Console.WriteLine($"ID: {trainer.Id}, Name: {trainer.Name}, Place: {trainer.Place}, Skill: {trainer.Skill}");
+            Console.WriteLine($"ID: {trainer.id}, Name: {trainer.name}, Place: {trainer.place}, Skill: {trainer.skill}");
         }
     }
 }
+}
+
+```
+4a. Menu Code
+
+```csharp
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProgramingFundamentalsProject.TrainerApp
+{
+    internal class TrainerMenu
+    {
+        public static void Menu()
+        {
+            TrainerUI ui = new TrainerUI();
+            bool running = true;
+
+            while (running)
+            {
+                Console.WriteLine("\nTrainer Management System");
+                Console.WriteLine("1. Create Trainer");
+                Console.WriteLine("2. Read Trainer");
+                Console.WriteLine("3. Update Trainer");
+                Console.WriteLine("4. Delete Trainer");
+                Console.WriteLine("5. List All Trainers");
+                Console.WriteLine("6. Exit");
+
+                Console.Write("Choose an option: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        ui.CreateTrainer();
+                        break;
+                    case "2":
+                        ui.ReadTrainer();
+                        break;
+                    case "3":
+                        ui.UpdateTrainer();
+                        break;
+                    case "4":
+                        ui.DeleteTrainer();
+                        break;
+                    case "5":
+                        ui.ListAllTrainers();
+                        break;
+                    case "6":
+                        running = false;
+                        Console.WriteLine("Exiting...");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+        }
+    }
+}
+
 ```
 
-4. Main Driver Code
+
+4b. Main Driver Code
 
 Finally, implement the `Main` method to provide a menu-driven interface.
 
 ```csharp
+
 using System;
+using System.Collections.Generic;
 
-class Program
+using System.Text;
+using System.Threading.Tasks;
+
+
+using ProgramingFundamentalsProject.TrainerApp;
+namespace ProgramingFundamentalsProject
 {
-    static void Main(string[] args)
+    internal class Program
     {
-        TrainerUI ui = new TrainerUI();
-        bool running = true;
-
-        while (running)
+        static void Main(string[] args) 
         {
-            Console.WriteLine("\nTrainer Management System");
-            Console.WriteLine("1. Create Trainer");
-            Console.WriteLine("2. Read Trainer");
-            Console.WriteLine("3. Update Trainer");
-            Console.WriteLine("4. Delete Trainer");
-            Console.WriteLine("5. List All Trainers");
-            Console.WriteLine("6. Exit");
-
-            Console.Write("Choose an option: ");
-            string choice = Console.ReadLine();
-
-            switch (choice)
-            {
-                case "1":
-                    ui.CreateTrainer();
-                    break;
-                case "2":
-                    ui.ReadTrainer();
-                    break;
-                case "3":
-                    ui.UpdateTrainer();
-                    break;
-                case "4":
-                    ui.DeleteTrainer();
-                    break;
-                case "5":
-                    ui.ListAllTrainers();
-                    break;
-                case "6":
-                    running = false;
-                    Console.WriteLine("Exiting...");
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
-            }
+            TrainerMenu.Menu()
+            Console.ReadKey();
         }
+
+       
     }
 }
 ```
