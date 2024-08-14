@@ -1,0 +1,35 @@
+Day Assignment: 
+1. Cricket Ground Boundry Sides Distances from batsman (from Pavilion End)
+        Leg Side 
+        Off Side  
+        Straight 
+        Third Man  
+    Compare two cricket grounds:
+        find the shortest distance from each ground 
+        and compare two ground based on shortest distance 
+            check which is preferred ground for batsman 
+
+    C#: CricketGround{ LegSideDistance: int, 
+        OffSideDistace: int, 
+        StraightDistance: int, 
+        ThirdManDistance: int }
+    - int FindShortestDistance()
+        among four distance find min 
+    - bool IsShortestDistanceGt(CricketGround other)     
+    
+    C3: UserOfCricketGround will compare two grounds 
+        will say which ground is preferred ground 
+2.  Circle { Radius: int }
+        - float Circumference() 
+        - bool IsCircumferenceGt(Circle other)
+    TestCircle 
+3.  BikeRaceTrack
+        { Distance: int }
+        - bool IsGt(BikeRaceTrack other)
+    TestBikeRaceTrack
+4.  ComplexNumber { Real: int, Imaginary: int}
+        - ComplexNumber Add(ComplexNumber other)
+    TestComplexNumber for addition 
+        (3 + i4)
+     +  (5 + i3) 
+     =  (8 + i7)

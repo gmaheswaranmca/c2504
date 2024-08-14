@@ -27,3 +27,48 @@ OOP:
             Console.WriteLine($"First Land {firstLand} is less than Second Land {secondLand}");
       }
 ------------------------
+2. To compare two land property consultants' 
+    two sets of lands (land is of shape Rectangle)
+        one set - many lands        >4 <10  [(40,60),(30,60),(30,70),(20,80)]
+        another set = many lands    >3 <8   [(60,35),(25,70),(45,75),(40,40),(35,65),(35,85)]
+
+    2.1 Define these two sets of lands.
+------------------------
+
+
+Day Assignment: 
+1. Cricket Ground Boundry Sides Distances from batsman (from Pavilion End)
+        Leg Side 
+        Off Side  
+        Straight 
+        Third Man  
+    Compare two cricket grounds:
+        find the shortest distance from each ground 
+        and compare two ground based on shortest distance 
+            check which is preferred ground for batsman 
+
+    C#: CricketGround{ LegSideDistance: int, 
+        OffSideDistace: int, 
+        StraightDistance: int, 
+        ThirdManDistance: int }
+    - int FindShortestDistance()
+        among four distance find min 
+    - bool IsShortestDistanceGt(CricketGround other)     
+    
+    C3: UserOfCricketGround will compare two grounds 
+        will say which ground is preferred ground 
+2.  Circle { Radius: int }
+        - float Circumference() 
+        - bool IsCircumferenceGt(Circle other)
+    TestCircle 
+3.  BikeRaceTrack
+        { Distance: int }
+        - bool IsGt(BikeRaceTrack other)
+    TestBikeRaceTrack
+4.  ComplexNumber { Real: int, Imaginary: int}
+        - ComplexNumber Add(ComplexNumber other)
+    TestComplexNumber for addition 
+        (3 + i4)
+     +  (5 + i3) 
+     =  (8 + i7)
+
