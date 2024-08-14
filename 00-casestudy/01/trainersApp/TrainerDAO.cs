@@ -11,18 +11,6 @@ namespace ProgramingFundamentalsProject
     {
         private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TrainersDb;Integrated Security=True;dfsfs";
         /*
-            CREATE DATABASE TrainersDb;
-            USE TrainersDb;
-            CREATE TABLE Trainers(Id int PRIMARY KEY IDENTITY(1,1), Name nvarchar(255), Place nvarchar(255), Skill nvarchar(255));
-            INSERT INTO Trainers (Name, Place, Skill) VALUES ('Mahesh', 'Mysore', 'C#');
-            INSERT INTO Trainers (Name, Place, Skill) VALUES ('Sanjay', 'Trivendrum', 'Management');
-            INSERT INTO Trainers (Name, Place, Skill) VALUES ('Mishel', 'Idukki', 'WPF');
-            SELECT * FROM Trainers;
-        */
-
-
-
-        /*
             how do you create the connection object?
             how do you create the command object?
             how do you write the parameterizied sql statement or query?
