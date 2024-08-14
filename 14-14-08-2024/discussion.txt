@@ -1,0 +1,29 @@
+OOP:
+1. Rectangle shaped land 
+    two lands - area 
+------------------------
+    Rectangle { length, breadth } 
+    C#::Rectangle { Length:int, Breadth:int } 
+        - int FindArea()
+        - 'two args' constructor 
+        - bool IsAreaGt(Rectangle other) //Gt == greater than 
+        - bool IsAreaEq(Rectangle other) //Eq == Equals  
+        - string ToString() !overrided function 
+            [Length=50,Breadth=40,Area=2000]
+------------------------
+    Use Rectangle
+    - Rectangle firstLand = new Rectangle(50,40); //2000
+    - Rectangle secondLand = new Rectangle(60,35); //2100
+    - if(firstLand.IsAreaGt(secondLand))
+      {
+            Console.WriteLine($"First Land {firstLand} is greater than Second Land {secondLand}");
+      }
+      else if(firstLand.IsAreaEq(secondLand))
+      {
+            Console.WriteLine($"First Land {firstLand} equals Second Land {secondLand}");
+      }
+      else
+      {
+            Console.WriteLine($"First Land {firstLand} is less than Second Land {secondLand}");
+      }
+------------------------
