@@ -122,3 +122,27 @@ Terminlologies:
         types:
             1. parameterized constructor 
             2. no parametrized constructor 
+
+    4. encapsulation 
+        is about hiding 'how' somethings works internally
+        and 
+        exposing only what is necessary for interacting with it.
+    5. abstraction 
+        is about defining what something does 
+        without worrying about how it does. 
+
+        after knowing "[inheritance and abstract class/interface]"
+
+
+        syntax: bool IsPrime(sal)
+
+        IsPrime(51) -> true         
+        IsPrime(52) -> false 
+
+        // logic is hidden, without knowing the logic we use function IsPrime
+        abstraction in function level. not in OOP.
+    6. public properties [set / get]
+        - encasulates the private field : helps for data hiding 
+        - before setting, we may do logic 
+        - after setting, we may do logic 
+        - before getting, we may do logic 
