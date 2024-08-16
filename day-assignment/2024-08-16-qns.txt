@@ -1,0 +1,15 @@
+Q1
+For rational number 
+    of numerator and denominator like p/q 
+    Implement 
+        Subtract
+        Multiply 
+        Divide 
+        Eq 
+        Gt 
+        Ne 
+        Gte 
+        Lt 
+        Lte 
+
+Q2

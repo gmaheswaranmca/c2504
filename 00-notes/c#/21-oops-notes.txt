@@ -1,0 +1,2947 @@
+==================================================================   
+    Notes: Introduction to C# and Object-Oriented Programming
+==================================================================
+What is C#?
+- C# (pronounced "C-sharp") is a modern, 
+object-oriented programming language developed by Microsoft. 
+- It is part of the .NET framework and is designed 
+for building a wide range of applications, 
+from web applications to mobile apps and desktop software.
+- C# combines the power of C++ with the ease of Visual Basic, 
+offering strong typing, imperative, declarative, functional, generic, 
+object-oriented (class-based), and component-oriented programming disciplines.
+- Key Characteristics of C#:
+  - Strongly Typed: 
+  C# enforces strict data types, 
+  reducing errors and improving code reliability.
+  - Cross-Platform: 
+  With .NET Core (now .NET), 
+  C# applications can run on multiple operating systems, 
+  including Windows, macOS, and Linux.
+  - Versatile: 
+  It is used for various application types, 
+  including web, desktop, games (using Unity), 
+  mobile, and cloud-based applications.
+
+Overview of Object-Oriented Programming (OOP)
+- Object-Oriented Programming (OOP) is a programming paradigm 
+based on the concept of "objects," 
+which are instances of classes.
+- OOP focuses on using objects and classes 
+to design and develop software. 
+The main goal is to model real-world entities as objects.
+- Key Concepts in OOP:
+  - Classes and Objects: 
+    - A class is a blueprint for creating objects. 
+    It defines properties and methods that an object can have.
+    - An object is an instance of a class, 
+    containing real data and behavior as defined by its class.
+  - Encapsulation:
+    - Encapsulation involves bundling the data (variables) and 
+    the methods (functions) that manipulate the data into a single unit called a class.
+    - It also restricts direct access to some of an object’s components, 
+    which is a means of preventing unintended interference and 
+    misuse of the methods and data.
+  - Inheritance:
+    - Inheritance allows a new class 
+    to inherit properties and methods from an existing class.
+    - It promotes code reusability and establishes 
+    a natural hierarchical relationship between classes.
+  - Polymorphism:
+    - Polymorphism allows objects of different classes 
+    to be treated as objects of a common superclass. 
+    It comes in two forms: compile-time (method overloading) and 
+    runtime (method overriding).
+  - Abstraction:
+    - Abstraction is the concept of hiding the complex implementation details and 
+    showing only the essential features of the object.
+    - It helps in reducing complexity by focusing 
+    on what an object does rather than how it does it.
+
+Key Features of OOP in C#
+- Classes and Objects:
+  - In C#, a class is defined using the `class` keyword, 
+  and an object is created using the `new` keyword.
+  - C# classes can include fields, properties, methods, and events, 
+  all encapsulated within the class.
+
+- Encapsulation:
+  - C# uses access modifiers (`public`, `private`, `protected`, `internal`) 
+  to control the visibility of class members.
+  - Properties in C# provide a way to control access 
+  to private fields while still exposing them 
+  to other parts of the program in a controlled manner.
+
+- Inheritance:
+  - C# supports single inheritance, meaning 
+  a class can inherit from only one base class.
+  - However, it allows multiple interfaces, 
+  enabling a class to inherit multiple sets of functionalities.
+
+- Polymorphism:
+  - C# allows method overloading (same method name with different parameters) and 
+  method overriding (subclass redefines a method from the base class).
+  - The `virtual` keyword is used to declare a method as overridable, 
+  and the `override` keyword is used to override a base class method in a derived class.
+
+- Abstraction:
+  - C# supports both abstract classes (using the `abstract` keyword) and 
+  interfaces (using the `interface` keyword) for defining abstract behaviors 
+  that derived classes must implement.
+
+- Memory Management:
+  - C# handles memory management automatically using a garbage collector, 
+  which cleans up unused objects, freeing developers from manual memory management.
+
+- Events and Delegates:
+  - C# provides a robust event-handling mechanism, 
+  where delegates are used as pointers to methods, and events are used 
+  to notify the occurrence of an action.
+
+- Properties and Indexers:
+  - Properties provide a flexible mechanism 
+  to read, write, or compute the values of private fields.
+  - Indexers allow objects to be indexed in a similar way 
+  to arrays, enabling array-like access to objects.
+
+
+==================================================================
+    Notes: Classes and Objects
+==================================================================
+Defining a Class
+- Class Definition: A class in C# is defined 
+using the `class` keyword followed by the class name. 
+It serves as a blueprint for creating objects.
+- Syntax:
+  ```csharp
+  public class ClassName
+  {
+      // Fields
+      private int field;
+
+      // Properties
+      public int Property { get; set; }
+
+      // Methods
+      public void MethodName()
+      {
+          // Method body
+      }
+  }
+  ```
+- Components of a Class:
+  - Fields: 
+  Variables declared inside a class to hold data.
+  - Properties: 
+  Provide access to class fields in a controlled way.
+  - Methods: 
+  Define the behavior or actions that an object can perform.
+
+- Access Modifiers: Control the visibility and accessibility of class members:
+  - `public`: Accessible from any other code.
+  - `private`: Accessible only within the class.
+  - `protected`: Accessible within the class and 
+  by derived class instances.
+  - `internal`: Accessible within the same assembly.
+
+Creating Objects
+- Object Creation: Objects are instances of a class. 
+You create an object using the `new` keyword, 
+which allocates memory and returns a reference to the object.
+- Syntax:
+  ```csharp
+  ClassName objectName = new ClassName();
+  ```
+- Example:
+  ```csharp
+  public class Car
+  {
+      public string Make { get; set; }
+      public string Model { get; set; }
+  }
+
+  // Creating an object of the Car class
+  Car myCar = new Car();
+  myCar.Make = "Toyota";
+  myCar.Model = "Corolla";
+  ```
+
+- Object Members Access: Use the dot (`.`) operator 
+to access fields, properties, and methods of an object.
+  ```csharp
+  Console.WriteLine(myCar.Make);  // Outputs: Toyota
+  ```
+
+Fields, Properties, and Methods
+- Fields:
+  - Fields are variables declared within a class. 
+  They represent the state or data of the object.
+  - Typically, fields are made private and 
+  accessed through properties.
+  - Example:
+    ```csharp
+    public class Person
+    {
+        private string name;  // Field
+
+        public string GetName()  // Method to access the field
+        {
+            return name;
+        }
+    }
+    ```
+
+- Properties:
+  - Properties in C# provide a flexible mechanism to read, write, or 
+  compute the values of private fields.
+  - Properties use `get` and `set` accessors to control access to fields.
+  - Example:
+    ```csharp
+    public class Person
+    {
+        private string name;  // Field
+
+        public string Name  // Property
+        {
+            get { return name; }
+            set { name = value; }
+        }
+    }
+    ```
+
+- Methods:
+  - Methods define the actions or behaviors of a class. 
+  They are functions associated with objects of the class.
+  - Example:
+    ```csharp
+    public class Calculator
+    {
+        public int Add(int a, int b)  // Method
+        {
+            return a + b;
+        }
+    }
+
+    // Using the method
+    Calculator calc = new Calculator();
+    int sum = calc.Add(5, 3);  // sum = 8
+    ```
+
+Constructors and Destructors
+- Constructors:
+  - A constructor is a special method that is automatically called 
+  when an object of the class is created.
+  - It is used to initialize objects and set initial values 
+  for fields or properties.
+  - Syntax:
+    ```csharp
+    public class ClassName
+    {
+        public ClassName()  // Constructor
+        {
+            // Initialization code
+        }
+    }
+    ```
+  - Parameterized Constructors: Constructors can take parameters 
+  to allow different ways of initializing objects.
+    ```csharp
+    public class Car
+    {
+        public string Make { get; set; }
+        public string Model { get; set; }
+
+        public Car(string make, string model)  // Parameterized Constructor
+        {
+            Make = make;
+            Model = model;
+        }
+    }
+
+    // Creating an object with a parameterized constructor
+    Car myCar = new Car("Honda", "Civic");
+    ```
+
+- Destructors:
+  - A destructor is a special method that is automatically called 
+  when an object is destroyed or when it goes out of scope.
+  - Destructors are used to clean up resources 
+  before the object is reclaimed by garbage collection.
+  - Syntax:
+    ```csharp
+    public class ClassName
+    {
+        ~ClassName()  // Destructor
+        {
+            // Cleanup code
+        }
+    }
+    ```
+  - Note: Destructors are not commonly used in C# because the .NET framework 
+  includes a garbage collector that automatically manages memory.
+
+
+==================================================================
+Notes: Unit 2 - Encapsulation
+==================================================================
+Encapsulation Overview
+- Encapsulation is one of the four fundamental OOP concepts, focusing on bundling the data (fields) and methods (functions) that operate on the data into a single unit or class.
+- It also includes the concept of restricting access to certain components, which is a way of preventing the accidental modification of data.
+- The main goal of encapsulation is to protect the internal state of an object and only expose a controlled interface to the outside world.
+
+Access Modifiers
+- Access modifiers in C# define the visibility and accessibility of classes, fields, methods, and properties. They control how the members of a class are accessed from outside the class.
+- Types of Access Modifiers:
+  - `public`: The member is accessible from any code, both within the same class and from outside classes.
+    - Example:
+      ```csharp
+      public class Car
+      {
+          public string Make { get; set; }
+      }
+      ```
+  - `private`: The member is accessible only within the class in which it is declared. It is the most restrictive access level.
+    - Example:
+      ```csharp
+      public class Car
+      {
+          private string make;
+
+          public string GetMake()
+          {
+              return make;
+          }
+      }
+      ```
+  - `protected`: The member is accessible within its class and by derived class instances. It's commonly used in inheritance scenarios.
+    - Example:
+      ```csharp
+      public class Vehicle
+      {
+          protected string model;
+      }
+
+      public class Car : Vehicle
+      {
+          public string GetModel()
+          {
+              return model;
+          }
+      }
+      ```
+  - `internal`: The member is accessible only within the same assembly. It’s commonly used when you want to allow access to code within the same project but hide it from other projects.
+    - Example:
+      ```csharp
+      internal class Engine
+      {
+          internal void StartEngine()
+          {
+              // Start engine code
+          }
+      }
+      ```
+  - `protected internal`: The member is accessible within its own assembly or by derived types in other assemblies.
+    - Example:
+      ```csharp
+      public class Engine
+      {
+          protected internal void Start()
+          {
+              // Engine start code
+          }
+      }
+      ```
+
+Properties and Auto-Implemented Properties
+- Properties:
+  - Properties in C# provide a flexible way to expose private fields to the outside world while maintaining control over how they are accessed and modified.
+  - Properties use `get` and `set` accessors, which define how values are retrieved from and assigned to fields.
+  - Example:
+    ```csharp
+    public class Person
+    {
+        private string name;  // Private field
+
+        public string Name    // Public property
+        {
+            get { return name; }
+            set { name = value; }
+        }
+    }
+    ```
+  - Read-Only and Write-Only Properties:
+    - A property can be made read-only by omitting the `set` accessor.
+    - A property can be made write-only by omitting the `get` accessor.
+    - Example:
+      ```csharp
+      public class Employee
+      {
+          private int id;
+
+          // Read-only property
+          public int ID
+          {
+              get { return id; }
+          }
+
+          // Write-only property
+          public string Password { private get; set; }
+      }
+      ```
+
+- Auto-Implemented Properties:
+  - C# allows for a simplified syntax for properties when no additional logic is required in the `get` and `set` accessors.
+  - Auto-implemented properties allow the compiler to create a backing field automatically.
+  - Example:
+    ```csharp
+    public class Car
+    {
+        public string Make { get; set; }  // Auto-implemented property
+        public string Model { get; set; }
+    }
+    ```
+  - This syntax reduces boilerplate code and is useful when you don’t need to implement any custom logic in the property.
+
+Encapsulation in Practice
+- Encapsulation Best Practices:
+  - Hide implementation details: Keep fields private and provide access through public properties or methods.
+  - Validate data through properties: Ensure that any data being assigned to a field meets certain criteria by adding validation logic in the `set` accessor.
+  - Use access modifiers wisely: Limit access to class members as much as possible, exposing only what's necessary.
+
+- Example of Encapsulation:
+  ```csharp
+  public class BankAccount
+  {
+      private decimal balance;  // Private field to store balance
+
+      public decimal Balance    // Public property to access balance
+      {
+          get { return balance; }
+          private set
+          {
+              if (value >= 0)
+                  balance = value;
+          }
+      }
+
+      public void Deposit(decimal amount)
+      {
+          if (amount > 0)
+          {
+              Balance += amount;
+          }
+      }
+
+      public void Withdraw(decimal amount)
+      {
+          if (amount > 0 && amount <= Balance)
+          {
+              Balance -= amount;
+          }
+      }
+  }
+  ```
+
+- In this example:
+  - The `balance` field is private, ensuring that it cannot be modified directly from outside the class.
+  - The `Balance` property allows controlled access to the balance, with validation logic in the `private set` accessor.
+  - The `Deposit` and `Withdraw` methods provide controlled ways to modify the balance, encapsulating the logic for handling deposits and withdrawals.
+
+==================================================================
+Notes: Overriding the `ToString()` Method in C#
+==================================================================
+
+Overview of the `ToString()` Method
+- `ToString()` is a method provided by the `Object` class in C#. Since all classes in C# inherit from `Object`, every object has a `ToString()` method.
+- The purpose of the `ToString()` method is to return a string representation of the object. By default, it returns the fully qualified name of the object's type (e.g., `Namespace.ClassName`).
+
+Why Override `ToString()`?
+- Overriding the `ToString()` method allows you to provide a meaningful string representation of an object, making it more useful when the object is printed, logged, or displayed.
+- It is commonly overridden to display key information about the object, such as its field values or a summary of its state.
+
+Syntax for Overriding `ToString()`
+- To override the `ToString()` method in a class, you use the `override` keyword followed by the method signature.
+- Syntax:
+  ```csharp
+  public override string ToString()
+  {
+      // Return a string that represents the current object
+  }
+  ```
+
+Example of Overriding `ToString()`
+```csharp
+public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public int Age { get; set; }
+
+    // Override the ToString() method
+    public override string ToString()
+    {
+        return $"Name: {FirstName} {LastName}, Age: {Age}";
+    }
+}
+
+// Usage
+Person person = new Person
+{
+    FirstName = "John",
+    LastName = "Doe",
+    Age = 30
+};
+
+Console.WriteLine(person.ToString());  // Outputs: Name: John Doe, Age: 30
+```
+
+- Explanation:
+  - In this example, the `ToString()` method is overridden in the `Person` class to return a string that includes the person's first name, last name, and age.
+  - When `Console.WriteLine(person.ToString());` is called, it outputs the string returned by the overridden `ToString()` method.
+
+Benefits of Overriding `ToString()`
+- Improved Readability: By providing a meaningful string representation of the object, you make it easier to understand when it is outputted or logged.
+- Easier Debugging: When debugging, the overridden `ToString()` method helps you quickly see important information about the object's state.
+- Custom Formatting: You can customize the format in which the object's data is presented.
+
+Considerations When Overriding `ToString()`
+- Return Useful Information: The `ToString()` method should return information that is relevant and useful, making the string representation meaningful.
+- Avoid Returning Null: Ensure that the `ToString()` method does not return `null`, as this could lead to unexpected behavior in code that assumes a string is returned.
+- Performance: While overriding `ToString()` is useful, ensure that the method is efficient, especially if it involves complex string concatenations or formatting.
+
+Further Example: A Complex Class
+```csharp
+public class Book
+{
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int Pages { get; set; }
+    public DateTime PublishedDate { get; set; }
+
+    // Override the ToString() method
+    public override string ToString()
+    {
+        return $"\"{Title}\" by {Author}, {Pages} pages, Published on {PublishedDate:MMMM dd, yyyy}";
+    }
+}
+
+// Usage
+Book book = new Book
+{
+    Title = "The Great Gatsby",
+    Author = "F. Scott Fitzgerald",
+    Pages = 218,
+    PublishedDate = new DateTime(1925, 4, 10)
+};
+
+Console.WriteLine(book.ToString());  // Outputs: "The Great Gatsby" by F. Scott Fitzgerald, 218 pages, Published on April 10, 1925
+```
+
+- In this example:
+  - The `ToString()` method is overridden to include the book's title, author, page count, and formatted publication date.
+  - The string formatting in `PublishedDate:MMMM dd, yyyy` displays the date in a more readable format.
+
+==================================================================
+Understanding the `Equals` Method in C#
+==================================================================
+Purpose of the `Equals` Method
+- The `Equals` method is used to determine whether two objects are considered equal.
+- By default, the `Equals` method checks for reference equality, meaning it returns `true` if both object references point to the same instance in memory.
+- However, in many cases, you might want to compare the actual content (i.e., the values of the fields or properties) of the objects, not just their references. Overriding the `Equals` method allows you to define what equality means for your specific class.
+
+Default Behavior
+- The `Equals` method is inherited from the `Object` class.
+- When you use the default implementation of `Equals`, it checks if the references of the two objects are the same.
+
+```csharp
+object a = new object();
+object b = new object();
+
+Console.WriteLine(a.Equals(b));  // Outputs: False (because a and b refer to different objects)
+```
+
+Overriding the `Equals` Method
+- When you override `Equals`, you can define equality based on the values of certain fields or properties in your class.
+- It is often overridden in conjunction with the `GetHashCode` method because the two methods are closely related in terms of object comparison.
+
+Example of Overriding `Equals`
+
+```csharp
+public class Trainer
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    // Override the Equals method to compare Trainer objects by Id and Name
+    public override bool Equals(object obj)
+    {
+        // If the object is null or not a Trainer, return false
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        // Cast the object to a Trainer
+        Trainer other = (Trainer)obj;
+
+        // Compare the Id and Name properties
+        return Id == other.Id && Name == other.Name;
+    }
+
+    // Override GetHashCode whenever Equals is overridden
+    public override int GetHashCode()
+    {
+        // Use a combination of Id and Name to generate a hash code
+        return Id.GetHashCode() ^ Name.GetHashCode();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Trainer trainer1 = new Trainer { Id = 1, Name = "Alice" };
+        Trainer trainer2 = new Trainer { Id = 1, Name = "Alice" };
+        Trainer trainer3 = new Trainer { Id = 2, Name = "Bob" };
+
+        Console.WriteLine(trainer1.Equals(trainer2));  // Outputs: True
+        Console.WriteLine(trainer1.Equals(trainer3));  // Outputs: False
+    }
+}
+```
+
+Explanation:
+
+1. Overriding `Equals`:
+   - The `Equals` method is overridden to compare the `Id` and `Name` properties of two `Trainer` objects.
+   - The method first checks if the passed object is `null` or of a different type, in which case it returns `false`.
+   - It then casts the object to a `Trainer` and compares the `Id` and `Name` properties.
+
+2. Overriding `GetHashCode`:
+   - The `GetHashCode` method is also overridden to provide a consistent hash code based on the `Id` and `Name`.
+   - This is important because if two objects are considered equal according to `Equals`, they must return the same hash code.
+
+Why Override `Equals`?
+- Content Equality: If two instances of a class are logically considered equal based on their data, rather than their memory addresses, you should override `Equals`.
+- Consistency: When storing objects in collections like `HashSet`, `Dictionary`, or comparing objects with `Contains`, `Equals` ensures that your objects behave as expected.
+- Domain-Specific Logic: Different domains might require different definitions of equality. For example, in some cases, two `Trainer` objects might be considered equal if they have the same `Name`, regardless of `Id`.
+
+Best Practices:
+- Always Override `GetHashCode` with `Equals`: If you override `Equals`, you should also override `GetHashCode` to maintain consistency, especially when the objects are used in hashed collections.
+- Null and Type Checking: Ensure that the `Equals` method correctly handles null values and type mismatches.
+- Symmetry, Transitivity, and Consistency: Your `Equals` implementation should be symmetric (if `x.Equals(y)` is true, then `y.Equals(x)` should also be true), transitive (if `x.Equals(y)` and `y.Equals(z)` are true, then `x.Equals(z)` should also be true), and consistent (if `x.Equals(y)` is true, it should consistently return true as long as neither object is modified).
+
+By overriding `Equals`, you define how instances of your class are compared, which is crucial for the correctness and predictability of your code, especially when working with collections or performing object comparisons.
+
+
+
+
+
+==================================================================
+            Polymorphism
+==================================================================
+Polymorphism is a fundamental concept in object-oriented programming (OOP) 
+that allows objects to be treated as instances of their parent class, 
+even though they may belong to more derived classes. 
+
+In C#, polymorphism is primarily achieved through two mechanisms: 
+method overriding and method overloading.
+
+1. Method Overriding
+Method overriding occurs 
+when a derived class provides a specific implementation of a method 
+that is already defined in its base class. 
+The overridden method in the derived class 
+must have the same signature as the method in the base class.
+
+- Base Class: 
+Defines a virtual method, 
+which can be overridden in a derived class.
+
+- Derived Class: 
+Uses the `override` keyword 
+to provide a specific implementation of the virtual method.
+
+Example:
+```csharp
+using System;
+
+class Animal
+{
+    public virtual void Speak()
+    {
+        Console.WriteLine("The animal makes a sound.");
+    }
+}
+
+class Dog : Animal
+{
+    public override void Speak()
+    {
+        Console.WriteLine("The dog barks.");
+    }
+}
+
+class Cat : Animal
+{
+    public override void Speak()
+    {
+        Console.WriteLine("The cat meows.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Animal myAnimal = new Animal();
+        Animal myDog = new Dog();
+        Animal myCat = new Cat();
+
+        myAnimal.Speak();  // Output: The animal makes a sound.
+        myDog.Speak();     // Output: The dog barks.
+        myCat.Speak();     // Output: The cat meows.
+    }
+}
+```
+
+2. Method Overloading
+Method overloading allows multiple methods 
+in the same class to have the same name but different parameters. 
+This is a form of compile-time polymorphism, as the correct method to call is determined 
+at compile time based on the method signature.
+
+Example:
+```csharp
+using System;
+
+class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    public double Add(double a, double b)
+    {
+        return a + b;
+    }
+
+    public int Add(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Calculator calc = new Calculator();
+        
+        Console.WriteLine(calc.Add(5, 10));        // Output: 15
+        Console.WriteLine(calc.Add(5.5, 10.2));    // Output: 15.7
+        Console.WriteLine(calc.Add(1, 2, 3));      // Output: 6
+    }
+}
+```
+
+Key Points:
+- Method Overriding: 
+Enables runtime polymorphism, 
+where the method that gets called is determined 
+at runtime based on the object's actual type.
+- Method Overloading: 
+Allows methods with the same name 
+but different signatures to coexist, 
+providing multiple ways to perform similar actions.
+
+Polymorphism makes code more flexible and easier 
+to extend and maintain, 
+as it allows objects to interact with each other 
+without knowing their exact types at compile time.
+
+
+==================================================================
+                    inheritance
+==================================================================
+In C#, 
+inheritance is a fundamental concept in object-oriented programming (OOP) 
+that allows you to create a new class (called a derived or child class) 
+based on an existing class (called a base or parent class). 
+
+The derived class inherits 
+    fields, 
+    methods, and 
+    properties from the base class, and 
+it can also introduce its own 
+    fields, 
+    methods, and 
+    properties or 
+override those inherited from the base class.
+
+Types of Inheritance in C#
+
+1. Single Inheritance:
+   - A derived class inherits from a single base class.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public void Eat()
+         {
+             Console.WriteLine("Eating...");
+         }
+     }
+
+     public class Dog : Animal
+     {
+         public void Bark()
+         {
+             Console.WriteLine("Barking...");
+         }
+     }
+     ```
+
+2. Multilevel Inheritance:
+   - A class is derived from another derived class, forming a chain.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public void Eat()
+         {
+             Console.WriteLine("Eating...");
+         }
+     }
+
+     public class Dog : Animal
+     {
+         public void Bark()
+         {
+             Console.WriteLine("Barking...");
+         }
+     }
+
+     public class Puppy : Dog
+     {
+         public void Weep()
+         {
+             Console.WriteLine("Weeping...");
+         }
+     }
+     ```
+
+3. Hierarchical Inheritance:
+   - Multiple derived classes inherit from a single base class.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public void Eat()
+         {
+             Console.WriteLine("Eating...");
+         }
+     }
+
+     public class Dog : Animal
+     {
+         public void Bark()
+         {
+             Console.WriteLine("Barking...");
+         }
+     }
+
+     public class Cat : Animal
+     {
+         public void Meow()
+         {
+             Console.WriteLine("Meowing...");
+         }
+     }
+     ```
+
+4. Multiple Inheritance (via Interfaces):
+   - C# does not support multiple inheritance 
+   with classes but allows it with interfaces.
+   - Example:
+     ```csharp
+     public interface IFlyable
+     {
+         void Fly();
+     }
+
+     public interface ISwimmable
+     {
+         void Swim();
+     }
+
+     public class Duck : IFlyable, ISwimmable
+     {
+         public void Fly()
+         {
+             Console.WriteLine("Flying...");
+         }
+
+         public void Swim()
+         {
+             Console.WriteLine("Swimming...");
+         }
+     }
+     ```
+
+Key Points
+
+- Base Keyword: 
+    Used to access members of the base class from the derived class.
+- Virtual Methods and Overriding: 
+    Methods in the base class can be marked as `virtual`, 
+    allowing them to be overridden 
+    in the derived class using the `override` keyword.
+- Abstract Classes: 
+    A base class can be declared as `abstract`, 
+    meaning it cannot be instantiated directly, and 
+    it may contain abstract methods 
+    that must be implemented in derived classes.
+- Sealed Classes: 
+    A class can be marked as `sealed` 
+    to prevent other classes from inheriting from it.
+
+Example with Virtual Method
+```csharp
+public class Animal
+{
+    public virtual void Sound()
+    {
+        Console.WriteLine("Animal makes a sound.");
+    }
+}
+
+public class Dog : Animal
+{
+    public override void Sound()
+    {
+        Console.WriteLine("Dog barks.");
+    }
+}
+```
+
+In this example, 
+the `Dog` class overrides 
+the `Sound` method of the `Animal` class.
+
+
+==================================================================
+                    interface
+==================================================================
+In C#, 
+an interface is a contract that defines 
+a set of methods, properties, events, or indexers 
+that a class or struct must implement. 
+
+Interfaces do not contain any implementation themselves; 
+they only specify what members (methods, properties, etc.) 
+should be implemented by the class or struct 
+that "implements" the interface. 
+
+This allows for greater flexibility and decoupling in code design.
+
+Key Features of Interfaces in C#
+
+1. Declaration:
+   - An interface is declared using the `interface` keyword.
+   - By convention, interface names in C# usually 
+    start with an uppercase "I".
+   - Example:
+     ```csharp
+     public interface IAnimal
+     {
+         void MakeSound();
+     }
+     ```
+
+2. Implementation:
+   - A class or struct implements an interface using the `:` symbol, 
+    followed by the interface name.
+   - The implementing class or struct must provide 
+   concrete implementations of all members defined 
+   in the interface.
+   - Example:
+     ```csharp
+     public class Dog : IAnimal
+     {
+         public void MakeSound()
+         {
+             Console.WriteLine("Bark!");
+         }
+     }
+     ```
+
+3. Multiple Interfaces:
+   - A class or struct can implement multiple interfaces, 
+   which allows for the composition of different behaviors.
+   - Example:
+     ```csharp
+     public interface IFlyable
+     {
+         void Fly();
+     }
+
+     public interface ISwimmable
+     {
+         void Swim();
+     }
+
+     public class Duck : IFlyable, ISwimmable
+     {
+         public void Fly()
+         {
+             Console.WriteLine("Flying...");
+         }
+
+         public void Swim()
+         {
+             Console.WriteLine("Swimming...");
+         }
+     }
+     ```
+
+4. Interface Inheritance:
+   - An interface can inherit from one or more other interfaces, 
+   allowing you to build more complex contracts.
+   - Example:
+     ```csharp
+     public interface IAnimal
+     {
+         void MakeSound();
+     }
+
+     public interface IPet : IAnimal
+     {
+         void Play();
+     }
+
+     public class Dog : IPet
+     {
+         public void MakeSound()
+         {
+             Console.WriteLine("Bark!");
+         }
+
+         public void Play()
+         {
+             Console.WriteLine("Playing fetch...");
+         }
+     }
+     ```
+
+5. Explicit Interface Implementation:
+   - A class can explicitly implement an interface's members. 
+   This is useful if the class needs to implement multiple interfaces 
+   with members that have the same name, or 
+   if you want to hide interface members 
+   from being called directly on the class instance.
+   - Example:
+     ```csharp
+     public interface IWalkable
+     {
+         void Move();
+     }
+
+     public interface IFlyable
+     {
+         void Move();
+     }
+
+     public class Bird : IWalkable, IFlyable
+     {
+         void IWalkable.Move()
+         {
+             Console.WriteLine("Walking...");
+         }
+
+         void IFlyable.Move()
+         {
+             Console.WriteLine("Flying...");
+         }
+     }
+     ```
+
+     In this example, 
+     `Bird` explicitly implements `Move()` 
+     for both `IWalkable` and `IFlyable`. 
+     These methods can only be called through an instance 
+     cast to the respective interface type.
+
+6. Interface vs. Abstract Class:
+   - Interfaces are purely abstract and cannot contain any implementation 
+   (except for default interface methods introduced in C# 8.0).
+   - An abstract class can have both abstract members 
+   (which must be implemented by derived classes) and 
+   concrete members with implementations.
+   - Interfaces do not have constructors, fields, or destructors, 
+   while abstract classes can have all of these.
+
+Example of Using an Interface
+
+Here's a simple example where an interface is used 
+to define a contract for any object that can make a sound:
+
+```csharp
+public interface IAnimal
+{
+    void MakeSound();
+}
+
+public class Dog : IAnimal
+{
+    public void MakeSound()
+    {
+        Console.WriteLine("Bark!");
+    }
+}
+
+public class Cat : IAnimal
+{
+    public void MakeSound()
+    {
+        Console.WriteLine("Meow!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        IAnimal myDog = new Dog();
+        IAnimal myCat = new Cat();
+
+        myDog.MakeSound(); // Output: Bark!
+        myCat.MakeSound(); // Output: Meow!
+    }
+}
+```
+
+Default Interface Methods (C# 8.0 and later)
+
+In C# 8.0 and later, 
+interfaces can contain default implementations for methods. 
+This allows you to add new methods to interfaces 
+without breaking existing implementations.
+
+```csharp
+public interface IAnimal
+{
+    void MakeSound();
+
+    void Eat() // Default method
+    {
+        Console.WriteLine("Eating...");
+    }
+}
+
+public class Dog : IAnimal
+{
+    public void MakeSound()
+    {
+        Console.WriteLine("Bark!");
+    }
+}
+```
+
+In this example, 
+the `Dog` class does not need 
+to implement the `Eat` method 
+because it already has a default implementation 
+in the `IAnimal` interface.
+
+Interfaces are a powerful way 
+to enforce consistency across classes while allowing for flexibility 
+in how those classes implement the required behaviors.
+
+
+==================================================================
+                abstract class
+==================================================================
+An abstract class in C# is a class 
+that cannot be instantiated on its own and 
+is intended to be a base class for other classes. 
+
+It can contain both abstract members (methods, properties, events) 
+that must be implemented by derived classes, 
+as well as concrete members with implementations 
+that can be inherited by derived classes. 
+
+Key Features of Abstract Classes in C#
+
+1. Abstract Class Declaration:
+   - An abstract class is declared using the `abstract` keyword.
+   - Abstract classes cannot be instantiated directly; 
+    they are meant to be subclassed.
+   - Example:
+     ```csharp
+     public abstract class Animal
+     {
+         public abstract void MakeSound(); // Abstract method
+         
+         public void Sleep() // Concrete method
+         {
+             Console.WriteLine("Sleeping...");
+         }
+     }
+     ```
+
+2. Abstract Members:
+   - Abstract members are declared without any implementation in the abstract class.
+   - Derived classes must provide implementations for all abstract members.
+   - Example:
+     ```csharp
+     public abstract class Animal
+     {
+         public abstract void MakeSound();
+     }
+
+     public class Dog : Animal
+     {
+         public override void MakeSound()
+         {
+             Console.WriteLine("Bark!");
+         }
+     }
+     ```
+
+3. Concrete Members:
+   - An abstract class can have concrete members (methods, properties, etc.) 
+    with full implementations.
+   - These concrete members can be inherited and 
+    used directly by derived classes.
+   - Example:
+     ```csharp
+     public abstract class Animal
+     {
+         public abstract void MakeSound();
+
+         public void Breathe()
+         {
+             Console.WriteLine("Breathing...");
+         }
+     }
+
+     public class Cat : Animal
+     {
+         public override void MakeSound()
+         {
+             Console.WriteLine("Meow!");
+         }
+     }
+     ```
+
+4. Partial Implementation:
+   - Abstract classes allow you to define common functionality 
+    that multiple derived classes can share, 
+    while also enforcing the implementation of specific methods.
+   - Example:
+     ```csharp
+     public abstract class Vehicle
+     {
+         public void StartEngine()
+         {
+             Console.WriteLine("Engine started");
+         }
+
+         public abstract void Drive();
+     }
+
+     public class Car : Vehicle
+     {
+         public override void Drive()
+         {
+             Console.WriteLine("Driving a car");
+         }
+     }
+
+     public class Bike : Vehicle
+     {
+         public override void Drive()
+         {
+             Console.WriteLine("Riding a bike");
+         }
+     }
+     ```
+
+5. Inheritance:
+   - A class can inherit from an abstract class and 
+    must implement all abstract members of the base abstract class 
+    unless the derived class is also abstract.
+   - Example:
+     ```csharp
+     public abstract class Shape
+     {
+         public abstract double GetArea();
+     }
+
+     public class Circle : Shape
+     {
+         public double Radius { get; set; }
+
+         public override double GetArea()
+         {
+             return Math.PI * Radius * Radius;
+         }
+     }
+     ```
+
+6. Abstract Classes vs. Interfaces:
+   - Abstract Class:
+     - Can have both abstract members (without implementation) and 
+        concrete members (with implementation).
+     - Can contain fields, constructors, destructors, and access modifiers.
+     - Supports inheritance, meaning a class can inherit 
+        from only one abstract class.
+   - Interface:
+     - Can only have method signatures 
+        (except for default interface methods introduced in C# 8.0).
+     - Cannot contain fields, constructors, or destructors.
+     - A class or struct can implement multiple interfaces, 
+        allowing for multiple inheritance.
+
+Example of Abstract Class
+
+Here’s a practical example that demonstrates 
+how an abstract class can be used:
+
+```csharp
+public abstract class Animal
+{
+    public string Name { get; set; }
+
+    public Animal(string name)
+    {
+        Name = name;
+    }
+
+    public abstract void MakeSound();
+
+    public void Sleep()
+    {
+        Console.WriteLine($"{Name} is sleeping.");
+    }
+}
+
+public class Dog : Animal
+{
+    public Dog(string name) : base(name)
+    {
+    }
+
+    public override void MakeSound()
+    {
+        Console.WriteLine($"{Name} says: Bark!");
+    }
+}
+
+public class Cat : Animal
+{
+    public Cat(string name) : base(name)
+    {
+    }
+
+    public override void MakeSound()
+    {
+        Console.WriteLine($"{Name} says: Meow!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Animal myDog = new Dog("Buddy");
+        Animal myCat = new Cat("Whiskers");
+
+        myDog.MakeSound(); // Output: Buddy says: Bark!
+        myCat.MakeSound(); // Output: Whiskers says: Meow!
+
+        myDog.Sleep(); // Output: Buddy is sleeping.
+        myCat.Sleep(); // Output: Whiskers is sleeping.
+    }
+}
+```
+
+When to Use an Abstract Class
+
+- Common Base Implementation: 
+    Use an abstract class when you have a base class 
+    that should provide some common functionality 
+    (like methods with code) to all derived classes.
+- Enforced Method Implementation: 
+    If you want to enforce certain methods 
+    that must be implemented by all subclasses.
+- Shared State: 
+    When you want derived classes 
+    to share common fields or properties.
+
+Abstract classes provide a way to define a template 
+for other classes 
+while allowing 
+for a partial or complete implementation of functionality.
+
+
+==================================================================
+                    virtual
+==================================================================
+
+In C#, the `virtual` keyword is used 
+to modify a method, property, indexer, or event declaration 
+to allow it to be overridden in a derived class. 
+
+When a member is marked as `virtual`, 
+it provides a default implementation 
+in the base class but allows derived classes 
+to provide their own specific implementation by overriding it.
+
+Key Concepts of `virtual` in C#
+
+1. Virtual Methods:
+   - A method in a base class can be declared as `virtual`, 
+   meaning it can be overridden in any derived class.
+   - If a derived class does not override the virtual method, 
+   the base class's implementation is used.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public virtual void MakeSound()
+         {
+             Console.WriteLine("Animal makes a sound.");
+         }
+     }
+
+     public class Dog : Animal
+     {
+         public override void MakeSound()
+         {
+             Console.WriteLine("Dog barks.");
+         }
+     }
+     ```
+
+2. Overriding Virtual Members:
+   - A derived class uses the `override` keyword 
+   to override a virtual member from the base class.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public virtual void MakeSound()
+         {
+             Console.WriteLine("Animal makes a sound.");
+         }
+     }
+
+     public class Cat : Animal
+     {
+         public override void MakeSound()
+         {
+             Console.WriteLine("Cat meows.");
+         }
+     }
+     ```
+
+3. Calling Base Class Implementation:
+   - Inside an overridden method, 
+   you can call the base class's implementation using the `base` keyword.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public virtual void MakeSound()
+         {
+             Console.WriteLine("Animal makes a sound.");
+         }
+     }
+
+     public class Dog : Animal
+     {
+         public override void MakeSound()
+         {
+             base.MakeSound(); // Calls the base class implementation
+             Console.WriteLine("Dog barks.");
+         }
+     }
+     ```
+
+     Output:
+     ```
+     Animal makes a sound.
+     Dog barks.
+     ```
+
+4. Virtual Properties:
+   - Just like methods, properties can also be marked as `virtual` 
+    to allow derived classes to override their getters and/or setters.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public virtual string Name { get; set; }
+     }
+
+     public class Dog : Animal
+     {
+         private string _name;
+
+         public override string Name
+         {
+             get { return _name; }
+             set { _name = value.ToUpper(); }
+         }
+     }
+     ```
+
+5. Virtual Events:
+   - Events can be declared as `virtual`, 
+    allowing derived classes to override their behavior.
+   - Example:
+     ```csharp
+     public class Publisher
+     {
+         public virtual event Action OnPublish;
+
+         public void Publish()
+         {
+             OnPublish?.Invoke();
+         }
+     }
+
+     public class CustomPublisher : Publisher
+     {
+         public override event Action OnPublish;
+
+         public CustomPublisher()
+         {
+             OnPublish += () => Console.WriteLine("Custom event handling.");
+         }
+     }
+     ```
+
+6. Polymorphism:
+   - Virtual methods are a key part of implementing polymorphism in C#. 
+    When a derived class overrides a virtual method, 
+    the method called is determined at runtime based 
+    on the actual object type, not the reference type.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public virtual void MakeSound()
+         {
+             Console.WriteLine("Animal makes a sound.");
+         }
+     }
+
+     public class Dog : Animal
+     {
+         public override void MakeSound()
+         {
+             Console.WriteLine("Dog barks.");
+         }
+     }
+
+     public class Cat : Animal
+     {
+         public override void MakeSound()
+         {
+             Console.WriteLine("Cat meows.");
+         }
+     }
+
+     class Program
+     {
+         static void Main()
+         {
+             Animal myAnimal = new Dog();
+             myAnimal.MakeSound(); // Output: Dog barks.
+
+             myAnimal = new Cat();
+             myAnimal.MakeSound(); // Output: Cat meows.
+         }
+     }
+     ```
+
+Example of Using `virtual`
+
+Here’s a simple example to demonstrate the use of `virtual` methods in C#:
+
+```csharp
+public class Vehicle
+{
+    public virtual void Start()
+    {
+        Console.WriteLine("Starting the vehicle...");
+    }
+}
+
+public class Car : Vehicle
+{
+    public override void Start()
+    {
+        Console.WriteLine("Starting the car...");
+    }
+}
+
+public class Bike : Vehicle
+{
+    public override void Start()
+    {
+        Console.WriteLine("Starting the bike...");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Vehicle myCar = new Car();
+        Vehicle myBike = new Bike();
+
+        myCar.Start(); // Output: Starting the car...
+        myBike.Start(); // Output: Starting the bike...
+    }
+}
+```
+
+In this example, the `Start` method 
+in the `Vehicle` class is marked as `virtual`, 
+and both the `Car` and `Bike` classes override this method 
+to provide specific behavior.
+
+Summary
+
+- Virtual Members: 
+    Mark a method, property, indexer, or event with `virtual` 
+    to allow derived classes to override it.
+- Overriding: 
+    Derived classes use the `override` keyword 
+    to provide a new implementation for a virtual member.
+- Polymorphism: 
+    Virtual methods enable runtime polymorphism, 
+    allowing you to write more flexible and reusable code.
+- Base Implementation: 
+    You can call the base class’s implementation of a virtual member 
+    using the `base` keyword.
+
+The `virtual` keyword is crucial 
+for implementing flexible and maintainable OOP patterns in C#.
+
+
+==================================================================
+`virtual`, `override`, and `default`
+==================================================================
+In C#, the concepts of `virtual`, `override`, and `default` 
+are integral to object-oriented programming, particularly 
+when dealing with inheritance, polymorphism, and method overriding. 
+Let’s break down each of these concepts and 
+see how they relate to each other.
+
+1. `virtual`
+
+- Purpose: The `virtual` keyword is used 
+to declare a method, property, indexer, or event 
+in a base class that can be overridden in a derived class.
+- Usage: When a member is marked as `virtual`, 
+it means that it provides a base implementation, 
+but derived classes are allowed 
+to provide their own implementation.
+- Example:
+  ```csharp
+  public class Animal
+  {
+      public virtual void MakeSound()
+      {
+          Console.WriteLine("Animal makes a sound.");
+      }
+  }
+  ```
+  In this example, `MakeSound` is declared as `virtual`, 
+  meaning it can be overridden by any class 
+  that inherits from `Animal`.
+
+2. `override`
+
+- Purpose: 
+The `override` keyword is used in a derived class 
+to provide a specific implementation of a method, property, indexer, or event 
+that is defined as `virtual` in a base class.
+- Usage: 
+When you override a virtual member in a derived class, 
+you use the `override` keyword to explicitly state 
+that this method is overriding a virtual method from the base class.
+- Example:
+  ```csharp
+  public class Dog : Animal
+  {
+      public override void MakeSound()
+      {
+          Console.WriteLine("Dog barks.");
+      }
+  }
+  ```
+  Here, the `Dog` class overrides the `MakeSound` method from the `Animal` class, 
+  providing its own specific implementation.
+
+3. `default`
+
+- Purpose: The `default` keyword in C# has different usages, 
+but in the context of methods, it can be used 
+to set default values for generic types, or (starting from C# 8.0) 
+to provide a default implementation for methods in interfaces.
+- Usage:
+  - Generic Types: `default` can be used to return the default value of a type, 
+  especially in generics.
+  - Default Interface Methods (C# 8.0 and later): 
+  In interfaces, `default` can be used 
+  to provide a default implementation for a method.
+- Example 1: Default Value for a Generic Type:
+  ```csharp
+  public T GetDefaultValue<T>()
+  {
+      return default(T);
+  }
+  ```
+  - For reference types, `default(T)` would return `null`.
+  - For value types like `int`, it would return `0`.
+
+- Example 2: Default Interface Method:
+  ```csharp
+  public interface IAnimal
+  {
+      void MakeSound(); // No default implementation
+
+      void Sleep()
+      {
+          Console.WriteLine("Animal is sleeping.");
+      }
+  }
+
+  public class Dog : IAnimal
+  {
+      public void MakeSound()
+      {
+          Console.WriteLine("Dog barks.");
+      }
+
+      // No need to implement Sleep() since it has a default implementation
+  }
+  ```
+  In this example, `Sleep` is a default interface method. 
+  A class implementing `IAnimal` does not need to provide its own implementation of `Sleep` 
+  unless it wants to override the default behavior.
+
+How They Work Together
+
+Here’s an example that combines `virtual`, `override`, and `default`:
+
+```csharp
+// Base class
+public class Animal
+{
+    // A virtual method that can be overridden by derived classes
+    public virtual void MakeSound()
+    {
+        Console.WriteLine("Animal makes a sound.");
+    }
+}
+
+// Derived class overriding the virtual method
+public class Dog : Animal
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Dog barks.");
+    }
+}
+
+// Interface with a default method implementation
+public interface IAnimalBehavior
+{
+    void Play();
+
+    // Default implementation of Sleep method
+    void Sleep()
+    {
+        Console.WriteLine("Animal is sleeping.");
+    }
+}
+
+// Implementing the interface in a class
+public class Cat : Animal, IAnimalBehavior
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Cat meows.");
+    }
+
+    public void Play()
+    {
+        Console.WriteLine("Cat is playing.");
+    }
+
+    // Optionally override the default Sleep method
+    public void Sleep()
+    {
+        Console.WriteLine("Cat is purring and sleeping.");
+    }
+}
+
+// Usage
+class Program
+{
+    static void Main()
+    {
+        Animal myDog = new Dog();
+        myDog.MakeSound(); // Output: Dog barks.
+
+        Cat myCat = new Cat();
+        myCat.MakeSound(); // Output: Cat meows.
+        myCat.Sleep();     // Output: Cat is purring and sleeping.
+        myCat.Play();      // Output: Cat is playing.
+    }
+}
+```
+
+Summary
+
+- `virtual`: 
+    Used in a base class to allow derived classes 
+    to override a method, property, indexer, or event.
+- `override`: 
+    Used in a derived class 
+    to provide a specific implementation 
+    for a virtual member from the base class.
+- `default`: 
+    Used to specify a default value 
+    for a generic type or to provide a default method implementation 
+    in an interface (C# 8.0+).
+
+These concepts enable flexibility, 
+allowing for method customization in derived classes 
+while providing default behaviors when needed.
+
+
+==================================================================
+abstract method
+==================================================================
+An abstract method in C# is a method 
+that is declared in an abstract class 
+but does not have any implementation. 
+Instead, it forces derived classes 
+to provide an implementation for the method. 
+
+Abstract methods are used when you want 
+to ensure that all derived classes implement a certain method, 
+but the implementation details may vary 
+depending on the specific derived class.
+
+Key Characteristics of Abstract Methods
+
+1. Declared in Abstract Classes:
+   - Abstract methods can only be declared inside an abstract class.
+   - An abstract class can contain both abstract methods 
+    (which have no implementation) and non-abstract methods 
+    (which do have an implementation).
+
+2. No Implementation in Base Class:
+   - Abstract methods do not have a body; 
+   they only have a method signature.
+   - The derived class must override the abstract method and provide 
+   its implementation.
+
+3. Forcing Implementation:
+   - Abstract methods enforce that any non-abstract class derived 
+   from the abstract class must implement the abstract methods.
+   - If a derived class does not implement all the abstract methods, 
+   it must be declared as abstract itself.
+
+Syntax for Abstract Methods
+
+Here’s the general syntax for declaring an abstract method 
+in an abstract class:
+
+```csharp
+public abstract class Shape
+{
+    // Abstract method with no implementation
+    public abstract double GetArea();
+    
+    // Non-abstract method with implementation
+    public void Display()
+    {
+        Console.WriteLine("Displaying shape information.");
+    }
+}
+```
+
+Example of Abstract Method
+
+Let’s see a practical example of using an abstract method 
+in an abstract class:
+
+```csharp
+// Abstract base class
+public abstract class Animal
+{
+    // Abstract method with no implementation
+    public abstract void MakeSound();
+
+    // Non-abstract method with implementation
+    public void Sleep()
+    {
+        Console.WriteLine("The animal is sleeping.");
+    }
+}
+
+// Derived class Dog, implementing the abstract method
+public class Dog : Animal
+{
+    // Providing implementation for the abstract method
+    public override void MakeSound()
+    {
+        Console.WriteLine("Dog barks.");
+    }
+}
+
+// Derived class Cat, implementing the abstract method
+public class Cat : Animal
+{
+    // Providing implementation for the abstract method
+    public override void MakeSound()
+    {
+        Console.WriteLine("Cat meows.");
+    }
+}
+
+// Usage
+class Program
+{
+    static void Main()
+    {
+        Animal myDog = new Dog();
+        myDog.MakeSound(); // Output: Dog barks.
+        myDog.Sleep();     // Output: The animal is sleeping.
+
+        Animal myCat = new Cat();
+        myCat.MakeSound(); // Output: Cat meows.
+        myCat.Sleep();     // Output: The animal is sleeping.
+    }
+}
+```
+
+Key Points to Remember
+
+- Abstract Class Requirement: 
+    Abstract methods must be declared within an abstract class.
+- No Method Body: 
+    Abstract methods do not have any implementation 
+    (i.e., they do not have a method body).
+- Implementation in Derived Classes: 
+    Any non-abstract class that derives 
+    from an abstract class with abstract methods 
+    must override and implement those abstract methods.
+- Abstract Modifier: 
+    The `abstract` keyword is used 
+    to declare both the method and the class that contains it.
+
+When to Use Abstract Methods
+
+- Enforce Common Functionality: 
+    Use abstract methods when you want 
+    to enforce that all subclasses provide a specific behavior or functionality, 
+    but you want to leave the details of the implementation up to the derived classes.
+- Template Pattern: 
+    Abstract methods are often used in the template method design pattern, 
+    where the abstract class defines the structure of an algorithm, 
+    but allows subclasses to define specific steps.
+
+In summary, abstract methods provide a way
+to define a contract within an abstract class, 
+ensuring that derived classes must implement specific methods 
+while allowing for different implementations depending on the subclass.
+
+
+
+==================================================================
+sealed
+==================================================================
+In C#, the `sealed` keyword is used 
+    to prevent a class from being inherited or 
+               a method from being overridden in derived classes. 
+
+It ensures that no further derivation or overriding can occur 
+beyond the point where the `sealed` keyword is applied.
+
+1. Sealed Classes
+
+When a class is marked as `sealed`, 
+it cannot be used as a base class. 
+This means that no other class can inherit from a sealed class.
+
+#Key Points:
+- A `sealed` class is final; 
+it cannot be extended by any other class.
+- This is useful when you want 
+to prevent further inheritance 
+for security, performance, or design reasons.
+- Sealed classes can still inherit from other classes, 
+but they can't be the base class for another class.
+
+#Example:
+```csharp
+public sealed class MathOperations
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+
+// The following will cause a compile-time error 
+// because MathOperations is sealed:
+// public class AdvancedMath : MathOperations
+// {
+// }
+```
+
+2. Sealed Methods
+
+The `sealed` keyword can also be used with methods, 
+but only in combination with `override`. 
+A sealed method in a derived class prevents 
+any further overriding of that method in any classes 
+that derive from this derived class.
+
+#Key Points:
+- A method can only be sealed 
+if it is overriding a virtual method 
+from a base class.
+- Sealing a method prevents 
+any further overrides in subclasses.
+
+#Example:
+```csharp
+public class Animal
+{
+    public virtual void MakeSound()
+    {
+        Console.WriteLine("Animal makes a sound.");
+    }
+}
+
+public class Dog : Animal
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Dog barks.");
+    }
+}
+
+public class Bulldog : Dog
+{
+    public sealed override void MakeSound()
+    {
+        Console.WriteLine("Bulldog growls.");
+    }
+}
+
+// The following will cause a compile-time error 
+// because MakeSound is sealed:
+// public class MiniBulldog : Bulldog
+// {
+//     public override void MakeSound()
+//     {
+//         Console.WriteLine("Mini Bulldog squeaks.");
+//     }
+// }
+```
+
+When to Use `sealed`
+
+- Preventing Unintended Inheritance: 
+If you have a class that is complete and you don’t want others 
+to extend or modify it through inheritance, you can mark it as `sealed`.
+- Optimizing Performance: 
+Sealed classes can sometimes allow 
+for optimizations by the compiler, 
+as it knows that no other class will inherit from it.
+- Security and Design: 
+In some cases, sealing a class or method is part of a security strategy or 
+a strict design pattern where extending or altering the behavior 
+through inheritance would introduce risks or violate design principles.
+
+Summary
+- `sealed` Class: 
+    Prevents any class from inheriting from it.
+- `sealed` Method: 
+    Used in conjunction with `override` 
+    to prevent further overriding in subclasses.
+- Use Cases: 
+    Sealed classes and methods are used 
+    to enforce the finality of a class or method, 
+    improving security, performance, and 
+    maintaining the integrity of design patterns.
+
+By using the `sealed` keyword, 
+you can create a more controlled inheritance structure and 
+prevent unwanted or incorrect subclassing in your applications.
+
+
+==================================================================
+constructors
+==================================================================
+
+In C#, constructors, 
+the `this` keyword, and the `base` 
+(often referred to as `super` in other languages) 
+keyword play a crucial role in class instantiation and inheritance. 
+Let’s explore these concepts in detail.
+
+1. Constructors in Classes
+
+A constructor is a special method 
+that is automatically called when an instance of a class is created. 
+It’s used to initialize the object’s data. 
+
+In C#, a constructor has the same name as the class and no return type.
+
+#Types of Constructors:
+- Default Constructor: A constructor with no parameters. 
+If no constructor is defined, 
+the compiler provides a default constructor automatically.
+- Parameterized Constructor: 
+A constructor 
+that takes parameters to initialize the object with specific values.
+- Static Constructor: 
+A constructor used to initialize static members of the class. 
+It is called automatically before any static members are accessed.
+
+#Example:
+```csharp
+public class Car
+{
+    public string Make { get; set; }
+    public string Model { get; set; }
+
+    // Default constructor
+    public Car()
+    {
+        Make = "Unknown";
+        Model = "Unknown";
+    }
+
+    // Parameterized constructor
+    public Car(string make, string model)
+    {
+        Make = make;
+        Model = model;
+    }
+}
+
+// Usage:
+Car car1 = new Car(); // Calls default constructor
+Car car2 = new Car("Toyota", "Camry"); // Calls parameterized constructor
+```
+
+2. Constructors and Inheritance
+
+When a class inherits from another class, 
+constructors are still used to initialize the objects. 
+The constructor of the base class is called 
+before the constructor of the derived class.
+
+- Base Class Constructor: 
+The constructor of the base class is automatically called 
+when a derived class is instantiated. 
+You can explicitly call a specific base class constructor 
+using the `base` keyword.
+- Default Constructor in Inheritance: 
+If the base class has a parameterless constructor, 
+it will be called by default 
+if you don’t specify which constructor to call.
+
+#Example:
+```csharp
+public class Vehicle
+{
+    public string Brand { get; set; }
+
+    // Base class constructor
+    public Vehicle(string brand)
+    {
+        Brand = brand;
+        Console.WriteLine("Vehicle constructor called.");
+    }
+}
+
+public class Car : Vehicle
+{
+    public string Model { get; set; }
+
+    // Derived class constructor
+    public Car(string brand, string model) : base(brand) // Calls base class constructor
+    {
+        Model = model;
+        Console.WriteLine("Car constructor called.");
+    }
+}
+
+// Usage:
+Car myCar = new Car("Toyota", "Camry");
+// Output:
+// Vehicle constructor called.
+// Car constructor called.
+```
+
+3. `this` Keyword
+
+The `this` keyword refers to the current instance of the class. 
+It is used to:
+- Differentiate between class members and parameters with the same name.
+- Call another constructor within the same class (constructor chaining).
+
+#Example:
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    // Constructor chaining using `this`
+    public Person() : this("Unknown", 0)
+    {
+    }
+
+    public Person(string name, int age)
+    {
+        this.Name = name;
+        this.Age = age;
+    }
+
+    public void Display()
+    {
+        Console.WriteLine($"Name: {this.Name}, Age: {this.Age}");
+    }
+}
+
+// Usage:
+Person person1 = new Person();
+person1.Display(); // Output: Name: Unknown, Age: 0
+Person person2 = new Person("John", 30);
+person2.Display(); // Output: Name: John, Age: 30
+```
+
+4. `base` (or `super`) Keyword
+
+The `base` keyword is used to access members 
+(methods, properties, constructors) 
+of the base class from within a derived class. 
+It’s particularly useful when:
+- You want to call a method from the base class 
+that has been overridden in the derived class.
+- You need to call a specific constructor of the base class.
+
+#Example:
+```csharp
+public class Animal
+{
+    public string Name { get; set; }
+
+    // Base class constructor
+    public Animal(string name)
+    {
+        Name = name;
+    }
+
+    // Base class method
+    public virtual void MakeSound()
+    {
+        Console.WriteLine("Animal makes a sound.");
+    }
+}
+
+public class Dog : Animal
+{
+    public string Breed { get; set; }
+
+    // Derived class constructor calling base class constructor
+    public Dog(string name, string breed) : base(name)
+    {
+        Breed = breed;
+    }
+
+    // Overriding base class method
+    public override void MakeSound()
+    {
+        base.MakeSound(); // Calls the base class method
+        Console.WriteLine("Dog barks.");
+    }
+}
+
+// Usage:
+Dog myDog = new Dog("Buddy", "Golden Retriever");
+myDog.MakeSound();
+// Output:
+// Animal makes a sound.
+// Dog barks.
+```
+
+Summary
+
+- Constructors: 
+Used to initialize objects. 
+Can be parameterized or default. 
+Inheritance allows derived classes 
+to call base class constructors.
+- `this` Keyword: 
+Refers to the current instance of the class. 
+Useful for differentiating between class members and parameters, 
+and for constructor chaining.
+- `base` Keyword: 
+Used to access members of the base class from the derived class. 
+Essential for calling base class constructors and overridden methods.
+
+These concepts work together 
+to allow for flexible and powerful object-oriented designs in C#.
+
+
+==================================================================
+            `super` keyword
+==================================================================
+In C#, there is no `super` keyword as found in languages like Java. 
+Instead, C# uses the `base` keyword to accomplish the same tasks 
+that `super` would in other languages. 
+The `base` keyword in C# is used to refer 
+to members of the base class (i.e., the parent class) 
+from within a derived class (i.e., the child class).
+
+Uses of `base` in C#
+
+1. Calling Base Class Constructors:
+   - The `base` keyword is used in a derived class constructor 
+   to call a constructor from the base class. 
+   This is often necessary when the base class 
+   does not have a parameterless constructor, or 
+   when you want to pass specific values 
+   to the base class constructor.
+
+2. Accessing Base Class Members:
+   - You can use `base` to access methods, properties, or fields 
+   from the base class, 
+   especially if they are overridden in the derived class.
+
+Example: Calling Base Class Constructors
+
+```csharp
+public class Animal
+{
+    public string Name { get; set; }
+
+    // Base class constructor
+    public Animal(string name)
+    {
+        Name = name;
+        Console.WriteLine("Animal constructor called.");
+    }
+}
+
+public class Dog : Animal
+{
+    public string Breed { get; set; }
+
+    // Derived class constructor calling base class constructor
+    public Dog(string name, string breed) : base(name) // using base to call the Animal constructor
+    {
+        Breed = breed;
+        Console.WriteLine("Dog constructor called.");
+    }
+}
+
+// Usage:
+Dog myDog = new Dog("Buddy", "Golden Retriever");
+// Output:
+// Animal constructor called.
+// Dog constructor called.
+```
+
+Example: Accessing Base Class Members
+
+```csharp
+public class Animal
+{
+    public virtual void MakeSound()
+    {
+        Console.WriteLine("Animal makes a sound.");
+    }
+}
+
+public class Dog : Animal
+{
+    // Overriding the base class method
+    public override void MakeSound()
+    {
+        base.MakeSound(); // Calls the base class implementation
+        Console.WriteLine("Dog barks.");
+    }
+}
+
+// Usage:
+Dog myDog = new Dog();
+myDog.MakeSound();
+// Output:
+// Animal makes a sound.
+// Dog barks.
+```
+
+Summary
+
+- `base` Keyword: 
+In C#, the `base` keyword is used to refer 
+to the base class from within a derived class. 
+It allows you to:
+  - Call base class constructors from the derived class constructor.
+  - Access base class methods, properties, or fields 
+  that might have been overridden in the derived class.
+
+So, while there is no `super` keyword in C#, 
+the `base` keyword serves the same purpose and 
+is a fundamental part of C#'s inheritance model.
+
+
+
+
+==================================================================
+        Constructor overloading
+==================================================================
+Constructor overloading in C# refers 
+to the practice of defining multiple constructors 
+within the same class, each with different parameters. 
+This allows the creation of objects in different ways depending 
+on the information available at the time of instantiation.
+
+Key Points about Constructor Overloading
+
+1. Multiple Constructors: 
+A class can have multiple constructors, 
+each with a different set of parameters (type, number, or both).
+2. Compile-Time Resolution: 
+The correct constructor is chosen at compile-time based 
+on the arguments passed when the object is created.
+3. Flexibility: 
+Constructor overloading provides flexibility 
+by allowing objects to be initialized 
+in various ways depending on the context.
+
+Example of Constructor Overloading
+
+```csharp
+public class Rectangle
+{
+    public int Width { get; set; }
+    public int Height { get; set; }
+
+    // Default constructor
+    public Rectangle()
+    {
+        Width = 0;
+        Height = 0;
+    }
+
+    // Constructor with one parameter (square)
+    public Rectangle(int side)
+    {
+        Width = side;
+        Height = side;
+    }
+
+    // Constructor with two parameters (rectangle)
+    public Rectangle(int width, int height)
+    {
+        Width = width;
+        Height = height;
+    }
+
+    public int GetArea()
+    {
+        return Width * Height;
+    }
+}
+
+// Usage:
+Rectangle rect1 = new Rectangle();           // Calls the default constructor
+Rectangle rect2 = new Rectangle(5);          // Calls the constructor with one parameter (5x5 square)
+Rectangle rect3 = new Rectangle(4, 7);       // Calls the constructor with two parameters (4x7 rectangle)
+
+// Output the areas:
+Console.WriteLine(rect1.GetArea()); // Output: 0 (0x0)
+Console.WriteLine(rect2.GetArea()); // Output: 25 (5x5)
+Console.WriteLine(rect3.GetArea()); // Output: 28 (4x7)
+```
+
+Constructor Overloading with `this`
+
+You can also use the `this` keyword 
+to call another constructor 
+in the same class from within a constructor. 
+This is known as constructor chaining and helps 
+to avoid code duplication.
+
+#Example with `this` Keyword:
+
+```csharp
+public class Circle
+{
+    public double Radius { get; set; }
+
+    // Default constructor
+    public Circle() : this(1.0) // Calls the constructor with one parameter
+    {
+    }
+
+    // Constructor with one parameter
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+
+    public double GetArea()
+    {
+        return Math.PI * Radius * Radius;
+    }
+}
+
+// Usage:
+Circle circle1 = new Circle();         // Calls the default constructor, which chains to the one-parameter constructor
+Circle circle2 = new Circle(3.0);      // Calls the constructor with one parameter
+
+Console.WriteLine(circle1.GetArea()); // Output: Area of a circle with radius 1.0
+Console.WriteLine(circle2.GetArea()); // Output: Area of a circle with radius 3.0
+```
+
+Benefits of Constructor Overloading
+
+- Flexibility: 
+Allows objects to be created 
+with different initial states depending on the available data.
+- Code Clarity: 
+Each constructor can have a clear and specific purpose, 
+making the code easier to understand.
+- Reduced Duplication: 
+By using `this` for constructor chaining, 
+you can avoid redundant code.
+
+Summary
+
+Constructor overloading in C# enables you 
+to define multiple constructors with different signatures 
+in the same class, providing different ways to create and initialize objects. 
+It adds flexibility and clarity to your code and allows 
+for better handling of different object initialization scenarios.
+
+
+==================================================================
+initialize classes and their members
+==================================================================
+In C#, there are several ways to initialize classes and their members. 
+Each method serves different purposes and 
+can be used based on the requirements of your application. 
+Here’s an overview of various initialization techniques for classes:
+
+1. Default Initialization
+
+When you create an object of a class, 
+it is automatically initialized using the class’s constructors. 
+If no constructor is defined, 
+a default constructor is provided by the compiler.
+
+#Example:
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+// Default constructor is called
+Person person1 = new Person(); 
+person1.Name = "Alice";
+person1.Age = 30;
+```
+
+2. Parameterized Constructor
+
+A parameterized constructor allows you 
+to initialize the class’s fields or properties 
+with specific values when the object is created.
+
+#Example:
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    // Parameterized constructor
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+
+// Initialize with specific values
+Person person2 = new Person("Bob", 25);
+```
+
+3. Constructor Overloading
+
+Constructor overloading allows you to define 
+multiple constructors with different parameters 
+in the same class. 
+This provides flexibility in how objects are instantiated.
+
+#Example:
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public Person() : this("Unknown", 0) { } // Calls another constructor
+
+    public Person(string name) : this(name, 0) { } // Calls another constructor
+
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+
+// Different ways to initialize
+Person person3 = new Person();        // Calls default constructor
+Person person4 = new Person("Eve");   // Calls constructor with one parameter
+Person person5 = new Person("Dave", 40); // Calls constructor with two parameters
+```
+
+4. Object Initializers
+
+Object initializers allow you 
+to set property values at the time of object creation 
+without explicitly calling a constructor.
+
+#Example:
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+// Initialize with object initializers
+Person person6 = new Person
+{
+    Name = "Fay",
+    Age = 28
+};
+```
+
+5. Property Initializers
+
+You can initialize properties directly within the class definition. 
+This method is useful for providing default values.
+
+#Example:
+```csharp
+public class Person
+{
+    public string Name { get; set; } = "John Doe";
+    public int Age { get; set; } = 30;
+}
+
+// Create instance with default property values
+Person person7 = new Person();
+```
+
+6. Static Constructors
+
+A static constructor is used to initialize static members of a class.
+It is called once, when the class is first accessed.
+
+#Example:
+```csharp
+public class Application
+{
+    public static string AppName { get; private set; }
+
+    // Static constructor
+    static Application()
+    {
+        AppName = "My Application";
+    }
+}
+
+// Access static member
+Console.WriteLine(Application.AppName); // Output: My Application
+```
+
+7. Field Initializers
+
+Fields can be initialized directly 
+where they are declared within a class. 
+This is useful for setting default values.
+
+#Example:
+```csharp
+public class Person
+{
+    public string Name = "Default Name";
+    public int Age = 0;
+}
+
+// Create instance with default field values
+Person person8 = new Person();
+```
+
+8. Readonly Fields
+
+Readonly fields are initialized either 
+at the point of declaration or within a constructor. 
+They can only be assigned values once, 
+which makes them immutable after construction.
+
+#Example:
+```csharp
+public class Person
+{
+    public readonly string Name;
+    public readonly int Age;
+
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+
+// Create instance with readonly fields
+Person person9 = new Person("Grace", 35);
+```
+
+Summary
+
+- Default Initialization: 
+Automatically done when an object is created.
+- Parameterized Constructor: 
+Allows setting values at the time of object creation.
+- Constructor Overloading: 
+Provides multiple ways to initialize objects with different parameters.
+- Object Initializers: 
+Sets property values at the time of object creation.
+- Property Initializers: 
+Provides default values directly in property declarations.
+- Static Constructors: 
+Initializes static members of a class.
+- Field Initializers: 
+Sets default values for fields.
+- Readonly Fields: 
+Allows setting values only during declaration or within a constructor.
+
+These initialization techniques provide flexibility and control 
+over how objects are created and initialized, 
+allowing you to tailor the instantiation process 
+to suit various scenarios.
+
+
+
+==================================================================
+            encapsulation and abstraction
+==================================================================            
+In C#, encapsulation and abstraction are 
+two fundamental concepts of object-oriented programming (OOP), 
+each serving a distinct purpose:
+
+Encapsulation:
+- Definition: Encapsulation is the practice of bundling the data (fields) and methods (functions) that operate on the data into a single unit, called a class. It restricts direct access to some of an object’s components, which is a means of preventing unintended interference and misuse of the methods and data.
+- How It Works: Encapsulation is typically achieved using access modifiers like `private`, `protected`, and `public`. By making the fields private, you restrict access to them and expose them through public methods (getters and setters).
+- Example:
+  ```csharp
+  class Person
+  {
+      private string name; // Field is private
+
+      public string Name // Public property to access the private field
+      {
+          get { return name; }
+          set { name = value; }
+      }
+  }
+  ```
+  In this example, the `name` field is encapsulated within the `Person` class and is accessible only through the `Name` property.
+
+Abstraction:
+- Definition: Abstraction is the concept of hiding the complex implementation details and showing only the essential features of an object. It allows focusing on what an object does rather than how it does it.
+- How It Works: Abstraction is achieved using abstract classes and interfaces in C#. Abstract classes can have abstract methods (without implementation) that must be implemented in derived classes. Interfaces define a contract without any implementation, which must be fulfilled by implementing classes.
+- Example:
+  ```csharp
+  interface IAnimal
+  {
+      void MakeSound(); // Interface method (no implementation)
+  }
+
+  class Dog : IAnimal
+  {
+      public void MakeSound()
+      {
+          Console.WriteLine("Bark");
+      }
+  }
+  ```
+  In this example, `IAnimal` is an interface that abstracts the concept of an animal making a sound, and `Dog` provides a specific implementation.
+
+Difference Between Encapsulation and Abstraction:
+- Encapsulation is about hiding the internal details and showing only what is necessary (data protection), while abstraction is about hiding the complexity and showing only the relevant parts (simplification of complexity).
+- Encapsulation deals with the inner details of an object and its state, and it protects an object's data from being accessed and modified by the outside world. Abstraction deals with the outside view of an object, hiding the complexity of its implementation and focusing on what it does.
+- Encapsulation is implemented by using access modifiers (like `private`, `public`). Abstraction is implemented using abstract classes, interfaces, and by defining methods that don't expose the internal workings.
+
+
+==================================================================
+        Business rules
+==================================================================
+Business rules in software are typically more related to abstraction than encapsulation.
+
+Why Business Rules are Related to Abstraction:
+
+- Abstraction: Business rules define the high-level logic that governs how a business process should be executed. They represent the "what" and "why" of the system's operations without delving into the "how." When you implement business rules, you're abstracting away the details of the underlying logic and focusing on the important rules and policies that must be followed.
+
+  - For example, a business rule might state, "A customer must have a valid email address to place an order." This rule abstracts the requirement without specifying how the validation is done or how the email is processed within the system.
+
+- Encapsulation: While the logic that enforces business rules might be encapsulated within classes or methods, the rules themselves represent the abstract, high-level requirements of the system. Encapsulation would then be used to protect the internal implementation of how these rules are enforced.
+
+Summary:
+- Business rules are more aligned with abstraction because they define the high-level operations and constraints of a system without revealing the internal mechanisms.
+- Encapsulation might be used to implement these business rules, ensuring that the underlying logic is hidden and protected from external interference.
+
+==================================================================
+Examples of abstraction and encapsulation:
+==================================================================
+
+Abstraction:
+
+Use Case: Building a Car Dashboard
+
+Scenario:
+You want to design a car dashboard that displays various indicators like speed, fuel level, and engine temperature.
+
+Abstraction in Action:
+- You design a high-level interface for the dashboard that displays these indicators without needing to understand the intricate details of how each indicator works.
+- For instance, the dashboard provides methods like `DisplaySpeed()`, `ShowFuelLevel()`, and `DisplayEngineTemperature()`. Each method represents a high-level action without exposing the internal workings of how these indicators get their data.
+
+Example Code:
+```csharp
+interface IDashboard
+{
+    void DisplaySpeed();
+    void ShowFuelLevel();
+    void DisplayEngineTemperature();
+}
+
+class CarDashboard : IDashboard
+{
+    public void DisplaySpeed()
+    {
+        // Implementation to get and display speed
+    }
+
+    public void ShowFuelLevel()
+    {
+        // Implementation to get and display fuel level
+    }
+
+    public void DisplayEngineTemperature()
+    {
+        // Implementation to get and display engine temperature
+    }
+}
+```
+Here, `IDashboard` abstracts the concept of a dashboard, showing only what it does without delving into the details of how it performs these actions.
+
+Encapsulation:
+
+Use Case: Banking System
+
+Scenario:
+You want to create a banking system where customers can manage their accounts.
+
+Encapsulation in Action:
+- You design a `BankAccount` class with private fields to store account details and balance.
+- To ensure that account balance cannot be changed directly from outside the class, you use public methods (getters and setters) to access and modify the balance.
+
+Example Code:
+```csharp
+class BankAccount
+{
+    private double balance; // Private field
+
+    public BankAccount(double initialBalance)
+    {
+        balance = initialBalance;
+    }
+
+    // Public method to get the balance
+    public double GetBalance()
+    {
+        return balance;
+    }
+
+    // Public method to deposit money
+    public void Deposit(double amount)
+    {
+        if (amount > 0)
+        {
+            balance += amount;
+        }
+    }
+
+    // Public method to withdraw money
+    public void Withdraw(double amount)
+    {
+        if (amount > 0 && amount <= balance)
+        {
+            balance -= amount;
+        }
+    }
+}
+```
+In this example, the `balance` field is encapsulated within the `BankAccount` class. The `GetBalance()`, `Deposit()`, and `Withdraw()` methods provide controlled access to the balance, ensuring that it can be modified only through these controlled interactions.
+
+Summary:
+- Abstraction focuses on what an object does, hiding the implementation details. It allows you to work with high-level concepts without worrying about the internal complexity.
+- Encapsulation focuses on how data is protected and accessed within an object. It hides the internal state and provides controlled access to the data through public methods.
+
+==================================================================
+                term abstraction sometimes be confusing
+==================================================================
+Yes, the term abstraction can sometimes be confusing because it encompasses different meanings depending on the context. Here are a few reasons why it might be confusing:
+
+1. Multiple Meanings: In programming, abstraction often refers to hiding complex implementation details behind simpler interfaces. However, the term is also used in other contexts, such as art or philosophy, which might contribute to confusion.
+
+2. High-Level vs. Low-Level: Abstraction in programming involves defining high-level operations or concepts while hiding the low-level details. This distinction between high-level abstraction and low-level implementation can be hard to grasp initially.
+
+3. Different Mechanisms: Abstraction can be achieved using different mechanisms, such as abstract classes, interfaces, or even simple methods. Understanding how each mechanism contributes to abstraction can be challenging.
+
+4. Overlap with Encapsulation: Sometimes, abstraction and encapsulation are discussed together, as they are related concepts. This overlap can make it hard to see their distinct roles. Encapsulation hides the internal state of an object, while abstraction hides the complexity of operations behind a simpler interface.
+
+Simplified Explanation:
+- Abstraction is about defining what something does without worrying about how it does it. It focuses on the essential characteristics without getting bogged down in details.
+- Encapsulation is about hiding how something works internally and exposing only what is necessary for interacting with it.
+
+Understanding these distinctions and focusing on the high-level purpose of abstraction can help clarify its meaning and application.
+
+

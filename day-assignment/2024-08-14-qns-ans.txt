@@ -1,0 +1,358 @@
+[Anugrah]
+
+3.Cricket Ground Boundry Sides Distances from batsman (from Pavilion End)
+        Leg Side 
+        Off Side  
+        Straight 
+        Third Man  
+    Compare two cricket grounds:
+        find the shortest distance from each ground 
+        and compare two ground based on shortest distance 
+        check which is preferred ground for batsman 
+
+
+
+namespace OOPCricket
+{
+
+    class Cricket
+    {
+        public int LegSide { set; get; }
+        public int OffSide { set; get; }
+        public int Straight { set; get; }
+        public int ThirdMan { set; get; }
+        public Cricket(int_legside, int _offside,int_straight,int_thirdman)
+        {
+            this.LegSide = _legside;
+            this.OffSide = _offside;
+            this.Straight=_straight;
+            this.ThirdMan=_thirdman;
+        }
+        public int FindShortestDistance()
+        { 
+           return Math.Min(Math.Min(LegSideDistance, OffSideDistance), Math.Min(StraightDistance, ThirdManDistance));
+        }
+        public bool GetSuitableGroundGt(Cricket other)
+        {
+            return this.FindShortestDistance() > other.FindShortestDistance();
+        }
+        public bool GetSuitableGroundEq(Cricket other)
+        {
+            return this.FindShortestDistance() == other.FindShortestDistance();
+        }
+ public override string ToString()
+        {
+            return $"[LegSide={this.LegSide},OffSide={this.OffSide},Straight={this.Straight},ThirdMan={this.ThirdMan},ShortestDistance={this.FindShortestDistance()}]";
+        }
+
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Cricket firstGround = new Cricket(65, 70, 75, 60);
+            Cricket secondGround = new Cricket(70, 68, 80, 65);
+            if (firstGround.GetSuitableGroundGt(secondGround))
+            {
+                Console.WriteLine($"first ground {firstGround} is greater than second ground {secondGround}");
+            }
+            else if (firstGround.GetSuitableGroundEq(secondGround))
+            {
+                Console.WriteLine($"first ground {firstGround} is equal to second ground {secondGround}");
+
+            }
+            else
+            {
+                Console.WriteLine($"first ground {firstGround} is less than to second land {secondGround}");
+
+            }
+        }
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Circle { Radius: int }
+        - float Circumference() 
+        - bool IsCircumferenceGt(Circle other)
+   TestCircle 
+
+
+namespace OOPCircle
+{
+
+    class Circle
+    {
+        public int Radius { set; get; }
+               
+        public Circle(int_radius)
+        {
+            this.Radius = _radius;
+        }
+        public float FindCircumference()
+        { 
+           return 2 * (float)Math.PI * Radius;
+         }
+        public bool CircleGt(Circle other)
+        {
+            return this.FindCircumference() > other.FindCircumference()
+        }
+        public bool CircleEq (Circle other)
+        {
+            return this.FindCircumference() == other.FindCircumference();
+        }
+       public override string ToString()
+        {
+            return $"[Radius={this.Radius},Circumference={this.FindCircumference()}]";
+        }
+
+    }
+    internal class TestCircle 
+    {
+        static void Main(string[] args)
+        {
+            Circle firstCircle = new Circle(10);
+            Circle secondCircle = new Circle(15);
+            if (firstCircle.CircleGt(secondCircle))
+            {
+                Console.WriteLine($"first circle {firstCircle} is greater than second circle {secondCircle}");
+            }
+            else if (firstCircle.CircleEq(secondCircle))
+            {
+                Console.WriteLine($"first circle {firstCircle} is equal to second circle {secondCircle}");
+
+            }
+            else
+            {
+                Console.WriteLine($"first circle {firstCircle} is less than to second circle {secondCircle}");
+
+            }
+        }
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. BikeRaceTrack
+        { Distance: int }
+        - bool IsGt(BikeRaceTrack other)
+    TestBikeRaceTrack
+
+
+namespace OOPRace
+{
+
+    class RaceTrack
+    {
+        public int Distance { set; get; }
+               
+        public RaceTrack(int_distance)
+        {
+            this.Distance = _distance;
+        }
+        public bool RaceTrackGt(RaceTrack other)
+        {
+            return this.Distance > other. Distance      
+        }
+        public bool RaceTrackEq(RaceTrack other)
+
+        {
+            return this.Distance == other.Distance ;
+        }
+       public override string ToString()
+        {
+            return $"[Distance={this.Distance}]";
+        }
+
+    }
+    internal class TestBikeRaceTrack
+    {
+        static void Main(string[] args)
+        {
+            RaceTrack firstTrack = new RaceTrack(500);
+            RaceTrack secondTrack = new RaceTrack(1000);
+            if (firstTrack.firstTrack(secondTrack))
+            {
+                Console.WriteLine($"first track {firstTrack} is greater than second track {secondTrack}");
+            }
+            else if (firstTrack.RaceTrackEq(secondTrack))
+            {
+                Console.WriteLine($"first track {firstTrack} is equal to second track {secondTrack}");
+
+            }
+            else
+            {
+                Console.WriteLine($"first track {firstTrack} is less than to second track {secondTrack}");
+
+            }
+        }
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6. ComplexNumber { Real: int, Imaginary: int}
+        - ComplexNumber Add(ComplexNumber other)
+    TestComplexNumber for addition 
+        (3 + i4)
+     +  (5 + i3) 
+     =  (8 + i7)
+
+namespace OOPComplexNos
+{
+
+    class ComplexNumber
+    {
+        public int Real { get; set; }
+        public int Imaginary { get; set; }
+               
+        public ComplexNumber(int_real,int_imaginary)
+        {
+            this.Real =_real;
+            this.Imaginary =_imaginary;   
+        }
+        public ComplexNosAdd(ComplexNumber other)
+        {
+            return new ComplexNumber(this.Real + other.Real, this.Imaginary + other.Imaginary);      
+        }
+        public override string ToString()
+        {
+            return $"[ComplexNumber={Real} + i{Imaginary}]";
+        }
+
+    }
+    internal class TestComplexNumber
+    {
+        static void Main(string[] args)
+        {
+            ComplexNumber firstNo = new ComplexNumber(3,4);
+            ComplexNumber secondNo = new ComplexNumber(5,3);
+            ComplexNumber result = firstNo.ComplexNosAdd(secondNo);
+            Console.WriteLine($"\nResult of addition: {result}");
+            
+        }
+    }
+}
+
+
+
+------------------------------------------
+
+I. Create Trainer
+
+
+public void Create(Trainer trainer)
+{
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        string query = "INSERT INTO Trainers (Name, Place, Skill) VALUES (@Name, @Place, @Skill)";
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@Name", trainer.name);
+        cmd.Parameters.AddWithValue("@Place", trainer.place);
+        cmd.Parameters.AddWithValue("@Skill", trainer.skill);
+        conn.Open();
+        cmd.ExecuteNonQuery();
+    }
+}
+
+1.how do you create the connection object?
+       
+using (SqlConnection conn = new SqlConnection(connectionString))
+This line declares a SqlConnection object named conn and initializes it with a connection string (connectionString), which is a string that specifies the information needed to        connect to the database.
+
+2.how do you create the command object?
+
+SqlCommand cmd = new SqlCommand(query, conn);
+This line creates a new SqlCommand object named cmd. The SqlCommand object is used to execute a SQL query against the database. It takes two parameters: the SQL query string (query) and the connection object (conn) that the command should use to connect to the database.
+
+3.how do you write the parameterizied sql statement or query?
+
+string query = "INSERT INTO Trainers (Name, Place, Skill) VALUES (@Name, @Place, @Skill)";
+This line defines a SQL query string named query. The query is an INSERT statement that adds a new row to the Trainers table. It specifies three columns (Name, Place, and Skill) that will receive the values provided using the @ symbol.
+
+4.how will you pass the value to the query?
+
+cmd.Parameters.AddWithValue("@Name", trainer.name);
+cmd.Parameters.AddWithValue("@Place", trainer.place);
+cmd.Parameters.AddWithValue("@Skill", trainer.skill);
+These three lines add parameters to the SqlCommand object. The AddWithValue method is used to add parameters to the command. It takes two arguments: the name of the parameter (e.g., @Name) and the value to be assigned to that parameter (e.g., trainer.name).
+
+5.how will you establish the connection to database?
+
+conn.Open();
+This line opens the database connection. It's necessary to open the connection before executing any commands against the database.
+
+6.how will you run the query?
+
+cmd.ExecuteNonQuery();
+This line executes the SQL command represented by the cmd object. The ExecuteNonQuery method is used for executing SQL statements that do not return any result sets, such as INSERT, UPDATE, or DELETE statements.
+
+
+II. Read Trainer
+
+public Trainer Read(int id)
+{
+    Trainer trainer = null;
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        string query = "SELECT Id, Name, Place, Skill FROM Trainers WHERE Id = @Id";
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@Id", id);
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+        if (reader.Read())
+        {
+            trainer = new Trainer((int)reader["Id"], reader["Name"].ToString(), reader["Skill"].ToString(),
+                    reader["Place"].ToString());
+        }
+    }
+    return trainer;
+}
+
+1.how do you create the connection object?
+       
+using (SqlConnection conn = new SqlConnection(connectionString))
+This line declares a SqlConnection object named conn and initializes it with a connection string (connectionString), which is a string that specifies the information needed to        connect to the database.
+
+2.how do you create the command object?
+
+SqlCommand cmd = new SqlCommand(query, conn);
+This line creates a new SqlCommand object named cmd. The SqlCommand object is used to execute a SQL query against the database. It takes two parameters: the SQL query string (query) and the connection object (conn) that the command should use to connect to the database.
+
+3.how do you write the parameterizied sql statement or query?
+
+string query = "SELECT Id, Name, Place, Skill FROM Trainers WHERE Id = @Id";
+This line defines a SQL query string named query. The query is an SELECT statement that selects a row from the Trainers table. It specifies three columns (Name, Place, and Skill) of a specified trainer. These data are selected using the id of the trainer specified as @Id.
+
+4.how will you pass the value to the query?
+
+cmd.Parameters.AddWithValue("@Id", id);
+This line add parameters to the SqlCommand object. The AddWithValue method is used to add parameters to the command. It takes two arguments: the name of the parameter (e.g., @Id) and the value to be assigned to that parameter (e.g., id).
+
+5.how will you establish the connection to database?
+
+conn.Open();
+This line opens the database connection. It's necessary to open the connection before executing any commands against the database.
+
+6.how will you run the query?
+
+SqlDataReader reader = cmd.ExecuteReader();
+This line executes the SQL command and returns a SqlDataReader object named reader. The SqlDataReader is used to read the data returned by the SELECT query.The ExecuteReader method is used for executing SQL statements that return any result sets.
+
+7.what is reader object?
+
+The reader object in the provided code is an instance of the SqlDataReader class in C#. This object is used to read data returned by a SqlCommand executed against a SQL Server database. 
+SqlDataReader is a class in the System.Data.SqlClient namespace used to read a forward-only stream of rows from a SQL Server database. 
+
+8.how will you read a row or row-by-row many rows using reader object?
+
+if (reader.Read())
+To read a row,This line checks if there are any rows returned by the query. The Read method of the SqlDataReader advances the reader to the next record. It returns true if there are more rows; otherwise, it returns false.
+while (reader.Read())
+To read row-by-row many rows,Use a loop to iterate over the rows returned by the SqlDataReader. The Read method of the SqlDataReader moves the reader to the next record and returns true as long as there are more rows to read.
+
+9.what is job of the reader.Read() function?
+
+The primary function of reader.Read() is to advance the SqlDataReader to the next record (or row) in the result set. Initially, when a SqlDataReader is created, it is positioned before the first record. The Read method must be called to start accessing any data.
+
+10.how do you use the reader object after Read() function?
+
+trainer = new Trainer((int)reader["Id"], reader["Name"].ToString(), reader["Skill"].ToString(),reader["Place"].ToString());
+If the if condition is true ,this line creates a new Trainer object and assigns it to the trainer variable.The values are accessed using the column names (e.g., reader["Id"]) and cast or converted to the appropriate data types.
