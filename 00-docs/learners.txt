@@ -1,14 +1,15 @@
-16/08/2024 Day 15: 
-[  ]Aaryaka P Nath, 	[  ]Abijith K, 			[  ]Alan Kuriakose Cherian,			
-[  ]Anjana E R, 		[  ]Anjana N K,
-[  ]Ann Mariya Jaimon, 	[  ]Anugrah Krishnan, 	[  ]Anurag C Ashok, 					
-[  ]Ashna Mariya Shaji, [  ]Ashwin V, 			[..]Athulya Shaji,
-[  ]Collin Francy, 		[  ]Dijol Davis,	    [  ]Girish K V, 		    
-[  ]Gladsy Joshy,	    [  ]Gopika V, 			[  ]Keerthana Jayalal K   
-[  ]Minnu Sudhakaran V A,, [  ]Neha Joy, 			
-[  ]Nivya Ignatious, 	[  ]Rishwin R Kanth,	[  ]Sahla. R, 			
-[  ]Sharon Rose, 		[  ]Shilpa Sha Eapen, 	
-[  ]Yahkoob P,
+17/08/2024 Day 16: 
+[04]Aaryaka P Nath, 	[05]Abijith K, 			[03]Alan Kuriakose Cherian,			
+[06]Anjana E R, 		[07]Anjana N K,
+[08]Ann Mariya Jaimon, 	[09]Anugrah Krishnan, 	[10]Anurag C Ashok, 					
+[..]Ashna Mariya Shaji, [11]Ashwin V, 			[02]Athulya Shaji,
+[12]Collin Francy, 		[13]Dijol Davis,	    [01]Girish K V, 		    
+[14]Gladsy Joshy,	    [15]Gopika V, 			[16]Keerthana Jayalal K   
+[17]Minnu Sudhakaran V A,, [18]Neha Joy, 			
+[19]Nivya Ignatious, 	[20]Rishwin R Kanth,	[21]Sahla. R, 			
+[22..]Sharon Rose, 		[23]Shilpa Sha Eapen, 	
+[24]Yahkoob P,
+
 16/08/2024  Day 15: 
 [01]Aaryaka P Nath, 	[02]Abijith K, 			[03]Alan Kuriakose Cherian,			
 [04]Anjana E R, 		[05]Anjana N K,

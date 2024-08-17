@@ -1,0 +1,65 @@
+1. dynamic binding : it keeps always "one definition"
+    abstract class IFlyable 
+        having virtual method : Fly() -> outputs -> 'Bird is flying'
+    class Crow: IFlyable 
+        having override method : Fly() -> outputs -> 'Crow is flying'
+    
+    virtual + override combo 
+    to hold the child object reference to parent reference variable
+    ie to hold Crow object reference to IFlyable reference variable "fly1"
+    and to hold the Crow object reference to Crow ref var also "crow1"
+    fly1.Fly() calls what?
+    crow1.Fly() calls what?
+    Output: 
+        'Crow is flying'
+        'Crow is flying'
+
+2. 
+    abstract class IFlyable 
+        having method : Fly()
+    class Crow: IFlyable 
+        having new method : Fly()
+    
+    not ovrriding via new keyword ie no virtual + override combo 
+    to hold the child object reference to parent reference variable
+    ie to hold Crow object reference to IFlyable reference variable "fly1"
+    and to hold the Crow object reference to Crow ref var also "crow1"
+    fly1.Fly() calls what?
+    crow1.Fly() calls what?
+    Output: 
+        'Bird is flying'
+        'Crow is flying'
+
+
+3. dynamic binding : it keeps always "one definition"
+    abstract class IFlyable 
+        having abstract method : Fly() -> No definition 
+    class Crow: IFlyable 
+        having override method : Fly() -> outputs -> 'Crow is flying'
+    
+    abstract + override combo 
+    to hold the child object reference to parent reference variable
+    ie to hold Crow object reference to IFlyable reference variable "fly1"
+    and to hold the Crow object reference to Crow ref var also "crow1"
+    fly1.Fly() calls what?
+    crow1.Fly() calls what?
+    Output: 
+        'Crow is flying'
+        'Crow is flying'
+
+1. "abstract + override", 2. "virtual + overrride", 3."'new' in the child"
+
+1. abstract class vs interface 
+    - class can inherit only one parent class 
+
+    for abstract class we use 'abstract' qualifier to make the class abstract.
+        abstract class is inherited to child to remove the abstraction
+    but interface by default abstract 
+        because all the methods / properties of interface are abstract 
+        interface is implemented in the class to remove the abstraction 
+
+2. interface implementation 
+    interface is implemented in the class 
+    class can implement any number of interfaces 
+3. interface inheritance types 
+    - interface can inherit many parent interfaces
