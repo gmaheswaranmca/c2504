@@ -1,0 +1,84 @@
+Inheritance:
+    - reusability 
+    - is-a relationship 
+
+    Car is a Vehicle -> Vehicle is the parent of the car        -- is-a relationship 
+    Car has engine   -> engine is the property of the car       -- has-a relationship 
+
+    - base class, derived class 
+    - types: single level, multi level, hierarchical 
+        no multiple inheritance in C# class (more than one parent is not possilbe for a class)
+        but multiple inheritance in C# interfaces or C# interfaces implmentations 
+    - virtual and override 
+        'virtual' qualified method can be overridden using 'override' keyword 
+        -- If in parent class, method is declared as 'virtual'
+           then in child class, method can be overridden (reimplmented) using keyword 'override'
+        -- 'virtual' and 'override' are the combo for overriding 
+    - abstract and override 
+        'abstract' qualified method will not have the body the method 
+        ie not impemented method is qualified as 'abstract' 
+        -- If in parent class, method is declared as 'abstract'
+           then in child class, method can be overridden (reimplmented) using keyword 'override'
+        -- 'abstract' and 'override' are the combo for overriding 
+    - abstract method 
+        - not impemented method is called as 'abstract' method 
+        - 'abstract' qualified method 
+        - abstract method class should be abstract class [reverse is not mandatory]
+    - abstract class 
+        - not object created[not instantiated] class is called abstract class 
+        - 'abstract' qualified class 
+        - abstract class can have 
+            - all the implmented methods 
+            - OR few implemented and others as abstract 
+            - OR all the abstract methods 
+    - sealed method 
+        - overriding method can be 'sealed' not to further override 
+        - 'sealed' qualified method 
+        - 'sealed' method should be overridden method 
+    - sealed class 
+        - 'sealed' class cannot be inherited 
+        - 'sealed' qualified class 
+    - this 
+        - current object reference 
+    - base 
+        - base object/class reference 
+-------------------------------------------------
+    to understand how to use the base keyword and 
+    when to use 
+
+    `to include the Animal's Eat() code 
+    also in the "Eat()" of "Dog"`.
+-------------------------------------------------     
+    public abstract class Animal
+    {
+        public virtual void Eat()
+        {
+            Console.WriteLine("Animal should eat");
+        }
+        
+    }
+
+    public class Dog : Animal
+    {
+        public override void Eat()
+        {
+            base.Eat();
+            Console.WriteLine("Eating...");
+        }
+        public  void Bark()
+        {
+            Console.WriteLine("Barking...");
+        }
+    }
+
+    
+    internal class Programs
+    {
+        static void Main(string[] args)
+        {
+            Dog willow = new Dog();
+            Console.WriteLine("---willow---"); willow.Bark(); willow.Eat();
+
+        }
+    }
+-------------------------------------------------

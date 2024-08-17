@@ -1,0 +1,827 @@
+================Questions:================
+1. Implement an Abstract Class with Method Overriding
+   - Task: Create an abstract class `Employee` with an abstract method `CalculateSalary()`. Derive two classes `FullTimeEmployee` and `PartTimeEmployee` from `Employee`.
+   - Requirements:
+     - `FullTimeEmployee` should have properties `BaseSalary` and `BonusPercentage`. Implement the `CalculateSalary()` method to return the total salary, including bonus.
+     - `PartTimeEmployee` should have properties `HourlyRate` and `HoursWorked`. Implement the `CalculateSalary()` method to return the total earnings based on hours worked.
+   - Example:
+     ```csharp
+     Employee fullTime = new FullTimeEmployee(50000, 0.1); 
+     Console.WriteLine(fullTime.CalculateSalary());  // Output: 55000
+
+     Employee partTime = new PartTimeEmployee(20, 80); 
+     Console.WriteLine(partTime.CalculateSalary());  // Output: 1600
+     ```
+
+2. Design a Class Hierarchy with Interfaces
+   - Task: Create an interface `IDrawable` with a method `Draw()`. Create a base class `Graphic` that implements `IDrawable` and has a method `Resize()`. Derive two classes `Line` and `Polygon` from `Graphic`.
+   - Requirements:
+     - `Line` should have properties `StartPoint` and `EndPoint`. Implement the `Draw()` method to draw a line.
+     - `Polygon` should have a property `Vertices` (a list of points). Implement the `Draw()` method to draw a polygon.
+     - Implement the `Resize()` method in both derived classes to adjust their dimensions.
+   - Example:
+     ```csharp
+     IDrawable line = new Line(new Point(0, 0), new Point(10, 10));
+     line.Draw(); // Draws a line from (0,0) to (10,10)
+
+     Graphic polygon = new Polygon(new List<Point> { new Point(0, 0), new Point(10, 0), new Point(10, 10), new Point(0, 10) });
+     polygon.Resize(2); // Resize polygon
+     polygon.Draw(); // Draws the resized polygon
+     ```
+
+3. Create an Abstract Base Class with a Template Method
+   - Task: Implement an abstract class `Report` with a method `GenerateReport()` that calls two methods `CreateHeader()` and `CreateBody()`. Derive classes `AnnualReport` and `MonthlyReport` from `Report`.
+   - Requirements:
+     - `AnnualReport` should override `CreateHeader()` and `CreateBody()` to provide a header and body for an annual report.
+     - `MonthlyReport` should override `CreateHeader()` and `CreateBody()` to provide a header and body for a monthly report.
+   - Example:
+     ```csharp
+     Report annual = new AnnualReport();
+     annual.GenerateReport(); // Output: Annual report header and body
+
+     Report monthly = new MonthlyReport();
+     monthly.GenerateReport(); // Output: Monthly report header and body
+     ```
+
+4. Design a Class Hierarchy with Abstract Methods and Interfaces
+   - Task: Create an abstract class `Vehicle` with an abstract method `Drive()`. Create an interface `IFuel` with a method `Refuel()`. Derive classes `Car` and `Motorcycle` from `Vehicle` and implement `IFuel`.
+   - Requirements:
+     - `Car` should have properties `FuelLevel` and `TankCapacity`. Implement the `Drive()` method to simulate driving and `Refuel()` to refill the tank.
+     - `Motorcycle` should have properties `FuelLevel` and `TankCapacity`. Implement the `Drive()` method to simulate driving and `Refuel()` to refill the tank.
+   - Example:
+     ```csharp
+     Vehicle car = new Car(10, 50);
+     car.Drive(); // Output: Car is driving
+     (car as IFuel).Refuel(20); // Output: Car is refueled
+
+     Vehicle motorcycle = new Motorcycle(5, 15);
+     motorcycle.Drive(); // Output: Motorcycle is driving
+     (motorcycle as IFuel).Refuel(10); // Output: Motorcycle is refueled
+     ```
+
+5. Implement a Class Hierarchy with Method Overriding and Interfaces
+   - Task: Create an interface `IIdentifiable` with a method `GetId()`. Create an abstract class `Document` that implements `IIdentifiable` and has a method `Print()`. Derive classes `Invoice` and `Receipt` from `Document`.
+   - Requirements:
+     - `Invoice` should have properties `InvoiceNumber` and `Amount`. Implement the `GetId()` method to return the invoice number and `Print()` to print invoice details.
+     - `Receipt` should have properties `ReceiptNumber` and `TotalAmount`. Implement the `GetId()` method to return the receipt number and `Print()` to print receipt details.
+   - Example:
+     ```csharp
+     Document invoice = new Invoice("INV001", 1000);
+     Console.WriteLine(invoice.GetId()); // Output: INV001
+     invoice.Print(); // Output: Invoice details
+
+     Document receipt = new Receipt("REC001", 200);
+     Console.WriteLine(receipt.GetId()); // Output: REC001
+     receipt.Print(); // Output: Receipt details
+     ```
+
+
+6. Implement a Class Hierarchy with Abstract Methods and Interfaces
+   - Task: Create an abstract class `Appliance` with an abstract method `Operate()`. Create an interface `IEnergyEfficient` with a method `GetEnergyEfficiency()`. Derive two classes `WashingMachine` and `Refrigerator` from `Appliance` and implement `IEnergyEfficient`.
+   - Requirements:
+     - `WashingMachine` should have properties `LoadCapacity` and `WaterUsage`. Implement `Operate()` to simulate operation and `GetEnergyEfficiency()` to return energy efficiency details.
+     - `Refrigerator` should have properties `Temperature` and `CoolingCapacity`. Implement `Operate()` to simulate operation and `GetEnergyEfficiency()` to return energy efficiency details.
+   - Example:
+     ```csharp
+     Appliance washer = new WashingMachine(7, 50);
+     washer.Operate();
+     Console.WriteLine(((IEnergyEfficient)washer).GetEnergyEfficiency());
+
+     Appliance fridge = new Refrigerator(-5, 300);
+     fridge.Operate();
+     Console.WriteLine(((IEnergyEfficient)fridge).GetEnergyEfficiency());
+     ```
+
+7. Design a Class Hierarchy with Abstract Classes and Method Overriding
+   - Task: Create an abstract class `Shape` with an abstract method `CalculateVolume()`. Derive two classes `Sphere` and `Cube` from `Shape`.
+   - Requirements:
+     - `Sphere` should have a property `Radius`. Implement `CalculateVolume()` to compute the volume of a sphere.
+     - `Cube` should have a property `SideLength`. Implement `CalculateVolume()` to compute the volume of a cube.
+   - Example:
+     ```csharp
+     Shape sphere = new Sphere(5);
+     Console.WriteLine(sphere.CalculateVolume());
+
+     Shape cube = new Cube(3);
+     Console.WriteLine(cube.CalculateVolume());
+     ```
+
+8. Create a Class Hierarchy with Interfaces and Method Implementation
+   - Task: Create an interface `IExportable` with a method `Export()`. Create a base class `Document` that implements `IExportable` and has a method `Save()`. Derive classes `PDFDocument` and `WordDocument` from `Document`.
+   - Requirements:
+     - `PDFDocument` should implement `Export()` to export as PDF and `Save()` to save the document.
+     - `WordDocument` should implement `Export()` to export as Word format and `Save()` to save the document.
+   - Example:
+     ```csharp
+     Document pdfDoc = new PDFDocument();
+     pdfDoc.Save();
+     pdfDoc.Export();
+
+     Document wordDoc = new WordDocument();
+     wordDoc.Save();
+     wordDoc.Export();
+     ```
+
+9. Implement a Class Hierarchy with Abstract Methods and Concrete Methods
+   - Task: Create an abstract class `Transaction` with an abstract method `Execute()`. Create a concrete method `LogTransaction()` in `Transaction` to log transaction details. Derive classes `Deposit` and `Withdrawal` from `Transaction`.
+   - Requirements:
+     - `Deposit` should have a property `Amount` and implement `Execute()` to simulate a deposit transaction.
+     - `Withdrawal` should have a property `Amount` and implement `Execute()` to simulate a withdrawal transaction.
+   - Example:
+     ```csharp
+     Transaction deposit = new Deposit(1000);
+     deposit.Execute();
+     deposit.LogTransaction();
+
+     Transaction withdrawal = new Withdrawal(500);
+     withdrawal.Execute();
+     withdrawal.LogTransaction();
+     ```
+
+10. Design a Class Hierarchy with Method Overriding and Virtual Methods
+   - Task: Create a base class `Person` with a virtual method `DisplayInfo()` that returns a string containing the person's details. Derive classes `Student` and `Teacher` from `Person`.
+   - Requirements:
+     - `Student` should have properties `StudentId` and `Major`. Override `DisplayInfo()` to return student-specific information.
+     - `Teacher` should have properties `EmployeeId` and `Subject`. Override `DisplayInfo()` to return teacher-specific information.
+   - Example:
+     ```csharp
+     Person student = new Student("S123", "Computer Science");
+     Console.WriteLine(student.DisplayInfo());
+
+     Person teacher = new Teacher("T456", "Mathematics");
+     Console.WriteLine(teacher.DisplayInfo());
+     ```
+================Answers:================
+1. Abstract Class with Method Overriding
+
+```csharp
+using System;
+
+abstract class Employee
+{
+    public abstract decimal CalculateSalary();
+}
+
+class FullTimeEmployee : Employee
+{
+    public decimal BaseSalary { get; set; }
+    public decimal BonusPercentage { get; set; }
+
+    public FullTimeEmployee(decimal baseSalary, decimal bonusPercentage)
+    {
+        BaseSalary = baseSalary;
+        BonusPercentage = bonusPercentage;
+    }
+
+    public override decimal CalculateSalary()
+    {
+        return BaseSalary + (BaseSalary * BonusPercentage);
+    }
+}
+
+class PartTimeEmployee : Employee
+{
+    public decimal HourlyRate { get; set; }
+    public int HoursWorked { get; set; }
+
+    public PartTimeEmployee(decimal hourlyRate, int hoursWorked)
+    {
+        HourlyRate = hourlyRate;
+        HoursWorked = hoursWorked;
+    }
+
+    public override decimal CalculateSalary()
+    {
+        return HourlyRate * HoursWorked;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Employee fullTime = new FullTimeEmployee(50000, 0.1m);
+        Console.WriteLine(fullTime.CalculateSalary());  // Output: 55000
+
+        Employee partTime = new PartTimeEmployee(20, 80);
+        Console.WriteLine(partTime.CalculateSalary());  // Output: 1600
+    }
+}
+```
+
+2. Class Hierarchy with Interfaces
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+interface IDrawable
+{
+    void Draw();
+}
+
+abstract class Graphic : IDrawable
+{
+    public abstract void Draw();
+
+    public void Resize(double scaleFactor)
+    {
+        // Implement resizing logic if needed
+    }
+}
+
+class Line : Graphic
+{
+    public Point StartPoint { get; set; }
+    public Point EndPoint { get; set; }
+
+    public Line(Point startPoint, Point endPoint)
+    {
+        StartPoint = startPoint;
+        EndPoint = endPoint;
+    }
+
+    public override void Draw()
+    {
+        Console.WriteLine($"Drawing line from {StartPoint} to {EndPoint}");
+    }
+}
+
+class Polygon : Graphic
+{
+    public List<Point> Vertices { get; set; }
+
+    public Polygon(List<Point> vertices)
+    {
+        Vertices = vertices;
+    }
+
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing polygon with vertices:");
+        foreach (var vertex in Vertices)
+        {
+            Console.WriteLine(vertex);
+        }
+    }
+}
+
+class Point
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public override string ToString()
+    {
+        return $"({X}, {Y})";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        IDrawable line = new Line(new Point(0, 0), new Point(10, 10));
+        line.Draw(); // Output: Drawing line from (0,0) to (10,10)
+
+        Graphic polygon = new Polygon(new List<Point> { new Point(0, 0), new Point(10, 0), new Point(10, 10), new Point(0, 10) });
+        polygon.Resize(2); // Resize polygon (method can be implemented)
+        polygon.Draw(); // Output: Drawing polygon with vertices: (0,0) (10,0) (10,10) (0,10)
+    }
+}
+```
+
+3. Abstract Base Class with a Template Method
+
+```csharp
+using System;
+
+abstract class Report
+{
+    public void GenerateReport()
+    {
+        CreateHeader();
+        CreateBody();
+        CreateFooter();
+    }
+
+    protected abstract void CreateHeader();
+    protected abstract void CreateBody();
+    protected virtual void CreateFooter()
+    {
+        Console.WriteLine("Creating footer...");
+    }
+}
+
+class AnnualReport : Report
+{
+    protected override void CreateHeader()
+    {
+        Console.WriteLine("Creating annual report header...");
+    }
+
+    protected override void CreateBody()
+    {
+        Console.WriteLine("Creating annual report body...");
+    }
+}
+
+class MonthlyReport : Report
+{
+    protected override void CreateHeader()
+    {
+        Console.WriteLine("Creating monthly report header...");
+    }
+
+    protected override void CreateBody()
+    {
+        Console.WriteLine("Creating monthly report body...");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Report annual = new AnnualReport();
+        annual.GenerateReport(); 
+        // Output: Creating annual report header...
+        //         Creating annual report body...
+        //         Creating footer...
+
+        Report monthly = new MonthlyReport();
+        monthly.GenerateReport(); 
+        // Output: Creating monthly report header...
+        //         Creating monthly report body...
+        //         Creating footer...
+    }
+}
+```
+
+4. Abstract Methods and Interfaces
+
+```csharp
+using System;
+
+interface IFuel
+{
+    void Refuel(decimal amount);
+}
+
+abstract class Vehicle : IFuel
+{
+    public abstract void Drive();
+
+    public abstract void Refuel(decimal amount);
+}
+
+class Car : Vehicle
+{
+    public decimal FuelLevel { get; set; }
+    public decimal TankCapacity { get; set; }
+
+    public Car(decimal fuelLevel, decimal tankCapacity)
+    {
+        FuelLevel = fuelLevel;
+        TankCapacity = tankCapacity;
+    }
+
+    public override void Drive()
+    {
+        Console.WriteLine("Car is driving");
+    }
+
+    public override void Refuel(decimal amount)
+    {
+        FuelLevel = Math.Min(FuelLevel + amount, TankCapacity);
+        Console.WriteLine("Car is refueled");
+    }
+}
+
+class Motorcycle : Vehicle
+{
+    public decimal FuelLevel { get; set; }
+    public decimal TankCapacity { get; set; }
+
+    public Motorcycle(decimal fuelLevel, decimal tankCapacity)
+    {
+        FuelLevel = fuelLevel;
+        TankCapacity = tankCapacity;
+    }
+
+    public override void Drive()
+    {
+        Console.WriteLine("Motorcycle is driving");
+    }
+
+    public override void Refuel(decimal amount)
+    {
+        FuelLevel = Math.Min(FuelLevel + amount, TankCapacity);
+        Console.WriteLine("Motorcycle is refueled");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Vehicle car = new Car(10, 50);
+        car.Drive(); // Output: Car is driving
+        car.Refuel(20); // Output: Car is refueled
+
+        Vehicle motorcycle = new Motorcycle(5, 15);
+        motorcycle.Drive(); // Output: Motorcycle is driving
+        motorcycle.Refuel(10); // Output: Motorcycle is refueled
+    }
+}
+```
+
+5. Class Hierarchy with Method Overriding and Interfaces
+
+```csharp
+using System;
+
+interface IIdentifiable
+{
+    string GetId();
+}
+
+abstract class Document : IIdentifiable
+{
+    public abstract string GetId();
+    public abstract void Print();
+}
+
+class Invoice : Document
+{
+    public string InvoiceNumber { get; set; }
+    public decimal Amount { get; set; }
+
+    public Invoice(string invoiceNumber, decimal amount)
+    {
+        InvoiceNumber = invoiceNumber;
+        Amount = amount;
+    }
+
+    public override string GetId()
+    {
+        return InvoiceNumber;
+    }
+
+    public override void Print()
+    {
+        Console.WriteLine($"Invoice Number: {InvoiceNumber}, Amount: {Amount}");
+    }
+}
+
+class Receipt : Document
+{
+    public string ReceiptNumber { get; set; }
+    public decimal TotalAmount { get; set; }
+
+    public Receipt(string receiptNumber, decimal totalAmount)
+    {
+        ReceiptNumber = receiptNumber;
+        TotalAmount = totalAmount;
+    }
+
+    public override string GetId()
+    {
+        return ReceiptNumber;
+    }
+
+    public override void Print()
+    {
+        Console.WriteLine($"Receipt Number: {ReceiptNumber}, Total Amount: {TotalAmount}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Document invoice = new Invoice("INV001", 1000);
+        Console.WriteLine(invoice.GetId()); // Output: INV001
+        invoice.Print(); // Output: Invoice Number: INV001, Amount: 1000
+
+        Document receipt = new Receipt("REC001", 200);
+        Console.WriteLine(receipt.GetId()); // Output: REC001
+        receipt.Print(); // Output: Receipt Number: REC001, Total Amount: 200
+    }
+}
+```
+
+
+
+
+
+
+6. Class Hierarchy with Abstract Methods and Interfaces
+
+```csharp
+using System;
+
+interface IEnergyEfficient
+{
+    string GetEnergyEfficiency();
+}
+
+abstract class Appliance : IEnergyEfficient
+{
+    public abstract void Operate();
+    public abstract string GetEnergyEfficiency();
+}
+
+class WashingMachine : Appliance
+{
+    public int LoadCapacity { get; set; }
+    public int WaterUsage { get; set; }
+
+    public WashingMachine(int loadCapacity, int waterUsage)
+    {
+        LoadCapacity = loadCapacity;
+        WaterUsage = waterUsage;
+    }
+
+    public override void Operate()
+    {
+        Console.WriteLine("Washing machine is operating");
+    }
+
+    public override string GetEnergyEfficiency()
+    {
+        return $"Washing machine with load capacity {LoadCapacity} kg and water usage {WaterUsage} L.";
+    }
+}
+
+class Refrigerator : Appliance
+{
+    public int Temperature { get; set; }
+    public int CoolingCapacity { get; set; }
+
+    public Refrigerator(int temperature, int coolingCapacity)
+    {
+        Temperature = temperature;
+        CoolingCapacity = coolingCapacity;
+    }
+
+    public override void Operate()
+    {
+        Console.WriteLine("Refrigerator is cooling");
+    }
+
+    public override string GetEnergyEfficiency()
+    {
+        return $"Refrigerator with temperature set to {Temperature}°C and cooling capacity {CoolingCapacity} BTU.";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Appliance washer = new WashingMachine(7, 50);
+        washer.Operate(); // Output: Washing machine is operating
+        Console.WriteLine(washer.GetEnergyEfficiency()); // Output: Washing machine with load capacity 7 kg and water usage 50 L.
+
+        Appliance fridge = new Refrigerator(-5, 300);
+        fridge.Operate(); // Output: Refrigerator is cooling
+        Console.WriteLine(fridge.GetEnergyEfficiency()); // Output: Refrigerator with temperature set to -5°C and cooling capacity 300 BTU.
+    }
+}
+```
+
+7. Class Hierarchy with Abstract Classes and Method Overriding
+
+```csharp
+using System;
+
+abstract class Shape
+{
+    public abstract double CalculateVolume();
+}
+
+class Sphere : Shape
+{
+    public double Radius { get; set; }
+
+    public Sphere(double radius)
+    {
+        Radius = radius;
+    }
+
+    public override double CalculateVolume()
+    {
+        return (4.0 / 3) * Math.PI * Math.Pow(Radius, 3);
+    }
+}
+
+class Cube : Shape
+{
+    public double SideLength { get; set; }
+
+    public Cube(double sideLength)
+    {
+        SideLength = sideLength;
+    }
+
+    public override double CalculateVolume()
+    {
+        return Math.Pow(SideLength, 3);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Shape sphere = new Sphere(5);
+        Console.WriteLine(sphere.CalculateVolume()); // Output: 523.5987755982989
+
+        Shape cube = new Cube(3);
+        Console.WriteLine(cube.CalculateVolume()); // Output: 27
+    }
+}
+```
+
+8. Class Hierarchy with Interfaces and Method Implementation
+
+```csharp
+using System;
+
+interface IExportable
+{
+    void Export();
+}
+
+abstract class Document : IExportable
+{
+    public abstract void Save();
+    public abstract void Export();
+}
+
+class PDFDocument : Document
+{
+    public override void Save()
+    {
+        Console.WriteLine("PDF Document saved.");
+    }
+
+    public override void Export()
+    {
+        Console.WriteLine("Exporting as PDF.");
+    }
+}
+
+class WordDocument : Document
+{
+    public override void Save()
+    {
+        Console.WriteLine("Word Document saved.");
+    }
+
+    public override void Export()
+    {
+        Console.WriteLine("Exporting as Word format.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Document pdfDoc = new PDFDocument();
+        pdfDoc.Save(); // Output: PDF Document saved.
+        pdfDoc.Export(); // Output: Exporting as PDF.
+
+        Document wordDoc = new WordDocument();
+        wordDoc.Save(); // Output: Word Document saved.
+        wordDoc.Export(); // Output: Exporting as Word format.
+    }
+}
+```
+
+9. Abstract Methods and Concrete Methods
+
+```csharp
+using System;
+
+abstract class Transaction
+{
+    public abstract void Execute();
+    public void LogTransaction()
+    {
+        Console.WriteLine("Logging transaction...");
+    }
+}
+
+class Deposit : Transaction
+{
+    public decimal Amount { get; set; }
+
+    public Deposit(decimal amount)
+    {
+        Amount = amount;
+    }
+
+    public override void Execute()
+    {
+        Console.WriteLine($"Depositing {Amount}");
+    }
+}
+
+class Withdrawal : Transaction
+{
+    public decimal Amount { get; set; }
+
+    public Withdrawal(decimal amount)
+    {
+        Amount = amount;
+    }
+
+    public override void Execute()
+    {
+        Console.WriteLine($"Withdrawing {Amount}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Transaction deposit = new Deposit(1000);
+        deposit.Execute(); // Output: Depositing 1000
+        deposit.LogTransaction(); // Output: Logging transaction...
+
+        Transaction withdrawal = new Withdrawal(500);
+        withdrawal.Execute(); // Output: Withdrawing 500
+        withdrawal.LogTransaction(); // Output: Logging transaction...
+    }
+}
+```
+
+10. Class Hierarchy with Method Overriding and Virtual Methods
+
+```csharp
+using System;
+
+class Person
+{
+    public virtual string DisplayInfo()
+    {
+        return "Person details.";
+    }
+}
+
+class Student : Person
+{
+    public string StudentId { get; set; }
+    public string Major { get; set; }
+
+    public Student(string studentId, string major)
+    {
+        StudentId = studentId;
+        Major = major;
+    }
+
+    public override string DisplayInfo()
+    {
+        return $"Student ID: {StudentId}, Major: {Major}";
+    }
+}
+
+class Teacher : Person
+{
+    public string EmployeeId { get; set; }
+    public string Subject { get; set; }
+
+    public Teacher(string employeeId, string subject)
+    {
+        EmployeeId = employeeId;
+        Subject = subject;
+    }
+
+    public override string DisplayInfo()
+    {
+        return $"Employee ID: {EmployeeId}, Subject: {Subject}";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person student = new Student("S123", "Computer Science");
+        Console.WriteLine(student.DisplayInfo()); // Output: Student ID: S123, Major: Computer Science
+
+        Person teacher = new Teacher("T456", "Mathematics");
+        Console.WriteLine(teacher.DisplayInfo()); // Output: Employee ID: T456, Subject: Mathematics
+    }
+}
+```

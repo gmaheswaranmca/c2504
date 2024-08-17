@@ -47,7 +47,9 @@ The main goal is to model real-world entities as objects.
     to inherit properties and methods from an existing class.
     - It promotes code reusability and establishes 
     a natural hierarchical relationship between classes.
-  - Polymorphism:
+
+        "Programmer -> TL -> PL"
+  - Polymorphism(poly-many, morphism-forms):
     - Polymorphism allows objects of different classes 
     to be treated as objects of a common superclass. 
     It comes in two forms: compile-time (method overloading) and 
@@ -761,7 +763,7 @@ without knowing their exact types at compile time.
 
 
 ==================================================================
-                    inheritance
+                    inheritance (reusability) (is-a relationship)
 ==================================================================
 In C#, 
 inheritance is a fundamental concept in object-oriented programming (OOP) 
@@ -776,7 +778,7 @@ it can also introduce its own
     fields, 
     methods, and 
     properties or 
-override those inherited from the base class.
+override (reimplement | redefine) those inherited from the base class.
 
 Types of Inheritance in C#
 
