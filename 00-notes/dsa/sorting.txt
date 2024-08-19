@@ -195,30 +195,27 @@ ar = [3 4 5 7 8 10 2 6]
 ar = [3 4 5 7 8 10 2 6]            
       ============     pos for 2 is 0, insertion 
                      ---
-ar = [2 3 4 5 7 8 10 6] 
+ar = [2 3 4 5 7 8 10 6]  [2 3 4 5 7 8. 10 10] [2 3 4 5 7 7 8 10]          TI=7,6,5,4 [2 3 4 5 6 7 8 10] 
       ==============   pos for 6 is 4, insertion 
 ar = [2 3 4 5 6 7 8 10], no further unsorted list, so we completed the sorting.
 
 -----------------------------------     
 
-
-
-
-
-def isort(ar):
+def isort(ar): #[Neha, Keerthana]
     N = len(ar)
-    for I in range(1,N): #initially we have first element sub list as sorted, all elements are in unsorted list.
-        target = ar[I]  # initialize first element of the unsorted element 
-        tindex = I      # assume the position for the first element is same 
-        sindex = I - 1  
-        while sindex >= 0 and target < ar[sindex]: # check the position for target element 
-            ar[sindex+1] = ar[sindex] # parrallel run for shifting right for insertion of target element 
-            sindex -= 1     # scan previous elements in the sorted list 
-            tindex -= 1     # change the position of the tareget element 
-        if tindex != I: # insertion we done. the shifting right happened before during finding the pos. 
-            ar[tindex] = target 
-        
-    #elements sorted 
+    for UI in range(1,N): #unsorted list, forward traversal  
+        target = ar[UI]  
+        TI = UI      
+        SI = UI - 1  #initialization for sorted list, backward traversal
+        while SI >= 0 and target < ar[SI]: #cond for sorted list   
+            ar[SI+1] = ar[SI] #shift right [parellel to sorted list traversal]
+            TI = SI
+            SI -= 1  #update part(decerement part) for sorted list   
+        end while       
+        if TI != UI: 
+            ar[TI] = target 
+        end if 
+    end for 
 
 def solve():
     #N=len(ar)#8

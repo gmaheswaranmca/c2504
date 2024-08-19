@@ -62,3 +62,116 @@ Requirements:
 3. Input N employee details (using an List<Employee>). 
 
 4. Print employees before sorting. Sort employees using insertion sort. Print sorted employees.
+
+
+Question 4
+Implement a Class Hierarchy with Method Overriding and Area Comparison
+
+Task: Create an abstract class `Shape` with an abstract method `CalculateArea()`. 
+Derive two classes `Rectangle` and `Circle` from `Shape`.
+
+Requirements:
+
+1. Rectangle: 
+   - Properties: `Length` and `Width`.
+   - Implement the `CalculateArea()` method to return the area of the rectangle using the formula:
+
+
+2. Circle: 
+   - Property: `Radius`.
+   - Implement the `CalculateArea()` method to return the area of the circle using the formula:
+
+
+3. Continuously input shape details (without using an array) until a termination signal (e.g., entering a specific keyword).
+
+4. After all shape details have been entered:
+   - Find and display the shape with the smallest area.
+   - Find and display the shape with the largest area.
+
+
+
+Base Program
+1. Abstract Class: `Shape`
+
+```csharp
+public abstract class Shape
+{
+    // Abstract method to calculate the area
+    public abstract double CalculateArea();
+}
+```
+
+2. Derived Class: `Rectangle`
+
+```csharp
+public class Rectangle : Shape
+{
+    // Properties for Length and Width
+    public double Length { get; set; }
+    public double Width { get; set; }
+
+    // Constructor to initialize Length and Width
+    public Rectangle(double length, double width)
+    {
+        Length = length;
+        Width = width;
+    }
+
+    // Override the CalculateArea method to return the area of the rectangle
+    public override double CalculateArea()
+    {
+        return Length * Width;
+    }
+}
+```
+
+3. Derived Class: `Circle`
+
+```csharp
+public class Circle : Shape
+{
+    // Property for Radius
+    public double Radius { get; set; }
+
+    // Constructor to initialize Radius
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+
+    // Override the CalculateArea method to return the area of the circle
+    public override double CalculateArea()
+    {
+        return Math.PI * Radius * Radius;
+    }
+}
+```
+
+Example Usage:
+
+```csharp
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Create instances of Rectangle and Circle
+        Rectangle rectangle = new Rectangle(5, 10);
+        Circle circle = new Circle(7);
+
+        // Calculate and display the area of the rectangle
+        double rectangleArea = rectangle.CalculateArea();
+        Console.WriteLine($"Area of the rectangle: {rectangleArea}");
+
+        // Calculate and display the area of the circle
+        double circleArea = circle.CalculateArea();
+        Console.WriteLine($"Area of the circle: {circleArea}");
+    }
+}
+```
+
+Explanation:
+- `Shape` Class: An abstract class with an abstract method `CalculateArea()` that must be implemented by any derived class.
+- `Rectangle` Class: Implements the `CalculateArea()` method to return the area of the rectangle using the formula `Length * Width`.
+- `Circle` Class: Implements the `CalculateArea()` method to return the area of the circle using the formula `π * Radius^2`.
+
+When you create instances of `Rectangle` and `Circle`, you can call `CalculateArea()` on each object to get the respective areas.
