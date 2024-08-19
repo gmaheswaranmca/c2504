@@ -1,0 +1,64 @@
+Question 1
+Implement an Abstract Class with Method Overriding and Salary Comparison
+
+Task: Create an abstract class `Employee` with an abstract method `CalculateSalary()`. 
+Derive two classes `FullTimeEmployee` and `PartTimeEmployee` from `Employee`.
+
+Requirements:
+
+1. FullTimeEmployee: 
+   - Properties: `BaseSalary` and `BonusPercentage`.
+   - Implement the `CalculateSalary()` method to return the total salary, including the bonus.
+
+2. PartTimeEmployee: 
+   - Properties: `HourlyRate` and `HoursWorked`.
+   - Implement the `CalculateSalary()` method to return the total earnings based on hours worked.
+
+3. Continuously input employee details (without using an array) 
+until a termination signal (e.g., entering a specific keyword). 
+
+4. After all employee details have been entered:
+   - Find and display the employee with the minimum salary.
+   - Find and display the employee with the maximum salary.
+   
+   
+Question 2
+Implement an Abstract Class with Method Overriding and Salary Comparison
+
+Task: Create an abstract class `Employee` with an abstract method `CalculateSalary()`. 
+Derive two classes `FullTimeEmployee` and `PartTimeEmployee` from `Employee`.
+
+Requirements:
+
+1. FullTimeEmployee: 
+   - Properties: `BaseSalary` and `BonusPercentage`.
+   - Implement the `CalculateSalary()` method to return the total salary, including the bonus.
+
+2. PartTimeEmployee: 
+   - Properties: `HourlyRate` and `HoursWorked`.
+   - Implement the `CalculateSalary()` method to return the total earnings based on hours worked.
+
+3. Input N employee details (using an array). 
+
+4. Print employees before sorting. Sort employees using selection sort. Print sorted employees.
+  
+   
+Question 3
+Implement an Abstract Class with Method Overriding and Salary Comparison
+
+Task: Create an abstract class `Employee` with an abstract method `CalculateSalary()`. 
+Derive two classes `FullTimeEmployee` and `PartTimeEmployee` from `Employee`.
+
+Requirements:
+
+1. FullTimeEmployee: 
+   - Properties: `BaseSalary` and `BonusPercentage`.
+   - Implement the `CalculateSalary()` method to return the total salary, including the bonus.
+
+2. PartTimeEmployee: 
+   - Properties: `HourlyRate` and `HoursWorked`.
+   - Implement the `CalculateSalary()` method to return the total earnings based on hours worked.
+
+3. Input N employee details (using an List<Employee>). 
+
+4. Print employees before sorting. Sort employees using insertion sort. Print sorted employees.

@@ -545,3 +545,16 @@ Windows Presentation Foundation
 			d.	Utilizing WPF in a front-end microservices architecture.
 			e.	Demonstrating practical examples of WPF and local RESTful service integration.
 
+
+
+
+========
+Day 1: 1.	Introduction to programming, 2.	Machine Language, 3.	Assembly Language and Assembler, 4.	High Level Language, Interpreters and Compilers, 5.	Problem solving techniques, 6.	Algorithm, 7.	Flowchart, 8.	Pseudocode, 9.	Hello World Program using C#, 10.	Introduction to Visual Studio IDE, 11.	Variables and constants, 12.	C# coding standards, 13.	Assignment Operator, 14.	Arithmetic Operators, 15.	Relational and Logical Operators, 16.	The “if” statement, 17.	The “if-else” statement, 18.	Nested “if” statements, 19.	The “else-if” ladder statement, 20.	The “for” loop, 21.	The nested “for” loop, 22.	The “while” loop, 23.	The nested “while” loop, 24.	The “do-while” loop, 25.	The nested “do-while” loop, 26.	The “break” and “continue” statements, 27.	The “switch-case” statement
+Day 2-4: Cont
+Day 5: 1.Introduction to database and RDBMS, 2.	Characteristics of Database Management System, 3.	Data modelling, 4.	Relational Data modelling, 5.	Normalization, 6.	Transaction, 7.	Types of Keys, 8.	Introduction to SQL, 9.	SQL Datatypes, 10.	SQL Commands (DDL, DML, TCL), 11.	SQL Operator, 12.	SQL Table, 13.	Select Statement, 14.	Insert Statement, 15.	Update Statement, 16.	DeleteStatement, 17.	Views, 18.	Sub Queries, 19.	Aggregate Function, 20.	SQL Joins, 
+Day 6-8: Cont 
+Day 9: 1.	Client server architecture, 2.	Web Applications, 3.	Flow of control in a web application, 4.	Browser as a thin client and Web Server, 5.	Introduction to HTML, CSS and JavaScript, 6.	Benefits of web applications, 7.	Static pages and Dynamic pages, 8.	Application servers, 9.	N-tier architecture, 10.	Difference between web server and application server, 
+Day 10: 1.	Introduction to Software Engineering, 2.	SDLC, 3.	STLC, 4.	Software Engineering models, 	a.	Waterfall model, 	b.	Spiral model , 	c.	Prototyping model, 5.	Project Management, 	a.	Various roles (Developer to Program Manager), 	b.	Project planning and tracking, 	c.	Risk management, 6.	Agile Scrum methodologies, 	a.	Introduction to Agile, 	b.	Scrum framework (roles, events, artifacts), 	c.	Modern Project Management Techniques, 		o	Kanban, 		o	Lean, 7.	Code sharing and version control systems, 	a.	Gitlab , 	b.	Github, 8.	Continuous Integration/Continuous Deployment (CI/CD), 	a.	Introduction to CI/CD, 	b.	Setting up CI/CD pipelines, 	c.	Tools like GitLab, Jenkins CI/CD, 9.	DevOps Practices, 	a.	Introduction to DevOps, 	b.	Tools and techniques (GitLab, Docker), 10.	Types of projects, 	a.	Application development and maintenance (Enterprise Applications, Embedded Applications), 	b.	Application testing, 	c.	Product engineering
+Day 11: Revision / Viva 1
+Day 12: Revision / Viva 1
+Day 13: 
