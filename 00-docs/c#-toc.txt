@@ -557,4 +557,34 @@ Day 9: 1.	Client server architecture, 2.	Web Applications, 3.	Flow of control in
 Day 10: 1.	Introduction to Software Engineering, 2.	SDLC, 3.	STLC, 4.	Software Engineering models, 	a.	Waterfall model, 	b.	Spiral model , 	c.	Prototyping model, 5.	Project Management, 	a.	Various roles (Developer to Program Manager), 	b.	Project planning and tracking, 	c.	Risk management, 6.	Agile Scrum methodologies, 	a.	Introduction to Agile, 	b.	Scrum framework (roles, events, artifacts), 	c.	Modern Project Management Techniques, 		o	Kanban, 		o	Lean, 7.	Code sharing and version control systems, 	a.	Gitlab , 	b.	Github, 8.	Continuous Integration/Continuous Deployment (CI/CD), 	a.	Introduction to CI/CD, 	b.	Setting up CI/CD pipelines, 	c.	Tools like GitLab, Jenkins CI/CD, 9.	DevOps Practices, 	a.	Introduction to DevOps, 	b.	Tools and techniques (GitLab, Docker), 10.	Types of projects, 	a.	Application development and maintenance (Enterprise Applications, Embedded Applications), 	b.	Application testing, 	c.	Product engineering
 Day 11: Revision / Viva 1
 Day 12: Revision / Viva 1
-Day 13: 
+Day 13: 1.	The .NET Framework - an Overview, 2.	Architecture of .NET Applications, 3.	Technologies used in these tiers (in .NET Frameworks), 	a.	Legacy .NET framework., 	b.	ASP.NET Web Forms , 	c.	ASP.NET MVC Applications, 	d.	SOAP-based web services , 4.	RESTful web services, 	a.	.NET Core Framework, 	b.	SP.NET Core MVC, 	c.	ASP.NET Core Web API (RESTful services), 	d.	gRPC services, 5.	Types of Applications developed using MS.NET., 6.	CLR, CTS, MSIL & other tools., 7.	Multiple Language Interaction & support l Moving from Project to Assemblies…, 8.	Security in .NET – CAS, 9.	Assemblies in Detail, 10.	GAC, Strong Names, 11.	Language Interop
+Day 14:C#.NET Programming | OOPs- Object Oriented Programming  (1 day)
+	   1.	Classes, 2.	Objects, 3.	Encapsulation, 4.	Inheritance, 5.	Polymorphism
+Day 15:C#.NET Programming | Classes & Objects (2days)
+	   1.	Components of a Class, 2.	Types of Variables and its uses., 3.	Method Advantages, Categories and Types, 4.	Constructor advantages and its types, 5.	Ways to initialize the Object, 6.	“this” keyword, 7.	Static Block & Instance Block, 8.	Nested classes
+Day 16:Cont
+Day 17:C#.NET Programming |  Inheritance (1 day) ===
+		1.	Inheritance and its advantages, 2.	The “extends” keyword, 3.	Types of Inheritance, 4.	Single Inheritance, 5.	Multilevel Inheritance, 6.	Multiple Inheritance, 7.	Hierarchical Inheritance, 8.	Hybrid Inheritance, 9.	Difference between IS-A and HAS-A relationship, 10.	Use of “super” keyword and forms of “super” keyword, 
+Day 18:C#.NET Programming |  Polymorphism (1 day)
+		1.	Polymorphism and its advantages, 2.	Types of Polymorphism, 3.	Types of Binding, 4.	Method Overloading and its uses., 5.	Conditions of Overloading, 6.	Method Overriding, 7.	Scenario of Overriding, 8.	Difference between Overloading and Overriding, 9.	About Class Casting
+Day 19:C#.NET Programming | C# Concepts: Abstract Class, Interface and Partial Class (2 days)
+		1.	Abstract Class, 2.	Virtual Functions, 3.	Interface, 4.	Interface vs. Abstract Class, 5.	Static Class, 6.	Extension Methods, 7.	Partial Class, 8.	Partial Methods
+Day 20:Cont
+Day 21:C#.NET Programming | C#: Property, Indexer, Attributes (1 day)
+		1.	Property, 2.	Indexer, 3.	Exceptional Handling, 4.	Enum, 5.	Attributes
+Day 22:C#.NET Programming | Arrays and Strings (1 day)
+		1.	Arrays, 2.	Types of Arrays, 3.	Strings, 4.	String Methods
+Day 23:Revision / Viva 2
+Day 24:C#.NET Programming | Exception Handling& Logging (1 Day)
+		1.	What is Exception and its types, 2.	How to handle exception?, 3.	Multiple catch blocks, 4.	Finally block, 5.	Difference between throw and throws, 6.	Custom Exception, 7.	Logging Exceptions, 	a.	Install log4net via NuGet., 	b.	Configure log4net in App.config or Web.config., 	c.	Initialize log4net by creating a Logger class., 	d.	Use the Logger to log exceptions in the application., 
+Day 25:C#.NET Programming | Anonymous Type, Delegates, Events and Lambda (1 day)
+		1.	Extension Methods, 2.	Anonymous Type, 3.	Var and Dynamic, 4.	Delegates, 5.	Events, 6.	Anonymous Methods, 7.	Lambda Expression, 8.	Expression Tree, 9.	Async/Await and Task Parallel Library (TPL) Basics., a.	Introduction to asynchronous programming, b.	Async and await keywords, c.	Task and Task<T>, d.	Handling exceptions in asynchronous methods, e.	Parallel programming with TPL, 10.	LINQ Usage Basics., a.	LINQ query syntax and method syntax, b.	LINQ operators (Select, Where,GroupBy, Join, etc.), c.	LINQ to Objects, d.	LINQ to XML, e.	LINQ to SQL
+Day 26:Practical OOAD (2 Days)
+		1.	SOLID Design Principles, a.	Single Responsibility Principle, b.	Open/Closed Principle, c.	Liskov Substitution Principle, d.	Interface Segregation Principle, e.	Dependency Inversion Principle, 2.	Practical Implementation Adhering to SOLID Principles, a.	Provide a simple domain-specific use case scenario from a real healthcare/semi or digital engineering service project at Quest., b.	Implement a simple Patient Management or Device Monitoring system that adheres to SOLID principles., 3.	Design Patterns Basics, a.	Importance of design patterns in software development., b.	Creational Pattern: Singleton, a.	Learning Outcome: Understand and implement the Singleton pattern to ensure a class has only one instance., b.	Practical Example: Implement a configuration manager that uses the Singleton pattern to provide a single access point for application settings., c.	Structural Pattern: Adapter, a.	Learning Outcome: Understand and implement the Adapter pattern to allow incompatible interfaces to work together., b.	Practical Example: Create an adapter for a legacy system to work with new code without modifying the existing system., d.	Behavioral Pattern: Observer, a.	Learning Outcome: Understand and implement the Observer pattern to define a one-to-many dependency between objects., b.	Practical Example: Implement an event notification system where multiple components are updated when the state of a subject changes., 
+Day 27:Cont
+Day 28:Socket Programming in C# (1 Day)
+		1.	Introduction to network programming, 2.	TCP/IP basics, 3.	Socket class in C#, 4.	Asynchronous socket operations, 5.	Client-server model
+Day 29:File I/O and Debugging using Visual Studio (1 Day)
+		1.	File and directory operations in C#, 2.	Stream-based I/O, 3.	Serialization and deserialization, 4.	Exception handling in file operations, 5.	Visual Studio debugging tools-NUnit
+Day 30:Revision / Viva 3
+========
