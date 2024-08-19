@@ -1,0 +1,107 @@
+Create a `HospitalStay` Class with Comparison Methods
+- Task: Implement a class `HospitalStay` that represents
+a hospital stay with properties `StayID` and `NumberOfDays`.
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the length of stays between two hospital stays.
+- Requirements:
+- Implement the `Equals(HospitalStay other)` method to check
+if two hospital stays have the same number of days.
+- Implement the `NotEquals(HospitalStay other)` method to check
+if two hospital stays have a different number of days.
+- Implement the `GreaterThan(HospitalStay other)` method to check
+if one stay is longer than another.
+- Implement the `GreaterThanEquals(HospitalStay other)` method to check
+if one stay is longer or the same length as another.
+- Implement the `LessThan(HospitalStay other)` method to check
+if one stay is shorter than another.
+- Implement the `LessThanEquals(HospitalStay other)` method to check
+if one stay is shorter or the same length as another.
+- Example:
+```csharp
+HospitalStay hs1 = new HospitalStay("HS001", 5);
+HospitalStay hs2 = new HospitalStay("HS002", 7);
+
+Console.WriteLine(hs1.Equals(hs2)); // Output: False
+Console.WriteLine(hs1.GreaterThan(hs2)); // Output: False
+Console.WriteLine(hs1.LessThanEquals(hs2)); // Output: True
+```
+public class HospitalStay
+  {
+      public string StayID { get; set; }
+      public int NumberOfDays { get; set; }
+
+      public HospitalStay(string stayID, int numberOfDays)
+      {
+          StayID = stayID;
+          NumberOfDays = numberOfDays;
+      }
+
+  
+      public bool Equals(HospitalStay other)
+      {
+          if (other == null)
+              return false;
+          return this.NumberOfDays == other.NumberOfDays;
+      }
+
+     
+      public bool NotEquals(HospitalStay other)
+      {
+          return !Equals(other);
+      }
+
+  
+      public bool GreaterThan(HospitalStay other)
+      {
+          if (other == null)
+              return false;
+          return this.NumberOfDays > other.NumberOfDays;
+      }
+
+      
+      public bool GreaterThanEquals(HospitalStay other)
+      {
+          if (other == null)
+              return false;
+          return this.NumberOfDays >= other.NumberOfDays;
+      }
+
+   
+       public bool LessThanEquals(HospitalStay other)
+      {
+          if (other == null)
+              return false;
+          return this.NumberOfDays <= other.NumberOfDays;
+      }
+
+      
+      public override string ToString()
+      {
+          return $"StayID: {StayID}, NumberOfDays: {NumberOfDays}";
+      }
+  }
+
+ 
+  public class Program
+  {
+      public static void Main()
+      {
+          HospitalStay hs1 = new HospitalStay("HS001", 5);
+          HospitalStay hs2 = new HospitalStay("HS002", 7);
+
+          Console.WriteLine(hs1); 
+          Console.WriteLine(hs2);
+
+           Console.WriteLine($"Are the stays equal:  {hs1.Equals(hs2)}"); 
+           Console.WriteLine($"Is Stay 1 greater than Stay 2:  {hs1.GreaterThan(hs2)}"); 
+           Console.WriteLine($"Is Stay 1 less than or equal to Stay 2: 
+                                         {hs1.LessThanEquals(hs2)}");
+           Console.WriteLine($"Are stay not euqal: {(hs1.NotEquals(hs2))}");
+           Console.WriteLine($"Is Stay 1 Greater Than Equals to Stay 2: 
+                                          {(hs1.GreaterThanEquals(hs2))}");
+          
+           Console.ReadKey();
+      }
+  }

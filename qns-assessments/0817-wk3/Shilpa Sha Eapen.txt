@@ -1,0 +1,85 @@
+Design a `Medication` Class with Comparison Methods
+- Task: Create a class `Medication` that represents
+a medication with properties `MedicationID` and `DosagePerDay` (in milligrams).
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the daily dosages between two medications.
+- Requirements:
+- Implement the `Equals(Medication other)` method to check
+if two medications have the same daily dosage.
+- Implement the `NotEquals(Medication other)` method to check
+if two medications have different daily dosages.
+- Implement the `GreaterThan(Medication other)` method to check
+if one medication has a higher daily dosage than another.
+- Implement the `GreaterThanEquals(Medication other)` method to check
+if one medication has a higher or equal daily dosage compared to another.
+- Implement the `LessThan(Medication other)` method to check
+if one medication has a lower daily dosage than another.
+- Implement the `LessThanEquals(Medication other)` method to check
+if one medication has a lower or equal daily dosage compared to another.
+- Example:
+```csharp
+Medication m1 = new Medication("M001", 100);
+Medication m2 = new Medication("M002", 150);
+
+Console.WriteLine(m1.Equals(m2)); // Output: False
+Console.WriteLine(m1.GreaterThan(m2)); // Output: False
+Console.WriteLine(m1.LessThanEquals(m2)); // Output: True
+```
+using System;
+class Medication
+{
+public string MedicationId{ get; set; }
+public int DosagePerDay{ get; set; }
+
+public Medication( string medid , int dosage)
+{
+MedicationId = medId;
+DosagePerDay = dosageP;
+}
+public bool Equals(Medication other)
+{
+return DosagePerDay == other.DosagePerDay;
+}
+ public bool NotEquals(Medication other)
+ {
+     return DosagePerDay != other.DosagePerDay;
+ }
+
+ public bool GreaterThan(Medication other)
+ {
+     return DosagePerDay > other.DosagePerDay;
+ }
+
+ public bool GreaterThanEquals(Medication other)
+ {
+     return DosagePerDay >= other.DosagePerDay;
+ }
+
+ public bool LessThan(Medication other)
+ {
+     return DosagePerDay < other.DosagePerDay;
+ }
+
+ public bool LessThanEquals(Medication other)
+ {
+     return DosagePerDay <= other.DosagePerDay;
+ }
+
+static void Main()
+{
+Medication m1 = new Medication("M001", 100);
+Medication m2 = new Medication("M002", 150);
+
+Console.WriteLine(m1.Equals(m2));
+Console.WriteLine(m1.NotEquals(m2));
+Console.WriteLine(m1.GreaterThan(m2));
+Console.WriteLine(m1.GreaterThanEquals(m2));
+Console.WriteLine(m1.LessThan(m2)); 
+Console.WriteLine(m1.LessThanEquals(m2)); 
+Console.ReadKey();
+
+
+    }
+}

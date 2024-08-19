@@ -1,0 +1,87 @@
+Create a `LabTest` Class with Comparison Methods
+- Task: Implement a class `LabTest` that represents
+a lab test with properties `TestID` and `ResultValue`
+(a numerical value indicating the test result).
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the result values of two lab tests.
+- Requirements:
+- Implement the `Equals(LabTest other)` method to check
+if two lab tests have the same result value.
+- Implement the `NotEquals(LabTest other)` method to check
+if two lab tests have different result values.
+- Implement the `GreaterThan(LabTest other)` method to check
+if one lab test result is greater than another.
+- Implement the `GreaterThanEquals(LabTest other)` method to check
+if one lab test result is greater than or equal to another.
+- Implement the `LessThan(LabTest other)` method to check
+if one lab test result is less than another.
+- Implement the `LessThanEquals(LabTest other)` method to check
+if one lab test result is less than or equal to another.
+- Example:
+```csharp
+LabTest lt1 = new LabTest("LT001", 75.5);
+LabTest lt2 = new LabTest("LT002", 80.0);
+
+Console.WriteLine(lt1.Equals(lt2)); // Output: False
+Console.WriteLine(lt1.GreaterThan(lt2)); // Output: False
+Console.WriteLine(lt1.LessThanEquals(lt2)); // Output: True
+```
+public class LabTest
+    {
+        public string TestID { get; set; }
+        public double ResultValue { get; set; }
+
+        public LabTest(string testID, double resultValue)
+        {
+            TestID = testID;
+            ResultValue = resultValue;
+        }
+
+        public bool IsEquals(LabTest other)
+        {
+            return this.ResultValue == other.ResultValue;
+        }
+
+        public bool IsNotEquals(LabTest other)
+        {
+
+            return this.ResultValue != other.ResultValue;
+        }
+
+        public bool IsGreaterThan(LabTest other)
+        {
+
+            return this.ResultValue > other.ResultValue;
+        }
+
+        public bool IsGreaterThanEquals(LabTest other)
+        {
+
+            return this.ResultValue >= other.ResultValue;
+        }
+
+        public bool IsLessThan(LabTest other)
+        {
+            return this.ResultValue < other.ResultValue;
+        }
+
+        public bool IsLessThanEquals(LabTest other)
+        {
+            return this.ResultValue <= other.ResultValue;
+        }
+    }
+
+   class Program
+    {
+        static void Main()
+        {
+            LabTest lt1 = new LabTest("LT001", 75.5);
+            LabTest lt2 = new LabTest("LT002", 80.0);
+
+            Console.WriteLine(lt1.IsEquals(lt2)); 
+            Console.WriteLine(lt1.IsGreaterThan(lt2)); 
+            Console.WriteLine(lt1.IsLessThanEquals(lt2)); 
+        }
+    }

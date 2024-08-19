@@ -1,0 +1,80 @@
+Design a `MedicalRecord` Class with Comparison Methods
+- Task: Create a class `MedicalRecord` that represents
+a medical record with properties `RecordID` and `DateOfVisit` (a `DateTime`).
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the dates of visits between two medical records.
+- Requirements:
+- Implement the `Equals(MedicalRecord other)` method to check
+if two medical records have the same date of visit.
+- Implement the `NotEquals(MedicalRecord other)` method to check
+if two medical records have different dates of visit.
+- Implement the `GreaterThan(MedicalRecord other)` method to check
+if one records date of visit is after anothers.
+- Implement the `GreaterThanEquals(MedicalRecord other)` method to check
+if one records date of visit is on or after anothers.
+- Implement the `LessThan(MedicalRecord other)` method to check
+if one records date of visit is before anothers.
+- Implement the `LessThanEquals(MedicalRecord other)` method to check
+if one records date of visit is on or before anothers.
+- Example:
+```csharp
+MedicalRecord mr1 = new MedicalRecord("MR001", new DateTime(2024, 5, 15));
+MedicalRecord mr2 = new MedicalRecord("MR002", new DateTime(2024, 4, 10));
+
+Console.WriteLine(mr1.Equals(mr2)); // Output: False
+Console.WriteLine(mr1.GreaterThan(mr2)); // Output: True
+Console.WriteLine(mr1.LessThanEquals(mr2)); // Output: False
+```
+using System.Collections.Generic;
+using System;
+
+public class MedicalRecord
+{
+    public string RecordID { get; set; }
+    public DateTime DateOfVisit { get; set; }
+
+    public MedicalRecord(string recordID, DateTime dateOfVisit)
+    {
+        RecordID = recordID;
+        DateOfVisit = dateOfVisit;
+    }
+
+    public bool Equals(MedicalRecord other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return DateOfVisit == other.DateOfVisit;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return Equals(obj as MedicalRecord);
+    }
+
+    public static bool operator ==(MedicalRecord left, MedicalRecord right) => EqualityComparer<MedicalRecord>.Default.Equals(left, right);
+
+    public static bool operator !=(MedicalRecord left, MedicalRecord right) => !(left == right);
+
+    public bool GreaterThan(MedicalRecord other) => DateOfVisit > other.DateOfVisit;
+
+    public bool GreaterThanEquals(MedicalRecord other) => DateOfVisit >= other.DateOfVisit;
+
+    public bool LessThan(MedicalRecord other) => DateOfVisit < other.DateOfVisit;
+
+    public bool LessThanEquals(MedicalRecord other) => DateOfVisit <= other.DateOfVisit;
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        MedicalRecord mr1 = new MedicalRecord("MR001", new DateTime(2024, 5, 15));
+        MedicalRecord mr2 = new MedicalRecord("MR002", new DateTime(2024, 4, 10));
+
+        Console.WriteLine(mr1.Equals(mr2)); // Output: False
+        Console.WriteLine(mr1.GreaterThan(mr2)); // Output: True
+        Console.WriteLine(mr1.LessThanEquals(mr2)); // Output: False
+    }
+}

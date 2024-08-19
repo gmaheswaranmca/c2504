@@ -1,0 +1,98 @@
+Design a `Vaccination` Class with Comparison Methods
+- Task: Create a class `Vaccination` that represents
+a vaccination record with properties `VaccinationID` and `DosesAdministered`.
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the number of doses administered between two vaccination records.
+- Requirements:
+- Implement the `Equals(Vaccination other)` method to check
+if two vaccinations have the same number of doses administered.
+- Implement the `NotEquals(Vaccination other)` method to check
+if two vaccinations have a different number of doses administered.
+- Implement the `GreaterThan(Vaccination other)` method to check
+if one vaccination has more doses administered than another.
+- Implement the `GreaterThanEquals(Vaccination other)` method to check
+if one vaccination has more or the same number of doses administered as another.
+- Implement the `LessThan(Vaccination other)` method to check
+if one vaccination has fewer doses administered than another.
+- Implement the `LessThanEquals(Vaccination other)` method to check
+if one vaccination has fewer or the same number of doses administered as another.
+- Example:
+```csharp
+Vaccination v1 = new Vaccination("V001", 2);
+Vaccination v2 = new Vaccination("V002", 3);
+
+Console.WriteLine(v1.Equals(v2)); // Output: False
+Console.WriteLine(v1.GreaterThan(v2)); // Output: False
+Console.WriteLine(v1.LessThanEquals(v2)); // Output: True
+```
+using System;
+
+namespace VaccinationNamespace
+{
+    class Vaccination
+    {
+        public int VaccinationID { get; set; }
+        public int DosesAdministered { get; set; }
+
+        public Vaccination(int id, int doses)
+        {
+            VaccinationID = id;
+            DosesAdministered = doses;
+        }
+
+        public bool Equals(Vaccination other)
+        {
+            return this.DosesAdministered == other.DosesAdministered;
+        }
+
+        public bool NotEquals(Vaccination other)
+        {
+            return !Equals(other);
+        }
+
+        public bool GreaterThan(Vaccination other)
+        {
+            return this.DosesAdministered > other.DosesAdministered;
+        }
+
+        public bool GreaterThanEquals(Vaccination other)
+        {
+            return this.DosesAdministered >= other.DosesAdministered;
+        }
+
+        public bool LessThan(Vaccination other)
+        {
+            return this.DosesAdministered < other.DosesAdministered;
+        }
+
+        public bool LessThanEquals(Vaccination other)
+        {
+            return this.DosesAdministered <= other.DosesAdministered;
+        }
+
+        public override string ToString()
+        {
+            return $"Vaccination ID: {VaccinationID}, Doses Administered: {DosesAdministered}";
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Vaccination v1 = new Vaccination(01, 2);
+            Vaccination v2 = new Vaccination(02, 3);
+
+            Console.WriteLine($"Equals: {v1.Equals(v2)}"); 
+            Console.WriteLine($"NotEquals: {v1.NotEquals(v2)}"); 
+            Console.WriteLine($"GreaterThan: {v1.GreaterThan(v2)}"); 
+            Console.WriteLine($"GreaterThanEquals: {v1.GreaterThanEquals(v2)}"); 
+            Console.WriteLine($"LessThan: {v1.LessThan(v2)}"); 
+            Console.WriteLine($"LessThanEquals: {v1.LessThanEquals(v2)}"); 
+
+            Console.ReadKey();
+        }
+    }
+}

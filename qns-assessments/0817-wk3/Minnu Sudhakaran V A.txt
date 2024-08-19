@@ -1,0 +1,86 @@
+Create a `SurgicalProcedure` Class with Comparison Methods
+- Task: Implement a class `SurgicalProcedure` that represents
+a surgical procedure with properties `ProcedureID` and `Cost` (in dollars).
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the costs of two surgical procedures.
+- Requirements:
+- Implement the `Equals(SurgicalProcedure other)` method to check
+if two procedures have the same cost.
+- Implement the `NotEquals(SurgicalProcedure other)` method to check
+if two procedures have different costs.
+- Implement the `GreaterThan(SurgicalProcedure other)` method to check
+if one procedure is more expensive than another.
+- Implement the `GreaterThanEquals(SurgicalProcedure other)` method to check
+if one procedure is more expensive or the same price as another.
+- Implement the `LessThan(SurgicalProcedure other)` method to check
+if one procedure is less expensive than another.
+- Implement the `LessThanEquals(SurgicalProcedure other)` method to check
+if one procedure is less expensive or the same price as another.
+- Example:
+```csharp
+SurgicalProcedure sp1 = new SurgicalProcedure("SP001", 5000);
+SurgicalProcedure sp2 = new SurgicalProcedure("SP002", 4500);
+
+Console.WriteLine(sp1.Equals(sp2)); // Output: False
+Console.WriteLine(sp1.GreaterThan(sp2)); // Output: True
+Console.WriteLine(sp1.LessThanEquals(sp2)); // Output: False
+```
+public class SurgicalProcedure
+{
+    public string ProcedureID { get; set; }
+    public int Cost { get; set; }
+
+    public SurgicalProcedure(int procedureid, int cost)
+    {
+        ProcedureID = procedureid;
+        Cost = cost;
+    }
+
+    public bool Equals(SurgicalProcedure  other)
+    {
+        return this.Cost == other.Cost;
+    }
+
+    public bool NotEquals(SurgicalProcedure other)
+    {
+        return this.Cost != other.Cost;
+    }
+
+    public bool GrTh(SurgicalProcedure other)
+    {
+        return this.Cost > other.Cost;
+    }
+
+    public bool GrThEquals(SurgicalProcedure other)
+    {
+        return this.Cost >= other.Cost;
+    }
+
+    public bool LsTh(SurgicalProcedure other)
+    {
+        return this.Cost < other.Cost;
+    }
+
+    public bool LsThEquals(SurgicalProcedure other)
+    {
+        return this.Cost <= other.Cost;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        SurgicalProcedure pro1 = new SurgicalProcedure("SP001", 5000);
+        SurgicalProcedure pro2 = new SurgicalProcedure("SP002", 4500);
+
+        Console.WriteLine(pro1.Equals(pro2));
+        Console.WriteLine(pro1.NotEquals(pro2));
+        Console.WriteLine(pro1.GrTh(pro2));
+        Console.WriteLine(pro1.GrThEquals(pro2));
+        Console.WriteLine(pro1.LsTh(pro2)");
+        Console.WriteLine(pro1.LsThEquals(pro2));
+    }
+}

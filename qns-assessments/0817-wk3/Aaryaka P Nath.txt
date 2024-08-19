@@ -1,0 +1,125 @@
+Create a `Prescription` Class with Comparison Methods
+- Task: Implement a class `Prescription` that represents
+a prescription with properties `PrescriptionID` and `Dosage` (in milligrams).
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the dosage between two prescriptions.
+- Requirements:
+- Implement the `Equals(Prescription other)` method to check
+if two prescriptions have the same dosage.
+- Implement the `NotEquals(Prescription other)` method to check
+if two prescriptions have different dosages.
+- Implement the `GreaterThan(Prescription other)` method to check
+if one prescription has a higher dosage than another.
+- Implement the `GreaterThanEquals(Prescription other)` method to check
+if one prescription has a higher or equal dosage compared to another.
+- Implement the `LessThan(Prescription other)` method to check
+if one prescription has a lower dosage than another.
+- Implement the `LessThanEquals(Prescription other)` method to check
+if one prescription has a lower or equal dosage compared to another.
+- Example:
+```csharp
+Prescription pres1 = new Prescription("RX001", 500);
+Prescription pres2 = new Prescription("RX002", 400);
+
+Console.WriteLine(pres1.Equals(pres2)); // Output: False
+Console.WriteLine(pres1.GreaterThan(pres2)); // Output: True
+Console.WriteLine(pres1.LessThanEquals(pres2)); // Output: False
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assessment3
+{
+    public class Prescription
+    {
+        public string PrescriptionID { get; set; }
+        public int Dosage { get; set; }
+
+        public Prescription(string prescriptionID, int dosage)
+        {
+            PrescriptionID = prescriptionID;
+            Dosage = dosage;
+        }
+
+        public override string ToString()
+        {
+            return $"[PrescriptionID={PrescriptionID}, Dosage={Dosage} mg]";
+        }
+
+        public bool Equals(Prescription other)
+        {
+            return Dosage == other.Dosage;
+        }
+
+        public bool NotEquals(Prescription other)
+        {
+            return Dosage != other.Dosage;
+        }
+
+        public bool GreaterThan(Prescription other)
+        {
+            return Dosage > other.Dosage;
+        }
+
+        public bool GreaterThanEquals(Prescription other)
+        {
+            return Dosage >= other.Dosage;
+        }
+
+        public bool LessThan(Prescription other)
+        {
+            return Dosage < other.Dosage;
+        }
+
+        public bool LessThanEquals(Prescription other)
+        {
+            return Dosage <= other.Dosage;
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Prescription pres1 = new Prescription("RX001", 500);
+            Prescription pres2 = new Prescription("RX002", 400);
+
+            if (pres1.Equals(pres2))
+            {
+                Console.WriteLine($"Dosage of {pres1} equals Dosage of {pres2}");
+            }
+
+            if (pres1.NotEquals(pres2))
+            {
+                Console.WriteLine($"Dosage of {pres1} does not equal Dosage of {pres2}");
+            }
+
+            if (pres1.GreaterThan(pres2))
+            {
+                Console.WriteLine($"Dosage of {pres1} is greater than Dosage of {pres2}");
+            }
+
+            if (pres1.GreaterThanEquals(pres2))
+            {
+                Console.WriteLine($"Dosage of {pres1} is greater than or equal to Dosage of {pres2}");
+            }
+
+            if (pres1.LessThan(pres2))
+            {
+                Console.WriteLine($"Dosage of {pres1} is less than Dosage of {pres2}");
+            }
+
+            if (pres1.LessThanEquals(pres2))
+            {
+                Console.WriteLine($"Dosage of {pres1} is less than or equal to Dosage of {pres2}");
+            }
+
+            Console.ReadKey();
+        }
+
+}
+}

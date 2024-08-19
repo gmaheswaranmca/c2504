@@ -1,0 +1,108 @@
+Implement a `Surgery` Class with Comparison Methods
+- Task: Create a class `Surgery` that represents
+a surgery with properties `SurgeryID` and `Duration` (in minutes).
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the durations of two surgeries.
+- Requirements:
+- Implement the `Equals(Surgery other)` method to check
+if two surgeries have the same duration.
+- Implement the `NotEquals(Surgery other)` method to check
+if two surgeries have different durations.
+- Implement the `GreaterThan(Surgery other)` method to check
+if one surgery takes longer than another.
+- Implement the `GreaterThanEquals(Surgery other)` method to check
+if one surgery takes longer or the same amount of time as another.
+- Implement the `LessThan(Surgery other)` method to check
+if one surgery takes less time than another.
+- Implement the `LessThanEquals(Surgery other)` method to check
+if one surgery takes less or the same amount of time as another.
+- Example:
+```csharp
+Surgery s1 = new Surgery("S001", 90);
+Surgery s2 = new Surgery("S002", 120);
+
+Console.WriteLine(s1.Equals(s2)); // Output: False
+Console.WriteLine(s1.GreaterThan(s2)); // Output: False
+Console.WriteLine(s1.LessThanEquals(s2)); // Output: True
+```
+public class Surgery
+{
+    public string SurgeryID
+    public int Duration
+
+    public Surgery(string SurgeryID, int Duration)
+    {
+        this.SurgeryID = SurgeryID;
+        this.Duration = Duration;
+    }
+
+    public bool Equal(Surgery other)
+    {
+       return this.Duration == other.Duration
+    }
+
+    public bool NotEqual(Surgery other)
+    {
+        return this.Duration <> other.Duration;
+    }
+
+    public bool GreaterThan(Surgery other)
+    {
+        return this.Duration > other.Duration;
+    }
+
+    public bool GreaterThanEqual(Surgery other)
+    {
+        return this.Duration >= other.Duration;
+    }
+
+    public bool LessThan(Surgery other)
+    {
+        return this.Duration < other.Duration;
+    }
+
+    public bool LessThanEqual(Surgery other)
+    {
+        return this.Duration <= other.Duration;
+    }
+}
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+          Surgery s1 = new Surgery("S1", 90);
+          Surgery s2 = new Surgery("S2", 120);
+          if (s1.Equal(s2))
+          {
+                Console.WriteLine("First surgery duration is equal to second" );
+          }
+          else if (s1.NotEqual(s2))
+          {
+               Console.WriteLine("First surgery duration is not equal to second surgery");
+          }
+          else if (s1.GreaterThan(s2))
+          {
+               Console.WriteLine("First surgery duration is greater than second surgery 
+                                           duration");
+          }
+          else if (s1.GreaterThanEqual(s2))
+          {
+              Console.WriteLine("First surgery duration is greater than or equal to second 
+                                           surgery");
+          }
+          else if (s1.LessThan(s2))
+          {
+               Console.WriteLine("First surgery duration less than second surgery");
+          }
+          else 
+          {
+            Console.WriteLine("First surgery duration less than or equal to second surgery");
+          }
+
+        
+    }
+}
+--------------------------------------------------------------------------------------------------

@@ -1,0 +1,101 @@
+Question 1 of 1
+Week#3Coding
+Create a `HospitalStay` Class with Comparison Methods
+- Task: Implement a class `HospitalStay` that represents
+a hospital stay with properties `StayID` and `NumberOfDays`.
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the length of stays between two hospital stays.
+- Requirements:
+- Implement the `Equals(HospitalStay other)` method to check
+if two hospital stays have the same number of days.
+- Implement the `NotEquals(HospitalStay other)` method to check
+if two hospital stays have a different number of days.
+- Implement the `GreaterThan(HospitalStay other)` method to check
+if one stay is longer than another.
+- Implement the `GreaterThanEquals(HospitalStay other)` method to check
+if one stay is longer or the same length as another.
+- Implement the `LessThan(HospitalStay other)` method to check
+if one stay is shorter than another.
+- Implement the `LessThanEquals(HospitalStay other)` method to check
+if one stay is shorter or the same length as another.
+- Example:
+```csharp
+HospitalStay hs1 = new HospitalStay("HS001", 5);
+HospitalStay hs2 = new HospitalStay("HS002", 7);
+
+Console.WriteLine(hs1.Equals(hs2)); // Output: False
+Console.WriteLine(hs1.GreaterThan(hs2)); // Output: False
+Console.WriteLine(hs1.LessThanEquals(hs2)); // Output: True
+```
+public class HospitalStay
+{
+    public string StayID { get; set; }
+    public int NumberOfDays { get; set; }
+
+    public HospitalStay(string stayID, int numberOfDays)
+    {
+        StayID = stayID;
+        NumberOfDays = numberOfDays;
+    }
+
+    // Equals method
+    public bool Equals(HospitalStay other)
+    {
+        if (other == null) return false;
+        return this.NumberOfDays == other.NumberOfDays;
+    }
+
+    // NotEquals method
+    public bool NotEquals(HospitalStay other)
+    {
+        return !Equals(other);
+    }
+
+    // GreaterThan method 
+    public bool GreaterThan(HospitalStay other)
+    {
+        if (other == null) throw new ArgumentNullException(nameof(other));
+        return this.NumberOfDays > other.NumberOfDays;
+    }
+
+    // GreaterThanEquals method 
+    public bool GreaterThanEquals(HospitalStay other)
+    {
+        if (other == null) throw new ArgumentNullException(nameof(other));
+        return this.NumberOfDays >= other.NumberOfDays;
+    }
+
+    // LessThan method 
+    public bool LessThan(HospitalStay other)
+    {
+        if (other == null) throw new ArgumentNullException(nameof(other));
+        return this.NumberOfDays < other.NumberOfDays;
+    }
+
+    // LessThanEquals method 
+    public bool LessThanEquals(HospitalStay other)
+    {
+        if (other == null) throw new ArgumentNullException(nameof(other));
+        return this.NumberOfDays <= other.NumberOfDays;
+    }
+}
+
+
+public class Program
+{
+    public static void Main()
+    {
+        HospitalStay stay1 = new HospitalStay("HS001", 5);
+        HospitalStay stay2 = new HospitalStay("HS002", 7);
+
+        Console.WriteLine(stay1.Equals(stay2));
+        Console.WriteLine(stay1.NotEquals(stay2));
+        Console.WriteLine(stay1.GreaterThan(stay2));
+        Console.WriteLine(stay1.GreaterThanEquals(stay2));
+        Console.WriteLine(stay1.LessThan(stay2));
+        Console.WriteLine(stay1.LessThanEquals(stay2));
+
+    }
+}

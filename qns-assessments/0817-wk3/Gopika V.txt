@@ -1,0 +1,89 @@
+Implement a `Patient` Class with Comparison Methods
+- Task: Create a class `Patient` that represents
+a patient with properties `PatientID` and `Age`.
+Implement the following methods:
+`Equals`, `NotEquals`, `GreaterThan`,
+`GreaterThanEquals`, `LessThan`, and `LessThanEquals`
+to compare the ages of two patients.
+- Requirements:
+- Implement the `Equals(Patient other)` method to check
+if two patients are of the same age.
+- Implement the `NotEquals(Patient other)` method to check
+if two patients are of different ages.
+- Implement the `GreaterThan(Patient other)` method to check
+if one patient is older than another.
+- Implement the `GreaterThanEquals(Patient other)` method to check
+if one patient is older or the same age as another.
+- Implement the `LessThan(Patient other)` method to check
+if one patient is younger than another.
+- Implement the `LessThanEquals(Patient other)` method to check
+if one patient is younger or the same age as another.
+- Example:
+```csharp
+Patient p1 = new Patient("P001", 45);
+Patient p2 = new Patient("P002", 50);
+
+Console.WriteLine(p1.Equals(p2)); // Output: False
+Console.WriteLine(p1.GreaterThan(p2)); // Output: False
+Console.WriteLine(p1.LessThanEquals(p2)); // Output: True
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp26
+{   
+
+     class Patient
+    {
+        private string patientid;
+        private int age;
+
+        public string PatientID {  get { return patientid; } set { patientid = value; } }
+        public int Age { get { return age; } set { age = value; } }
+
+        public Patient(string patientid, int age)
+        {
+            this.patientid = patientid;
+            this.age = age;
+        }
+        public bool Equals(Patient other)
+        {
+            return this.age == other.age;
+
+        }
+        public bool NotEquals(Patient other)
+        {
+            return this.age != other.age;
+        }
+        public bool GreaterThan(Patient other)
+        {
+            return this.age > other.age;
+        }
+        public bool GreaterThanEquals(Patient other)
+        {
+            return this.age >= other.age;
+        }
+        public bool LessThan(Patient other)
+        {
+            return this.age < other.age;
+        }
+        public bool LessThanEquals(Patient other)
+        {
+            return this.age <= other.age;
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Patient p1 = new Patient("P001", 45);
+            Patient p2 = new Patient("P002", 50);
+            Console.WriteLine(p1.Equals(p2)); // Output: False
+            Console.WriteLine(p1.GreaterThan(p2)); // Output: False
+            Console.WriteLine(p1.LessThanEquals(p2)); // Output: True
+        }
+    }
+}

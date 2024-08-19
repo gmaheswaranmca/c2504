@@ -1,0 +1,379 @@
+1. What will be the output of the following C# code?
+
+```csharp
+public class BaseClass
+{
+    public BaseClass()
+    {
+        Console.WriteLine("Base Constructor");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public DerivedClass()
+    {
+        Console.WriteLine("Derived Constructor");
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        DerivedClass obj = new DerivedClass();
+    }
+}
+```
+
+- A. Base Constructor
+- B. Derived Constructor
+- C. Base Constructor
+   Derived Constructor
+- D. Derived Constructor
+   Base Constructor
+
+Answer: C
+
+---
+
+2. What will be the output of the following C# code?
+
+```csharp
+public class MyClass
+{
+    private int _x;
+
+    public int X
+    {
+        get { return _x; }
+        set { _x = value; }
+    }
+
+    public MyClass(int x)
+    {
+        X = x;
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        MyClass obj = new MyClass(5);
+        Console.WriteLine(obj.X);
+    }
+}
+```
+
+- A. 0
+- B. 5
+- C. Compilation error
+- D. NullReferenceException
+
+Answer: B
+
+---
+
+3. What will be the output of the following C# code?
+
+```csharp
+public class MyClass
+{
+    public MyClass()
+    {
+        Console.WriteLine("Default Constructor");
+    }
+
+    public MyClass(int x) : this()
+    {
+        Console.WriteLine("Parameterized Constructor");
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        MyClass obj = new MyClass(10);
+    }
+}
+```
+
+- A. Default Constructor
+- B. Parameterized Constructor
+- C. Default Constructor
+   Parameterized Constructor
+- D. Compilation error
+
+Answer: C
+
+---
+
+4. What will be the output of the following C# code?
+
+```csharp
+public class MyClass
+{
+    public string Name { get; set; }
+
+    public MyClass(string name)
+    {
+        Name = name;
+    }
+
+    public string GetName()
+    {
+        return Name;
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        MyClass obj = new MyClass("John");
+        obj.Name = "Doe";
+        Console.WriteLine(obj.GetName());
+    }
+}
+```
+
+- A. John
+- B. Doe
+- C. Compilation error
+- D. NullReferenceException
+
+Answer: B
+
+---
+
+5. What will be the output of the following C# code?
+
+```csharp
+public class BaseClass
+{
+    public virtual void Display()
+    {
+        Console.WriteLine("Base Display");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public override void Display()
+    {
+        Console.WriteLine("Derived Display");
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        BaseClass obj = new DerivedClass();
+        obj.Display();
+    }
+}
+```
+
+- A. Base Display
+- B. Derived Display
+- C. Compilation error
+- D. NullReferenceException
+
+Answer: B
+
+---
+
+6. What will be the output of the following C# code?
+
+```csharp
+public class MyClass
+{
+    public MyClass()
+    {
+        Console.WriteLine("Constructor");
+    }
+
+    ~MyClass()
+    {
+        Console.WriteLine("Destructor");
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        MyClass obj = new MyClass();
+    }
+}
+```
+
+- A. Constructor
+- B. Destructor
+- C. Constructor
+   Destructor
+- D. No output
+
+Answer: A
+
+---
+
+7. What will be the output of the following C# code?
+
+```csharp
+public class BaseClass
+{
+    public BaseClass()
+    {
+        Console.WriteLine("Base Constructor");
+    }
+
+    public void Display()
+    {
+        Console.WriteLine("Base Display");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public DerivedClass()
+    {
+        Console.WriteLine("Derived Constructor");
+    }
+
+    public new void Display()
+    {
+        Console.WriteLine("Derived Display");
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        DerivedClass obj = new DerivedClass();
+        obj.Display();
+    }
+}
+```
+
+- A. Base Constructor
+   Base Display
+- B. Base Constructor
+   Derived Constructor
+   Base Display
+- C. Base Constructor
+   Derived Constructor
+   Derived Display
+- D. Derived Display
+
+Answer: C
+
+---
+
+8. What will be the output of the following C# code?
+
+```csharp
+public class MyClass
+{
+    public int Value { get; set; }
+
+    public MyClass(int value)
+    {
+        Value = value;
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        MyClass obj1 = new MyClass(5);
+        MyClass obj2 = obj1;
+        obj2.Value = 10;
+        Console.WriteLine(obj1.Value);
+    }
+}
+```
+
+- A. 5
+- B. 10
+- C. Compilation error
+- D. NullReferenceException
+
+Answer: B
+
+---
+
+9. What will be the output of the following C# code?
+
+```csharp
+public class MyClass
+{
+    public int X { get; set; }
+
+    public MyClass(int x)
+    {
+        X = x;
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        MyClass obj1 = new MyClass(10);
+        MyClass obj2 = new MyClass(20);
+        obj1 = obj2;
+        Console.WriteLine(obj1.X);
+    }
+}
+```
+
+- A. 10
+- B. 20
+- C. Compilation error
+- D. NullReferenceException
+
+Answer: B
+
+---
+
+10. What will be the output of the following C# code?
+
+```csharp
+public class BaseClass
+{
+    public virtual void Show()
+    {
+        Console.WriteLine("Base Show");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public override void Show()
+    {
+        Console.WriteLine("Derived Show");
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        BaseClass obj = new BaseClass();
+        obj.Show();
+    }
+}
+```
+
+- A. Base Show
+- B. Derived Show
+- C. Compilation error
+- D. NullReferenceException
+
+Answer: A
