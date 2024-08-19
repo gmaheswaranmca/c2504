@@ -1,0 +1,375 @@
+
+------- Sorting Algorithms ---------
+--- Bubble Sort ---
+    ar = [7 4 3 5 8 10 2 6], N=8 Bubble Sort 
+
+    element and its next element: adjacent elements -> comparison 
+        from first element till the element before the last element 
+            why? reason: the element will not have the next element 
+    
+    Step A: element and its next element: adjacent elements -> comparison 
+        repeat for all the elements 
+
+        This step is called pass 
+
+        After every pass, we conclude the last element of the taken list is sorted 
+
+        In the comparision, if we found element is greater than the next element,   
+            conduct swap bt element and next element.
+
+        In a pass, if you cannot conduct the swap. Meaning: the elements are already sorted.
+            Here, if no swap in the last pass, stop the prcoess.
+                because elements are sorted. 
+
+    Optimization Rules: 
+        1. after every pass reduce the size ie excluded the last element of the taken list
+        2. if there is no swap during pass, stop the process. 
+
+ar = [7 4 3 5 8 10 2 6], N=8 Bubble Sort
+      = -
+ar = [4 7 3 5 8 10 2 6] swap        
+        = -
+ar = [4 3 7 5 8 10 2 6] swap
+          = -
+ar = [4 3 5 7 8 10 2 6] swap         
+            = -  no swap 
+ar = [4 3 5 7 8 10 2 6]              
+              = -   no swap
+ar = [4 3 5 7 8 10 2 6]             
+                =  -  swap 
+ar = [4 3 5 7 8 2 10 6]                
+                  =  - swap 
+ar = [4 3 5 7 8 2 6 10]  here pass is over.
+after the first pass, the element 10 takes its position. sorted. 
+
+Next pass we apply the above process only for list less last element 
+ar = [4 3 5 7 8 2 6] conduct one more time the pass, if we continue this we will make sure 
+the list is sorted.
+
+
+Attributes/Principles of bubble sort:
+    comparison sort 
+    swap 
+    in-place memory. not using any auxiliary memory for our sorting.
+
+    Time complexity: 
+        Best      O(N)      if the elements are sorted already    
+        Average   O(N^2)  
+        Worst     O(N^2)
+    Space complexity: O(1)
+
+
+
+
+--- Selection Sort ---
+    ar = [7 4 3 5 8 10 2 6], N=8 Selection Sort
+
+    Pass 
+        select every element and find min element after the element 
+        swap the selected element and min element  
+    Pass you conduct for every element other than last element 
+        Reason: the last element will not have next elements 
+
+    N elements require N-1 passes 
+        Each pass you do N-1 comparisons 
+
+    Time complexity: O(N^2) for best, average and worst cases 
+    Space complexity: O(1) 
+
+Attributes/Principles of selection sort:
+    selection and finding min element 
+    comparison sort 
+    swap 
+    in-place memory. not using any auxiliary memory for our sorting.
+
+
+conduct selection sort:
+    ar = [7 4 3 5 8 10 2 6], N=8
+          =                  min element after the selected element = 2 
+    swap the selected element and min element 
+    ar = [2 4 3 5 8 10 7 6]
+        every time after the pass the selected element will get the position. sorted. 
+    ar = [2 4 3 5 8 10 7 6]    
+            =                 min=3 
+    ar = [2 3 4 5 8 10 7 6]    
+              =               min=4, dont do the swap it element and min element indices are same 
+    ar = [2 3 4 5 8 10 7 6]
+                =             min=5, no swap 
+    ar = [2 3 4 5 8 10 7 6]
+                  =           min=6, swap 
+    ar = [2 3 4 5 6 10 7 8]
+                    ==        min=7, swap 
+    ar = [2 3 4 5 6 7 10 8] 
+                      ==      min=8, swap 
+    ar = [2 3 4 5 6 7 8 10]   no more passes. we conduct passes only for elements before last element. 
+
+
+
+
+--- Insertion Sort ---
+    ar = [7 4 3 5 8 10 2 6], N=8 Insertion Sort
+
+    the principle is the way we insert the element into the array.
+        how do we insert an elment into the array?
+            we will right shift the next elements and insert the new element 
+
+learning the sorting: sorted list | unsorted list 
+ar = [7 4 3 5 8 10 2 6]
+    we will find the first element of the unsorted list in the sorted list 
+        --------------
+ar = [7 4 3 5 8 10 2 6]   
+      =                pos for 4 is 0 
+          -------------
+ar = [4 7 3 5 8 10 2 6]
+      ===              pos for 3 is 0 
+            ------------
+ar = [3 4 7 5 8 10 2 6]    
+      =====            pos for 5 is 2 
+              -------- 
+ar = [3 4 5 7 8 10 2 6]
+      =======         pos for 8 is 4, no insertion 
+                -------- 
+ar = [3 4 5 7 8 10 2 6]      
+      =========       pos for 10 is the same, no insertion 
+                   ---- 
+ar = [3 4 5 7 8 10 2 6]            
+      ============     pos for 2 is 0, insertion 
+                     ---
+ar = [2 3 4 5 7 8 10 6] 
+      ==============   pos for 6 is 4, insertion 
+ar = [2 3 4 5 6 7 8 10], no further unsorted list, so we completed the sorting.
+
+-----------------------------------     
+
+
+def bsort(ar):
+    N = len(ar)
+
+    while True:
+        isSwapped = False 
+        #pass code 
+        for I in range(N-1): # 0 .. N-2 
+            if ar[I] > ar[I+1]: #comparison of adj elements 
+                ar[I],ar[I+1] = ar[I+1],ar[I] #swap 
+                isSwapped = True 
+        if not isSwapped:
+            break
+    # the elements sorted 
+def solve():
+    #N=len(ar)#8
+    #ar = [7, 4, 3, 5, 8, 10, 2, 6]
+    #ar = [3, 5, 8, 10]
+    ar = [100, 88, 90, 45, 85, 67, 110, 40, 77, 92, 13, 62]
+    print('Before sort:',ar)
+    bsort(ar)
+    print('After sort:',ar)
+    
+solve()
+
+#time complexity: O(N^2) for average and worst cases, O(N) for best case [sorted data]
+#space complexity: O(1)
+
+
+
+
+def ssort(ar):
+    N = len(ar)
+
+    for I in range(N-1): #selected element 
+        min_index = I 
+        for J in range(I+1,N): #compare the selected element with next elements to find min element 
+            if ar[J] < ar[min_index]:
+                min_index = J
+        #swap selected element and min element 
+        if min_index != I:  #if selected and min elements are same, no swap [optimized]
+            ar[I], ar[min_index] = ar[min_index], ar[I] # swap code 
+    # the elements sorted
+def solve():
+    #N=len(ar)#8
+    #ar = [7, 4, 3, 5, 8, 10, 2, 6]
+    #ar = [3, 5, 8, 10]
+    ar = [100, 88, 90, 45, 85, 67, 110, 40, 77, 92, 13, 62]
+    print('Before sort:',ar)
+    ssort(ar)
+    print('After sort:',ar)
+    
+solve()
+
+#time complexity:  see in the notes file
+#space complexity: see in the notes file
+
+
+
+
+
+
+
+
+def isort(ar):
+    N = len(ar)
+    for I in range(1,N): #initially we have first element sub list as sorted, all elements are in unsorted list.
+        target = ar[I]  # initialize first element of the unsorted element 
+        tindex = I      # assume the position for the first element is same 
+        sindex = I - 1  
+        while sindex >= 0 and target < ar[sindex]: # check the position for target element 
+            ar[sindex+1] = ar[sindex] # parrallel run for shifting right for insertion of target element 
+            sindex -= 1     # scan previous elements in the sorted list 
+            tindex -= 1     # change the position of the tareget element 
+        if tindex != I: # insertion we done. the shifting right happened before during finding the pos. 
+            ar[tindex] = target 
+        
+    #elements sorted 
+
+def solve():
+    #N=len(ar)#8
+    #ar = [7, 4, 3, 5, 8, 10, 2, 6]
+    #ar = [3, 5, 8, 10]
+    ar = [100, 88, 90, 45, 85, 67, 110, 40, 77, 92, 13, 62]
+    print('Before sort:',ar)
+    isort(ar)
+    print('After sort:',ar)
+    
+solve()
+
+#time complexity:  see in the notes file
+#space complexity: see in the notes file
+
+
+
+
+
+
+def partition(ar,left,right):
+    pivot_index = right #pick pivot
+    pivot = ar[pivot_index]
+    #seek the pivot place | left..right-1
+    gindex = left #greater index, new place for pivot after process
+    for K in range(left,right):#scan from first to before pivot
+        if ar[K] <= pivot:            
+            if gindex != K:
+                  ar[K], ar[gindex] = ar[gindex],ar[K] #swap greater element and less element
+            gindex+=1
+    #[lesser][greater][pivot] -> [lesser][pivot][greater]
+    ar[gindex], ar[pivot_index] = ar[pivot_index], ar[gindex] #swap the first greater element and pivot
+    #now gindex is the new place for pivot ie index of pivot
+    return gindex 
+def qsort(ar,left,right):
+    #base condition  #  left<right - more one element, left==right - just one element, left>right - no element
+    if left >= right:
+        return 
+    #logic
+    pivot_index = partition(ar, left, right)
+    qsort(ar, left, pivot_index - 1) #left list 
+    qsort(ar, pivot_index + 1, right) #right list 
+def solve():
+    ar = [100, 88, 90, 45, 85, 67, 110, 40, 77, 92, 13, 62]
+    left, right = 0, len(ar)-1
+    print('Before sort:', ar)
+    qsort(ar,left,right)
+    print('After sort:', ar)
+solve()
+# time complexity: O(N log N) for best, average cases. O(N^2) for worst case.
+# space complexity: O(log N) for recusion call stack memory | O(1) if not consided call stack mem
+
+
+
+
+
+
+
+
+1. quick sort
+    "the sort 
+        where we pick an element as the pivot 
+        and we find the place for pivot in a way that 
+            lesser values before the pivot 
+            greater values before the pivot" 
+    i. pick pivot element ii. find pivot place iii. pivot is sorted 
+    [lesser list] + [pivot] + [greater list]
+
+    Divide and Conquer : [Problem : {Sub Problems Solution}] + [Compile The Solution from recursive Sub Problems Solutions]
+    Comparison
+    Swap 
+    Partitioning - Pivot Placement 
+    in-place sorting
+
+    gi
+    100, 88, 90, 45, 85, 67, 110, 40, 77, 92, 13, 62
+
+2. merge sort 
+            0    1    2   3   4  5              6   7   8   9   10  11
+            100, 88, 90, 45, 85, 67,            110, 40, 77, 92, 13, 62
+        100, 88, 90,        45, 85, 67       110, 40, 77,             92, 13, 62
+    100          88,90     45     85,67    110      40,77            92     13,62
+               88    90          85    67          40    77         92     13    62
+-------------------------------------------------------------------------------------  
+                 88,90             67,85             40,77                   13,62
+          88,90,100         45,67,85              40,77,110             13,62,92
+              45,67,85,88,90,100                        13,40,62,77,92,110
+                               13,40,45,62,67,77,85,88,90,92,100,110  
+    Divide and Conquer 
+    Merge Process 
+    not in-place sorting [auxiliary memory to do the merge process]
+
+
+
+
+def merge(ar,left1,right1,right2):
+    left2 = right1 + 1 
+    
+    size = right2 - left1 + 1 #size of first list + size of second list
+    slist = [0 for e in range(size)] #0 filled array for the size of sorted list(slist)
+    
+    sindex = 0 #index of sorted index
+    index1, index2 = left1, left2 #index1 <- index of first list, index2 <- index of second list 
+    while index1 <= right1 and index2 <= right2:
+        if ar[index1] < ar[index2]:
+            slist[sindex] = ar[index1]
+            index1 += 1
+        else:
+            slist[sindex] = ar[index2]
+            index2 += 1
+        sindex += 1    
+    while index1 <= right1: #copy if elements in left list #1
+        slist[sindex] = ar[index1]
+        index1 += 1
+        sindex += 1
+    while index2 <= right2: #copy if elements in right list #2 either 1 or 2 will happen 
+        slist[sindex] = ar[index2]
+        index2 += 1
+        sindex += 1
+    #copy back from slist to actual list 
+    index1 = left1    
+    for sindex in range(size):
+        ar[index1] = slist[sindex]
+        index1+=1    
+
+def msort(ar,left,right):
+    if left>=right:
+        return 
+    mid = (left + right) // 2
+    #1st half 
+    left1, right1 = left, mid     
+    msort(ar, left1, right1)
+    #2nd half
+    left2, right2 = mid+1, right 
+    msort(ar, left2, right2) 
+    #compile solution of 1st and 2nd halves
+    merge(ar,left1,right1,right2)    
+def solve():
+    ar = [100, 88, 90, 45, 85, 67, 110, 40, 77, 92, 13, 62]
+    left, right = 0, len(ar)-1
+    print('Before sort:', ar)
+    msort(ar,left,right)
+    print('After sort:', ar)
+solve()
+
+
+
+
+
+
+
+
+
+
