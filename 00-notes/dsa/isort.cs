@@ -1,3 +1,4 @@
+using System;
 class Programs
 {
     /*
@@ -11,7 +12,7 @@ class Programs
         for (int UI = 1; UI < N; UI++) //unsorted list, forward traversal 
         {
             long target = ar[UI];
-            long TI = UI; //init target index
+            int TI = UI; //init target index
             int SI = UI - 1; //init for sorted list, backward traversal 
             while (SI >= 0 && ar[SI] > target) //'cond for sorted list' and 'is element greater'
             {

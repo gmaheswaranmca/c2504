@@ -160,8 +160,8 @@ def solve():
     
 solve()
 
-#time complexity:  see in the notes file
-#space complexity: see in the notes file
+#time complexity:  O(N^2)
+#space complexity: O(1)
 
 
 
@@ -203,19 +203,22 @@ ar = [2 3 4 5 6 7 8 10], no further unsorted list, so we completed the sorting.
 
 def isort(ar): #[Neha, Keerthana]
     N = len(ar)
-    for UI in range(1,N): #unsorted list, forward traversal  
-        target = ar[UI]  
-        TI = UI      
-        SI = UI - 1  #initialization for sorted list, backward traversal
-        while SI >= 0 and target < ar[SI]: #cond for sorted list   
-            ar[SI+1] = ar[SI] #shift right [parellel to sorted list traversal]
-            TI = SI
-            SI -= 1  #update part(decerement part) for sorted list   
-        end while       
-        if TI != UI: 
-            ar[TI] = target 
-        end if 
-    end for 
+    for unsortedIndex in range(1,N): #unsorted list, forward traversal  
+        target = ar[unsortedIndex]  
+        targetIndex = unsortedIndex      
+        for sortedIndex in range(unsortedIndex-1, -1, -1): #sorted list, backward traversal
+            #if no greater element 
+            if  not(ar[sortedIndex] > target):
+                break
+            #end if 
+            #if any greater element 
+            ar[sortedIndex + 1] = ar[sortedIndex] #shift right 
+            targetIndex = sortedIndex #change targetIndex
+        #end for       
+        if targetIndex != unsortedIndex: 
+            ar[targetIndex] = target 
+        #end if 
+    #end for 
 
 def solve():
     #N=len(ar)#8
@@ -228,8 +231,8 @@ def solve():
     
 solve()
 
-#time complexity:  see in the notes file
-#space complexity: see in the notes file
+#time complexity:  O(N^2) for non-sorted, O(N) for sorted 
+#space complexity: O(1)
 
 
 
