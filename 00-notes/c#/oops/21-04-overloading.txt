@@ -1,5 +1,13 @@
 =======================================================
     Method overloading
+        - same named multiple functions with different signatures 
+        - signature / syntax 
+            int Add(int a, int b)
+            int Add(int a, int b, int c)
+            double Add(double a, double b)
+            double Add(int a, double b)
+            double Add(double a, int b)
+            string Add(string a, string b)
 =======================================================    
 Method overloading in C# is a feature 
 that allows a class to have multiple methods 
