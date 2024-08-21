@@ -1,0 +1,112 @@
+=======================================================
+    Method overloading
+=======================================================    
+Method overloading in C# is a feature 
+that allows a class to have multiple methods 
+with the same name but different parameters. 
+
+These methods can differ in the number of parameters, 
+the types of parameters, or the order of parameters. 
+
+The correct method to be called is determined by the compiler 
+based on the arguments passed when the method is invoked.
+
+Key Points About Method Overloading:
+    1. Same Method Name: 
+        All overloaded methods share the same name.
+    2. Different Parameters: 
+        The methods must differ 
+        in the number, type, or order of their parameters.
+    3. Return Type: 
+        The return type can be the same or different, 
+        but it alone cannot be used to distinguish overloaded methods.
+    4. Compile-Time Polymorphism: 
+        Method overloading is an example of compile-time polymorphism 
+        (or static polymorphism).
+
+Example of Method Overloading:
+
+```csharp
+public class Calculator
+{
+    // Method to add two integers
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    // Overloaded method to add three integers
+    public int Add(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+
+    // Overloaded method to add two double values
+    public double Add(double a, double b)
+    {
+        return a + b;
+    }
+
+    // Overloaded method to concatenate two strings
+    public string Add(string a, string b)
+    {
+        return a + b;
+    }
+}
+```
+
+Usage:
+
+```csharp
+class Program
+{
+    static void Main()
+    {
+        Calculator calculator = new Calculator();
+
+        int sum1 = calculator.Add(5, 10);           // Calls Add(int, int)
+        int sum2 = calculator.Add(5, 10, 15);       // Calls Add(int, int, int)
+        double sum3 = calculator.Add(5.5, 10.5);    // Calls Add(double, double)
+        string concatenated = calculator.Add("Hello, ", "World!");  // Calls Add(string, string)
+
+        Console.WriteLine(sum1);       // Output: 15
+        Console.WriteLine(sum2);       // Output: 30
+        Console.WriteLine(sum3);       // Output: 16.0
+        Console.WriteLine(concatenated);  // Output: Hello, World!
+    }
+}
+```
+
+How It Works:
+- When `calculator.Add(5, 10)` is called, 
+the compiler looks for a method named `Add` 
+that takes two `int` parameters and finds `Add(int a, int b)`.
+- When `calculator.Add(5.5, 10.5)` is called, 
+the compiler matches it with 
+the `Add(double a, double b)` method because the arguments are `double`.
+- When `calculator.Add(5, 10, 15)` is called, 
+the compiler finds the method that accepts three `int` parameters.
+
+Rules for Method Overloading:
+    1. Parameter Types: 
+        Methods must differ in their parameter types 
+        (e.g., `int` vs. `double`).
+    2. Parameter Count: 
+        Methods can differ in the number of parameters 
+        (e.g., two vs. three parameters).
+    3. Parameter Order: 
+        If the methods have the same number of parameters, 
+        they can still be overloaded if the order of parameters is different 
+        (e.g., `int, string` vs. `string, int`).
+
+Common Use Cases:
+- Simplifying API Design: 
+    Overloading allows you to provide multiple ways 
+    to perform similar operations with different inputs.
+- Enhancing Readability: 
+    Overloaded methods with the same name make the code more readable and easier to understand, 
+    as they perform similar tasks with different input types.
+
+Method overloading is a powerful feature 
+that provides flexibility in how methods are defined and called, 
+allowing you to create more intuitive and flexible APIs.

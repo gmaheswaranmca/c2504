@@ -1,0 +1,156 @@
+List of C# access modifiers 
+and the entities that can use them:
+
+1. public  
+   - Classes
+   - Structs
+   - Interfaces
+   - Enums
+   - Methods
+   - Properties
+   - Fields
+   - Events
+   - Indexers
+   - Delegates
+   - Constructors
+
+2. private  
+   - Classes (nested only)
+   - Structs (nested only)
+   - Methods
+   - Properties
+   - Fields
+   - Events
+   - Indexers
+   - Delegates
+   - Constructors
+
+3. protected  
+   - Classes (nested only)
+   - Methods
+   - Properties
+   - Fields
+   - Events
+   - Indexers
+   - Delegates
+   - Constructors
+
+4. internal  
+   - Classes
+   - Structs
+   - Interfaces
+   - Enums
+   - Methods
+   - Properties
+   - Fields
+   - Events
+   - Indexers
+   - Delegates
+   - Constructors
+
+5. protected internal  
+   - Classes
+   - Structs
+   - Interfaces
+   - Enums
+   - Methods
+   - Properties
+   - Fields
+   - Events
+   - Indexers
+   - Delegates
+   - Constructors
+
+6. private protected  
+   - Classes (nested only)
+   - Methods
+   - Properties
+   - Fields
+   - Events
+   - Indexers
+   - Delegates
+   - Constructors
+
+The `abstract` keyword in C# can be used with the following entities:
+1. Classes  
+   - Abstract Classes
+2. Methods  
+   - Abstract Methods
+3. Properties  
+   - Abstract Properties
+4. Events  
+   - Abstract Events
+5. Indexers  
+   - Abstract Indexers
+
+The `virtual` keyword in C# can be used with the following entities:
+1. Methods
+   - Virtual Methods
+2. Properties
+   - Virtual Properties
+3. Events
+   - Virtual Events
+4. Indexers
+   - Virtual Indexers
+
+The `override` keyword in C# can be used with the following entities:
+1. Methods
+   - Overridden Methods
+2. Properties
+   - Overridden Properties
+3. Events
+   - Overridden Events
+4. Indexers
+   - Overridden Indexers
+
+The `static` keyword in C# can be used with the following entities:
+1. Classes
+   - Static Classes
+2. Methods
+   - Static Methods
+3. Properties
+   - Static Properties
+4. Fields
+   - Static Fields
+5. Constructors
+   - Static Constructors
+6. Events
+   - Static Events
+7. Indexers
+   - Static Indexers 
+   (though rarely used, 
+   indexers can technically be static)
+
+
+Constructors
+
+1. Constructors:
+   - Default Constructor: 
+        Used to initialize fields with default values.
+   - Parameterized Constructor: 
+        Used to initialize fields with specific values passed as arguments.
+   - Copy Constructor: 
+        Used to create a new object as a copy of an existing object.
+   - Static Constructor: 
+        Used to initialize static members of the class, 
+        invoked automatically before the first instance is created.
+   - Private Constructor: 
+        Used to prevent instantiation of a class,
+        often used in singleton patterns.
+
+2. Property Initializations:
+   - Default values: 
+        Properties are initialized 
+        with default values directly 
+        in the class.
+   - Object Initializer syntax: 
+        Properties are set using an object initializer 
+        after the constructor call.
+   - Constructor parameter assignment: 
+   Properties are initialized using values passed to the constructor.
+
+3. Calling a Constructor from the Same Class:
+   - Use `this()` keyword: Used to call another constructor in the same class, facilitating constructor chaining.
+
+4. Calling a Parent Class Constructor:
+   - Use `base()` keyword: Used to call a constructor of the parent class, initializing the base class before the derived class.

@@ -1,0 +1,17 @@
+1. class object 
+2. class - field, property, constructor 
+3. class - Equals, GetHashCode, ToString 
+4. class - inheritance 
+    types of inheritance 
+        1. single 
+        2. multi-level
+        3. hierarchical
+        4. multiple [interfaces] 
+        5. hybrid 
+5. overriding 
+    virtual-override 
+    abstract-override 
+    interface implementation 
+6. access specifiers for class memebers 
+    public, private, protected, internal
+7. 

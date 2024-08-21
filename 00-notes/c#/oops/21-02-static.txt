@@ -1,0 +1,203 @@
+=======================================================
+                `static` class
+=======================================================
+- `static` class is a class that cannot be instantiated
+    - ie. you cannot create an object of it
+- All members of a static class must also be static
+- This makes static classes useful for 
+    utility functions, 
+    constants, and 
+    methods that are related
+            but do not require an instance of the class to operate
+
+Key Features of a Static Class:
+1. Cannot be instantiated: 
+    You cannot create an object of a static class 
+    using the `new` keyword.
+2. Contains only static members: 
+    All fields, methods, properties, and 
+    events of the class must be static.
+3. Cannot inherit from another class: 
+    Static classes cannot inherit from any class 
+    except `Object` implicitly.
+4. Cannot be inherited: 
+    Other classes cannot derive from a static class.
+
+Example of a Static Class:
+
+```csharp
+public static class MathUtilities
+{
+    // A static field
+    public static double Pi = 3.14159;
+
+    // A static method
+    public static double Square(double number)
+    {
+        return number * number;
+    }
+
+    // A static property
+    public static int Counter { get; private set; }
+
+    // A static constructor
+    static MathUtilities()
+    {
+        Counter = 0;
+    }
+
+    // Another static method
+    public static void IncrementCounter()
+    {
+        Counter++;
+    }
+}
+```
+
+Usage:
+
+```csharp
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Accessing static members without creating an instance of the class
+        Console.WriteLine(MathUtilities.Pi);
+        
+        double result = MathUtilities.Square(5);
+        Console.WriteLine(result); // Output: 25
+
+        MathUtilities.IncrementCounter();
+        Console.WriteLine(MathUtilities.Counter); // Output: 1
+    }
+}
+```
+
+In this example, 
+`MathUtilities` is a static class 
+that provides utility methods and fields 
+that are accessible 
+without creating an instance of the class
+
+
+=======================================================
+                `static` keyword in C#
+=======================================================
+1. Static Fields:
+   - Static fields are variables 
+   that are shared across all instances of a class. 
+   There is only one copy of a static field, 
+   regardless of how many instances of the class exist.
+   ```csharp
+   public class Example
+   {
+       public static int Count = 0;
+   }
+   ```
+
+2. Static Methods:
+   - Static methods can be called 
+   without creating an instance of the class. 
+   They can only access static fields or 
+   other static methods directly.
+   ```csharp
+   public class Example
+   {
+       public static void DisplayCount()
+       {
+           Console.WriteLine(Count);
+       }
+   }
+   ```
+
+3. Static Properties:
+   - Static properties provide a way 
+   to access or modify static fields 
+   in a controlled manner.
+   ```csharp
+   public class Example
+   {
+       private static int count;
+       public static int Count
+       {
+           get { return count; }
+           set { count = value; }
+       }
+   }
+   ```
+
+4. Static Constructors:
+   - A static constructor is used 
+   to initialize static fields or perform actions 
+   that need to occur only once.
+
+   It is called automatically 
+   before any static members are accessed or 
+   any instances of the class are created.
+   ```csharp
+   public class Example
+   {
+       static Example()
+       {
+           Count = 1;
+       }
+   }
+   ```
+
+5. Static Classes:
+   - A static class can only contain static members and 
+   cannot be instantiated or inherited.
+   ```csharp
+   public static class Utilities
+   {
+       public static void PrintMessage(string message)
+       {
+           Console.WriteLine(message);
+       }
+   }
+   ```
+
+Example Usage:
+```csharp
+public class Example
+{
+    public static int Count = 0;
+
+    public static void Increment()
+    {
+        Count++;
+    }
+
+    static Example()
+    {
+        Count = 10;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine(Example.Count); // Output: 10
+        Example.Increment();
+        Console.WriteLine(Example.Count); // Output: 11
+    }
+}
+```
+
+Key Points:
+- Static Members: 
+    Can be accessed directly through the class name, 
+    without needing an instance of the class.
+- Static Constructor: 
+    Runs automatically once, 
+    the first time a static member is accessed.
+- Static Class: 
+    Contains only static members and 
+    cannot be instantiated or inherited.
+
+The `static` keyword is powerful for situations 
+where you need a single point of access or shared behavior 
+across all instances of a class, or 
+when you don't need to instantiate a class
+at all (like utility or helper classes).
