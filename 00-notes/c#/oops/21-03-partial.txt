@@ -1,3 +1,10 @@
+============================================
+        `partial` keyword
+        - to define the class in multiple files     : partial class 
+        - to define the struct in multiple files    : partial struct 
+        - to define the interface in multiple files : partial interface
+============================================
+
 In C#, the `partial` keyword is used 
 to split the definition of a 
 class, struct, interface, or method across multiple files. 

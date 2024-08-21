@@ -1,9 +1,9 @@
 21/08/2024 morning: 
-[03]Aaryaka P Nath, 	[  ]Abijith K, 			[  ]Alan Kuriakose Cherian,			
-[  ]Anjana E R, 		[02]Anjana N K,
-[  ]Ann Mariya Jaimon, 	[  ]Anugrah Krishnan, 	[  ]Anurag C Ashok, 					
-[  ]Ashna Mariya Shaji, [  ]Ashwin V, 			[  ]Athulya Shaji,
-[  ]Collin Francy, 		[  ]Dijol Davis,	    [01]Girish K V, 		    
+[03]Aaryaka P Nath, 	[04]Abijith K, 			[05]Alan Kuriakose Cherian,			
+[04]Anjana E R, 		[02]Anjana N K,
+[05]Ann Mariya Jaimon, 	[06]Anugrah Krishnan, 	[06]Anurag C Ashok, 					
+[07]Ashna Mariya Shaji, [08]Ashwin V, 			[09]Athulya Shaji,
+[10]Collin Francy, 		[  ]Dijol Davis,	    [01]Girish K V, 		    
 [  ]Gladsy Joshy,	    [  ]Gopika V, 			[  ]Keerthana Jayalal K   
 [  ]Minnu Sudhakaran V A,, [  ]Neha Joy, 			
 [  ]Nivya Ignatious, 	[  ]Rishwin R Kanth,	[  ]Sahla. R, 			

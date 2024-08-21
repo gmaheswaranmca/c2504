@@ -1,6 +1,7 @@
 =======================================================
     Method overloading
-        - same named multiple functions with different signatures 
+        - same named multiple functions 
+            with different signatures 
         - signature / syntax 
             int Add(int a, int b)
             int Add(int a, int b, int c)
@@ -8,6 +9,19 @@
             double Add(int a, double b)
             double Add(double a, int b)
             string Add(string a, string b)
+=======================================================
+    static/compile-time binding/polymorphism : overloading, overriding
+        same named multiple functions 
+            with different signatures
+        same signature function if in both parent and child 
+        - parent reference variable refers the parent object 
+            method even overridden will call the parent method only 
+        - child reference variable refers the child object 
+            method is obviosly of child object, calls the child method
+    dynamic/run-time binding/polymorphism    : overriding 
+        same signature function if in both parent and child 
+        - parent reference variable refers the child object 
+            method as overridden, calls the child method
 =======================================================    
 Method overloading in C# is a feature 
 that allows a class to have multiple methods 
