@@ -1,0 +1,160 @@
+In C#, an indexer allows an object to be indexed like an array. This means that you can access data within an object using the array-like syntax, making your class behave like a collection. Indexers are defined with the `this` keyword.
+
+Syntax for an Indexer:
+```csharp
+public class SampleClass
+{
+    private int[] arr = new int[100];  // Example array to be indexed
+
+    // Define the indexer
+    public int this[int index]
+    {
+        get
+        {
+            // Logic to get the value
+            return arr[index];
+        }
+        set
+        {
+            // Logic to set the value
+            arr[index] = value;
+        }
+    }
+}
+```
+
+How to Use the Indexer:
+Once you define an indexer in a class, you can access elements of the object using an index, just like you would with an array.
+
+```csharp
+SampleClass obj = new SampleClass();
+obj[0] = 10;        // Setting value using the indexer
+Console.WriteLine(obj[0]);  // Getting value using the indexer
+```
+
+Key Points:
+1. No Name: Unlike methods or properties, indexers don't have a name. They are defined using the `this` keyword.
+2. Parameters: Indexers can take multiple parameters, but at least one parameter is required.
+3. Access Modifiers: You can specify different access levels for the `get` and `set` accessors of an indexer.
+4. Return Type: The return type of an indexer can be any type.
+
+Example with Multiple Parameters:
+You can also create an indexer with multiple parameters.
+
+```csharp
+public class Matrix
+{
+    private int[,] matrix = new int[10, 10];
+
+    public int this[int row, int col]
+    {
+        get { return matrix[row, col]; }
+        set { matrix[row, col] = value; }
+    }
+}
+```
+
+This allows you to access elements like this:
+
+```csharp
+Matrix m = new Matrix();
+m[0, 0] = 5;
+Console.WriteLine(m[0, 0]);  // Outputs 5
+```
+
+Indexers are very useful when you want to make your class behave like a collection and provide a more intuitive way to access data.
+
+
+=========================================
+
+
+C# Indexer Coding Question
+
+Question:  
+Create a class named `StudentGrades` that stores grades for students. Implement an indexer in the class that allows you to get and set the grade of a student using their name as the key. The class should also handle the case where a student name is not found by returning a default grade of `-1`.
+
+Requirements:
+- The class should maintain a dictionary of student names and their grades.
+- The indexer should take a string (the student's name) as the parameter.
+- If the student's name is found, return the corresponding grade.
+- If the student's name is not found, return `-1`.
+- Provide a way to add new students and their grades to the class.
+
+Example Usage:
+```csharp
+StudentGrades grades = new StudentGrades();
+grades["Alice"] = 85;
+grades["Bob"] = 92;
+
+Console.WriteLine(grades["Alice"]);  // Outputs: 85
+Console.WriteLine(grades["Eve"]);    // Outputs: -1
+```
+
+=========================================
+
+Here's the implementation for the `StudentGrades` class with an indexer:
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+public class StudentGrades
+{
+    // Dictionary to store student names and their grades
+    private Dictionary<string, int> studentGrades = new Dictionary<string, int>();
+
+    // Indexer to access grades by student name
+    public int this[string studentName]
+    {
+        get
+        {
+            // Check if the student exists in the dictionary
+            if (studentGrades.ContainsKey(studentName))
+            {
+                return studentGrades[studentName];
+            }
+            else
+            {
+                // Return -1 if the student is not found
+                return -1;
+            }
+        }
+        set
+        {
+            // If the student exists, update the grade; otherwise, add the student
+            studentGrades[studentName] = value;
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create an instance of StudentGrades
+        StudentGrades grades = new StudentGrades();
+
+        // Add some student grades
+        grades["Alice"] = 85;
+        grades["Bob"] = 92;
+
+        // Access grades using the indexer
+        Console.WriteLine($"Alice's grade: {grades["Alice"]}");  // Outputs: 85
+        Console.WriteLine($"Bob's grade: {grades["Bob"]}");      // Outputs: 92
+        Console.WriteLine($"Eve's grade: {grades["Eve"]}");      // Outputs: -1
+    }
+}
+```
+
+Explanation:
+- Dictionary: The `studentGrades` dictionary stores the student names as keys and their grades as values.
+- Indexer: The indexer allows you to get and set grades using the student's name. It checks if the student exists in the dictionary; if not, it returns `-1`.
+- Adding/Updating Grades: The setter in the indexer automatically adds a new student or updates the grade for an existing student.
+
+Output:
+When you run the `Program` class's `Main` method, the output will be:
+```
+Alice's grade: 85
+Bob's grade: 92
+Eve's grade: -1
+```

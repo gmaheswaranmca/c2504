@@ -1,0 +1,38 @@
+ANUGRAGH:NEHA -	   If we have base class and derived class, when we create a object, which constructor is called first?
+AARYAKA:NEHA  -    What is Polymorphism ? explain its types.
+ABHIJITH:NEHA -    What are the Access modifiers?
+GOPIKA:NEHA   -    What is base keyword in OOPS concept?
+ANURAG:NEHA   -    What do you mean by partial class?
+ASHWIN:NEHA   -    What is inheritance?Its types
+DIJOL:NEHA    -    Feature of static class
+NEHA:DIJOL    -    Explain conditional statement
+ATHULYA:GIRISH  -  What is get and set?
+GIRISH:ATHULYA  -  What is method overloading?
+GIRISH:COLLIN   -  Types of inheritance
+COLLIN:GIRISH   -  Explain about virtual-override keyword usage
+GIRISH:KEERTHANA - What is the use of static class?
+KEERTHANA:GIRISH - How to prevent inheritance in C#?
+GIRISH:SAHLA     - Use of this keyword
+SAHLA:GIRISH   -   Types of  variables used
+GIRISH:SHARON  -   Can you Explain interface work in C#
+SHARON:GIRISH  -   Benefits of method Overloading
+GIRISH:ANNMARIYA - What is base keyword?
+ANNMARIYA:GIRISH   Explain this keyword
+GIRISH:ANJANA ER   Differnce between method overriding and method overloading
+ANAJANA ER:GIRISH  Difference between method overriding and method hiding
+ALAN:GLADSY      - What is constructor?TYPES
+GLADSY:ALAN      - What is Abstraction?
+ALAN:RISHWIN     - What is OOPS?
+RISHWIN:ALAN     - When we use params keyword?
+ALAN:YAHKOOP     - What is struct keyword?
+YAHKOOP:ALAN     - What is enum?
+ALAN:ASHNA       - What is Abstrat class?
+ASHNA:ALAN       - What is an interface?
+ALAN:ANJANA NK   - What are the differnt types of Constructors?
+ANJANA NK:ALAN   - What is the key responsiblity of Constructor?
+ALAN:SHILPA      - Can you define method in a interface?
+SHILPA:ALAN      - How can you perform multiple inheritance?
+ALAN:NIVYA       - *********(NIVYA ABSENT)
+NIVYA:ALAN       - *********
+ALAN:MINNU       - What is Encapsulation?
+MINNU:ALAN       - Difference between constructor and method

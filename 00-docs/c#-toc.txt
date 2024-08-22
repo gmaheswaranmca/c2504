@@ -193,7 +193,7 @@ Classes & Objects
 		2.	Create objects from classes and use them by calling the appropriate methods
 		3.	Identify the need of default and parameterized constructors and code them
 		4.	Identify the need of getters and setters and code them
-		5.	Identify the need of method overloading ---
+		5.	Identify the need of method overloading 
 	Topics:
 		1.	Components of a Class
 		2.	Types of Variables and its uses.
@@ -214,7 +214,7 @@ Inheritance
 		6.	Multiple Inheritance
 		7.	Hierarchical Inheritance
 		8.	Hybrid Inheritance
-		9.	Difference between IS-A and HAS-A relationship
+		9.	Difference between IS-A and HAS-A relationship --
 		10.	Use of “super” keyword and forms of “super” keyword		base 
 		
 Polymorphism
@@ -228,19 +228,19 @@ Polymorphism
 		5.	Explain polymorphism with the example of method overriding
 		6.	Explain early binding (compile time polymorphism) and 
 			late/dynamic binding (runtime polymorphism) with 
-			method overloading and method overriding --
+			method overloading and method overriding 
 		7.	Identify the need of interfaces and write code
 		8.	Explain how runtime polymorphism is achieved with the help of abstract classes and interfaces
 		9.	Identify the need for multiple inheritance of interfaces and write code
 	Topics:
-		1.	Polymorphism and its advantages -- --
-		2.	Types of Polymorphism --
+		1.	Polymorphism and its advantages 
+		2.	Types of Polymorphism 
 		3.	Types of binding
-		4.	Method Overloading and its uses.  --
-		5.	Conditions of Overloading  --
+		4.	Method Overloading and its uses.
+		5.	Conditions of Overloading 
 		6.	Method Overriding
 		7.	Scenario of Overriding
-		8.	Difference between Overloading and Overriding  --
+		8.	Difference between Overloading and Overriding
 		9.	About Class Casting
 		
 C# Concepts: Abstract Class, Interface and Partial Class
@@ -255,10 +255,10 @@ C# Concepts: Abstract Class, Interface and Partial Class
 		2.	Virtual Functions
 		3.	Interface
 		4.	Interface vs. Abstract Class
-		5.	Static Class --
+		5.	Static Class 
 		6.	Extension Methods -- LINQ
-		7.	Partial Class --
-		8.	Partial Methods --
+		7.	Partial Class 
+		8.	Partial Methods 
 		
 C#: Property, Indexer, Attributes and Exception Handling
 	Learning Outcomes:
@@ -269,7 +269,7 @@ C#: Property, Indexer, Attributes and Exception Handling
 		5.	Identify the need of pass by reference and use ref keyword
 		6.	Identify the need of out parameters and code them
 	Topics:
-		1.	Property --
+		1.	Property 
 		2.	Indexer --
 		3.	Exceptional Handling --
 		4.	Enum

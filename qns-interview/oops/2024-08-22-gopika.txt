@@ -1,0 +1,41 @@
+1.Anugrah:We have a base class and a derived class which constructor work first? base constructor or derived constructor
+    ans: base constructor(neha)
+2.Aaryaka:What is polymorphism and its types?(neha)
+3.Abhijith:What are the access modifiers in c#?public,private,protected,internal(neha)
+4.Gopika:purpose of base keyword in base class?used to access base class members(neha)
+5.Anurag:What is the purpose of partial class?used to split the class in multiple files(neha)
+6.Ashwin:What is inheritance?(neha)
+7.Dijol:explain features of static class?cannot be instantiated,contain only static members,cannot inherit from another class,cannot be inherited
+    Neha:Explain the conditional statements?if,else-if,else,while
+8.Collin:Explain about virtual and override combination?virtual methods can be overridden in derived classes
+    Girish:Different types of Inheritance?Single level Inheritance,Multi
+9.Athuliya:What is the purpose of get and set?for read and write access
+    Girish:What is overloading?
+10.Keerthana:How to prevent a class from getting inherited ?using sealed class
+    Girish:What is the use of static class?
+11.Sahla:Explain different types of variables used?int,float,string etc
+    Girish:Purpose of this keyword?used to refer current object
+12.Sharon:Benefits of constructor overloading?Polymorphism,code clarity,Maintanance of code,Avoid Duplication
+    Girish:How interface work in c#?
+13.Ann Mariya:Purpose of this key word?
+    Girish:Purpose of base keyword?
+14.Anjana ER: Difference between method overriding and method hiding?
+    Method overriding allows a derived class to provide a specific implementation of a method that is already defined in its base class. To override a method, the base class method must be marked with the virtual keyword, and the derived class method must be marked with the override keyword.
+    Method hiding occurs when a derived class defines a method that has the same name as a method in its base class but does not use the override keyword. Instead, it uses the new keyword to explicitly hide the base class method.
+    Girish: Difference between Method Overriding and Method overloading?
+15.Gladsy:What is abstraction?Hiding complex details and showing only essential features of an object
+    Alan:What is a constructor?Used to initialize the object when created
+16.Rishwin:Purpose of params?used to specify the 
+    Alan:What is OOPS?What are Pillars?
+17.Yahkoob:Expalin what is Enum?
+    In C#, an enum (short for "enumeration") is a distinct value type that defines a set of named constants. Enums are used to represent a collection of related values in a more readable and manageable way. Each named constant in an enum is associated with a numeric value, starting from zero by default, but you can specify custom values if needed.
+    Alan: What is a struct keyword?In C#, the struct keyword is used to define a structure, which is a value type that can contain data members and methods. 
+18.Ashna Mariya:What is Abstract class?
+    Alan: What is an Interface?
+    In C#, an interface is a reference type that defines a contract consisting of method signatures, properties, events, and indexers. Interfaces specify what methods and properties a class or struct must implement, but they do not provide the implementation themselves
+19.Anjana NK:What are the responsibilities of Constructors?
+    Alan:What are the types of constructors?
+20.Shilpa:How can we perform Multiple Inheritance?using interfaces(interface inheritance and interface implementation)
+    Alan:Can we define a method in interface?we cannot define method in interface.In C# 8.0 we can use default keyword to define a method
+21:Minnu:Diffeence between a constructor and method?
+    Alan:What is encapsulation?Binding of data as a single unit

@@ -1,38 +1,63 @@
 List of C# access modifiers 
 and the entities that can use them:
 
+public: 
+   Access isn't restricted.
+protected: 
+   Access is limited to the containing class or types 
+   derived from the containing class.
+internal: 
+   Access is limited to the current assembly.
+protected internal: 
+   Access is limited to the current assembly or types 
+   derived from the containing class.
+private: 
+   Access is limited to the containing type.
+private protected: 
+   Access is limited to the containing class or 
+   types derived from the containing class within the current assembly.
+                          1          2               3             4                5 
+                        class  derived class   derived class   other classes     other classes     
+                               same assembly   other assembly  same assembly     other assembly 
+public                   y         y                y              y                y 
+internal                 y         y                n              y                n 
+protected                y         y                y              n                n 
+private                  y         n                n              n                n 
+protected internal       y         y                y             'y'               n
+private protected        y         y                n              n                n 
+
 1. public  
    - Classes
    - Structs
    - Interfaces
    - Enums
+   - Delegates
    - Methods
    - Properties
    - Fields
    - Events
    - Indexers
-   - Delegates
    - Constructors
 
 2. private  
    - Classes (nested only)
    - Structs (nested only)
+   - Delegates
    - Methods
    - Properties
    - Fields
    - Events
    - Indexers
-   - Delegates
    - Constructors
 
 3. protected  
    - Classes (nested only)
+   - Delegates
    - Methods
    - Properties
    - Fields
    - Events
    - Indexers
-   - Delegates
    - Constructors
 
 4. internal  
@@ -40,35 +65,41 @@ and the entities that can use them:
    - Structs
    - Interfaces
    - Enums
+   - Delegates
    - Methods
    - Properties
    - Fields
    - Events
    - Indexers
-   - Delegates
    - Constructors
 
-5. protected internal  
+5. protected internal  : 
+      * visibility to all types[class] of same assembly
+      * visibility to child types[class] of other assembly 
    - Classes
    - Structs
    - Interfaces
    - Enums
+   - Delegates
    - Methods
    - Properties
    - Fields
    - Events
    - Indexers
-   - Delegates
    - Constructors
 
 6. private protected  
+      * Access is limited to the containing class or types 
+        derived from the containing class within the current assembly
+            * visibility is in the same class 
+            * visibility is in the child class of same assembly 
    - Classes (nested only)
+   - Delegates
    - Methods
    - Properties
    - Fields
    - Events
    - Indexers
-   - Delegates
    - Constructors
 
 The `abstract` keyword in C# can be used with the following entities:

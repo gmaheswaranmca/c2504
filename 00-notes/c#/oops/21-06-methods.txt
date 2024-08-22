@@ -1,0 +1,413 @@
+In C#, method arguments (or parameters) refer to the values 
+that are passed to a method when it is called. 
+These arguments are used by the method to perform its operations. 
+
+Understanding how to pass arguments and 
+how they are handled inside methods is crucial 
+for effective programming.
+
+Types of Method Arguments
+
+1. Value Parameters:
+   - Definition: When an argument is passed by value, 
+   a copy of the argument is passed to the method. 
+   The method operates on the copy, and any changes made 
+   to the parameter do not affect the original variable.
+   - Example:
+     ```csharp
+     void Increment(int number)
+     {
+         number++;
+     }
+
+     int x = 5;
+     Increment(x);
+     Console.WriteLine(x);  // Output: 5
+     ```
+   - Explanation: `x` is passed by value, 
+   so `Increment` operates on a copy of `x`. 
+   The original value of `x` remains unchanged.
+
+2. Reference Parameters (`ref` keyword):
+   - Definition: When an argument is passed by reference, 
+   the method receives a reference to the original variable. 
+   Any changes made to the parameter inside the method affect the original variable.
+   - Example:
+     ```csharp
+     void Increment(ref int number)
+     {
+         number++;
+     }
+
+     int x = 5;
+     Increment(ref x);
+     Console.WriteLine(x);  // Output: 6
+     ```
+   - Explanation: `x` is passed by reference, 
+   so `Increment` modifies the original value of `x`.
+
+
+
+3. Output Parameters (`out` keyword):
+   - Definition: Output parameters are used when a method needs 
+   to return multiple values. 
+   The `out` keyword is used to indicate 
+   that a parameter will be initialized within the method and returned to the caller.
+   - Example:
+     ```csharp
+     void GetDimensions(out int width, out int height)
+     {
+         width = 1920;
+         height = 1080;
+     }
+
+     int w, h;
+     GetDimensions(out w, out h);
+     Console.WriteLine($"Width: {w}, Height: {h}");  // Output: Width: 1920, Height: 1080
+     ```
+   - Explanation: `out` parameters allow the method to assign values to `w` and `h`, 
+   which are then accessible to the caller.
+
+Example: 
+    long findSum(long a, long b)
+    {
+        return a + b;
+    }
+
+    To write extended findSum fn to return sum, diff, prod, quotient and remainder:
+    long findSumExtended(long a, long b, out long diff, out long prod, 
+                out long quotient, out long remaninder)
+    {
+        long sum = a + b;
+        diff = a - b;
+        prod = a * b; 
+        quotient = a / b;
+        remaninder = a % b; 
+        return sum;
+    }
+
+    Usage:
+    long s, d, p, q, r;
+    s = findSumExtended(20,3,out d, out p, out q, out r); 
+
+
+* without either out or ref arg: input to function 
+* out arg: output out of the function 
+* ref arg: input to function and output out of the function  
+
+4. Parameter Arrays (`params` keyword):
+   - Definition: The `params` keyword allows a method 
+   to accept a variable number of arguments of a specified type. 
+   The arguments are passed as an array to the method.
+   - Example:
+     ```csharp
+     void PrintNumbers(params int[] numbers)
+     {
+         foreach (int number in numbers)
+         {
+             Console.WriteLine(number);
+         }
+     }
+
+     PrintNumbers(1, 2, 3, 4);  // Output: 1 2 3 4
+     ```
+   - Explanation: 
+   The `PrintNumbers` method accepts a variable number of integer arguments, 
+   which it iterates over and prints.
+
+5. Optional Parameters:
+   - Definition: Optional parameters allow you 
+   to define parameters with default values. 
+   If the caller does not provide a value for the parameter, 
+   the default value is used.
+   - Example:
+     ```csharp
+     void DisplayMessage(string message, int times = 1)
+     {
+         for (int i = 0; i < times; i++)
+         {
+             Console.WriteLine(message);
+         }
+     }
+
+     DisplayMessage("Hello!");  // Output: Hello!
+     DisplayMessage("Hi!", 3);  // Output: Hi! Hi! Hi!
+     ```
+   - Explanation: `times` is an optional parameter with a default value of `1`. 
+   If no value is provided by the caller, the method uses the default value.
+
+6. Named Arguments:
+   - Definition: Named arguments allow you to specify the name of an argument 
+   when calling a method, which can make the code more readable.
+   - Example:
+     ```csharp
+     void ShowDetails(string name, int age, string city)
+     {
+         Console.WriteLine($"{name} is {age} years old and lives in {city}.");
+     }
+
+     ShowDetails(age: 25, name: "Alice", city: "New York");
+     ```
+   - Explanation: Named arguments allow you to pass arguments 
+   in any order by specifying their names.
+
+Summary
+
+- Value Parameters: 
+    Pass a copy of the argument; changes do not affect the original.
+- Reference Parameters (`ref`): 
+    Pass a reference to the original argument; changes affect the original.
+- Output Parameters (`out`): 
+    Pass a reference, but the argument must be assigned within the method.
+- Parameter Arrays (`params`): 
+    Accept a variable number of arguments as an array.
+- Optional Parameters: 
+    Allow parameters to have default values.
+- Named Arguments: 
+    Enable passing arguments by specifying parameter names for clarity.
+
+
+****Overloading by value type and ref type ****
+Understanding how to use these different types of method arguments helps create more flexible and readable code in C#.
+
+
+    internal class Programs
+    {
+        static int f(int x, int y)
+        {
+            return x + y;
+        }
+        static int f(ref int x, ref int y)
+        {
+            x = 10;
+            y = 20;
+            return x + y;
+        }
+        
+        static void Main(string[] args)
+        {
+            int p = 2, q = 3;
+            int r = f(p, q);
+            int s = f(ref p, ref q);
+            Console.Write($"r={r},s={s}");
+        }
+    }
+********************
+In C#, methods are blocks of code that perform a specific task and 
+can be called to execute that task. Methods are fundamental 
+to structuring and organizing code. 
+
+Depending on their characteristics, 
+methods can be categorized into different types. 
+Here’s an overview of the various method types in C#:
+
+1. Instance Methods
+   - Definition: An instance method operates on an instance of a class. 
+   It can access instance fields and properties of the class.
+   - Example:
+     ```csharp
+     public class Calculator
+     {
+         public int Add(int a, int b)
+         {
+             return a + b;
+         }
+     }
+
+     // Usage
+     Calculator calc = new Calculator();
+     int result = calc.Add(3, 5);  // Output: 8
+     ```
+
+2. Static Methods
+   - Definition: A static method belongs to the class itself rather than 
+     to any specific instance. 
+     It can only access static fields or methods in the class.
+   - Example:
+     ```csharp
+     public class MathUtility
+     {
+         public static int Square(int number)
+         {
+             return number * number;
+         }
+     }
+
+     // Usage
+     int result = MathUtility.Square(4);  // Output: 16
+     ```
+
+3. Abstract Methods
+   - Definition: An abstract method is declared in an abstract class and 
+     does not have a body. Subclasses 
+     that inherit the abstract class must implement the abstract method.
+   - Example:
+     ```csharp
+     public abstract class Shape
+     {
+         public abstract double Area();
+     }
+
+     public class Circle : Shape
+     {
+         public double Radius { get; set; }
+
+         public override double Area()
+         {
+             return Math.PI * Radius * Radius;
+         }
+     }
+     ```
+
+4. Virtual Methods
+   - Definition: A virtual method is a method in a base class 
+     that can be overridden by a derived class to provide a specific implementation. 
+     It has a default implementation in the base class.
+   - Example:
+     ```csharp
+     public class Animal
+     {
+         public virtual void Speak()
+         {
+             Console.WriteLine("Animal sound");
+         }
+     }
+
+     public class Dog : Animal
+     {
+         public override void Speak()
+         {
+             Console.WriteLine("Bark");
+         }
+     }
+     ```
+
+5. Override Methods
+   - Definition: An override method provides a new implementation 
+     for a virtual or abstract method defined in a base class.
+   - Example: 
+     ```csharp
+     public class BaseClass
+     {
+         public virtual void Display()
+         {
+             Console.WriteLine("Base class display");
+         }
+     }
+
+     public class DerivedClass : BaseClass
+     {
+         public override void Display()
+         {
+             Console.WriteLine("Derived class display");
+         }
+     }
+     ```
+
+6. Partial Methods
+   - Definition: A partial method is a method declared 
+   within a partial class or struct, and it is optionally implemented. 
+   If not implemented, the method is removed by the compiler at compile time.
+   - Example:
+     ```csharp
+     public partial class Sample
+     {
+         partial void OnInitialize();
+
+         public Sample()
+         {
+             OnInitialize();
+         }
+     }
+
+     public partial class Sample
+     {
+         partial void OnInitialize()
+         {
+             Console.WriteLine("Initialized");
+         }
+     }
+     ```
+
+7. Extension Methods
+   - Definition: Extension methods are static methods 
+   that extend the functionality of existing types without modifying them. 
+   They are declared in static classes and are accessed as 
+   if they were instance methods.
+   - Example:
+     ```csharp
+     public static class StringExtensions
+     {
+         public static bool IsCapitalized(this string input)
+         {
+             return !string.IsNullOrEmpty(input) && char.IsUpper(input[0]);
+         }
+     }
+
+     // Usage
+     string word = "Hello";
+     bool isCapitalized = word.IsCapitalized();  // Output: true
+     ```
+
+8. Operator Methods
+   - Definition: Operator methods define the behavior of operators 
+   (such as `+`, `-`, `*`, etc.) for user-defined types.
+   - Example:
+     ```csharp
+     public class Complex
+     {
+         public double Real { get; set; }
+         public double Imaginary { get; set; }
+
+         public static Complex operator +(Complex c1, Complex c2)
+         {
+             return new Complex { Real = c1.Real + c2.Real, Imaginary = c1.Imaginary + c2.Imaginary };
+         }
+     }
+
+     // Usage
+     Complex c1 = new Complex { Real = 1, Imaginary = 2 };
+     Complex c2 = new Complex { Real = 3, Imaginary = 4 };
+     Complex result = c1 + c2;
+     ```
+
+9. Anonymous Methods
+   - Definition: Anonymous methods are methods that do not have a name. 
+   They are typically used with delegates and 
+   are defined using the `delegate` keyword.
+   - Example:
+     ```csharp
+     Func<int, int, int> add = delegate (int a, int b)
+     {
+         return a + b;
+     };
+
+     int result = add(3, 4);  // Output: 7
+     ```
+
+10. Lambda Expressions
+   - Definition: Lambda expressions are a concise way 
+   to write anonymous methods using the `=>` syntax. 
+   They are often used in LINQ queries and delegate assignments.
+   - Example:
+     ```csharp
+     Func<int, int, int> add = (a, b) => a + b;
+
+     int result = add(3, 4);  // Output: 7
+     ```
+
+Summary
+
+- Instance Methods: Operate on an instance of a class.
+- Static Methods: Belong to the class itself, not to any instance.
+- Abstract Methods: Declared in an abstract class, must be implemented by derived classes.
+- Virtual Methods: Can be overridden in derived classes.
+- Override Methods: Provide a specific implementation of a virtual or abstract method.
+- Partial Methods: Declared in a partial class, optionally implemented.
+    - Extension Methods: Extend the functionality of existing types.
+- Operator Methods: Define custom behavior for operators.
+    - Anonymous Methods: Methods without names, used with delegates.
+    - Lambda Expressions: A concise syntax for anonymous methods.
+
+Understanding these different types of methods helps you 
+to write more organized, flexible, and maintainable code in C#.

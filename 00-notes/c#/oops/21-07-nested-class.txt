@@ -1,0 +1,121 @@
+Nested class:
+
+Coding Question:
+Create a class named `Company` that contains an inner class `Employee`. The `Company` class should manage a list of employees and provide methods to add employees and display all employees. The `Employee` class should store information about an employee, including their name and position.
+
+1. In the `Company` class:
+   - Define a private list of `Employee` objects.
+   - Provide a method `AddEmployee` to add an `Employee` to the list.
+   - Provide a method `DisplayEmployees` to display details of all employees.
+
+2. In the `Employee` inner class:
+   - Define private fields for `Name` and `Position`.
+   - Provide a constructor to initialize these fields.
+   - Provide public properties for `Name` and `Position`.
+   - Provide a method `GetDetails` that returns a formatted string with the employee’s name and position.
+
+Demonstrate how to use these classes in a `Main` method.
+
+Solution
+
+Company.cs
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+public class Company
+{
+    private List<Employee> employees = new List<Employee>();
+
+    // Method to add an employee
+    public void AddEmployee(string name, string position)
+    {
+        employees.Add(new Employee(name, position));
+    }
+
+    // Method to display all employees
+    public void DisplayEmployees()
+    {
+        foreach (var employee in employees)
+        {
+            Console.WriteLine(employee.GetDetails());
+        }
+    }
+
+    // Inner class Employee
+    public class Employee
+    {
+        private string name;
+        private string position;
+
+        // Constructor
+        public Employee(string name, string position)
+        {
+            this.name = name;
+            this.position = position;
+        }
+
+        // Properties
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public string Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
+        // Method to get employee details
+        public string GetDetails()
+        {
+            return $"Name: {name}, Position: {position}";
+        }
+    }
+}
+```
+
+Program.cs
+
+```csharp
+// File: Program.cs
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Creating an instance of the Company class
+        Company myCompany = new Company();
+
+        // Adding employees
+        myCompany.AddEmployee("Alice Johnson", "Software Developer");
+        myCompany.AddEmployee("Bob Smith", "Project Manager");
+
+        // Displaying all employees
+        myCompany.DisplayEmployees();
+    }
+}
+```
+
+Explanation
+
+1. Nested Class (`Employee`): The `Employee` class is defined within the `Company` class. It encapsulates employee details and methods related to an employee.
+
+2. Company Class:
+   - `employees`: A private list to hold `Employee` objects.
+   - `AddEmployee`: Adds a new employee to the list.
+   - `DisplayEmployees`: Iterates through the list of employees and displays their details.
+
+3. Employee Class:
+   - Private Fields: `name` and `position` for storing employee information.
+   - Constructor: Initializes `name` and `position`.
+   - Properties: Getters and setters for `Name` and `Position`.
+   - `GetDetails`: Returns a formatted string with the employee’s details.
+
+4. Usage: In the `Program` class, an instance of `Company` is created, employees are added, and their details are displayed using the `Company` methods.
+
+This design shows how nested classes can be used to logically group related classes and encapsulate functionality within a containing class.

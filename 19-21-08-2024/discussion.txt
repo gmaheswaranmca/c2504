@@ -1,0 +1,4 @@
+1. Overloading 
+    Polymorphism Types 
+2. Static class 
+3. Partial class 
