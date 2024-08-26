@@ -140,7 +140,7 @@ namespace ProgramingFundamentalsProject.Tests
 }
 ```
 
-5. CalcTests.cs
+5. CalcDivideTests.cs
 ```
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Win32;
@@ -171,3 +171,5 @@ namespace ProgramingFundamentalsProjectTests
 }
 
 ```
+
+

@@ -94,3 +94,27 @@ Log4net provides different methods for logging messages at various levels:
 After configuring and initializing log4net, when you run your application, log messages will be written to `logfile.log` (as configured in the example).
 
 This is a simple setup to get you started with logging using log4net. You can further customize the configuration to log to other appenders (like console, database, etc.), format the log messages, and more.
+
+
+
+===================severity levels===============
+Emergency
+Alert
+Critical
+Error
+Warning
+Notice
+Informational
+Debug
+
+
+===================severity levels from log4net===============
+Off.
+
+Fatal.
+Error.
+Warn.
+Info.
+Debug.
+
+All.
