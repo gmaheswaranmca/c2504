@@ -321,17 +321,17 @@ Anonymous Type, Delegates, Events and Lambda
 		7.	Lambda Expression
 		8.	Expression Tree
 		9.	Async/Await and Task Parallel Library (TPL) Basics.
-		a.	Introduction to asynchronous programming
-		b.	Async and await keywords
-		c.	Task and Task<T>
-		d.	Handling exceptions in asynchronous methods
-		e.	Parallel programming with TPL
+			a.	Introduction to asynchronous programming
+			b.	Async and await keywords
+			c.	Task and Task<T>
+			d.	Handling exceptions in asynchronous methods
+			e.	Parallel programming with TPL
 		10.	LINQ Usage Basics.
-		a.	LINQ query syntax and method syntax
-		b.	LINQ operators (Select, Where,GroupBy, Join, etc.)
-		c.	LINQ to Objects
-		d.	LINQ to XML
-		e.	LINQ to SQL
+			a.	LINQ query syntax and method syntax
+			b.	LINQ operators (Select, Where,GroupBy, Join, etc.)
+			c.	LINQ to Objects
+			d.	LINQ to XML
+			e.	LINQ to SQL
 	
 Practical OOAD
 	1.	SOLID Design Principles

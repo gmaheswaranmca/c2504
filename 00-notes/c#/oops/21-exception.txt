@@ -1,0 +1,375 @@
+Exception handling in C# is a way to handle runtime errors in your code 
+to ensure that your program doesn't crash unexpectedly. 
+It uses `try`, `catch`, `finally`, and `throw` keywords to manage exceptions. 
+Here's a basic overview:
+
+Basic Syntax
+
+```csharp
+try
+{
+    // Code that might throw an exception
+}
+catch (ExceptionType ex)
+{
+    // Code to handle the exception
+}
+finally
+{
+    // Code that runs regardless of whether an exception was thrown
+}
+```
+
+Example
+
+```csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            int[] numbers = { 1, 2, 3 };
+            Console.WriteLine(numbers[5]); // This will throw an IndexOutOfRangeException
+        }
+        catch (IndexOutOfRangeException ex)
+        {
+            Console.WriteLine("An error occurred: " + ex.Message);
+        }
+        finally
+        {
+            Console.WriteLine("This block is always executed.");
+        }
+    }
+}
+```
+
+Key Points
+
+1. `try` block: 
+    The code that might throw an exception is placed inside a `try` block.
+2. `catch` block: 
+    This block is executed when an exception occurs in the `try` block. 
+    You can have multiple `catch` blocks for different types of exceptions.
+3. `finally` block: 
+    This block is optional and is executed regardless of whether an exception occurs. 
+    It's often used for cleaning up resources (e.g., closing a file or database connection).
+4. `throw` keyword: Used to manually throw an exception.
+
+Throwing an Exception
+
+You can throw an exception manually using the `throw` keyword:
+
+```csharp
+throw new Exception("Something went wrong!");
+```
+
+Custom Exceptions
+
+You can also create custom exceptions by extending the `Exception` class:
+
+```csharp
+public class MyCustomException : Exception
+{
+    public MyCustomException(string message) : base(message)
+    {
+    }
+}
+```
+
+Then you can use it like any other exception:
+
+```csharp
+throw new MyCustomException("This is a custom exception.");
+```
+
+
+
+
+
+In C#, exceptions are events 
+that occur during the execution of a program 
+that disrupt the normal flow of instructions. 
+
+The .NET framework provides several types of exceptions, 
+each of which corresponds to a specific error condition. 
+
+Below are some common types of exceptions in C#:
+
+1. System.Exception
+   - Description: The base class for all exceptions in C#. 
+   Every other exception class derives from this class.
+   - Example: `Exception ex = new Exception("An error occurred.");`
+
+2. System.SystemException
+   - Description: The base class for all predefined system exceptions, 
+   which derive from `System.Exception`.
+   - Example: `SystemException ex = new SystemException("A system error occurred.");`
+
+3. System.ArgumentException
+   - Description: Thrown when one of the arguments provided to a method is not valid.
+   - Example: `ArgumentException ex = new ArgumentException("Invalid argument.");`
+
+4. System.ArgumentNullException
+   - Description: Thrown when a null reference is passed to a method that does not accept it as a valid argument.
+   - Example: `ArgumentNullException ex = new ArgumentNullException("Parameter cannot be null.");`
+
+5. System.ArgumentOutOfRangeException
+   - Description: Thrown when the value of an argument is outside the allowable range of values as defined by the invoked method.
+   - Example: `ArgumentOutOfRangeException ex = new ArgumentOutOfRangeException("Index out of range.");`
+
+6. System.IndexOutOfRangeException
+   - Description: Thrown when an attempt is made to access an element of an array or collection with an index that is outside its bounds.
+   - Example: `IndexOutOfRangeException ex = new IndexOutOfRangeException("Array index is out of bounds.");`
+
+7. System.NullReferenceException
+   - Description: Thrown when there is an attempt to dereference a null object reference.
+   - Example: `NullReferenceException ex = new NullReferenceException("Object reference not set to an instance of an object.");`
+
+8. System.InvalidOperationException
+   - Description: Thrown when a method call is invalid for the object's current state.
+   - Example: `InvalidOperationException ex = new InvalidOperationException("Operation is not valid due to the current state of the object.");`
+
+9. System.FormatException
+   - Description: Thrown when the format of an argument is invalid, such as trying to convert a string to a number, and the string is not in a valid format.
+   - Example: `FormatException ex = new FormatException("The format is invalid.");`
+
+10. System.DivideByZeroException
+   - Description: Thrown when an attempt is made to divide a numeric value by zero.
+   - Example: `DivideByZeroException ex = new DivideByZeroException("Division by zero is not allowed.");`
+
+11. System.OverflowException
+   - Description: Thrown when an arithmetic operation in a checked context results in an overflow.
+   - Example: `OverflowException ex = new OverflowException("Arithmetic operation resulted in an overflow.");`
+
+12. System.OutOfMemoryException
+   - Description: Thrown when there is not enough memory to continue the execution of a program.
+   - Example: `OutOfMemoryException ex = new OutOfMemoryException("Not enough memory to continue execution.");`
+
+13. System.StackOverflowException
+   - Description: 
+   Thrown when the execution stack overflows 
+   due to too many nested method calls (e.g., infinite recursion).
+   - Example: `StackOverflowException ex = new StackOverflowException("The execution stack has overflowed.");`
+
+14. System.IO.IOException
+   - Description: 
+   The base class for exceptions 
+   thrown during I/O operations.
+   - Example: `IOException ex = new IOException("I/O error occurred.");`
+
+15. System.FileNotFoundException
+   - Description: 
+   Thrown when an attempt 
+   o access a file that does not exist on disk fails.
+   - Example: `FileNotFoundException ex = new FileNotFoundException("File not found.");`
+
+16. System.NotSupportedException
+   - Description: 
+   Thrown when an invoked method is not supported, 
+   or a particular feature is not available.
+   - Example: `NotSupportedException ex = new NotSupportedException("This method is not supported.");`
+
+17. System.TimeoutException
+   - Description: 
+   Thrown when an operation times out.
+   - Example: `TimeoutException ex = new TimeoutException("The operation has timed out.");`
+
+18. System.UnauthorizedAccessException
+   - Description: 
+   Thrown when the operating system denies access 
+   to a resource due to insufficient privileges.
+   - Example: `UnauthorizedAccessException ex = new UnauthorizedAccessException("Access is denied.");`
+
+These are just some of the many exceptions available in C#. 
+Custom exceptions can also be created 
+by deriving from the `System.Exception` class 
+to represent specific error conditions in your application.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+try
+{
+    // code can throw exception 
+}
+catch (SqlException ex)
+{
+    // Handle SQL exceptions
+    Console.WriteLine($"SQL Error: {ex.Message}");
+}
+catch (Exception ex)
+{
+    // Handle other exceptions
+    Console.WriteLine($"Error: {ex.Message}");
+}
+
+Problem Statement: Medication Expiry Tracking
+- Define a class: `MedicationExpiry` with the following properties:
+    - `BatchID` (integer)
+    - `Medication` (string)
+    - `ExpiryDate` (DateTime)
+- Tasks:
+    1. Data Collection:
+    - Read N `medicationExpiries` from the keyboard.
+    2. Find Medication with Nearest Expiry:
+    - Display the medication that is closest to expiry.
+        Solve in time complexity of O(N).
+        Don’t use built-in C# sorting or LINQ.
+    3. Find Second Farthest Expiry:
+    - Display the medication that has the second farthest expiry date.
+        Solve in time complexity of O(N).
+        Don’t use built-in C# sorting or LINQ.
+    4. Sort by Expiry Date:
+    - Implement and call your own sorting algorithm.
+        Don’t use built-in C# sorting or LINQ.
+
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+class MedicationExpiry
+{
+    public int BatchID { get; set; }
+    public string Medication { get; set; }
+    public DateTime ExpiryDate { get; set; }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Task 1: Data Collection
+        Console.Write("Enter the number of medications: ");
+        int N = int.Parse(Console.ReadLine());
+        List<MedicationExpiry> medicationExpiries = new List<MedicationExpiry>();
+
+        for (int i = 0; i < N; i++)
+        {
+            Console.WriteLine($"Enter details for medication {i + 1}:");
+            Console.Write("BatchID: ");
+            int batchID = int.Parse(Console.ReadLine());
+            Console.Write("Medication: ");
+            string medication = Console.ReadLine();
+            Console.Write("ExpiryDate (yyyy-mm-dd): ");
+            DateTime expiryDate = DateTime.Parse(Console.ReadLine());
+
+            medicationExpiries.Add(new MedicationExpiry
+            {
+                BatchID = batchID,
+                Medication = medication,
+                ExpiryDate = expiryDate
+            });
+        }
+
+        // Task 2: Find Medication with Nearest Expiry
+        MedicationExpiry nearestExpiry = medicationExpiries[0];
+        foreach (var med in medicationExpiries)
+        {
+            if (med.ExpiryDate < nearestExpiry.ExpiryDate)
+            {
+                nearestExpiry = med;
+            }
+        }
+
+        Console.WriteLine($"\nMedication with nearest expiry: {nearestExpiry.Medication} (Expiry Date: {nearestExpiry.ExpiryDate:yyyy-MM-dd})");
+
+        // Task 3: Find Second Farthest Expiry
+        MedicationExpiry farthestExpiry = medicationExpiries[0];
+        MedicationExpiry secondFarthestExpiry = null;
+
+        foreach (var med in medicationExpiries)
+        {
+            if (med.ExpiryDate > farthestExpiry.ExpiryDate)
+            {
+                secondFarthestExpiry = farthestExpiry;
+                farthestExpiry = med;
+            }
+            else if (secondFarthestExpiry == null || med.ExpiryDate > secondFarthestExpiry.ExpiryDate)
+            {
+                secondFarthestExpiry = med;
+            }
+        }
+
+        if (secondFarthestExpiry != null)
+        {
+            Console.WriteLine($"\nMedication with second farthest expiry: {secondFarthestExpiry.Medication} (Expiry Date: {secondFarthestExpiry.ExpiryDate:yyyy-MM-dd})");
+        }
+        else
+        {
+            Console.WriteLine("\nNo second farthest expiry found.");
+        }
+
+        // Task 4: Sort by Expiry Date (using Bubble Sort)
+        for (int i = 0; i < medicationExpiries.Count - 1; i++)
+        {
+            for (int j = 0; j < medicationExpiries.Count - i - 1; j++)
+            {
+                if (medicationExpiries[j].ExpiryDate > medicationExpiries[j + 1].ExpiryDate)
+                {
+                    var temp = medicationExpiries[j];
+                    medicationExpiries[j] = medicationExpiries[j + 1];
+                    medicationExpiries[j + 1] = temp;
+                }
+            }
+        }
+
+        Console.WriteLine("\nMedications sorted by expiry date:");
+        foreach (var med in medicationExpiries)
+        {
+            Console.WriteLine($"{med.Medication} (Expiry Date: {med.ExpiryDate:yyyy-MM-dd})");
+        }
+    }
+}
+```
+
+
+
+SQL Server Table Creation
+
+```sql
+CREATE TABLE MedicationExpiry (
+    BatchID INT PRIMARY KEY,
+    Medication NVARCHAR(100),
+    ExpiryDate DATE
+);
+```
+
+Insert Statements for 18 Records
+
+```sql
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (101, 'Paracetamol', '2024-09-10');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (102, 'Amoxicillin', '2025-01-15');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (103, 'Ibuprofen', '2024-08-30');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (104, 'Metformin', '2024-12-05');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (105, 'Lisinopril', '2024-10-20');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (106, 'Amlodipine', '2024-11-01');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (107, 'Simvastatin', '2025-03-12');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (108, 'Omeprazole', '2024-07-25');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (109, 'Atorvastatin', '2025-02-28');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (110, 'Losartan', '2024-10-05');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (111, 'Aspirin', '2024-11-15');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (112, 'Clopidogrel', '2024-09-01');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (113, 'Metoprolol', '2024-12-25');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (114, 'Albuterol', '2024-08-15');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (115, 'Montelukast', '2025-04-10');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (116, 'Levothyroxine', '2024-11-30');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (117, 'Rosuvastatin', '2024-07-30');
+INSERT INTO MedicationExpiry (BatchID, Medication, ExpiryDate) VALUES (118, 'Citalopram', '2024-08-20');
+```
