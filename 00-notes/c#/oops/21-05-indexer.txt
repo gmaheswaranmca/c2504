@@ -1,4 +1,10 @@
-In C#, an indexer allows an object to be indexed like an array. This means that you can access data within an object using the array-like syntax, making your class behave like a collection. Indexers are defined with the `this` keyword.
+In C#, an indexer allows an object to be indexed like an array. 
+
+This means that you can access data within an object 
+using the array-like syntax, 
+making your class behave like a collection. 
+
+Indexers are defined with the `this` keyword.
 
 Syntax for an Indexer:
 ```csharp
