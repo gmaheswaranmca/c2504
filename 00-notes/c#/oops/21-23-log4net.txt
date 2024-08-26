@@ -1,0 +1,96 @@
+Log4net is a logging framework 
+that allows you to log messages in various ways, 
+such as to a file, console, database, or other output targets, within a C# application. It's widely used for managing and maintaining application logs in .NET projects.
+
+Here’s a basic guide on how to use log4net in a C# application:
+
+1. Install Log4net
+First, install the log4net package via NuGet in your project:
+
+```bash
+Install-Package log4net
+```
+
+2. Configure Log4net
+You can configure log4net using an XML configuration file (e.g., `App.config`, `Web.config`) or by code. Here’s an example using an XML configuration:
+
+App.config or Web.config:
+```xml
+<configuration>
+  <configSections>
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+  </configSections>
+
+  <log4net>
+    <appender name="FileAppender" type="log4net.Appender.RollingFileAppender">
+      <file value="logfile.log" />
+      <appendToFile value="true" />
+      <rollingStyle value="Size" />
+      <maxSizeRollBackups value="5" />
+      <maximumFileSize value="10MB" />
+      <staticLogFileName value="true" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger - %message%newline" />
+      </layout>
+    </appender>
+    <root>
+      <level value="ALL" />
+      <appender-ref ref="FileAppender" />
+    </root>
+  </log4net>
+
+  ....
+</configuration>
+```
+
+
+AssemblyInfo.cs 
+```
+[assembly: log4net.Config.XmlConfigurator]
+```
+
+3. Initialize Log4net in Your Code
+You need to initialize log4net in your code, typically in the `Main` method or startup routine:
+
+```csharp
+using log4net;
+using log4net.Config;
+
+class Program
+{
+    private static readonly ILog log = LogManager.GetLogger(typeof(Program));
+
+    static void Main(string[] args)
+    {
+        XmlConfigurator.Configure(); // Reads the configuration from App.config
+
+        log.Info("Application is starting.");
+
+        try
+        {
+            // Your application code here
+            log.Debug("Debugging information.");
+        }
+        catch (Exception ex)
+        {
+            log.Error("An error occurred.", ex);
+        }
+
+        log.Info("Application is ending.");
+    }
+}
+```
+
+4. Logging Methods
+Log4net provides different methods for logging messages at various levels:
+
+- `log.Debug("Debug message");`
+- `log.Info("Info message");`
+- `log.Warn("Warning message");`
+- `log.Error("Error message");`
+- `log.Fatal("Fatal message");`
+
+5. Run Your Application
+After configuring and initializing log4net, when you run your application, log messages will be written to `logfile.log` (as configured in the example).
+
+This is a simple setup to get you started with logging using log4net. You can further customize the configuration to log to other appenders (like console, database, etc.), format the log messages, and more.

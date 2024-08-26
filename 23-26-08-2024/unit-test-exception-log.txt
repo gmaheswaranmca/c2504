@@ -1,0 +1,173 @@
+1. AssemblyInfo.cs 
+```
+[assembly: log4net.Config.XmlConfigurator]
+```
+2. App.Config 
+```
+<configSections>
+	<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+</configSections>
+
+<log4net>
+	<!-- File Appender -->
+	<appender name="FileAppender" type="log4net.Appender.RollingFileAppender">
+		<file value="logfile.log" />
+		<appendToFile value="true" />
+		<rollingStyle value="Size" />
+		<maxSizeRollBackups value="5" />
+		<maximumFileSize value="10MB" />
+		<staticLogFileName value="true" />
+		<layout type="log4net.Layout.PatternLayout">
+			<conversionPattern value="%date [%thread] %-5level %logger - %message%newline" />
+		</layout>
+	</appender>
+
+	<!-- Console Appender -->
+	<appender name="ConsoleAppender" type="log4net.Appender.ConsoleAppender">
+		<layout type="log4net.Layout.PatternLayout">
+			<conversionPattern value="%date [%thread] %-5level %logger - %message%newline" />
+		</layout>
+	</appender>
+
+	<!-- Root logger -->
+	<root>
+		<level value="ALL" />
+		<appender-ref ref="FileAppender" />
+		<appender-ref ref="ConsoleAppender" />
+	</root>
+</log4net>
+```
+
+3. Program.cs
+```
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+using System.Text;
+using System.Threading.Tasks;
+
+using log4net;
+using log4net.Config;
+
+namespace ProgramingFundamentalsProject
+{
+    public class DivideMyException : Exception
+    {
+        public DivideMyException(string msg) : base(msg){ }
+    }
+    public class Calc
+    {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Calc));
+
+        //5,20 -> 100
+        //3,4 -> 12
+        public double Multiply(double first, double second)
+        {
+            return first * second;
+        }
+
+        public double Divide(double first, double second)
+        {
+            if(second == 0)
+            {
+                log.Error("Denominator should not be zero.");
+                throw new DivideMyException("Denominator should not be zero.");
+            }
+            double result = first / second;
+            return result;
+        }
+    }
+    internal class Programs
+    {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Programs));
+        static void Main(string[] args)
+        {
+            Calc calc = new Calc();
+            double product1 = calc.Multiply(5.0, 20.0);
+            log.Info($"calc.Multiply(5.0, 20.0)={product1}");
+            double product2 = calc.Multiply(3.0, 4.0);
+            log.Info($"calc.Multiply(3.0, 4.0)={product2}");
+            double quotient1 = calc.Divide(10.0, 2.0);
+            log.Info($"calc.Divide(10.0, 2.0)={quotient1}");
+            try
+            {
+                double quotient2 = calc.Divide(10.0, 0.0);
+                log.Info($"calc.Divide(10.0, 0.0)={quotient2}");
+            }
+            catch(DivideMyException ex)
+            {
+                log.Error($"{ex.Message}");
+            }
+            
+
+        }
+    }
+}
+```
+
+
+4. CalcTests.cs
+```
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ProgramingFundamentalsProject;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProgramingFundamentalsProject.Tests
+{
+    [TestClass()]
+    public class CalcTests
+    {
+        [TestMethod()]
+        public void Multiply_ShouldReturn100ForGiven5And20()
+        {
+            Calc calc = new Calc();
+            double product = calc.Multiply(5.0, 20.0);
+            Assert.AreEqual(100.0, product);
+        }
+        [TestMethod()]
+        public void Multiply_ShouldReturn12ForGiven3And4()
+        {
+            Calc calc = new Calc();
+            double product = calc.Multiply(3.0, 4.0);
+            Assert.AreEqual(12.0, product);
+        }
+    }
+}
+```
+
+5. CalcTests.cs
+```
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Win32;
+using System;
+using ProgramingFundamentalsProject;
+
+namespace ProgramingFundamentalsProjectTests
+{
+    [TestClass]
+    public class CalcDivideTests
+    {
+        [TestMethod]
+        public void DivideShouldReturn2ForGiven10And5()
+        {
+            Calc calc = new Calc();
+            double quotient = calc.Divide(10.0, 5.0);
+            Assert.AreEqual(2.0, quotient);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DivideMyException))]
+        public void DivideShouldThrowExceptionForGiven10And0()
+        {
+            Calc calc = new Calc();
+            double quotient = calc.Divide(10.0, 0.0);
+            //Assert.AreEqual(2.0, quotient);
+        }
+    }
+}
+
+```

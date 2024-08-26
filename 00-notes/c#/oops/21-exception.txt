@@ -1,3 +1,9 @@
+"
+exceptions are events 
+that occur during the execution of a program 
+that disrupt the normal flow of instructions
+"
+
 Exception handling in C# is a way to handle runtime errors in your code 
 to ensure that your program doesn't crash unexpectedly. 
 It uses `try`, `catch`, `finally`, and `throw` keywords to manage exceptions. 

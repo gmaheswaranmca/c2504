@@ -345,3 +345,13 @@ Aggregation (Weak Composition)
    Many students can enroll in many courses, and 
    the courses and students 
    can exist independently of each other.
+
+   Course
+        Name 
+        
+   Student
+        Name 
+        
+   CourseStudentMap 
+        Course 
+        Student 

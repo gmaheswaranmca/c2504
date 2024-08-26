@@ -1,4 +1,9 @@
-Attributes 
+Attributes : Declarative Programming
+    C# we achieve "Declarative Programming" using attributes 
+    Python we achieve  "Declarative Programming" using decorators
+    Java we achieve  "Declarative Programming" using annotations
+
+
     in C# provide several key benefits and 
     are used for a variety of reasons in software development. 
     
