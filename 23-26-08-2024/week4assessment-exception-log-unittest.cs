@@ -184,23 +184,25 @@ namespace Week4AssessmentApp
         }
         public static MedicationExpiry FindMin(MedicationExpiry[] medicationExpiries)
         {
-            MedicationExpiry nearestExpiry = medicationExpiries[0];
+            DateTime min = DateTime.MaxValue;
+            MedicationExpiry minMedicationExpiry = null;
             foreach (var med in medicationExpiries)
             {
-                if (med.ExpiryDate < nearestExpiry.ExpiryDate)
+                if (med.ExpiryDate < min)
                 {
-                    nearestExpiry = med;
+                    minMedicationExpiry = med;
+                    min = med.ExpiryDate;
                 }
             }
-            return nearestExpiry;
+            return minMedicationExpiry;
         }
         public static MedicationExpiry FindSecondMax(MedicationExpiry[] medicationExpiries)
         {
             DateTime max = DateTime.MinValue;
             DateTime secondMax = DateTime.MinValue;
 
-            MedicationExpiry maxExpiry = null;
-            MedicationExpiry secondMaxExpiry = null;
+            MedicationExpiry maxMedicationExpiry = null;
+            MedicationExpiry secondMaxMedicationExpiry = null;
 
             foreach (var med in medicationExpiries)
             {
@@ -208,19 +210,19 @@ namespace Week4AssessmentApp
                 {
                     if (max != DateTime.MinValue)
                     {
-                        secondMaxExpiry = maxExpiry;
-                        secondMax = secondMaxExpiry.ExpiryDate;
+                        secondMaxMedicationExpiry = maxMedicationExpiry;
+                        secondMax = secondMaxMedicationExpiry.ExpiryDate;
                     }
-                    maxExpiry = med;
+                    maxMedicationExpiry = med;
                     max = med.ExpiryDate;
                 }
                 else if (med.ExpiryDate > secondMax && med.ExpiryDate != max)
                 {
-                    secondMaxExpiry = med;
-                    secondMax = secondMaxExpiry.ExpiryDate;
+                    secondMaxMedicationExpiry = med;
+                    secondMax = secondMaxMedicationExpiry.ExpiryDate;
                 }
             }
-            return secondMaxExpiry;
+            return secondMaxMedicationExpiry;
         }
     }
     public class Program
@@ -317,3 +319,12 @@ namespace Week4AssessmentApp.Tests
     }
 }
 ```
+
+
+/*
+Output:
+2024-08-27 08:28:45,403 [1] INFO  Week4AssessmentApp.Program - min=[3,Halls,31-05-2025 00:00:00]
+2024-08-27 08:28:45,420 [1] INFO  Week4AssessmentApp.Program - secondMax=[2,Vicks,20-11-2025 00:00:00]
+2024-08-27 08:28:45,420 [1] INFO  Week4AssessmentApp.Program - [3,Halls,31-05-2025 00:00:00] [2,Vicks,20-11-2025 00:00:00] [1,P 500,12-12-2025 00:00:00]
+
+*/
