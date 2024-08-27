@@ -1,0 +1,47 @@
+ public class Service
+ {
+     public static long FindSumOfThirdAndFourth(long[] arr)
+     {
+         if (arr.Length < 4)
+         {
+             Console.WriteLine("3rd or 4th element is not there");
+             throw new IndexOutOfRangeException();
+         }
+         return arr[2] + arr[3];
+     }
+ }
+ internal class Programs
+ {
+
+     static void Main(string[] args)
+     {
+         //long[] nums = { 10, 20, 30, 40, 50, 60, 70, 80, 90 }; //No Err
+         long[] nums = { 10, 20, 30 }; //Err
+         long sum = 0;
+
+
+         try
+         {
+             Console.WriteLine("1 trying ");//Log.debug
+             if (nums.Length >= 4)
+             {
+                 sum = Service.FindSumOfThirdAndFourth(nums);
+             }
+             //sum = Service.FindSumOfThirdAndFourth(nums);
+             Console.WriteLine("1 tried !");//Log.debug
+         }
+         catch (IndexOutOfRangeException ex)
+         {
+             Console.WriteLine("2 handled");//Log.debug
+             Console.WriteLine(ex.Message);//Log.Error
+
+         }
+         finally
+         {
+             Console.WriteLine("3 finally");//Log.debug
+         }
+         Console.WriteLine("4 continued");//Log.debug
+         Console.WriteLine(sum);//Log.Info
+
+     }
+ }

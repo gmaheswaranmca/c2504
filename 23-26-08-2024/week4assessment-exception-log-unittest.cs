@@ -1,3 +1,72 @@
+Q1
+Problem Statement: Medication Expiry Tracking
+- Define a class: `MedicationExpiry` with the following properties:
+    - `BatchID` (integer)
+    - `Medication` (string)
+    - `ExpiryDate` (DateTime)
+- Tasks: [Read, FindMin, FindSecondMax, Sort]
+    1. Data Collection:
+    - Read N `medicationExpiries` from database table 'MedicationExpiry of sql server .
+    2. Find Medication with Nearest Expiry:
+    - Display the medication that is closest to expiry.
+        Solve in time complexity of O(N).
+        Don’t use built-in C# sorting or LINQ.
+    3. Find Second Farthest Expiry:
+    - Display the medication that has the second farthest expiry date.
+        Solve in time complexity of O(N).
+        Don’t use built-in C# sorting or LINQ.
+    4. Sort by Expiry Date:
+    - Implement and call your own sorting algorithm.
+        Don’t use built-in C# sorting or LINQ.
+
+
+
+Q2
+Problem Statement: Medication Expiry Tracking
+- Define a class: `MedicationExpiry` with the following properties:
+    - `BatchID` (integer)
+    - `Medication` (string)
+    - `ExpiryDate` (DateTime)
+- Tasks: [Read, FindMin, FindSecondMax, Sort]
+    1. Data Collection:
+    - Read N `medicationExpiries` from database table 'MedicationExpiry of sql server .
+    2. Find Medication with Nearest Expiry:
+    - Display the medication that is closest to expiry.
+        Solve in time complexity of O(N).
+        Don’t use built-in C# sorting or LINQ.
+    3. Find Second Farthest Expiry:
+    - Display the medication that has the second farthest expiry date.
+        Solve in time complexity of O(N).
+        Don’t use built-in C# sorting or LINQ.
+    4. Sort by Expiry Date:
+    - Implement and call your own sorting algorithm.
+        Don’t use built-in C# sorting or LINQ.
+
+    5. log into file using logger 
+
+Q3
+Problem Statement: Medication Expiry Tracking
+- Define a class: `MedicationExpiry` with the following properties:
+    - `BatchID` (integer)
+    - `Medication` (string)
+    - `ExpiryDate` (DateTime)
+- Tasks: [Read, FindMin, FindSecondMax, Sort]
+    1. Data Collection:
+    - Read N `medicationExpiries` from database table 'MedicationExpiry of sql server .
+    2. Find Medication with Nearest Expiry:
+    - Display the medication that is closest to expiry.
+        Solve in time complexity of O(N).
+        Don’t use built-in C# sorting or LINQ.
+    3. Find Second Farthest Expiry:
+    - Display the medication that has the second farthest expiry date.
+        Solve in time complexity of O(N).
+        Don’t use built-in C# sorting or LINQ.
+    4. Sort by Expiry Date:
+    - Implement and call your own sorting algorithm.
+        Don’t use built-in C# sorting or LINQ.
+
+    5. log into file using logger 
+    6. conduct the unit test for Pt 2, 3, and 4 (min, 2nd max, sort)
 ```
 CREATE DATABASE Week4AssessmentDb;
 
