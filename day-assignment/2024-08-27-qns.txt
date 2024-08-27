@@ -1,0 +1,31 @@
+1. Each program 
+    try to run normally, learn exception handling.
+
+2. Each program, 
+    try to run using log4net, learn log4net 
+
+Number of programs: 3
+    programs folder: "\day-assignment\2024-08-27-qns"
+{Number of programs running normally: 3
+Number of programs running with log4net: 3}
+
+
+Upload 6 programs with log4net enabled
+    with configuring into AssemblyInfo.cs, App.config 
+
+Assesment4Qn Step 1:
+    Demonstrated code is in folder
+        "\23-26-08-2024\week4assessment-exception-log-unittest.cs"
+    Read from database and solve by using sample code.
+    Handle exception 
+
+Assesment4Qn Step 2:
+    Step 1
+    + 
+    Apply log4net 
+
+Assesment4Qn Step 3:
+    Step 2
+    + 
+    Apply unit test 
+

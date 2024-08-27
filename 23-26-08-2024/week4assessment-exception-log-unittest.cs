@@ -237,19 +237,19 @@ namespace Week4AssessmentApp
             }
             catch(ServerException ex)
             {
-                log.Error($"{ex.Message}");
+                log.Error($"{ex.Message}");//Console.WriteLine($"{ex.Message}");
             }
             MedicationExpiry min = MedicationExpiryService.FindMin(medicationExpiries);
-            log.Info($"min={min}");
+            log.Info($"min={min}");//Console.WriteLine($"min={min}");
             MedicationExpiry secondMax = MedicationExpiryService.FindSecondMax(medicationExpiries);
-            log.Info($"secondMax={secondMax}");
+            log.Info($"secondMax={secondMax}");//Console.WriteLine($"secondMax={secondMax}");
             MedicationExpiryService.Sort(medicationExpiries);
             string output = "";
             foreach(var e in medicationExpiries)
             {
                 output += $"{e} ";
             }
-            log.Info(output);
+            log.Info(output);//Console.WriteLine(output);
         }
     }
 }

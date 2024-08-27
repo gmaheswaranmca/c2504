@@ -1,0 +1,43 @@
+public class Service
+{
+    public static long FindSumOfThirdAndFourth(long[] arr)
+    {
+        return arr[2] + arr[3];
+    }
+}
+internal class Programs
+{
+    
+    static void Main(string[] args)
+    {
+        long[] nums = { 10, 20, 30, 40, 50, 60, 70, 80, 90 }; //No Err1
+        //long[] nums = { 10, 20, 30 }; //Err1
+        long sum = 0;
+
+        try
+        {
+            sum = Service.FindSumOfThirdAndFourth(nums);
+            object sumref = sum;//Comment1
+            DateTime dt = (DateTime)sumref;//Comment1
+        }
+        catch(IndexOutOfRangeException ex)
+        {
+            Console.WriteLine(ex.Message);//Log.Error
+        }
+        catch(InvalidCastException ex)
+        {
+            Console.WriteLine(ex.Message);//Log.Error
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.ToString());//Log.Error
+        }
+        finally
+        {
+            Console.WriteLine("Continuing from finally");//Log.Info
+        }
+
+        Console.WriteLine($"Sum is {sum}");//Log.Info
+
+    }
+}
