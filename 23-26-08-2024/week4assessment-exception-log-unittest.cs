@@ -1,3 +1,26 @@
+```
+CREATE DATABASE Week4AssessmentDb;
+
+USE Week4AssessmentDb;
+
+CREATE TABLE MedicationExpiry (
+    BatchID INT PRIMARY KEY,
+    Medication NVARCHAR(100),
+    ExpiryDate DATE
+);
+
+INSERT INTO MedicationExpiry 
+(BatchID, Medication, ExpiryDate) VALUES 
+(1, 'Dolo 650', '2025-12-12'),
+(2, 'Vicks', '2025-11-20'),
+(3, 'Halls', '2025-05-31');
+
+SELECT * FROM MedicationExpiry;
+```
+
+
+Install "log4net" for the application project.
+
 1. AssemblyInfo.cs
 ```
 [assembly: log4net.Config.XmlConfigurator]
