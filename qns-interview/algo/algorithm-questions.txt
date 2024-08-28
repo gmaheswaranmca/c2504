@@ -1,0 +1,27 @@
+Algorithm:
+1. Count frequency of characters in a given string.	
+2. Remove duplicates from sorted array.
+3. Rotate given array from the specified index.
+4. Find number of prime numbers in an array.	
+5. a. reverse string 
+   b. fibonacii					
+6. Given an array of integers 
+   where every number is repeating two times. 
+   Find the number which is occuring only once.
+15. Reverse a given number.
+
+7. Merge two sorted array.
+8. Find kth smallest element in an array.
+9. a. write vector. (dynamic array | List)
+   b. write string.
+10. a. Implement stack 
+    b. Implement queue.
+11. a. Implement stack as queue and 
+    b. Implement queue as stack.
+
+13. Insertion sort.								
+14. Merge sort.
+
+
+===========================================
+12. Delete a node from binary search tree.
