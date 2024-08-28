@@ -1,13 +1,23 @@
 Algorithm:
 1. Count frequency of characters in a given string.	
+   -Count frequency of salaries in a given array.
 2. Remove duplicates from sorted array.
 3. Rotate given array from the specified index.
+    - Left rotate at index k [Print]
+    - Right rotate at index k [Print]
+    - Left rotate at index k [Copy]
+    - Right rotate at index k [Copy]
 4. Find number of prime numbers in an array.	
 5. a. reverse string 
    b. fibonacii					
 6. Given an array of integers 
    where every number is repeating two times. 
    Find the number which is occuring only once.
+   [consecutive repeating numbers]
+
+   2 2 3 3 4 4 5 6 6    ==> 5
+   2 3 3 4 4 5 5 6 6    ==>    
+   2 2 3 3 4 4 5 5 6    ==>
 15. Reverse a given number.
 
 7. Merge two sorted array.
