@@ -1,0 +1,264 @@
+Topics covered:
+    - programming fundamentals 
+    - sql server 
+    - intro to web / software engg 
+    - dotnet architechture 
+    - oops - fundamentals
+        - nested class, static class 
+        - has-a, is-a 
+        - polimorphism - overloading 
+        - this, base keywords 
+        - method types 
+            static, intance methods 
+        - method argument types 
+            ref, out, tuple 
+    - inheritance - abstract, interface , partial class
+        - types of inheritance 
+        - runtime polimorphism 
+    - indexer, exception, attributes, enum  
+    - logging 
+    - arrays and strings 
+
+Today:
+    - Anonymous Type, Delegates, Events and Lambda
+
+    delegate 
+        C# frameworks 
+            event models are based on delegate
+        what is delegate? 
+            like C language function pointer
+            "reference to function"
+
+=======================
+1. what is object?
+    object is blueprint 
+    object is composite type variable 
+    object is the reference type 
+    object memory will be crated at "heap"
+2. what is reference variable of the object? 
+3. when will you get the reference variable?
+4. what is garbage collector? 
+    gc will collects no longer referenced objects.
+5. what is local variables?
+        - function scope variables and arguments of the function 
+    when memory will be allocatted the variable and deallocated?
+        - alloc: inside the function 
+        - dealloc: returning out of the function 
+        [] "stack mem" will be delloc'd automatically 
+6. signature of the Add functionality of the Complex object. 
+        Add is the object member function of the Complex object 
+    syntax: 
+        Complex Add(Complex other)
+    usage:a, b are the two complex numbers 
+        Complex c = a.Add(b);
+            what is a? 
+                calling object 
+            what is b? 
+                argument object 
+            Here,
+                object 'a' calls the function "Add" 
+                and "Add" takes the argument 'b'
+            Add function returns 'sum' complex number 
+
+class Complex 
+{
+    public double R{get; set;}
+    public double I{get; set;}
+    public Complex(double _R, double _I)
+    {
+        this.R = _R;
+        this.I = _I;
+    }
+    public Complex Add(Complex other)
+    {
+        Complex third = new Complex();
+        third.R = this.R + other.R;
+        third.I = this.I + other.R;
+        return third;
+    }
+    public override string ToString()
+    {
+        return $"({this.R} + i{this.I})";
+    }
+}
+
+Usage:
+    Complex a = new Complex(2,3); //2+i3
+    Complex b = new Complex(5,7); //5+i7
+    Complex c = a.Add(b);         //7+i10
+    Console.WriteLine($"{a} + {b} = {c}");
+
+
+Full Code: 
+        class Complex
+        {
+            public double R { get; set; }
+            public double I { get; set; }
+            public Complex(double _R, double _I)
+            {
+                this.R = _R;
+                this.I = _I;
+            }
+            public Complex() : this(0, 0) { }
+            public Complex Add(Complex other)
+            {
+                Complex third = new Complex();
+                third.R = this.R + other.R;
+                third.I = this.I + other.I;
+                return third;
+            }
+            public override string ToString()
+            {
+                return $"({this.R} + i{this.I})";
+            }
+        }
+        static void Main()
+        {
+            Complex a = new Complex(2, 3); //2+i3
+            Complex b = new Complex(5, 7); //5+i7
+            Complex c = a.Add(b);         //7+i10
+            Console.WriteLine($"{a} + {b} = {c}");
+        }
+    }
+7. signature of the Subtract functionality of the Complex object. 
+    syntax: 
+        Complex Subtract(Complex other)
+    usage: a, b are complex objects 
+        Complex c = a.Subtract(b);
+8. signature of the IsGreater functionality of the Rectangle object
+    Note: compare by area of the rectangle 
+    syntax: 
+        bool IsGreater(Rectangle other)
+    definition:
+        //...
+        public bool IsGreater(Rectangle other)
+        {
+            return this.FindArea() > other.FindArea();
+        } 
+        //...
+    usage: a, b are rectangles
+        bool isGreater = a.IsGreater(b);
+9. signature of the IsEqual functionality of Student object 
+    Note: compare students total marks, where 'Total' is the property 
+    syntax: 
+        bool IsEqual(Student other)
+    definition:
+        class Student
+        {
+            public double Total{get; set;}
+            //...
+            public bool IsEqual(Student other)
+            {
+                return this.Total == other.Total;
+            }
+        }
+    usage: a, b are students
+        bool isEqual = a.IsEqual(b);
+
+10. usage: 
+    Console.WriteLine("Hello World");
+    Here, 
+        class "Console" calls function "WriteLine"
+        WriteLine 
+            - takes string "Hello World" as arg 
+            - and it prints that arg in console 
+    //Prints Hello World 
+
+
+=======================
+
+Delegate is the reference to the function 
+    - Delegate will hold the signature of the function to be held 
+
+    Example for delegate type:
+        delegate void DWriteLine(string str);
+    Here, 
+        delegate type named "DWriteLine" is created. 
+        The signature of the delegate is 
+            - returns void 
+            - takes one arg 
+                first arg : string 
+    Now, 
+        reference variable of delegate named "DWriteLine"
+        may refer the functions whose signature must match to delegate signature 
+    Implies ie 
+        We can refer any function matching the delegate signature 
+    
+Example 1: Usage
+    "DWriteLine wr = Console.WriteLine;"
+    Here, 
+        wr refers 'Console.WriteLine'
+        so with 'wr' we can call the 'Console.WriteLine'
+Example 2: Usage
+    Suppose,
+        We have the functions 
+            static void Print(string a)
+            static void PrintLettersOneByOne(string x)
+            static void PrintLettersCount(string x)
+    "DWriteLine rPrint = Print;" 
+    Here, 
+        with rPrint we may call Print because Print is referred by rPrint.
+Example 3: Usage (multi casting)
+     DWriteLine rPrintLettersOneByOne = PrintLettersOneByOne; //assigning the reference
+     rPrintLettersOneByOne += PrintLettersCount; //adding one extra reference
+
+     Here, 
+        rPrintLettersOneByOne refers two functions "PrintLettersOneByOne" and 
+            "PrintLettersCount"
+        So, with rPrintLettersOneByOne, we can call two functions at a time.
+Example 4: Usage (remove reference )
+    //To remove one of the functions referred by the delegate reference.
+    rPrintLettersOneByOne -= PrintLettersOneByOne;
+    Here, reference of "PrintLettersOneByOne" is removed from the "rPrintLettersOneByOne"
+
+Program:
+    
+    delegate void DWriteLine(string str);
+    internal class Programs
+    {
+        static void Print(string a)
+        {
+            Console.WriteLine(a);
+        }
+        static void Main()
+        {
+            //Console.WriteLine("Hello World!!!");
+            //Console.WriteLine("Hi Ashna!");
+            //Console.WriteLine("Hi Collin!");
+
+            DWriteLine wr = Console.WriteLine; //DWriteLine wr = new DWriteLine(Console.WriteLine);
+            wr("Hello World!!!");
+            wr("Hi Ashna!");
+            wr("Hi Collin!");
+            
+
+            //DWriteLine rl = Console.ReadLine; //why? //signature of "Console.ReadLine" and "DWriteLine" are not matched
+            DWriteLine rPrint = Print;//new DWriteLine(Print)
+            rPrint("I am printing...");
+
+            DWriteLine rPrintLettersOneByOne = PrintLettersOneByOne;
+            rPrintLettersOneByOne += PrintLettersCount;//multi casting //delegate var refers many functions at a time
+
+            rPrintLettersOneByOne("Obj");
+
+            rPrintLettersOneByOne -= PrintLettersOneByOne;
+            rPrintLettersOneByOne("Oriented");
+        }
+
+        static void PrintLettersOneByOne(string x)
+        {
+            foreach(var letter in x)
+            {
+                Console.WriteLine(letter);
+            }
+        }
+        static void PrintLettersCount(string x) //Note: Dont use Length function 
+        {
+            int c = 0;
+            foreach (var letter in x)
+            {
+                c++;
+            }
+            Console.WriteLine($"Count is {c}");
+        }
+    }

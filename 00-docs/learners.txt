@@ -1,4 +1,19 @@
-13/08/2024 noon: 
+28/08/2024: 
+[  ]Aaryaka P Nath, 	[  ]Abijith K, 			
+[  ]Alan Kuriakose Cherian,	[ ]Anurag C Ashok,		
+[  ]Anjana E R, 		[ ]Anjana N K,
+[04]Ann Mariya Jaimon, 	[ ]Anugrah Krishnan, 	 					
+[05]Ashna Mariya Shaji, [ ]Ashwin V, 	
+[  ]Athulya Shaji,		
+[03]Collin Francy, 		[  ]Dijol Davis,	    		    
+[  ]Gladsy Joshy,	    [  ]Girish K V, 
+[02]Gopika V, 	[10]Keerthana Jayalal K		
+[ab]Minnu Sudhakaran V A, [01]Neha Joy, 			
+[  ]Rishwin R Kanth,	[  ]Sahla. R, 			
+[  ]Sharon Rose, 		[  ]Shilpa Sha Eapen, 	
+[  ]Yahkoob P, 
+
+28/08/2024: 
 [06]Aaryaka P Nath, 	[ab]Abijith K, 			
 [04]Alan Kuriakose Cherian,	[18]Anurag C Ashok,		
 [11]Anjana E R, 		[19]Anjana N K,
@@ -10,7 +25,7 @@
 [09]Gopika V, 	[10]Keerthana Jayalal K		
 [12]Minnu Sudhakaran V A,, [05]Neha Joy, 			
 [13]Rishwin R Kanth,	[21]Sahla. R, 			
-[07]Sharon Rose, 		[ab]Shilpa Sha Eapen, 	
+[07]Sharon Rose, 		[23]Shilpa Sha Eapen, 	
 [02]Yahkoob P, 
    
 
