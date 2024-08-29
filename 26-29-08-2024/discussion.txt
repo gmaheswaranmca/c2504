@@ -262,3 +262,166 @@ Program:
             Console.WriteLine($"Count is {c}");
         }
     }
+
+
+Higher order function:
+    The function takes 
+        one of the arguments as function 
+    or 
+    The function returns 
+        another function 
+
+Example Program 2: for delegate
+public delegate double DCalc(double a, double b);
+
+public class Calculator
+{
+    public static double Add(double x, double y)
+    {
+        return x + y;
+    }
+    
+}
+
+internal class Programs
+{
+
+    static void Main()
+    {
+        DCalc rCalc = Calculator.Add;
+        Console.WriteLine("sum = {0}", rCalc(10, 20));//30
+
+        
+    }
+   
+}
+
+
+Example Program for 'callback function':
+    The task function which takes input data and callback function as another argument .
+    The task function will calls the callback function after task completion. 
+
+public delegate double DCalc(double a, double b);
+public delegate void DOnAfterSubtract();
+public class Calculator
+{
+    public static double Add(double x, double y)
+    {
+        return x + y;
+    }
+    public static double Subtract(double x, double y, DOnAfterSubtract OnAfterSubtract = null)
+    //OnAfterSubtract is the callback function
+    {
+        double d = x - y;
+        if (OnAfterSubtract != null)
+        {
+            OnAfterSubtract();
+        }
+        
+        return d;
+    }
+}
+
+internal class Programs
+{
+    
+    static void Main()
+    {
+        DCalc rCalc = Calculator.Add;
+        Console.WriteLine("sum = {0}",rCalc(10, 20));//30
+
+        double d1 = Calculator.Subtract(20, 15, OnAfterSubtract1);
+        Console.WriteLine($"20-15={d1}");//5
+        double d2 = Calculator.Subtract(20, 3, OnAfterSubtract2);
+        Console.WriteLine($"20-3={d2}");//17
+        double d3 = Calculator.Subtract(15, 3);
+        Console.WriteLine($"15-3={d3}");//12
+    }        
+    static void OnAfterSubtract1()
+    {
+        Console.WriteLine("20, 15 Subtraction completed.");
+    }
+    static void OnAfterSubtract2()
+    {
+        Console.WriteLine("20, 3 Subtraction completed.");
+    }
+}
+
+Event handling mechanism in C#:
+    what is event?
+        event is the delegate variable.
+            to represent the task is completing or to do the task 
+            to happen any activtity 
+        event is the special approach / mechanism in .net to handle the events.
+        event is the "delegate" design pattern  
+    mechanism?
+        1. define delegate 
+        2. define event of type delegate for the task function object 
+        3. raise the event inside the object's task function 
+        4. define the event handler in user class 
+        5. attach the event handler of task function object 
+    why event?
+        "message passing" 
+            - one of the OOPs principle 
+            - "message passing" is the mechanism
+                in which two objects will talk each other 
+                calling object 
+                    will handle the event 
+                called object 
+                    will generate event 
+
+Program for event defining and handling:
+
+public delegate double DCalc(double a, double b);//1 define delegate
+public delegate void DOnAfterSubtract();
+public class Calculator
+{
+    public event DOnAfterSubtract OnAfterSubtract;//2. event is defined // delegate ref variable is the event
+    //event is wrapper of the delegate
+    public double Subtract(double x, double y)
+    //OnAfterSubtract is the callback function
+    {
+        double d = x - y;
+        if (OnAfterSubtract != null)
+        {
+            OnAfterSubtract();//3. event generated
+        }
+        
+        return d;
+    }
+}
+
+internal class Programs
+{
+    
+    static void Main()
+    {
+        Calculator calc1 = new Calculator();
+        calc1.OnAfterSubtract += OnAfterSubtract1;//5. Attach the event handler of calc1's OnAfterSubtract
+        double d1 = calc1.Subtract(20, 15);
+        Console.WriteLine($"20-15={d1}");//5
+
+
+        Calculator calc2 = new Calculator();
+        calc2.OnAfterSubtract += OnAfterSubtract2;//5. Attach the event handler of calc2's OnAfterSubtract
+        double d2 = calc2.Subtract(20, 3);
+        Console.WriteLine($"20-3={d2}");//17
+
+
+        Calculator calc3 = new Calculator();
+        double d3 = calc3.Subtract(15, 3);
+        Console.WriteLine($"15-3={d3}");//12
+    }        
+    static void OnAfterSubtract1() //4. defining event handler of object calc1's event OnAfterSubtract
+    {
+        Console.WriteLine("20, 15 Subtraction completed.");
+    }
+    static void OnAfterSubtract2() //4. defining event handler of object calc2's event OnAfterSubtract
+    {
+        Console.WriteLine("20, 3 Subtraction completed.");
+    }
+}
+
+
+Tomorrow:
+    - Anonymous Type, Lambda, Linq, Extension Method 
