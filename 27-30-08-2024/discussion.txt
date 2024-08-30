@@ -1,0 +1,4 @@
+what is extension method?
+    extension method helps 
+    to add the method 
+    to existing class object.

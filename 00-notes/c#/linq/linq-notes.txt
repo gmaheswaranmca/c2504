@@ -1,5 +1,6 @@
 1. Extension Methods
-   - Definition: Extension methods allow you to add new methods to existing types without modifying them. They are defined as static methods but are called on instances of the extended type.
+   - Definition: Extension methods allow you to add new methods to existing class objects without modifying them. They are defined as static methods but are called on instances of the extended class.
+  - Definition: Extension methods allow you to add new methods to existing types without modifying them. They are defined as static methods but are called on instances of the extended type.
    - Syntax: 
      ```csharp
      public static class MyExtensions
