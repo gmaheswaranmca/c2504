@@ -1,0 +1,896 @@
+The SOLID design principles are 
+    a set of five fundamental principles 
+    for object-oriented design and programming 
+    that help create systems that are 
+        easy to maintain, 
+                extend, and 
+                understand. 
+    Single Responsibility Principle (SRP) 
+        "class should have only one responsibility"
+        Employee{manageDetail(),calculateSalary(),
+           trackAttendance(),  generatePerformanceReview()}
+        =>
+        EmployeeDetailsManager{manage()}
+        SalaryCalculator{calculate()}
+        AttendanceTracker{track()}
+        PerformanceReviewGenerator{generate()}
+    Open/Closed Principle (OCP)
+        "The class should be
+            open for extension but 
+            closed for modification."
+        PaymentProcessor{processPayPal(),processCredidCard(),processBankTransfer()} 
+        => 
+        PaymentMethod{process()}, 
+        PayPalPaymentMethod:PaymentMethod{},
+        CredidCardPaymentMethod:PaymentMethod{},
+        BankTransferPaymentMethod:PaymentMethod{}
+    Liskov Substitution Principle (LSP)
+        "This principle states 
+        that subclasses should be substitutable 
+        for their base classes."
+        ie 
+        "You should be able 
+        to use a subclass in any situation 
+        where a base class is expected, 
+        without noticing any difference."
+
+        -- to use subclass in place of base class
+        Bird{layEggs(),fly()}, Penguin:Bird{}
+        =>
+        Bird{layEggs()},FlyingBird:Bird{fly()}, Penguin:Bird{}
+    Interface Segregation Principle (ISP)
+         "Clients should not be forced 
+        to depend on interfaces they do not use."
+        IVehicle{drive(),fly(),sail()},
+        Car: IVehicle, Plane: IVehicle, Boat: IVehicle
+        =>
+        IDrivable{drive()},
+        IFlyable{fly()},
+        ISailable{sail()},
+        Car: IDrivable, Plane: IFlyable, Boat: ISailable
+    Dependency Inversion Principle (DIP)
+        "High-level modules 
+            should not depend on 
+        low-level modules, 
+        but 
+            both 
+                should depend on 
+            abstractions."
+
+        advantage: loosely coupled, ie high cohesion
+
+        OrderProcessor, ==> HLM
+        Database        ==> LLM
+            here OrderProcessor uses Database 
+        ==>
+        IOrderRepository, 
+        Database: IOrderRepository,
+        OrderProcessor uses only IOrderRepository
+
+
+        Keyboard, 
+        Windows 
+            Keyboard driver depends on Windows only 
+        ==>
+        Windows:IOperatingSystem, 
+        Keyboard driver depends only on IOperatingSystem
+
+
+    --- ---
+        monolithic app to microservices app 
+                    microservices service(backends) apps 
+                    microfrontends frontend(client) apps 
+        microservices - development design pattern for app 
+                ||
+            full stack developments 
+        MVC - model view controller design pattern 
+    --- ---
+
+Let's break them down:
+===============================================================
+a. Single Responsibility Principle (SRP)
+===============================================================
+    Definition: 
+        A class should have only one reason to change, 
+        meaning "class should have only one responsibility" or job.
+    Explanation: 
+        This principle encourages developers 
+        to split up the responsibilities of a class 
+        into smaller, more focused classes. 
+        
+        Each class should handle only one aspect of 
+        the functionality of the software, 
+        leading to a system 
+        where changes in one part do not affect 
+        other unrelated parts.
+
+    Example: 
+        If you have a `Report` class that handles both 
+            report generation and 
+            printing, 
+        you should separate these responsibilities into two classes: 
+            `ReportGenerator` and 
+            `ReportPrinter`.
+
+    More examples illustrating the Single Responsibility Principle (SRP):
+
+    Each of these examples shows how a class 
+    with multiple responsibilities 
+    can be refactored into 
+        smaller, 
+        more focused classes, 
+        each with a single responsibility.
+
+    This makes the code 
+        more modular, 
+        easier to understand, and 
+        simpler to maintain.
+
+    1. Invoice Management
+    - Initial Design: 
+        An `Invoice` class handles 
+            creating invoices, 
+            calculating totals, 
+            applying discounts, and 
+            sending invoices to customers.
+    - SRP-Compliant Design: Split the responsibilities into multiple classes:
+        - `InvoiceGenerator` handles creating invoices.
+        - `InvoiceCalculator` handles calculating totals and applying discounts.
+        - `InvoiceSender` handles sending invoices to customers.
+
+    2. User Account Management
+    - Initial Design: 
+        A `UserAccount` class is responsible for 
+            user authentication, 
+            managing user profiles, and 
+            handling password recovery.
+    - SRP-Compliant Design:
+        - `UserAuthentication` handles user login and logout processes.
+        - `UserProfileManager` handles managing and updating user profiles.
+        - `PasswordRecoveryService` handles password reset and recovery.
+
+    3. Report Generation
+    - Initial Design: 
+        A `Report` class handles 
+            data fetching, 
+            report formatting, and 
+            report printing.
+    - SRP-Compliant Design:
+        - `DataFetcher` handles retrieving data from databases or external sources.
+        - `ReportFormatter` handles formatting the data into a specific report structure.
+        - `ReportPrinter` handles printing or exporting the report to different formats.
+
+    4. Order Processing
+    - Initial Design: 
+        An `Order` class is responsible for 
+            processing orders, 
+            validating payment, 
+            updating inventory, and 
+            sending confirmation emails.
+    - SRP-Compliant Design:
+        - `OrderProcessor` handles the order processing logic.
+        - `PaymentValidator` handles payment validation.
+        - `InventoryManager` handles updating inventory levels.
+        - `ConfirmationEmailSender` handles sending confirmation emails.
+
+    5. Customer Service
+    - Initial Design: 
+        A `CustomerService` class manages 
+            customer queries, 
+            processes returns, and 
+            handles customer feedback.
+    - SRP-Compliant Design:
+        - `QueryHandler` handles customer queries.
+        - `ReturnProcessor` handles the return process.
+        - `FeedbackManager` handles collecting and managing customer feedback.
+    
+    6. Employee Management
+    - Initial Design: 
+        An `Employee` class 
+            manages employee details, 
+            calculates salaries, 
+            tracks attendance, and 
+            generates performance reviews.
+        ------------------------
+        class: Employee
+        ------------------------
+            + manageDetail
+                + C 
+                + R 
+                + U 
+                + D 
+            + calculateSalary 
+            + trackAttendance 
+            + generatePerformanceReview
+        ------------------------
+    - SRP-Compliant Design:
+        - `EmployeeDetailsManager` handles storing and managing employee details.
+        - `SalaryCalculator` handles calculating employee salaries.
+        - `AttendanceTracker` handles tracking employee attendance.
+        - `PerformanceReviewGenerator` handles generating performance reviews.
+        ------------------------
+        class: EmployeeDetailsManager
+        ------------------------
+            + manageDetail
+                + C 
+                + R 
+                + U 
+                + D 
+        ------------------------
+        ------------------------
+        class: SalaryCalculator
+        ------------------------
+            + calculateSalary 
+        ------------------------
+        ------------------------
+        class: AttendanceTracker
+        ------------------------
+            + trackAttendance 
+        ------------------------
+        ------------------------
+        class: PerformanceReviewGenerator
+        ------------------------
+            + generatePerformanceReview 
+        ------------------------
+
+    7. Shopping Cart
+    - Initial Design: 
+        A `ShoppingCart` class adds/removes items, 
+            calculates the total price, 
+            applies discounts, and 
+            processes payments.
+    - SRP-Compliant Design:
+        - `CartManager` handles adding and removing items.
+        - `PriceCalculator` handles calculating the total price.
+        - `DiscountApplier` handles applying discounts.
+        - `PaymentProcessor` handles processing payments.
+
+    8. Product Catalog
+    - Initial Design: 
+        A `ProductCatalog` class 
+            fetches product data, 
+            handles product searches, and 
+            generates product recommendations.
+    - SRP-Compliant Design:
+        - `ProductDataFetcher` handles fetching product data.
+        - `ProductSearch` handles searching products based on criteria.
+        - `RecommendationEngine` handles generating product recommendations.
+
+    9. Notification System
+    - Initial Design: 
+        A `Notification` class sends 
+            email notifications, 
+            SMS messages, and 
+            push notifications.
+    - SRP-Compliant Design:
+        - `EmailNotifier` handles sending email notifications.
+        - `SMSNotifier` handles sending SMS messages.
+        - `PushNotifier` handles sending push notifications.
+
+    10. Content Management System (CMS)
+    - Initial Design: 
+        A `ContentManager` class handles 
+            creating, 
+            editing, 
+            deleting content, 
+            managing user roles, and 
+            publishing content.
+    - SRP-Compliant Design:
+        - `ContentEditor` handles creating and editing content.
+        - `ContentDeleter` handles deleting content.
+        - `RoleManager` handles managing user roles and permissions.
+        - `ContentPublisher` handles publishing content to the web or other platforms.
+
+
+
+===============================================================
+b. Open/Closed Principle (OCP)
+===============================================================
+    Definition: 
+        The class should be(class, service, component etc.) 
+            open for extension but 
+            closed for modification.
+    Explanation: 
+        This principle suggests that you should be able 
+        to extend the behavior of a class 
+        without modifying its existing code. 
+        
+        It promotes the use of 
+            interfaces, 
+            abstract classes, and 
+            polymorphism 
+        to allow new functionality 
+        to be added with minimal impact on existing code.
+    Example: 
+        If you have a `Shape` class with a method 
+            to calculate area, and 
+        you want to add a new shape, 
+            say `Triangle`, 
+        you should do so by extending the `Shape` class 
+        rather than modifying the existing code.
+
+
+    More examples illustrating the Open/Closed Principle (OCP):
+
+    In each example, the Open/Closed Principle is applied 
+    by making classes open for extension 
+    (through inheritance or composition) 
+    but closed for modification, 
+        ensuring that 
+    existing code remains stable 
+    while allowing for future enhancements.
+
+
+    In these examples, 
+    the Open/Closed Principle is applied 
+    by making the system open to new functionality 
+    through inheritance or composition, 
+    while the core system remains closed to modifications. 
+    This approach helps in building scalable and maintainable systems.
+
+    1. Payment Processing System
+    - Initial Design: 
+        A `PaymentProcessor` class handles payments 
+        via credit card, PayPal, and bank transfer, 
+        with methods like `processCreditCard`, `processPayPal`, and `processBankTransfer`.
+        ----------------------
+         class:PaymentProcessor
+        ----------------------
+            + processCreditCard
+            + processPayPal
+            + processBankTransfer
+        ----------------------
+
+            Open for extension = not possible 
+            closed for modification = yes 
+    - OCP-Compliant Design: 
+        - Create an abstract `PaymentMethod` class with a method `processPayment`.
+        - Implement specific payment methods as subclasses 
+        like `CreditCardPayment`, `PayPalPayment`, and `BankTransferPayment`.
+        - The `PaymentProcessor` class remains unchanged, 
+        but new payment methods can be added 
+        by creating new subclasses without modifying existing code.
+
+        ----------------------
+        class: PaymentMethod
+        ----------------------
+            processPayment
+        ----------------------
+
+        ----------------------
+        class: CreditCardPayment:PaymentMethod
+        ----------------------
+        ----------------------
+
+        ----------------------
+        class: PayPalPayment:PaymentMethod
+        ----------------------
+        ----------------------
+
+        ----------------------
+        class: BankTransferPayment:PaymentMethod
+        ----------------------
+        ----------------------
+        Note: closed for modifiation 
+
+        Opened for extension
+        ----------------------
+        class: UPIPayment:PaymentMethod
+        ----------------------
+        ----------------------
+
+
+    2. Shape Area Calculation
+    - Initial Design: 
+        A `Shape` class has methods `calculateArea` 
+        for different shapes like circles, squares, and rectangles, 
+        each with its own logic.
+    - OCP-Compliant Design:
+        - Define an abstract `Shape` class with a `calculateArea` method.
+        - Implement specific shapes like `Circle`, `Square`, and `Rectangle` as subclasses, 
+        each with its own implementation of `calculateArea`.
+        - To add a new shape, create a new subclass 
+        without altering the existing `Shape` class or its methods.
+
+    3. Tax Calculation System
+    - Initial Design: 
+        A `TaxCalculator` class calculates tax based on different countries, 
+        with methods like `calculateUSTax`, `calculateUKTax`, and `calculateIndiaTax`.
+    - OCP-Compliant Design:
+        - Create an abstract `TaxCalculator` class 
+        with a `calculateTax` method.
+        - Implement country-specific tax calculations 
+        in subclasses like `USTaxCalculator`, `UKTaxCalculator`, and `IndiaTaxCalculator`.
+        - The `TaxCalculator` system can be extended 
+        to new countries by adding new subclasses without modifying existing code.
+
+    4. Notification System
+    - Initial Design: 
+        A `Notifier` class sends notifications via email and SMS, 
+        with methods `sendEmailNotification` and `sendSMSNotification`.
+    - OCP-Compliant Design:
+        - Define an abstract `Notifier` class 
+        with a `sendNotification` method.
+        - Implement specific notification methods as subclasses 
+        like `EmailNotifier`, `SMSNotifier`, and `PushNotifier`.
+        - New notification methods (e.g., `PushNotification`, `InAppNotification`) 
+        can be added by creating new subclasses without altering the existing `Notifier` class.
+
+    5. Report Generation
+    - Initial Design:
+        A `ReportGenerator` class generates 
+        different types of reports like PDF and Excel, 
+        with methods `generatePDFReport` and `generateExcelReport`.
+    - OCP-Compliant Design:
+        - Create an abstract `ReportGenerator` class 
+        with a `generateReport` method.
+        - Implement specific report types as subclasses 
+        like `PDFReportGenerator` and `ExcelReportGenerator`.
+        - To add a new report format, such as `HTMLReportGenerator`, 
+        create a new subclass without modifying the existing `ReportGenerator` class or methods.
+
+    6. Logging System
+    - Initial Design: A `Logger` class handles logging messages 
+        to the console, files, and databases, with methods 
+        like `logToConsole`, `logToFile`, and `logToDatabase`.
+    - OCP-Compliant Design:
+    - Define an abstract `Logger` class with a `log` method.
+    - Implement specific logging strategies as subclasses 
+        like `ConsoleLogger`, `FileLogger`, and `DatabaseLogger`.
+    - To add a new logging destination, such as `RemoteServerLogger`, 
+        create a new subclass without modifying the existing `Logger` class.
+
+    7. Discount Calculation
+    - Initial Design: A `DiscountCalculator` class applies 
+        different types of discounts 
+        like seasonal, loyalty, and bulk purchase discounts, 
+        with methods 
+        `applySeasonalDiscount`, `applyLoyaltyDiscount`, and `applyBulkDiscount`.
+    - OCP-Compliant Design:
+    - Create an abstract `Discount` class with a method `applyDiscount`.
+    - Implement specific discount types as subclasses 
+    like `SeasonalDiscount`, `LoyaltyDiscount`, and `BulkDiscount`.
+    - To introduce a new discount type, 
+    such as `ClearanceDiscount`, add a new subclass 
+    without altering the existing `DiscountCalculator` class.
+
+    8. Event Handling System
+    - Initial Design: 
+        An `EventHandler` class handles different types of events 
+        like mouse clicks, keyboard inputs, and window resizing, 
+        with methods like `handleMouseClick`, `handleKeyboardInput`, and `handleWindowResize`.
+    - OCP-Compliant Design:
+        - Define an abstract `Event` class with a `handle` method.
+        - Implement specific event types as subclasses 
+        like `MouseClickEvent`, `KeyboardInputEvent`, and `WindowResizeEvent`.
+        - New events, such as `TouchEvent`, can be added 
+        by creating a new subclass without modifying the `EventHandler` class.
+
+    9. Data Export System
+    - Initial Design: 
+        A `DataExporter` class exports data in different formats 
+        like CSV, JSON, and XML, 
+        with methods `exportToCSV`, `exportToJSON`, and `exportToXML`.
+    - OCP-Compliant Design:
+        - Define an abstract `DataExporter` class 
+        with an `exportData` method.
+        - Implement specific export formats as subclasses 
+        like `CSVExporter`, `JSONExporter`, and `XMLExporter`.
+        - New export formats, such as `YAMLExporter`, can be added 
+        by introducing a new subclass 
+        without modifying the existing `DataExporter` class.
+
+    10. Order Validation System
+    - Initial Design: 
+        An `OrderValidator` class validates orders based on various criteria 
+        like payment validation, inventory check, and address verification, 
+        with methods like `validatePayment`, `checkInventory`, and `verifyAddress`.
+    - OCP-Compliant Design:
+        - Create an abstract `OrderValidator` class with a `validate` method.
+        - Implement specific validation types as subclasses like 
+            `PaymentValidator`, `InventoryValidator`, and `AddressValidator`.
+        - To add a new validation type, such as `CouponValidator`, 
+            create a new subclass without modifying 
+                the existing `OrderValidator` class.
+
+
+===============================================================
+c. Liskov Substitution Principle (LSP)
+===============================================================
+    Definition: 
+        "This principle states 
+        that subclasses should be substitutable 
+        for their base classes."
+        ie 
+        "You should be able 
+        to use a subclass in any situation 
+        where a base class is expected, 
+        without noticing any difference."
+
+        -- to use subclass in place of base class 
+
+        Objects of a superclass should be replaceable 
+        with objects of a subclass 
+        without affecting the correctness of the program.
+    Explanation: 
+        This principle states 
+        that subclasses should be substitutable 
+        for their base classes. 
+        
+        The derived class should extend the base class 
+        without changing its behavior in a way 
+        that breaks the application. 
+        
+        This ensures that a class or method 
+        can use an instance of a subclass 
+        just like it would use an instance of the superclass.
+    Example: 
+        If a `Bird` class has a method `fly`, 
+        and a `Penguin` class is a subclass of `Bird`, 
+        but penguins cannot fly, 
+        then `Penguin` 
+            should not inherit `fly`. Instead, 
+        `Bird` might need to be refactored into 
+            `FlyingBird` and `NonFlyingBird`.
+
+
+More examples:
+In each example, 
+adhering to the Liskov Substitution Principle ensures 
+that subclasses can be used in place of their parent classes 
+without unexpected behavior or the need for additional checks. 
+This leads to more robust and reliable code.
+
+
+
+These examples highlight the importance of 
+ensuring that subclasses can be used in place of 
+their parent classes 
+without altering the expected behavior or causing errors, 
+which is the core idea of the Liskov Substitution Principle.
+
+1. Rectangle and Square
+- Initial Design: A `Rectangle` class has `width` and `height` properties with methods to calculate area and perimeter. A `Square` class inherits from `Rectangle`.
+- LSP Violation: The `Square` class overrides the `setWidth` and `setHeight` methods to ensure both sides are equal, but this breaks the behavior expected from a `Rectangle`, where width and height can be set independently.
+- LSP-Compliant Design: Instead of inheriting `Square` from `Rectangle`, both `Rectangle` and `Square` should inherit from a more general `Quadrilateral` or `Shape` class, each with their own specific implementations.
+
+2. Birds and Penguins
+- Initial Design: A `Bird` class has methods `fly` and `layEggs`. A `Penguin` class inherits from `Bird`.
+- LSP Violation: Penguins cannot fly, so the `fly` method in `Penguin` would either throw an exception or not function as expected, violating LSP.
+    ----------------------
+        class:Bird
+    ----------------------
+        +layEggs
+        +fly 
+    ----------------------  
+    ----------------------
+        class:Penguin:Bird
+    ----------------------
+        +fly : Error 
+    ----------------------
+    Penguin is not fully the Bird.
+
+- LSP-Compliant Design: Introduce a separate `FlyingBird` class that inherits from `Bird` and contains the `fly` method. `Penguin` would inherit directly from `Bird` and not have a `fly` method.
+    ----------------------
+        class:Bird
+    ----------------------
+        +layEggs       
+    ---------------------- 
+
+
+    ----------------------
+        class:FlyingBird : Bird 
+    ----------------------
+        +fly 
+    ----------------------
+
+
+    ----------------------
+        class:Penguin:Bird
+    ----------------------
+    ----------------------
+3. Payment Processing with Credit and Cash
+- Initial Design: A `PaymentProcessor` class handles processing payments, with subclasses like `CreditCardPaymentProcessor` and `CashPaymentProcessor`.
+- LSP Violation: If `CashPaymentProcessor` requires additional steps like change calculation that aren't applicable to `CreditCardPaymentProcessor`, substituting one for the other may cause issues in code relying on the standard payment processing flow.
+- LSP-Compliant Design: Instead of forcing all payment processors to fit the same model, use an interface `PaymentProcessor` and have each payment method implement it according to its specific needs, ensuring that all implementations can be used interchangeably without surprises.
+
+4. Shape Drawing with Circle and Ellipse
+- Initial Design: An `Ellipse` class has methods to set the major and minor axes and a `draw` method. A `Circle` class inherits from `Ellipse` and ensures both axes are equal.
+- LSP Violation: Substituting a `Circle` where an `Ellipse` is expected might break code that assumes the axes can be different lengths, violating LSP.
+- LSP-Compliant Design: Create a base `Shape` class with a `draw` method. Both `Ellipse` and `Circle` would be separate subclasses of `Shape`, each implementing their own logic without overriding each other’s properties.
+
+5. File Handling with Read-Only and Read-Write Files
+- Initial Design: A `File` class has methods `read`, `write`, and `delete`. A `ReadOnlyFile` class inherits from `File` and disables `write` and `delete`.
+- LSP Violation: Substituting a `ReadOnlyFile` where a `File` is expected might result in runtime errors if `write` or `delete` is called, violating LSP.
+- LSP-Compliant Design: Use an interface like `ReadableFile` for `read` operations and `WritableFile` for `write` operations. `ReadOnlyFile` would implement `ReadableFile`, while `ReadWriteFile` would implement both `ReadableFile` and `WritableFile`, ensuring substitutability.
+
+
+6. Document Management with Text and Encrypted Documents
+- Initial Design: A `Document` class has methods `open`, `edit`, and `save`. An `EncryptedDocument` class inherits from `Document` but requires decryption before opening or editing.
+- LSP Violation: If a method that expects a `Document` tries to open or edit an `EncryptedDocument` without handling decryption, it will fail or behave unexpectedly, violating LSP.
+- LSP-Compliant Design: Introduce an interface like `ReadableDocument` and `WritableDocument`. `Document` implements both, while `EncryptedDocument` implements `ReadableDocument` and includes its decryption logic. This ensures that both document types can be used interchangeably in a way that the calling code understands.
+
+7. Employee and Intern Payment System
+- Initial Design: An `Employee` class has methods `calculateSalary` and `getBenefits`. An `Intern` class inherits from `Employee` but doesn’t receive benefits.
+- LSP Violation: If a method that expects an `Employee` object calls `getBenefits` on an `Intern` object and gets `null` or an error, it violates LSP.
+- LSP-Compliant Design: Create a base `Worker` class with a `calculateSalary` method and separate `Employee` and `Intern` classes. `Employee` has a `getBenefits` method, while `Intern` does not. This way, both classes adhere to their expected behavior without violating LSP.
+
+8. Graphical User Interface (GUI) Elements
+- Initial Design: A `Button` class has methods `render` and `click`. A `ReadOnlyButton` class inherits from `Button` but disables the `click` functionality.
+- LSP Violation: If code that expects a `Button` tries to click a `ReadOnlyButton`, it may result in unexpected behavior or errors, violating LSP.
+- LSP-Compliant Design: Create an abstract `UIElement` class with a `render` method. `Button` and `ReadOnlyButton` both inherit from `UIElement`, but only `Button` has a `click` method. This ensures that substituting one for the other does not break the expected behavior.
+
+9. Vehicle Types with Cars and Electric Cars
+- Initial Design: A `Car` class has methods `refuel` and `drive`. An `ElectricCar` class inherits from `Car` but overrides `refuel` with a `recharge` method.
+- LSP Violation: If a method expects a `Car` and calls `refuel`, it will not work correctly with an `ElectricCar`, as the concept of refueling doesn't apply, violating LSP.
+- LSP-Compliant Design: Create a `Vehicle` interface with a `drive` method. Implement `Car` with `refuel` and `ElectricCar` with `recharge`. Both classes implement `Vehicle`, ensuring that the driving behavior is consistent, while refueling and recharging are separate responsibilities.
+
+10. Bank Account Types with Savings and Fixed Deposit Accounts
+- Initial Design: A `BankAccount` class has methods `deposit`, `withdraw`, and `calculateInterest`. A `FixedDepositAccount` class inherits from `BankAccount` but does not allow withdrawals before maturity.
+- LSP Violation: If code expects a `BankAccount` and attempts to withdraw from a `FixedDepositAccount`, it will violate the expected behavior or lead to errors, violating LSP.
+- LSP-Compliant Design: Create a `DepositAccount` class with `deposit` and `calculateInterest` methods and a `WithdrawalAccount` class with `withdraw`. `SavingsAccount` inherits from `WithdrawalAccount`, while `FixedDepositAccount` inherits from `DepositAccount`. This ensures that only accounts that support withdrawals have the `withdraw` method, adhering to LSP.
+
+===============================================================
+d. Interface Segregation Principle (ISP)
+===============================================================
+    Definition: 
+        "Clients should not be forced 
+        to depend on interfaces they do not use."
+    Explanation: 
+        This principle suggests that 
+        instead of having a large, monolithic interface, 
+        it should be broken down into smaller, 
+        more specific interfaces 
+        so that classes can implement only the methods 
+        that are relevant to them. 
+        
+        This prevents classes from being forced 
+        to implement methods that they don’t need.
+    Example: 
+        If you have an interface `Vehicle` 
+        with methods `startEngine`, `stopEngine`, and `fly`, 
+        a class `Car` should not be forced 
+            to implement `fly`. 
+        Instead, split the interface into `EngineVehicle` and `FlyingVehicle`.
+
+More examples(ISP) Interface Segregation Principle:
+In these examples, 
+adhering to the Interface Segregation Principle ensures 
+that classes only implement the interfaces they actually need, 
+leading to a more flexible, maintainable, and understandable system.
+
+These examples emphasize the importance of splitting large, 
+monolithic interfaces into smaller, more specific ones, 
+allowing classes to implement only what they need, 
+leading to cleaner, more maintainable code.
+
+1. Printer Interface
+- Initial Design: A `Printer` interface includes methods like `print`, `scan`, `fax`, and `photocopy`. All classes that implement `Printer` must provide implementations for all these methods.
+- ISP Violation: A basic printer that only has printing capabilities is forced to implement methods for scanning, faxing, and photocopying, which are irrelevant for that printer.
+- ISP-Compliant Design: Split the `Printer` interface into smaller, more specific interfaces like `Printable`, `Scannable`, `Faxable`, and `Photocopiable`. Now, a basic printer only needs to implement the `Printable` interface, adhering to ISP.
+
+2. Vehicle Interface
+- Initial Design: A `Vehicle` interface includes methods like `drive`, `fly`, and `sail`. All vehicle classes, like `Car`, `Plane`, and `Boat`, must implement all these methods.
+        ---------------------
+            interface: Vehicle 
+        ---------------------   
+            + drive
+            + fly 
+            + sail 
+        ---------------------
+
+        ---------------------
+            class: Car: Vehicle
+        ---------------------   
+            + drive - Implementation 
+            + fly - NOT Implementable 
+            + sail - NOT Implementable 
+        ---------------------
+
+        ---------------------
+            class: Plane: Vehicle
+        ---------------------   
+            + drive - NOT Implementable  
+            + fly - Implementation 
+            + sail - NOT Implementable 
+        ---------------------
+
+        ---------------------
+            class: Boat: Vehicle
+        ---------------------   
+            + drive - NOT Implementable  
+            + fly - NOT Implementable 
+            + sail - Implementation
+        ---------------------
+
+- ISP Violation: A car class is forced to implement `fly` and `sail` methods, which are irrelevant for a car.
+- ISP-Compliant Design: Split the `Vehicle` interface into more specific interfaces like `Drivable`, `Flyable`, and `Sailable`. Now, `Car` implements `Drivable`, `Plane` implements `Flyable`, and `Boat` implements `Sailable`, making the design adhere to ISP.
+        ---------------------
+            interface: Drivable 
+        ---------------------   
+            + drive
+        ---------------------
+        ---------------------
+            interface: Flyable 
+        ---------------------              
+            + fly 
+        ---------------------
+        ---------------------
+            interface: Sailable 
+        ---------------------
+            + sail 
+        ---------------------
+
+        ---------------------
+            class: Car: Drivable
+        ---------------------   
+            + drive - Implementation 
+        ---------------------
+
+        ---------------------
+            class: Plane: Flyable
+        --------------------- 
+            + fly - Implementation 
+        ---------------------
+
+        ---------------------
+            class: Boat: Sailable
+        ---------------------   
+            + sail - Implementation
+        ---------------------
+
+3. User Authentication Interface
+- Initial Design: An `Auth` interface includes methods like `login`, `register`, `logout`, `resetPassword`, and `twoFactorAuth`. Every class that implements this interface must provide implementations for all these methods.
+- ISP Violation: A simple authentication system that does not support two-factor authentication (2FA) is forced to implement the `twoFactorAuth` method.
+- ISP-Compliant Design: Split the `Auth` interface into smaller interfaces like `Loginable`, `Registerable`, `Logoutable`, `PasswordResettable`, and `TwoFactorAuthenticable`. Now, a simple authentication system only implements the interfaces relevant to its features, adhering to ISP.
+
+4. Media Player Interface
+- Initial Design: A `MediaPlayer` interface includes methods like `playAudio`, `playVideo`, and `record`. Every media player class must implement all these methods.
+- ISP Violation: A simple audio player is forced to implement `playVideo` and `record` methods, which are irrelevant for audio playback.
+- ISP-Compliant Design: Split the `MediaPlayer` interface into `AudioPlayable`, `VideoPlayable`, and `Recordable` interfaces. Now, an audio player only implements `AudioPlayable`, a video player implements both `AudioPlayable` and `VideoPlayable`, and a recorder implements `Recordable`, adhering to ISP.
+
+5. Employee Interface
+- Initial Design: An `Employee` interface includes methods like `work`, `attendMeeting`, `manageTeam`, and `prepareReport`. Every class that implements this interface must implement all these methods.
+- ISP Violation: A junior developer is forced to implement methods like `manageTeam` and `prepareReport`, which are not part of their job responsibilities.
+- ISP-Compliant Design: Split the `Employee` interface into smaller, role-specific interfaces like `Worker`, `TeamManager`, and `ReportPreparer`. Now, a junior developer only implements `Worker`, while a team lead might implement both `Worker` and `TeamManager`, adhering to ISP.
+
+
+6. Appliance Interface
+- Initial Design: An `Appliance` interface includes methods like `turnOn`, `turnOff`, `setTemperature`, and `setTimer`. All appliances, such as `Fan`, `Oven`, and `AirConditioner`, must implement all these methods.
+- ISP Violation: A `Fan` doesn’t need to implement `setTemperature`, as it doesn't control temperature. Similarly, an `Oven` might not need `setTimer`.
+- ISP-Compliant Design: Create smaller interfaces like `Switchable` (with `turnOn` and `turnOff`), `TemperatureControllable`, and `TimerSettable`. Now, `Fan` implements `Switchable`, `Oven` implements `Switchable` and `TimerSettable`, and `AirConditioner` implements all three. This allows each appliance to only implement the methods relevant to it.
+
+7. Worker Interface
+- Initial Design: A `Worker` interface includes methods like `assembleParts`, `testProduct`, and `packageProduct`. All worker classes, like `Assembler`, `Tester`, and `Packer`, must implement all these methods.
+- ISP Violation: An `Assembler` doesn’t need to implement `testProduct` and `packageProduct`, as those tasks are not part of their role.
+- ISP-Compliant Design: Create smaller interfaces like `AssemblyTask`, `TestingTask`, and `PackagingTask`. Now, `Assembler` implements `AssemblyTask`, `Tester` implements `TestingTask`, and `Packer` implements `PackagingTask`, ensuring that each worker role is only responsible for its specific tasks.
+
+8. Vehicle Maintenance Interface
+- Initial Design: A `VehicleMaintenance` interface includes methods like `changeOil`, `rotateTires`, `checkBrakes`, and `replaceBattery`. All vehicle maintenance classes must implement all these methods.
+- ISP Violation: A `BatterySpecialist` shouldn’t need to implement methods like `changeOil` or `rotateTires`, as their expertise is limited to battery replacement.
+- ISP-Compliant Design: Split the `VehicleMaintenance` interface into specific interfaces like `OilChangeable`, `TireRotatable`, `BrakeCheckable`, and `BatteryReplaceable`. Now, a `BatterySpecialist` only implements `BatteryReplaceable`, adhering to ISP by focusing on relevant tasks.
+
+9. Online Payment Interface
+- Initial Design: An `OnlinePayment` interface includes methods like `payWithCreditCard`, `payWithPayPal`, `payWithCryptocurrency`, and `refundPayment`. All payment processing classes must implement all these methods.
+- ISP Violation: A payment processor that only handles credit card transactions doesn’t need to implement methods for PayPal or cryptocurrency payments.
+- ISP-Compliant Design: Break down the `OnlinePayment` interface into smaller interfaces like `CreditCardPayment`, `PayPalPayment`, `CryptocurrencyPayment`, and `Refundable`. This way, each payment processor only implements the relevant methods, ensuring adherence to ISP.
+
+10. Customer Support Interface
+- Initial Design: A `CustomerSupport` interface includes methods like `handleTechnicalSupport`, `handleBillingInquiry`, `handleAccountManagement`, and `handleFeedback`. All customer support roles must implement all these methods.
+- ISP Violation: A `TechnicalSupportAgent` doesn’t need to implement `handleBillingInquiry` or `handleAccountManagement`, as these tasks are outside their responsibilities.
+- ISP-Compliant Design: Create smaller interfaces like `TechnicalSupport`, `BillingSupport`, `AccountManagement`, and `FeedbackHandling`. Now, a `TechnicalSupportAgent` implements `TechnicalSupport`, while other roles implement the interfaces relevant to their duties.
+
+
+===============================================================
+e. Dependency Inversion Principle (DIP)
+
+    - Dependency Injection Principle (DIP)
+
+
+    Inversion of Control (IoC)  
+    is known as nowadays "Dependency Injection"
+
+
+Dependency Injection Examples 
+    ==> Spring Framework
+    ==> Angular 
+===============================================================
+    Definition: 
+        "High-level modules should not depend on low-level modules. 
+        Both should depend on abstractions. 
+        Abstractions should not depend on details; 
+        details should depend on abstractions."
+    Explanation: 
+        This principle suggests 
+        that rather than high-level modules being directly 
+        dependent on low-level modules, 
+        both should depend on a common abstraction. 
+        
+        It promotes the use of interfaces or abstract classes 
+        to decouple the high-level and low-level modules, 
+        leading to a more flexible and maintainable codebase.
+    Example: 
+        Instead of a `Keyboard` class being tightly coupled 
+        with a `WindowsOS` class, 
+        both should depend on an interface, such as `IOperatingSystem`, 
+        which defines the behavior they require.
+
+
+More examples - Dependency Inversion Principle (DIP):
+These examples illustrate how adhering 
+to the Dependency Inversion Principle 
+reduces coupling between 
+    high-level modules and 
+    low-level implementations, 
+making the code more flexible, maintainable, and scalable.
+
+These examples further demonstrate 
+how applying the Dependency Inversion Principle helps 
+decouple high-level classes from low-level implementations, 
+leading to more flexible and adaptable code.
+
+1. Notification System
+- Initial Design: A `NotificationService` class directly depends on concrete classes like `EmailSender` and `SMSSender` to send notifications.
+- DIP Violation: The `NotificationService` class is tightly coupled to the specific implementations of `EmailSender` and `SMSSender`, making it difficult to switch to a different notification method or add a new one.
+- DIP-Compliant Design: Introduce an abstraction like `NotificationSender` with methods `sendNotification`. `EmailSender` and `SMSSender` implement this interface. The `NotificationService` class now depends on the `NotificationSender` interface rather than specific implementations, allowing easy extension and modification.
+
+2. Payment Processing
+- Initial Design: A `PaymentProcessor` class directly depends on concrete classes like `CreditCardPayment` and `PayPalPayment` to process payments.
+- DIP Violation: The `PaymentProcessor` class is tightly coupled to these specific payment methods, making it hard to switch or add new payment methods.
+- DIP-Compliant Design: Create an abstraction like `PaymentMethod` with methods like `processPayment`. `CreditCardPayment` and `PayPalPayment` implement this interface. The `PaymentProcessor` class now depends on the `PaymentMethod` interface, allowing it to work with any payment method that implements this interface.
+
+3. Data Access Layer
+- Initial Design: A `UserRepository` class directly depends on a concrete `SQLDatabase` class to retrieve and store user data.
+- DIP Violation: The `UserRepository` class is tightly coupled to `SQLDatabase`, making it difficult to switch to another database type, like `NoSQLDatabase`.
+- DIP-Compliant Design: Introduce an abstraction like `Database` with methods like `saveUser` and `getUser`. `SQLDatabase` and `NoSQLDatabase` implement this interface. The `UserRepository` class now depends on the `Database` interface, allowing it to work with any database type.
+
+4. Logger System
+- Initial Design: An `Application` class directly depends on a concrete `FileLogger` class to log messages.
+- DIP Violation: The `Application` class is tightly coupled to `FileLogger`, making it difficult to switch to another logging method, like `DatabaseLogger`.
+- DIP-Compliant Design: Create an abstraction like `Logger` with methods like `logMessage`. `FileLogger` and `DatabaseLogger` implement this interface. The `Application` class now depends on the `Logger` interface, allowing easy switching of logging mechanisms.
+
+5. Order Management System
+- Initial Design: An `OrderProcessor` class directly depends on concrete classes like `InventoryService` and `PaymentService` to process orders.
+- DIP Violation: The `OrderProcessor` class is tightly coupled to these specific services, making it hard to modify or replace them.
+- DIP-Compliant Design: Introduce abstractions like `InventoryManager` and `PaymentGateway` with relevant methods. `InventoryService` and `PaymentService` implement these interfaces. The `OrderProcessor` class now depends on the interfaces rather than specific implementations, allowing flexibility and easier maintenance.
+
+
+6. Report Generation
+- Initial Design: A `ReportGenerator` class directly depends on a concrete `PDFReport` class to generate reports in PDF format.
+- DIP Violation: The `ReportGenerator` class is tightly coupled to `PDFReport`, making it difficult to generate reports in other formats, such as Excel or Word.
+- DIP-Compliant Design: Introduce an abstraction like `ReportFormat` with a method `generate`. Concrete classes like `PDFReport`, `ExcelReport`, and `WordReport` implement this interface. The `ReportGenerator` class now depends on the `ReportFormat` interface, allowing easy switching between different report formats.
+
+7. Messaging System
+- Initial Design: A `MessagingService` class directly depends on a concrete `SMSService` class to send messages.
+- DIP Violation: The `MessagingService` class is tightly coupled to `SMSService`, making it difficult to switch to another messaging method, such as email or push notifications.
+- DIP-Compliant Design: Create an abstraction like `MessageSender` with a method `sendMessage`. `SMSService`, `EmailService`, and `PushNotificationService` implement this interface. The `MessagingService` class now depends on the `MessageSender` interface, allowing it to send messages through any implementation.
+
+8. Authentication System
+- Initial Design: An `Authenticator` class directly depends on a concrete `DatabaseUserStore` class to authenticate users.
+- DIP Violation: The `Authenticator` class is tightly coupled to `DatabaseUserStore`, making it difficult to switch to another user store, like an LDAP or OAuth service.
+- DIP-Compliant Design: Introduce an abstraction like `UserStore` with methods like `getUserCredentials`. `DatabaseUserStore`, `LDAPUserStore`, and `OAuthUserStore` implement this interface. The `Authenticator` class now depends on the `UserStore` interface, allowing it to authenticate users from any store.
+
+9. E-commerce System
+- Initial Design: A `CheckoutService` class directly depends on a concrete `PayPalPaymentProcessor` class to process payments during checkout.
+- DIP Violation: The `CheckoutService` class is tightly coupled to `PayPalPaymentProcessor`, making it hard to integrate other payment processors like Stripe or Square.
+- DIP-Compliant Design: Create an abstraction like `PaymentProcessor` with a method `processPayment`. `PayPalPaymentProcessor`, `StripePaymentProcessor`, and `SquarePaymentProcessor` implement this interface. The `CheckoutService` class now depends on the `PaymentProcessor` interface, allowing easy integration of various payment methods.
+
+10. File Handling System
+- Initial Design: A `FileHandler` class directly depends on a concrete `LocalFileSystem` class to handle file operations such as reading and writing.
+- DIP Violation: The `FileHandler` class is tightly coupled to `LocalFileSystem`, making it difficult to switch to a cloud-based file system like AWS S3 or Google Drive.
+- DIP-Compliant Design: Introduce an abstraction like `FileSystem` with methods like `readFile` and `writeFile`. `LocalFileSystem`, `S3FileSystem`, and `GoogleDriveFileSystem` implement this interface. The `FileHandler` class now depends on the `FileSystem` interface, allowing it to work with any file storage system.
+
+
+
+developers can create systems 
+    that are 
+        easier 
+            to maintain, 
+            extend, and 
+            test, 
+    ultimately leading to 
+        more 
+            robust and 
+            scalable 
+                software.
+

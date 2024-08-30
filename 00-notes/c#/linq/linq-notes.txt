@@ -1,0 +1,173 @@
+1. Extension Methods
+   - Definition: Extension methods allow you to add new methods to existing types without modifying them. They are defined as static methods but are called on instances of the extended type.
+   - Syntax: 
+     ```csharp
+     public static class MyExtensions
+     {
+         public static int WordCount(this string str)
+         {
+             return str.Split(' ').Length;
+         }
+     }
+     ```
+   - Usage: 
+     ```csharp
+     string text = "Hello World";
+     int count = text.WordCount(); // Calls the extension method
+     ```
+
+2. Anonymous Types
+   - Definition: Anonymous types provide a way to create a new type without defining it explicitly. They are useful for creating objects with multiple properties without needing to define a formal class.
+   - Syntax: 
+     ```csharp
+     var person = new { Name = "John", Age = 30 };
+     ```
+   - Usage: 
+     ```csharp
+     Console.WriteLine(person.Name); // Output: John
+     ```
+
+3. Var and Dynamic
+   - Var: 
+     - Definition: `var` is a statically typed variable where the type is inferred at compile time.
+     - Usage: 
+       ```csharp
+       var number = 5; // int
+       var name = "Alice"; // string
+       ```
+   - Dynamic:
+     - Definition: `dynamic` bypasses compile-time type checking. The type is resolved at runtime, making it more flexible but less safe.
+     - Usage: 
+       ```csharp
+       dynamic obj = "Hello";
+       Console.WriteLine(obj.Length); // Works
+       obj = 5;
+       Console.WriteLine(obj.Length); // Runtime error
+       ```
+
+4. Delegates
+   - Definition: Delegates are types that represent references to methods. They are used to pass methods as arguments to other methods.
+   - Syntax:
+     ```csharp
+     public delegate int MathOperation(int a, int b);
+     ```
+   - Usage:
+     ```csharp
+     MathOperation add = (a, b) => a + b;
+     int result = add(3, 4); // 7
+     ```
+
+5. Events
+   - Definition: Events are a way for a class to notify other classes when something happens. They are based on delegates.
+   - Syntax:
+     ```csharp
+     public event EventHandler SomethingHappened;
+     ```
+   - Usage:
+     ```csharp
+     public void TriggerEvent()
+     {
+         SomethingHappened?.Invoke(this, EventArgs.Empty);
+     }
+     ```
+
+6. Anonymous Methods
+   - Definition: Anonymous methods are inline methods that can be defined using the `delegate` keyword. They are useful when the method implementation is short and used only once.
+   - Syntax:
+     ```csharp
+     delegate void Print(string message);
+     Print print = delegate(string message) { Console.WriteLine(message); };
+     print("Hello World");
+     ```
+
+7. Lambda Expressions
+   - Definition: Lambda expressions are a concise way to write anonymous methods. They are commonly used with LINQ.
+   - Syntax:
+     ```csharp
+     Func<int, int, int> add = (x, y) => x + y;
+     ```
+   - Usage:
+     ```csharp
+     int result = add(3, 4); // 7
+     ```
+
+8. Expression Trees
+   - Definition: Expression trees represent code as data, allowing you to examine and modify the code in a tree-like structure. They are mainly used in LINQ to SQL or LINQ to Entities.
+   - Syntax:
+     ```csharp
+     Expression<Func<int, bool>> expr = num => num > 5;
+     ```
+   - Usage:
+     ```csharp
+     Console.WriteLine(expr.Body); // Output: (num > 5)
+     ```
+
+9. Async/Await and Task Parallel Library (TPL) Basics
+   - Introduction to Asynchronous Programming:
+     - Asynchronous programming allows you to perform tasks without blocking the main thread, making applications more responsive.
+   - Async and Await Keywords:
+     - `async` marks a method as asynchronous, and `await` is used to asynchronously wait for a task to complete.
+     ```csharp
+     public async Task<int> FetchDataAsync()
+     {
+         await Task.Delay(1000); // Simulate async work
+         return 42;
+     }
+     ```
+   - Task and Task<T>:
+     - `Task` represents an asynchronous operation, while `Task<T>` returns a value.
+     - Example:
+     ```csharp
+     Task<int> task = FetchDataAsync();
+     int result = await task;
+     ```
+   - Handling Exceptions in Asynchronous Methods:
+     - Use `try-catch` blocks to handle exceptions in asynchronous methods.
+     ```csharp
+     try
+     {
+         int result = await FetchDataAsync();
+     }
+     catch (Exception ex)
+     {
+         Console.WriteLine(ex.Message);
+     }
+     ```
+   - Parallel Programming with TPL:
+     - TPL provides a higher-level abstraction for parallelism using `Task` and `Parallel` classes.
+     ```csharp
+     Parallel.For(0, 10, i =>
+     {
+         Console.WriteLine(i);
+     });
+     ```
+
+10. LINQ Usage Basics
+   - LINQ Query Syntax and Method Syntax:
+     - Query syntax is SQL-like and easier for beginners, while method syntax is more flexible and powerful.
+     ```csharp
+     var querySyntax = from num in numbers where num > 5 select num;
+     var methodSyntax = numbers.Where(num => num > 5);
+     ```
+   - LINQ Operators:
+     - Common operators include `Select`, `Where`, `GroupBy`, `Join`, etc.
+     ```csharp
+     var results = numbers.Where(num => num > 5).Select(num => num * 2);
+     ```
+   - LINQ to Objects:
+     - LINQ to Objects works with in-memory collections like arrays or lists.
+     ```csharp
+     var evenNumbers = numbers.Where(n => n % 2 == 0);
+     ```
+   - LINQ to XML:
+     - LINQ to XML allows you to query and manipulate XML data.
+     ```csharp
+     XElement xml = XElement.Load("file.xml");
+     var nodes = from node in xml.Elements("Item") select node;
+     ```
+   - LINQ to SQL:
+     - LINQ to SQL is used to query a SQL database using LINQ.
+     ```csharp
+     var query = from c in dbContext.Customers where c.City == "London" select c;
+     ```
+

@@ -1,0 +1,78 @@
+Dependency Inversion Principle (DIP)
+    "High-level modules 
+        should not depend on 
+    low-level modules, 
+    but 
+        both 
+            should depend on 
+        abstractions."
+
+    In simpler terms, 
+    this means that instead of 
+        a high-level module 
+                (e.g., a business logic layer) 
+        depending directly on 
+        a low-level module 
+                (e.g., a database layer), 
+        both modules 
+            should depend on an abstraction 
+        (e.g., an interface). 
+
+    This decouples the high-level module 
+    from the low-level module, 
+    making it easier to change or replace 
+    the low-level module 
+    without affecting the high-level module.
+
+Let's consider an example to illustrate the Dependency Inversion Principle (DIP) better.
+
+Suppose we're building a simple e-commerce system that allows users to place orders. We have a OrderProcessor class that depends on a Database class to store and retrieve order data.
+
+Without DIP:
+    // High-level module: OrderProcessor
+    class OrderProcessor {
+        private Database database;
+
+        public OrderProcessor(Database database) {
+            this.database = database;
+        }
+
+        public void processOrder(Order order) {
+            database.saveOrder(order);
+        }
+    }
+
+    // Low-level module: Database
+    class Database {
+        public void saveOrder(Order order) {
+            // implementation to save order to database
+        }
+    }
+
+In this example, the OrderProcessor class directly depends on the Database class. This tight coupling makes it difficult to change or replace the Database class without affecting the OrderProcessor class.
+
+With DIP:
+    // Abstraction: OrderRepository
+    interface OrderRepository {
+    void saveOrder(Order order);
+    }
+
+    // Low-level module: DatabaseOrderRepository
+    class DatabaseOrderRepository implements OrderRepository {
+        public void saveOrder(Order order) {
+            // implementation to save order to database
+        }
+    }
+
+    // High-level module: OrderProcessor
+    class OrderProcessor {       
+        private OrderRepository orderRepository;
+
+        public OrderProcessor(OrderRepository orderRepository) {
+            this.orderRepository = orderRepository;
+        }
+
+        public void processOrder(Order order) {
+            orderRepository.saveOrder(order);
+        }
+    }
