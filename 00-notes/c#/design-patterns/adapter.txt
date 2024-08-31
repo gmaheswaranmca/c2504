@@ -1,0 +1,127 @@
+The Adapter pattern is a structural design pattern 
+that allows objects with incompatible interfaces to work together. 
+It acts as a bridge between two incompatible interfaces, 
+enabling them to communicate and work together seamlessly.
+
+Key Concepts of Adapter Pattern:
+
+1. Target Interface: 
+    The interface that the client expects or needs to work with.
+2. Adaptee: 
+    The existing class or interface that needs 
+    to be adapted to fit the target interface.
+3. Adapter: 
+    The class that implements the target interface and 
+    translates requests from the target interface 
+    to the adaptee's interface.
+
+Types of Adapter Pattern:
+
+1. Class Adapter: 
+    Uses inheritance to adapt one interface to another. 
+    This requires the adapter to extend the adaptee class.
+2. Object Adapter: 
+    Uses composition to adapt one interface to another. 
+    The adapter contains an instance of the adaptee and 
+    translates requests to the adaptee's interface.
+
+Implementation in C#
+
+Here’s a simple example of the Adapter pattern in C#. 
+In this example, we’ll adapt a legacy logging system 
+to work with a new logging interface.
+
+Legacy System
+
+```csharp
+// Adaptee class (legacy system)
+public class OldLogger
+{
+    public void LogMessage(string message)
+    {
+        Console.WriteLine("Old Logger: " + message);
+    }
+}
+```
+
+Target Interface
+
+```csharp
+// Target interface
+public interface ILogger
+{
+    void Log(string message);
+}
+```
+
+Adapter
+
+```csharp
+// Adapter class
+public class LoggerAdapter : ILogger
+{
+    private readonly OldLogger _oldLogger;
+
+    public LoggerAdapter(OldLogger oldLogger)
+    {
+        _oldLogger = oldLogger;
+    }
+
+    public void Log(string message)
+    {
+        // Adapt the method call to the old logger's method
+        _oldLogger.LogMessage(message);
+    }
+}
+```
+
+Client Code
+
+```csharp
+class Program
+{
+    static void Main()
+    {
+        // Existing client code expects ILogger interface
+        ILogger logger = new LoggerAdapter(new OldLogger());
+        logger.Log("This is a log message.");
+    }
+}
+```
+
+Explanation:
+
+1. Adaptee (OldLogger): 
+This is the existing class with the method `LogMessage` 
+that needs to be adapted.
+
+2. Target Interface (ILogger): 
+This is the interface 
+that the client code expects to use.
+
+3. Adapter (LoggerAdapter): 
+This class implements the `ILogger` interface and 
+uses an instance of `OldLogger` 
+to fulfill the `Log` method's requirement. 
+It translates the call from `Log` to `LogMessage`.
+
+4. Client Code: 
+The client code uses the `ILogger` interface, 
+allowing it to interact with the `LoggerAdapter`, 
+which in turn uses the legacy `OldLogger` to perform the actual logging.
+
+Summary
+
+- Adapter Pattern: 
+    Allows incompatible interfaces 
+    to work together by converting the interface of a class 
+    into another interface that a client expects.
+- Class Adapter: 
+    Uses inheritance to achieve adaptation.
+- Object Adapter: 
+    Uses composition to achieve adaptation.
+
+The Adapter pattern helps in integrating new components 
+with legacy systems or third-party libraries 
+without altering their source code, 
+thereby promoting code reuse and flexibility.

@@ -1,0 +1,143 @@
+The 23 Gang of Four (GoF) Design Patterns 
+refer to a set of software design patterns 
+introduced by the book 
+    *"Design Patterns: Elements of Reusable Object-Oriented Software"* 
+written by 
+    Erich Gamma, 
+    Richard Helm, 
+    Ralph Johnson, 
+    and John Vlissides—often 
+    
+    referred to as the "Gang of Four." 
+These patterns are categorized into three types: 
+    Creational, 
+    Structural, and 
+    Behavioral.
+
+1. Creational Patterns
+    Creational patterns deal with object creation mechanisms, 
+    trying to create objects in a manner suitable to the situation. 
+    The basic form of object creation could lead 
+    to design problems or added complexity to the design. 
+
+    Creational patterns solve this problem by controlling 
+    the object creation process.
+
+- Singleton: 
+    Ensures a class has only one instance and 
+    provides a global point of access to it.
+- Factory Method: 
+    Defines an interface for creating an object 
+    but lets subclasses 
+    alter the type of objects that will be created.
+- Abstract Factory: Provides an interface 
+    for creating families of related or dependent objects 
+    without specifying their concrete classes.
+- Builder: 
+    Separates the construction of a complex object 
+    from its representation so that the same construction process 
+    can create different representations.
+- Prototype: 
+    Specifies the kinds of objects 
+    to create using a prototypical instance and creates new objects 
+    by copying this prototype.
+
+2. Structural Patterns
+    Structural patterns deal with object composition or the way 
+    to assemble objects and classes into larger structures 
+    while keeping these structures flexible and efficient.
+
+- Adapter: 
+    Allows incompatible interfaces 
+    to work together by wrapping one interface 
+    to make it compatible with another.
+- Bridge: 
+    Separates an object’s abstraction from its implementation, 
+    so the two can vary independently.
+- Composite: 
+    Composes objects into tree-like structures 
+    to represent part-whole hierarchies. 
+    It allows clients to treat individual objects and 
+    compositions uniformly.
+- Decorator: 
+    Adds additional responsibilities to an object dynamically. 
+    Decorators provide a flexible alternative 
+    to subclassing for extending functionality.
+- Facade: 
+    Provides a simplified interface 
+    to a complex subsystem, 
+    making the subsystem easier to use.
+- Flyweight: 
+    Reduces the cost of creating and 
+    manipulating a large number of similar objects 
+    by sharing common parts of the state 
+    between multiple objects.
+- Proxy: 
+    Provides a surrogate or placeholder 
+    for another object to control access to it.
+
+3. Behavioral Patterns
+    Behavioral patterns are concerned with algorithms and 
+    the assignment of responsibilities between objects. 
+    They deal with how objects interact and 
+    communicate with each other.
+
+- Chain of Responsibility: 
+    Allows passing requests along a chain of handlers. 
+    Upon receiving a request, each handler decides either 
+    to process it or to pass 
+    it to the next handler in the chain.
+- Command: 
+    Encapsulates a request as an object, 
+    thereby allowing for parameterization of clients 
+    with queues, requests, and operations.
+- Interpreter: 
+    Defines a grammatical representation 
+    for a language and an interpreter 
+    to interpret the grammar.
+- Iterator: 
+    Provides a way to access 
+    the elements of an aggregate object sequentially 
+    without exposing its underlying representation.
+- Mediator: 
+    Defines an object that encapsulates 
+    how a set of objects interact, 
+    promoting loose coupling by keeping objects 
+    from referring to each other explicitly.
+- Memento: 
+    Captures and externalizes an object’s internal state 
+    without violating encapsulation, 
+    allowing the object 
+    to be restored to this state later.
+- Observer: 
+    Defines a one-to-many dependency between objects, 
+    where a change in one object triggers updates in others.
+- State: 
+    Allows an object to alter its behavior 
+    when its internal state changes, 
+    making the object appear to change its class.
+- Strategy: 
+    Defines a family of algorithms, encapsulates 
+    each one, and makes them interchangeable. 
+    This pattern lets the algorithm vary independently of clients 
+    that use it.
+- Template Method: 
+    Defines the skeleton of an algorithm 
+    in the superclass but lets subclasses override specific 
+    steps of the algorithm without changing its structure.
+- Visitor: 
+    Represents an operation 
+    to be performed on elements of an object structure. 
+    It lets you define a new operation 
+    without changing the classes of the elements on which it operates.
+
+Summary
+The 23 GoF design patterns provide proven solutions 
+to common software design problems. 
+By understanding and applying these patterns, 
+developers can create 
+more flexible, maintainable, and reusable object-oriented software systems. 
+
+These patterns have become foundational knowledge 
+for software architects and developers, 
+helping them to write more effective and robust code.

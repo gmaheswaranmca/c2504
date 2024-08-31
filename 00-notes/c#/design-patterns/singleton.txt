@@ -1,0 +1,114 @@
+Creational Pattern: Singleton
+
+a. Learning Outcome:
+The goal is to understand and implement the Singleton pattern, 
+a creational design pattern 
+that ensures a class has only one instance 
+throughout the application and provides 
+a global access point to that instance. 
+
+This pattern is particularly useful 
+when exactly one object is needed 
+to coordinate actions across the system.
+
+b. Practical Example: 
+Configuration Manager
+
+In this example, 
+we'll implement a `ConfigurationManager` class 
+that uses the Singleton pattern. 
+This class will manage the configuration settings of an application, 
+ensuring that there's only one instance of the manager 
+throughout the application's lifecycle.
+
+Singleton Implementation:
+
+```csharp
+public sealed class ConfigurationManager
+{
+    // The single instance of the ConfigurationManager, created eagerly at the time of class loading.
+    private static readonly ConfigurationManager _instance = new ConfigurationManager();
+
+    // Private constructor to prevent instantiation from outside
+    private ConfigurationManager() 
+    {
+        // Initialize configuration settings
+    }
+
+    // Public static method to provide a global access point to the single instance
+    public static ConfigurationManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
+    // Example method to retrieve a configuration setting
+    public string GetSetting(string key)
+    {
+        // Logic to fetch the setting from a configuration source
+        return "SomeValue"; // Placeholder value
+    }
+
+    // Example method to update a configuration setting
+    public void SetSetting(string key, string value)
+    {
+        // Logic to update the setting in the configuration source
+    }
+}
+```
+
+Explanation:
+
+1. Private Constructor: 
+    The constructor is private to prevent other classes 
+    from instantiating the `ConfigurationManager` directly. 
+    This ensures that the only way 
+    to access the `ConfigurationManager` is through 
+    the provided `Instance` property.
+
+2. Static Instance: 
+    A static, readonly instance of the `ConfigurationManager` 
+    is created eagerly when the class is loaded. 
+    This guarantees that there is only one instance, 
+    and it is thread-safe.
+
+3. Global Access Point: 
+    The `Instance` property provides a global access point 
+    to the `ConfigurationManager`. 
+    Any part of the application can access the single instance 
+    using `ConfigurationManager.Instance`.
+
+4. Configuration Management: 
+    The `GetSetting` and `SetSetting` methods are examples of 
+    how the configuration manager might be used to manage application settings. 
+    These methods could interact with a configuration file, 
+    a database, or another storage medium 
+    to retrieve and update settings.
+
+Usage Example:
+
+```csharp
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Accessing the singleton instance of ConfigurationManager
+        ConfigurationManager configManager = ConfigurationManager.Instance;
+        
+        // Retrieving a setting
+        string settingValue = configManager.GetSetting("DatabaseConnectionString");
+        Console.WriteLine($"Database Connection String: {settingValue}");
+
+        // Updating a setting
+        configManager.SetSetting("DatabaseConnectionString", "NewConnectionStringValue");
+
+        // Again retrieving the updated setting to verify
+        string updatedSettingValue = configManager.GetSetting("DatabaseConnectionString");
+        Console.WriteLine($"Updated Database Connection String: {updatedSettingValue}");
+    }
+}
+```
+
+In this example, the `ConfigurationManager` ensures that all parts of the application use the same configuration settings, which are managed through a single instance. This is critical in applications where consistency and controlled access to resources like configuration settings are important.

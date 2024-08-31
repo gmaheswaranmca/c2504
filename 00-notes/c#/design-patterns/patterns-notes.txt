@@ -1,0 +1,171 @@
+Creational design patterns deal with object creation mechanisms, trying to create objects in a manner suitable to the situation. These patterns aim to reduce complexities and instability by controlling the creation process. They encapsulate knowledge about which classes should be instantiated and how.
+
+Common Creational Patterns:
+
+1. Singleton Pattern:
+   - Intent: Ensures that a class has only one instance and provides a global point of access to it.
+   - Use Case: When you need to ensure only one instance of a class exists, such as managing a single configuration manager or connection pool.
+   - Example: The `ConfigurationManager` that allows only one instance to manage application settings.
+
+2. Factory Method Pattern:
+   - Intent: Defines an interface for creating an object, but allows subclasses to alter the type of objects that will be created.
+   - Use Case: When the exact type of the object to be created isn't known until runtime or when creating objects from a group of related classes.
+   - Example: Creating various types of documents (e.g., Word, PDF) depending on user input.
+
+3. Abstract Factory Pattern:
+   - Intent: Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+   - Use Case: When the system needs to be independent of how its objects are created and when dealing with multiple families of objects.
+   - Example: A GUI framework where you can create families of related UI elements (buttons, checkboxes) without knowing their specific class.
+
+4. Builder Pattern:
+   - Intent: Separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
+   - Use Case: When creating complex objects step by step, especially when the creation involves multiple configurations or optional parameters.
+   - Example: Constructing a complex `Meal` object that includes various items like a burger, drink, and dessert.
+
+5. Prototype Pattern:
+   - Intent: Specifies the kinds of objects to create using a prototypical instance, and creates new objects by copying this prototype.
+   - Use Case: When the cost of creating a new object is prohibitive, and you want to clone an existing object instead.
+   - Example: Cloning complex objects, such as a configured user profile or a complex graphical object in a drawing application.
+
+Summary
+
+- Singleton: One instance, global access.
+- Factory Method: Subclasses decide object creation.
+- Abstract Factory: Creates families of related objects.
+- Builder: Step-by-step construction of complex objects.
+- Prototype: Create objects by cloning an existing instance.
+
+These patterns help in managing object creation efficiently, making systems more flexible, reusable, and easy to maintain. They are particularly useful in situations where the exact nature of the objects to be created can vary widely.
+
+==========================
+Structural design patterns focus on how classes and objects are composed to form larger structures while keeping these structures flexible and efficient. They help ensure that if one part of a system changes, the entire system doesn’t have to change. Structural patterns focus on the relationships between entities, making it easier to design complex systems.
+
+Common Structural Patterns:
+
+1. Adapter Pattern:
+   - Intent: Allows incompatible interfaces to work together. The Adapter acts as a bridge between two incompatible interfaces.
+   - Use Case: When you have existing code (a legacy system) that doesn’t match the interface required by your new system.
+   - Example: Adapting a legacy system’s interface to work with a modern application without modifying the legacy code.
+
+2. Bridge Pattern:
+   - Intent: Separates an object’s abstraction from its implementation so that the two can vary independently.
+   - Use Case: When both abstraction and implementation need to be extended independently, or when implementations should be interchangeable.
+   - Example: A shape class (abstraction) that can use different drawing APIs (implementations) for rendering, such as a vector or raster drawing.
+
+3. Composite Pattern:
+   - Intent: Composes objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.
+   - Use Case: When you need to work with hierarchies of objects where individual objects and groups of objects should be treated the same way.
+   - Example: A GUI framework where components like buttons, text fields, and containers that hold other components can be treated uniformly.
+
+4. Decorator Pattern:
+   - Intent: Adds behavior or responsibilities to an object dynamically, without affecting the behavior of other objects from the same class.
+   - Use Case: When you need to add features to individual objects without affecting the class as a whole.
+   - Example: Adding scrollbars to a window or adding border styles to a text box.
+
+5. Facade Pattern:
+   - Intent: Provides a simplified interface to a complex subsystem.
+   - Use Case: When you need to provide a simple interface to a complex library or framework.
+   - Example: A unified interface for a complicated set of libraries to simplify usage in a client application.
+
+6. Flyweight Pattern:
+   - Intent: Reduces the cost of creating and managing a large number of similar objects by sharing as much data as possible among them.
+   - Use Case: When working with a large number of objects that share common data, reducing memory consumption.
+   - Example: In a word processor, characters are shared as objects where only their position and font color differ.
+
+7. Proxy Pattern:
+   - Intent: Provides a surrogate or placeholder for another object to control access to it.
+   - Use Case: When you need to control access to an object, such as in lazy initialization, access control, logging, or remote object management.
+   - Example: A virtual proxy that controls access to a large object, like an image that loads only when needed.
+
+Summary:
+
+- Adapter: Makes incompatible interfaces compatible.
+- Bridge: Decouples abstraction from implementation.
+- Composite: Treats individual and composite objects uniformly.
+- Decorator: Adds behavior to objects dynamically.
+- Facade: Simplifies interaction with complex systems.
+- Flyweight: Shares objects to reduce memory usage.
+- Proxy: Controls access to another object.
+
+These patterns provide flexibility and extensibility in structuring code, ensuring that systems are easier to maintain and adapt over time. They allow developers to work with complex systems by abstracting away intricate details and making components more modular.
+
+
+==========================
+
+
+Behavioral design patterns focus on communication between objects and how responsibilities are distributed. They help define how objects interact and cooperate, making it easier to design flexible and reusable systems. Here are some common behavioral patterns:
+
+Common Behavioral Patterns:
+
+1. Chain of Responsibility Pattern:
+   - Intent: Passes a request along a chain of handlers, allowing multiple handlers to process the request. Each handler in the chain decides whether to handle the request or pass it along.
+   - Use Case: When you have a series of processing steps that can be dynamically changed or when you want to decouple the sender of a request from its handlers.
+   - Example: A logging system where different handlers process log messages at various levels (e.g., INFO, DEBUG, ERROR).
+
+2. Command Pattern:
+   - Intent: Encapsulates a request as an object, thereby allowing parameterization of clients with queues, requests, and operations. It provides the ability to issue requests, queue them, and execute them at a later time.
+   - Use Case: When you need to queue operations, support undo/redo functionality, or parameterize objects with operations.
+   - Example: A remote control system where different commands (e.g., turn on light, increase volume) are encapsulated as objects.
+
+3. Interpreter Pattern:
+   - Intent: Defines a grammar for a language and provides an interpreter to interpret sentences of the language. Useful for designing a language or interpreting expressions.
+   - Use Case: When you need to interpret or compile expressions, such as SQL queries or simple scripting languages.
+   - Example: A simple expression interpreter that parses and evaluates arithmetic expressions.
+
+4. Iterator Pattern:
+   - Intent: Provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+   - Use Case: When you need to traverse a collection of objects and want to avoid exposing the internal structure of the collection.
+   - Example: Iterating over a list of items in a collection or a complex data structure like a tree or graph.
+
+5. Mediator Pattern:
+   - Intent: Defines an object that encapsulates how a set of objects interact. It promotes loose coupling by keeping objects from referring to each other explicitly.
+   - Use Case: When you need to centralize complex communications between multiple objects to promote loose coupling.
+   - Example: A chat room where users interact with each other through a mediator that handles message distribution.
+
+6. Memento Pattern:
+   - Intent: Captures and externalizes an object's internal state without violating encapsulation, allowing the object to be restored to that state later.
+   - Use Case: When you need to save and restore the state of an object, such as implementing undo functionality.
+   - Example: A text editor with undo/redo functionality where the state of the document can be saved and restored.
+
+7. Observer Pattern:
+   - Intent: Defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+   - Use Case: When multiple objects need to be notified of changes in another object, such as event handling systems.
+   - Example: A subscription system where subscribers receive updates when the state of the subject (e.g., weather station) changes.
+
+8. State Pattern:
+   - Intent: Allows an object to change its behavior when its internal state changes. The object will appear to change its class.
+   - Use Case: When an object's behavior depends on its state and it must change its behavior at runtime.
+   - Example: A context-aware application where the behavior of the application changes based on different states (e.g., login state, active state).
+
+9. Strategy Pattern:
+   - Intent: Defines a family of algorithms, encapsulates each one, and makes them interchangeable. The algorithm can be selected at runtime.
+   - Use Case: When you need to define multiple algorithms for a task and want to choose among them at runtime.
+   - Example: A payment processing system where different payment methods (e.g., credit card, PayPal) are implemented as separate strategies.
+
+10. Template Method Pattern:
+    - Intent: Defines the skeleton of an algorithm in a base class but lets subclasses override specific steps of the algorithm without changing its structure.
+    - Use Case: When you need to define the basic steps of an algorithm but allow subclasses to implement specific steps.
+    - Example: A data processing pipeline where the overall process is fixed but specific steps (e.g., data validation, transformation) can be customized.
+
+11. Visitor Pattern:
+    - Intent: Defines a new operation to a class of objects without changing the classes on which it operates. It allows you to add further operations to objects without modifying them.
+    - Use Case: When you need to perform operations on a set of objects with different types and want to avoid cluttering the classes with operations.
+    - Example: An object structure where different types of operations (e.g., rendering, serializing) can be applied without changing the objects.
+
+Summary:
+
+- Chain of Responsibility: Passes a request through a chain of handlers.
+- Command: Encapsulates requests as objects.
+- Interpreter: Defines a grammar and provides an interpreter.
+- Iterator: Provides sequential access to elements.
+- Mediator: Centralizes communication between objects.
+- Memento: Captures and restores an object's state.
+- Observer: Notifies dependent objects of state changes.
+- State: Changes behavior based on state.
+- Strategy: Defines interchangeable algorithms.
+- Template Method: Defines an algorithm skeleton with customizable steps.
+- Visitor: Adds operations to objects without changing their classes.
+
+These patterns help in designing robust, maintainable, and flexible systems by addressing common communication and behavior-related challenges.
+
+==========================
