@@ -1,3 +1,15 @@
+"
+    Design patterns are typical 
+        solutions 
+            to 
+        commonly occurring problems 
+            in software design. 
+"
+
+Alexander Shvets
+    https://refactoring.guru/design-patterns
+    https://refactoring.guru/refactoring
+
 The 23 Gang of Four (GoF) Design Patterns 
 refer to a set of software design patterns 
 introduced by the book 
@@ -6,16 +18,17 @@ written by
     Erich Gamma, 
     Richard Helm, 
     Ralph Johnson, 
-    and John Vlissides—often 
-    
-    referred to as the "Gang of Four." 
+    and 
+    John Vlissides
+    —
+    often referred to as the "Gang of Four." 
 These patterns are categorized into three types: 
     Creational, 
     Structural, and 
     Behavioral.
 
 1. Creational Patterns
-    Creational patterns deal with object creation mechanisms, 
+    Creational patterns deal with "object creation mechanisms", 
     trying to create objects in a manner suitable to the situation. 
     The basic form of object creation could lead 
     to design problems or added complexity to the design. 
@@ -43,7 +56,7 @@ These patterns are categorized into three types:
     by copying this prototype.
 
 2. Structural Patterns
-    Structural patterns deal with object composition or the way 
+    Structural patterns deal with "object composition" or the way 
     to assemble objects and classes into larger structures 
     while keeping these structures flexible and efficient.
 
@@ -76,7 +89,7 @@ These patterns are categorized into three types:
     Provides a surrogate or placeholder 
     for another object to control access to it.
 
-3. Behavioral Patterns
+3. Behavioral Patterns  : "communication of the objects"
     Behavioral patterns are concerned with algorithms and 
     the assignment of responsibilities between objects. 
     They deal with how objects interact and 
