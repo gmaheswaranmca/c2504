@@ -105,8 +105,8 @@ enabling flexibility and easier testing.
 
 C# Implementation
 
-1. Patient Management
-```csharp
+//1. Patient Management
+//```csharp
 public interface IPatientRepository
 {
     void AddPatient(Patient patient);
@@ -147,10 +147,10 @@ public class PatientRepository : IPatientRepository
         return _patients;
     }
 }
-```
+//```
 
-2. Appointment Scheduling
-```csharp
+//2. Appointment Scheduling
+//```csharp
 public interface IAppointmentRepository
 {
     void ScheduleAppointment(Appointment appointment);
@@ -197,10 +197,10 @@ public class AppointmentRepository : IAppointmentRepository
         return _appointments.Where(a => a.PatientID == patientID);
     }
 }
-```
+//```
 
-3. Billing and Payment Processing
-```csharp
+//3. Billing and Payment Processing
+//```csharp
 public interface IBillingRepository
 {
     void GenerateInvoice(Invoice invoice);
@@ -272,10 +272,10 @@ public class InsuranceProcessor : IPaymentProcessor
         // Process insurance payment logic
     }
 }
-```
+//```
 
-4. Service Layer
-```csharp
+//4. Service Layer
+//```csharp
 public class PatientService
 {
     private readonly IPatientRepository _patientRepository;
@@ -341,7 +341,7 @@ public class BillingService
         _paymentProcessor.ProcessPayment(payment);
     }
 }
-```
+//```
 
 Summary
 In this scenario:
