@@ -14,7 +14,7 @@ The SOLID design principles are
                                             both should depend on abstractions only 
 
     Single Responsibility Principle (SRP) 
-        "class should have only one responsibility"
+        "class must have only one responsibility"
         Employee{manageDetail(),calculateSalary(),
            trackAttendance(),  generatePerformanceReview()}
         =>
@@ -23,9 +23,7 @@ The SOLID design principles are
         AttendanceTracker{track()}
         PerformanceReviewGenerator{generate()}
     Open/Closed Principle (OCP)
-        "The class should be
-            open for extension but 
-            closed for modification."
+        "class is open for extension and closed for modification"
         PaymentProcessor{processPayPal(),processCredidCard(),processBankTransfer()} 
         => 
         PaymentMethod{process()}, 
@@ -33,22 +31,13 @@ The SOLID design principles are
         CredidCardPaymentMethod:PaymentMethod{},
         BankTransferPaymentMethod:PaymentMethod{}
     Liskov Substitution Principle (LSP)
-        "This principle states 
-        that subclasses should be substitutable 
-        for their base classes."
-        ie 
-        "You should be able 
-        to use a subclass in any situation 
-        where a base class is expected, 
-        without noticing any difference."
-
-        -- to use subclass in place of base class
+        "subclassess should be substituable for base class"
         Bird{layEggs(),fly()}, Penguin:Bird{}
         =>
         Bird{layEggs()},FlyingBird:Bird{fly()}, Penguin:Bird{}
     Interface Segregation Principle (ISP)
-         "Clients should not be forced 
-        to depend on interfaces they do not use."
+         "client depends only on the interfaces they use.
+         client should not depend on the interfaces they do not use"
         IVehicle{drive(),fly(),sail()},
         Car: IVehicle, Plane: IVehicle, Boat: IVehicle
         =>
@@ -57,13 +46,8 @@ The SOLID design principles are
         ISailable{sail()},
         Car: IDrivable, Plane: IFlyable, Boat: ISailable
     Dependency Inversion Principle (DIP)
-        "High-level modules 
-            should not depend on 
-        low-level modules, 
-        but 
-            both 
-                should depend on 
-            abstractions."
+        "high level module should not depend the low level module 
+          both should depend on abstractions only"
 
         advantage: loosely coupled, ie high cohesion
 
