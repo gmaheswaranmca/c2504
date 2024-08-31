@@ -357,3 +357,30 @@ that the system is easily extendable, testable, and maintainable.
 The system adheres to all SOLID principles, 
 providing a robust and scalable design 
 for a clinic's management system.
+
+Usage
+```
+// Example of using the full Clinic Management System
+var patientRepository = new PatientRepository();
+var appointmentRepository = new AppointmentRepository();
+var billingRepository = new BillingRepository();
+var paymentProcessor = new CreditCardProcessor();
+
+var patientService = new PatientService(patientRepository);
+var appointmentService = new AppointmentService(appointmentRepository);
+var billingService = new BillingService(billingRepository, paymentProcessor);
+var doctorService = new DoctorService(patientRepository);
+
+// Register a patient
+patientService.RegisterPatient(1, "Jane Doe", "Hypertension, Allergic to Penicillin");
+
+// Schedule an appointment
+appointmentService.ScheduleAppointment(1, 1, DateTime.Now.AddDays(2), "Dr. Johnson");
+
+// Generate an invoice and process payment
+billingService.GenerateInvoice(1, 1, 150.00m);
+billingService.ProcessPayment(1, 1, 150.00m, "Credit Card");
+
+// Doctor reviews the patient's medical history
+doctorService.ReviewPatientHistory(1);
+```
