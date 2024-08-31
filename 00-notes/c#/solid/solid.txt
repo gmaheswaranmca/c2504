@@ -5,6 +5,14 @@ The SOLID design principles are
         easy to maintain, 
                 extend, and 
                 understand. 
+    Single Responsibility Principle (SRP) : class must have only one responsibility 
+    Open/Closed Principle (OCP)           : class is open for extension and closed for modification
+    Liskov Substitution Principle (LSP)   : subclassess should be substituable for base class 
+    Interface Segregation Principle (ISP) : client depends only on the interfaces they use 
+                                            client should not depend on the interfaces they do not use 
+    Dependency Inversion Principle (DIP)  : high level module should not depend the low level module 
+                                            both should depend on abstractions only 
+
     Single Responsibility Principle (SRP) 
         "class should have only one responsibility"
         Employee{manageDetail(),calculateSalary(),
