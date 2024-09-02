@@ -1,0 +1,293 @@
+Problem Statement: Prescription Cost Management
+- Define a class: `PrescriptionCost` with the following properties:
+- `PrescriptionID` (integer)
+- `PatientName` (string)
+- `Medication` (string)
+- `Cost` (double, in dollars)
+- Tasks:
+1. Data Input:
+- Read N `prescriptionCosts` from the keyboard.
+2. Find Lowest Cost Prescription:
+- Display the prescription with the lowest cost.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Highest Cost Prescription:
+- Display the prescription with the second highest cost.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Medication Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+public class PrescriptionCost
+    {
+        public int PrescriptionID { get; set; }
+        public string PatientName { get; set; }
+        public string Medication { get; set; }
+        public double Cost { get; set; }
+
+        public static void ReadPrescription(PrescriptionCost[] prescriptions)
+        {
+            for (int i = 0; i < prescriptions.Length; i++)
+            {
+                prescriptions[i] = new PrescriptionCost();
+                Console.Write("Enter Prescription ID: ");
+                prescriptions[i].PrescriptionID = int.Parse(Console.ReadLine());
+                Console.Write("Enter Patient Name: ");
+                prescriptions[i].PatientName = Console.ReadLine();
+                Console.Write("Enter Medication: ");
+                prescriptions[i].Medication = Console.ReadLine();
+                Console.Write("Enter Cost: ");
+                prescriptions[i].Cost = double.Parse(Console.ReadLine());
+            }
+        }
+
+        public static void LowestCostPrescription(PrescriptionCost[] prescriptions)
+        {
+            PrescriptionCost lowestCostPrescription = prescriptions[0];
+            for (int i = 1; i < prescriptions.Length; i++)
+            {
+                if (prescriptions[i].Cost < lowestCostPrescription.Cost)
+                {
+                    lowestCostPrescription = prescriptions[i];
+                }
+            }
+            Console.WriteLine("\nPrescription with the Lowest Cost:");
+            Console.WriteLine(lowestCostPrescription);
+        }
+
+        public static void SecondHighestCostPrescription(PrescriptionCost[] prescriptions)
+        {
+            double highestCost = 0;
+            double secondHighestCost = 0;
+            PrescriptionCost secondHighestCostPrescription = null;
+
+            for (int i = 0; i < prescriptions.Length; i++)
+            {
+                if (prescriptions[i].Cost > highestCost)
+                {
+                    secondHighestCost = highestCost;
+                    highestCost = prescriptions[i].Cost;
+                }
+                else if (prescriptions[i].Cost > secondHighestCost && prescriptions[i].Cost < highestCost)
+                {
+                    secondHighestCost = prescriptions[i].Cost;
+                    secondHighestCostPrescription = prescriptions[i];
+                }
+            }
+
+            if (secondHighestCostPrescription != null)
+            {
+                Console.WriteLine("\nPrescription with the Second Highest Cost:");
+                Console.WriteLine(secondHighestCostPrescription);
+            }
+            else
+            {
+                Console.WriteLine("\nNo second highest cost prescription found.");
+            }
+
+        }
+
+        
+        private static void SelectionSortMedication(PrescriptionCost[] prescriptions)
+        {
+            int n = prescriptions.Length;
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (string.Compare(prescriptions[j].Medication, prescriptions[minIndex].Medication) < 0)
+                    {
+                        minIndex = j;
+                    }
+                }
+
+               
+                if (minIndex != i)
+                {
+                    PrescriptionCost temp = prescriptions[i];
+                    prescriptions[i] = prescriptions[minIndex];
+                    prescriptions[minIndex] = temp;
+                }
+            }
+       
+        }
+        public static void DisplySort(PrescriptionCost[] prescriptions)
+        {
+            SelectionSortMedication(prescriptions);
+
+            Console.WriteLine("\nPrescriptions Sorted by Medication Name:");
+            foreach (var prescription in prescriptions)
+            {
+                Console.WriteLine(prescription);
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {PrescriptionID}, Patient: {PatientName}, Medication: {Medication}, Cost: ${Cost}";
+        }
+ }
+
+    class Program
+    {
+          static void Main(string[] args)
+        {
+            Console.Write("Enter the number of prescriptions: ");
+            int N = int.Parse(Console.ReadLine());
+
+            PrescriptionCost[] prescriptions = new PrescriptionCost[N];
+            PrescriptionCost.ReadPrescription(prescriptions);
+
+            PrescriptionCost.LowestCostPrescription(prescriptions);
+            PrescriptionCost.SecondHighestCostPrescription(prescriptions);
+            PrescriptionCost.DisplySort(prescriptions);
+        }
+    }
+    }
+
+
+
+    ===========================
+
+
+
+    Problem Statement: Advanced Inheritance and Interface in Patient Care System
+- Define a base class: `CareProvider` with properties:
+- `ProviderID` (integer), `ProviderName` (string)
+- Method: `ProvideCare()` (virtual, void)
+- Define an interface: `IEmergencyResponder` with the following method:
+- `RespondToEmergency()` (void)
+- Define a derived class: `Nurse` that inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `ShiftTiming` (string)
+- Implement `ProvideCare()` to display care provided during the shift.
+- Implement `RespondToEmergency()` to handle emergency situations.
+- Define another derived class: `Doctor` that also inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `Specialization` (string)
+- Implement `ProvideCare()` to display care based on specialization.
+- Implement `RespondToEmergency()` to handle critical emergency situations.
+- Tasks:
+1. Care Management:
+- Read details for N `careProviders` (both Nurses and Doctors).
+2. Emergency Response:
+- Implement a method to simulate an emergency and call `RespondToEmergency()` for each care provider.
+3. Care Providing:
+- Display details of care provided by each provider using the overridden `ProvideCare()` method.
+public class Program
+    {
+        public class CareProvider
+        {
+            public int ProviderID { get; set; }
+            public string ProviderName { get; set; }
+
+            public virtual void ProvideCare() { }
+            
+        }
+
+        public interface IEmergencyResponder
+        {
+            void RespondToEmergency();
+        }
+
+        public class Nurse : CareProvider, IEmergencyResponder
+        {
+            public string ShiftTiming { get; set; }
+
+            public override void ProvideCare()
+            {
+                Console.WriteLine($"Nurse {ProviderName} is providing care during the {ShiftTiming} shift.");
+            }
+
+            public void RespondToEmergency()
+            {
+                Console.WriteLine($"Nurse {ProviderName} is responding to an emergency situation.");
+            }
+        }
+
+        public class Doctor : CareProvider, IEmergencyResponder
+        {
+            public string Specialization { get; set; }
+
+            public override void ProvideCare()
+            {
+                Console.WriteLine($"Doctor {ProviderName}, specializing in {Specialization}, is providing care.");
+            }
+
+            public void RespondToEmergency()
+            {
+                Console.WriteLine($"Doctor {ProviderName} is responding to a critical emergency situation.");
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of care providers: ");
+            int numberOfProviders = int.Parse(Console.ReadLine());
+
+            CareProvider[] careProviders = new CareProvider[numberOfProviders];
+
+            for (int i = 0; i < numberOfProviders; i++)
+            {
+                Console.Write("Enter type of care provider (Nurse/Doctor): ");
+                string type = Console.ReadLine();
+
+                CareProvider provider = null;
+
+                if (type.Equals("Nurse", StringComparison.OrdinalIgnoreCase))
+                {
+                    provider = new Nurse();
+                    Console.Write("Enter Shift Timing: ");
+                    ((Nurse)provider).ShiftTiming = Console.ReadLine();
+                }
+                else if (type.Equals("Doctor", StringComparison.OrdinalIgnoreCase))
+                {
+                    provider = new Doctor();
+                    Console.Write("Enter Specialization: ");
+                    ((Doctor)provider).Specialization = Console.ReadLine();
+                }
+
+                if (provider != null)
+                {
+                    Console.Write("Enter Provider ID: ");
+                    provider.ProviderID = int.Parse(Console.ReadLine());
+                    Console.Write("Enter Provider Name: ");
+                    provider.ProviderName = Console.ReadLine();
+
+                    careProviders[i] = provider;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid type entered.");
+                    i--; 
+                }
+            }
+
+            SimulateEmergency(careProviders);
+            DisplayCareProvided(careProviders);
+        }
+
+         static void SimulateEmergency(CareProvider[] careProviders)
+         {
+             Console.WriteLine("\nSimulating Emergency:");
+             foreach (var provider in careProviders)
+             {
+                 if (provider is IEmergencyResponder emergencyResponder)
+                 {
+                     emergencyResponder.RespondToEmergency();
+                 }
+             }
+         }
+       
+
+        static void DisplayCareProvided(CareProvider[] careProviders)
+        {
+            Console.WriteLine("\nCare Provided by Each Provider:");
+            foreach (var provider in careProviders)
+            {
+                provider.ProvideCare();
+            }
+        }
+    }
+
+}

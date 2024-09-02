@@ -1,0 +1,245 @@
+Problem Statement: Doctor Prescription System
+- Define a class: `DoctorPrescription` with the following properties:
+- `DoctorID` (integer)
+- `PatientName` (string)
+- `Medication` (string)
+- `Dosage` (double, in milligrams)
+- Tasks:
+1. Data Input:
+- Read N `doctorPrescriptions` from the keyboard.
+2. Find Minimum Dosage by a Specific Doctor:
+- For a given doctor's ID, display the prescription with the least dosage prescribed by them.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Third Maximum Dosage Overall:
+- Display the prescription with the third maximum dosage across all doctors.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Patient Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+public Class DoctorPrescription
+{
+    public int DoctorID { get; set; }
+    public string PatientName { get; set; }
+    public string Medication { get; set; }
+    public double Dosage { get; set; }  // In milligrams
+}
+
+static void main()
+{
+    Console.Write( "Enter number of prescriptions : " );
+    int numPrescription = int.Parse(Console.ReadLine());
+    DoctorPrescription[] doctorPrescription = new DoctorPrescription[numPrescription];
+    for ( int i =0; i < numPrescription; i++)
+    {
+        Console.Write( "Enter DoctorId : " );
+        doctorPrescription[i].DoctorID = int.Parse(Console.ReadLine());
+        Console.Write( "Enter PatientName : " );
+        doctorPrescription[i].PatientName = Console.ReadLine();
+        Console.Write( "Enter Medication : " );
+        doctorPrescription[i].Medication = Console.ReadLine();
+        Console.Write( "Enter Dosage (in mg) : " );
+        doctorPrescription[i].Dosage = double.Parse(Console.ReadLine());  
+    }
+
+    Console.Write( "Enter DoctorId to find minimum dosage prescribed : " );
+    int searchDoctorId = int.Parse(Console.ReadLine());
+    FindMinDosage( searchDoctorId, doctorPrescription );
+
+    // To sort based on patient names
+    PatientNameSort( doctorPrescription );
+
+    Console.WriteLine("Sorted list of prescription based on patient name :")
+    foreach (DoctorPrescription prescription in doctorPrescription)
+    {
+          Console.WriteLine(prescription)
+    }
+
+    // To sort based on dosage
+    DosageSort( DoctorPrescription[] doctorPrescription );
+
+    // To print third maximum value after sorting
+    Console.Write($"Third maximum dosage in overall : {doctorPrescription[numPrescription - 3].Dosage}")
+}
+
+// 2 - To find minmum dosage prescribed by given doctorid
+public void FindMinDosage( int doctorId, DoctorPrescription[] doctorPrescription )
+{
+     double minDosage = double.MaxValue;
+     foreach (DoctorPrescription prescription in doctorPrescription)
+     {
+         if (doctorPrescription.DoctorID == doctorID && doctorPrescription.Dosage < minDosage)
+         {
+             minDosage = doctorPrescription.Dosage;
+         }
+     }
+    Console.Write($"Minimum Dosage for DoctorID {doctorID} : {minDosage} ");
+}
+
+// 4 - To sort based on patient names
+public void PatientNameSort( DoctorPrescription[] doctorPrescription )
+{
+    int size = doctorPrescription.Length;
+    for (int i = 0; i < size - 1; i++ )
+    {
+        int minIndex = i;
+        for (int j = i+1; i < size; i++ )
+        {
+            if(string.Compare(doctorPrescription[j].PatientName , doctorPrescription[minIndex].PatientName) < 0)
+             {
+                  minIndex = j;
+             }
+        }
+        if(minIndex != i)
+        {
+             DoctorPrescription temp = doctorPrescription[minIndex].PatientName;
+             doctorPrescription[minIndex].PatientName = doctorPrescription[i].PatientName;
+             doctorPrescription[i].PatientName = temp;
+        }
+    }
+}
+
+// 3 - To sort based on dosage
+public void DosageSort( DoctorPrescription[] doctorPrescription )
+{
+    int size = doctorPrescription.Length;
+    for (int i = 0; i < size - 1; i++ )
+    {
+        int minIndex = i;
+        for (int j = i+1; i < size; i++ )
+        {
+            if( doctorPrescription[j].Dosage < doctorPrescription[minIndex].Dosage)
+            {
+                 minIndex = j;
+            }
+        }
+        if(minIndex != i)
+        {
+             DoctorPrescription temp = doctorPrescription[minIndex].Dosage;
+             doctorPrescription[minIndex].Dosage = doctorPrescription[i].Dosage;
+             doctorPrescription[i].Dosage = temp;
+        }
+    }
+}
+
+
+========================
+
+
+Problem Statement: Interface Implementation in Patient Monitoring
+- Define an interface: `IVitalMonitor` with the following methods:
+- `CheckVitals()` (void)
+- `GenerateAlert()` (void)
+- Define a class: `Patient` with properties:
+- `PatientID` (integer), `Name` (string)
+- Define a derived class: `ICUPatient` that inherits from `Patient` and implements the `IVitalMonitor` interface:
+- Properties: `HeartRate` (integer), `BloodPressure` (string)
+- Implement `CheckVitals()` to check if vitals are within a safe range.
+- Implement `GenerateAlert()` to trigger an alert if vitals are abnormal.
+- Define another derived class: `OutPatient` that also inherits from `Patient` and implements the `IVitalMonitor` interface:
+- Properties: `Temperature` (double), `RespirationRate` (integer)
+- Implement `CheckVitals()` and `GenerateAlert()` with different conditions.
+- Tasks:
+1. Monitor Vitals:
+- Read N `patients` of both types (ICU and OutPatients).
+2. Generate Alerts:
+- Call `CheckVitals()` and `GenerateAlert()` for each patient and display any alerts generated.
+// Interface
+public interface IVitalMonitor
+{
+    void CheckVitals();
+    void GenerateAlert();
+}
+
+// Base class
+public class Patient
+{
+    public int PatientID { get; set; }
+    public string Name { get; set; }
+}
+
+// Derived class 1:
+public class ICUPatient : Patient, IVitalMonitor
+{
+    public int HeartRate { get; set; }
+    public string BloodPressure { get; set; }
+    public void CheckVitals()
+    {
+        if(HeartRate > 100 || HeartRate < 60 || BloodPressure.ToLower() == "abnormal")
+        {
+             GenerateAlert();
+        }
+    }
+    void GenerateAlert()
+    {
+        Console.WriteLine($"Abnormality detected for ICUPatient :\nPatientID {PatientID}\nName{Name}");
+    }
+}
+
+// Derived class 2 :
+public class OutPatient : Patient, IVitalMonitor
+{
+    public double Temperature { get; set; }
+    public int RespirationRate { get; set; }
+    public void CheckVitals()
+    {
+        if(Temperature > 37.2 || Temperature < 36.1 || RespirationRate > 20 || RespirationRate < 12)
+        {
+             GenerateAlert();
+        }
+    }
+    void GenerateAlert()
+    {
+        Console.WriteLine($"Abnormality detected for OutPatient :\nPatientID {PatientID}\nName{Name}");
+    }
+}
+
+public enum PatientType
+{
+    ICUPatient,
+    OutPatient
+}
+
+static void Main()
+{
+    Console.Write("Enter number of patients : ");
+    int numPatients = int.Parse(Console.ReadLine());
+    Patient[] patient = new int[numPatients];
+    for (int i = 0; i < numPatients; i++ )
+    {
+        Console.Write("Enter patient type (1 - ICUPatient  or 2 - OutPatient ) : ");
+        int type = int.Parse(Console.ReadLine());
+        swwitch(type)
+        {
+             case 1: ICUPatient iCUPatient = new ICUPatient();
+                         Console.Write("Enter PatientID : ");
+                         iCUPatient.PatientID = int.Parse(Console.ReadLine());
+                         Console.Write("Enter patient name : ");
+                         iCUPatient.Name = Console.ReadLine();
+                         Console.Write("Enter HeartRate : ");
+                         iCUPatient.HeartRate = int.Parse(Console.ReadLine());
+                         Console.Write("Enter BloodPressure ('Normal' or 'Abnormal') : ");
+                         iCUPatient.BloodPressure = Console.ReadLine();
+                         patient[i] = iCUPatient;
+                         break;
+             case 2: OutPatient outPatient = new OutPatient();
+                         Console.Write("Enter PatientID : ");
+                         outPatient.PatientID = int.Parse(Console.ReadLine());
+                         Console.Write("Enter patient name : ");
+                         outPatient.Name = Console.ReadLine();
+                         Console.Write("Enter Temperature : ");
+                         outPatient.Temperature = double.Parse(Console.ReadLine());
+                         Console.Write("Enter RespirationRate  : ");
+                         outPatient.RespirationRate = int.Parse(Console.ReadLine());
+                         patient[i] = outPatient;
+                         break;
+             default : Console.WriteLine("Invalid choice.")
+                         break;
+        }
+    }
+    foreach (Patient i in patient)
+    {
+        i.CheckVitals();
+    }
+}

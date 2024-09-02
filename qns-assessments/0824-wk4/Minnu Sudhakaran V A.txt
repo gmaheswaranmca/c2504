@@ -1,0 +1,238 @@
+Problem Statement: Patient Allergy Management
+- Define a class: `Allergy` with the following properties:
+- `AllergyID` (integer)
+- `PatientName` (string)
+- `Allergen` (string)
+- `SeverityLevel` (integer, 1 to 10)
+- Tasks:
+1. Data Input:
+- Read N `allergies` from the keyboard.
+2. Find Most Severe Allergy:
+- Display the allergy with the highest severity level.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Least Severe Allergy:
+- Display the allergy with the second lowest severity level.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Allergen:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+using System;
+
+class Allergy
+{
+    public int AllergyID { get; set; }
+    public string PatientName { get; set; }
+    public string Allergen { get; set; }
+    public int SeverityLevel { get; set; }
+}
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the number of allergies: ");
+        int n = int.parse(Console.ReadLine());
+
+        Allergy[] allergies = new Allergy[n];
+
+    
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine("Enter details for allergy {0}:", i + 1);
+            Console.Write("Allergy ID: ");
+            int allergyID = int.parse(Console.ReadLine());
+            Console.Write("Patient Name: ");
+            string Name = Console.ReadLine();
+            Console.Write("Allergen: ");
+            string allergen = Console.ReadLine();
+            Console.Write("Severity Level: ");
+            int Level = int.parse(Console.ReadLine());
+
+            allergies[i] = new Allergy
+                       { AllergyID = allergyID,
+                         PatientName = Name,
+                         Allergen = allergen, 
+                        SeverityLevel = Level };
+        }
+
+       
+        Allergy mostSevereAllergy = FindMostSevereAllergy(allergies);
+        Console.WriteLine("Most severe allergy: Allergy ID = {0}, Patient Name = {1}, 
+             Allergen = {2}, Severity Level = {3}", mostSevereAllergy.AllergyID, 
+             mostSevereAllergy.PatientName, mostSevereAllergy.Allergen, 
+             mostSevereAllergy.SeverityLevel);
+
+       
+        Allergy secondLeastSevereAllergy = FindSecondLeastSevereAllergy(allergies);
+        Console.WriteLine("Second least severe allergy: Allergy ID = {0}, Patient Name = 
+          {1}, Allergen = {2}, Severity Level = {3}", secondLeastSevereAllergy.AllergyID, 
+         secondLeastSevereAllergy.PatientName, secondLeastSevereAllergy.Allergen, 
+         secondLeastSevereAllergy.SeverityLevel);
+
+       
+        
+    }
+
+    public Allergy FindMostSevereAllergy(Allergy[] allergies)
+    {
+        Allergy mostSevereAllergy = allergies[0];
+        for (int i = 1; i < allergies.Length; i++)
+        {
+            if (allergies[i].SeverityLevel > mostSevereAllergy.SeverityLevel)
+            {
+                mostSevereAllergy = allergies[i];
+            }
+        }
+        return mostSevereAllergy;
+    }
+
+   public Allergy FindSecondLeastSevereAllergy(Allergy[] allergies)
+    {
+        int minSeverity = int.MaxValue;
+        int secondMinSeverity = int.MaxValue;
+        Allergy secondLeastSevereAllergy = null;
+
+        for (int i = 0; i < allergies.Length; i++)
+        {
+            if (allergies[i].SeverityLevel < minSeverity)
+            {
+                secondMinSeverity = minSeverity;
+                minSeverity = allergies[i].SeverityLevel;
+                secondLeastSevereAllergy = allergies[i];
+            }
+            else if (allergies[i].SeverityLevel < secondMinSeverity && allergies[i].SeverityLevel != minSeverity)
+            {
+                secondMinSeverity = allergies[i].SeverityLevel;
+                secondLeastSevereAllergy = allergies[i];
+            }
+        }
+        return secondLeastSevereAllergy;
+    }
+
+===============
+
+    
+    Problem Statement: Interface Implementation in Patient Monitoring
+- Define an interface: `IVitalMonitor` with the following methods:
+- `CheckVitals()` (void)
+- `GenerateAlert()` (void)
+- Define a class: `Patient` with properties:
+- `PatientID` (integer), `Name` (string)
+- Define a derived class: `ICUPatient` that inherits from `Patient` and implements the `IVitalMonitor` interface:
+- Properties: `HeartRate` (integer), `BloodPressure` (string)
+- Implement `CheckVitals()` to check if vitals are within a safe range.
+- Implement `GenerateAlert()` to trigger an alert if vitals are abnormal.
+- Define another derived class: `OutPatient` that also inherits from `Patient` and implements the `IVitalMonitor` interface:
+- Properties: `Temperature` (double), `RespirationRate` (integer)
+- Implement `CheckVitals()` and `GenerateAlert()` with different conditions.
+- Tasks:
+1. Monitor Vitals:
+- Read N `patients` of both types (ICU and OutPatients).
+2. Generate Alerts:
+- Call `CheckVitals()` and `GenerateAlert()` for each patient and display any alerts generated.
+using System;
+
+interface IVitalMonitor
+{
+    void CheckVitals();
+    void GenerateAlert();
+}
+
+class Patient
+{
+    public int PatientID { get; set; }
+    public string Name { get; set; }
+}
+
+class ICUPatient : Patient, IVitalMonitor
+{
+    public int HeartRate { get; set; }
+    public string BloodPressure { get; set; }
+
+    public void CheckVitals()
+    {
+        if (HeartRate < 60 || HeartRate > 100 || BloodPressure != "Normal")
+        {
+            GenerateAlert();
+        }
+    }
+
+    public void GenerateAlert()
+    {
+        Console.WriteLine("Alert: Abnormal vitals  " + Name);
+    }
+}
+
+class OutPatient : Patient, IVitalMonitor
+{
+    public double Temperature { get; set; }
+    public int RespirationRate { get; set; }
+
+    public void CheckVitals()
+    {
+        if (Temperature > 102 || RespirationRate < 12 || RespirationRate > 20)
+        {
+            GenerateAlert();
+        }
+    }
+
+    public void GenerateAlert()
+    {
+        Console.WriteLine("Alert: Abnormal vitals  " + Name);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the number of patients: ");
+        int n = int.parse(Console.ReadLine());
+
+        Patient[] patients = new Patient[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine("Enter details for patient {0}:", i + 1);
+            Console.Write("Patient ID: ");
+            int patientID = int.parse(Console.ReadLine());
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            Console.Write(" ICU/OutPatient: ");
+            string type = Console.ReadLine();
+
+            if (type == "ICU")
+            {
+                Console.Write("Heart Rate: ");
+                int heartRate =int.parse(Console.ReadLine());
+                Console.Write("Blood Pressure: ");
+                string bloodPressure = Console.ReadLine();
+
+                patients[i] = new ICUPatient
+                        { PatientID = patientID, Name = name, HeartRate = heartRate, 
+                         BloodPressure = bloodPressure };
+            }
+            else if (type == "OutPatient")
+            {
+                Console.Write("Temperature: ");
+                double temperature = double(Console.ReadLine());
+                Console.Write("Respiration Rate: ");
+                int respirationRate = int.parse(Console.ReadLine());
+
+                patients[i] = new OutPatient
+                                 { PatientID = patientID, Name = name, Temperature = temperature, 
+                                 RespirationRate = respirationRate };
+            }
+        }
+
+        foreach (Patient patient in patients)
+        {
+            if (patient isIVitalMonitor)
+            {
+                IVitalMonitor vitalMonitor = (IVitalMonitor)patient;
+                vitalMonitor.CheckVitals();
+            }
+        }
+    }
+}

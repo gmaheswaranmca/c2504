@@ -1,0 +1,340 @@
+Problem Statement: Hospital Medication Management
+- Define a class: `HospitalMedication` with the following properties:
+- `HospitalID` (integer)
+- `DoctorName` (string)
+- `Medication` (string)
+- `Dosage` (double, in milligrams)
+- Tasks:
+1. Data Entry:
+- Read N `hospitalMedications` from the keyboard.
+2. Find Maximum Dosage by a Specific Doctor:
+- For a given doctor's name, display the medication with the highest dosage prescribed by them.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Least Dosage Overall:
+- Display the medication with the second least dosage across all hospitals.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Medication Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+using System;
+using System.Collections.Generic;
+
+public class HospitalMedication
+{
+    public int HospitalID { get; set; }
+    public string DoctorName { get; set; }
+    public string Medication { get; set; }
+    public double Dosage { get; set; }
+
+    public HospitalMedication(int hospitalID, string doctorName, string medication, double dosage)
+    {
+        HospitalID = hospitalID;
+        DoctorName = doctorName;
+        Medication = medication;
+        Dosage = dosage;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        List<HospitalMedication> medications = new List<HospitalMedication>();
+
+        // Data Entry
+        Console.Write("Enter the number of hospital medications: ");
+        int N = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < N; i++)
+        {
+            Console.WriteLine($"Enter details for Medication {i + 1}:");
+
+            Console.Write("Hospital ID: ");
+            int hospitalID = int.Parse(Console.ReadLine());
+
+            Console.Write("Doctor's Name: ");
+            string doctorName = Console.ReadLine();
+
+            Console.Write("Medication: ");
+            string medication = Console.ReadLine();
+
+            Console.Write("Dosage (in mg): ");
+            double dosage = double.Parse(Console.ReadLine());
+
+            medications.Add(new HospitalMedication(hospitalID, doctorName, medication, dosage));
+        }
+
+        // 2. Find Maximum Dosage by a Specific Doctor
+        Console.Write("Enter doctor's name to find the medication with the highest dosage: ");
+        string searchDoctor = Console.ReadLine();
+
+        HospitalMedication maxDosageMedication = null;
+        foreach (var med in medications)
+        {
+            if (med.DoctorName == searchDoctor)
+            {
+                if (maxDosageMedication == null || med.Dosage > maxDosageMedication.Dosage)
+                {
+                    maxDosageMedication = med;
+                }
+            }
+        }
+
+        if (maxDosageMedication != null)
+        {
+            Console.WriteLine($"Medication with the highest dosage by {searchDoctor}:");
+            Console.WriteLine($"Hospital ID: {maxDosageMedication.HospitalID}");
+            Console.WriteLine($"Medication: {maxDosageMedication.Medication}");
+            Console.WriteLine($"Dosage: {maxDosageMedication.Dosage} mg");
+        }
+        else
+        {
+            Console.WriteLine($"No medications found for doctor {searchDoctor}.");
+        }
+
+        // 3. Find Second Least Dosage Overall
+        if (medications.Count < 2)
+        {
+            Console.WriteLine("Not enough data to find the second least dosage.");
+        }
+        else
+        {
+            double minDosage = double.MaxValue;
+            double secondMinDosage = double.MaxValue;
+
+            foreach (var med in medications)
+            {
+                if (med.Dosage < minDosage)
+                {
+                    secondMinDosage = minDosage;
+                    minDosage = med.Dosage;
+                }
+                else if (med.Dosage < secondMinDosage && med.Dosage > minDosage)
+                {
+                    secondMinDosage = med.Dosage;
+                }
+            }
+
+            if (secondMinDosage == double.MaxValue)
+            {
+                Console.WriteLine("No second least dosage found.");
+            }
+            else
+            {
+                Console.WriteLine($"Second least dosage overall: {secondMinDosage} mg");
+                Console.WriteLine("Medication(s) with the second least dosage:");
+                foreach (var med in medications)
+                {
+                    if (med.Dosage == secondMinDosage)
+                    {
+                        Console.WriteLine($"Hospital ID: {med.HospitalID}");
+                        Console.WriteLine($"Doctor's Name: {med.DoctorName}");
+                        Console.WriteLine($"Medication: {med.Medication}");
+                        Console.WriteLine($"Dosage: {med.Dosage} mg");
+                    }
+                }
+            }
+        }
+
+        // 4. Sort by Medication Name
+        Console.WriteLine("Sorting medications by medication name...");
+        InsertionSortByMedicationName(medications);
+
+        Console.WriteLine("Sorted Medications:");
+        foreach (var med in medications)
+        {
+            Console.WriteLine($"Hospital ID: {med.HospitalID}");
+            Console.WriteLine($"Doctor's Name: {med.DoctorName}");
+            Console.WriteLine($"Medication: {med.Medication}");
+            Console.WriteLine($"Dosage: {med.Dosage} mg");
+            Console.WriteLine();
+        }
+    }
+
+    // Custom sorting algorithm (Insertion Sort) for sorting by medication name
+    static void InsertionSortByMedicationName(List<HospitalMedication> medications)
+    {
+        for (int i = 1; i < medications.Count; i++)
+        {
+            HospitalMedication key = medications[i];
+            int j = i - 1;
+
+            while (j >= 0 && string.Compare(medications[j].Medication, key.Medication, StringComparison.Ordinal) > 0)
+            {
+                medications[j + 1] = medications[j];
+                j--;
+            }
+            medications[j + 1] = key;
+        }
+    }
+}
+
+
+=============================
+
+
+
+Problem Statement: Interface Implementation in Patient Monitoring
+- Define an interface: `IVitalMonitor` with the following methods:
+- `CheckVitals()` (void)
+- `GenerateAlert()` (void)
+- Define a class: `Patient` with properties:
+- `PatientID` (integer), `Name` (string)
+- Define a derived class: `ICUPatient` that inherits from `Patient` and implements the `IVitalMonitor` interface:
+- Properties: `HeartRate` (integer), `BloodPressure` (string)
+- Implement `CheckVitals()` to check if vitals are within a safe range.
+- Implement `GenerateAlert()` to trigger an alert if vitals are abnormal.
+- Define another derived class: `OutPatient` that also inherits from `Patient` and implements the `IVitalMonitor` interface:
+- Properties: `Temperature` (double), `RespirationRate` (integer)
+- Implement `CheckVitals()` and `GenerateAlert()` with different conditions.
+- Tasks:
+1. Monitor Vitals:
+- Read N `patients` of both types (ICU and OutPatients).
+2. Generate Alerts:
+- Call `CheckVitals()` and `GenerateAlert()` for each patient and display any alerts generated.
+using System;
+using System.Collections.Generic;
+
+// Define the IVitalMonitor interface
+interface IVitalMonitor
+{
+    void CheckVitals();
+    void GenerateAlert();
+}
+
+// Define the Patient class
+class Patient
+{
+    public int PatientID { get; set; }
+    public string Name { get; set; }
+}
+
+// Define the ICUPatient class implementing IVitalMonitor
+class ICUPatient : Patient, IVitalMonitor
+{
+    public int HeartRate { get; set; }
+    public string BloodPressure { get; set; }
+
+    // Implement CheckVitals for ICU patients
+    public void CheckVitals()
+    {
+        if (HeartRate < 60 || HeartRate > 100)
+        {
+            Console.WriteLine($"ICU Patient {Name} (ID: {PatientID}) has abnormal heart rate: {HeartRate}");
+        }
+        if (BloodPressure == "High")
+        {
+            Console.WriteLine($"ICU Patient {Name} (ID: {PatientID}) has abnormal blood pressure: {BloodPressure}");
+        }
+    }
+
+    // Implement GenerateAlert for ICU patients
+    public void GenerateAlert()
+    {
+        if (HeartRate < 60 || HeartRate > 100 || BloodPressure == "High")
+        {
+            Console.WriteLine($"Alert for ICU Patient {Name} (ID: {PatientID}): Critical vitals detected!");
+        }
+    }
+}
+
+// Define the OutPatient class implementing IVitalMonitor
+class OutPatient : Patient, IVitalMonitor
+{
+    public double Temperature { get; set; }
+    public int RespirationRate { get; set; }
+
+    // Implement CheckVitals for OutPatients
+    public void CheckVitals()
+    {
+        if (Temperature < 97.0 || Temperature > 99.5)
+        {
+            Console.WriteLine($"OutPatient {Name} (ID: {PatientID}) has abnormal temperature: {Temperature}");
+        }
+        if (RespirationRate < 12 || RespirationRate > 20)
+        {
+            Console.WriteLine($"OutPatient {Name} (ID: {PatientID}) has abnormal respiration rate: {RespirationRate}");
+        }
+    }
+
+    // Implement GenerateAlert for OutPatients
+    public void GenerateAlert()
+    {
+        if (Temperature < 97.0 || Temperature > 99.5 || RespirationRate < 12 || RespirationRate > 20)
+        {
+            Console.WriteLine($"Alert for OutPatient {Name} (ID: {PatientID}): Abnormal vitals detected!");
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        List<IVitalMonitor> patients = new List<IVitalMonitor>();
+
+        // Read N patients from the keyboard
+        Console.Write("Enter the number of patients: ");
+        int N = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < N; i++)
+        {
+            Console.WriteLine($"Enter details for patient {i + 1}:");
+
+            Console.Write("Enter type (ICU/OutPatient): ");
+            string type = Console.ReadLine();
+
+            Console.Write("Enter Patient ID: ");
+            int patientID = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter Patient Name: ");
+            string name = Console.ReadLine();
+
+            if (type.Equals("ICU", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.Write("Enter Heart Rate: ");
+                int heartRate = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter Blood Pressure (Normal/High): ");
+                string bloodPressure = Console.ReadLine();
+
+                patients.Add(new ICUPatient
+                {
+                    PatientID = patientID,
+                    Name = name,
+                    HeartRate = heartRate,
+                    BloodPressure = bloodPressure
+                });
+            }
+            else if (type.Equals("OutPatient", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.Write("Enter Temperature (in Fahrenheit): ");
+                double temperature = double.Parse(Console.ReadLine());
+
+                Console.Write("Enter Respiration Rate: ");
+                int respirationRate = int.Parse(Console.ReadLine());
+
+                patients.Add(new OutPatient
+                {
+                    PatientID = patientID,
+                    Name = name,
+                    Temperature = temperature,
+                    RespirationRate = respirationRate
+                });
+            }
+            else
+            {
+                Console.WriteLine("Invalid patient type. Skipping...");
+            }
+        }
+
+        // Monitor vitals and generate alerts for each patient
+        foreach (IVitalMonitor patient in patients)
+        {
+            patient.CheckVitals();
+            patient.GenerateAlert();
+        }
+    }
+}

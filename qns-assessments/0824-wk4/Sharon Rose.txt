@@ -1,0 +1,313 @@
+Problem Statement: Prescription Cost Management
+- Define a class: `PrescriptionCost` with the following properties:
+- `PrescriptionID` (integer)
+- `PatientName` (string)
+- `Medication` (string)
+- `Cost` (double, in dollars)
+- Tasks:
+1. Data Input:
+- Read N `prescriptionCosts` from the keyboard.
+2. Find Lowest Cost Prescription:
+- Display the prescription with the lowest cost.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Highest Cost Prescription:
+- Display the prescription with the second highest cost.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Medication Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PrescriptionCost
+{
+    class PrescriptionCost
+    {
+        public int PrescriptionID { get; set; }
+        public string PatientName { get; set; }
+
+        public string Medication { get; set; }
+
+        public double Cost { get; set; }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Enter number of prescriptions: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            PrescriptionCost[] prescriptionCosts = new PrescriptionCost[n];
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Enter prescription details: ");
+                Console.WriteLine("Enter PrescriptionID: ");
+                int prescriptionID = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("PatientName: ");
+                string PatientName = Console.ReadLine();
+                Console.WriteLine("Medication: ");
+                string Medication = Console.ReadLine();
+                Console.WriteLine("Cost: ");
+                double cost = Convert.ToDouble(Console.ReadLine());
+
+                prescriptionCosts[i] = new PrescriptionCost
+                {
+                    PrescriptionID = prescriptionID,
+                    PatientName = PatientName,
+                    Medication = Medication,
+                    Cost = cost
+                };
+
+            }
+            PrescriptionCost lowestCostPrescription = FindLowestCostPrescription(prescriptionCosts);
+            Console.WriteLine("Lowest Cost Prescription: ");
+            Console.WriteLine($"PrescriptionID: {lowestCostPrescription.PrescriptionID}, PatientName: {lowestCostPrescription.PatientName}, Medication: {lowestCostPrescription.Medication}, Cost: {lowestCostPrescription.Cost}");
+
+            PrescriptionCost secondHighestCostsPrescription = FindSecondHighestCostPrescription(prescriptionCosts);
+            Console.WriteLine("Second Highest Cost Prescription: ");
+            Console.WriteLine($"PrescriptionID: {secondHighestCostsPrescription.PrescriptionID}, PatientName: {secondHighestCostsPrescription.PatientName}, Medication: {secondHighestCostsPrescription.Medication}, Cost: {secondHighestCostsPrescription.Cost}");
+
+            BubbleSortByMedicationName(prescriptionCosts);
+            Console.WriteLine("Prescription sorted by medication name: ");
+            foreach (var prescription in prescriptionCosts)
+            {
+                Console.WriteLine($"PrescriptionID: {prescription.PrescriptionID}, PatientName: {prescription.PrescriptionID}, Medication: {prescription.PrescriptionID}, Cost: {prescription.PrescriptionID}");
+
+            }
+        }
+        static PrescriptionCost FindLowestCostPrescription(PrescriptionCost[] prescriptionCosts)
+        {
+            PrescriptionCost lowestCostsPrescription = prescriptionCosts[0];
+            for (int i = 1; i < prescriptionCosts.Length; i++)
+            {
+                if (prescriptionCosts[i].Cost < lowestCostsPrescription.Cost)
+                {
+                    lowestCostsPrescription = prescriptionCosts[i];
+
+                }
+
+            }
+            return lowestCostsPrescription;
+
+        }
+        static PrescriptionCost FindSecondHighestCostPrescription(PrescriptionCost[] prescriptionCosts)
+        {
+            double maxCost = double.MinValue;
+            double secondmaxCost = double.MinValue;
+            PrescriptionCost secondHighestCostPrescription = null;
+
+            for (int i = 1; i < prescriptionCosts.Length; i++)
+            {
+                if (prescriptionCosts[i].Cost > maxCost)
+
+                {
+                    secondmaxCost = maxCost;
+                    maxCost = prescriptionCosts[i].Cost;
+                    secondHighestCostPrescription = prescriptionCosts[i];
+                }
+                else if (prescriptionCosts[i].Cost > secondmaxCost && prescriptionCosts[i].Cost != maxCost)
+                {
+                    secondmaxCost = prescriptionCosts[i].Cost;
+                    secondHighestCostPrescription = prescriptionCosts[i];
+                }
+            }
+            return secondHighestCostPrescription;
+        }
+
+        static void BubbleSortByMedicationName(PrescriptionCost[] prescriptionCosts)
+        {
+            int n = prescriptionCosts.Length;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (string.Compare(prescriptionCosts[j].Medication, prescriptionCosts[j + 1].Medication) > 0)
+                        {
+                        PrescriptionCost temp = prescriptionCosts[j];
+                        prescriptionCosts[j] = prescriptionCosts[j + 1];
+                        prescriptionCosts[j + 1] = temp;
+                    }
+                }
+
+
+            }
+        }
+    }
+}
+
+
+==================
+
+Problem Statement: Interface and Inheritance in Hospital Equipment Management
+- Define an interface: `IServiceable` with the following methods:
+- `Service()` (void)
+- `GetServiceStatus()` (string)
+- Define a base class: `Equipment` with properties:
+- `EquipmentID` (integer), `Name` (string)
+- Define a derived class: `DiagnosticEquipment` that inherits from `Equipment` and implements `IServiceable`:
+- Additional Property: `LastServiceDate` (DateTime)
+- Implement `Service()` to update the service date.
+- Implement `GetServiceStatus()` to return whether the equipment is due for service.
+- Define another derived class: `SurgicalEquipment` that also inherits from `Equipment` and implements `IServiceable`:
+- Additional Property: `UsageCount` (integer)
+- Implement `Service()` to reset the usage count.
+- Implement `GetServiceStatus()` to return service status based on usage.
+- Tasks:
+1. Manage Equipment:
+- Read details for N `equipments` of both types (Diagnostic and Surgical).
+2. Perform Service:
+- Call `Service()` on all equipment and display the updated status.
+3. Service Status Check:
+- Implement a method to display the service status of all equipment.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HospitalEquipmentManagement
+{
+    interface Serviceable
+    {
+        void Service();
+        string GetServiceStatus();
+    }
+    class Equipment
+    {
+        public int EquipmentID { get; set; }
+        public string Name { get; set; }
+    }
+    class DiagnosticEquipment : Equipment, Serviceable
+    {
+        public DateTime LastServiceDate { get; set; }
+        public void Service()
+        {
+            LastServiceDate = DateTime.Now;
+        }
+
+        public string GetServiceStatus()
+        {
+            TimeSpan timeSinceLastService = DateTime.Now - LastServiceDate;
+            if (timeSinceLastService.Days > 30)
+            {
+                return " Due for service";
+            }
+            else
+            {
+                return "Not due for service";
+            }
+        }
+        class SurgicalEquipment : Equipment, Serviceable
+        {
+            public int UsageCount { get; set; }
+            public void Service()
+            {
+                UsageCount = 0;
+            }
+
+            public string GetServiceStatus()
+            {
+                if (UsageCount > 50)
+                {
+                    return " Due for service";
+                }
+                else
+                {
+                    return "Not due for service";
+                }
+            }
+        }
+        class Program
+        {
+            static void Main()
+            {
+                Console.Write("Enter the number of equipments: ");
+                int n = Convert.ToInt32(Console.ReadLine());
+
+                Equipment[] equipments = new Equipment[n];
+                for (int i = 0; i < equipments.Length; i++)
+                {
+                    Console.WriteLine("Enter equipment details:");
+                    Console.WriteLine("ID: ");
+                    int equipmentID = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Name: ");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Type (Diagnostic/Surgical): ");
+                    string type = Console.ReadLine();
+
+                    if (type.ToLower() == "diagnostic")
+                    {
+                        DiagnosticEquipment diagnosticEquipment = new DiagnosticEquipment
+                        {
+                            EquipmentID = equipmentID,
+                            Name = name,
+                            LastServiceDate = DateTime.Now.AddDays(-30)
+                        };
+                        equipments[i] = diagnosticEquipment;
+                    }
+
+                    else if (type.ToLower() == "surgicals")
+                    {
+                        SurgicalEquipment surgicalEquipment = new SurgicalEquipment
+                        {
+                            EquipmentID = equipmentID,
+                            Name = name,
+                            UsageCount = 0
+                        };
+                        equipments[i] = surgicalEquipment;
+                    }
+                }
+
+                foreach (Equipment equipment in equipments)
+                {
+                    if (equipment is Serviceable)
+                    {
+                        ((Serviceable)equipment).Service();
+                    }
+                }
+
+
+
+                DisplayServiceStatus(equipments);
+            }
+            static void DisplayServiceStatus(Equipment[] equipments)
+            {
+                Console.WriteLine("Service Status: ");
+                foreach (Equipment equipment in equipments)
+                {
+                    if (equipment is Serviceable)
+                    {
+                        Console.WriteLine($"{equipment.Name} - {((Serviceable)equipment).GetServiceStatus()}");
+                    }
+                }
+            }
+        }
+    }
+}
+ 
+OUTPUT:
+
+Enter the number of equipments: 2
+Enter equipment details:
+ID:
+101
+Name:
+SETHESCOPE
+Type (Diagnostic/Surgical):
+DIAGNOSTIC
+Enter equipment details:
+ID:
+321
+Name:
+FORCEPS
+Type (Diagnostic/Surgical):
+SURGICAL
+Service Status:
+SETHESCOPE - Not due for service

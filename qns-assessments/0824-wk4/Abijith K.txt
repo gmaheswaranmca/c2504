@@ -1,0 +1,217 @@
+Problem Statement: Patient Medication History
+- Define a class: `PatientHistory` with the following properties:
+- `HistoryID` (integer)
+- `PatientName` (string)
+- `Medication` (string)
+- `Duration` (integer, in days)
+- Tasks:
+1. Data Input:
+- Read N `patientHistories` from the keyboard.
+2. Find History with Longest Duration:
+- Display the patient history with the longest duration.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Shortest Duration:
+- Display the patient history with the second shortest duration.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Patient Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+public class PatientHistory
+{
+    public int HistoryID { get; set; }
+    public string PatientName { get; set; }
+    public string Medication { get; set; }
+    public int Duration { get; set; }
+
+    public PatientHistory(int historyID, string patientName, string medication, int duration)
+    {
+        HistoryID = historyID;
+        PatientName = patientName;
+        Medication = medication;
+        Duration = duration;
+    }
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the number of patient histories: ");
+        int n = int.Parse(Console.ReadLine());
+
+        PatientHistory[] patientHistories = new PatientHistory[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write("Enter History ID: ");
+            int historyID = int.Parse(Console.ReadLine());
+            Console.Write("Enter Patient Name: ");
+            string patientName = Console.ReadLine();
+            Console.Write("Enter Medication: ");
+            string medication = Console.ReadLine();
+            Console.Write("Enter Duration: ");
+            int duration = int.Parse(Console.ReadLine());
+
+            patientHistories[i] = new PatientHistory(historyID, patientName, medication, duration);
+        }
+
+       
+        PatientHistory longestDuration = patientHistories[n];
+        for (int i = 1; i < n; i++)
+        {
+            if (patientHistories[i].Duration > longestDuration.Duration)
+            {
+                longestDuration = patientHistories[i];
+            }
+        }
+        Console.WriteLine("Patient History with Longest Duration:");
+        Console.WriteLine($"History ID: {longestDuration.HistoryID}, Patient Name: {longestDuration.PatientName}, Medication: {longestDuration.Medication}, Duration: {longestDuration.Duration}");
+
+        
+        /*PatientHistory shortestDuration = patientHistories[n];
+        PatientHistory secondShortestDuration = patientHistories[n];
+        for (int i = 1; i < n; i++)
+        {
+            if (patientHistories[i].Duration < shortestDuration.Duration)
+            {
+                secondShortestDuration = shortestDuration;
+                shortestDuration = patientHistories[i];
+            }
+
+        }*/
+       
+
+         
+        static void selection(PatientHistory[] History)
+        {
+            int N = History.Length;
+            for (int i = 0; i < N - 1; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < N; j++)
+                {
+                    if (string.Compare(History[j].PatientName, History[minIndex].PatientName) < 0)
+                    {
+                        minIndex = j;
+                    }
+                }
+                PatientHistory temp = History[minIndex];
+                History[minIndex] = History[i];
+                History[i] = temp;
+            }
+        }
+        
+    }
+}
+
+===============================
+
+Problem Statement: Advanced Overriding in Doctor-Patient Relationships
+- Define a base class: `Doctor` with properties:
+- `DoctorID` (integer), `Name` (string)
+- Method: `ConsultationFee()` (virtual, returns double)
+- Define a derived class: `GeneralPractitioner` that overrides `ConsultationFee()`:
+- Additional Property: `ConsultationHours` (integer)
+- Override `ConsultationFee()` to calculate based on hours.
+- Define another derived class: `Specialist` that also overrides `ConsultationFee()`:
+- Additional Property: `Specialization` (string)
+- Override `ConsultationFee()` to calculate based on specialization type.
+- Tasks:
+1. Data Entry:
+- Read details for N `doctors` (both GeneralPractitioners and Specialists).
+2. Calculate Total Fees:
+- Implement a method to calculate and display the total consultation fees for all doctors.
+3. Override `ToString()`:
+- Override `ToString()` in derived classes to display detailed information for each doctor.
+public class Doctor
+    {
+        public int DoctorID { get; set; }
+        public string Name { get; set; }
+
+        public virtual double ConsultationFee()
+        {
+            return 0;
+        }
+    }
+
+    public class GeneralPractitioner : Doctor
+    {
+        public int ConsultationHours { get; set; }
+
+        public override double ConsultationFee()
+        {
+            return ConsultationHours * 50.0;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $", Consultation Hours: {ConsultationHours}, Consultation Fee: {ConsultationFee()}";
+        }
+    }
+
+    public class Specialist : Doctor
+    {
+        public string Specialization { get; set; }
+
+
+        public override double ConsultationFee()
+        {
+            return  1000.0;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $", Specialization: {Specialization}, Consultation Fee: {ConsultationFee()}";
+        }
+    }
+
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of doctors: ");
+            int n = int.Parse(Console.ReadLine());
+
+            Doctor[] doctors = new Doctor[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("Enter Doctor ID: ");
+                int doctorID = int.Parse(Console.ReadLine());
+                Console.Write("Enter Doctor Name: ");
+                string name = Console.ReadLine();
+
+                Console.Write(" General Practitioner (1) or Specialist (2)? ");
+                int choice = int.Parse(Console.ReadLine());
+
+                if (choice == 1)
+                {
+                    Console.Write("Enter Consultation Hours: ");
+
+                    int consultationHours = int.Parse(Console.ReadLine());
+
+                    doctors[i] = new GeneralPractitioner { DoctorID = doctorID, Name = name, ConsultationHours = consultationHours };
+                }
+                else if (choice == 2)
+                {
+                    Console.WriteLine("specialisation will charge rs.1000");
+                    string specialization = Console.ReadLine("Enter specialisation");
+                    doctors[i] = new Specialist { DoctorID = doctorID, Name = name, Specialization = specialization };
+                }
+            }
+
+            double totalFees = 0.0;
+            foreach (var doctor in doctors)
+            {
+                totalFees += doctor.ConsultationFee();
+            }
+
+            Console.WriteLine($"Total Consultation Fees: {totalFees}");
+        }
+    }
+
+
+
+}

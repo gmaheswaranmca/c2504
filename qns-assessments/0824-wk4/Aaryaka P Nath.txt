@@ -1,0 +1,324 @@
+Problem Statement: Patient Vital Signs Tracker
+- Define a class: `VitalSigns` with the following properties:
+- `PatientID` (integer)
+- `HeartRate` (integer, beats per minute)
+- `BloodPressure` (string, systolic/diastolic)
+- `Temperature` (double, in Celsius)
+- Tasks:
+1. Data Collection:
+- Read N `vitalSigns` from the keyboard.
+2. Find Patient with Lowest Heart Rate:
+- Display the patient with the lowest heart rate.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Highest Temperature:
+- Display the patient with the second highest temperature.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Blood Pressure (systolic):
+- Implement and call your own sorting algorithm based on the systolic value of blood pressure.
+Dont use built-in C# sorting or LINQ.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assessment4
+{
+    public class VitalSigns
+    {
+        public int PatientID { get; set; }
+        public int HeartRate { get; set; }
+        public string BloodPressure { get; set; }
+        public double Temperature { get; set; }
+
+        public VitalSigns(int patientID, int heartRate, string bloodPressure, double temperature)
+        {
+            PatientID = patientID;
+            HeartRate = heartRate;
+            BloodPressure = bloodPressure;
+            Temperature = temperature;
+        }
+        public override string ToString()
+        {
+            return $"PatientID: {PatientID}, HeartRate = {HeartRate}, BloodPressure = {BloodPressure}, Temperature = {Temperature}";
+        }
+
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the number of patients");
+            int N = int.Parse(Console.ReadLine());
+            VitalSigns[] vitalSignsArray = new VitalSigns[N];
+
+            for (int i = 0; i < N; i++)
+            {
+                Console.WriteLine($"Enter details for patient {i + 1}:");
+                Console.Write("PatientID: ");
+                int patientID = int.Parse(Console.ReadLine());
+                Console.Write("HeartRate: ");
+                int heartRate = int.Parse(Console.ReadLine());
+                Console.Write("BloodPressure: ");
+                string bloodPressure = Console.ReadLine();
+                Console.Write("Temperature: ");
+                double temperature = double.Parse(Console.ReadLine());
+
+                VitalSigns vs = new VitalSigns(patientID, heartRate, bloodPressure, temperature);
+                vitalSignsArray[i] = vs;
+            }
+                VitalSigns minHeartRatePatient = vitalSignsArray[0];
+                foreach (var patient in vitalSignsArray)
+                {
+                    if (patient.HeartRate < minHeartRatePatient.HeartRate)
+                    {
+                        minHeartRatePatient = patient;
+                    }
+                }
+                Console.WriteLine($"Patient with lowest heart rate: {minHeartRatePatient}");
+
+                double highestTemperature = double.MinValue;
+                double secondHighestTemperature = double.MinValue;
+                foreach (var patient in vitalSignsArray)
+                {
+                    if (patient.Temperature > highestTemperature)
+                    {
+                        secondHighestTemperature = highestTemperature;
+                        highestTemperature = patient.Temperature;
+                    }
+                    else if (patient.Temperature > secondHighestTemperature && patient.Temperature < highestTemperature)
+                    {
+                        secondHighestTemperature = patient.Temperature;
+                    }
+                }
+
+                VitalSigns secondHighestTempPatient = null;
+                foreach (var patient in vitalSignsArray)
+                {
+                    if (patient.Temperature == secondHighestTemperature)
+                    {
+                        secondHighestTempPatient = patient;
+                        break;
+                    }
+                }
+                if (secondHighestTempPatient != null)
+                {
+                    Console.WriteLine($"Patient with second highest temperature: {secondHighestTempPatient}");
+                }
+                else
+                {
+                    Console.WriteLine("No second highest temperature found.");
+                }
+                SelectionSortBySystolicBloodPressure(vitalSignsArray);
+
+                Console.WriteLine("Patients sorted by systolic blood pressure:");
+                foreach (var patient in vitalSignsArray)
+                {
+                    Console.WriteLine(patient);
+                }
+            }
+            static void SelectionSortBySystolicBloodPressure(VitalSigns[] array)
+            {
+                int n = array.Length;
+
+                for (int i = 0; i < n - 1; i++)
+                {
+                    int minIndex = i;
+                    for (int j = i + 1; j < n; j++)
+                    {
+                        string[] bp1 = array[j].BloodPressure.Split('/');
+                        string[] bp2 = array[minIndex].BloodPressure.Split('/');
+                        int systolic1 = int.Parse(bp1[0]);
+                        int systolic2 = int.Parse(bp2[0]);
+
+                        if (systolic1 < systolic2)
+                        {
+                            minIndex = j;
+                        }
+                    }
+                    VitalSigns temp = array[minIndex];
+                    array[minIndex] = array[i];
+                    array[i] = temp;
+                }
+
+            }
+    }
+}
+
+
+
+======================
+
+
+
+Problem Statement: Advanced Overriding in Doctor-Patient Relationships
+- Define a base class: `Doctor` with properties:
+- `DoctorID` (integer), `Name` (string)
+- Method: `ConsultationFee()` (virtual, returns double)
+- Define a derived class: `GeneralPractitioner` that overrides `ConsultationFee()`:
+- Additional Property: `ConsultationHours` (integer)
+- Override `ConsultationFee()` to calculate based on hours.
+- Define another derived class: `Specialist` that also overrides `ConsultationFee()`:
+- Additional Property: `Specialization` (string)
+- Override `ConsultationFee()` to calculate based on specialization type.
+- Tasks:
+1. Data Entry:
+- Read details for N `doctors` (both GeneralPractitioners and Specialists).
+2. Calculate Total Fees:
+- Implement a method to calculate and display the total consultation fees for all doctors.
+3. Override `ToString()`:
+- Override `ToString()` in derived classes to display detailed information for each doctor.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assessment4_2
+{
+    public class Doctor
+    {
+        public int DoctorID { get; set; }
+        public string Name { get; set; }
+
+        public virtual double ConsultationFee()
+        {
+            return 0.0;
+        }
+
+        public override string ToString()
+        {
+            return $"DoctorID: {DoctorID}, Name: {Name}";
+        }
+    }
+
+    public class GeneralPractitioner : Doctor
+    {
+        public int ConsultationHours { get; set; }
+
+        public GeneralPractitioner(int doctorID, string name, int consultationHours)
+        {
+            DoctorID = doctorID;
+            Name = name;
+            ConsultationHours = consultationHours;
+        }
+
+        public override double ConsultationFee()
+        {
+            return 100 + (ConsultationHours * 50);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $", Consultation Hours: {ConsultationHours}, Consultation Fee: {ConsultationFee()}";
+        }
+    }
+
+    public class Specialist : Doctor
+    {
+        public SpecialistType Specialization { get; set; }
+
+        public Specialist(int doctorID, string name, SpecialistType specialization)
+        {
+            this.DoctorID = doctorID;
+            this.Name = name;
+            this.Specialization = specialization;
+        }
+
+        public override double ConsultationFee()
+        {
+            switch (Specialization)
+            {
+                case SpecialistType.Cardiology:
+                    return 500;
+                case SpecialistType.Dermatology:
+                    return 300;
+                default:
+                    return 200;
+            }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $", Specialization: {Specialization}, Consultation Fee: {ConsultationFee()}";
+        }
+    }
+
+    public enum DoctorType
+    {
+        GeneralPractitioner = 1,
+        Specialist = 2
+    }
+
+    public enum SpecialistType
+    {
+        Cardiology = 1,
+        Dermatology = 2,
+        Other = 3
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the number of doctors:");
+            int numDoctors = int.Parse(Console.ReadLine());
+
+            Doctor[] doctors = new Doctor[numDoctors];
+            int doctorCount = 0;
+
+            for (int i = 0; i < numDoctors; i++)
+            {
+                Doctor doctor = null;
+                Console.WriteLine("Enter doctor type (1. General Practitioner, 2. Specialist):");
+                DoctorType doctorType = (DoctorType)int.Parse(Console.ReadLine());
+
+                switch (doctorType)
+                {
+                    case DoctorType.GeneralPractitioner:
+                        Console.WriteLine("Enter Doctor ID:");
+                        int gpDoctorID = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Enter Doctor Name:");
+                        string gpName = Console.ReadLine();
+                        Console.WriteLine("Enter Consultation Hours:");
+                        int hours = int.Parse(Console.ReadLine());
+
+                        doctor = new GeneralPractitioner(gpDoctorID, gpName, hours);
+                        break;
+
+                    case DoctorType.Specialist:
+                        Console.WriteLine("Enter Doctor ID:");
+                        int spDoctorID = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Enter Doctor Name:");
+                        string spName = Console.ReadLine();
+                        Console.WriteLine("Enter Specialization (1. Cardiology, 2. Dermatology, 3. Other):");
+                        SpecialistType specialization = (SpecialistType)int.Parse(Console.ReadLine());
+
+                        doctor = new Specialist(spDoctorID, spName, specialization);
+                        break;
+                }
+
+                if (doctor != null)
+                {
+                    doctors[doctorCount] = doctor;
+                    doctorCount++;
+                }
+            }
+
+            double totalFees = 0;
+            for (int i = 0; i < doctorCount; i++)
+            {
+                totalFees += doctors[i].ConsultationFee();
+            }
+
+            Console.WriteLine($"Total Consultation Fees for all doctors: {totalFees}");
+
+            for (int i = 0; i < doctorCount; i++)
+            {
+                Console.WriteLine(doctors[i].ToString());
+            }
+        }
+    }
+}

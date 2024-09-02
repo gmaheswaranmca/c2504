@@ -1,0 +1,248 @@
+Problem Statement: Doctor Prescription System
+- Define a class: `DoctorPrescription` with the following properties:
+- `DoctorID` (integer)
+- `PatientName` (string)
+- `Medication` (string)
+- `Dosage` (double, in milligrams)
+- Tasks:
+1. Data Input:
+- Read N `doctorPrescriptions` from the keyboard.
+2. Find Minimum Dosage by a Specific Doctor:
+- For a given doctor's ID, display the prescription with the least dosage prescribed by them.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Third Maximum Dosage Overall:
+- Display the prescription with the third maximum dosage across all doctors.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Patient Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp46
+{  
+    public class DoctorPrescription
+    {
+        public int DoctorID { get; set; }
+        public string PatientName {  get; set; }
+        public string Medication{  get; set; }
+        public double Dosage{  get; set; }
+
+        public DoctorPrescription(int doctorID, string patientName, string medication, double dosage)
+        {
+            DoctorID = doctorID;
+            PatientName = patientName;
+            Medication = medication;
+            Dosage = dosage;
+        }
+
+        public override string ToString()
+        {
+            return $"DoctorID :{DoctorID},PatientName:{PatientName},Medication:{Medication},Dosage:{Dosage}";
+        }
+
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("enter the number of doctor prescriptions:");
+            int n=int.Parse(Console.ReadLine());
+            DoctorPrescription[]doctorPres = new DoctorPrescription[n];
+            for(int i = 0; i < doctorPres.Length; i++)
+            {
+                Console.Write("Enter the DoctorID:");
+                int DoctorID = int.Parse(Console.ReadLine());
+                Console.Write("Enter the PatientName:");
+               string PatientName = Console.ReadLine();
+                Console.Write("Enter the Medication:");
+                string Medication = Console.ReadLine();
+                Console.Write("Enter the Dosage:");
+                double Dosage = double.Parse(Console.ReadLine());
+                doctorPres[i] = new DoctorPrescription(DoctorID, PatientName, Medication, Dosage);
+            }
+            Console.WriteLine("enter the doctor id to find the minimum dosage:");
+            int doctorID=int.Parse(Console.ReadLine()); 
+            DisplayDocLeastDos(doctorPres,doctorID);
+            DisplayPatientName(doctorPres);
+            Console.WriteLine("sorted by patient name:");
+            foreach(DoctorPrescription patient in doctorPres)
+            {
+                Console.WriteLine(patient);
+            }
+
+        }
+
+        public static void DisplayPatientName(DoctorPrescription[] doctorPres)
+        {
+            //sort by dosage
+            int n = doctorPres.Length;
+            for (int i = 0;i < n-1; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < n ; j++)
+                {
+                    if (string.Compare(doctorPres[j].PatientName,doctorPres[minIndex].PatientName)< 0)
+                    {
+                        minIndex = j;
+                    }
+                    
+                }
+                if (minIndex != i)
+                {
+                    DoctorPrescription temp= doctorPres[minIndex];
+                    doctorPres[minIndex]= doctorPres[i];
+                    doctorPres[i]= temp;
+                }
+            }
+            
+        }
+        public static void DisplayDocLeastDos(DoctorPrescription[] doctorPres, int doctorID)
+        {
+            double minDosage = double.MaxValue;
+            DoctorPrescription minPres = null;
+
+            foreach (DoctorPrescription dosage in doctorPres)
+            {
+                if (dosage.DoctorID == doctorID && dosage.Dosage < minDosage)
+                {
+                    minDosage = dosage.Dosage;
+                    minPres = dosage;
+                }
+            }
+
+            if (minPres!= null)
+            {
+                Console.WriteLine($"Minimum dosage prescribed by DoctorID { doctorID}: {minPres.Dosage} mg for {minPres.PatientName}");
+            }
+            else
+            {
+                Console.WriteLine($"No prescriptions found for DoctorID {doctorID}.");
+            }
+        }
+    }
+}
+
+====================
+
+
+Problem Statement: Inheritance and Overriding in Medication Management
+- Define an abstract class: `Medication` with the following properties and methods:
+- Properties: `MedicationID` (integer), `Dosage` (double, in milligrams)
+- Method: `CalculateCost()` (abstract, returns double)
+- Define a derived class: `TabletMedication` that inherits from `Medication` and has additional properties:
+- `TabletCount` (integer)
+- Override the `CalculateCost()` method to calculate cost based on the number of tablets and dosage.
+- Define another derived class: `InjectionMedication` that also inherits from `Medication` and has additional properties:
+- `Volume` (double, in milliliters)
+- Override the `CalculateCost()` method to calculate cost based on volume and dosage.
+- Tasks:
+1. Data Input:
+- Read N `medications` of both types (tablets and injections).
+2. Calculate Total Cost:
+- Implement a method that calculates and displays the total cost for all medications.
+3. Display Details:
+- Display the details of each medication using overridden `ToString()` methods in the derived classes.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp47
+{
+    public abstract class Medication
+    {
+        public int MedicationID { get; set; }
+        public double Dosage { get; set; }
+
+        public abstract double CalculateCost();
+
+    }
+    public class TabletMedication : Medication
+    {
+        public int TabletCount { get; set; }
+
+        public override double CalculateCost() 
+        {   
+            double cost = TabletCount * Dosage;
+            return cost;
+        }
+        public override string ToString()
+        {
+            return $" MedicationID:{MedicationID},Dosage:{Dosage},TabletCount:{TabletCount},cost:{CalculateCost()}";
+        }
+
+    }
+    public class InjectionMedication : Medication
+    {
+        public int Volume { get; set; }
+
+        public override double CalculateCost()
+        {
+            double cost = Volume * Dosage;
+            return cost;
+        }
+
+        public override string ToString()
+        {
+            return $" MedicationID:{MedicationID},Dosage:{Dosage},Volume:{Volume},cost:{CalculateCost()}";
+        }
+
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the number of medications:");
+            int n = int.Parse(Console.ReadLine());
+            Medication[] medications = new Medication[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Enter the Medication Id:");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter the dosage:");
+                double dosage = double.Parse(Console.ReadLine());
+                Console.WriteLine("Enter the Medication type:");
+                string type = Console.ReadLine().ToLower();
+                if (type == "tablet")
+                {
+                    TabletMedication tabletMedication = new TabletMedication();
+                    tabletMedication.MedicationID = id;
+                    tabletMedication.Dosage = dosage;
+                    Console.WriteLine("enter the tablet count:");
+                    tabletMedication.TabletCount = int.Parse(Console.ReadLine());
+
+
+                }
+                else if (type == "injection")
+                {
+                    InjectionMedication injectionMedication = new InjectionMedication();
+                    injectionMedication.MedicationID = id;
+                    injectionMedication.Dosage = dosage;
+                    Console.WriteLine("enter the volume:");
+                    injectionMedication.Volume = int.Parse(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine("enter valid type!");
+                }
+      
+            }
+
+          double totalCost = 0;
+            Console.WriteLine("total cost:");
+            foreach (Medication medication in medications)
+            {
+                totalCost=totalCost+ medication.CalculateCost();
+            }
+            Console.WriteLine($"totalcost={totalCost}");
+        }
+    }
+}

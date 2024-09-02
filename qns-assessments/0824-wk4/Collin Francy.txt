@@ -1,0 +1,422 @@
+Problem Statement: Medication Dosage Analysis
+- Define a class: `Prescription` with the following properties:
+- `PrescriptionID` (integer)
+- `PatientName` (string)
+- `MedicationName` (string)
+- `Dosage` (double, in milligrams)
+- Tasks:
+1. Data Input:
+- Read N `prescriptions` from the keyboard.
+2. Find Maximum Dosage:
+- Display the prescription with the highest dosage among the N `prescriptions`.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Third Least Dosage:
+- Display the prescription with the third least dosage among the N `prescriptions`.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort Prescriptions by Medication Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+public class Prescription
+{
+    public int PrescriptionID { get; set; }
+    public string PatientName { get; set; }
+    public string MedicationName { get; set; }
+    public double Dosage { get; set; }
+}
+
+public class MaximumDosage
+{
+    public Prescription FindMaxDosage(List<Prescription> prescriptions)
+    {
+        Prescription maxDosagePrescription = prescriptions[0];
+        foreach (var prescription in prescriptions)
+        {
+            if (prescription.Dosage > maxDosagePrescription.Dosage)
+            {
+                maxDosagePrescription = prescription;
+            }
+        }
+        return maxDosagePrescription;
+    }
+}
+
+
+public class ThirdLeastDosage
+{
+    public Prescription FindThirdLeastDosage(List<Prescription> prescriptions)
+    {
+        double first = double.MaxValue, second = double.MaxValue, third = double.MaxValue;
+        Prescription thirdLeastDosagePrescription = null;
+
+        foreach (var prescription in prescriptions)
+        {
+            if (prescription.Dosage < first)
+            {
+                third = second;
+                second = first;
+                first = prescription.Dosage;
+            }
+            else if (prescription.Dosage < second)
+            {
+                third = second;
+                second = prescription.Dosage;
+            }
+            else if (prescription.Dosage < third)
+            {
+                third = prescription.Dosage;
+                thirdLeastDosagePrescription = prescription;
+            }
+        }
+        return thirdLeastDosagePrescription;
+    }
+}
+
+
+public class InsertionSort
+{
+    public void SortByMedicationName(List<Prescription> prescriptions)
+    {
+        for (int i = 1; i < prescriptions.Count; i++)
+        {
+            Prescription key = prescriptions[i];
+            int j = i - 1;
+
+            while (j >= 0 && prescriptions[j].MedicationName.CompareTo(key.MedicationName) > 0)
+            {
+                prescriptions[j + 1] = prescriptions[j];
+                j--;
+            }
+            prescriptions[j + 1] = key;
+        }
+    }
+}
+
+
+public class Program
+{
+    public static void Main()
+    {
+        Console.Write("Enter the number of prescriptions: ");
+        int N = int.Parse(Console.ReadLine());
+
+        List<Prescription> prescriptions = new List<Prescription>();
+
+    
+        for (int i = 0; i < N; i++)
+        {
+            Console.WriteLine($"Enter details for prescription {i + 1}:");
+
+            Prescription prescription = new Prescription();
+
+            Console.Write("Prescription ID: ");
+            prescription.PrescriptionID = int.Parse(Console.ReadLine());
+
+            Console.Write("Patient Name: ");
+            prescription.PatientName = Console.ReadLine();
+
+            Console.Write("Medication Name: ");
+            prescription.MedicationName = Console.ReadLine();
+
+            Console.Write("Dosage (in mg): ");
+            prescription.Dosage = double.Parse(Console.ReadLine());
+
+            prescriptions.Add(prescription);
+        }
+
+        
+        MaximumDosage maxDosageFinder = new MaximumDosage();
+        Prescription maxDosagePrescription = maxDosageFinder.FindMaxDosage(prescriptions);
+        Console.WriteLine("\nPrescription with the highest dosage:");
+        DisplayPrescription(maxDosagePrescription);
+
+       
+        ThirdLeastDosage thirdLeastDosageFinder = new ThirdLeastDosage();
+        Prescription thirdLeastDosagePrescription = thirdLeastDosageFinder.FindThirdLeastDosage(prescriptions);
+        Console.WriteLine("\nPrescription with the third least dosage:");
+        DisplayPrescription(thirdLeastDosagePrescription);
+
+       
+        InsertionSort prescriptionSorter = new InsertionSort();
+        prescriptionSorter.SortByMedicationName(prescriptions);
+        Console.WriteLine("\nPrescriptions sorted by Medication Name:");
+        foreach (var prescription in prescriptions)
+        {
+            DisplayPrescription(prescription);
+        }
+    }
+
+    public static void DisplayPrescription(Prescription prescription)
+    {
+        if (prescription != null)
+        {
+            Console.WriteLine($"Prescription ID: {prescription.PrescriptionID}, " +
+                              $"Patient Name: {prescription.PatientName}, " +
+                              $"Medication Name: {prescription.MedicationName}, " +
+                              $"Dosage: {prescription.Dosage} mg");
+        }
+        else
+        {
+            Console.WriteLine("No prescription found.");
+        }
+    }
+}
+
+*********OUTPUT*************
+
+
+Medication Name: Paracetamol
+Dosage (in mg): 500
+Enter details for prescription 2:
+Prescription ID: 2
+Patient Name: alan
+Medication Name: Ibuprofen
+Dosage (in mg): 456
+Enter details for prescription 3:
+Prescription ID: 3
+Patient Name: ashwin
+Medication Name: Aspirin
+Dosage (in mg): 45
+Enter details for prescription 4:
+Prescription ID: 4
+Patient Name: abhijith
+Medication Name: Cetirizine
+Dosage (in mg): 600
+Enter details for prescription 5:
+Prescription ID: 5
+Patient Name: basil
+Medication Name: Amoxicillin
+Dosage (in mg): 100
+
+Prescription with the highest dosage:
+Prescription ID: 4, Patient Name: abhijith, Medication Name: Cetirizine, Dosage: 600 mg
+
+Prescription with the third least dosage:
+No prescription found.
+
+Prescriptions sorted by Medication Name:
+Prescription ID: 5, Patient Name: basil, Medication Name: Amoxicillin, Dosage: 100 mg
+Prescription ID: 3, Patient Name: ashwin, Medication Name: Aspirin, Dosage: 45 mg
+Prescription ID: 4, Patient Name: abhijith, Medication Name: Cetirizine, Dosage: 600 mg
+Prescription ID: 2, Patient Name: alan, Medication Name: Ibuprofen, Dosage: 456 mg
+Prescription ID: 1, Patient Name: collin, Medication Name: Paracetamol, Dosage: 500 mg
+Press any key to continue . . .
+
+
+===========================
+
+
+
+Problem Statement: Advanced Inheritance and Interface in Patient Care System
+- Define a base class: `CareProvider` with properties:
+- `ProviderID` (integer), `ProviderName` (string)
+- Method: `ProvideCare()` (virtual, void)
+- Define an interface: `IEmergencyResponder` with the following method:
+- `RespondToEmergency()` (void)
+- Define a derived class: `Nurse` that inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `ShiftTiming` (string)
+- Implement `ProvideCare()` to display care provided during the shift.
+- Implement `RespondToEmergency()` to handle emergency situations.
+- Define another derived class: `Doctor` that also inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `Specialization` (string)
+- Implement `ProvideCare()` to display care based on specialization.
+- Implement `RespondToEmergency()` to handle critical emergency situations.
+- Tasks:
+1. Care Management:
+- Read details for N `careProviders` (both Nurses and Doctors).
+2. Emergency Response:
+- Implement a method to simulate an emergency and call `RespondToEmergency()` for each care provider.
+3. Care Providing:
+- Display details of care provided by each provider using the overridden `ProvideCare()` method.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+public class CareProvider
+{
+    public int ProviderID { get; set; }
+    public string ProviderName { get; set; }
+
+    public virtual void ProvideCare()
+    {
+        Console.WriteLine("Providing general care.");
+    }
+}
+
+public interface IEmergencyResponder {
+
+    void RespondToEmergency();
+}
+
+public class Nurse:CareProvider,IEmergencyResponder
+{
+    public string ShiftTiming { get; set; }
+    public override void ProvideCare()
+    {
+        Console.WriteLine($"Nurse {ProviderName} is providing care during the {ShiftTiming} shift.");
+    }
+    public void RespondToEmergency()
+    {
+        Console.WriteLine($"Nurse {ProviderName} is responding to an emergency during the {ShiftTiming} shift.");
+    }
+
+}
+
+public class Doctor: CareProvider, IEmergencyResponder
+{
+    public string Specialization { get; set; }
+    public override void ProvideCare()
+    {
+        Console.WriteLine($"Doctor {ProviderName}, specializing in {Specialization}");
+    }
+    public void RespondToEmergency()
+    {
+        Console.WriteLine($"Doctor {ProviderName}, specializing in {Specialization}, is responding to a critical emergency.");
+    }
+}
+
+
+class DisplayCareProvided
+{
+    public  DisplayCareProvided(List<CareProvider> careProviders)
+    {
+        Console.WriteLine("\nDisplaying care provided by each care provider:");
+        foreach (var provider in careProviders)
+        {
+            provider.ProvideCare();
+        }
+    }
+}
+class EmergencyResponder
+{
+    public EmergencyResponder(List<CareProvider> careProviders)
+    {
+        Console.WriteLine("\nSimulating an emergency...");
+        foreach (var provider in careProviders)
+        {
+            if (provider is IEmergencyResponder responder)
+            {
+                responder.RespondToEmergency();
+            }
+        }
+    }
+}
+
+
+class Program
+{
+    static void Main()
+    {
+
+
+        List<CareProvider> careProviders = new List<CareProvider>();
+        Console.WriteLine("Enter the number of care providers:");
+        int N = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < N; i++)
+        {
+            Console.WriteLine("\nEnter details for care provider " + (i + 1) + ":");
+            Console.WriteLine("Is the care provider a Nurse or a Doctor? (N/D):");
+            char type = Console.ReadKey().KeyChar;
+            Console.WriteLine();
+
+            Console.WriteLine("Enter Provider ID:");
+            int id = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter Provider Name:");
+            string name = Console.ReadLine();
+
+            if (type == 'N' || type == 'n')
+            {
+                Console.WriteLine("Enter Shift Timing:");
+                string shift = Console.ReadLine();
+
+                Nurse nurse = new Nurse
+                {
+                    ProviderID = id,
+                    ProviderName = name,
+                    ShiftTiming = shift
+                };
+                careProviders.Add(nurse);
+
+            }
+            else if (type == 'D' || type == 'd')
+            {
+                Console.WriteLine("Enter Specialization:");
+                string specialization = Console.ReadLine();
+
+                Doctor doctor = new Doctor
+                {
+                    ProviderID = id,
+                    ProviderName = name,
+                    Specialization = specialization
+                };
+                careProviders.Add(doctor);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter 'N' for Nurse or 'D' for Doctor.");
+                i--; 
+            }
+        }
+        EmergencyResponder emergencyResponder = new EmergencyResponder(careProviders);
+        DisplayCareProvided displayCareProvided = new DisplayCareProvided(careProviders);
+
+    }
+}
+
+********ANSWER************
+
+Enter the number of care providers:
+3
+
+Enter details for care provider 1:
+Is the care provider a Nurse or a Doctor? (N/D):
+D
+Enter Provider ID:
+1
+Enter Provider Name:
+collin
+Enter Specialization:
+dentist
+
+Enter details for care provider 2:
+Is the care provider a Nurse or a Doctor? (N/D):
+D
+Enter Provider ID:
+2
+Enter Provider Name:
+alan
+Enter Specialization:
+surgeon
+
+Enter details for care provider 3:
+Is the care provider a Nurse or a Doctor? (N/D):
+N
+Enter Provider ID:
+3
+Enter Provider Name:
+mariya
+Enter Shift Timing:
+12
+
+Simulating an emergency...
+Doctor collin, specializing in dentist, is responding to a critical emergency.
+Doctor alan, specializing in surgeon, is responding to a critical emergency.
+Nurse mariya is responding to an emergency during the 12 shift.
+
+Displaying care provided by each care provider:
+Doctor collin, specializing in dentist
+Doctor alan, specializing in surgeon
+Nurse mariya is providing care during the 12 shift.
+Press any key to continue . . .

@@ -1,0 +1,499 @@
+Problem Statement: Patient Vital Signs Tracker
+- Define a class: `VitalSigns` with the following properties:
+- `PatientID` (integer)
+- `HeartRate` (integer, beats per minute)
+- `BloodPressure` (string, systolic/diastolic)
+- `Temperature` (double, in Celsius)
+- Tasks:
+1. Data Collection:
+- Read N `vitalSigns` from the keyboard.
+2. Find Patient with Lowest Heart Rate:
+- Display the patient with the lowest heart rate.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Highest Temperature:
+- Display the patient with the second highest temperature.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Blood Pressure (systolic):
+- Implement and call your own sorting algorithm based on the systolic value of blood pressure.
+Dont use built-in C# sorting or LINQ.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Test1
+{
+    class VitalSigns
+    {
+        public int PatientID { get; set; }
+        public int HeartRate { get; set; }
+        public string BloodPressure { get; set; }
+        public double Temperature { get; set; }
+
+        public void Read()
+        {
+            Console.WriteLine("Enter PatientID");
+            PatientID = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter HeartRate");
+            HeartRate = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter BloodPressure");
+            BloodPressure = Console.ReadLine();
+            Console.WriteLine("Enter Temperature");
+            Temperature = int.Parse(Console.ReadLine());
+        }
+
+        public override string ToString()
+        {
+            return $"PatientID : {PatientID} {Environment.NewLine}" +
+                $"HeartRate : {HeartRate} {Environment.NewLine}" +
+                $"BloodPressure : {BloodPressure} {Environment.NewLine}" +
+                $"Temperature : {Temperature} {Environment.NewLine}";
+        }
+    }
+    internal class Program
+    {
+
+        static VitalSigns LowestHeartRate(VitalSigns[] vitalSigns) //funtion to find patient Lowest heart rate
+        {
+            int minHeartRate = int.MaxValue;
+            VitalSigns vitalSign = null;
+            for (int i = 0; i < vitalSigns.Length; i++)
+            {
+                if (vitalSigns[i].HeartRate < minHeartRate)
+                {
+                    minHeartRate = vitalSigns[i].HeartRate;
+                    vitalSign = vitalSigns[i];
+                }
+            }
+
+            return vitalSign;
+        }
+
+        static VitalSigns SecondLargestTemp(VitalSigns[] vitalSigns) // function to find patient with second largest temperature
+        {
+            double largest = double.MinValue;
+            double secLargest = double.MinValue;
+            VitalSigns secLargePatient = null;
+            for (int i = 0;i < vitalSigns.Length; i++)
+            {
+                if (vitalSigns[i].Temperature > largest)
+                {
+                    secLargest = largest;
+                    largest = vitalSigns[i].Temperature;
+                    secLargePatient = vitalSigns[i];
+
+                }
+
+                else if (vitalSigns[i].Temperature > secLargest && vitalSigns[i].Temperature < largest)
+                {
+                    secLargest = vitalSigns[i].Temperature;
+                    secLargePatient = vitalSigns[i];
+                }
+
+            }
+            return secLargePatient;
+
+        }
+
+
+        static void SortBloodPressure(VitalSigns[] vitalSigns)  // function to sort patients by blood pressure
+        {
+            int N = vitalSigns.Length;
+            for (int i = 0; i < N - 1; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < N; j++)
+                {
+                    if (int.Parse(vitalSigns[j].BloodPressure) < int.Parse(vitalSigns[minIndex].BloodPressure))
+                    {
+                        minIndex = j;
+                    }
+                }
+
+                if (minIndex != i)
+                {
+                    string temp = vitalSigns[i].BloodPressure;
+                    vitalSigns[i].BloodPressure = vitalSigns[minIndex].BloodPressure;
+                    vitalSigns[minIndex].BloodPressure = temp;
+                }
+
+            }
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the number of patients");
+            int N = int.Parse(Console.ReadLine());
+            VitalSigns[] vitalSigns = new VitalSigns[N];
+            for (int i = 0; i < N; i++)
+            {
+                VitalSigns vit = new VitalSigns();
+                Console.WriteLine($"Read data for patient {i+1}");
+                vit.Read();
+                vitalSigns[i] = vit;
+            }
+
+
+            Console.WriteLine("List of Patients\n");  // to display all patients
+            for (int i = 0;i < N; i++)
+            {
+                Console.WriteLine($"{ vitalSigns[i]}");
+            }
+
+            Console.WriteLine("The patient with lowest heartrate is\n");
+            VitalSigns lowHeartRatePatient = LowestHeartRate(vitalSigns);
+            Console.WriteLine(lowHeartRatePatient);
+
+            Console.WriteLine("The patient with second largest temperature is\n");
+            VitalSigns secLargestTempPatient = SecondLargestTemp(vitalSigns);
+            Console.WriteLine(secLargestTempPatient);
+
+            Console.WriteLine("The List of patients after sorting by blood pressure is\n");
+            SortBloodPressure(vitalSigns);
+            for (int i = 0; i < N; i++)
+            {
+                Console.WriteLine($"{vitalSigns[i]}");
+            }
+
+        }
+    }
+}
+
+
+//Output
+
+Enter the number of patients
+4
+Read data for patient 1
+Enter PatientID
+1
+Enter HeartRate
+120
+Enter BloodPressure
+115
+Enter Temperature
+37
+Read data for patient 2
+Enter PatientID
+2
+Enter HeartRate
+90
+Enter BloodPressure
+122
+Enter Temperature
+40
+Read data for patient 3
+Enter PatientID
+3
+Enter HeartRate
+112
+Enter BloodPressure
+130
+Enter Temperature
+45
+Read data for patient 4
+Enter PatientID
+4
+Enter HeartRate
+89
+Enter BloodPressure
+119
+Enter Temperature
+35
+List of Patients
+
+PatientID : 1
+HeartRate : 120
+BloodPressure : 115
+Temperature : 37
+
+PatientID : 2
+HeartRate : 90
+BloodPressure : 122
+Temperature : 40
+
+PatientID : 3
+HeartRate : 112
+BloodPressure : 130
+Temperature : 45
+
+PatientID : 4
+HeartRate : 89
+BloodPressure : 119
+Temperature : 35
+
+The patient with lowest heartrate is
+
+PatientID : 4
+HeartRate : 89
+BloodPressure : 119
+Temperature : 35
+
+The patient with second largest temperature is
+
+PatientID : 3
+HeartRate : 112
+BloodPressure : 130
+Temperature : 45
+
+The List of patients after sorting by blood pressure is
+
+PatientID : 1
+HeartRate : 120
+BloodPressure : 115
+Temperature : 37
+
+PatientID : 2
+HeartRate : 90
+BloodPressure : 119
+Temperature : 40
+
+PatientID : 3
+HeartRate : 112
+BloodPressure : 122
+Temperature : 45
+
+PatientID : 4
+HeartRate : 89
+BloodPressure : 130
+Temperature : 35
+
+Press any key to continue . . .
+
+
+===============================
+
+
+
+Problem Statement: Advanced Inheritance and Interface in Patient Care System
+- Define a base class: `CareProvider` with properties:
+- `ProviderID` (integer), `ProviderName` (string)
+- Method: `ProvideCare()` (virtual, void)
+- Define an interface: `IEmergencyResponder` with the following method:
+- `RespondToEmergency()` (void)
+- Define a derived class: `Nurse` that inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `ShiftTiming` (string)
+- Implement `ProvideCare()` to display care provided during the shift.
+- Implement `RespondToEmergency()` to handle emergency situations.
+- Define another derived class: `Doctor` that also inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `Specialization` (string)
+- Implement `ProvideCare()` to display care based on specialization.
+- Implement `RespondToEmergency()` to handle critical emergency situations.
+- Tasks:
+1. Care Management:
+- Read details for N `careProviders` (both Nurses and Doctors).
+2. Emergency Response:
+- Implement a method to simulate an emergency and call `RespondToEmergency()` for each care provider.
+3. Care Providing:
+- Display details of care provided by each provider using the overridden `ProvideCare()` method.
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Test2
+{
+    interface IEmergencyResponder
+    {
+        void RespondToEmergency();
+
+    }
+
+    class CareProvider : IEmergencyResponder
+    {
+        public int ProviderId { get; set; }
+        public string ProviderName { get; set; }
+        public virtual void RespondToEmergency() { }
+
+        public virtual void ProvideCare()
+        {
+            Console.WriteLine("Care provided...");
+        }
+
+    }
+
+
+    class Nurse : CareProvider, IEmergencyResponder
+    {
+        public string ShiftTiming { get; set; }
+        public override void ProvideCare()
+        {
+            Console.WriteLine($"Care provided by {this}");
+        }
+        public override void RespondToEmergency()
+        {
+            Console.WriteLine($"Responded to emergency by nurse with {this}");
+        }
+
+        public void Read()
+        {
+            Console.WriteLine("Enter the id for nurse");
+            ProviderId = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the name of the nurse");
+            ProviderName = Console.ReadLine();
+            Console.WriteLine("Enter the time shift for the nurse");
+            ShiftTiming = Console.ReadLine();
+        }
+
+        public override string ToString()
+        {
+            return $"The nurse with shift timing {Environment.NewLine}" +
+                $"ID : {ProviderId} {Environment.NewLine}" +
+                $"Name : {ProviderName} {Environment.NewLine}" +
+                $"shift timings {ShiftTiming}";
+        }
+
+    }
+    class Doctor : CareProvider, IEmergencyResponder
+    {
+        public string Specialization { get; set; }
+        public override void ProvideCare()
+        {
+            Console.WriteLine($"Care provided by {this}");
+        }
+        public override void RespondToEmergency()
+        {
+            Console.WriteLine($"Responded to critical situations by doctor {this}");
+        }
+
+        public void Read()
+        {
+            Console.WriteLine("Enter the id for doctor");
+            ProviderId = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the name of the doctor");
+            ProviderName = Console.ReadLine();
+            Console.WriteLine("Enter the specialization for the doctor");
+            Specialization = Console.ReadLine();
+        }
+
+        public override string ToString()
+        {
+            return $"The doctor with {Environment.NewLine}" +
+                $"ID : {ProviderId} {Environment.NewLine}" +
+                $"Name : {ProviderName} {Environment.NewLine}" +
+                $"specialzation {Specialization}";
+        }
+
+    }
+    internal class Program
+    {
+        enum CareProviderType
+        {
+            Doctor = 1,
+            Nurse = 2
+        }
+
+        static void SimulateEmergency(CareProvider[] providers)
+        {
+            for (int i = 0; i < providers.Length; i++)
+            {
+                providers[i].RespondToEmergency();
+            }
+        }
+
+        static void DisplayCareProvided(CareProvider[] providers)
+        {
+            for (int i = 0; i < providers.Length; i++)
+            {
+                providers[i].ProvideCare();
+            }
+        }
+
+        static void Run()
+        {
+            CareProviderType Ptype;
+            CareProvider provider;
+            Console.WriteLine("Enter the number of care providers");
+            int N = int.Parse(Console.ReadLine());
+            CareProvider[] providers = new CareProvider[N];
+            for (int i = 0; i < N; i++)
+            {
+                provider = null;
+                Console.WriteLine("1.Doctor ----- 2.Nurse");
+                Ptype = (CareProviderType)int.Parse(Console.ReadLine());
+                switch (Ptype)
+                {
+                    case CareProviderType.Doctor:
+                        Doctor doc = new Doctor();
+                        provider = doc;
+                        doc.Read();
+                        providers[i] = provider;
+                        break;
+
+                    case CareProviderType.Nurse:
+                        Nurse nur = new Nurse();
+                        provider = nur;
+                        nur.Read();
+                        providers[i] = provider;
+                        break;
+                }
+            }
+
+            SimulateEmergency(providers);
+            DisplayCareProvided(providers);
+        }
+
+        static void Main(string[] args)
+        {
+           Run();
+        }
+    }
+}
+
+//Output
+
+Enter the number of care providers
+3
+1.Doctor ----- 2.Nurse
+1
+Enter the id for doctor
+100
+Enter the name of the doctor
+Mahesh
+Enter the specialization for the doctor
+Heart
+1.Doctor ----- 2.Nurse
+2
+Enter the id for nurse
+101
+Enter the name of the nurse
+veena
+Enter the time shift for the nurse
+12am
+1.Doctor ----- 2.Nurse
+1
+Enter the id for doctor
+103
+Enter the name of the doctor
+John
+Enter the specialization for the doctor
+Dental
+Responded to critical situations by doctor The doctor with
+ID : 100
+Name : Mahesh
+specialzation Heart
+Responded to emergency by nurse with The nurse with shift timing
+ID : 101
+Name : veena
+shift timings 12am
+Responded to critical situations by doctor The doctor with
+ID : 103
+Name : John
+specialzation Dental
+Care provided by The doctor with
+ID : 100
+Name : Mahesh
+specialzation Heart
+Care provided by The nurse with shift timing
+ID : 101
+Name : veena
+shift timings 12am
+Care provided by The doctor with
+ID : 103
+Name : John
+specialzation Dental
+Press any key to continue . . .

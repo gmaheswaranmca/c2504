@@ -1,0 +1,326 @@
+Problem Statement: Doctor Prescription System
+- Define a class: `DoctorPrescription` with the following properties:
+- `DoctorID` (integer)
+- `PatientName` (string)
+- `Medication` (string)
+- `Dosage` (double, in milligrams)
+- Tasks:
+1. Data Input:
+- Read N `doctorPrescriptions` from the keyboard.
+2. Find Minimum Dosage by a Specific Doctor:
+- For a given doctor's ID, display the prescription with the least dosage prescribed by them.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Third Maximum Dosage Overall:
+- Display the prescription with the third maximum dosage across all doctors.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Patient Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+namespace OopsConcepts
+{
+    class DoctorPrescription
+    {
+        public int DoctorID { get; set; }
+        public string PatientName { get; set; }
+        public string Medication { get; set; }
+        public double Dosage { get; set; }
+
+        public DoctorPrescription(int doctorID, string patientName, string medication, double dosage)
+        {
+            DoctorID = doctorID;
+            PatientName = patientName;
+            Medication = medication;
+            Dosage = dosage;
+        }
+    }
+
+    class DoctorPrescriptionSystem
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the number of prescriptions: ");
+            int n = int.Parse(Console.ReadLine());
+
+            DoctorPrescription[] prescriptions = new DoctorPrescription[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"Enter details for prescription {i + 1}:");
+                Console.Write("DoctorID: ");
+                int doctorID = int.Parse(Console.ReadLine());
+
+                Console.Write("PatientName: ");
+                string patientName = Console.ReadLine();
+
+                Console.Write("Medication: ");
+                string medication = Console.ReadLine();
+
+                Console.Write("Dosage (in milligrams): ");
+                double dosage = double.Parse(Console.ReadLine());
+
+                prescriptions[i] = new DoctorPrescription(doctorID, patientName, medication, dosage);
+            }
+
+           
+            Console.WriteLine("Enter DoctorID to find the minimum dosage prescription: ");
+            int specificDoctorID = int.Parse(Console.ReadLine());
+            FindMinimumDosageByDoctor(prescriptions, specificDoctorID);
+
+            FindThirdMaximumDosage(prescriptions);
+
+          
+            SortByPatientName(prescriptions);
+
+         
+            Console.WriteLine("\nPrescriptions sorted by Patient Name:");
+            foreach (var prescription in prescriptions)
+            {
+                Console.WriteLine($"DoctorID: {prescription.DoctorID}, PatientName: {prescription.PatientName}, Medication: {prescription.Medication}, Dosage: {prescription.Dosage} mg");
+            }
+        }
+
+        static void FindMinimumDosageByDoctor(DoctorPrescription[] prescriptions, int doctorID)
+        {
+            DoctorPrescription minDosagePrescription = null;
+            foreach (var prescription in prescriptions)
+            {
+                if (prescription.DoctorID == doctorID)
+                {
+                    if (minDosagePrescription == null || prescription.Dosage < minDosagePrescription.Dosage)
+                    {
+                        minDosagePrescription = prescription;
+                    }
+                }
+            }
+
+            if (minDosagePrescription != null)
+            {
+                Console.WriteLine($"\nMinimum dosage by Doctor {doctorID}:");
+                Console.WriteLine($"PatientName: {minDosagePrescription.PatientName}, Medication: {minDosagePrescription.Medication}, Dosage: {minDosagePrescription.Dosage} mg");
+            }
+            else
+            {
+                Console.WriteLine($"No prescriptions found for Doctor {doctorID}");
+            }
+        }
+
+        static void FindThirdMaximumDosage(DoctorPrescription[] prescriptions)
+        {
+            double firstMax = double.MinValue;
+            double secondMax = double.MinValue;
+            double thirdMax = double.MinValue;
+            DoctorPrescription thirdMaxPrescription = null;
+
+            foreach (var prescription in prescriptions)
+            {
+                if (prescription.Dosage > firstMax)
+                {
+                    thirdMax = secondMax;
+                    secondMax = firstMax;
+                    firstMax = prescription.Dosage;
+                }
+                else if (prescription.Dosage > secondMax)
+                {
+                    thirdMax = secondMax;
+                    secondMax = prescription.Dosage;
+                }
+                else if (prescription.Dosage > thirdMax)
+                {
+                    thirdMax = prescription.Dosage;
+                    thirdMaxPrescription = prescription;
+                }
+            }
+
+            if (thirdMaxPrescription != null)
+            {
+                Console.WriteLine($"\nThird maximum dosage overall:");
+                Console.WriteLine($"DoctorID: {thirdMaxPrescription.DoctorID}, PatientName: {thirdMaxPrescription.PatientName}, Medication: {thirdMaxPrescription.Medication}, Dosage: {thirdMaxPrescription.Dosage} mg");
+            }
+            else
+            {
+                Console.WriteLine("Less than three distinct dosages found.");
+            }
+        }
+
+        static void SortByPatientName(DoctorPrescription[] prescriptions)
+        {
+            for (int i = 0; i < prescriptions.Length - 1; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < prescriptions.Length; j++)
+                {
+                    if (string.Compare(prescriptions[j].PatientName, prescriptions[minIndex].PatientName) < 0)
+                    {
+                        minIndex = j;
+                    }
+                }
+
+                if (minIndex != i)
+                {
+                    DoctorPrescription temp = prescriptions[i];
+                    prescriptions[i] = prescriptions[minIndex];
+                    prescriptions[minIndex] = temp;
+                }
+            }
+        }
+    }
+}
+
+
+================
+
+
+Problem Statement: Advanced Inheritance and Interface in Patient Care System
+- Define a base class: `CareProvider` with properties:
+- `ProviderID` (integer), `ProviderName` (string)
+- Method: `ProvideCare()` (virtual, void)
+- Define an interface: `IEmergencyResponder` with the following method:
+- `RespondToEmergency()` (void)
+- Define a derived class: `Nurse` that inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `ShiftTiming` (string)
+- Implement `ProvideCare()` to display care provided during the shift.
+- Implement `RespondToEmergency()` to handle emergency situations.
+- Define another derived class: `Doctor` that also inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `Specialization` (string)
+- Implement `ProvideCare()` to display care based on specialization.
+- Implement `RespondToEmergency()` to handle critical emergency situations.
+- Tasks:
+1. Care Management:
+- Read details for N `careProviders` (both Nurses and Doctors).
+2. Emergency Response:
+- Implement a method to simulate an emergency and call `RespondToEmergency()` for each care provider.
+3. Care Providing:
+- Display details of care provided by each provider using the overridden `ProvideCare()` method.
+using System;
+
+class CareProvider
+{
+    public int ProviderID { get; set; }
+    public string ProviderName { get; set; }
+
+    public CareProvider(int providerID, string providerName)
+    {
+        ProviderID = providerID;
+        ProviderName = providerName;
+    }
+
+    public virtual void ProvideCare()
+    {
+        Console.WriteLine("Providing general care.");
+    }
+}
+
+interface IEmergencyResponder
+{
+    void RespondToEmergency();
+}
+
+class Nurse : CareProvider, IEmergencyResponder
+{
+    public string ShiftTiming { get; set; }
+
+    public Nurse(int providerID, string providerName, string shiftTiming)
+        : base(providerID, providerName)
+    {
+        ShiftTiming = shiftTiming;
+    }
+
+    public override void ProvideCare()
+    {
+        Console.WriteLine($"Nurse {ProviderName} (ID: {ProviderID}) is providing care during the {ShiftTiming} shift.");
+    }
+
+    public void RespondToEmergency()
+    {
+        Console.WriteLine($"Nurse {ProviderName} (ID: {ProviderID}) is responding to an emergency during the {ShiftTiming} shift.");
+    }
+}
+
+class Doctor : CareProvider, IEmergencyResponder
+{
+    public string Specialization { get; set; }
+
+    public Doctor(int providerID, string providerName, string specialization)
+        : base(providerID, providerName)
+    {
+        Specialization = specialization;
+    }
+
+    public override void ProvideCare()
+    {
+        Console.WriteLine($"Doctor {ProviderName} (ID: {ProviderID}) is providing care based on specialization: {Specialization}.");
+    }
+
+    public void RespondToEmergency()
+    {
+        Console.WriteLine($"Doctor {ProviderName} (ID: {ProviderID}) is responding to a critical emergency in the field of {Specialization}.");
+    }
+}
+
+class PatientCareSystem
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the number of care providers: ");
+        int n = int.Parse(Console.ReadLine());
+
+        CareProvider[] careProviders = new CareProvider[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"Enter details for care provider {i + 1}:");
+            Console.Write("Is the care provider a Nurse (N) or a Doctor (D)? ");
+            char type = char.ToUpper(Console.ReadLine()[0]);
+
+            Console.Write("ProviderID: ");
+            int providerID = int.Parse(Console.ReadLine());
+
+            Console.Write("ProviderName: ");
+            string providerName = Console.ReadLine();
+
+            if (type == 'N')
+            {
+                Console.Write("ShiftTiming: ");
+                string shiftTiming = Console.ReadLine();
+
+                careProviders[i] = new Nurse(providerID, providerName, shiftTiming);
+            }
+            else if (type == 'D')
+            {
+                Console.Write("Specialization: ");
+                string specialization = Console.ReadLine();
+
+                careProviders[i] = new Doctor(providerID, providerName, specialization);
+            }
+        }
+
+    
+        SimulateEmergency(careProviders);
+
+       
+        DisplayCareProvided(careProviders);
+    }
+
+    static void SimulateEmergency(CareProvider[] careProviders)
+    {
+        Console.WriteLine("\nSimulating an emergency...");
+        foreach (var provider in careProviders)
+        {
+            if (provider is IEmergencyResponder emergencyResponder)
+            {
+                emergencyResponder.RespondToEmergency();
+            }
+        }
+    }
+
+    static void DisplayCareProvided(CareProvider[] careProviders)
+    {
+        Console.WriteLine("\nDisplaying care provided by each provider:");
+        foreach (var provider in careProviders)
+        {
+            provider.ProvideCare();
+        }
+    }
+}

@@ -1,0 +1,283 @@
+Problem Statement: Prescription Cost Management
+- Define a class: `PrescriptionCost` with the following properties:
+- `PrescriptionID` (integer)
+- `PatientName` (string)
+- `Medication` (string)
+- `Cost` (double, in dollars)
+- Tasks:
+1. Data Input:
+- Read N `prescriptionCosts` from the keyboard.
+2. Find Lowest Cost Prescription:
+- Display the prescription with the lowest cost.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Highest Cost Prescription:
+- Display the prescription with the second highest cost.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Medication Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+using System;
+
+public class PrescriptionCost
+{
+    public int PrescriptionID { get; set; }
+    public string PatientName { get; set; }
+    public string Medication { get; set; }
+    public double Cost { get; set; }
+
+    public PrescriptionCost(int id, string name, string medication, double cost)
+    {
+        PrescriptionID = id;
+        PatientName = name;
+        Medication = medication;
+        Cost = cost;
+    }
+    public override string ToString()
+    {
+        return $"ID: {PrescriptionID}, Name: {PatientName}, Medication: {Medication}, Cost: ${Cost}";
+    }
+}
+using System;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the number of prescriptions: ");
+        int n = int.Parse(Console.ReadLine());
+
+        PrescriptionCost[] prescriptions = new PrescriptionCost[n];
+  
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"Enter details for prescription {i + 1}:");
+            Console.Write("Prescription ID: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.Write("Patient Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Medication: ");
+            string medication = Console.ReadLine();
+            Console.Write("Cost: ");
+            double cost = double.Parse(Console.ReadLine());
+
+            prescriptions[i] = new PrescriptionCost(id, name, medication, cost);
+        }
+ PrescriptionCost lowestCost = FindLowestCostPrescription(prescriptions);
+        Console.WriteLine("Prescription with the lowest cost:");
+        Console.WriteLine(lowestCost);
+
+        
+        PrescriptionCost secondHighestCost = FindSecondHighestCostPrescription(prescriptions);
+        Console.WriteLine("Prescription with the second highest cost:");
+        Console.WriteLine(secondHighestCost);
+
+        
+        SortPrescriptionsByMedication(prescriptions);
+        Console.WriteLine("Prescriptions sorted by Medication Name:");
+        foreach (var prescription in prescriptions)
+        {
+            Console.WriteLine(prescription);
+        }
+    }
+
+    static PrescriptionCost FindLowestCostPrescription(PrescriptionCost[] prescriptions)
+    {
+        if (prescriptions.Length == 0)
+            throw new InvalidOperationException("No prescriptions available.");
+
+        PrescriptionCost lowest = prescriptions[0];
+        foreach (var prescription in prescriptions)
+        {
+            if (prescription.Cost < lowest.Cost)
+            {
+                lowest = prescription;
+            }
+        }
+        return lowest;
+    }
+    static PrescriptionCost FindSecondHighestCostPrescription(PrescriptionCost[] prescriptions)
+    {
+        if (prescriptions.Length < 2)
+            throw new InvalidOperationException("At least two prescriptions are required.");
+
+        PrescriptionCost highest = prescriptions[0];
+        PrescriptionCost secondHighest = null;
+
+        foreach (var prescription in prescriptions)
+        {
+            if (prescription.Cost > highest.Cost)
+            {
+                secondHighest = highest;
+                highest = prescription;
+            }
+            else if (secondHighest == null || prescription.Cost > secondHighest.Cost)
+            {
+                secondHighest = prescription;
+            }
+        }
+        if (secondHighest == null)
+            throw new InvalidOperationException("Could not find the second highest cost prescription.");
+        return secondHighest;
+    }
+
+    static void SortPrescriptionsByMedication(PrescriptionCost[] prescriptions)
+{
+    for (int i = 0; i < prescriptions.Length - 1; i++)
+    {
+        for (int j = i + 1; j < prescriptions.Length; j++)
+        {
+            if (string.Compare(prescriptions[i].Medication, prescriptions[j].Medication) > 0)
+            {
+              
+                PrescriptionCost temp = prescriptions[i];
+                prescriptions[i] = prescriptions[j];
+                prescriptions[j] = temp;
+            }
+        }
+    }
+}
+
+
+========================
+
+
+Problem Statement: Advanced Overriding in Doctor-Patient Relationships
+- Define a base class: `Doctor` with properties:
+- `DoctorID` (integer), `Name` (string)
+- Method: `ConsultationFee()` (virtual, returns double)
+- Define a derived class: `GeneralPractitioner` that overrides `ConsultationFee()`:
+- Additional Property: `ConsultationHours` (integer)
+- Override `ConsultationFee()` to calculate based on hours.
+- Define another derived class: `Specialist` that also overrides `ConsultationFee()`:
+- Additional Property: `Specialization` (string)
+- Override `ConsultationFee()` to calculate based on specialization type.
+- Tasks:
+1. Data Entry:
+- Read details for N `doctors` (both GeneralPractitioners and Specialists).
+2. Calculate Total Fees:
+- Implement a method to calculate and display the total consultation fees for all doctors.
+3. Override `ToString()`:
+- Override `ToString()` in derived classes to display detailed information for each doctor.
+public class Doctor
+{
+    public int DoctorID { get; set; }
+    public string Name { get; set; }
+
+    public Doctor(int doctorID, string name)
+    {
+        DoctorID = doctorID;
+        Name = name;
+    }
+    public virtual double ConsultationFee()
+    {
+        return 0; 
+    }
+    public override string ToString()
+    {
+        return $"Doctor ID: {DoctorID}, Name: {Name}";
+    }
+}
+public class GeneralPractitioner : Doctor
+{
+    public int ConsultationHours { get; set; }
+
+    public GeneralPractitioner(int doctorID, string name, int consultationHours)
+        : base(doctorID, name)
+    {
+        ConsultationHours = consultationHours;
+    } 
+    public override double ConsultationFee()
+    {
+       
+        return ConsultationHours * 50;
+    }
+  
+    public override string ToString()
+    {
+        return $"{base.ToString()}, Consultation Hours: {ConsultationHours}, Fee: ${ConsultationFee()}";
+    }
+}
+
+public class Specialist : Doctor
+{
+    public string Specialization { get; set; }
+
+    public Specialist(int doctorID, string name, string specialization)
+        : base(doctorID, name)
+    {
+        Specialization = specialization;
+    }
+public override double ConsultationFee()
+    {
+       
+        switch (Specialization.ToLower())
+        {
+            case "cardiologist":
+                return 200;
+            case "neurologist":
+                return 180;
+            case "dermatologist":
+                return 150;
+            default:
+                return 100;
+        }
+ public override string ToString()
+    {
+        return $"{base.ToString()}, Specialization: {Specialization}, Fee: ${ConsultationFee()}";
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the number of doctors: ");
+        int n = int.Parse(Console.ReadLine());
+
+        List<Doctor> doctors = new List<Doctor>();
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"Enter details for doctor {i + 1}:");
+            Console.Write("Doctor ID: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Enter type (GP/Specialist): ");
+            string type = Console.ReadLine().ToLower();
+
+            if (type == "gp")
+            {
+                Console.Write("Consultation Hours: ");
+                int hours = int.Parse(Console.ReadLine());
+                doctors.Add(new GeneralPractitioner(id, name, hours));
+            }
+            else  (type == "specialist")
+            {
+                Console.Write("Specialization: ");
+                string specialization = Console.ReadLine();
+                doctors.Add(new Specialist(id, name, specialization));
+            }
+}
+double totalFees = CalculateTotalFees(doctors);
+        Console.WriteLine($"Total Consultation Fees: ${totalFees}");
+
+        
+        Console.WriteLine("Doctor Details:");
+        foreach (var doctor in doctors)
+        {
+            Console.WriteLine(doctor);
+        }
+    }
+
+    static double CalculateTotalFees(List<Doctor> doctors)
+    {
+        double total = 0;
+        foreach (var doctor in doctors)
+        {
+            total += doctor.ConsultationFee();
+        }
+        return total;
+    }
+}

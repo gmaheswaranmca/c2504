@@ -1,0 +1,333 @@
+Problem Statement: Patient Allergy Management
+- Define a class: `Allergy` with the following properties:
+- `AllergyID` (integer)
+- `PatientName` (string)
+- `Allergen` (string)
+- `SeverityLevel` (integer, 1 to 10)
+- Tasks:
+1. Data Input:
+- Read N `allergies` from the keyboard.
+2. Find Most Severe Allergy:
+- Display the allergy with the highest severity level.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Second Least Severe Allergy:
+- Display the allergy with the second lowest severity level.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Allergen:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+namespace AllergyManagement
+{
+    class Allergy
+    {
+        public int AllergyID { get; set; }
+        public string PatientName { get; set; }
+        public string Allergen { get; set; }
+        public int SeverityLevel { get; set; }
+
+        public Allergy(int allergyID, string patientName, string allergen, int severityLevel)
+        {
+            AllergyID = allergyID;
+            PatientName = patientName;
+            Allergen = allergen;
+            SeverityLevel = severityLevel;
+        }
+
+        public override string ToString()
+        {
+            return $"Allergy ID: {AllergyID}, Patient Name: {PatientName}, Allergen: {Allergen}, Severity Level: {SeverityLevel}";
+        }
+        
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                Console.Write("Enter the number of allergies: ");
+                int numberOfAllergies = int.Parse(Console.ReadLine());
+                Allergy[] allergies = new Allergy[numberOfAllergies];
+
+                // Input allergy details
+                for (int i = 0; i < numberOfAllergies; i++)
+                {
+                    Console.Write("Enter the Allergy ID: ");
+                    int allergyID = int.Parse(Console.ReadLine());
+
+                    Console.Write("Enter the Patient Name: ");
+                    string patientName = Console.ReadLine();
+
+                    Console.Write("Enter the Allergen: ");
+                    string allergen = Console.ReadLine();
+
+                    int severityLevel;
+                    while (true)
+                    {
+                        Console.Write("Enter the Severity Level (1 to 10): ");
+                        if (int.TryParse(Console.ReadLine(), out severityLevel) && severityLevel >= 1 && severityLevel <= 10)
+                        {
+                            break; 
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Severity Level must be an integer between 1 and 10.");
+                        }
+                    }
+
+                    allergies[i] = new Allergy(allergyID, patientName, allergen, severityLevel);
+                }
+
+                //  most severe allergy
+                Allergy mostSevere = FindMostSevereAllergy(allergies);
+                if (mostSevere != null)
+                {
+                    Console.WriteLine($"Most Severe Allergy: {mostSevere}");
+                }
+                else
+                {
+                    Console.WriteLine("No allergies found.");
+                }
+
+                // second least severe allergy
+                Allergy secondLeastSevere = FindSecondLeastSevereAllergy(allergies);
+                if (secondLeastSevere != null)
+                {
+                    Console.WriteLine($"Second Least Severe Allergy: {secondLeastSevere}");
+                }
+                else
+                {
+                    Console.WriteLine("Not enough allergies to find the second least severe.");
+                }
+
+               
+                SelectionSort(allergies);
+
+                
+                Console.WriteLine("Sorted list by allergen:");
+                foreach (Allergy allergy in allergies)
+                {
+                    Console.WriteLine(allergy);
+                }
+            }
+
+            static Allergy FindMostSevereAllergy(Allergy[] allergies)
+            {
+                if (allergies.Length == 0) return null;
+
+                Allergy mostSevere = allergies[0];
+                foreach (var allergy in allergies)
+                {
+                    if (allergy != null && allergy.SeverityLevel > mostSevere.SeverityLevel)
+                    {
+                        mostSevere = allergy;
+                    }
+                }
+
+                return mostSevere;
+            }
+
+            static Allergy FindSecondLeastSevereAllergy(Allergy[] allergies)
+            {
+                if (allergies.Length < 2) return null;
+
+                Allergy leastSevere = allergies[0];
+                Allergy secondLeastSevere = null;
+
+                foreach (var allergy in allergies)
+                {
+                    if (allergy != null)
+                    {
+                        if (allergy.SeverityLevel < leastSevere.SeverityLevel)
+                        {
+                            secondLeastSevere = leastSevere;
+                            leastSevere = allergy;
+                        }
+                        else if (secondLeastSevere == null || (allergy.SeverityLevel < secondLeastSevere.SeverityLevel && allergy.SeverityLevel > leastSevere.SeverityLevel))
+                        {
+                            secondLeastSevere = allergy;
+                        }
+                    }
+                }
+
+                return secondLeastSevere;
+            }
+
+            static void SelectionSort(Allergy[] array)
+            {
+                int n = array.Length;
+                for (int i = 0; i < n - 1; i++)
+                {
+                    int minIndex = i;
+                    for (int j = i + 1; j < n; j++)
+                    {
+                        if (string.Compare(array[j].Allergen, array[minIndex].Allergen, StringComparison.Ordinal) < 0)
+                        {
+                            minIndex = j;
+                        }
+                    }
+                    if (minIndex != i)
+                    {
+                        Allergy temp = array[i];
+                        array[i] = array[minIndex];
+                        array[minIndex] = temp;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+=========================
+
+
+
+Problem Statement: Inheritance and Overriding in Medication Management
+- Define an abstract class: `Medication` with the following properties and methods:
+- Properties: `MedicationID` (integer), `Dosage` (double, in milligrams)
+- Method: `CalculateCost()` (abstract, returns double)
+- Define a derived class: `TabletMedication` that inherits from `Medication` and has additional properties:
+- `TabletCount` (integer)
+- Override the `CalculateCost()` method to calculate cost based on the number of tablets and dosage.
+- Define another derived class: `InjectionMedication` that also inherits from `Medication` and has additional properties:
+- `Volume` (double, in milliliters)
+- Override the `CalculateCost()` method to calculate cost based on volume and dosage.
+- Tasks:
+1. Data Input:
+- Read N `medications` of both types (tablets and injections).
+2. Calculate Total Cost:
+- Implement a method that calculates and displays the total cost for all medications.
+3. Display Details:
+- Display the details of each medication using overridden `ToString()` methods in the derived classes.
+namespace MedicationManagement
+{
+    abstract class Medication
+    {
+        public int MedicationID { get; set; }
+        public double Dosage { get; set; } // Dosage in milligrams
+
+        public Medication(int medicationID, double dosage)
+        {
+            MedicationID = medicationID;
+            Dosage = dosage;
+        }
+
+        // Abstract method to calculate cost
+        public abstract double CalculateCost();
+
+        public override string ToString()
+        {
+            return $"Medication ID: {MedicationID}, Dosage: {Dosage} mg";
+        }
+    }
+
+    
+    class TabletMedication : Medication
+    {
+        public int TabletCount { get; set; }
+
+        public TabletMedication(int medicationID, double dosage, int tabletCount)
+            : base(medicationID, dosage)
+        {
+            TabletCount = tabletCount;
+        }
+
+        
+        public override double CalculateCost()
+        {
+            double costPerTablet = 0.50; // Example cost per tablet
+            double costPerMilligram = 0.01; // Example cost per milligram dosage
+            return (TabletCount * costPerTablet) + (Dosage * costPerMilligram);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $", Tablet Count: {TabletCount}";
+        }
+    }
+
+   
+    class InjectionMedication : Medication
+    {
+        public double Volume { get; set; } // Volume in milliliters
+
+        public InjectionMedication(int medicationID, double dosage, double volume)
+            : base(medicationID, dosage)
+        {
+            Volume = volume;
+        }
+
+        
+        public override double CalculateCost()
+        {
+            double costPerMilliliter = 2.00; // Example cost per milliliter
+            return Volume * costPerMilliliter;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $", Volume: {Volume} ml";
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of medications: ");
+            int numberOfMedications = int.Parse(Console.ReadLine());
+
+            Medication[] medications = new Medication[numberOfMedications];
+
+            
+            for (int i = 0; i < numberOfMedications; i++)
+            {
+                Console.Write("Enter medication type (1 for Tablet, 2 for Injection): ");
+                int type = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter Medication ID: ");
+                int medicationID = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter Dosage (in milligrams): ");
+                double dosage = double.Parse(Console.ReadLine());
+
+                if (type == 1) // Tablet
+                {
+                    Console.Write("Enter Tablet Count: ");
+                    int tabletCount = int.Parse(Console.ReadLine());
+
+                    medications[i] = new TabletMedication(medicationID, dosage, tabletCount);
+                }
+                else if (type == 2) // Injection
+                {
+                    Console.Write("Enter Volume (in milliliters): ");
+                    double volume = double.Parse(Console.ReadLine());
+
+                    medications[i] = new InjectionMedication(medicationID, dosage, volume);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid type entered.");
+                    i--; // Decrement index to re-enter the current medication
+                }
+            }
+
+            // Calculate and display the total cost
+            double totalCost = 0;
+            foreach (var medication in medications)
+            {
+                totalCost += medication.CalculateCost();
+            }
+            Console.WriteLine($"Total Cost: ${totalCost}");
+
+            // Display details of each medication
+			
+            Console.WriteLine("Medication Details:");
+            foreach (var medication in medications)
+            {
+                Console.WriteLine(medication);
+            }
+        }
+    }
+}

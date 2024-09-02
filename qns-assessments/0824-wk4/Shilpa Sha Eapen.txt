@@ -1,0 +1,213 @@
+Problem Statement: Doctor Prescription System
+- Define a class: `DoctorPrescription` with the following properties:
+- `DoctorID` (integer)
+- `PatientName` (string)
+- `Medication` (string)
+- `Dosage` (double, in milligrams)
+- Tasks:
+1. Data Input:
+- Read N `doctorPrescriptions` from the keyboard.
+2. Find Minimum Dosage by a Specific Doctor:
+- For a given doctor's ID, display the prescription with the least dosage prescribed by them.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Third Maximum Dosage Overall:
+- Display the prescription with the third maximum dosage across all doctors.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort by Patient Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+class DoctorPrescription
+{
+    public int DoctorId { get; set; }
+    public string PatientName { get; set; }
+    public string Medication { get; set; }
+    public double Dosage { get; set; }
+
+    static void Main()
+    {
+        DoctorPrescription[] doctorPrescriptions = new DoctorPrescription[4];
+        for (int i = 0; i < doctorPrescriptions.Length; i++)
+        {
+            Console.Write("Enter Doctor id: ");
+            int docId = int.Parse(Console.ReadLine());
+            Console.Write("Enter Patient Name: ");
+            string patientName = Console.ReadLine();
+            Console.Write("Enter Medication: ");
+            string Medication = Console.ReadLine();
+            Console.Write("Enter Dosage: ");
+            double Dosage = double.Parse(Console.ReadLine());
+
+            doctorPrescriptions[i] = new DoctorPrescription { DoctorId = docId, PatientName = patientName, Medication = Medication, Dosage = Dosage };
+        }
+        for(int i = 0;i < doctorPrescriptions.Length - 1; i++)
+        {
+            int minIndex = i;
+            for(int j = i +1; j < doctorPrescriptions.Length; j++)
+            {
+                if (doctorPrescriptions[j].Dosage < doctorPrescriptions[minIndex].Dosage)
+                {
+                     minIndex = j;
+                }
+            }
+            DoctorPrescription temp = doctorPrescriptions[minIndex];
+            doctorPrescriptions[minIndex] = doctorPrescriptions[i];
+            doctorPrescriptions[i] = temp;
+        }
+            Console.WriteLine($"The Minimum Dosage is:{doctorPrescriptions[0].Dosage}mg by Doctor {doctorPrescriptions[0].DoctorId}");
+           Console.WriteLine($"The Third Maximum Dosage is : {doctorPrescriptions[(doctorPrescriptions.Length-1) - 2].Dosage}mg");
+        for (int i = 0; i < doctorPrescriptions.Length - 1; i++)
+        {
+            int minIndex = i;
+            for (int j = i + 1; j < doctorPrescriptions.Length; j++)
+            {
+                if (string.Compare(doctorPrescriptions[j].PatientName, doctorPrescriptions[minIndex].PatientName) < 0)
+                {
+                    minIndex = j;
+                }
+            }
+            DoctorPrescription temp = doctorPrescriptions[minIndex];
+            doctorPrescriptions[minIndex] = doctorPrescriptions[i];
+            doctorPrescriptions[i] = temp;
+        }
+
+        Console.WriteLine("Prescriptions sorted by patient name:");
+        foreach (var prescription in doctorPrescriptions)
+        {
+            Console.WriteLine($"{prescription.PatientName} - {prescription.Medication} - {prescription.Dosage}mg");
+        }
+
+        Console.ReadKey();
+    }
+  
+        
+
+}
+
+
+
+=====================
+
+
+
+Problem Statement: Advanced Inheritance and Interface in Patient Care System
+- Define a base class: `CareProvider` with properties:
+- `ProviderID` (integer), `ProviderName` (string)
+- Method: `ProvideCare()` (virtual, void)
+- Define an interface: `IEmergencyResponder` with the following method:
+- `RespondToEmergency()` (void)
+- Define a derived class: `Nurse` that inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `ShiftTiming` (string)
+- Implement `ProvideCare()` to display care provided during the shift.
+- Implement `RespondToEmergency()` to handle emergency situations.
+- Define another derived class: `Doctor` that also inherits from `CareProvider` and implements `IEmergencyResponder`:
+- Additional Property: `Specialization` (string)
+- Implement `ProvideCare()` to display care based on specialization.
+- Implement `RespondToEmergency()` to handle critical emergency situations.
+- Tasks:
+1. Care Management:
+- Read details for N `careProviders` (both Nurses and Doctors).
+2. Emergency Response:
+- Implement a method to simulate an emergency and call `RespondToEmergency()` for each care provider.
+3. Care Providing:
+- Display details of care provided by each provider using the overridden `ProvideCare()` method.
+public class CareProvider
+{
+    public int ProviderID { get; set; }
+    public string ProviderName { get; set; }
+
+    public virtual void ProvideCare()
+    {
+        Console.WriteLine(ProviderName);
+    }
+}
+
+
+public interface IEmergencyResponder
+{
+    void RespondToEmergency();
+}
+
+
+public class Nurse : CareProvider, IEmergencyResponder
+{
+    public string ShiftTiming { get; set; }
+
+    public override void ProvideCare()
+    {
+        Console.WriteLine($"Care provided by {ProviderName} during  {ShiftTiming}");
+    }
+
+    public void RespondToEmergency()
+    {
+        Console.WriteLine($"Nurse {ProviderName}  is responding to the emergency situation.");
+
+
+    }
+}
+
+
+public class Doctor : CareProvider, IEmergencyResponder
+{
+    public string Specialization { get; set; }
+
+    public override void ProvideCare()
+    {
+        Console.WriteLine($"Care provided by  {ProviderName} in {Specialization}");
+    }
+
+    public void RespondToEmergency()
+    {
+        Console.WriteLine($"Doctor  {ProviderName}  is responding to the critical emergency situation in {Specialization}");
+       
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        IEmergencyResponder[] careProviders = new IEmergencyResponder[3]; 
+
+
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write("Enter provider type (Nurse/Doctor): ");
+            string type = Console.ReadLine();
+            Console.Write("Enter provider ID: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter provider name: ");
+            string name = Console.ReadLine();
+
+            if (type == "Nurse")
+            {
+                Console.Write("Enter shift timing: ");
+                string shiftTiming = Console.ReadLine();
+                careProviders[i] = new Nurse { ProviderID = id, ProviderName = name, ShiftTiming = shiftTiming };
+            }
+            else if (type == "Doctor")
+            {
+                Console.Write("Enter specialization: ");
+                string specialization = Console.ReadLine();
+                careProviders[i] = new Doctor { ProviderID = id, ProviderName = name, Specialization = specialization };
+            }
+        }
+
+
+        Console.WriteLine("Emergency Response:");
+        foreach (var provider in careProviders)
+        {
+            provider.RespondToEmergency();
+        }
+
+   
+        Console.WriteLine("Care Providing:");
+        foreach (var provider in careProviders)
+        {
+            ((CareProvider)provider).ProvideCare();
+        }
+
+        Console.ReadKey();
+    }
+}

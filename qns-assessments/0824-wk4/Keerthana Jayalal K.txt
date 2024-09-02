@@ -1,0 +1,439 @@
+Problem Statement: Medication Dosage Analysis
+- Define a class: `Prescription` with the following properties:
+- `PrescriptionID` (integer)
+- `PatientName` (string)
+- `MedicationName` (string)
+- `Dosage` (double, in milligrams)
+- Tasks:
+1. Data Input:
+- Read N `prescriptions` from the keyboard.
+2. Find Maximum Dosage:
+- Display the prescription with the highest dosage among the N `prescriptions`.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Third Least Dosage:
+- Display the prescription with the third least dosage among the N `prescriptions`.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort Prescriptions by Medication Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+//Problem Statement: Medication Dosage Analysis (without using LINQ or in-built C# sorting)
+//- Define a class: `Prescription` with the following properties:
+//- `PrescriptionID` (integer)
+//- `PatientName` (string)
+//- `MedicationName` (string)
+//- `Dosage` (double, in milligrams)
+//- Tasks:
+//1.Data Input:
+//-Read N `prescriptions` from the keyboard.
+//2. Find Maximum Dosage:
+//-Display the prescription with the highest dosage among the N `prescriptions`.
+//Solve in time complexity of O(N).
+//Dont use built-in C# sorting or LINQ.
+//3. Find Third Least Dosage:
+//-Display the prescription with the third least dosage among the N `prescriptions`.
+//Solve in time complexity of O(N).
+//Dont use built-in C# sorting or LINQ.
+//4. Sort Prescriptions by Medication Name:
+//-Implement and call your own sorting algorithm.
+//Dont use built-in C# sorting or LINQ.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuestTest4
+{
+    public class Prescription
+    {
+        //1. Class: `Prescription`
+
+        public int PrescriptionID { get; set; }
+        public string PatientName { get; set; }
+        public string MedicationName { get; set; }
+        public double Dosage { get; set; }
+
+        public Prescription(int prescriptionID, string patientName, string medicationName, double dosage)
+        {
+            PrescriptionID = prescriptionID;
+            PatientName = patientName;
+            MedicationName = medicationName;
+            Dosage = dosage;
+        }
+
+        public Prescription()
+        {
+        }
+
+        public override string ToString()
+        {
+            return $"PrescriptionID: {PrescriptionID}, PatientName: {PatientName}, MedicationName: {MedicationName}, Dosage: {Dosage}";
+        }
+
+
+        //2. Find Maximum Dosage: (using Insertion Sort - O(N))
+
+        public static void FindMaxDosage(List<Prescription> prescriptions, int N)
+        {
+            if(N == 0)
+            {
+                Console.WriteLine("No Prescription available");
+                return;
+            }
+
+            for (int i = 1; i < prescriptions.Count; i++)
+            {
+                Prescription key = prescriptions[i];
+                int j = i - 1;
+
+                // Move elements of prescriptions[0..i-1], that are greater than key, to one position ahead of their current position
+                while (j >= 0 && prescriptions[j].Dosage > key.Dosage)
+                {
+                    prescriptions[j + 1] = prescriptions[j];
+                    j = j - 1;
+                }
+                prescriptions[j + 1] = key;
+            }
+
+            // The last element in the sorted list will have the maximum dosage
+            Prescription maxDosage = prescriptions[prescriptions.Count - 1];
+            Console.WriteLine($"Prescription with the highest dosage: {maxDosage.MedicationName}, Dosage: {maxDosage.Dosage} mg");
+        }
+        //3. Find Third Least Dosage: (using Insertion Sort - O(N))
+        public static void FindThirdLeastDosage(List<Prescription> prescriptions, int N)
+        {
+            if (prescriptions.Count < 3)
+            {
+                Console.WriteLine("Not enough prescriptions to find the third least dosage.");
+                return;
+            }
+            double first = double.MaxValue, second = double.MaxValue, third = double.MaxValue;
+            Prescription thirdLeastPrescription = null;
+
+            foreach (var prescription in prescriptions)
+            {
+                if (prescription.Dosage < first)
+                {
+                    third = second;
+                    second = first;
+                    first = prescription.Dosage;
+                }
+                else if (prescription.Dosage < second)
+                {
+                    third = second;
+                    second = prescription.Dosage;
+                }
+                else if (prescription.Dosage < third)
+                {
+                    third = prescription.Dosage;
+                    thirdLeastPrescription = prescription;
+                }
+            }
+
+            Console.WriteLine($"Prescription with the third least dosage: {thirdLeastPrescription.MedicationName}, Dosage: {thirdLeastPrescription.Dosage} mg");
+        }
+
+
+        //4. Sort Prescriptions by Medication Name:
+        public static void SortByMedicationName(List<Prescription> prescriptions)
+        {
+            int n = prescriptions.Count;
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (string.Compare(prescriptions[j].MedicationName, prescriptions[j + 1].MedicationName) > 0)
+                    {
+                        // Swap prescriptions[j] and prescriptions[j + 1]
+                        var temp = prescriptions[j];
+                        prescriptions[j] = prescriptions[j + 1];
+                        prescriptions[j + 1] = temp;
+                    }
+                }
+            }
+
+            Console.WriteLine("Prescriptions sorted by Medication Name:");
+            foreach (var prescription in prescriptions)
+            {
+                Console.WriteLine($"{prescription.MedicationName} - {prescription.Dosage} mg");
+            }
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Prescription pres = new Prescription();
+            //1.Data Input:
+            //-Read N `prescriptions` from the keyboard.
+
+            List<Prescription> prescriptions = new List<Prescription>();
+            Console.WriteLine("Enter the number of prescriptions:");
+            int N = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < N; i++)
+            {
+                Console.WriteLine($"Enter details for prescription {i + 1}:");
+                Prescription p = new Prescription();
+                Console.Write("PrescriptionID: ");
+                p.PrescriptionID = int.Parse(Console.ReadLine());
+                Console.Write("PatientName: ");
+                p.PatientName = Console.ReadLine();
+                Console.Write("MedicationName: ");
+                p.MedicationName = Console.ReadLine();
+                Console.Write("Dosage (in mg): ");
+                p.Dosage = double.Parse(Console.ReadLine());
+                prescriptions.Add(p);
+            }
+
+            Prescription.FindMaxDosage(prescriptions,N);
+            Prescription.FindThirdLeastDosage(prescriptions, N);
+            Prescription.SortByMedicationName(prescriptions);
+        }
+    }
+}
+
+//Output:
+//Enter the number of prescriptions:
+//5
+//Enter details for prescription 1:
+//PrescriptionID: 1
+//PatientName: Ram
+//MedicationName: Paracetamol
+//Dosage(in mg): 250
+//Enter details for prescription 2:
+//PrescriptionID: 2
+//PatientName: Seeta
+//MedicationName: Cital
+//Dosage(in mg): 120
+//Enter details for prescription 3:
+//PrescriptionID: 3
+//PatientName: Yasim
+//MedicationName: Dolo
+//Dosage(in mg): 350
+//Enter details for prescription 4:
+//PrescriptionID: 4
+//PatientName: Ishaan
+//MedicationName: Betadine
+//Dosage(in mg): 540
+//Enter details for prescription 5:
+//PrescriptionID: 5
+//PatientName: Ganga
+//MedicationName: Dexorange
+//Dosage(in mg): 420
+//Prescription with the highest dosage: Betadine, Dosage: 540 mg
+//Prescription with the third least dosage: Dolo, Dosage: 350 mg
+//Prescriptions sorted by Medication Name:
+//Betadine - 540 mg
+//Cital - 120 mg
+//Dexorange - 420 mg
+//Dolo - 350 mg
+//Paracetamol - 250 mg
+//Press any key to continue . . .
+
+====================================
+
+Problem Statement: Inheritance and Overriding in Medication Management
+- Define an abstract class: `Medication` with the following properties and methods:
+- Properties: `MedicationID` (integer), `Dosage` (double, in milligrams)
+- Method: `CalculateCost()` (abstract, returns double)
+- Define a derived class: `TabletMedication` that inherits from `Medication` and has additional properties:
+- `TabletCount` (integer)
+- Override the `CalculateCost()` method to calculate cost based on the number of tablets and dosage.
+- Define another derived class: `InjectionMedication` that also inherits from `Medication` and has additional properties:
+- `Volume` (double, in milliliters)
+- Override the `CalculateCost()` method to calculate cost based on volume and dosage.
+- Tasks:
+1. Data Input:
+- Read N `medications` of both types (tablets and injections).
+2. Calculate Total Cost:
+- Implement a method that calculates and displays the total cost for all medications.
+3. Display Details:
+- Display the details of each medication using overridden `ToString()` methods in the derived classes.
+//Problem Statement: Inheritance and Overriding in Medication Management
+//- Define an abstract class: `Medication` with the following properties and methods:
+//-Properties: `MedicationID` (integer), `Dosage` (double, in milligrams)
+//- Method: `CalculateCost()` (abstract, returns double)
+
+//- Define a derived class: `TabletMedication` that inherits from `Medication` and has additional properties:
+//- `TabletCount` (integer)
+//- Override the `CalculateCost()` method to calculate cost based on the number of tablets and dosage.
+
+//- Define another derived class: `InjectionMedication` that also inherits from `Medication` and has additional properties:
+//- `Volume` (double, in milliliters)
+//- Override the `CalculateCost()` method to calculate cost based on volume and dosage.
+
+//- Tasks:
+//1.Data Input:
+//-Read N `medications` of both types (tablets and injections).
+//2. Calculate Total Cost:
+//-Implement a method that calculates and displays the total cost for all medications.
+//3. Display Details:
+//-Display the details of each medication using overridden `ToString()` methods in the derived classes.
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuestTest4b
+{
+    // Class Medication
+    public abstract class Medication
+    {
+        public int MedicationID { get; set; }
+        public double Dosage { get; set; }
+        public abstract double CalculateCost();
+
+    }
+
+    // Class TabletMedication
+
+    class TabletMedication : Medication
+    {
+        public TabletMedication()
+        {
+        }
+
+        public int TabletCount { get; set; }
+        public override double CalculateCost()
+        {
+            double CostPerTablet=0.5;
+            return TabletCount * Dosage * CostPerTablet;
+        }
+
+        public override string ToString()
+        {
+            return $"Tablet Count: {TabletCount}, Dosage: {Dosage}, Total Cost for Tablets: {CalculateCost()}";
+        }
+    }
+
+    // Class InjectionMedication
+
+    class InjectionMedication : Medication
+    {
+        public InjectionMedication()
+        {
+        }
+        public double Volume { get; set; }
+        public override double CalculateCost()
+        {
+            double CostPerInjection = 2;
+            return Volume * Dosage * CostPerInjection;
+        }
+
+        public override string ToString()
+        {
+            return $"Volume: {Volume} ml, Dosage: {Dosage}, Total Cost for Injection: {CalculateCost()}";
+        }
+    }
+
+    internal class Program
+    {
+        //2. Calculate Total Cost:
+        //-Calculate and display the total cost for all medications.
+        public static void CalcTotalCost(List<Medication> medications)
+        {
+            double totalCost=0.0;
+            foreach (var medication in medications)
+            {
+                totalCost += medication.CalculateCost();
+            }
+            Console.WriteLine($"Total cost of all medications: {totalCost}");
+        }
+
+        //3. Display Details:
+        //-Display the details of each medication using overridden `ToString()` methods in the derived classes.
+        public static void DisplayMedicationDetails(List<Medication> medications)
+        {
+            Console.WriteLine("Details of all medications:");
+            foreach (var medication in medications)
+            {
+                Console.WriteLine(medication.ToString());
+            }
+        }
+        static void Main(string[] args)
+        {
+            //1.Data Input:
+            //-Read N `medications` of both types (tablets and injections).
+            Console.Write("Enter the number of Medications: ");
+            int N = int.Parse(Console.ReadLine());
+            List<Medication> medications = new List<Medication>();
+            for (int i = 0; i < N; i++)
+            {
+                Console.WriteLine($"Enter details for Medication {i + 1}:");
+                Console.Write("Enter 't' for Tablet Medication or 'j' for Injection Medication: ");
+                char medType = char.Parse(Console.ReadLine().ToLower());
+                if(medType == 't')
+                {
+                    TabletMedication t = new TabletMedication();
+                    Console.Write("MedicationID: ");
+                    t.MedicationID = int.Parse(Console.ReadLine());
+                    Console.Write("Tablet Count: ");
+                    t.TabletCount =int.Parse(Console.ReadLine());
+
+                    Console.Write("Dosage (in mg): ");
+                    t.Dosage = double.Parse(Console.ReadLine());
+                    medications.Add(t);
+                }
+
+                else if (medType == 'j')
+                {
+                    InjectionMedication j = new InjectionMedication();
+                    Console.Write("MedicationID: ");
+                    j.MedicationID = int.Parse(Console.ReadLine());
+                    Console.Write("Volume (in ml): ");
+                    j.Volume = int.Parse(Console.ReadLine());
+
+                    Console.Write("Dosage (in mg): ");
+                    j.Dosage = double.Parse(Console.ReadLine());
+                    medications.Add(j);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid type. Please enter 't' for Tablet or 'j' for Injection.");
+                    i--; // Repeat the iteration for valid input
+                }
+                
+            }
+            //display the total cost
+            CalcTotalCost(medications);
+
+            // Display details of each medication
+            DisplayMedicationDetails(medications);
+        }
+    }
+}
+
+//Output:
+//Enter the number of Medications: 3
+//Enter details for Medication 1:
+//Enter 't' for Tablet Medication or 'j' for Injection Medication: t
+//MedicationID: 1
+//Tablet Count: 5
+//Dosage(in mg): 34
+//Enter details for Medication 2:
+//Enter 't' for Tablet Medication or 'j' for Injection Medication: j
+//MedicationID: 2
+//Volume(in ml): 56
+//Dosage(in mg): 23
+//Enter details for Medication 3:
+//Enter 't' for Tablet Medication or 'j' for Injection Medication: t
+//MedicationID: 3
+//Tablet Count: 5
+//Dosage(in mg): 67
+//Total cost of all medications: 2828.5
+//Details of all medications:
+//Tablet Count: 5, Dosage: 34, Total Cost for Tablets: 85
+//Volume: 56 ml, Dosage: 23, Total Cost for Injection: 2576
+//Tablet Count: 5, Dosage: 67, Total Cost for Tablets: 167.5
+//Press any key to continue . . .

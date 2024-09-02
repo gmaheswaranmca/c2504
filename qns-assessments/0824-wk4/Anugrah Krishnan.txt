@@ -1,0 +1,293 @@
+Problem Statement: Medication Dosage Analysis
+- Define a class: `Prescription` with the following properties:
+- `PrescriptionID` (integer)
+- `PatientName` (string)
+- `MedicationName` (string)
+- `Dosage` (double, in milligrams)
+- Tasks:
+1. Data Input:
+- Read N `prescriptions` from the keyboard.
+2. Find Maximum Dosage:
+- Display the prescription with the highest dosage among the N `prescriptions`.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+3. Find Third Least Dosage:
+- Display the prescription with the third least dosage among the N `prescriptions`.
+Solve in time complexity of O(N).
+Dont use built-in C# sorting or LINQ.
+4. Sort Prescriptions by Medication Name:
+- Implement and call your own sorting algorithm.
+Dont use built-in C# sorting or LINQ.
+using System;
+namespace MedicineDosage
+{
+    public class Prescription
+    {
+        public int PrescriptionID { get; set; }
+        public string PatientName { get; set; }
+        public string MedicationName { get; set; }
+        public double Dosage { get; set; }
+
+        public Prescription(int id, string name, string medication, double dosage) 
+        {
+            PrescriptionID = id;
+            PatientName = name;
+            MedicationName = medication;
+            Dosage = dosage;
+        }
+    }
+    internal class Program
+    {
+        public static void ThirdLeastDosage(Prescription[] arr)
+        {
+            if (arr.Length == 0)
+                Console.WriteLine("Prescriptions empty");
+            else if (arr.Length < 3)
+                Console.WriteLine("No Third Least Dosage");
+
+            double FirstLeast = double.MaxValue;
+            double SecondLeast = double.MaxValue;
+            double ThirdLeast = double.MaxValue;
+
+            foreach (Prescription prescription in arr)
+            {
+                if (prescription.Dosage < FirstLeast)
+                {
+                    ThirdLeast = SecondLeast;
+                    SecondLeast = FirstLeast;
+                    FirstLeast = prescription.Dosage;
+                }
+                else if (prescription.Dosage < SecondLeast && prescription.Dosage != FirstLeast)
+                {
+                    ThirdLeast = SecondLeast;
+                    SecondLeast = prescription.Dosage;
+                }
+                else if (prescription.Dosage < ThirdLeast && prescription.Dosage != SecondLeast && prescription.Dosage != FirstLeast)
+                {
+                    ThirdLeast = prescription.Dosage;
+                }
+            }
+            if (ThirdLeast == double.MaxValue)
+            {
+                Console.WriteLine("No distinct third least dosage found.");
+            }
+            else
+            {
+                foreach (Prescription prescription in arr)
+                {
+                    if (prescription.Dosage == ThirdLeast)
+                    {
+                        Console.WriteLine("Third Least Dosage Prescription:");
+                        Console.WriteLine($"[ ID: {prescription.PrescriptionID}, Name: {prescription.PatientName}, Medicine: {prescription.MedicationName}, Dose: {prescription.Dosage}]");
+                    }
+                }
+            }
+        }
+
+        public static void SortedPrescription(Prescription[] arr)
+        {
+            int n = arr.Length;
+            for (int i = 0; i < n-1; i++)
+            {
+                int MinIndex = i;
+                int j;
+                for (j = i+1; j < n; j++)
+                {
+                    if (string.Compare(arr[j].MedicationName, arr[MinIndex].MedicationName, StringComparison.OrdinalIgnoreCase) < 0)
+                    {
+                        MinIndex = j;
+                    }
+                }
+                if(MinIndex != i)
+                {
+                    Prescription temp = arr[j];
+                    arr[j] = arr[MinIndex];
+                    arr[MinIndex] = temp;
+                }
+            }
+
+            Console.WriteLine("Prescriptions sorted by Medication Name:");
+            foreach (var prescription in arr)
+            {
+                Console.WriteLine($"ID: {prescription.PrescriptionID}, Patient: {prescription.PatientName}, Medication: {prescription.MedicationName}, Dose: {prescription.Dosage}");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter Number of Prescriptions:");
+            int n = int.Parse(Console.ReadLine());
+            Prescription[] prescriptions = new Prescription[n];
+            double HighestDosage = double.MinValue;
+            Console.WriteLine("Enter Prescription Details");
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Enter Prescription ID:");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Patient Name:");
+                string name = Console.ReadLine();
+                Console.WriteLine("Enter Medication Name:");
+                string medication = Console.ReadLine();
+                Console.WriteLine("Enter Dosage:");
+                double dosage = double.Parse(Console.ReadLine());
+
+                if (dosage > HighestDosage)
+                    HighestDosage = dosage;
+
+                prescriptions[i] = new Prescription(id, name, medication, dosage);
+
+            }
+            foreach (Prescription prescription in prescriptions)
+            {
+                if (prescription.Dosage == HighestDosage)
+                {
+                    Console.WriteLine("Highest Dosage Prescription:");
+                    Console.WriteLine($"[ ID: {prescription.PrescriptionID}, Name: {prescription.PatientName}, Medicine:{prescription.MedicationName}, Dose: {prescription.Dosage}]");
+                }
+            }
+
+            ThirdLeastDosage(prescriptions);
+            SortedPrescription(prescriptions);
+        }
+    }
+}
+
+
+=========================
+
+
+Problem Statement: Interface and Inheritance in Hospital Equipment Management
+- Define an interface: `IServiceable` with the following methods:
+- `Service()` (void)
+- `GetServiceStatus()` (string)
+- Define a base class: `Equipment` with properties:
+- `EquipmentID` (integer), `Name` (string)
+- Define a derived class: `DiagnosticEquipment` that inherits from `Equipment` and implements `IServiceable`:
+- Additional Property: `LastServiceDate` (DateTime)
+- Implement `Service()` to update the service date.
+- Implement `GetServiceStatus()` to return whether the equipment is due for service.
+- Define another derived class: `SurgicalEquipment` that also inherits from `Equipment` and implements `IServiceable`:
+- Additional Property: `UsageCount` (integer)
+- Implement `Service()` to reset the usage count.
+- Implement `GetServiceStatus()` to return service status based on usage.
+- Tasks:
+1. Manage Equipment:
+- Read details for N `equipments` of both types (Diagnostic and Surgical).
+2. Perform Service:
+- Call `Service()` on all equipment and display the updated status.
+3. Service Status Check:
+- Implement a method to display the service status of all equipment.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Equipment
+{
+    public interface IServiceable
+    {
+        void Service();
+        string GetServiceStatus();
+    }
+    public abstract class Equipment
+    {
+        public int EquipmentID { get; set; }
+        public string Name { get; set; }
+    }
+    public class DiagnosticEquipment : Equipment, IServiceable
+    {
+        public DateTime LastServiceDate { get; set; }
+
+        public void Service()
+        {
+            LastServiceDate = DateTime.Now;
+        }
+
+        public string GetServiceStatus()
+        {
+            var dueDate = LastServiceDate.AddMonths(10);
+
+            if (DateTime.Now > dueDate)
+            {
+               return "Due for service";
+            }
+            else
+            {
+                return "Service not due";
+            }
+        }
+    }
+
+    public class SurgicalEquipment : Equipment, IServiceable
+    {
+        public int UsageCount { get; set; }
+
+        public void Service()
+        {
+            UsageCount = 0;
+        }
+
+        public string GetServiceStatus()
+        {
+            if (UsageCount > 1000)
+            {
+                return "Service due";
+            }
+            else
+            {
+                return "Service not due";
+            }
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<IServiceable> equipments = new List<IServiceable>();
+
+            Console.Write("Enter the number of equipment items: ");
+            int N = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < N; i++)
+            {
+                Console.WriteLine($"Enter details for equipment {i + 1}:");
+                Console.Write("Equipment Type (Diagnostic/Surgical): ");
+                string type = Console.ReadLine();
+
+                Equipment equipment;
+                if (type.Equals("Diagnostic", StringComparison.OrdinalIgnoreCase))
+                {
+                    equipment = new DiagnosticEquipment();
+                    Console.Write("LastServiceDate (YYYY-MM-DD): ");
+                    ((DiagnosticEquipment)equipment).LastServiceDate = DateTime.Parse(Console.ReadLine());
+                }
+                else if (type.Equals("Surgical", StringComparison.OrdinalIgnoreCase))
+                {
+                    equipment = new SurgicalEquipment();
+                    Console.Write("UsageCount: ");
+                    ((SurgicalEquipment)equipment).UsageCount = int.Parse(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine("Invalid equipment type.");
+                    continue;
+                }
+
+                Console.Write("EquipmentID: ");
+                equipment.EquipmentID = int.Parse(Console.ReadLine());
+                Console.Write("Name: ");
+                equipment.Name = Console.ReadLine();
+
+                equipments.Add((IServiceable)equipment);
+            }
+
+            foreach (var equipment in equipments)
+            {
+                equipment.Service();
+            }
+
+      
+        }
+    }
+}
