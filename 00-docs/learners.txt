@@ -1,3 +1,33 @@
+02/09/2024 monring: 
+[P01+]Aaryaka P Nath, 	[P--]Abijith K, 			
+[P--]Alan Kuriakose Cherian,	[P09+]Anurag C Ashok,		
+[P03+]Anjana E R, 		[P12+]Anjana N K,
+[P04+]Ann Mariya Jaimon, 	[P02]Anugrah Krishnan, 	 					
+[A..]Ashna Mariya Shaji, [A..]Ashwin V, 	
+[A..]Athulya Shaji,		
+[P07]Collin Francy, 		[P08+]Dijol Davis,	    		    
+[P09+]Gladsy Joshy,	    [P06+]Girish K V, 
+[=]Gopika V, 	[=]Keerthana Jayalal K		
+[..10]Minnu Sudhakaran V A, [=]Neha Joy, 			
+[A..]Rishwin R Kanth,	[P05+]Sahla. R, 			
+[=]Sharon Rose, 		[=]Shilpa Sha Eapen, 	
+[P11+]Yahkoob P, 
+
+xx/09/2024 monring: 
+[ ]Aaryaka P Nath, 	[ ]Abijith K, 			
+[ ]Alan Kuriakose Cherian,	[ ]Anurag C Ashok,		
+[ ]Anjana E R, 		[ ]Anjana N K,
+[  ]Ann Mariya Jaimon, 	[ ]Anugrah Krishnan, 	 					
+[ ]Ashna Mariya Shaji, [ ]Ashwin V, 	
+[ ]Athulya Shaji,		
+[ ]Collin Francy, 		[ ]Dijol Davis,	    		    
+[ ]Gladsy Joshy,	    [ ]Girish K V, 
+[=]Gopika V, 	[=]Keerthana Jayalal K		
+[//]Minnu Sudhakaran V A, [=]Neha Joy, 			
+[ ]Rishwin R Kanth,	[ ]Sahla. R, 			
+[=]Sharon Rose, 		[=]Shilpa Sha Eapen, 	
+[//]Yahkoob P, 
+
 31/08/2024: 
 [02]Aaryaka P Nath, 	[ab]Abijith K, 			
 [07]Alan Kuriakose Cherian,	[12]Anurag C Ashok,		

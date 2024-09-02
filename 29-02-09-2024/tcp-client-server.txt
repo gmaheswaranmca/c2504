@@ -1,0 +1,35 @@
+Server
+
+1.
+TcpListerner server = new TcpListener(IPAddress.Parse(ipAddr), port);
+2. 
+server.Start()
+3. 
+TcpClient client = server.AcceptTcpClient();
+4. 
+NetworkStream stream = client.GetStream();
+byte[] msg = new byte[1024];
+stream.Read(msg,0,msg.Length);
+
+byte[] msg = new byte[1024];
+stream.Write(msg,0,msg.Length);
+5. 
+client.Close()
+6. 
+server.Stop()
+
+
+Client 
+1.
+TcpClient client = new TcpClient(serverAddress, port);
+2. 
+NetworkStream stream = client.GetStream();
+byte[] msg = new byte[1024];
+stream.Read(msg,0,msg.Length);
+
+byte[] msg = new byte[1024];
+stream.Write(msg,0,msg.Length);
+3. 
+stream.Close()
+client.Close() 
+

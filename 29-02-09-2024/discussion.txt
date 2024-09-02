@@ -1,0 +1,118 @@
+Revised Topics:
+    1. SOLID Principles 
+    2. Design Patterns 
+
+Today topics:
+    - networking basics 
+        - OSI model 
+        - TCP/IP model
+    - client / server architecture 
+    - TCP client / server 
+    - UPD client / server 
+    - programs for TCP client / server 
+    - programs for UPD client / server 
+
+
+TCP Server Service Program:
+1. Create Server Object 
+    ```
+    TcpListener server = new TcpListener(IPAddress.Parse(ipAddr), port);// Create a TCP listener
+    ```
+2. To start server 
+    ```
+    server.Start();
+    ```
+3. Listening to clients 
+    ```
+    TcpClient client = server.AcceptTcpClient();
+    ```
+4. Communication between client and server 
+    ```
+    NetworkStream stream = client.GetStream();
+    ```
+    i. send data as byte array 
+    ```
+    stream.Write(msg, 0, msg.Length); 
+    ```
+    ii. received data as byten array 
+    ```
+    stream.Read(msg, 0, msg.Length); 
+    ```
+
+    possibilities of communications:
+
+    ----------------------------
+    #i  to find the "greetings" for given person name "dravid" as "Hello dravid"
+    ----------------------------
+    1. client: sends personName              2. server: receives personName 
+    4. client: receives greetings           3. server: sends greetings 
+
+
+    ----------------------------
+    #ii to calc sum of two numbers from client 
+    ----------------------------
+    1. client: sends firstNumber             2. server: receives firstNumber
+    3. client: sends secondNumber            4. server: receives secondNumber 
+    6. client: receives sum                 5. server: sends sum 
+
+
+    ----------------------------
+    #iii to calc sum of N numbers from client 
+    ----------------------------
+    1. client: sends N                      2. server: receives N
+
+    for I = 1..N                            for I = 1..N
+        3. each I, send a number                4. each I, receive a number 
+    
+    
+    6. client: receives sum                 5. server: sends sum 
+    
+    
+    ----------------------------
+    #iv to calc sum of numbers till we read 0 from client 
+    ----------------------------
+
+    do..                                      do 
+        1. client: send a number                2. server: receive a number 
+    while number is not zero                  while number is not zero            
+    
+    
+    4. client: receives sum                 3. server: sends sum 
+
+5. Release connection 
+    ```
+    client.Close() 
+    ```
+6. Shutting Down 
+    ```
+    server.Stop();
+    ```
+
+
+TCP Client Service Program:
+1. Create Client Object using 'server address' and 'port' 
+    ```
+    TcpClient client = new TcpClient(server, port);
+    ```
+2. Communication between client and server 
+    ```
+    NetworkStream stream = client.GetStream();
+    ```
+
+    i. send data as byte array 
+    ```
+    stream.Write(msg, 0, msg.Length); 
+    ```
+    ii. received data as byten array 
+    ```
+    stream.Read(msg, 0, msg.Length); 
+    ```
+
+    possibilities of communications:
+        Note: check in server notes
+3. Cleaning up [Release the stream, 
+        Disconnect the connection]
+    ```
+        stream.Close();
+        client.Close();      
+    ```
