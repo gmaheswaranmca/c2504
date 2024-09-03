@@ -1,62 +1,108 @@
-    public class Person
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-    }
+ public class Person
+ {
+     public string Name { get; set; }
+     public int Age { get; set; }
+ }
 
-    public class PersonManager
-    {
-        public List<Person> Persons { get; set; }  = new List<Person>();
+ public class PersonManager
+ {
+     public const string FILE_NAME = "persons.json";
+     public List<Person> Persons { get; set; } = new List<Person>();
 
-        public void Add(Person person)
-        {
-            Persons.Add(person);
-            // Serialization
-            string jsonString = JsonSerializer.Serialize(Persons);
-            Console.WriteLine(jsonString); //DEBUG
-            using (FileStream fs = new FileStream("persons.json", FileMode.Create))
-            {
-                using (StreamWriter sw = new StreamWriter(fs))
-                {
-                    sw.WriteLine(jsonString);
-                }
-            }
-        }
-        public void ReadAll()
-        {
-            string jsonString = "";
-            if(!File.Exists("persons.json")) { return;  }
-            using (FileStream fs = new FileStream("persons.json", FileMode.Open))
-            {
-                using (StreamReader sr = new StreamReader(fs))
-                {
-                    jsonString = sr.ReadToEnd();
-                }
-            }
-            Persons = JsonSerializer.Deserialize<List<Person>>(jsonString);
-            Persons.ForEach(person => Console.WriteLine($"[{person.Name},{person.Age}] "));
-        }
-    }
-    internal class Programs
-    {
-       
-        static void Main()
-        {
+     public void Add(Person person)
+     {
+         Persons.Add(person);//1-add person to Persons array
+         // Serialization
+         string jsonString = JsonSerializer.Serialize(Persons);//2 convert Persons array into json string
+         Console.WriteLine(jsonString); //DEBUG
+         
+         using (FileStream fs = new FileStream(FILE_NAME, FileMode.Create))
+         {
+             using (StreamWriter sw = new StreamWriter(fs))
+             {
+                 sw.WriteLine(jsonString);//3 write json string to the file 
+             }
+         }
+     }
+     public void ReadAll()
+     {
+         string jsonString = "";
+         if (!File.Exists(FILE_NAME)) { return; }//1-File Exist, if not dont read 
+         using (FileStream fs = new FileStream(FILE_NAME, FileMode.Open))
+         {
+             using (StreamReader sr = new StreamReader(fs))
+             {
+                 jsonString = sr.ReadToEnd();//2 Read the json string from file
+             }
+         }
+         Persons = JsonSerializer.Deserialize<List<Person>>(jsonString);//3 convert json string as C# Persons array 
+         Persons.ForEach(person => Console.WriteLine($"[{person.Name},{person.Age}] "));
+     }
+ }
+ internal class Programs
+ {
 
-            PersonManager manager = new PersonManager();
-            manager.ReadAll();
-            manager.Add(new Person { Name = "Dhoni", Age = 42 });
-            manager.Add(new Person { Name = "Dravid", Age = 50 });
-            manager.Add(new Person { Name = "Kohli", Age = 35 });
-            manager.Add(new Person { Name = "Surya", Age = 30 });
-            manager.ReadAll();
-        }
+     static void Main()
+     {
+
+         PersonManager manager = new PersonManager();
+         manager.ReadAll();//Append to the file
+         manager.Add(new Person { Name = "Dhoni", Age = 42 });
+         manager.Add(new Person { Name = "Dravid", Age = 50 });
+         manager.Add(new Person { Name = "Kohli", Age = 35 });
+         manager.Add(new Person { Name = "Surya", Age = 30 });
+         manager.ReadAll();
+     }
+     /*
+      [{"Name":"Dhoni","Age":42},{"Name":"Dravid","Age":50},{"Name":"Kohli","Age":35},{"Name":"Surya","Age":30}]
+      */
+
+ }
 
 
-    }
+System.IO 
+
+--File functions-- 
+File.Create("example.txt")
+File.WriteAllText("example.txt", "Hello, World!");
+File.WriteAllLines("example.txt", lines);
+File.ReadAllText("example.txt");
+string[] lines = File.ReadAllLines("example.txt");
+File.Exists("example.txt")
+File.Delete("example.txt");
 
 
+--Directory functions--
+Directory.CreateDirectory("NewFolder");
+string[] files = Directory.GetFiles("NewFolder");
+Directory.Exists("NewFolder")
+Directory.Delete("NewFolder");
+Directory.Delete("NewFolder", true);
 
+--Combining Paths--
+string fullPath = Path.Combine("NewFolder", "example.txt"); // Outputs "NewFolder/example.txt"
+
+
+Stream-based I/O in C# is a powerful way to handle input and output operations involving data streams. The `System.IO` namespace provides several classes for reading from and writing to streams.
+    - `Stream`: The base class for all streams.
+    - `FileStream`: Used for reading and writing bytes to a file.
+    - `MemoryStream`: Used for reading and writing bytes in memory.
+    - `NetworkStream`: Used for reading and writing bytes over network sockets.
+    - `BufferedStream`: Used to wrap another stream and add buffering capabilities.
+    - `StreamReader` and `StreamWriter`: Used for reading and writing text to streams.
+    - `BinaryReader` and `BinaryWriter`: Used for reading and writing primitive data types as binary values.
+
+
+Serialization and deserialization are processes 
+used to convert an object into a format 
+that can be easily stored or transmitted (serialization) and 
+then reconstructed later (deserialization). 
+    Binary Serialization
+    XML Serialization
+    JSON Serialization
+    Custom Serialization
+        : ISerializable
+        [Serializable] [NonSerialized]
 
 C# file and directory operations 
     are in the `System.IO` namespace.

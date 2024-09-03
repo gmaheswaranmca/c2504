@@ -1,3 +1,178 @@
+internal class Programs
+{
+    public static async Task<int> DoSquare(int a)
+    {
+        System.Threading.Thread.Sleep(3000); // Simulate async work
+        return a * a;
+    }
+
+    public static void TestFetchDataAsync()
+    {
+        DoSquare(5).ContinueWith(task => Console.WriteLine(task.Result));
+        Console.WriteLine("After 5");
+        DoSquare(6).ContinueWith(task => Console.WriteLine(task.Result));
+        Console.WriteLine("After 6");
+    }
+    public static async void TestFetchDataAsync2()
+    {
+        var sevenSq = await DoSquare(7);
+        Console.WriteLine(sevenSq);
+        Console.WriteLine("After 7");
+        var eightSq = await DoSquare(8);
+        Console.WriteLine(eightSq);
+        Console.WriteLine("After 8");
+    }
+
+    delegate string DProcessStr(string a, string b);
+    static void Main()
+    {
+
+        var person = new { firstName = "Mahendrasingh", lastName = "Dhoni", Age = 30 };
+
+        DProcessStr findFullName = delegate (string firstName, string lastName)
+        {
+            return firstName + " " + lastName;
+        };
+        Func<string, string, string> formGreetings = (string greetText, string name) =>
+        {
+            return greetText + " " + name;
+        };
+
+        //Func<string, string, string> formGreetings = (string greetText, string name) =>  greetText + " " + name;
+        //Action<string> printGreetings = (string greet) => Console.WriteLine(greet);
+
+        //Func<string, string, string> formGreetings = (greetText, name) =>  greetText + " " + name;
+        //Action<string> printGreetings = greet => Console.WriteLine(greet);
+        //printGreetings(formGreetings("hi", "rohit"));
+
+
+        string fullName = findFullName(person.firstName, person.lastName);
+        Console.WriteLine($"fullname = {fullName}");//fullname = Mahendrasingh Dhoni
+        string greetings = formGreetings("hello", fullName);
+        Console.WriteLine($"greetings={greetings}");//greetings=hello Mahendrasingh Dhoni
+
+
+        /**/
+
+        /*
+        //dynamic vs var example
+        dynamic y = 10;
+        var x = 10;
+        //x = "hello";//ERR
+        y = "wow";
+        Console.WriteLine($"x={x},y={y}");
+        */
+
+
+        /*//Expression Example 1
+        Expression<Func<int, bool>> expr = num => num > 5;
+        Console.WriteLine(expr.Body); // Output: (num > 5)
+        Console.WriteLine(expr.Compile()(60));
+        Console.WriteLine(expr.Compile()(3));
+
+
+        //Expression Example 2
+        // Define a parameter expression for 'x'
+        ParameterExpression param = Expression.Parameter(typeof(int), "x");
+
+        // Define an expression for 'x + 1'
+        Expression add = Expression.Add(param, Expression.Constant(1));
+
+        // Create the lambda expression 'x => x + 1'
+        Expression<Func<int, int>> lambda = Expression.Lambda<Func<int, int>>(add, param);
+
+        // Compile the expression to a delegate
+        Func<int, int> compiled = lambda.Compile();
+
+        // Execute the compiled expression
+        int result = compiled(5);
+
+        Console.WriteLine(result); // Output: 6
+        Console.WriteLine(lambda.Body);
+
+        //Expression example 3
+        // Define parameters 'x' and 'y'
+        ParameterExpression paramX = Expression.Parameter(typeof(int), "x");
+        ParameterExpression paramY = Expression.Parameter(typeof(int), "y");
+
+        // Define expressions for 'x * 2' and 'x * 2 - y'
+        Expression multiply = Expression.Multiply(paramX, Expression.Constant(2));
+        Expression subtract = Expression.Subtract(multiply, paramY);
+
+        // Create the lambda expression 'x, y => x * 2 - y'
+        Expression<Func<int, int, int>> lambdaSubtract = Expression.Lambda<Func<int, int, int>>(subtract, paramX, paramY);
+
+        // Compile and execute the expression
+        Func<int, int, int> compiledSubtract = lambdaSubtract.Compile();
+        int resultSubtract = compiledSubtract(5, 3);
+
+        Console.WriteLine(resultSubtract); // Output: 7
+        Console.WriteLine(lambdaSubtract.Body);*/
+
+
+
+
+        /*//Linq
+        int[] numbers = { 20, 10, 40, 10, 30, 50, 3, 2, 5, 6 };
+        Action<int[]> printNums = (nums) => { foreach (var n in nums) { Console.Write($"{n} "); } };
+
+        var querySyntax = from num in numbers where num > 5 select num;
+        Console.Write($"{Environment.NewLine}Array num > 5 query:"); printNums(querySyntax.ToArray());
+
+        var methodSyntax = numbers.Where(num => num > 5);
+        Console.Write($"{Environment.NewLine}Array num > 5 method:"); printNums(methodSyntax.ToArray());
+
+        var divideBy20Numbers = numbers.Where(n => n % 20 == 0).ToArray();
+        Console.Write($"{Environment.NewLine}Array n % 20 == 0:"); printNums(divideBy20Numbers);
+
+        var sorted = from num in numbers orderby num select num;
+        Console.Write($"{Environment.NewLine}Array sorted by query:"); printNums(sorted.ToArray());
+
+        var sorted2 = numbers.OrderBy(num => num);
+        Console.Write($"{Environment.NewLine}Array sorted by method:"); printNums(sorted2.ToArray());
+
+        var xmlString = "<Root><Number>10</Number><Number>20</Number></Root>";
+        XElement xml = XElement.Parse(xmlString);//XElement xml = XElement.Load("numbers.xml");
+        var nodesNumber = from node in xml.Elements("Number") select int.Parse(node.Value);
+        Console.Write($"{Environment.NewLine}Array from xml query:"); printNums(nodesNumber.ToArray());
+
+        var nodesNumber2 = xml.Elements("Number").Select(node => int.Parse(node.Value));
+        Console.Write($"{Environment.NewLine}Array from xml method:"); printNums(nodesNumber2.ToArray());*/
+
+
+
+
+        /*//Async ops
+        Console.WriteLine("Testing async / await");
+        TestFetchDataAsync();
+        TestFetchDataAsync2();
+        Console.WriteLine("After tested asyncs");*/
+
+
+
+        /* //Parallel tasks
+         Parallel.For(0, 10, i =>
+         {
+             Console.WriteLine(i);
+         });*/
+
+        /*
+         1,00,00,000 people who will get Rs.50,000 from gov 
+
+         to check who got 50,000 early, to remove from the list
+         
+           
+        10000 times 1000 people, 7
+
+        10000/7
+         */
+
+    }
+
+
+}
+
+
 1. Extension Methods
    - Definition: Extension methods allow you 
    to add new methods to existing class objects 
@@ -197,145 +372,3 @@
 
 
 
-
-internal class Programs
-{
-    public static async Task<int> DoSquare(int a)
-    {
-        System.Threading.Thread.Sleep(3000); // Simulate async work
-        return a * a;
-    }
-
-    public static void TestFetchDataAsync()
-    {
-        DoSquare(5).ContinueWith(task => Console.WriteLine(task.Result));
-        Console.WriteLine("After 5");
-        DoSquare(6).ContinueWith(task => Console.WriteLine(task.Result));
-        Console.WriteLine("After 6");
-    }
-    public static async void TestFetchDataAsync2()
-    {
-        var sevenSq = await DoSquare(7);
-        Console.WriteLine(sevenSq);
-        Console.WriteLine("After 7");
-        var eightSq = await DoSquare(8);
-        Console.WriteLine(eightSq);
-        Console.WriteLine("After 8");
-    }
-
-    delegate string DProcessStr(string a, string b);
-
-    static void Main()
-    {
-        var person = new { firstName = "Mahendrasingh", lastName="Dhoni", Age = 30 };
-
-        DProcessStr findFullName = delegate (string firstName, string lastName)
-        {
-            return firstName + " " + lastName;
-        };
-
-        Func<string, string, string> formGreetings = (string greetText, string name) =>
-        {
-            return greetText + " " + name;
-        };
-
-        string fullName = findFullName(person.firstName, person.lastName);
-        Console.WriteLine($"fullname = {fullName}");
-        string greetings = formGreetings("hello", fullName);
-        Console.WriteLine($"greetings={greetings}");
-
-        /*
-        //dynamic vs var example
-        dynamic y = 10;
-        var x = 10;
-        //x = "hello";//ERR
-        y = "wow";
-        Console.WriteLine($"x={x},y={y}");
-        */
-
-        //Expression Example 1
-        Expression<Func<int, bool>> expr = num => num > 5;
-        Console.WriteLine(expr.Body); // Output: (num > 5)
-        Console.WriteLine(expr.Compile()(60));
-        Console.WriteLine(expr.Compile()(3));
-
-
-        //Expression Example 2
-        // Define a parameter expression for 'x'
-        ParameterExpression param = Expression.Parameter(typeof(int), "x");
-
-        // Define an expression for 'x + 1'
-        Expression add = Expression.Add(param, Expression.Constant(1));
-
-        // Create the lambda expression 'x => x + 1'
-        Expression<Func<int, int>> lambda = Expression.Lambda<Func<int, int>>(add, param);
-
-        // Compile the expression to a delegate
-        Func<int, int> compiled = lambda.Compile();
-
-        // Execute the compiled expression
-        int result = compiled(5);
-
-        Console.WriteLine(result); // Output: 6
-        Console.WriteLine(lambda.Body); 
-
-        //Expression example 3
-        // Define parameters 'x' and 'y'
-        ParameterExpression paramX = Expression.Parameter(typeof(int), "x");
-        ParameterExpression paramY = Expression.Parameter(typeof(int), "y");
-
-        // Define expressions for 'x * 2' and 'x * 2 - y'
-        Expression multiply = Expression.Multiply(paramX, Expression.Constant(2));
-        Expression subtract = Expression.Subtract(multiply, paramY);
-
-        // Create the lambda expression 'x, y => x * 2 - y'
-        Expression<Func<int, int, int>> lambdaSubtract = Expression.Lambda<Func<int, int, int>>(subtract, paramX, paramY);
-
-        // Compile and execute the expression
-        Func<int, int, int> compiledSubtract = lambdaSubtract.Compile();
-        int resultSubtract = compiledSubtract(5, 3);
-
-        Console.WriteLine(resultSubtract); // Output: 7
-        Console.WriteLine(lambdaSubtract.Body);
-
-
-        
-
-        //Linq
-        int[] numbers = { 20, 10, 40, 10, 30, 50, 3, 2, 5, 6 };
-        Action <int[]> printNums = (nums) => { foreach (var n in nums) { Console.WriteLine(n); } }; 
-        var querySyntax = from num in numbers where num > 5 select num;
-        Console.WriteLine("Array:"); printNums(querySyntax.ToArray());
-        var methodSyntax = numbers.Where(num => num > 5);
-        Console.WriteLine("Array:"); printNums(methodSyntax.ToArray());
-
-        var divideBy20Numbers = numbers.Where(n => n % 20 == 0).ToArray();
-        Console.WriteLine("Array:"); printNums(divideBy20Numbers);
-
-        var sorted = from num in numbers orderby num select num;
-        Console.WriteLine("Array:"); printNums(sorted.ToArray());
-
-        var xmlString = "<Root><Number>10</Number><Number>20</Number></Root>";
-        XElement xml = XElement.Parse(xmlString);//XElement xml = XElement.Load("numbers.xml");
-        var nodesNumber = from node in xml.Elements("Number") select int.Parse(node.Value);
-        Console.WriteLine("Array:"); printNums(nodesNumber.ToArray());
-        /*
-        //Async ops
-        Console.WriteLine("Testing async / await");
-        TestFetchDataAsync();
-        TestFetchDataAsync2();
-        Console.WriteLine("After tested asyncs");
-
-        
-
-        //Parallel tasks
-        Parallel.For(0, 10, i =>
-        {
-            Console.WriteLine(i);
-        });
-        */
-
-    }
-
-
-}

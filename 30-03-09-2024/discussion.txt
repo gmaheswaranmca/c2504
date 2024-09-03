@@ -1,0 +1,86 @@
+Today 
+    File Stream 
+        Reading - Writing 
+        Serialization 
+    Linq 
+        var dynamic 
+        anonymous object 
+        anonymous method 
+        lambda method 
+        expression 
+        asynchronous programming 
+            Task 
+            Parallel 
+        linq 
+            query, method 
+            query to objects 
+            query to xml 
+            query to sql ---
+    Debugging 
+
+^^^^^^^^^^^^^^^^^^^^^
+using block 
+    in which we create the resource like file, network, database 
+    releases / disposes the resource created 
+^^^^^^^^^^^^^^^^^^^^^
+
+
+^^^^^^^^^^^^^^^^^^^^^
+  create resource 
+try 
+catch 
+finally 
+    releasing the resource 
+^^^^^^^^^^^^^^^^^^^^^
+
+^^^^^^^^^^^^^^^^^^^^^
+class 
+    constructor
+        creating the resource 
+    destructor 
+        releasing the resource 
+^^^^^^^^^^^^^^^^^^^^^
+
+
+------------------------
+try 
+{
+    //..
+    using (FileStream fs = new FileStream("persons.json", FileMode.Create))
+    {
+    }
+    //...
+}
+catch 
+{
+
+}
+------------------------
+Here, using clause is used to dispose the fs automatically 
+
+
+------------------------
+FileStream fs = null;
+try 
+{
+    //...
+    fs = new FileStream("persons.json", FileMode.Create))
+    //...
+}
+catch 
+{
+
+}
+finally
+{
+    if(fs != null)
+    {
+        fs.Close();
+    }
+}
+------------------------
+Here, in the finally block we release the resource.
+
+
+
+
