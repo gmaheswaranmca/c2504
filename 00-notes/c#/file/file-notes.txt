@@ -1,0 +1,705 @@
+    public class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
+
+    public class PersonManager
+    {
+        public List<Person> Persons { get; set; }  = new List<Person>();
+
+        public void Add(Person person)
+        {
+            Persons.Add(person);
+            // Serialization
+            string jsonString = JsonSerializer.Serialize(Persons);
+            Console.WriteLine(jsonString); //DEBUG
+            using (FileStream fs = new FileStream("persons.json", FileMode.Create))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(jsonString);
+                }
+            }
+        }
+        public void ReadAll()
+        {
+            string jsonString = "";
+            if(!File.Exists("persons.json")) { return;  }
+            using (FileStream fs = new FileStream("persons.json", FileMode.Open))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    jsonString = sr.ReadToEnd();
+                }
+            }
+            Persons = JsonSerializer.Deserialize<List<Person>>(jsonString);
+            Persons.ForEach(person => Console.WriteLine($"[{person.Name},{person.Age}] "));
+        }
+    }
+    internal class Programs
+    {
+       
+        static void Main()
+        {
+
+            PersonManager manager = new PersonManager();
+            manager.ReadAll();
+            manager.Add(new Person { Name = "Dhoni", Age = 42 });
+            manager.Add(new Person { Name = "Dravid", Age = 50 });
+            manager.Add(new Person { Name = "Kohli", Age = 35 });
+            manager.Add(new Person { Name = "Surya", Age = 30 });
+            manager.ReadAll();
+        }
+
+
+    }
+
+
+
+
+C# file and directory operations 
+    are in the `System.IO` namespace.
+    
+
+
+1. Working with Files
+
+Creating a File
+You can create a new file using the `File.Create` method.
+
+```csharp
+using System.IO;
+
+// Creates a new file called "example.txt" in the current directory.
+FileStream fs = File.Create("example.txt");
+fs.Close(); // Close the file stream after creating the file.
+```
+
+Writing to a File
+You can write text to a file using `File.WriteAllText` or `StreamWriter`.
+
+```csharp
+using System.IO;
+
+// Write a single string to a file
+File.WriteAllText("example.txt", "Hello, World!");
+
+// Write multiple lines to a file
+string[] lines = { "First line", "Second line", "Third line" };
+File.WriteAllLines("example.txt", lines);
+
+// Using StreamWriter
+using (StreamWriter sw = new StreamWriter("example.txt"))
+{
+    sw.WriteLine("Hello, World!");
+    sw.WriteLine("Welcome to file operations in C#.");
+}
+```
+
+Reading from a File
+You can read text from a file using `File.ReadAllText` or `StreamReader`.
+
+```csharp
+using System.IO;
+
+// Read the entire file as a single string
+string content = File.ReadAllText("example.txt");
+Console.WriteLine(content);
+
+// Read all lines into a string array
+string[] lines = File.ReadAllLines("example.txt");
+foreach (string line in lines)
+{
+    Console.WriteLine(line);
+}
+
+// Using StreamReader
+using (StreamReader sr = new StreamReader("example.txt"))
+{
+    string line;
+    while ((line = sr.ReadLine()) != null)
+    {
+        Console.WriteLine(line);
+    }
+}
+```
+
+Deleting a File
+You can delete a file using `File.Delete`.
+
+```csharp
+using System.IO;
+
+// Delete the file "example.txt"
+if (File.Exists("example.txt"))
+{
+    File.Delete("example.txt");
+}
+```
+
+2. Working with Directories
+
+Creating a Directory
+You can create a new directory using `Directory.CreateDirectory`.
+
+```csharp
+using System.IO;
+
+// Creates a new directory called "NewFolder"
+Directory.CreateDirectory("NewFolder");
+```
+
+Checking if a Directory Exists
+You can check if a directory exists using `Directory.Exists`.
+
+```csharp
+using System.IO;
+
+if (Directory.Exists("NewFolder"))
+{
+    Console.WriteLine("Directory exists.");
+}
+else
+{
+    Console.WriteLine("Directory does not exist.");
+}
+```
+
+Listing Files in a Directory
+You can list all files in a directory using `Directory.GetFiles`.
+
+```csharp
+using System.IO;
+
+// Get all files in the directory
+string[] files = Directory.GetFiles("NewFolder");
+foreach (string file in files)
+{
+    Console.WriteLine(file);
+}
+```
+
+Deleting a Directory
+You can delete a directory using `Directory.Delete`. 
+If the directory is not empty, 
+you can specify whether to delete it recursively.
+
+```csharp
+using System.IO;
+
+// Delete a directory
+Directory.Delete("NewFolder", true); // true deletes recursively, false throws an exception if the directory is not empty.
+```
+
+3. Combining Paths
+You can combine paths in a platform-independent way using `Path.Combine`.
+
+```csharp
+using System.IO;
+
+string fullPath = Path.Combine("NewFolder", "example.txt");
+Console.WriteLine(fullPath); // Outputs "NewFolder/example.txt" (or equivalent on other platforms)
+```
+
+4. Getting File or Directory Information
+
+File Information
+You can retrieve information about a file using the `FileInfo` class.
+
+```csharp
+using System.IO;
+
+FileInfo fileInfo = new FileInfo("example.txt");
+Console.WriteLine($"File Name: {fileInfo.Name}");
+Console.WriteLine($"File Size: {fileInfo.Length} bytes");
+Console.WriteLine($"Creation Time: {fileInfo.CreationTime}");
+```
+
+Directory Information
+You can retrieve information about a directory using the `DirectoryInfo` class.
+
+```csharp
+using System.IO;
+
+DirectoryInfo dirInfo = new DirectoryInfo("NewFolder");
+Console.WriteLine($"Directory Name: {dirInfo.Name}");
+Console.WriteLine($"Creation Time: {dirInfo.CreationTime}");
+```
+
+These operations cover most of the common file and directory tasks you might need to perform in C#.
+
+
+==================== ==================== ====================
+
+Stream-based I/O in C# is a powerful way to handle input and output operations involving data streams. The `System.IO` namespace provides several classes for reading from and writing to streams. Here's an overview of how to work with streams in C#:
+
+1. Understanding Streams
+A stream is an abstract representation of a sequence of bytes, which can be used to read from or write to various data sources like files, memory, network connections, etc.
+
+The main classes involved in stream-based I/O are:
+
+- `Stream`: The base class for all streams.
+- `FileStream`: Used for reading and writing bytes to a file.
+- `MemoryStream`: Used for reading and writing bytes in memory.
+- `NetworkStream`: Used for reading and writing bytes over network sockets.
+- `BufferedStream`: Used to wrap another stream and add buffering capabilities.
+- `StreamReader` and `StreamWriter`: Used for reading and writing text to streams.
+- `BinaryReader` and `BinaryWriter`: Used for reading and writing primitive data types as binary values.
+
+2. Reading from a Stream
+To read data from a stream, you typically use one of the following classes: `StreamReader` for text data or `BinaryReader` for binary data.
+
+Reading Text Data
+```csharp
+using System;
+using System.IO;
+
+using (FileStream fs = new FileStream("example.txt", FileMode.Open))
+{
+    using (StreamReader sr = new StreamReader(fs))
+    {
+        string line;
+        while ((line = sr.ReadLine()) != null)
+        {
+            Console.WriteLine(line);
+        }
+    }
+}
+```
+
+Reading Binary Data
+```csharp
+using System;
+using System.IO;
+
+using (FileStream fs = new FileStream("example.bin", FileMode.Open))
+{
+    using (BinaryReader br = new BinaryReader(fs))
+    {
+        int intValue = br.ReadInt32();
+        double doubleValue = br.ReadDouble();
+        Console.WriteLine($"Read Int32: {intValue}, Read Double: {doubleValue}");
+    }
+}
+```
+
+3. Writing to a Stream
+To write data to a stream, you can use `StreamWriter` for text data or `BinaryWriter` for binary data.
+
+Writing Text Data
+```csharp
+using System;
+using System.IO;
+
+using (FileStream fs = new FileStream("example.txt", FileMode.Create))
+{
+    using (StreamWriter sw = new StreamWriter(fs))
+    {
+        sw.WriteLine("Hello, World!");
+        sw.WriteLine("Stream-based I/O in C#.");
+    }
+}
+```
+
+Writing Binary Data
+```csharp
+using System;
+using System.IO;
+
+using (FileStream fs = new FileStream("example.bin", FileMode.Create))
+{
+    using (BinaryWriter bw = new BinaryWriter(fs))
+    {
+        bw.Write(42);       // Write an integer
+        bw.Write(3.14);     // Write a double
+    }
+}
+```
+
+4. Working with Memory Streams
+A `MemoryStream` is a stream that uses memory as its backing store instead of a physical file.
+
+Writing to a MemoryStream
+```csharp
+using System;
+using System.IO;
+
+using (MemoryStream ms = new MemoryStream())
+{
+    using (StreamWriter sw = new StreamWriter(ms))
+    {
+        sw.Write("Hello, MemoryStream!");
+        sw.Flush(); // Ensure all data is written to the stream
+
+        // Convert memory stream to a byte array
+        byte[] data = ms.ToArray();
+        Console.WriteLine("Data length: " + data.Length);
+    }
+}
+```
+
+Reading from a MemoryStream
+```csharp
+using System;
+using System.IO;
+
+byte[] data = { 72, 101, 108, 108, 111 }; // Represents "Hello"
+using (MemoryStream ms = new MemoryStream(data))
+{
+    using (StreamReader sr = new StreamReader(ms))
+    {
+        string text = sr.ReadToEnd();
+        Console.WriteLine(text); // Outputs "Hello"
+    }
+}
+```
+
+5. Buffered Streams
+A `BufferedStream` can be used to wrap another stream to add buffering, which can improve performance when reading or writing large amounts of data.
+
+```csharp
+using System;
+using System.IO;
+
+using (FileStream fs = new FileStream("example.bin", FileMode.Create))
+{
+    using (BufferedStream bs = new BufferedStream(fs))
+    {
+        using (BinaryWriter bw = new BinaryWriter(bs))
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                bw.Write(i);
+            }
+        }
+    }
+}
+```
+
+6. Advanced Operations
+You can also perform more advanced operations with streams, such as seeking to a specific position in a stream using the `Seek` method or asynchronously reading and writing data.
+
+Seeking in a Stream
+```csharp
+using System;
+using System.IO;
+
+using (FileStream fs = new FileStream("example.bin", FileMode.Open))
+{
+    fs.Seek(10, SeekOrigin.Begin); // Move to the 10th byte from the beginning
+    int data = fs.ReadByte();
+    Console.WriteLine($"Data at position 10: {data}");
+}
+```
+
+7. Asynchronous I/O Operations
+Asynchronous I/O operations can help improve performance by not blocking the main thread while waiting for I/O operations to complete.
+
+Asynchronous Read and Write
+```csharp
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
+async Task WriteAsync(string path)
+{
+    using (FileStream fs = new FileStream(path, FileMode.Create))
+    {
+        byte[] data = System.Text.Encoding.UTF8.GetBytes("Hello, Async!");
+        await fs.WriteAsync(data, 0, data.Length);
+    }
+}
+
+async Task ReadAsync(string path)
+{
+    using (FileStream fs = new FileStream(path, FileMode.Open))
+    {
+        byte[] data = new byte[fs.Length];
+        await fs.ReadAsync(data, 0, data.Length);
+        string text = System.Text.Encoding.UTF8.GetString(data);
+        Console.WriteLine(text);
+    }
+}
+
+await WriteAsync("asyncExample.txt");
+await ReadAsync("asyncExample.txt");
+```
+
+Stream-based I/O provides flexibility and control over 
+how data is read and written in your applications, 
+making it an essential concept for working 
+    with files, memory, and network operations in C#.
+
+
+==================== ==================== ====================
+Serialization and deserialization are processes 
+used to convert an object into a format 
+that can be easily stored or transmitted (serialization) and 
+then reconstructed later (deserialization). 
+
+In C#, these processes are commonly used for saving objects to files, 
+sending objects over a network, or working with data 
+in various formats like JSON, XML, or binary.
+
+1. Binary Serialization
+
+Binary serialization converts an object into a binary format. This is useful for saving objects to a file or sending them over a network in a compact form.
+
+Enabling Binary Serialization
+
+To use binary serialization, the class you want to serialize must be marked with the `[Serializable]` attribute. If certain fields should not be serialized, you can mark them with the `[NonSerialized]` attribute.
+
+```csharp
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
+[Serializable]
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    [NonSerialized] public string Secret;
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person = new Person { Name = "Alice", Age = 30, Secret = "Hidden" };
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        // Serialization
+        using (FileStream fs = new FileStream("person.dat", FileMode.Create))
+        {
+            formatter.Serialize(fs, person);
+        }
+
+        // Deserialization
+        using (FileStream fs = new FileStream("person.dat", FileMode.Open))
+        {
+            Person deserializedPerson = (Person)formatter.Deserialize(fs);
+            Console.WriteLine($"Name: {deserializedPerson.Name}, Age: {deserializedPerson.Age}");
+            Console.WriteLine($"Secret: {deserializedPerson.Secret}"); // Secret is not serialized, so it will be null.
+        }
+    }
+}
+```
+
+2. XML Serialization
+
+XML serialization converts an object into an XML format, which is human-readable and widely used in data exchange.
+
+Enabling XML Serialization
+
+Unlike binary serialization, XML serialization requires a public parameterless constructor and public properties.
+
+```csharp
+using System;
+using System.IO;
+using System.Xml.Serialization;
+
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person = new Person { Name = "Alice", Age = 30 };
+        XmlSerializer serializer = new XmlSerializer(typeof(Person));
+
+        // Serialization
+        using (FileStream fs = new FileStream("person.xml", FileMode.Create))
+        {
+            serializer.Serialize(fs, person);
+        }
+
+        // Deserialization
+        using (FileStream fs = new FileStream("person.xml", FileMode.Open))
+        {
+            Person deserializedPerson = (Person)serializer.Deserialize(fs);
+            Console.WriteLine($"Name: {deserializedPerson.Name}, Age: {deserializedPerson.Age}");
+        }
+    }
+}
+```
+
+3. JSON Serialization
+
+JSON serialization is widely used for web services and APIs. It converts an object into a JSON string, which is lightweight and easy to parse.
+
+Using `System.Text.Json`
+
+The `System.Text.Json` namespace provides classes for JSON serialization and deserialization.
+
+```csharp
+using System;
+using System.Text.Json;
+
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person = new Person { Name = "Alice", Age = 30 };
+
+        // Serialization
+        string jsonString = JsonSerializer.Serialize(person);
+        Console.WriteLine(jsonString); // {"Name":"Alice","Age":30}
+
+        // Deserialization
+        Person deserializedPerson = JsonSerializer.Deserialize<Person>(jsonString);
+        Console.WriteLine($"Name: {deserializedPerson.Name}, Age: {deserializedPerson.Age}");
+    }
+}
+```
+
+Using `Newtonsoft.Json` (JSON.NET)
+
+`Newtonsoft.Json` is a popular third-party library for JSON serialization and deserialization.
+
+```csharp
+using System;
+using Newtonsoft.Json;
+
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person = new Person { Name = "Alice", Age = 30 };
+
+        // Serialization
+        string jsonString = JsonConvert.SerializeObject(person);
+        Console.WriteLine(jsonString); // {"Name":"Alice","Age":30}
+
+        // Deserialization
+        Person deserializedPerson = JsonConvert.DeserializeObject<Person>(jsonString);
+        Console.WriteLine($"Name: {deserializedPerson.Name}, Age: {deserializedPerson.Age}");
+    }
+}
+```
+
+4. Custom Serialization
+
+Sometimes, you may want more control over the serialization process. In such cases, you can implement the `ISerializable` interface.
+
+```csharp
+using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
+[Serializable]
+public class Person : ISerializable
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    // Default constructor
+    public Person() { }
+
+    // Special constructor for deserialization
+    protected Person(SerializationInfo info, StreamingContext context)
+    {
+        Name = info.GetString("PersonName");
+        Age = info.GetInt32("PersonAge");
+    }
+
+    // Method to control serialization
+    public void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        info.AddValue("PersonName", Name);
+        info.AddValue("PersonAge", Age);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person = new Person { Name = "Alice", Age = 30 };
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        // Serialization
+        using (FileStream fs = new FileStream("person.dat", FileMode.Create))
+        {
+            formatter.Serialize(fs, person);
+        }
+
+        // Deserialization
+        using (FileStream fs = new FileStream("person.dat", FileMode.Open))
+        {
+            Person deserializedPerson = (Person)formatter.Deserialize(fs);
+            Console.WriteLine($"Name: {deserializedPerson.Name}, Age: {deserializedPerson.Age}");
+        }
+    }
+}
+```
+
+5. Serialization with Data Contracts
+
+Data contracts provide more control over the XML or JSON serialization process, allowing you to define how your data is serialized and deserialized.
+
+```csharp
+using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+
+[DataContract]
+public class Person
+{
+    [DataMember]
+    public string Name { get; set; }
+
+    [DataMember]
+    public int Age { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person = new Person { Name = "Alice", Age = 30 };
+        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Person));
+
+        // Serialization
+        using (MemoryStream ms = new MemoryStream())
+        {
+            serializer.WriteObject(ms, person);
+            ms.Position = 0;
+
+            StreamReader sr = new StreamReader(ms);
+            string json = sr.ReadToEnd();
+            Console.WriteLine(json); // {"Name":"Alice","Age":30}
+        }
+
+        // Deserialization
+        string jsonInput = "{\"Name\":\"Bob\",\"Age\":35}";
+        using (MemoryStream ms = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(jsonInput)))
+        {
+            Person deserializedPerson = (Person)serializer.ReadObject(ms);
+            Console.WriteLine($"Name: {deserializedPerson.Name}, Age: {deserializedPerson.Age}");
+        }
+    }
+}
+```
+
+Serialization and deserialization are essential for data persistence and communication, 
+and understanding how to use these techniques effectively in C# is crucial for many applications.

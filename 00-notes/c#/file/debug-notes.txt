@@ -1,0 +1,207 @@
+static void Swap(ref long a, ref long b)
+{
+
+    long t = a;  a = b; b = t; 
+}
+static void SelectionSort(long[] ar)
+{
+    int N = ar.Length;//
+                      //select element from first element till element before last element 'second last element'
+    for (int selectedIndex = 0; selectedIndex < (N - 1); selectedIndex++) //selection logic | for first N-1 elements
+    {
+        int minIndex = selectedIndex;//init min element index
+                                     //check is there any 'min number' in the 'next elements' after 'selected element'
+        for (int nextIndex = selectedIndex + 1; nextIndex < N; nextIndex++)//pass //seeking min element in next elements
+        {
+            if (ar[nextIndex] < ar[minIndex]) //if there lesser element in the next element
+            {
+                minIndex = nextIndex; //change the min element index
+            }
+        }
+        if (minIndex != selectedIndex) //swap min element and selected element
+        {
+            Swap(ref ar[minIndex], ref ar[selectedIndex]);
+            /*
+            long temp = ar[minIndex];//swap logic, move to function
+            ar[minIndex] = ar[selectedIndex];
+            ar[selectedIndex] = temp;
+            */
+        }
+        //TRACE//Console.Write($"\nSI={selectedIndex},MI={minIndex}:"); print(ar);
+    }
+
+}
+private static void print(long[] ar)
+{
+    foreach (long num in ar)
+    {
+        Console.Write($"{num} ");
+    }
+}
+static void Main(string[] args)
+{
+    //long[] ar = { 7, 4, 3, 5, 8, 10, 2, 6 };
+    //long[] ar = {3, 5, 8, 10 };
+    long[] ar = { 100, 88, 90, 45, 85, 67, 110, 40, 77, 92, 13, 62 };
+    //long[] ar = { 3, 7, 2, 4 };
+    Console.Write("Before sort:"); print(ar);
+    SelectionSort(ar);
+    Console.Write("\nAfter sort :"); print(ar);
+    Console.WriteLine();
+}
+
+
+Visual Studio provides a robust set of debugging tools 
+that can help you identify and fix issues in your code efficiently. 
+NUnit is a popular unit testing framework 
+for .NET that integrates well with Visual Studio, 
+enabling you to write and run tests 
+to ensure your code behaves as expected. 
+
+Here's an overview of both:
+
+Visual Studio Debugging Tools
+
+Visual Studio's debugging tools allow you to pause the execution of your program, inspect variables, evaluate expressions, and step through code line by line to identify bugs or logic errors.
+
+1. Breakpoints
+Breakpoints are markers that you can set on specific lines of code to pause execution at that point.
+
+- Setting Breakpoints: Click in the left margin next to the line number where you want to pause execution or press `F9`.
+- Conditional Breakpoints: Right-click on a breakpoint and select "Conditions..." to set conditions under which the breakpoint will be hit, such as when a variable has a specific value.
+- Hit Count Breakpoints: Right-click on a breakpoint and select "Hit Count..." to specify how many times the breakpoint should be hit before pausing.
+
+2. Step Commands
+Step commands allow you to navigate through your code during debugging.
+
+- Step Over (`F10`): Executes the current line of code. If the line contains a method call, the debugger will not step into the method; it will execute it and move to the next line.
+- Step Into (`F11`): If the current line contains a method call, the debugger will step into the method, allowing you to debug its internal code.
+- Step Out (`Shift + F11`): If you are inside a method, this command will execute the rest of the method and return to the caller.
+- Run to Cursor (`Ctrl + F10`): Runs the code up to the line where the cursor is positioned, bypassing any breakpoints in between.
+
+3. Watch Window
+The Watch window allows you to monitor the values of variables and expressions during debugging.
+
+- Adding Variables to Watch: Right-click on a variable in the code and select "Add to Watch" or manually add it in the Watch window.
+- Evaluating Expressions: You can enter any valid expression in the Watch window to see its current value.
+
+4. Locals and Autos Windows
+These windows automatically display variables that are in scope:
+
+- Locals Window: Shows all local variables in the current scope.
+- Autos Window: Displays variables used in the current line of code and the previous line.
+
+5. Immediate Window
+The Immediate window allows you to execute commands or evaluate expressions at runtime.
+
+- Executing Commands: Type expressions or commands directly into the Immediate window to see their output or modify variables.
+
+6. Call Stack Window
+The Call Stack window shows the sequence of method calls that led to the current point in the code.
+
+- Navigating Call Stack: You can double-click any frame in the Call Stack to navigate to that point in the code.
+
+7. Exception Settings
+Exception settings allow you to configure how Visual Studio handles exceptions during debugging.
+
+- Break on Exceptions: You can configure Visual Studio to break on specific exceptions as soon as they are thrown, even if they are handled by your code.
+
+NUnit Framework
+
+NUnit is a widely used unit testing framework for .NET languages. It allows you to write tests to verify that your code works as expected. NUnit integrates seamlessly with Visual Studio, allowing you to run tests directly from the IDE.
+
+1. Creating NUnit Tests
+To create a test project in Visual Studio using NUnit:
+
+1. Create a Test Project: In Visual Studio, create a new project and select "NUnit Test Project" as the template.
+2. Install NUnit NuGet Packages: If not already included, install the `NUnit` and `NUnit3TestAdapter` packages via NuGet Package Manager.
+
+2. Writing NUnit Tests
+NUnit tests are written as methods within a class. The class should be marked with the `[TestFixture]` attribute, and individual test methods should be marked with the `[Test]` attribute.
+
+```csharp
+using NUnit.Framework;
+
+[TestFixture]
+public class CalculatorTests
+{
+    [Test]
+    public void Add_SimpleValues_ShouldReturnSum()
+    {
+        // Arrange
+        var calculator = new Calculator();
+
+        // Act
+        int result = calculator.Add(2, 3);
+
+        // Assert
+        Assert.AreEqual(5, result);
+    }
+
+    [Test]
+    public void Divide_ByZero_ShouldThrowException()
+    {
+        // Arrange
+        var calculator = new Calculator();
+
+        // Act & Assert
+        Assert.Throws<DivideByZeroException>(() => calculator.Divide(10, 0));
+    }
+}
+```
+
+- Arrange: Set up any necessary objects or conditions.
+- Act: Perform the action you are testing.
+- Assert: Verify the result with `Assert` methods like `Assert.AreEqual` or `Assert.Throws`.
+
+3. Running NUnit Tests in Visual Studio
+You can run NUnit tests directly from Visual Studio:
+
+1. Test Explorer: Open the Test Explorer window (`Test > Test Explorer`) to view and run your tests.
+2. Run Tests: Click "Run All" to run all tests, or right-click individual tests to run or debug them.
+
+4. Asserting Test Results
+NUnit provides a range of assertion methods:
+
+- `Assert.AreEqual(expected, actual)`: Verifies that the expected value equals the actual value.
+- `Assert.IsTrue(condition)`: Verifies that the specified condition is true.
+- `Assert.IsNull(object)`: Verifies that the specified object is null.
+- `Assert.Throws<TException>(() => action)`: Verifies that the specified action throws the expected exception.
+
+5. Test Setup and Teardown
+You can use `[SetUp]` and `[TearDown]` attributes to run code before and after each test, respectively:
+
+```csharp
+[TestFixture]
+public class CalculatorTests
+{
+    private Calculator _calculator;
+
+    [SetUp]
+    public void SetUp()
+    {
+        _calculator = new Calculator();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        _calculator = null;
+    }
+    
+    // Tests go here...
+}
+```
+
+- [SetUp]: Runs before each test method, ideal for common setup tasks.
+- [TearDown]: Runs after each test method, useful for cleanup tasks.
+
+Integration of Debugging and NUnit
+Visual Studio's debugging tools can be used while running NUnit tests to help identify issues:
+
+- Debugging Tests: Right-click a test in Test Explorer and select "Debug" 
+to run the test in debug mode. You can set breakpoints 
+in your test or the code it calls to inspect behavior during execution.
+
+These tools, when used together, provide a powerful environment 
+for developing, testing, and debugging your .NET applications.

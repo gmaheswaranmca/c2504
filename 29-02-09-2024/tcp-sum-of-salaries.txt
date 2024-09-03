@@ -1,0 +1,115 @@
+    //server to calc sum of N salaries from client
+
+    public class SimpleServer
+    {
+        public void service(string ipAddr = "127.0.0.1", int port = 13000)
+        {
+            byte[] bufferWrite;
+            byte[] bufferRead = new byte[1024];
+            int bufferReadSize = 0;
+            //1
+            TcpListener server = new TcpListener(IPAddress.Parse(ipAddr), port);
+            //2
+            server.Start();
+            //3
+            Console.WriteLine($"[DEBUG]3.Server is listening on port {port}...");//DEBUG
+            TcpClient client = server.AcceptTcpClient();
+            Console.WriteLine("Connected!");//DEBUG
+            //4
+            NetworkStream stream = client.GetStream();
+
+            //read N from network
+            bufferReadSize = stream.Read(bufferRead, 0, bufferRead.Length);
+            int N = int.Parse(Encoding.ASCII.GetString(bufferRead, 0, bufferReadSize));
+            Console.WriteLine($"Number of salaries: {N}");
+
+            //read N salaries from network
+            List<double> salaries = new List<double>();
+            for(int I = 0; I < N; I++)
+            {
+                //salaries
+                bufferReadSize = stream.Read(bufferRead, 0, bufferRead.Length);
+                salaries.Add(double.Parse( Encoding.ASCII.GetString(bufferRead, 0, bufferReadSize)));
+            }
+            //write sum into network
+            double sum = salaries.Sum();
+
+            Console.Write("Sum of[");
+            foreach(var salary in salaries) { Console.Write($"{salary} "); }
+            Console.WriteLine($"] = {sum}");
+
+            bufferWrite = Encoding.ASCII.GetBytes(sum.ToString());
+            stream.Write(bufferWrite, 0, bufferWrite.Length);
+
+
+            //5
+            client.Close();
+            //6
+            server.Stop();
+        }
+    }
+    public class SimpleClient
+    {
+        public void service(string serverAddress = "127.0.0.1", int port = 13000)
+        {
+            byte[] bufferWrite;
+            byte[] bufferRead = new byte[1024];
+            int bufferReadSize = 0;
+            //1
+            TcpClient client = new TcpClient(serverAddress, port);
+            //2
+            NetworkStream stream = client.GetStream();
+
+            //write N into network
+            Console.Write($"Number of salaries:");
+            int N = int.Parse(Console.ReadLine());
+            bufferWrite = Encoding.ASCII.GetBytes(N.ToString());
+            stream.Write(bufferWrite, 0, bufferWrite.Length);
+
+            //write N salaries into network
+            List<double> salaries = new List<double>();
+            for (int I = 0; I < N; I++)
+            {
+                Console.Write($"salary at {I+1}:");
+                bufferWrite = Encoding.ASCII.GetBytes(Console.ReadLine());
+                stream.Write(bufferWrite, 0, bufferWrite.Length);
+            }
+            //read sum of N salaries from network
+            //yahoop
+            bufferReadSize = stream.Read(bufferRead, 0, bufferRead.Length);
+            double sum = double.Parse( Encoding.ASCII.GetString(bufferRead, 0, bufferReadSize));
+            Console.WriteLine($"sum: {sum}");
+            //3
+            stream.Close();
+            client.Close();
+        }
+    }
+
+    internal class Programs
+    {
+
+        static void Main()
+        {
+            Console.Write("Option[1-Run Server, 2-Run Client]:");
+            int option = int.Parse(Console.ReadLine());
+            int port = 13000;//change it 
+            string serverAddress = "127.0.0.1";
+            switch (option)
+            {
+                case 1:
+                    Console.WriteLine("Server Service to get started...");
+                    SimpleServer server = new SimpleServer();
+                    server.service(port: port);
+                    break;
+                case 2:
+                    Console.WriteLine("Client Service to get started...");
+                    SimpleClient client = new SimpleClient();
+                    client.service(serverAddress: serverAddress, port: port);
+                    break;
+            }
+            Console.WriteLine("\nPress Enter to exit...");
+            Console.Read();
+        }
+
+
+    }
