@@ -1,0 +1,45 @@
+WinForms controls naming convesion:
+
+Prefixes:
+    btn for Buttons
+    txt for TextBoxes
+    lbl for Labels
+    cmb for ComboBoxes
+    chk for CheckBoxes
+    rd for RadioButtons
+    lst for ListBoxes
+    grd for DataGridViews
+    pic for PictureBoxes
+    tab for TabControls
+    grp for GroupBoxes
+
+Suffixes:
+    Use a descriptive suffix to indicate the control's purpose or function, such as:
+    SearchButton for a Button used for searching
+    UsernameTextBox for a TextBox used to input a username
+    StatusLabel for a Label used to display status information
+
+Examples:
+    btnSave for a Button used to save data
+    txtUsername for a TextBox used to input a username
+    lblErrorMessage for a Label used to display error messages
+    cmbCategory for a ComboBox used to select a category
+
+
+WinForms Form naming convesion:
+Prefixes:
+    frm is a common prefix used for forms, but it's not required. You can use a more descriptive prefix if it makes sense for your application.
+Suffixes:
+    Use a descriptive suffix to indicate the form's purpose or function, such as:
+    Login for a form used to log in to the application
+    Settings for a form used to configure application settings
+    About for a form used to display information about the application
+Examples:
+    frmLogin for a form used to log in to the application
+    frmMain for the main form of the application
+    frmSettings for a form used to configure application settings
+    frmAbout for a form used to display information about the application
+Additional Tips:
+    Avoid using abbreviations or acronyms unless they are widely recognized and understood.
+    Use a consistent naming convention throughout your application.
+    Make sure the form name is descriptive and easy to understand.

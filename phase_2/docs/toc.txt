@@ -1,0 +1,190 @@
+WinForms 
+	Learning Outcomes:
+		•	Identify the need of GUI with 
+            buttons, 
+            check boxes, 
+            radio buttons, 
+            panels, 
+            group boxes, 
+            list boxes and 
+            picture boxes and create using WinForms
+		•	Identify the need of event driven programming 
+            in WinForms and write programs 
+            to handle various events
+		•	Design and implement a simple practical project using WinForms.
+
+	Topics:
+		1.	Introduction to Windows Forms
+		2.	Visual Studio and the Forms Designer
+		3.	Using Controls
+		4.	List Controls
+		5.	Working with Dialogs
+		6.	Menus, Toolbars and Status Bars
+		7.	Practical Project: Contact Management System
+			a.	Develop a WinForms application to manage contacts. 
+			The application will allow users 
+			to add, update, delete, and view contacts. 
+			It will use various WinForms controls and 
+			demonstrate event-driven programming.
+			b.	Main Form: Contains buttons 
+			to add, update, delete, and view contacts.
+			c.	Add/Update Form: Allows the user 
+			to enter contact details such as name, phone number, and email.
+			d.	Contact List: Displays the list of contacts 
+			using a ListBox or DataGridView.
+
+Windows Presentation Foundation		
+	Learning Outcomes:
+		1.	Create Windows applications using the classes provided by WPF
+		2.	Create applications following MVVM design pattern using WPF
+		3.	Create XAML with WPF application
+		4.	Create Windows applications using a combination of code and XAML
+		5.	Use the layout features of WPF to create flexible and attractive user interfaces using Panels
+		6.	Use static and dynamic resources for different WPF controls like rectangle, ellipse and Border
+		7.	Use element binding, property binding and two way binding in WPF
+		8.	Implement event and command-driven applications 
+			with windows, menus, dialogs, toolbars and other common user interface features
+		9.	Use threading in WPF
+		10.	Create thread and multithread applications using WPF
+		11.	Able to create and use Behaviours to enhance interactivity and reduce code-behind in WPF applications.
+		12.	
+	Topics:
+		1.	Introduction to WPF
+			a.	Why WPF?
+			b.	What Is WPF?
+			c.	.NET Framework  (WinFX)
+			d.	WPF Overview
+			e.	Application and Window
+			f.	A Simple WPF Application
+			g.	Using Visual Studio
+			h.	Brushes
+			i.	Panels
+		2.	MVVM
+			a.	MVVM Introduction
+			b.	MVVM Advantages
+			c.	MVVM First application
+			d.	MVVM- Hooking up views
+			e.	MVVM- Hooking up view model
+			f.	MVVM- WPF Data binding
+			g.	MVVM-WPF Data templates
+			h.	MVVM- View model communications
+			i.	MVVM-Hierarchies & Navigation
+			j.	MVVM- Validations
+		3.	XAML
+			a.	Role of XAML
+			b.	Elements and Attributes
+			c.	Namespaces
+			d.	Property Elements
+			e.	Type Converters
+			f.	Content Property
+			g.	Collections
+			h.	XAML and Procedural Code
+			i.	Visual Tree and Logical tree
+		4.	Dependency Properties and Routed Events
+			a.	Dependency Properties
+			b.	Change Notification
+			c.	Property Value Inheritance
+			d.	Support for Multiple Providers
+			e.	Routed Events
+			f.	Routing Strategies
+			5.	WPF GUI
+			a.	WPF Controls(Button,Label,TextBox,ToolTip,RadioButton,CheckBox,ListBox,ComboBox)
+			b.	Layouts (sizing, positioning, Transforms, canvas, shapes, stackpanel, wrappanel, dockpanel, Grid, scrolling, scalling)
+			c.	Dialogs (Message boxes, Win32 common dialogs, Custom modal dialogs, Custom modeless dialogs)
+			d.	Custom Controls of WPF
+		6.	Data Binding
+			a.	Binding Sources
+			b.	Sharing Sources with DataContext
+			c.	Data Templates
+			d.	Value Converters
+			e.	Collection Views
+			f.	Data Providers
+			g.	Validation Rules
+			h.	(More focus on how to use binding & controls together)
+		7.	Menus & Commands, Toolbars & Status bars
+			a.	Menus & Commands
+				i.	Menus
+				ii.	Context Menus
+				iii.	Icons on Menu Items
+				iv.	Commands
+				v.	Keyboard Shortcuts
+				vi.	Disabling Menu Items
+				vii.	Checking Menu Item
+			b.	Toolbars and Status Bars
+				i.	Toolbars
+				ii.	Toolbars and Commands
+				iii.	Status Bars
+		8.	Styles, Templates, Skins and Themes
+			a.	Styles
+			b.	Style Sharing
+			c.	Triggers
+			d.	Templates
+			e.	Templated Parent’s Properties
+			f.	Skins
+			g.	Themes
+		9.	Behaviors 
+			a.	 Introduction to Behaviors 
+				a.	Understanding the concept of Behaviors in WPF
+				b.	Behaviors vs. event handlers
+				c.	Benefits of using Behaviors
+			b. Creating Custom Behaviors
+				a.	Inheriting from Behavior<T> class
+				b.	Implementing AttachedProperty for Behaviors
+				c.	Overriding OnAttached and OnDetaching methods
+			c. Using Microsoft.Xaml.Behaviors NuGet package
+				a.	Installing and referencing the package
+				b.	Namespace declarations in XAML
+			d. Common Built-in Behaviors
+				a.	EventTriggerBehavior
+				b.	InvokeCommandAction
+				c.	ChangePropertyAction
+			e. Attaching Behaviors to Controls
+				a.	XAML syntax for attaching Behaviors
+				b.	Binding Behaviors to ViewModel properties
+		10.	Dispatcher Timer 
+			i.	Introduction to Dispatcher Timer 
+			ii.	Understanding the DispatcherTimer class
+			iii.	Differences between DispatcherTimer and System.Threading.Timer
+			b.	Creating and Configuring DispatcherTimer
+			i.	Instantiating DispatcherTimer
+			ii.	Setting Interval property
+			iii.	Handling the Tick event
+			c.	Starting and Stopping the Timer 
+			i.	Using Start() and Stop() methods
+			ii.	IsEnabled property
+			d.	Timer Accuracy and Performance Considerations 
+			i.	Understanding timer resolution
+			ii.	Best practices for timer intervals
+			e.	Using DispatcherTimer in MVVM 
+			i.	Integrating DispatcherTimer with ViewModels
+			ii.	Binding timer state to UI elements
+			11.	Background Worker
+			i.	Introduction to BackgroundWorker
+			ii.	Purpose and benefits of BackgroundWorker
+			iii.	Comparison with other asynchronous patterns
+			b.	Creating and Configuring BackgroundWorker
+			i.	Instantiating BackgroundWorker
+			ii.	Setting WorkerReportsProgress and WorkerSupportsCancellation properties
+			c.	Implementing DoWork Event Handler 
+			i.	Writing long-running operations
+			ii.	Passing arguments to the worker
+			d.	Progress Reporting 
+			i.	Using ReportProgress method
+			ii.	Handling ProgressChanged event
+			iii.	Updating UI with progress information
+			e.	Handling Work Completion 
+			i.	Implementing RunWorkerCompleted event handler
+			ii.	Accessing results and handling errors
+		12.	Multi-threaded Applications
+			a.	Creating multi-threaded applications in WPF
+			b.	Handling UI updates from background threads
+		13.	Capstone Project
+			a.	Design & implement a functional dashboard for any engineering service app using MVVM.
+			b.	Showcase integration with real-time data sources.
+			c.	Demonstrate the use of advanced WPF features in a cohesive application.
+		14.	Integration with Restful Services
+			a.	Introduction to RESTful services.
+			b.	Implementing data retrieval and updates from multiple RESTful services.
+			c.	Consuming RESTful services in a WPF application.
+			d.	Utilizing WPF in a front-end microservices architecture.
+			e.	Demonstrating practical examples of WPF and local RESTful service integration.

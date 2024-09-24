@@ -1,0 +1,41 @@
+23/09/2024 Mon monring: 
+[  ]Aaryaka P Nath, 	[  ]Abijith K, 			
+[  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
+[  ]Anjana E R, 		[  ]Anjana N K,
+[  ]Ann Mariya Jaimon, 	[  ]Anugrah Krishnan, 	 					
+[  ]Ashna Mariya Shaji, [  ]Ashwin V, 			
+[  ]Collin Francy, 		[  ]Dijol Davis,	    		    
+[  ]Gladsy Joshy,	    [  ]Girish K V, 
+[  ]Gopika V, 	        [  ]Keerthana Jayalal K		
+[  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
+[  ]Rishwin R Kanth,	[  ]Sahla. R, 			
+[  ]Sharon Rose, 		[  ]Yahkoob P, 
+
+Visual Studio we have. Not packages installable. 
+Need IT support. 
+
+Anugrah Krishnan        Hc	
+	Gopika V            Hc
+	Anurag C Ashok      Hc
+	Aaryaka P Nath      Hc
+    Girish K V          Des
+	Abijith K	        Des 
+    Anjana N K          Des 
+    Alan Kuriakose Cherian	    Des
+
+Ashwin V                Hc	
+	Collin Francy       Hc
+	Keerthana Jayalal K Hc
+    Sharon Rose         Des
+    Neha Joy            Des
+	Dijol Davis         Des  
+    Gladsy Joshy        Des
+
+Yahkoob P                       Hc 	
+    Sahla. R                    Hc	
+	Ann Mariya Jaimon           Hc
+	Anjana E R	                Hc 	
+	
+    Rishwin R Kanth             Hc
+	Ashna Mariya Shaji          Hc 	
+    Minnu Sudhakaran            Hc 

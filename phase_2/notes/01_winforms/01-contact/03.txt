@@ -1,0 +1,161 @@
+3. Using Controls in Windows Forms
+
+Windows Forms (WinForms) provides a wide variety of controls 
+that can be used to create rich user interfaces. 
+Controls are the visual elements (like buttons, text boxes, labels, etc.) 
+that allow users to interact with your application.
+
+Common Windows Forms Controls:
+1. Button (`Button`): A clickable button that triggers an action when clicked.
+2. Label (`Label`): Displays static text or other information on the form.
+3. TextBox (`TextBox`): Allows the user to input text.
+4. CheckBox (`CheckBox`): A box that can be checked or unchecked to represent binary choices.
+5. RadioButton (`RadioButton`): A control for selecting one option from a group of choices.
+6. ComboBox (`ComboBox`): A drop-down list that allows the user to select one option from a list.
+7. ListBox (`ListBox`): Displays a list of items from which the user can select one or more.
+8. DataGridView (`DataGridView`): A control used to display and manage tabular data.
+9. Panel (`Panel`): A container control that can hold other controls, useful for grouping controls visually.
+10. PictureBox (`PictureBox`): Displays an image.
+11. DateTimePicker (`DateTimePicker`): Allows the user to select a date and time.
+
+Adding and Using Controls in WinForms:
+You can add controls to your forms either visually 
+using the Forms Designer in Visual Studio or programmatically 
+in the code.
+
+1. Adding Controls via Forms Designer:
+1. Drag and Drop:
+   - Open the Toolbox in Visual Studio.
+   - Drag a control (e.g., `Button`, `TextBox`, `Label`) from the Toolbox onto the form.
+2. Set Control Properties:
+   - After adding the control, 
+   use the Properties Window to set properties 
+   like `Name`, `Text`, `Size`, `Location`, etc.
+   - Example: Set the `Text` property of a `Button` to "Submit" and 
+   set its `Name` property to `submitButton`.
+   
+2. Adding Controls Programmatically:
+You can also add and configure controls programmatically 
+in the form’s constructor or an event handler.
+
+Example:
+```csharp
+// Inside your form's constructor
+Button submitButton = new Button();
+submitButton.Text = "Submit";
+submitButton.Location = new Point(100, 100);
+submitButton.Click += new EventHandler(submitButton_Click);
+this.Controls.Add(submitButton);
+```
+
+In this example, a `Button` is created, 
+its `Text` and `Location` properties are set, and 
+an event handler is assigned for the `Click` event.
+
+3. Handling Events for Controls:
+Controls in WinForms are event-driven, 
+meaning they respond to user actions such as clicks, key presses, or selections. 
+You need to define event handlers to specify what happens when an event occurs.
+
+- Click Event: Handles when a button is clicked.
+- TextChanged Event: 
+Handles when the text in a `TextBox` changes.
+- CheckedChanged Event: 
+Handles when a `CheckBox` or `RadioButton` is checked or unchecked.
+
+Example: Handling a Button Click Event
+```csharp
+private void submitButton_Click(object sender, EventArgs e)
+{
+    MessageBox.Show("Submit button clicked!");
+}
+```
+
+4. Commonly Used Properties of Controls:
+1. Name: The name of the control, used to reference it in code.
+2. Text: The text displayed by the control (e.g., text on a button or label).
+3. Location: The position of the control on the form (specified by `Point(x, y)`).
+4. Size: The width and height of the control (specified by `Size(width, height)`).
+5. Enabled: A boolean property that indicates whether the control is enabled for user interaction.
+6. Visible: A boolean property that indicates whether the control is visible on the form.
+7. BackColor: Sets the background color of the control.
+8. ForeColor: Sets the text color of the control (e.g., for a `Label` or `TextBox`).
+
+5. Control Layout and Grouping:
+- Panel: A `Panel` control can be used to group related controls together. 
+This is useful for logically grouping inputs, or for creating a structured layout.
+- GroupBox: Similar to a `Panel`, a `GroupBox` adds a visual frame around grouped controls.
+- TableLayoutPanel and FlowLayoutPanel: 
+These controls provide more advanced layout management, 
+allowing controls to automatically resize and reposition themselves within the form.
+
+Example: Creating a Simple Form with Controls
+
+Here’s an example of creating a form with a `Label`, `TextBox`, and `Button`, and 
+handling the button click event to display the entered text:
+
+```csharp
+public class ContactForm : Form
+{
+    private Label nameLabel;
+    private TextBox nameTextBox;
+    private Button submitButton;
+
+    public ContactForm()
+    {
+        // Initialize controls
+        nameLabel = new Label();
+        nameTextBox = new TextBox();
+        submitButton = new Button();
+
+        // Set properties
+        nameLabel.Text = "Enter your name:";
+        nameLabel.Location = new Point(10, 10);
+
+        nameTextBox.Location = new Point(10, 40);
+        nameTextBox.Width = 200;
+
+        submitButton.Text = "Submit";
+        submitButton.Location = new Point(10, 80);
+
+        // Add event handler for button click
+        submitButton.Click += new EventHandler(SubmitButton_Click);
+
+        // Add controls to the form
+        Controls.Add(nameLabel);
+        Controls.Add(nameTextBox);
+        Controls.Add(submitButton);
+    }
+
+    // Event handler for button click
+    private void SubmitButton_Click(object sender, EventArgs e)
+    {
+        string name = nameTextBox.Text;
+        MessageBox.Show("Hello, " + name);
+    }
+
+    [STAThread]
+    static void Main()
+    {
+        Application.EnableVisualStyles();
+        Application.Run(new ContactForm());
+    }
+}
+```
+
+In this example:
+- A `Label` prompts the user to enter their name.
+- A `TextBox` collects the user’s input.
+- A `Button` submits the data, and when clicked, 
+displays a message box with the entered name.
+
+Conclusion:
+Controls are the building blocks of Windows Forms applications, 
+allowing you to build interactive and user-friendly interfaces. 
+
+Visual Studio’s Forms Designer makes it easy to add and configure controls, 
+while event-driven programming allows you 
+to define how the application responds to user actions. 
+
+By combining different controls and event handlers, 
+you can create complex and fully functional desktop applications.
