@@ -1,0 +1,482 @@
+Contacts.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ContactProject
+{
+    public class Contact
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name},{Email},{Phone}"; 
+        }
+    }
+
+
+}
+```
+
+IRepo.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ContactProject
+{
+    public interface IRepo
+    {
+        void Create(Contact contact);
+        List<Contact> ReadAll();
+        Contact ReadByEmail(string email);
+        void Update(string email, Contact contact);
+        void DeleteByEmail(string email);
+
+
+    }
+}
+
+```
+
+ListMemoryRepo.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ContactProject
+{
+    public class ListMemoryRepo : IRepo
+    {
+        private List<Contact> contacts  = new List<Contact>();
+       
+        public void Create(Contact contact)
+        {
+           contacts.Add(contact);
+        }
+
+        public void DeleteByEmail(string email)
+        {
+            foreach (var contact in contacts)
+            {
+                if (contact.Email == email)
+                {
+                    contacts.Remove(contact);
+                    return;
+                }
+            }
+        }
+
+        public List<Contact> ReadAll()
+        {
+            return contacts;
+        }
+
+        public Contact ReadByEmail(string email)
+        {
+            foreach (var contact in contacts)
+            {
+                if (contact.Email == email)
+                {
+                    return (Contact) contact;
+                }
+            }
+            return null;
+
+
+        }
+
+        public void Update(string email, Contact contact)
+        {
+            return;
+        }
+    }
+}
+
+```
+
+
+
+frmContact.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics.Contracts;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ContactProject
+{
+    public partial class frmContact : Form
+    {
+        public frmContact()
+        {
+            InitializeComponent();
+        }
+        private Contact contact = new Contact { Email = "", Name = "", Phone = "" };
+        private bool IsNew { get; set; } = true;
+        private string SaveActionText { get => (IsNew ? "Create Contact" : "Update Contact"); }
+        private IRepo repo = new ListMemoryRepo();
+
+        private void DoNewContact()
+        {
+            //new contact object
+            contact = new Contact { Email = "", Name = "", Phone = "" };
+            //object to UIs
+            txtEmail.Text = contact.Email;
+            txtName.Text = contact.Name;
+            txtPhone.Text = contact.Phone;
+            //new mode out of edit & new modes
+            IsNew = true;
+            btnSave.Text = SaveActionText;
+            txtEmail.Enabled = IsNew;
+            //
+            txtName.Focus();
+        }
+        private void DoLoadContacts()
+        {
+            lstContacts.DataSource = null;
+            lstContacts.DataSource = repo.ReadAll();//Db ReadAll in CRUD 
+        }
+        private void DoCreate()
+        {
+            var result = MessageBox.Show(text: "Are you sure to create?",
+                                         caption: "Confirm",
+                                         buttons: MessageBoxButtons.YesNo,
+                                         icon: MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+            //UIs to object
+            contact.Email = txtEmail.Text;
+            contact.Name = txtName.Text;
+            contact.Phone = txtPhone.Text;
+            //db create in CRUD
+            repo.Create(contact);
+            //
+            result = MessageBox.Show(text: "Created Successfully",
+                                     caption: "Alert",
+                                     buttons: MessageBoxButtons.OK,
+                                     icon: MessageBoxIcon.Information);
+            //Refresh the form 1. refresh list 2. referesh form (new contact mode)
+            DoLoadContacts();
+            DoNewContact();
+        }
+
+        private void DoUpdate()
+        {
+            var result = MessageBox.Show(text: "Are you sure to update?",
+                                         caption: "Confirm",
+                                         buttons: MessageBoxButtons.YesNo,
+                                         icon: MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+            //UIs to object
+            contact.Name = txtName.Text;
+            contact.Phone = txtPhone.Text;
+            //db update in CRUD
+            repo.Update(contact.Email, contact);
+            //
+            result = MessageBox.Show(text: "Updated Successfully",
+                                     caption: "Alert",
+                                     buttons: MessageBoxButtons.OK,
+                                     icon: MessageBoxIcon.Information);
+            //
+            DoLoadContacts();
+        }
+        private void OnEdit()
+        {
+            //selected contact
+            Contact selectedContact = (Contact)lstContacts.SelectedItem;
+            //db read by email in CRUD
+            this.contact = repo.ReadByEmail(selectedContact.Email);
+            //object to UIs
+            txtEmail.Text = contact.Email;
+            txtName.Text = contact.Name;
+            txtPhone.Text = contact.Phone;
+
+            //edit mode out of edit & new modes
+            IsNew = false;
+            btnSave.Text = SaveActionText;
+            txtEmail.Enabled = IsNew;
+            //
+            txtName.Focus();
+        }
+
+        private void OnDelete()
+        {
+            if(lstContacts.SelectedIndex == -1)
+            {
+                var result_valid = MessageBox.Show(text: "Please select contact",
+                                     caption: "Alert",
+                                     buttons: MessageBoxButtons.OK,
+                                     icon: MessageBoxIcon.Information);
+                return;
+            }
+            var selectedContact = (Contact)lstContacts.SelectedItem;
+            //db Delete in CRUD
+            repo.DeleteByEmail(selectedContact.Email);
+            var result = MessageBox.Show(text: "Deleted Successfully",
+                                     caption: "Alert",
+                                     buttons: MessageBoxButtons.OK,
+                                     icon: MessageBoxIcon.Information);
+            //refresh form 
+            DoLoadContacts();
+        }
+        private void btnNewContact_Click(object sender, EventArgs e)
+        {
+            DoNewContact();
+        }
+        private void frmContact_Load(object sender, EventArgs e)
+        {
+            DoNewContact();
+            DoLoadContacts();
+        }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if(IsNew)
+            {
+                DoCreate();    
+            }
+            else
+            {
+                DoUpdate();
+            }
+        }
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            OnEdit();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            OnDelete();
+        }
+    }
+}
+```
+
+
+frmContact.Designer.cs
+```
+namespace ContactProject
+{
+    partial class frmContact
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.lstContacts = new System.Windows.Forms.ListBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblPhone = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnNewContact = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // lstContacts
+            // 
+            this.lstContacts.FormattingEnabled = true;
+            this.lstContacts.ItemHeight = 16;
+            this.lstContacts.Location = new System.Drawing.Point(32, 94);
+            this.lstContacts.Margin = new System.Windows.Forms.Padding(4);
+            this.lstContacts.Name = "lstContacts";
+            this.lstContacts.Size = new System.Drawing.Size(482, 340);
+            this.lstContacts.TabIndex = 6;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(627, 79);
+            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(54, 16);
+            this.lblName.TabIndex = 1;
+            this.lblName.Text = "Name:";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(744, 70);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(190, 23);
+            this.txtName.TabIndex = 1;
+            // 
+            // lblPhone
+            // 
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Location = new System.Drawing.Point(627, 135);
+            this.lblPhone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(57, 16);
+            this.lblPhone.TabIndex = 1;
+            this.lblPhone.Text = "Phone:";
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(744, 127);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(190, 23);
+            this.txtPhone.TabIndex = 2;
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(627, 198);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(52, 16);
+            this.lblEmail.TabIndex = 1;
+            this.lblEmail.Text = "Email:";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(744, 190);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(190, 23);
+            this.txtEmail.TabIndex = 3;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(629, 277);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(306, 41);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = " Create Contact";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnNewContact
+            // 
+            this.btnNewContact.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewContact.Location = new System.Drawing.Point(32, 33);
+            this.btnNewContact.Margin = new System.Windows.Forms.Padding(4);
+            this.btnNewContact.Name = "btnNewContact";
+            this.btnNewContact.Size = new System.Drawing.Size(356, 37);
+            this.btnNewContact.TabIndex = 5;
+            this.btnNewContact.Text = "New Contact";
+            this.btnNewContact.UseVisualStyleBackColor = true;
+            this.btnNewContact.Click += new System.EventHandler(this.btnNewContact_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Location = new System.Drawing.Point(39, 452);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(246, 27);
+            this.btnEdit.TabIndex = 7;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(294, 452);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(226, 31);
+            this.btnDelete.TabIndex = 8;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // frmContact
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1200, 554);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnNewContact);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.txtEmail);
+            this.Controls.Add(this.txtPhone);
+            this.Controls.Add(this.lblEmail);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.lblPhone);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.lstContacts);
+            this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "frmContact";
+            this.Text = "Contact App";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmContact_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ListBox lstContacts;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label lblPhone;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnNewContact;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
+    }
+}
+
+
+```
