@@ -1,0 +1,420 @@
+"Personalized Health Tracker" application [PHT]
+===========================abstract=============================
+"Personalized Health Tracker"  
+   Develop an application 
+    to monitor patients' daily health metrics 
+        (heart rate, 
+        blood pressure, 
+        activity levels) and 
+    generate personalized health insights.
+
+
+
+Abstract for the "Personalized Health Tracker" Application
+
+The "Personalized Health Tracker" is a healthcare-focused application designed to monitor and manage a user’s daily health metrics, including heart rate, blood pressure, and activity levels. By collecting real-time data, the app generates personalized health insights that empower users to track their well-being, set fitness or health goals, and sync health data from external devices such as fitness trackers. The application also offers users historical health data visualization and notification alerts for proactive health management. 
+
+Built using the C#, WPF, and SQL Server, the system ensures scalability, efficient data storage, and real-time access to health information. Users can interact with the platform through a secure and user-friendly interface, allowing for regular updates of health metrics and insights generated using data analytics.
+
+With the integration of goal tracking, device synchronization, and health history maintenance, the app provides a comprehensive solution for individuals looking to optimize their health and wellness based on personalized, data-driven insights.
+===========================app=============================
+
+1. Home Page
+   - Purpose: Introduction to the app with an overview of its health tracking services.
+   - Key Features:  
+     - Overview of tracking health metrics (heart rate, blood pressure, activity levels).
+     - Navigation links (login, sign-up, view insights, etc.).
+     - "Get Started" or "Learn More" buttons.
+
+2. User Sign-up / Login Page
+   - Purpose: Allows patients to create an account or log in.
+   - Key Features:  
+     - Input fields for email, password, name, and contact details.
+     - "Sign in with Google/Facebook" options.
+     - Forgot password link.
+
+3. Dashboard (User Overview)
+   - Purpose: Central hub for users after logging in, showing a snapshot of health metrics.
+   - Key Features:  
+     - Overview of key metrics like heart rate, blood pressure, and activity levels.
+     - Visual representation (charts/graphs) of recent health data.
+     - Quick actions to add or sync health data (from wearable devices or manual input).
+     - Links to detailed insights, goals, and historical data.
+
+4. Daily Health Metrics Entry Page
+   - Purpose: Allows users to manually input or sync their daily health metrics.
+   - Key Features:  
+     - Input fields for metrics like heart rate, blood pressure, activity levels.
+     - Integration with wearable devices (like fitness trackers).
+     - Ability to add notes (e.g., medication intake, diet details).
+     - Save button to update the database.
+
+5. Health Insights Page
+   - Purpose: Generates personalized health insights based on user data.
+   - Key Features:  
+     - Graphs and charts comparing daily, weekly, and monthly health trends.
+     - Personalized suggestions (e.g., increase exercise, reduce stress).
+     - Warnings or alerts for abnormal metrics (e.g., high blood pressure).
+     - Option to set health goals based on insights.
+
+6. Health History Page
+   - Purpose: Displays a detailed history of all health metrics tracked over time.
+   - Key Features:  
+     - Table or timeline of past health entries.
+     - Filters to view specific metrics (e.g., only heart rate or blood pressure).
+     - Export option to download data in PDF/CSV format.
+     - Comparison feature to track progress over different timeframes.
+
+7. Health Goals and Progress Page
+   - Purpose: Allows users to set personal health goals and track progress.
+   - Key Features:  
+     - Set goals for various health metrics (e.g., lower blood pressure, increase activity).
+     - Visual tracking of progress (percentage completed, timeline, etc.).
+     - Notifications/reminders for users to meet their goals.
+     - Option to edit or update goals.
+
+8. Device Integration / Sync Page
+   - Purpose: Enables users to connect and sync data from wearables and health apps.
+   - Key Features:  
+     - List of supported devices (e.g., Fitbit, Apple Watch).
+     - Instructions for syncing data from external devices.
+     - Real-time syncing status and last synced data.
+     - Troubleshooting tips for device integration issues.
+
+9. Profile Settings Page
+   - Purpose: Allows users to manage personal information and preferences.
+   - Key Features:  
+     - Edit profile (name, age, contact info, etc.).
+     - Health preferences (metric units, notification settings).
+     - Sync settings for devices or apps.
+     - Security settings (password change, 2-factor authentication).
+
+10. Admin Dashboard (Optional)
+   - Purpose: Platform management for administrators.
+   - Key Features:  
+     - User management (view and manage user data).
+     - System performance monitoring (e.g., sync errors, data processing).
+     - Platform analytics (user activity, health trends).
+
+11. Contact Support / Help Page
+   - Purpose: Support for users needing assistance with app usage.
+   - Key Features:  
+     - FAQs.
+     - Contact form for tech or health-related inquiries.
+     - Live chat or email support.
+
+
+
+
+
+===========================about database=============================
+
+
+1. Users Table
+   - Purpose: Stores user information.
+   - Fields:
+     - `UserID` (Primary Key, `INT`, Identity): Unique identifier for each user.
+     - `Name` (`NVARCHAR(100)`): Full name of the user.
+     - `Email` (`NVARCHAR(100)`, Unique): User's email (used for login).
+     - `PasswordHash` (`NVARCHAR(MAX)`): Hashed password for authentication.
+     - `DateOfBirth` (`DATE`): User's date of birth.
+     - `Gender` (`NVARCHAR(10)`): Gender of the user.
+     - `CreatedAt` (`DATETIME`): Account creation date.
+     - `UpdatedAt` (`DATETIME`): Last update timestamp.
+
+2. HealthMetrics Table
+   - Purpose: Stores daily health metrics for each user.
+   - Fields:
+     - `MetricID` (Primary Key, `INT`, Identity): Unique identifier for each health metric entry.
+     - `UserID` (Foreign Key, `INT`): Reference to the `Users` table.
+     - `HeartRate` (`INT`): Heart rate value (beats per minute).
+     - `BloodPressureSystolic` (`INT`): Systolic blood pressure value.
+     - `BloodPressureDiastolic` (`INT`): Diastolic blood pressure value.
+     - `ActivityLevel` (`DECIMAL(5, 2)`): Activity level (steps or similar measure).
+     - `MetricDate` (`DATETIME`): Date and time the metrics were recorded.
+     - `CreatedAt` (`DATETIME`): Timestamp of when the metrics were recorded.
+
+3. HealthInsights Table
+   - Purpose: Stores personalized health insights generated based on the user's data.
+   - Fields:
+     - `InsightID` (Primary Key, `INT`, Identity): Unique identifier for each insight.
+     - `UserID` (Foreign Key, `INT`): Reference to the `Users` table.
+     - `InsightType` (`NVARCHAR(100)`): Type of health insight (e.g., "High Blood Pressure Alert").
+     - `InsightDetails` (`NVARCHAR(MAX)`): Detailed explanation or advice for the insight.
+     - `GeneratedAt` (`DATETIME`): Timestamp of when the insight was generated.
+
+4. Goals Table
+   - Purpose: Stores health-related goals set by the users.
+   - Fields:
+     - `GoalID` (Primary Key, `INT`, Identity): Unique identifier for each goal.
+     - `UserID` (Foreign Key, `INT`): Reference to the `Users` table.
+     - `GoalType` (`NVARCHAR(100)`): Type of goal (e.g., "Lower Blood Pressure", "Increase Steps").
+     - `TargetValue` (`DECIMAL(10, 2)`): Target value for the goal (e.g., target blood pressure or activity level).
+     - `StartDate` (`DATETIME`): The date when the goal was set.
+     - `EndDate` (`DATETIME`): The expected completion date for the goal.
+     - `Status` (`NVARCHAR(50)`): Current status of the goal (e.g., "Active", "Completed").
+
+5. DeviceSync Table
+   - Purpose: Stores information about user devices or external apps syncing health data.
+   - Fields:
+     - `SyncID` (Primary Key, `INT`, Identity): Unique identifier for each sync record.
+     - `UserID` (Foreign Key, `INT`): Reference to the `Users` table.
+     - `DeviceType` (`NVARCHAR(100)`): Type of external device (e.g., "Fitbit", "Apple Watch").
+     - `LastSyncedAt` (`DATETIME`): Timestamp of the last successful sync.
+     - `SyncStatus` (`NVARCHAR(50)`): Status of the sync (e.g., "Successful", "Failed").
+
+6. HealthHistory Table
+   - Purpose: Stores historical health metrics for users.
+   - Fields:
+     - `HistoryID` (Primary Key, `INT`, Identity): Unique identifier for each health history record.
+     - `UserID` (Foreign Key, `INT`): Reference to the `Users` table.
+     - `MetricType` (`NVARCHAR(50)`): Type of metric (e.g., "Heart Rate", "Blood Pressure").
+     - `MetricValue` (`DECIMAL(10, 2)`): The value of the recorded metric.
+     - `RecordedAt` (`DATETIME`): Date and time when the metric was recorded.
+
+7. Notifications Table
+   - Purpose: Stores notifications sent to users regarding health alerts, reminders, and insights.
+   - Fields:
+     - `NotificationID` (Primary Key, `INT`, Identity): Unique identifier for each notification.
+     - `UserID` (Foreign Key, `INT`): Reference to the `Users` table.
+     - `NotificationType` (`NVARCHAR(100)`): Type of notification (e.g., "Reminder", "Alert").
+     - `Message` (`NVARCHAR(MAX)`): Notification message content.
+     - `SentAt` (`DATETIME`): Timestamp when the notification was sent.
+
+Relationships Between Tables:
+- Users has a one-to-many relationship with `HealthMetrics`, `HealthInsights`, `Goals`, `DeviceSync`, `HealthHistory`, and `Notifications`.
+- HealthMetrics stores the daily health data for each user.
+- HealthInsights stores health insights derived from the data in `HealthMetrics`.
+- Goals tracks users’ health-related objectives and their progress.
+- DeviceSync records data from external devices, which can be linked to health metrics.
+- HealthHistory keeps a record of past health metrics for users.
+- Notifications provides alerts or updates to users about their health status or app activities.
+
+ER Diagram Overview:
+1. Users → *1-to-many* → HealthMetrics
+2. Users → *1-to-many* → HealthInsights
+3. Users → *1-to-many* → Goals
+4. Users → *1-to-many* → DeviceSync
+5. Users → *1-to-many* → HealthHistory
+6. Users → *1-to-many* → Notifications
+
+===========================database tables=============================
+
+```sql
+-- 1. Users Table
+CREATE TABLE Users (
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(MAX) NOT NULL,
+    DateOfBirth DATE,
+    Gender NVARCHAR(10),
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE()
+);
+
+-- 2. HealthMetrics Table
+CREATE TABLE HealthMetrics (
+    MetricID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    HeartRate INT,
+    BloodPressureSystolic INT,
+    BloodPressureDiastolic INT,
+    ActivityLevel DECIMAL(5, 2),
+    MetricDate DATETIME NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+-- 3. HealthInsights Table
+CREATE TABLE HealthInsights (
+    InsightID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    InsightType NVARCHAR(100) NOT NULL,
+    InsightDetails NVARCHAR(MAX),
+    GeneratedAt DATETIME DEFAULT GETDATE()
+);
+
+-- 4. Goals Table
+CREATE TABLE Goals (
+    GoalID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    GoalType NVARCHAR(100) NOT NULL,
+    TargetValue DECIMAL(10, 2) NOT NULL,
+    StartDate DATETIME NOT NULL,
+    EndDate DATETIME,
+    Status NVARCHAR(50) DEFAULT 'Active'
+);
+
+-- 5. DeviceSync Table
+CREATE TABLE DeviceSync (
+    SyncID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    DeviceType NVARCHAR(100) NOT NULL,
+    LastSyncedAt DATETIME DEFAULT GETDATE(),
+    SyncStatus NVARCHAR(50) DEFAULT 'Successful'
+);
+
+-- 6. HealthHistory Table
+CREATE TABLE HealthHistory (
+    HistoryID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    MetricType NVARCHAR(50) NOT NULL,
+    MetricValue DECIMAL(10, 2) NOT NULL,
+    RecordedAt DATETIME NOT NULL
+);
+
+-- 7. Notifications Table
+CREATE TABLE Notifications (
+    NotificationID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    NotificationType NVARCHAR(100) NOT NULL,
+    Message NVARCHAR(MAX) NOT NULL,
+    SentAt DATETIME DEFAULT GETDATE()
+);
+```
+
+Explanation:
+1. Users Table: Contains user information such as name, email, password, date of birth, gender, and timestamps.
+2. HealthMetrics Table: Stores daily health metrics for users like heart rate, blood pressure, activity levels, and the date of the metrics.
+3. HealthInsights Table: Stores personalized health insights generated from the user's metrics.
+4. Goals Table: Allows users to set health-related goals and track their progress.
+5. DeviceSync Table: Stores information about syncing with external devices such as fitness trackers.
+6. HealthHistory Table: Maintains a record of past health metrics for tracking purposes.
+7. Notifications Table: Manages notifications sent to users for health alerts, reminders, or insights.
+
+
+===========================SQL planner for each page=============================
+
+1. Sign Up / Registration Page
+- Action: Insert a new user record when a user registers.
+- SQL Statement:
+   ```sql
+   INSERT INTO Users (Name, Email, PasswordHash, DateOfBirth, Gender, CreatedAt)
+   VALUES ('John Doe', 'john@example.com', 'hashed_password', '1990-01-01', 'Male', GETDATE());
+   ```
+
+2. Login Page
+- Action: Validate a user by checking if the email and password hash match.
+- SQL Statement:
+   ```sql
+   SELECT UserID, Name 
+   FROM Users
+   WHERE Email = 'john@example.com' AND PasswordHash = 'hashed_password';
+   ```
+
+3. Dashboard Page (View Health Metrics Summary)
+- Action: Retrieve recent health metrics for a user to show on the dashboard.
+- SQL Statement:
+   ```sql
+   SELECT HeartRate, BloodPressureSystolic, BloodPressureDiastolic, ActivityLevel, MetricDate
+   FROM HealthMetrics
+   WHERE UserID = 1 -- Assuming UserID = 1 for logged-in user
+   ORDER BY MetricDate DESC;
+   ```
+
+4. Add New Health Metric Page
+- Action: Insert a new health metric record for the user.
+- SQL Statement:
+   ```sql
+   INSERT INTO HealthMetrics (UserID, HeartRate, BloodPressureSystolic, BloodPressureDiastolic, ActivityLevel, MetricDate, CreatedAt)
+   VALUES (1, 72, 120, 80, 10000, GETDATE(), GETDATE());
+   ```
+
+5. Health Insights Page
+- Action: Retrieve personalized health insights for the user.
+- SQL Statement:
+   ```sql
+   SELECT InsightType, InsightDetails, GeneratedAt
+   FROM HealthInsights
+   WHERE UserID = 1 -- Assuming UserID = 1 for logged-in user
+   ORDER BY GeneratedAt DESC;
+   ```
+
+6. Set Health Goal Page
+- Action: Insert a new goal for the user.
+- SQL Statement:
+   ```sql
+   INSERT INTO Goals (UserID, GoalType, TargetValue, StartDate, EndDate, Status)
+   VALUES (1, 'Increase Steps', 15000, GETDATE(), DATEADD(day, 30, GETDATE()), 'Active');
+   ```
+
+7. View All Goals Page
+- Action: Retrieve all goals set by the user.
+- SQL Statement:
+   ```sql
+   SELECT GoalType, TargetValue, StartDate, EndDate, Status
+   FROM Goals
+   WHERE UserID = 1 -- Assuming UserID = 1 for logged-in user
+   ORDER BY StartDate DESC;
+   ```
+
+8. Device Sync Page
+- Action: Insert a record for syncing with an external device.
+- SQL Statement:
+   ```sql
+   INSERT INTO DeviceSync (UserID, DeviceType, LastSyncedAt, SyncStatus)
+   VALUES (1, 'Fitbit', GETDATE(), 'Successful');
+   ```
+
+9. View Sync History Page
+- Action: Retrieve sync history for the user’s devices.
+- SQL Statement:
+   ```sql
+   SELECT DeviceType, LastSyncedAt, SyncStatus
+   FROM DeviceSync
+   WHERE UserID = 1 -- Assuming UserID = 1 for logged-in user
+   ORDER BY LastSyncedAt DESC;
+   ```
+
+10. Health History Page
+- Action: Retrieve past health metrics from the history.
+- SQL Statement:
+   ```sql
+   SELECT MetricType, MetricValue, RecordedAt
+   FROM HealthHistory
+   WHERE UserID = 1 -- Assuming UserID = 1 for logged-in user
+   ORDER BY RecordedAt DESC;
+   ```
+
+11. Notifications Page
+- Action: Retrieve recent notifications for the user.
+- SQL Statement:
+   ```sql
+   SELECT NotificationType, Message, SentAt
+   FROM Notifications
+   WHERE UserID = 1 -- Assuming UserID = 1 for logged-in user
+   ORDER BY SentAt DESC;
+   ```
+
+12. Profile Page (Update User Information)
+- Action: Update the user’s profile information (e.g., name, email, date of birth).
+- SQL Statement:
+   ```sql
+   UPDATE Users
+   SET Name = 'John Doe Updated', Email = 'john.updated@example.com', DateOfBirth = '1990-02-02', UpdatedAt = GETDATE()
+   WHERE UserID = 1;
+   ```
+
+13. Delete Account Page
+- Action: Delete a user’s account and cascade delete all related health data.
+- SQL Statements:
+   1. Delete related records (if foreign key constraints are set to `ON DELETE CASCADE`, this step may not be required):
+      ```sql
+      DELETE FROM HealthMetrics WHERE UserID = 1;
+      DELETE FROM HealthInsights WHERE UserID = 1;
+      DELETE FROM Goals WHERE UserID = 1;
+      DELETE FROM DeviceSync WHERE UserID = 1;
+      DELETE FROM HealthHistory WHERE UserID = 1;
+      DELETE FROM Notifications WHERE UserID = 1;
+      ```
+
+   2. Delete the user:
+      ```sql
+      DELETE FROM Users WHERE UserID = 1;
+      ```
+
+---
+
+Note:
+- Replace `1` in `UserID = 1` with the actual user ID from the application’s session data.
+- Ensure that security and proper data handling mechanisms, like hashed passwords and parameterized queries (to prevent SQL injection), are applied at the application level.

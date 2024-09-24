@@ -1,0 +1,421 @@
+Smart Manufacturing Analytics Dashboard  
+   This project aims 
+   to create an interactive dashboard 
+   that aggregates and visualizes data 
+   from various manufacturing processes. 
+   By leveraging real-time data analytics, 
+   users can monitor key performance indicators (KPIs), 
+   identify bottlenecks, and optimize production efficiency. 
+   The dashboard will integrate with SQL Server for data storage and 
+   provide insights through dynamic charts and graphs.
+===========================abstract=============================
+Abstract for the Smart Manufacturing Analytics Dashboard
+
+The Smart Manufacturing Analytics Dashboard is an innovative application designed to enhance operational efficiency and data-driven decision-making in manufacturing environments. By integrating real-time data analytics with a user-friendly interface, the dashboard empowers users to monitor key performance indicators (KPIs), visualize production metrics, and identify bottlenecks across various manufacturing processes. Utilizing SQL Server for robust data management and storage, the application enables seamless access to critical production data, allowing users to generate comprehensive reports and alerts for any anomalies.
+
+The dashboard's interactive features provide insights into production trends, facilitating timely interventions and continuous improvement. With a focus on optimizing production efficiency and ensuring product quality, the Smart Manufacturing Analytics Dashboard serves as an essential tool for manufacturers striving to maintain competitiveness in a rapidly evolving industry. This application not only streamlines data collection and analysis but also fosters collaboration among teams, ultimately driving better outcomes in product lifecycle management and operational performance.
+===========================app=============================
+1. Home Dashboard
+   - Overview of key performance indicators (KPIs) such as production efficiency, downtime, and output rates.
+   - Real-time updates on manufacturing processes and status.
+   - Summary of recent alerts or issues.
+
+2. Data Visualization Page
+   - Interactive charts and graphs representing manufacturing data.
+   - Options to filter data by time period, production line, or specific metrics.
+   - Visual comparisons of performance across different production units.
+
+3. Production Performance Monitoring
+   - Detailed metrics on individual production lines or machines.
+   - Visualization of production rates, efficiency, and quality metrics.
+   - Historical performance data analysis to identify trends.
+
+4. Bottleneck Analysis Page
+   - Tools for identifying and analyzing bottlenecks in production.
+   - Visual representation of process flow and points of delay.
+   - Recommendations for process optimization based on analysis.
+
+5. Alerts and Notifications Page
+   - Real-time alerts for any issues affecting production (e.g., machine failures, quality issues).
+   - Summary of resolved and unresolved alerts.
+   - Customizable notification settings for different user roles.
+
+6. Reporting and Analytics Page
+   - Generate detailed reports on production performance, efficiency, and quality.
+   - Export reports in various formats (PDF, Excel, etc.).
+   - Schedule automated report generation and distribution.
+
+7. Integration Settings Page
+   - Configuration options for connecting to various data sources (IoT devices, ERP systems, etc.).
+   - Manage API settings for data integration with SQL Server.
+   - Set up data import/export schedules.
+
+8. User Management Page
+   - Admin controls for managing user roles and permissions.
+   - Add, edit, or remove users from the dashboard.
+   - Track user activity and engagement.
+
+9. Data Sources Overview Page
+   - List and manage all connected data sources.
+   - Status indicators for data source connections (active/inactive).
+   - Options for manual data refresh and troubleshooting.
+
+10. Help and Support Page
+    - Access user guides and documentation for dashboard features.
+    - FAQs and troubleshooting tips for common issues.
+    - Contact support form for technical assistance.
+===========================about database=============================
+===========================database tables=============================
+```sql
+-- Table for storing user information
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY(1,1),
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    Role NVARCHAR(50) NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    LastLogin DATETIME
+);
+
+-- Table for storing production line data
+CREATE TABLE ProductionLines (
+    LineID INT PRIMARY KEY IDENTITY(1,1),
+    LineName NVARCHAR(100) NOT NULL,
+    Status NVARCHAR(50) NOT NULL,  -- e.g., Active, Inactive
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+-- Table for storing production metrics
+CREATE TABLE ProductionMetrics (
+    MetricID INT PRIMARY KEY IDENTITY(1,1),
+    LineID INT NOT NULL,
+    MetricDate DATETIME NOT NULL,
+    ProductionRate DECIMAL(18, 2),  -- Units produced per hour
+    Efficiency DECIMAL(5, 2),       -- Percentage (0-100)
+    QualityRate DECIMAL(5, 2),       -- Percentage (0-100)
+    Downtime DECIMAL(18, 2),         -- Hours of downtime
+    FOREIGN KEY (LineID) REFERENCES ProductionLines(LineID)
+);
+
+-- Table for storing alerts
+CREATE TABLE Alerts (
+    AlertID INT PRIMARY KEY IDENTITY(1,1),
+    LineID INT NOT NULL,
+    AlertDate DATETIME DEFAULT GETDATE(),
+    AlertType NVARCHAR(100) NOT NULL,  -- e.g., Machine Failure, Quality Issue
+    Severity NVARCHAR(50),              -- e.g., Low, Medium, High
+    Message NVARCHAR(255) NOT NULL,
+    Resolved BIT DEFAULT 0,
+    FOREIGN KEY (LineID) REFERENCES ProductionLines(LineID)
+);
+
+-- Table for storing configuration settings
+CREATE TABLE Settings (
+    SettingID INT PRIMARY KEY IDENTITY(1,1),
+    SettingKey NVARCHAR(100) NOT NULL UNIQUE,
+    SettingValue NVARCHAR(255) NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE()
+);
+
+-- Table for storing historical data on production trends
+CREATE TABLE ProductionTrends (
+    TrendID INT PRIMARY KEY IDENTITY(1,1),
+    LineID INT NOT NULL,
+    TrendDate DATETIME NOT NULL,
+    AverageProductionRate DECIMAL(18, 2),
+    AverageEfficiency DECIMAL(5, 2),
+    AverageQualityRate DECIMAL(5, 2),
+    FOREIGN KEY (LineID) REFERENCES ProductionLines(LineID)
+);
+```
+
+Explanation of the Tables:
+
+1. Users: Stores user information, including credentials and roles (e.g., admin, operator).
+
+2. ProductionLines: Represents different production lines or machines in the manufacturing facility.
+
+3. ProductionMetrics: Captures performance metrics for each production line, including production rate, efficiency, quality rate, and downtime.
+
+4. Alerts: Records alerts related to production issues, including type, severity, and resolution status.
+
+5. Settings: Stores application configuration settings that can be adjusted as needed.
+
+6. ProductionTrends: Holds historical data for analyzing production trends over time.
+
+Note
+Make sure to customize the data types and constraints based on your specific application requirements. 
+Also, consider implementing indexes on frequently queried columns to optimize performance.
+
+
+Overview of the Entity-Relationship (ER) Diagram 
+
+Entities and Attributes
+
+1. User
+   - Attributes:
+     - UserID (Primary Key)
+     - Username
+     - PasswordHash
+     - Role
+     - CreatedAt
+     - LastLogin
+
+2. ProductionLine
+   - Attributes:
+     - LineID (Primary Key)
+     - LineName
+     - Status
+     - CreatedAt
+
+3. ProductionMetric
+   - Attributes:
+     - MetricID (Primary Key)
+     - LineID (Foreign Key)
+     - MetricDate
+     - ProductionRate
+     - Efficiency
+     - QualityRate
+     - Downtime
+
+4. Alert
+   - Attributes:
+     - AlertID (Primary Key)
+     - LineID (Foreign Key)
+     - AlertDate
+     - AlertType
+     - Severity
+     - Message
+     - Resolved
+
+5. Setting
+   - Attributes:
+     - SettingID (Primary Key)
+     - SettingKey
+     - SettingValue
+     - CreatedAt
+     - UpdatedAt
+
+6. ProductionTrend
+   - Attributes:
+     - TrendID (Primary Key)
+     - LineID (Foreign Key)
+     - TrendDate
+     - AverageProductionRate
+     - AverageEfficiency
+     - AverageQualityRate
+
+Relationships
+
+1. User to Alert: 
+   - One user can generate multiple alerts. (Optional relationship, not explicitly shown in tables)
+
+2. ProductionLine to ProductionMetric: 
+   - One production line can have multiple production metrics recorded. (One-to-Many)
+   - Relationship: ProductionLine.LineID → ProductionMetric.LineID
+
+3. ProductionLine to Alert: 
+   - One production line can generate multiple alerts. (One-to-Many)
+   - Relationship: ProductionLine.LineID → Alert.LineID
+
+4. ProductionLine to ProductionTrend: 
+   - One production line can have multiple production trends recorded. (One-to-Many)
+   - Relationship: ProductionLine.LineID → ProductionTrend.LineID
+
+ER Diagram Overview
+
+- The User entity is connected to the Alert entity, indicating that users can create alerts, though this relationship is typically optional.
+- The ProductionLine entity serves as a central hub, with multiple one-to-many relationships to the ProductionMetric, Alert, and ProductionTrend entities.
+- The Setting entity stands alone as it is not directly related to other entities but can be referenced for application configuration.
+
+Diagram Representation
+While I can't create visual diagrams directly, the ER diagram can be visualized as follows:
+
+```
+[User] 1 --------< [Alert]
+   |
+   |
+[ProductionLine] 1 --------< [ProductionMetric]
+   |
+   |
+   1 --------< [ProductionTrend]
+```
+
+===========================SQL planner for each page=============================
+1. Home Dashboard
+- Select Key Performance Indicators (KPIs):
+```sql
+SELECT 
+    SUM(ProductionRate) AS TotalProduction,
+    AVG(Efficiency) AS AverageEfficiency,
+    SUM(Downtime) AS TotalDowntime
+FROM 
+    ProductionMetrics
+WHERE 
+    MetricDate >= DATEADD(day, -30, GETDATE());
+```
+
+2. Data Visualization Page
+- Select Production Metrics for Visualization:
+```sql
+SELECT 
+    MetricDate,
+    ProductionRate,
+    Efficiency,
+    QualityRate
+FROM 
+    ProductionMetrics
+WHERE 
+    LineID = @LineID
+ORDER BY 
+    MetricDate DESC;
+```
+
+3. Production Performance Monitoring
+- Select Performance Metrics for a Specific Production Line:
+```sql
+SELECT 
+    MetricDate,
+    ProductionRate,
+    Efficiency,
+    QualityRate,
+    Downtime
+FROM 
+    ProductionMetrics
+WHERE 
+    LineID = @LineID
+ORDER BY 
+    MetricDate DESC;
+```
+
+4. Bottleneck Analysis Page
+- Identify Bottlenecks:
+```sql
+SELECT 
+    LineID,
+    AVG(Downtime) AS AverageDowntime,
+    COUNT(*) AS DowntimeOccurrences
+FROM 
+    ProductionMetrics
+GROUP BY 
+    LineID
+HAVING 
+    AVG(Downtime) > @Threshold;  -- Specify a threshold for bottlenecks
+```
+
+5. Alerts and Notifications Page
+- Select Active Alerts:
+```sql
+SELECT 
+    AlertID,
+    LineID,
+    AlertDate,
+    AlertType,
+    Severity,
+    Message,
+    Resolved
+FROM 
+    Alerts
+WHERE 
+    Resolved = 0;  -- Only unresolved alerts
+```
+
+- Update Alert Resolution:
+```sql
+UPDATE Alerts
+SET 
+    Resolved = 1
+WHERE 
+    AlertID = @AlertID;  -- Specify the alert to resolve
+```
+
+6. Reporting and Analytics Page
+- Generate a Report of Production Metrics:
+```sql
+SELECT 
+    LineID,
+    AVG(ProductionRate) AS AverageProductionRate,
+    AVG(Efficiency) AS AverageEfficiency,
+    AVG(QualityRate) AS AverageQualityRate,
+    SUM(Downtime) AS TotalDowntime
+FROM 
+    ProductionMetrics
+WHERE 
+    MetricDate BETWEEN @StartDate AND @EndDate
+GROUP BY 
+    LineID;
+```
+
+7. Integration Settings Page
+- Select All Data Sources:
+```sql
+SELECT 
+    SettingID,
+    SettingKey,
+    SettingValue,
+    CreatedAt,
+    UpdatedAt
+FROM 
+    Settings;
+```
+
+- Update Data Source Settings:
+```sql
+UPDATE Settings
+SET 
+    SettingValue = @NewValue,
+    UpdatedAt = GETDATE()
+WHERE 
+    SettingKey = @SettingKey;  -- Specify the setting key to update
+```
+
+8. User Management Page
+- Select All Users:
+```sql
+SELECT 
+    UserID,
+    Username,
+    Role,
+    CreatedAt,
+    LastLogin
+FROM 
+    Users;
+```
+
+- Insert New User:
+```sql
+INSERT INTO Users (Username, PasswordHash, Role)
+VALUES (@Username, @PasswordHash, @Role);  -- Use hashed password for security
+```
+
+- Update User Role:
+```sql
+UPDATE Users
+SET 
+    Role = @NewRole
+WHERE 
+    UserID = @UserID;  -- Specify the user ID to update
+```
+
+9. Data Sources Overview Page
+- Select All Connected Data Sources:
+```sql
+SELECT 
+    *
+FROM 
+    Settings;
+```
+
+10. Help and Support Page
+- Select Help Articles or FAQs:
+```sql
+SELECT 
+    ArticleID,
+    Title,
+    Content,
+    CreatedAt
+FROM 
+    HelpArticles;  -- Assuming you have a HelpArticles table
+```
+

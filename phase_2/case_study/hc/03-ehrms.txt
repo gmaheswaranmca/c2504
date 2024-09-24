@@ -1,0 +1,579 @@
+"Electronic Health Record (EHR) Management System" [EHRMS]
+"Electronic Health Record (EHR) Management System"  
+   Implement a secure, 
+        cloud-based EHR system 
+        for hospitals 
+            to store and retrieve patient records.
+
+===========================abstract=============================
+Abstract for the Electronic Health Record (EHR) Management System
+
+The Electronic Health Record (EHR) Management System is a secure, cloud-based solution designed to enable healthcare institutions to efficiently store, retrieve, and manage patient medical records. The system facilitates seamless communication between healthcare providers, allowing them to access patient information such as health history, appointments, medications, lab results, and billing records in real time. The platform supports role-based access for doctors, nurses, and administrative staff, ensuring that patient data is handled with high security and privacy.
+
+The system offers core features such as patient registration, appointment scheduling, health record management, medication prescriptions, lab test result tracking, and billing. It is designed to improve healthcare workflow, enhance decision-making, and promote patient care by offering an integrated, scalable, and user-friendly platform. Additionally, the EHR system complies with regulatory standards for healthcare data protection, ensuring the confidentiality and integrity of patient information.
+
+This comprehensive system enables healthcare providers to deliver better, faster, and more coordinated care, streamlining operations and enhancing the overall patient experience.
+
+===========================pages=============================
+Pages of the EHR Management System App
+
+1. User Login Page
+   - Function: Allows healthcare professionals and administrators to log into the system securely.
+
+2. Dashboard
+   - Function: Provides an overview of key metrics, patient statistics, and quick access to functionalities like patient search and recent activities.
+
+3. Patient Registration Page
+   - Function: Allows staff to add new patients to the system, including personal details and medical history.
+
+4. Patient Profile Page
+   - Function: Displays detailed information about a specific patient, including demographics, medical history, medications, and allergies.
+
+5. EHR Records Management Page
+   - Function: Enables healthcare providers to view, add, edit, or delete patient health records.
+
+6. Appointment Scheduling Page
+   - Function: Allows users to schedule and manage patient appointments, including notifications for upcoming appointments.
+
+7. Medication Management Page
+   - Function: Facilitates the management of prescribed medications, including dosage information and refill requests.
+
+8. Billing and Insurance Page
+   - Function: Displays billing information and allows for the management of insurance details, payments, and claims.
+
+9. Reporting Page
+   - Function: Generates reports on patient records, treatment outcomes, and billing statistics for administrative purposes.
+
+10. Audit Trail Page
+    - Function: Provides a log of user activities within the system for security and compliance purposes.
+
+11. User Management Page
+    - Function: Allows administrators to manage user accounts, roles, and permissions within the system.
+
+12. Settings Page
+    - Function: Enables users to configure system settings, notifications, and preferences.
+
+13. Help and Support Page
+    - Function: Provides resources for users, including FAQs, guides, and contact information for support.
+
+Additional Features (Optional)
+- Telemedicine Integration Page
+  - Function: Allows for remote consultations and video appointments with patients.
+
+- Patient Portal
+  - Function: Enables patients to access their records, request refills, and communicate with their healthcare providers.
+===========================about database=============================
+===========================database tables=============================
+
+
+1. Users
+   - Stores user information for healthcare professionals, administrators, and system users.
+
+   ```sql
+   CREATE TABLE Users (
+       UserID INT PRIMARY KEY IDENTITY(1,1),
+       Name NVARCHAR(100) NOT NULL,
+       Email NVARCHAR(100) UNIQUE NOT NULL,
+       PasswordHash VARBINARY(256) NOT NULL,
+       Role NVARCHAR(50) CHECK (Role IN ('Admin', 'Doctor', 'Nurse', 'Receptionist')),
+       CreatedAt DATETIME DEFAULT GETDATE(),
+       LastLogin DATETIME
+   );
+   ```
+
+---
+
+2. Patients
+   - Stores patient demographic and basic information.
+
+   ```sql
+   CREATE TABLE Patients (
+       PatientID INT PRIMARY KEY IDENTITY(1,1),
+       FirstName NVARCHAR(100) NOT NULL,
+       LastName NVARCHAR(100) NOT NULL,
+       DateOfBirth DATE NOT NULL,
+       Gender NVARCHAR(10) CHECK (Gender IN ('Male', 'Female', 'Other')),
+       ContactNumber NVARCHAR(15),
+       Address NVARCHAR(255),
+       Email NVARCHAR(100) UNIQUE,
+       MedicalHistory NVARCHAR(MAX),
+       Allergies NVARCHAR(MAX),
+       CreatedAt DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+---
+
+3. EHRRecords
+   - Stores electronic health records for patients, including diagnoses, treatments, and notes.
+
+   ```sql
+   CREATE TABLE EHRRecords (
+       RecordID INT PRIMARY KEY IDENTITY(1,1),
+       PatientID INT FOREIGN KEY REFERENCES Patients(PatientID),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       RecordType NVARCHAR(50) NOT NULL, -- e.g. Diagnosis, Treatment, Notes, Lab Results
+       Description NVARCHAR(MAX) NOT NULL,
+       DateOfEntry DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+---
+
+4. Appointments
+   - Stores appointment details between patients and healthcare professionals.
+
+   ```sql
+   CREATE TABLE Appointments (
+       AppointmentID INT PRIMARY KEY IDENTITY(1,1),
+       PatientID INT FOREIGN KEY REFERENCES Patients(PatientID),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID), -- Doctor or Nurse ID
+       AppointmentDate DATETIME NOT NULL,
+       Status NVARCHAR(50) CHECK (Status IN ('Scheduled', 'Completed', 'Canceled')),
+       Notes NVARCHAR(MAX)
+   );
+   ```
+
+---
+
+5. Medications
+   - Stores medication information for patients, including prescriptions.
+
+   ```sql
+   CREATE TABLE Medications (
+       MedicationID INT PRIMARY KEY IDENTITY(1,1),
+       PatientID INT FOREIGN KEY REFERENCES Patients(PatientID),
+       MedicationName NVARCHAR(100) NOT NULL,
+       Dosage NVARCHAR(50) NOT NULL,
+       Frequency NVARCHAR(50) NOT NULL, -- e.g. 'Once a day', 'Twice a day'
+       StartDate DATE NOT NULL,
+       EndDate DATE,
+       PrescribedBy INT FOREIGN KEY REFERENCES Users(UserID), -- Doctor who prescribed
+       CreatedAt DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+---
+
+6. Billing
+   - Stores billing information for patient services.
+
+   ```sql
+   CREATE TABLE Billing (
+       BillID INT PRIMARY KEY IDENTITY(1,1),
+       PatientID INT FOREIGN KEY REFERENCES Patients(PatientID),
+       TotalAmount DECIMAL(10, 2) NOT NULL,
+       Status NVARCHAR(50) CHECK (Status IN ('Pending', 'Paid', 'Canceled')),
+       PaymentMethod NVARCHAR(50) CHECK (PaymentMethod IN ('Credit Card', 'Insurance', 'Cash')),
+       CreatedAt DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+---
+
+7. Insurance
+   - Stores insurance details for patients.
+
+   ```sql
+   CREATE TABLE Insurance (
+       InsuranceID INT PRIMARY KEY IDENTITY(1,1),
+       PatientID INT FOREIGN KEY REFERENCES Patients(PatientID),
+       InsuranceProvider NVARCHAR(100) NOT NULL,
+       PolicyNumber NVARCHAR(100) NOT NULL,
+       ExpirationDate DATE NOT NULL
+   );
+   ```
+
+---
+
+8. AuditTrail
+   - Stores activity logs for compliance and security purposes.
+
+   ```sql
+   CREATE TABLE AuditTrail (
+       AuditID INT PRIMARY KEY IDENTITY(1,1),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       Action NVARCHAR(255) NOT NULL,
+       ActionDateTime DATETIME DEFAULT GETDATE(),
+       Description NVARCHAR(MAX)
+   );
+   ```
+
+---
+
+9. Notifications
+   - Stores notifications for users related to appointments, records, or system updates.
+
+   ```sql
+   CREATE TABLE Notifications (
+       NotificationID INT PRIMARY KEY IDENTITY(1,1),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       Message NVARCHAR(MAX) NOT NULL,
+       NotificationDate DATETIME DEFAULT GETDATE(),
+       Status NVARCHAR(50) CHECK (Status IN ('Unread', 'Read')),
+       RelatedEntity NVARCHAR(50) NULL, -- Could be 'Appointment', 'Record', etc.
+       EntityID INT NULL -- The ID of the related entity (AppointmentID, RecordID, etc.)
+   );
+   ```
+
+---
+
+10. Roles
+   - Stores different roles and associated permissions for users.
+
+   ```sql
+   CREATE TABLE Roles (
+       RoleID INT PRIMARY KEY IDENTITY(1,1),
+       RoleName NVARCHAR(50) NOT NULL,
+       Permissions NVARCHAR(MAX) -- A JSON or delimited string storing permissions
+   );
+   ```
+
+---
+
+11. UserRoles
+   - Associates users with their roles.
+
+   ```sql
+   CREATE TABLE UserRoles (
+       UserRoleID INT PRIMARY KEY IDENTITY(1,1),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       RoleID INT FOREIGN KEY REFERENCES Roles(RoleID)
+   );
+   ```
+
+---
+
+12. LabResults (Optional)
+   - Stores lab test results for patients.
+
+   ```sql
+   CREATE TABLE LabResults (
+       LabResultID INT PRIMARY KEY IDENTITY(1,1),
+       PatientID INT FOREIGN KEY REFERENCES Patients(PatientID),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID), -- Doctor or Lab Technician
+       TestType NVARCHAR(100) NOT NULL,
+       Result NVARCHAR(MAX) NOT NULL,
+       TestDate DATE NOT NULL,
+       Notes NVARCHAR(MAX),
+       CreatedAt DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+---
+
+Relationships
+- Users to EHRRecords, Appointments, Medications, LabResults (1:M)
+- Patients to EHRRecords, Appointments, Medications, LabResults, Billing, Insurance (1:M)
+- Roles to UserRoles (1:M)
+- UserRoles to Users (M:1)
+
+
+
+Overview of the ER (Entity-Relationship) Diagram 
+for the Electronic Health Record (EHR) Management System:
+
+The ER Diagram for the EHR Management System 
+visualizes the relationships between various entities 
+involved in managing electronic 
+health records, patients, healthcare professionals, and 
+administrative tasks. 
+Here's an overview of the key entities and their relationships:
+
+---
+
+1. Users
+   - Represents healthcare professionals and administrators who interact with the system.
+   - Attributes: `UserID`, `Name`, `Email`, `PasswordHash`, `Role`, `CreatedAt`, `LastLogin`.
+   - Relationships:
+     - One-to-Many (1:M) with `EHRRecords`, `Appointments`, `Medications`, and `LabResults` as each user (doctor or nurse) can create multiple records for different patients.
+     - One-to-Many (1:M) with `AuditTrail` for tracking actions performed by each user.
+     - One-to-Many (1:M) with `Notifications`, where each user can receive multiple notifications.
+     - Many-to-Many (M:N) with `Roles` through the `UserRoles` junction table, linking users to their specific roles.
+
+---
+
+2. Patients
+   - Represents individual patients in the system.
+   - Attributes: `PatientID`, `FirstName`, `LastName`, `DateOfBirth`, `Gender`, `ContactNumber`, `Address`, `Email`, `MedicalHistory`, `Allergies`, `CreatedAt`.
+   - Relationships:
+     - One-to-Many (1:M) with `EHRRecords`, where each patient can have multiple health records.
+     - One-to-Many (1:M) with `Appointments`, as a patient can have multiple appointments with healthcare providers.
+     - One-to-Many (1:M) with `Medications`, since a patient can be prescribed multiple medications.
+     - One-to-Many (1:M) with `Billing` and `Insurance` to track payments and insurance details for each patient.
+     - One-to-Many (1:M) with `LabResults` for storing multiple lab test results.
+
+---
+
+3. EHRRecords
+   - Represents electronic health records associated with each patient.
+   - Attributes: `RecordID`, `PatientID`, `UserID`, `RecordType`, `Description`, `DateOfEntry`.
+   - Relationships:
+     - Many-to-One (M:1) with `Patients` as each record belongs to one patient.
+     - Many-to-One (M:1) with `Users` (healthcare professionals), as each record is created or updated by a specific doctor or nurse.
+
+---
+
+4. Appointments
+   - Represents appointments scheduled between patients and healthcare professionals.
+   - Attributes: `AppointmentID`, `PatientID`, `UserID`, `AppointmentDate`, `Status`, `Notes`.
+   - Relationships:
+     - Many-to-One (M:1) with `Patients`, as each appointment is for one patient.
+     - Many-to-One (M:1) with `Users` (Doctors/Nurses), as each appointment is conducted by a specific healthcare provider.
+
+---
+
+5. Medications
+   - Represents the medications prescribed to patients.
+   - Attributes: `MedicationID`, `PatientID`, `MedicationName`, `Dosage`, `Frequency`, `StartDate`, `EndDate`, `PrescribedBy`, `CreatedAt`.
+   - Relationships:
+     - Many-to-One (M:1) with `Patients`, as each medication prescription is for one patient.
+     - Many-to-One (M:1) with `Users`, as each medication is prescribed by a specific healthcare professional (doctor).
+
+---
+
+6. Billing
+   - Represents billing information for patient services and medical procedures.
+   - Attributes: `BillID`, `PatientID`, `TotalAmount`, `Status`, `PaymentMethod`, `CreatedAt`.
+   - Relationships:
+     - Many-to-One (M:1) with `Patients`, as each bill is associated with one patient.
+
+---
+
+7. Insurance
+   - Represents insurance details of patients.
+   - Attributes: `InsuranceID`, `PatientID`, `InsuranceProvider`, `PolicyNumber`, `ExpirationDate`.
+   - Relationships:
+     - Many-to-One (M:1) with `Patients`, as each insurance policy belongs to one patient.
+
+---
+
+8. AuditTrail
+   - Represents a log of system activities and actions for security and compliance.
+   - Attributes: `AuditID`, `UserID`, `Action`, `ActionDateTime`, `Description`.
+   - Relationships:
+     - Many-to-One (M:1) with `Users`, as each log entry is associated with a specific user who performed the action.
+
+---
+
+9. Notifications
+   - Represents system-generated notifications sent to users.
+   - Attributes: `NotificationID`, `UserID`, `Message`, `NotificationDate`, `Status`, `RelatedEntity`, `EntityID`.
+   - Relationships:
+     - Many-to-One (M:1) with `Users`, as each notification is received by a specific user.
+
+---
+
+10. Roles (Optional)
+   - Represents different roles and permissions for system users (e.g., `Admin`, `Doctor`, `Nurse`, etc.).
+   - Attributes: `RoleID`, `RoleName`, `Permissions`.
+   - Relationships:
+     - Many-to-Many (M:N) with `Users` through the `UserRoles` table, defining which users have which roles.
+
+---
+
+11. LabResults (Optional)
+   - Represents lab test results for patients.
+   - Attributes: `LabResultID`, `PatientID`, `UserID`, `TestType`, `Result`, `TestDate`, `Notes`, `CreatedAt`.
+   - Relationships:
+     - Many-to-One (M:1) with `Patients`, as each lab result belongs to one patient.
+     - Many-to-One (M:1) with `Users`, as each lab result is entered by a specific healthcare professional (e.g., a doctor or lab technician).
+
+---
+
+12. UserRoles (Optional Junction Table)
+   - Acts as a bridge between `Users` and `Roles`, facilitating a many-to-many relationship.
+   - Attributes: `UserRoleID`, `UserID`, `RoleID`.
+---
+
+Summary of Relationships:
+- Users have a 1:M relationship with `EHRRecords`, `Appointments`, `Medications`, `Notifications`, `LabResults`, and `AuditTrail`.
+- Patients have a 1:M relationship with `EHRRecords`, `Appointments`, `Medications`, `Billing`, `Insurance`, and `LabResults`.
+- Roles and Users are linked via a M:N relationship through the `UserRoles` table.
+
+===========================SQL planner for each page=============================
+1. Login Page
+This page authenticates users (doctors, nurses, or admins) into the system.
+
+SQL Query to Verify User Login:
+```sql
+SELECT UserID, Name, Role
+FROM Users
+WHERE Email = @Email AND PasswordHash = @PasswordHash;
+```
+
+2. Dashboard Page
+The dashboard page provides an overview of recent activities such as appointments, recent EHR updates, and notifications.
+
+SQL Query for Dashboard Data:
+```sql
+-- Fetch recent appointments
+SELECT TOP 5 a.AppointmentID, p.FirstName, p.LastName, a.AppointmentDate, a.Status 
+FROM Appointments a
+JOIN Patients p ON a.PatientID = p.PatientID
+WHERE a.UserID = @UserID
+ORDER BY a.AppointmentDate DESC;
+
+-- Fetch recent EHR updates
+SELECT TOP 5 e.RecordID, p.FirstName, p.LastName, e.RecordType, e.DateOfEntry
+FROM EHRRecords e
+JOIN Patients p ON e.PatientID = p.PatientID
+WHERE e.UserID = @UserID
+ORDER BY e.DateOfEntry DESC;
+
+-- Fetch unread notifications
+SELECT NotificationID, Message, NotificationDate 
+FROM Notifications
+WHERE UserID = @UserID AND Status = 'Unread'
+ORDER BY NotificationDate DESC;
+```
+
+3. Patients Page
+This page lists all patients and provides a search function.
+
+SQL Query to List Patients:
+```sql
+SELECT PatientID, FirstName, LastName, DateOfBirth, Gender, ContactNumber
+FROM Patients;
+```
+
+SQL Query to Search for a Patient:
+```sql
+SELECT PatientID, FirstName, LastName, DateOfBirth, Gender, ContactNumber
+FROM Patients
+WHERE FirstName LIKE '%' + @SearchTerm + '%' OR LastName LIKE '%' + @SearchTerm + '%';
+```
+
+4. Patient Details Page
+This page displays detailed information about a selected patient, including their health records, appointments, medications, etc.
+
+SQL Query for Patient Information:
+```sql
+SELECT FirstName, LastName, DateOfBirth, Gender, ContactNumber, Address, MedicalHistory, Allergies 
+FROM Patients
+WHERE PatientID = @PatientID;
+```
+
+SQL Query for Patient EHR Records:
+```sql
+SELECT RecordID, RecordType, Description, DateOfEntry
+FROM EHRRecords
+WHERE PatientID = @PatientID
+ORDER BY DateOfEntry DESC;
+```
+
+SQL Query for Patient Appointments:
+```sql
+SELECT AppointmentID, AppointmentDate, Status, Notes 
+FROM Appointments
+WHERE PatientID = @PatientID
+ORDER BY AppointmentDate DESC;
+```
+
+SQL Query for Patient Medications:
+```sql
+SELECT MedicationID, MedicationName, Dosage, Frequency, StartDate, EndDate, PrescribedBy 
+FROM Medications
+WHERE PatientID = @PatientID
+ORDER BY StartDate DESC;
+```
+
+5. Add/Edit EHR Record Page
+This page allows healthcare professionals to create or update EHR records for a patient.
+
+SQL Insert for Adding a New EHR Record:
+```sql
+INSERT INTO EHRRecords (PatientID, UserID, RecordType, Description, DateOfEntry)
+VALUES (@PatientID, @UserID, @RecordType, @Description, GETDATE());
+```
+
+SQL Update for Editing an EHR Record:
+```sql
+UPDATE EHRRecords
+SET RecordType = @RecordType, Description = @Description
+WHERE RecordID = @RecordID;
+```
+
+6. Appointments Page
+This page lists all appointments for the healthcare provider, allowing them to schedule, view, and update appointments.
+
+SQL Query for Healthcare Provider's Appointments:
+```sql
+SELECT a.AppointmentID, p.FirstName, p.LastName, a.AppointmentDate, a.Status, a.Notes 
+FROM Appointments a
+JOIN Patients p ON a.PatientID = p.PatientID
+WHERE a.UserID = @UserID
+ORDER BY a.AppointmentDate DESC;
+```
+
+SQL Insert for Scheduling a New Appointment:
+```sql
+INSERT INTO Appointments (PatientID, UserID, AppointmentDate, Status, Notes)
+VALUES (@PatientID, @UserID, @AppointmentDate, 'Scheduled', @Notes);
+```
+
+SQL Update for Rescheduling/Updating an Appointment:
+```sql
+UPDATE Appointments
+SET AppointmentDate = @AppointmentDate, Status = @Status, Notes = @Notes
+WHERE AppointmentID = @AppointmentID;
+```
+
+7. Medications Page
+This page allows healthcare professionals to view and prescribe medications to patients.
+
+SQL Query to List Patient Medications:
+```sql
+SELECT MedicationID, MedicationName, Dosage, Frequency, StartDate, EndDate, PrescribedBy 
+FROM Medications
+WHERE PatientID = @PatientID
+ORDER BY StartDate DESC;
+```
+
+SQL Insert for Prescribing New Medication:
+```sql
+INSERT INTO Medications (PatientID, MedicationName, Dosage, Frequency, StartDate, EndDate, PrescribedBy, CreatedAt)
+VALUES (@PatientID, @MedicationName, @Dosage, @Frequency, @StartDate, @EndDate, @PrescribedBy, GETDATE());
+```
+
+8. Billing Page
+This page allows the billing department to generate and update invoices for patient services.
+
+SQL Query for Patient Billing Information:
+```sql
+SELECT BillID, TotalAmount, Status, PaymentMethod, CreatedAt 
+FROM Billing
+WHERE PatientID = @PatientID;
+```
+
+SQL Insert for Generating a New Bill:
+```sql
+INSERT INTO Billing (PatientID, TotalAmount, Status, PaymentMethod, CreatedAt)
+VALUES (@PatientID, @TotalAmount, 'Pending', @PaymentMethod, GETDATE());
+```
+
+SQL Update for Marking a Bill as Paid:
+```sql
+UPDATE Billing
+SET Status = 'Paid'
+WHERE BillID = @BillID;
+```
+
+9. Lab Results Page
+This page allows healthcare providers to view lab test results of patients.
+
+SQL Query to List Lab Results:
+```sql
+SELECT LabResultID, TestType, Result, TestDate, Notes 
+FROM LabResults
+WHERE PatientID = @PatientID
+ORDER BY TestDate DESC;
+```
+
+SQL Insert for Adding Lab Test Results:
+```sql
+INSERT INTO LabResults (PatientID, UserID, TestType, Result, TestDate, Notes, CreatedAt)
+VALUES (@PatientID, @UserID, @TestType, @Result, @TestDate, @Notes, GETDATE());
+```
+
+---

@@ -1,0 +1,473 @@
+"Medication Adherence Tracker" application:[mdt]
+
+"Medication Adherence Tracker"  
+   Create a system 
+        to remind patients 
+        to take their medication and 
+        track adherence 
+            through notifications and 
+            patient check-ins.
+===========================abstract=============================
+Abstract Statement for the Medication Adherence Tracker App
+
+The Medication Adherence Tracker is a healthcare application designed to improve patient compliance with prescribed medication regimens. The system enables patients to manage their medications effectively by providing features such as automated reminders, medication schedules, and adherence tracking. Through regular check-ins and notifications, the app ensures that patients take their medications on time, reducing the risk of missed doses. 
+
+The app also generates detailed adherence reports, allowing both patients and healthcare providers to monitor treatment progress. Optional features include goal setting for medication adherence and doctor-patient interaction, where healthcare professionals can track and support patient adherence in real-time. By offering a streamlined, user-friendly platform, the Medication Adherence Tracker aims to enhance overall health outcomes, improve communication between patients and doctors, and promote better medication management practices.
+
+The system integrates modern technologies and databases, leveraging WPF, C# and SQL Server as stack for robust data handling, while providing secure and efficient user interactions.
+===========================pages=============================
+1. Sign Up / Registration Page
+   - Purpose: Allows new patients to register and create an account by providing necessary information such as name, email, password, and medical details.
+   - Key Fields:
+     - Name, Email, Password, Date of Birth, Medical History
+
+2. Login Page
+   - Purpose: Allows registered patients to log in to the application by entering their email and password.
+   - Key Fields:
+     - Email, Password
+
+3. Dashboard Page
+   - Purpose: Provides an overview of the patient's medication schedule, adherence status, upcoming doses, and notifications.
+   - Components:
+     - Daily medication schedule
+     - Adherence percentage
+     - Recent and upcoming reminders
+
+4. Add Medication Page
+   - Purpose: Allows the patient to add new medications to their schedule, including dose, frequency, and duration.
+   - Key Fields:
+     - Medication name, dosage, start date, end date, frequency (e.g., daily, twice a day)
+
+5. Medication Schedule Page
+   - Purpose: Displays the complete medication schedule for the patient, showing when each dose is due and whether it has been taken.
+   - Components:
+     - List of medications with upcoming and past doses
+     - Mark doses as taken or missed
+
+6. Adherence Tracking Page
+   - Purpose: Shows a detailed history of the patient's adherence to their prescribed medication schedule.
+   - Components:
+     - Visual adherence report (e.g., bar graph showing % adherence over time)
+     - History of missed or delayed doses
+
+7. Reminders & Notifications Page
+   - Purpose: Lists all reminders sent to the patient about upcoming doses and any other important notifications.
+   - Components:
+     - List of past and upcoming reminders
+     - Reminder settings (e.g., frequency of notifications, preferred time)
+
+8. Check-in Page
+   - Purpose: Patients check in to confirm that they have taken their medication. This page logs the check-in to track adherence.
+   - Key Actions:
+     - Mark medication as taken
+     - Option to report side effects or issues
+
+9. Patient Profile Page
+   - Purpose: Allows patients to update their profile, including personal information and medical history.
+   - Key Fields:
+     - Name, Date of Birth, Medical Conditions, Allergies, Emergency Contacts
+
+10. Doctor/Pharmacist Page (optional)
+   - Purpose: Provides access to the patient’s doctor or pharmacist to monitor adherence remotely, adjust medication schedules, and send custom notifications.
+   - Components:
+     - View patient adherence
+     - Modify medication schedules
+     - Send patient reminders or messages
+
+11. Reports Page
+   - Purpose: Allows patients to view adherence reports over time and download the data (if needed for doctor visits).
+   - Components:
+     - Exportable PDF/CSV reports
+     - Visual summary of adherence
+
+12. Settings Page
+   - Purpose: Enables patients to configure application settings, such as notification preferences, time zones, and privacy settings.
+   - Key Options:
+     - Notification frequency
+     - Reminder methods (email, SMS, app)
+     - Time zone settings
+
+---
+
+Summary:
+- Medication Management: Add and manage medications with dose scheduling.
+- Adherence Tracking: Track adherence to the medication schedule with reports and insights.
+- Reminders and Check-ins: Receive reminders to take medication and check in to confirm compliance.
+- Profile & Settings: Manage personal details, medical information, and app settings.
+
+
+===========================about database=============================
+===========================database tables=============================
+
+1. Users Table
+   - Stores patient or user information, including their personal details and credentials.
+
+   ```sql
+   CREATE TABLE Users (
+       UserID INT PRIMARY KEY IDENTITY(1,1),
+       Name NVARCHAR(100) NOT NULL,
+       Email NVARCHAR(100) UNIQUE NOT NULL,
+       PasswordHash NVARCHAR(256) NOT NULL,
+       DateOfBirth DATE,
+       MedicalHistory NVARCHAR(MAX),
+       CreatedAt DATETIME DEFAULT GETDATE(),
+       UpdatedAt DATETIME
+   );
+   ```
+
+2. Medications Table
+   - Stores information about each medication that the patient is taking.
+
+   ```sql
+   CREATE TABLE Medications (
+       MedicationID INT PRIMARY KEY IDENTITY(1,1),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       MedicationName NVARCHAR(100) NOT NULL,
+       Dosage NVARCHAR(50) NOT NULL,
+       Frequency NVARCHAR(50) NOT NULL,  -- e.g., 'Once a day', 'Twice a day'
+       StartDate DATE NOT NULL,
+       EndDate DATE,
+       CreatedAt DATETIME DEFAULT GETDATE(),
+       UpdatedAt DATETIME
+   );
+   ```
+
+3. MedicationSchedules Table
+   - Stores the schedule for when each medication should be taken.
+
+   ```sql
+   CREATE TABLE MedicationSchedules (
+       ScheduleID INT PRIMARY KEY IDENTITY(1,1),
+       MedicationID INT FOREIGN KEY REFERENCES Medications(MedicationID),
+       ScheduledTime DATETIME NOT NULL,
+       Status NVARCHAR(20) DEFAULT 'Pending',  -- e.g., 'Pending', 'Taken', 'Missed'
+       CreatedAt DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+4. CheckIns Table
+   - Stores patient check-ins to confirm that they have taken their medication.
+
+   ```sql
+   CREATE TABLE CheckIns (
+       CheckInID INT PRIMARY KEY IDENTITY(1,1),
+       ScheduleID INT FOREIGN KEY REFERENCES MedicationSchedules(ScheduleID),
+       CheckInTime DATETIME NOT NULL,
+       AdherenceStatus NVARCHAR(20) NOT NULL,  -- e.g., 'Taken', 'Missed'
+       SideEffects NVARCHAR(MAX),
+       CreatedAt DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+5. Reminders Table
+   - Stores reminder notifications that have been sent to the patient.
+
+   ```sql
+   CREATE TABLE Reminders (
+       ReminderID INT PRIMARY KEY IDENTITY(1,1),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       ScheduleID INT FOREIGN KEY REFERENCES MedicationSchedules(ScheduleID),
+       ReminderTime DATETIME NOT NULL,
+       Message NVARCHAR(255) NOT NULL,
+       Status NVARCHAR(20) DEFAULT 'Sent',  -- e.g., 'Sent', 'Delivered', 'Read'
+       CreatedAt DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+6. Notifications Table
+   - Stores general notifications sent to patients, such as adherence reports or messages from doctors.
+
+   ```sql
+   CREATE TABLE Notifications (
+       NotificationID INT PRIMARY KEY IDENTITY(1,1),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       NotificationType NVARCHAR(50) NOT NULL,  -- e.g., 'Adherence Report', 'Message from Doctor'
+       Message NVARCHAR(MAX) NOT NULL,
+       SentAt DATETIME DEFAULT GETDATE(),
+       Status NVARCHAR(20) DEFAULT 'Unread'  -- e.g., 'Unread', 'Read'
+   );
+   ```
+
+7. Goals Table (Optional)
+   - Stores medication adherence goals for the patient, such as a target adherence percentage.
+
+   ```sql
+   CREATE TABLE Goals (
+       GoalID INT PRIMARY KEY IDENTITY(1,1),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       GoalType NVARCHAR(100) NOT NULL,  -- e.g., 'Adherence Goal'
+       TargetValue INT NOT NULL,  -- e.g., 90% adherence target
+       StartDate DATE NOT NULL,
+       EndDate DATE,
+       Status NVARCHAR(20) DEFAULT 'Active',  -- e.g., 'Active', 'Achieved'
+       CreatedAt DATETIME DEFAULT GETDATE(),
+       UpdatedAt DATETIME
+   );
+   ```
+
+8. Doctors Table (Optional)
+   - Stores information about doctors or pharmacists who may monitor the patient’s adherence.
+
+   ```sql
+   CREATE TABLE Doctors (
+       DoctorID INT PRIMARY KEY IDENTITY(1,1),
+       Name NVARCHAR(100) NOT NULL,
+       Specialization NVARCHAR(100),
+       ContactInfo NVARCHAR(255),
+       CreatedAt DATETIME DEFAULT GETDATE(),
+       UpdatedAt DATETIME
+   );
+   ```
+
+9. Doctor_Patient Table (Optional)
+   - Stores the relationships between patients and their assigned doctors.
+
+   ```sql
+   CREATE TABLE Doctor_Patient (
+       DoctorPatientID INT PRIMARY KEY IDENTITY(1,1),
+       DoctorID INT FOREIGN KEY REFERENCES Doctors(DoctorID),
+       UserID INT FOREIGN KEY REFERENCES Users(UserID),
+       AssignedAt DATETIME DEFAULT GETDATE()
+   );
+   ```
+
+---
+
+Relationships:
+- Users: Patients are stored here, and each patient can have multiple medications.
+- Medications: Each medication is associated with a user, and each medication has its schedule.
+- MedicationSchedules: Specifies when each medication dose is scheduled.
+- CheckIns: Stores patient check-ins for each scheduled dose to track adherence.
+- Reminders: Sends reminders based on the medication schedule.
+- Notifications: Stores alerts and other notifications for patients.
+- Doctors: Doctors can be associated with patients (optional), and may monitor medication adherence.
+
+
+
+Overview of the ER (Entity-Relationship) Diagram 
+for the Medication Adherence Tracker application. 
+This provides a conceptual understanding of the relationships 
+between various entities in the SQL Server database schema.
+
+Entities and Relationships:
+
+1. Users  
+   - Attributes: `UserID`, `Name`, `Email`, `PasswordHash`, `DateOfBirth`, `MedicalHistory`, `CreatedAt`, `UpdatedAt`
+   - Relationship: A user can have multiple medications.
+
+2. Medications  
+   - Attributes: `MedicationID`, `UserID`, `MedicationName`, `Dosage`, `Frequency`, `StartDate`, `EndDate`, `CreatedAt`, `UpdatedAt`
+   - Relationship: Each medication belongs to a user. A medication can have multiple schedules.
+
+3. MedicationSchedules  
+   - Attributes: `ScheduleID`, `MedicationID`, `ScheduledTime`, `Status`, `CreatedAt`
+   - Relationship: Each schedule belongs to a medication. A schedule can have one or more check-ins.
+
+4. CheckIns  
+   - Attributes: `CheckInID`, `ScheduleID`, `CheckInTime`, `AdherenceStatus`, `SideEffects`, `CreatedAt`
+   - Relationship: Each check-in belongs to a medication schedule.
+
+5. Reminders  
+   - Attributes: `ReminderID`, `UserID`, `ScheduleID`, `ReminderTime`, `Message`, `Status`, `CreatedAt`
+   - Relationship: Each reminder is associated with a user and a schedule.
+
+6. Notifications  
+   - Attributes: `NotificationID`, `UserID`, `NotificationType`, `Message`, `SentAt`, `Status`
+   - Relationship: Each notification is sent to a user.
+
+7. Goals (Optional)  
+   - Attributes: `GoalID`, `UserID`, `GoalType`, `TargetValue`, `StartDate`, `EndDate`, `Status`, `CreatedAt`, `UpdatedAt`
+   - Relationship: Each goal belongs to a user.
+
+8. Doctors (Optional)  
+   - Attributes: `DoctorID`, `Name`, `Specialization`, `ContactInfo`, `CreatedAt`, `UpdatedAt`
+   - Relationship: Each doctor can be assigned to multiple patients.
+
+9. Doctor_Patient (Optional)  
+   - Attributes: `DoctorPatientID`, `DoctorID`, `UserID`, `AssignedAt`
+   - Relationship: Associates doctors with patients. Each doctor can monitor multiple patients, and each patient can have multiple doctors.
+
+---
+
+Key Relationships:
+- Users to Medications: A user can have many medications (1-to-many).
+- Medications to MedicationSchedules: A medication can have many scheduled doses (1-to-many).
+- MedicationSchedules to CheckIns: A schedule can have multiple check-ins (1-to-many).
+- Users to Reminders: A user can receive multiple reminders (1-to-many).
+- Users to Notifications: A user can receive multiple notifications (1-to-many).
+- Users to Goals: A user can set multiple goals (1-to-many).
+- Doctors to Patients: A doctor can be linked to multiple patients, and each patient can have multiple doctors (many-to-many via the `Doctor_Patient` table).
+
+---
+
+ER Diagram Structure (Summary):
+- Users (1) → (M) Medications
+- Medications (1) → (M) MedicationSchedules
+- MedicationSchedules (1) → (M) CheckIns
+- Users (1) → (M) Reminders
+- Users (1) → (M) Notifications
+- Users (1) → (M) Goals
+- Doctors (1) → (M) Doctor_Patient ← Users (M)
+===========================SQL planner for each page=============================
+
+
+1. User Registration Page
+   - Function: Register a new user.
+   - SQL: Insert a new user into the `Users` table.
+
+   ```sql
+   INSERT INTO Users (Name, Email, PasswordHash, DateOfBirth, MedicalHistory, CreatedAt)
+   VALUES ('John Doe', 'john.doe@example.com', HASHBYTES('SHA2_256', 'password123'), '1980-05-15', 'Hypertension', GETDATE());
+   ```
+
+---
+
+2. User Login Page
+   - Function: Authenticate a user by email and password.
+   - SQL: Select user data based on credentials.
+
+   ```sql
+   SELECT UserID, Name, Email, DateOfBirth, MedicalHistory
+   FROM Users
+   WHERE Email = 'john.doe@example.com'
+   AND PasswordHash = HASHBYTES('SHA2_256', 'password123');
+   ```
+
+---
+
+3. Dashboard Page
+   - Function: Display an overview of the user’s medications and reminders.
+   - SQL: Fetch all medications and reminders for the logged-in user.
+
+   ```sql
+   SELECT M.MedicationID, M.MedicationName, M.Dosage, M.Frequency, M.StartDate, M.EndDate
+   FROM Medications M
+   WHERE M.UserID = @UserID;
+
+   SELECT R.ReminderID, R.ReminderTime, R.Message, R.Status
+   FROM Reminders R
+   WHERE R.UserID = @UserID
+   AND R.Status = 'Pending';
+   ```
+
+---
+
+4. Add New Medication Page
+   - Function: Add a new medication to the user’s account.
+   - SQL: Insert a new record into the `Medications` table.
+
+   ```sql
+   INSERT INTO Medications (UserID, MedicationName, Dosage, Frequency, StartDate, EndDate, CreatedAt)
+   VALUES (@UserID, 'Aspirin', '100 mg', 'Once a day', '2024-01-01', '2024-12-31', GETDATE());
+   ```
+
+---
+
+5. View Medication Schedule Page
+   - Function: Display the medication schedule for a specific medication.
+   - SQL: Retrieve all scheduled doses for the selected medication.
+
+   ```sql
+   SELECT ScheduleID, ScheduledTime, Status
+   FROM MedicationSchedules
+   WHERE MedicationID = @MedicationID
+   ORDER BY ScheduledTime ASC;
+   ```
+
+---
+
+6. Check-In Page
+   - Function: Patient checks in to confirm they’ve taken their medication.
+   - SQL: Update the status of a scheduled dose and insert a new record in the `CheckIns` table.
+
+   ```sql
+   UPDATE MedicationSchedules
+   SET Status = 'Taken'
+   WHERE ScheduleID = @ScheduleID;
+
+   INSERT INTO CheckIns (ScheduleID, CheckInTime, AdherenceStatus, SideEffects, CreatedAt)
+   VALUES (@ScheduleID, GETDATE(), 'Taken', 'No side effects', GETDATE());
+   ```
+
+---
+
+7. Reminders Page
+   - Function: Display all reminders for the user.
+   - SQL: Select reminders for the user.
+
+   ```sql
+   SELECT ReminderID, ReminderTime, Message, Status
+   FROM Reminders
+   WHERE UserID = @UserID
+   ORDER BY ReminderTime ASC;
+   ```
+
+---
+
+8. Add Reminder Page
+   - Function: Add a reminder for a specific medication schedule.
+   - SQL: Insert a new reminder into the `Reminders` table.
+
+   ```sql
+   INSERT INTO Reminders (UserID, ScheduleID, ReminderTime, Message, Status, CreatedAt)
+   VALUES (@UserID, @ScheduleID, '2024-09-24 09:00', 'Time to take your medication', 'Sent', GETDATE());
+   ```
+
+---
+
+9. Notifications Page
+   - Function: Display notifications for the user.
+   - SQL: Retrieve all unread notifications for the user.
+
+   ```sql
+   SELECT NotificationID, NotificationType, Message, SentAt, Status
+   FROM Notifications
+   WHERE UserID = @UserID
+   AND Status = 'Unread'
+   ORDER BY SentAt DESC;
+   ```
+
+---
+
+10. Medication Adherence Report Page
+   - Function: Generate an adherence report for the patient based on check-ins.
+   - SQL: Fetch adherence data for all medications and check-ins.
+
+   ```sql
+   SELECT M.MedicationName, COUNT(C.CheckInID) AS TotalCheckIns, 
+          SUM(CASE WHEN C.AdherenceStatus = 'Taken' THEN 1 ELSE 0 END) AS DosesTaken
+   FROM Medications M
+   INNER JOIN MedicationSchedules MS ON M.MedicationID = MS.MedicationID
+   LEFT JOIN CheckIns C ON MS.ScheduleID = C.ScheduleID
+   WHERE M.UserID = @UserID
+   GROUP BY M.MedicationName;
+   ```
+
+---
+
+11. Set Adherence Goal Page
+   - Function: Set a medication adherence goal.
+   - SQL: Insert a new goal into the `Goals` table.
+
+   ```sql
+   INSERT INTO Goals (UserID, GoalType, TargetValue, StartDate, EndDate, Status, CreatedAt)
+   VALUES (@UserID, 'Adherence Goal', 90, '2024-09-01', '2024-12-31', 'Active', GETDATE());
+   ```
+
+---
+
+12. Doctor Monitoring Page (Optional)
+   - Function: Display medications and adherence for patients assigned to a doctor.
+   - SQL: Retrieve medication adherence for each patient under the doctor’s care.
+
+   ```sql
+   SELECT U.Name AS PatientName, M.MedicationName, COUNT(C.CheckInID) AS TotalCheckIns, 
+          SUM(CASE WHEN C.AdherenceStatus = 'Taken' THEN 1 ELSE 0 END) AS DosesTaken
+   FROM Doctor_Patient DP
+   INNER JOIN Users U ON DP.UserID = U.UserID
+   INNER JOIN Medications M ON U.UserID = M.UserID
+   INNER JOIN MedicationSchedules MS ON M.MedicationID = MS.MedicationID
+   LEFT JOIN CheckIns C ON MS.ScheduleID = C.ScheduleID
+   WHERE DP.DoctorID = @DoctorID
+   GROUP BY U.Name, M.MedicationName;
+   ```

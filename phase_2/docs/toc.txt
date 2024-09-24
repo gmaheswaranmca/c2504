@@ -188,3 +188,5 @@ Windows Presentation Foundation
 			c.	Consuming RESTful services in a WPF application.
 			d.	Utilizing WPF in a front-end microservices architecture.
 			e.	Demonstrating practical examples of WPF and local RESTful service integration.
+
+
