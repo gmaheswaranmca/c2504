@@ -1,0 +1,13 @@
+SqureCalcForm 
+    - Text: Square Calc
+    - WindowState: Maximized
+    - Font: Verdana Regular 12pt 
+
+    +
+        Label : 
+            Name: lblTitle 
+            AutoSize: False 
+            Dock: Top 
+            Text: Square Calc 
+            Font: ***** Bold 28pt
+            TextAlign: Top Center

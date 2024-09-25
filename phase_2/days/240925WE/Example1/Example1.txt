@@ -1,0 +1,17 @@
+Master Document : MainPageForm  
+    - SumCalcForm 
+    - SquareCalcForm 
+    - SalaryPage
+    - ContactListPage
+        - ContactCreateForm 
+        - ContactEditForm 
+----------------------------------------------------------------------------
+MDI 
+    Multi Document Interface 
+SDI 
+    Single Document Interface 
+----------------------------------------------------------------------------
+
+                    
+
+    

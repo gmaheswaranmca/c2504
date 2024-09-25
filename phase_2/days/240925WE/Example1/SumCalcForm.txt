@@ -1,0 +1,52 @@
+SumCalcForm 
+    - Text: Sum Calc
+    - WindowState: Maximized
+    - Font: Verdana Regular 12pt 
+
+    +
+        Label : 
+            Name: lblTitle 
+            AutoSize: False 
+            Dock: Top 
+            Text: Sum Calc 
+            Font: ***** Bold 28pt
+            TextAlign: Top Center 
+        Label TextBox 
+        Label TextBox 
+        Label TextBox 
+                Button 
+
+            All textboxes and button 
+                - Align Left 
+                - Make Vertical Spacing Equal 
+                - Make Same Width 
+            TextBox1 and Label1 
+            TextBox2 and Label2 
+            TextBox3 and Label3 
+                - Align Middle 
+            Label1 Label2 Labe3 
+                - Align Left 
+            Button1
+                - Height Required 
+
+        Label1 
+            -Name: lblNumber1
+            -Text: Number 1
+        TextBox1 
+            -Name: txtNumber1
+        Label2 
+            -Name: lblNumber2
+            -Text: Number 2
+        TextBox2 
+            -Name: txtNumber2
+        Label3
+            -Name: lblSum
+            -Text: Sum
+        TextBox3 
+            -Name: txtSum
+            -ReadOnly: True 
+        Button1
+            -Name: btnFindSum
+            -Text: Find Sum 
+                
+    

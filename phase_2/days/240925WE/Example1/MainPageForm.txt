@@ -1,0 +1,225 @@
+MainPageForm
+    Form1   is renamed as "MainPageForm"
+    MainPageForm
+        - Text: Example 1 App 
+        - IsMdiContainer: True 
+        - WindowState: Maximized 
+
+        + 
+            MenuStrip 
+                Calculator      Salary      Contact 
+                    Sum Calculator              Contact List 
+                    ------------------          New Contact 
+                    Square Calculator 
+            MenuStrip 
+                Name: mnuBar 
+            Calculator: 
+                Name: mnuCalc
+                + Sum Calculator:
+                    Name: mnuSumCalc
+                + Divider 
+                    Name: mnudCalc1
+                + Square Calculator: 
+                    Name: mnuSquareCalc
+            Salary:
+                Name: mnuSalary 
+            Contact: 
+                Name: mnuContact
+                + Contact List : 
+                    Name: mnuContactList 
+                + New Contact: 
+                    Name: mnuNewContact 
+
+MainPageForm.cs
+```
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Example1Project
+{
+    public partial class MainPageForm : Form
+    {
+        public MainPageForm()
+        {
+            InitializeComponent();
+        }
+        private SumCalcForm frmSumCalc = new SumCalcForm();
+        private SquareCalcForm frmSquareCalc = new SquareCalcForm();
+        private SalaryPage frmSalary = new SalaryPage();
+        private void mnuSumCalc_Click(object sender, EventArgs e)
+        {
+            frmSumCalc.MdiParent = this;
+            frmSumCalc.Show();
+            frmSumCalc.Activate();
+        }
+
+        private void mnuSquareCalc_Click(object sender, EventArgs e)
+        {
+            frmSquareCalc.MdiParent = this;
+            frmSquareCalc.Show();
+            frmSquareCalc.Activate();
+        }
+
+        private void mnuSalary_Click(object sender, EventArgs e)
+        {
+            frmSalary.MdiParent = this;
+            frmSalary.Show();
+            frmSalary.Activate();
+        }
+    }
+}
+```
+
+
+MainPageForm.Designer.cs
+```
+namespace Example1Project
+{
+    partial class MainPageForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mnuCalc = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSumCalc = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnudCalc1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuSquareCalc = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSalary = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuContactList = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNewContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuCalc,
+            this.mnuSalary,
+            this.mnuContact});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "mnuBar";
+            // 
+            // mnuCalc
+            // 
+            this.mnuCalc.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSumCalc,
+            this.mnudCalc1,
+            this.mnuSquareCalc});
+            this.mnuCalc.Name = "mnuCalc";
+            this.mnuCalc.Size = new System.Drawing.Size(73, 20);
+            this.mnuCalc.Text = "&Calculator";
+            // 
+            // mnuSumCalc
+            // 
+            this.mnuSumCalc.Name = "mnuSumCalc";
+            this.mnuSumCalc.Size = new System.Drawing.Size(180, 22);
+            this.mnuSumCalc.Text = "&Sum Calculator";
+            this.mnuSumCalc.Click += new System.EventHandler(this.mnuSumCalc_Click);
+            // 
+            // mnudCalc1
+            // 
+            this.mnudCalc1.Name = "mnudCalc1";
+            this.mnudCalc1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // mnuSquareCalc
+            // 
+            this.mnuSquareCalc.Name = "mnuSquareCalc";
+            this.mnuSquareCalc.Size = new System.Drawing.Size(180, 22);
+            this.mnuSquareCalc.Text = "S&quare Calculator";
+            this.mnuSquareCalc.Click += new System.EventHandler(this.mnuSquareCalc_Click);
+            // 
+            // mnuSalary
+            // 
+            this.mnuSalary.Name = "mnuSalary";
+            this.mnuSalary.Size = new System.Drawing.Size(50, 20);
+            this.mnuSalary.Text = "&Salary";
+            this.mnuSalary.Click += new System.EventHandler(this.mnuSalary_Click);
+            // 
+            // mnuContact
+            // 
+            this.mnuContact.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuContactList,
+            this.mnuNewContact});
+            this.mnuContact.Name = "mnuContact";
+            this.mnuContact.Size = new System.Drawing.Size(61, 20);
+            this.mnuContact.Text = "C&ontact";
+            // 
+            // mnuContactList
+            // 
+            this.mnuContactList.Name = "mnuContactList";
+            this.mnuContactList.Size = new System.Drawing.Size(143, 22);
+            this.mnuContactList.Text = "&Contact List";
+            // 
+            // mnuNewContact
+            // 
+            this.mnuNewContact.Name = "mnuNewContact";
+            this.mnuNewContact.Size = new System.Drawing.Size(143, 22);
+            this.mnuNewContact.Text = "&New Contact";
+            // 
+            // MainPageForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "MainPageForm";
+            this.Text = "Example 1 App";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mnuCalc;
+        private System.Windows.Forms.ToolStripMenuItem mnuSumCalc;
+        private System.Windows.Forms.ToolStripSeparator mnudCalc1;
+        private System.Windows.Forms.ToolStripMenuItem mnuSquareCalc;
+        private System.Windows.Forms.ToolStripMenuItem mnuSalary;
+        private System.Windows.Forms.ToolStripMenuItem mnuContact;
+        private System.Windows.Forms.ToolStripMenuItem mnuContactList;
+        private System.Windows.Forms.ToolStripMenuItem mnuNewContact;
+    }
+}
+```
