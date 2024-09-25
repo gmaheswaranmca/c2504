@@ -1,0 +1,22 @@
+1. Salary Page 
+    Job Title 
+        Title 
+        Salary 
+    Add Edit Delete 
+        CRUD ops 
+    
+    Image on Action ie Button 
+    DataGridView 
+    ComboBox 
+    ListBox 
+
+2. TextArea 
+    Multi line text 
+
+    dialog boxes 
+
+    tool bar 
+    menu bar 
+    status bar 
+
+    
