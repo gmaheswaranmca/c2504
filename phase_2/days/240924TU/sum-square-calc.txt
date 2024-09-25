@@ -1,0 +1,419 @@
+frmSumCalc.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace DesignProject
+{
+    public partial class frmSumCalc : Form
+    {
+        public frmSumCalc()
+        {
+            InitializeComponent();
+        }
+        private bool IsNum(string numStr)
+        {
+            try
+            {
+                int.Parse(numStr);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        private void btnFindSum_Click(object sender, EventArgs e)
+        {
+            if(!IsNum(txtNumber1.Text))
+            {
+                MessageBox.Show("Number 1 is not a number");
+                txtNumber1.Focus();
+                txtNumber1.SelectAll();
+                return;
+            }
+            if (!IsNum(txtNumber2.Text))
+            {
+                MessageBox.Show("Number 2 is not a number");
+                txtNumber2.Focus();
+                txtNumber2.SelectAll();
+                return;
+            }
+
+            int number1 = int.Parse(txtNumber1.Text);
+            int number2 = int.Parse(txtNumber2.Text);
+            int sum = number1 + number2;
+            txtSum.Text = sum.ToString();
+        }
+    }
+}
+
+```
+
+frmSquareCalc.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace DesignProject
+{
+    public partial class frmSquareCalc : Form
+    {
+        public frmSquareCalc()
+        {
+            InitializeComponent();
+        }
+        private bool IsNum(string numStr)
+        {
+            try
+            {
+                int.Parse(numStr);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        private void btnFindSquare_Click(object sender, EventArgs e)
+        {
+            if (!IsNum(txtNumber.Text))
+            {
+                MessageBox.Show("Please enter number only.");
+                txtNumber.Focus();
+                txtNumber.SelectAll();
+                return;
+            }
+            int number = int.Parse(txtNumber.Text);
+            int square = (int)Math.Pow(number, 2);
+            txtSquare.Text = square.ToString();
+        }
+    }
+}
+
+```
+
+
+Program.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace DesignProject
+{
+    internal static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmSquareCalc());
+        }
+    }
+}
+```
+
+frmSumCalc.Designer.cs 
+```
+namespace DesignProject
+{
+    partial class frmSumCalc
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtNumber1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNumber2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSum = new System.Windows.Forms.TextBox();
+            this.btnFindSum = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Verdana", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(757, 61);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Sum Calculator";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(197, 117);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 18);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Number 1";
+            // 
+            // txtNumber1
+            // 
+            this.txtNumber1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNumber1.Location = new System.Drawing.Point(295, 117);
+            this.txtNumber1.Name = "txtNumber1";
+            this.txtNumber1.Size = new System.Drawing.Size(254, 27);
+            this.txtNumber1.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(197, 195);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 18);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Number 2";
+            // 
+            // txtNumber2
+            // 
+            this.txtNumber2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNumber2.Location = new System.Drawing.Point(295, 195);
+            this.txtNumber2.Name = "txtNumber2";
+            this.txtNumber2.Size = new System.Drawing.Size(254, 27);
+            this.txtNumber2.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(197, 273);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 18);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Sum";
+            // 
+            // txtSum
+            // 
+            this.txtSum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSum.Location = new System.Drawing.Point(295, 273);
+            this.txtSum.Name = "txtSum";
+            this.txtSum.ReadOnly = true;
+            this.txtSum.Size = new System.Drawing.Size(254, 27);
+            this.txtSum.TabIndex = 6;
+            // 
+            // btnFindSum
+            // 
+            this.btnFindSum.Location = new System.Drawing.Point(295, 329);
+            this.btnFindSum.Name = "btnFindSum";
+            this.btnFindSum.Size = new System.Drawing.Size(254, 43);
+            this.btnFindSum.TabIndex = 7;
+            this.btnFindSum.Text = "Find Sum";
+            this.btnFindSum.UseVisualStyleBackColor = true;
+            this.btnFindSum.Click += new System.EventHandler(this.btnFindSum_Click);
+            // 
+            // frmSumCalc
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(757, 457);
+            this.Controls.Add(this.btnFindSum);
+            this.Controls.Add(this.txtSum);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtNumber2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtNumber1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Name = "frmSumCalc";
+            this.Text = "Sum Calculator";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtNumber1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtNumber2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtSum;
+        private System.Windows.Forms.Button btnFindSum;
+    }
+}
+```
+
+
+frmSquareCalc.Designer.cs 
+```
+namespace DesignProject
+{
+    partial class frmSquareCalc
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btnFindSquare = new System.Windows.Forms.Button();
+            this.txtSquare = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // btnFindSquare
+            // 
+            this.btnFindSquare.Location = new System.Drawing.Point(295, 294);
+            this.btnFindSquare.Name = "btnFindSquare";
+            this.btnFindSquare.Size = new System.Drawing.Size(254, 43);
+            this.btnFindSquare.TabIndex = 15;
+            this.btnFindSquare.Text = "Find Square";
+            this.btnFindSquare.UseVisualStyleBackColor = true;
+            this.btnFindSquare.Click += new System.EventHandler(this.btnFindSquare_Click);
+            // 
+            // txtSquare
+            // 
+            this.txtSquare.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSquare.Location = new System.Drawing.Point(295, 238);
+            this.txtSquare.Name = "txtSquare";
+            this.txtSquare.ReadOnly = true;
+            this.txtSquare.Size = new System.Drawing.Size(254, 27);
+            this.txtSquare.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(197, 238);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 18);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Square";
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNumber.Location = new System.Drawing.Point(295, 173);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(254, 27);
+            this.txtNumber.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(197, 173);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 18);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Number";
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Verdana", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(676, 61);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Square Calculator";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // frmSquareCalc
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(676, 485);
+            this.Controls.Add(this.btnFindSquare);
+            this.Controls.Add(this.txtSquare);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Name = "frmSquareCalc";
+            this.Text = "Square Calculator";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnFindSquare;
+        private System.Windows.Forms.TextBox txtSquare;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+    }
+}
+```

@@ -1,4 +1,4 @@
-24/09/2024 Tue monring: 
+25/09/2024 Wed monring: 
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
 [  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
 [  ]Anjana E R, 		[  ]Anjana N K,
@@ -11,7 +11,27 @@
 [  ]Rishwin R Kanth,	[  ]Sahla. R, 			
 [  ]Sharon Rose, 		[  ]Yahkoob P, 
 
-10:12am : team meeting
+
+Ashwin, Keerthana,
+Anurag, Anugrah, Aaryaka, Gopika 
+Minnu
+
+24/09/2024 Tue monring/evening: 
+[  ]Aaryaka P Nath, 	[  ]Abijith K, 			
+[  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
+[  ]Anjana E R, 		[  ]Anjana N K,
+[  ]Ann Mariya Jaimon, 	[  ]Anugrah Krishnan, 	 					
+[  ]Ashna Mariya Shaji, [  ]Ashwin V, 			
+[  ]Collin Francy, 		[  ]Dijol Davis,	    		    
+[  ]Gladsy Joshy,	    [  ]Girish K V, 
+[  ]Gopika V, 	        [  ]Keerthana Jayalal K		
+[  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
+[  ]Rishwin R Kanth,	[  ]Sahla. R, 			
+[  ]Sharon Rose, 		[  ]Yahkoob P, 
+
+10:12am : team meeting 
+ended at : noon 3:45pm
+Installations of packages in VS happened.
 
 23/09/2024 Mon monring + evening: 
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
