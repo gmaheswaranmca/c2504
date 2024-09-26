@@ -1,45 +1,79 @@
 Digital Twin Visualization for Product Design  
-   This project focuses on developing a digital twin framework for product design that allows engineers to create a virtual representation of physical products. By simulating real-world conditions, users can analyze performance, conduct tests, and make data-driven design decisions. The project will leverage SQL Server to store design specifications and simulation results.
+   This project focuses on developing a digital twin framework 
+   for product design that allows engineers 
+   to create a virtual representation of physical products. 
+   By simulating real-world conditions, 
+   users can analyze performance, conduct tests, and 
+   make data-driven design decisions. 
+   The project will leverage SQL Server 
+   to store design specifications and simulation results.
 
 ===========================abstract=============================
 Abstract Statement for the Digital Twin Visualization for Product Design App
 
-The Digital Twin Visualization for Product Design application aims to revolutionize product development by providing engineers with an advanced platform to create, simulate, and analyze virtual representations of physical products. By leveraging the power of SQL Server for data storage and analytics, this application allows users to design digital twins that accurately reflect real-world conditions. Engineers can run simulations, monitor performance metrics, and conduct iterative design modifications based on data-driven insights. The collaborative features enable teams to share feedback and insights, fostering innovation and improving product quality. Ultimately, this application streamlines the product design process, reduces development time, and enhances decision-making through effective visualization and analysis of complex design data.
+The Digital Twin Visualization for Product Design application aims 
+to revolutionize product development by providing engineers 
+with an advanced platform 
+to create, simulate, and analyze virtual representations of physical products. 
+By leveraging the power of SQL Server for data storage and analytics, 
+this application allows users to design digital twins 
+that accurately reflect real-world conditions. 
+Engineers can run simulations, monitor performance metrics, and 
+conduct iterative design modifications based on data-driven insights. 
+The collaborative features enable teams to share feedback and insights, 
+fostering innovation and improving product quality. Ultimately, 
+this application streamlines the product design process, 
+reduces development time, and enhances decision-making 
+through effective visualization and analysis of complex design data.
 ===========================app=============================
 
 1. Home Dashboard
    - Functionality: 
-     - Provide an overview of all digital twins created for various products.
-     - Display key metrics such as active simulations, performance indicators, and recent updates.
+     - Provide an overview of all digital twins created 
+     for various products.
+     - Display key metrics such as active simulations, 
+     performance indicators, and recent updates.
 
 2. Digital Twin Creation Page
    - Functionality: 
-     - Allow users to create a new digital twin by inputting design specifications and parameters.
-     - Provide options to upload 3D models and define simulation conditions (e.g., material properties, environmental factors).
+     - Allow users to create a new digital twin 
+     by inputting design specifications and parameters.
+     - Provide options to upload 3D models and 
+     define simulation conditions (e.g., material properties, environmental factors).
 
 3. Simulation Management Page
    - Functionality: 
-     - Display a list of existing simulations and their statuses (e.g., running, completed, failed).
-     - Allow users to start, pause, or stop simulations, as well as review logs and results.
+     - Display a list of existing simulations and their statuses 
+     (e.g., running, completed, failed).
+     - Allow users to start, pause, or stop simulations, 
+     as well as review logs and results.
 
 4. Performance Analysis Page
    - Functionality: 
-     - Visualize simulation results through interactive graphs, charts, and 3D renderings.
-     - Provide tools for detailed analysis of performance metrics, including stress tests, thermal analysis, and flow simulations.
+     - Visualize simulation results through 
+     interactive graphs, charts, and 3D renderings.
+     - Provide tools for detailed analysis of performance metrics, 
+     including stress tests, thermal analysis, and flow simulations.
 
 5. Design Iteration Page
    - Functionality: 
-     - Enable users to make adjustments to the product design based on simulation results.
-     - Allow for version control and comparison between different design iterations.
+     - Enable users to make adjustments to the product design 
+     based on simulation results.
+     - Allow for version control and comparison 
+     between different design iterations.
 
 6. Data Management Page
    - Functionality: 
-     - Provide access to stored design specifications, simulation parameters, and results in SQL Server.
-     - Allow users to search, filter, and export data for reporting purposes.
+     - Provide access to stored design specifications, 
+     simulation parameters, and results in SQL Server.
+     - Allow users to search, filter, and 
+     export data for reporting purposes.
 
 7. Collaboration Page
    - Functionality: 
-     - Facilitate collaboration among team members by allowing users to share digital twin projects and simulation results.
+     - Facilitate collaboration among team members 
+     by allowing users 
+     to share digital twin projects and simulation results.
      - Provide comments and feedback features for team discussions.
 
 8. User Management Page
@@ -49,12 +83,16 @@ The Digital Twin Visualization for Product Design application aims to revolution
 
 9. Settings Page
    - Functionality: 
-     - Provide options for configuring system settings, including simulation parameters and notification preferences.
-     - Allow users to set preferences for data visualization and reporting formats.
+     - Provide options for configuring system settings, 
+     including simulation parameters and notification preferences.
+     - Allow users to set preferences 
+     for data visualization and reporting formats.
 
 10. Help and Support Page
    - Functionality: 
-     - Offer FAQs, guides, and tutorials for users to understand the digital twin framework and how to use the application effectively.
+     - Offer FAQs, guides, and tutorials for users 
+     to understand the digital twin framework and 
+     how to use the application effectively.
      - Provide contact information for technical support.
 
 11. Feedback Page

@@ -1,0 +1,12 @@
+Editor 
+    Text Area 
+        - apply fore color 
+        - appy back color 
+        - apply font 
+        - save to file 
+        - open from file
+        - apply alignment 
+
+============================================================
+    Text File (*.txt) | JSON File (*.json) 
+============================================================

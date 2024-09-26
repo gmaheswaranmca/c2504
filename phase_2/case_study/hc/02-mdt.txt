@@ -10,78 +10,115 @@
 ===========================abstract=============================
 Abstract Statement for the Medication Adherence Tracker App
 
-The Medication Adherence Tracker is a healthcare application designed to improve patient compliance with prescribed medication regimens. The system enables patients to manage their medications effectively by providing features such as automated reminders, medication schedules, and adherence tracking. Through regular check-ins and notifications, the app ensures that patients take their medications on time, reducing the risk of missed doses. 
+The Medication Adherence Tracker is 
+a healthcare application designed 
+to improve patient compliance with prescribed medication regimens. 
+The system enables patients to manage their medications effectively 
+by providing features such as automated reminders, medication schedules, and 
+adherence tracking. Through regular check-ins and notifications, 
+the app ensures that patients take their medications on time, 
+reducing the risk of missed doses. 
 
-The app also generates detailed adherence reports, allowing both patients and healthcare providers to monitor treatment progress. Optional features include goal setting for medication adherence and doctor-patient interaction, where healthcare professionals can track and support patient adherence in real-time. By offering a streamlined, user-friendly platform, the Medication Adherence Tracker aims to enhance overall health outcomes, improve communication between patients and doctors, and promote better medication management practices.
+The app also generates detailed adherence reports, 
+allowing both patients and healthcare providers 
+to monitor treatment progress. Optional features 
+include goal setting for medication adherence and 
+doctor-patient interaction, where healthcare professionals 
+can track and support patient adherence in real-time. 
+By offering a streamlined, user-friendly platform, 
+the Medication Adherence Tracker aims 
+to enhance overall health outcomes, 
+improve communication between patients and doctors, and 
+promote better medication management practices.
 
-The system integrates modern technologies and databases, leveraging WPF, C# and SQL Server as stack for robust data handling, while providing secure and efficient user interactions.
+The system integrates modern technologies and databases, 
+leveraging WPF, C# and SQL Server as stack for robust data handling, 
+while providing secure and efficient user interactions.
 ===========================pages=============================
 1. Sign Up / Registration Page
-   - Purpose: Allows new patients to register and create an account by providing necessary information such as name, email, password, and medical details.
+   - Purpose: Allows new patients to register and create an account 
+   by providing necessary information 
+   such as name, email, password, and medical details.
    - Key Fields:
      - Name, Email, Password, Date of Birth, Medical History
 
 2. Login Page
-   - Purpose: Allows registered patients to log in to the application by entering their email and password.
+   - Purpose: Allows registered patients to log in 
+   to the application by entering their email and password.
    - Key Fields:
      - Email, Password
 
 3. Dashboard Page
-   - Purpose: Provides an overview of the patient's medication schedule, adherence status, upcoming doses, and notifications.
+   - Purpose: Provides an overview of the patient's medication schedule, 
+   adherence status, upcoming doses, and notifications.
    - Components:
      - Daily medication schedule
      - Adherence percentage
      - Recent and upcoming reminders
 
 4. Add Medication Page
-   - Purpose: Allows the patient to add new medications to their schedule, including dose, frequency, and duration.
+   - Purpose: Allows the patient to add new medications 
+   to their schedule, including dose, frequency, and duration.
    - Key Fields:
-     - Medication name, dosage, start date, end date, frequency (e.g., daily, twice a day)
+     - Medication name, dosage, start date, end date, 
+     frequency (e.g., daily, twice a day)
 
 5. Medication Schedule Page
-   - Purpose: Displays the complete medication schedule for the patient, showing when each dose is due and whether it has been taken.
+   - Purpose: Displays the complete medication schedule 
+   for the patient, showing when each dose is due and whether it has been taken.
    - Components:
      - List of medications with upcoming and past doses
      - Mark doses as taken or missed
 
 6. Adherence Tracking Page
-   - Purpose: Shows a detailed history of the patient's adherence to their prescribed medication schedule.
+   - Purpose: Shows a detailed history of the patient's adherence 
+   to their prescribed medication schedule.
    - Components:
      - Visual adherence report (e.g., bar graph showing % adherence over time)
      - History of missed or delayed doses
 
 7. Reminders & Notifications Page
-   - Purpose: Lists all reminders sent to the patient about upcoming doses and any other important notifications.
+   - Purpose: Lists all reminders sent 
+   to the patient about upcoming doses and 
+   any other important notifications.
    - Components:
      - List of past and upcoming reminders
      - Reminder settings (e.g., frequency of notifications, preferred time)
 
 8. Check-in Page
-   - Purpose: Patients check in to confirm that they have taken their medication. This page logs the check-in to track adherence.
+   - Purpose: Patients check in to confirm 
+   that they have taken their medication. 
+   This page logs the check-in to track adherence.
    - Key Actions:
      - Mark medication as taken
      - Option to report side effects or issues
 
 9. Patient Profile Page
-   - Purpose: Allows patients to update their profile, including personal information and medical history.
+   - Purpose: Allows patients to update their profile, 
+   including personal information and medical history.
    - Key Fields:
      - Name, Date of Birth, Medical Conditions, Allergies, Emergency Contacts
 
 10. Doctor/Pharmacist Page (optional)
-   - Purpose: Provides access to the patient’s doctor or pharmacist to monitor adherence remotely, adjust medication schedules, and send custom notifications.
+   - Purpose: Provides access to the patient’s doctor or pharmacist 
+   to monitor adherence remotely, adjust medication schedules, and 
+   send custom notifications.
    - Components:
      - View patient adherence
      - Modify medication schedules
      - Send patient reminders or messages
 
 11. Reports Page
-   - Purpose: Allows patients to view adherence reports over time and download the data (if needed for doctor visits).
+   - Purpose: Allows patients to view adherence reports over time and 
+   download the data (if needed for doctor visits).
    - Components:
      - Exportable PDF/CSV reports
      - Visual summary of adherence
 
 12. Settings Page
-   - Purpose: Enables patients to configure application settings, such as notification preferences, time zones, and privacy settings.
+   - Purpose: Enables patients to configure application settings, 
+   such as notification preferences, 
+   time zones, and privacy settings.
    - Key Options:
      - Notification frequency
      - Reminder methods (email, SMS, app)

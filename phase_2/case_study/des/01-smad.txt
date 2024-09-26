@@ -11,12 +11,31 @@ Smart Manufacturing Analytics Dashboard
 ===========================abstract=============================
 Abstract for the Smart Manufacturing Analytics Dashboard
 
-The Smart Manufacturing Analytics Dashboard is an innovative application designed to enhance operational efficiency and data-driven decision-making in manufacturing environments. By integrating real-time data analytics with a user-friendly interface, the dashboard empowers users to monitor key performance indicators (KPIs), visualize production metrics, and identify bottlenecks across various manufacturing processes. Utilizing SQL Server for robust data management and storage, the application enables seamless access to critical production data, allowing users to generate comprehensive reports and alerts for any anomalies.
+The Smart Manufacturing Analytics Dashboard is 
+an innovative application designed 
+to enhance operational efficiency and data-driven decision-making 
+in manufacturing environments. 
+By integrating real-time data analytics with a user-friendly interface, 
+the dashboard empowers users to monitor key performance indicators (KPIs), 
+visualize production metrics, and identify bottlenecks 
+across various manufacturing processes. 
+Utilizing SQL Server for robust data management and storage, 
+the application enables seamless access to critical production data, 
+allowing users to generate comprehensive reports and alerts for any anomalies.
 
-The dashboard's interactive features provide insights into production trends, facilitating timely interventions and continuous improvement. With a focus on optimizing production efficiency and ensuring product quality, the Smart Manufacturing Analytics Dashboard serves as an essential tool for manufacturers striving to maintain competitiveness in a rapidly evolving industry. This application not only streamlines data collection and analysis but also fosters collaboration among teams, ultimately driving better outcomes in product lifecycle management and operational performance.
+The dashboard's interactive features provide insights into production trends, 
+facilitating timely interventions and continuous improvement. 
+With a focus on optimizing production efficiency and ensuring product quality, 
+the Smart Manufacturing Analytics Dashboard serves as an essential tool 
+for manufacturers striving to maintain competitiveness in a rapidly evolving industry. 
+This application not only streamlines data collection and analysis 
+but also fosters collaboration among teams, 
+ultimately driving better outcomes 
+in product lifecycle management and operational performance.
 ===========================app=============================
 1. Home Dashboard
-   - Overview of key performance indicators (KPIs) such as production efficiency, downtime, and output rates.
+   - Overview of key performance indicators (KPIs) 
+   such as production efficiency, downtime, and output rates.
    - Real-time updates on manufacturing processes and status.
    - Summary of recent alerts or issues.
 
@@ -36,7 +55,8 @@ The dashboard's interactive features provide insights into production trends, fa
    - Recommendations for process optimization based on analysis.
 
 5. Alerts and Notifications Page
-   - Real-time alerts for any issues affecting production (e.g., machine failures, quality issues).
+   - Real-time alerts for any issues affecting production 
+   (e.g., machine failures, quality issues).
    - Summary of resolved and unresolved alerts.
    - Customizable notification settings for different user roles.
 
@@ -46,7 +66,8 @@ The dashboard's interactive features provide insights into production trends, fa
    - Schedule automated report generation and distribution.
 
 7. Integration Settings Page
-   - Configuration options for connecting to various data sources (IoT devices, ERP systems, etc.).
+   - Configuration options for connecting to various data sources 
+   (IoT devices, ERP systems, etc.).
    - Manage API settings for data integration with SQL Server.
    - Set up data import/export schedules.
 
@@ -134,19 +155,25 @@ Explanation of the Tables:
 
 1. Users: Stores user information, including credentials and roles (e.g., admin, operator).
 
-2. ProductionLines: Represents different production lines or machines in the manufacturing facility.
+2. ProductionLines: Represents different production lines or machines 
+in the manufacturing facility.
 
-3. ProductionMetrics: Captures performance metrics for each production line, including production rate, efficiency, quality rate, and downtime.
+3. ProductionMetrics: Captures performance metrics 
+for each production line, including production rate, 
+efficiency, quality rate, and downtime.
 
-4. Alerts: Records alerts related to production issues, including type, severity, and resolution status.
+4. Alerts: Records alerts related to production issues, 
+including type, severity, and resolution status.
 
 5. Settings: Stores application configuration settings that can be adjusted as needed.
 
 6. ProductionTrends: Holds historical data for analyzing production trends over time.
 
 Note
-Make sure to customize the data types and constraints based on your specific application requirements. 
-Also, consider implementing indexes on frequently queried columns to optimize performance.
+Make sure to customize the data types and constraints 
+based on your specific application requirements. 
+Also, consider implementing indexes on frequently queried columns 
+to optimize performance.
 
 
 Overview of the Entity-Relationship (ER) Diagram 
@@ -225,12 +252,18 @@ Relationships
 
 ER Diagram Overview
 
-- The User entity is connected to the Alert entity, indicating that users can create alerts, though this relationship is typically optional.
-- The ProductionLine entity serves as a central hub, with multiple one-to-many relationships to the ProductionMetric, Alert, and ProductionTrend entities.
-- The Setting entity stands alone as it is not directly related to other entities but can be referenced for application configuration.
+- The User entity is connected to the Alert entity, 
+indicating that users can create alerts, 
+though this relationship is typically optional.
+- The ProductionLine entity serves as a central hub, 
+with multiple one-to-many relationships 
+to the ProductionMetric, Alert, and ProductionTrend entities.
+- The Setting entity stands alone as it is not directly related 
+to other entities but can be referenced for application configuration.
 
 Diagram Representation
-While I can't create visual diagrams directly, the ER diagram can be visualized as follows:
+While I can't create visual diagrams directly, 
+the ER diagram can be visualized as follows:
 
 ```
 [User] 1 --------< [Alert]

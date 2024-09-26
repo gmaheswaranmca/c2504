@@ -6,6 +6,39 @@ offering insights based on regular data inputs from wearable devices.
 
 
 ===========================abstract=============================
+Abstract for Chronic Disease Monitoring Dashboard
+
+The Chronic Disease Monitoring Dashboard is 
+a comprehensive healthcare application designed 
+to assist doctors in effectively monitoring patients 
+with chronic conditions, such as diabetes and hypertension. 
+The system integrates data from wearable health devices 
+to track critical health metrics, 
+including blood sugar levels, heart rate, blood pressure, and 
+physical activity. 
+By offering real-time insights and alerts, 
+the application enables healthcare providers 
+to detect abnormalities early and take prompt actions, 
+thus improving patient outcomes.
+
+Patients’ health data is continuously collected, 
+stored securely in the cloud, and analyzed 
+to provide personalized treatment plans. 
+Doctors can manage patient records, monitor health trends, and 
+generate reports to evaluate the effectiveness of treatments. 
+Additionally, the system allows manual input of health data 
+for patients without wearable devices, 
+ensuring comprehensive data collection. 
+The platform also features a user-friendly interface 
+for managing wearable devices, viewing patient metrics, 
+setting up alerts, and overseeing treatment plans.
+
+The dashboard enhances patient care 
+by providing actionable insights, reducing hospital visits, and 
+improving adherence to treatment protocols. 
+Overall, this application offers an efficient, scalable, and 
+secure solution for monitoring chronic diseases and 
+promoting proactive healthcare.
 ===========================pages=============================
 
 
@@ -19,16 +52,20 @@ offering insights based on regular data inputs from wearable devices.
 2. Dashboard Overview Page
    - Purpose: A comprehensive overview of all patients with chronic diseases.
    - Key Features:
-     - Summary of monitored patients, including their latest readings (e.g., blood glucose levels, heart rate, etc.).
+     - Summary of monitored patients, including their latest readings 
+     (e.g., blood glucose levels, heart rate, etc.).
      - Alerts for patients with abnormal readings.
-     - Key performance indicators (KPIs) such as average readings, critical patient count, and recent updates.
+     - Key performance indicators (KPIs) 
+     such as average readings, critical patient count, and recent updates.
      - Search functionality for quick patient lookup.
 
 3. Patient Profile Page
-   - Purpose: Detailed information about an individual patient and their chronic condition monitoring.
+   - Purpose: Detailed information 
+   about an individual patient and their chronic condition monitoring.
    - Key Features:
      - Personal details (name, age, condition).
-     - List of wearable device data (e.g., blood pressure, glucose level, activity levels).
+     - List of wearable device data 
+     (e.g., blood pressure, glucose level, activity levels).
      - Graphical representation of vital sign trends over time.
      - Option to upload manual health data.
      - Doctor’s notes and recommendations.
@@ -36,12 +73,15 @@ offering insights based on regular data inputs from wearable devices.
 4. Health Metrics Page
    - Purpose: View and analyze key health metrics for all monitored patients.
    - Key Features:
-     - Charts and graphs showing trends for specific health parameters (e.g., blood sugar levels, heart rate, blood pressure).
+     - Charts and graphs showing trends for specific health parameters 
+     (e.g., blood sugar levels, heart rate, blood pressure).
      - Filters for viewing metrics by time (daily, weekly, monthly).
-     - Option to view data from different wearable devices (glucose monitors, heart rate trackers).
+     - Option to view data from different wearable devices 
+     (glucose monitors, heart rate trackers).
 
 5. Alerts & Notifications Page
-   - Purpose: Manage alerts generated when a patient’s readings go beyond normal levels.
+   - Purpose: Manage alerts generated 
+   when a patient’s readings go beyond normal levels.
    - Key Features:
      - List of triggered alerts (e.g., high glucose, low heart rate).
      - Ability to set thresholds for different health parameters.
@@ -64,10 +104,13 @@ offering insights based on regular data inputs from wearable devices.
      - Automated suggestions based on patient trends.
 
 8. Treatment Plan Page
-   - Purpose: Manage and adjust the treatment plans for chronic disease patients.
+   - Purpose: Manage and adjust the treatment plans 
+   for chronic disease patients.
    - Key Features:
-     - Create and modify personalized treatment plans (medication, diet, exercise).
-     - Track patient adherence to treatment plans (daily medication reminders, activity tracking).
+     - Create and modify personalized treatment plans 
+     (medication, diet, exercise).
+     - Track patient adherence to treatment plans 
+     (daily medication reminders, activity tracking).
      - Update treatment recommendations based on wearable data trends.
 
 9. Reports & Analytics Page
@@ -227,66 +270,92 @@ Overview of the Entity-Relationship (ER) Diagram
 Entities and Their Attributes
 
 1. Users
-   - Attributes: UserID (PK), Username, PasswordHash, FullName, Role, Email, CreatedAt
-   - Description: Represents doctors, nurses, and admin users who manage patient data.
+   - Attributes: UserID (PK), Username, PasswordHash, 
+   FullName, Role, Email, CreatedAt
+   - Description: Represents doctors, nurses, and 
+   admin users who manage patient data.
 
 2. Patients
-   - Attributes: PatientID (PK), FullName, Age, Gender, Address, PhoneNumber, Email, Condition, AssignedDoctorID (FK), CreatedAt
-   - Description: Represents individuals being monitored for chronic diseases.
+   - Attributes: PatientID (PK), FullName, Age, Gender, Address, 
+   PhoneNumber, Email, Condition, AssignedDoctorID (FK), CreatedAt
+   - Description: Represents individuals being monitored 
+   for chronic diseases.
 
 3. WearableDevices
-   - Attributes: DeviceID (PK), PatientID (FK), DeviceType, DeviceSerialNumber, LastSync, Status, CreatedAt
-   - Description: Represents wearable devices linked to patients for health monitoring.
+   - Attributes: DeviceID (PK), PatientID (FK), DeviceType, 
+   DeviceSerialNumber, LastSync, Status, CreatedAt
+   - Description: Represents wearable devices linked to patients 
+   for health monitoring.
 
 4. HealthMetrics
-   - Attributes: MetricID (PK), PatientID (FK), DeviceID (FK), MetricDate, BloodSugarLevel, HeartRate, BloodPressure, ActivityLevel, Remarks, CreatedAt
-   - Description: Stores daily health metrics collected from patients’ wearable devices.
+   - Attributes: MetricID (PK), PatientID (FK), DeviceID (FK), 
+   MetricDate, BloodSugarLevel, HeartRate, BloodPressure, 
+   ActivityLevel, Remarks, CreatedAt
+   - Description: Stores daily health metrics collected 
+   from patients’ wearable devices.
 
 5. Alerts
-   - Attributes: AlertID (PK), PatientID (FK), AlertType, MetricID (FK), AlertDate, Status, DoctorAction, CreatedAt
-   - Description: Represents alerts triggered by abnormal health metrics requiring doctor attention.
+   - Attributes: AlertID (PK), PatientID (FK), AlertType, MetricID (FK), 
+   AlertDate, Status, DoctorAction, CreatedAt
+   - Description: Represents alerts triggered 
+   by abnormal health metrics requiring doctor attention.
 
 6. TreatmentPlans
-   - Attributes: PlanID (PK), PatientID (FK), DoctorID (FK), PlanDetails, StartDate, EndDate, Medications, DietPlan, ExercisePlan, FollowUpDate, CreatedAt
-   - Description: Stores treatment plans prescribed for patients, including medications and recommendations.
+   - Attributes: PlanID (PK), PatientID (FK), DoctorID (FK), 
+   PlanDetails, StartDate, EndDate, Medications, 
+   DietPlan, ExercisePlan, FollowUpDate, CreatedAt
+   - Description: Stores treatment plans prescribed 
+   for patients, including medications and recommendations.
 
 7. ManualDataInputs
-   - Attributes: InputID (PK), PatientID (FK), InputDate, BloodSugarLevel, HeartRate, BloodPressure, ActivityLevel, EnteredBy (FK), CreatedAt
-   - Description: Captures manual health data entries made by patients or healthcare providers.
+   - Attributes: InputID (PK), PatientID (FK), InputDate, 
+   BloodSugarLevel, HeartRate, BloodPressure, 
+   ActivityLevel, EnteredBy (FK), CreatedAt
+   - Description: Captures manual health data entries made 
+   by patients or healthcare providers.
 
 8. Reports
-   - Attributes: ReportID (PK), PatientID (FK), ReportType, ReportContent, GeneratedDate, GeneratedBy (FK), CreatedAt
-   - Description: Represents generated reports based on patient health data for analysis.
+   - Attributes: ReportID (PK), PatientID (FK), ReportType, 
+   ReportContent, GeneratedDate, GeneratedBy (FK), CreatedAt
+   - Description: Represents generated reports 
+   based on patient health data for analysis.
 
 Relationships Between Entities
 
 1. Users to Patients
    - Relationship Type: One-to-Many (1:M)
-   - Description: A user (doctor) can be assigned to multiple patients, but each patient has only one assigned doctor.
+   - Description: A user (doctor) can be assigned 
+   to multiple patients, but each patient has only one assigned doctor.
 
 2. Patients to WearableDevices
    - Relationship Type: One-to-Many (1:M)
-   - Description: A patient can have multiple wearable devices, but each device is linked to a single patient.
+   - Description: A patient can have multiple wearable devices, 
+   but each device is linked to a single patient.
 
 3. Patients to HealthMetrics
    - Relationship Type: One-to-Many (1:M)
-   - Description: Each patient can have multiple health metrics recorded over time.
+   - Description: Each patient can have multiple 
+   health metrics recorded over time.
 
 4. HealthMetrics to Alerts
    - Relationship Type: One-to-Many (1:M)
-   - Description: Each health metric can trigger multiple alerts based on abnormal readings.
+   - Description: Each health metric can trigger multiple alerts 
+   based on abnormal readings.
 
 5. Patients to TreatmentPlans
    - Relationship Type: One-to-Many (1:M)
-   - Description: A patient can have multiple treatment plans, but each plan is for a specific patient.
+   - Description: A patient can have multiple treatment plans, 
+   but each plan is for a specific patient.
 
 6. Patients to ManualDataInputs
    - Relationship Type: One-to-Many (1:M)
-   - Description: A patient can have multiple manual data inputs recorded over time.
+   - Description: A patient can have multiple manual 
+   data inputs recorded over time.
 
 7. Patients to Reports
    - Relationship Type: One-to-Many (1:M)
-   - Description: Each patient can have multiple reports generated based on their health metrics.
+   - Description: Each patient can have multiple 
+   reports generated based on their health metrics.
 
 
 ===========================SQL planner for each page=============================  
@@ -300,8 +369,10 @@ WHERE Username = @username AND PasswordHash = HASHBYTES('SHA2_256', @password);
 2. Patient Registration Page
 ```sql
 -- Insert a new patient
-INSERT INTO Patients (FullName, Age, Gender, Address, PhoneNumber, Email, Condition, AssignedDoctorID) 
-VALUES (@FullName, @Age, @Gender, @Address, @PhoneNumber, @Email, @Condition, @AssignedDoctorID);
+INSERT INTO Patients (FullName, Age, Gender, Address, 
+PhoneNumber, Email, Condition, AssignedDoctorID) 
+VALUES (@FullName, @Age, @Gender, @Address, @PhoneNumber, 
+@Email, @Condition, @AssignedDoctorID);
 ```
 
 3. Patient Dashboard Page
@@ -329,8 +400,10 @@ WHERE PatientID = @patientID;
 5. Health Metrics Input Page
 ```sql
 -- Insert health metrics for a patient
-INSERT INTO HealthMetrics (PatientID, DeviceID, BloodSugarLevel, HeartRate, BloodPressure, ActivityLevel, Remarks) 
-VALUES (@PatientID, @DeviceID, @BloodSugarLevel, @HeartRate, @BloodPressure, @ActivityLevel, @Remarks);
+INSERT INTO HealthMetrics (PatientID, DeviceID, BloodSugarLevel, 
+HeartRate, BloodPressure, ActivityLevel, Remarks) 
+VALUES (@PatientID, @DeviceID, @BloodSugarLevel, @HeartRate, 
+@BloodPressure, @ActivityLevel, @Remarks);
 
 -- Retrieve health metrics for a patient
 SELECT MetricID, MetricDate, BloodSugarLevel, HeartRate, BloodPressure, ActivityLevel 
@@ -354,8 +427,10 @@ WHERE PatientID = @patientID;
 7. Treatment Plan Management Page
 ```sql
 -- Insert a new treatment plan for a patient
-INSERT INTO TreatmentPlans (PatientID, DoctorID, PlanDetails, StartDate, EndDate, Medications, DietPlan, ExercisePlan, FollowUpDate) 
-VALUES (@PatientID, @DoctorID, @PlanDetails, @StartDate, @EndDate, @Medications, @DietPlan, @ExercisePlan, @FollowUpDate);
+INSERT INTO TreatmentPlans (PatientID, DoctorID, PlanDetails, 
+StartDate, EndDate, Medications, DietPlan, ExercisePlan, FollowUpDate) 
+VALUES (@PatientID, @DoctorID, @PlanDetails, @StartDate, @EndDate, 
+@Medications, @DietPlan, @ExercisePlan, @FollowUpDate);
 
 -- Retrieve treatment plans for a specific patient
 SELECT PlanID, PlanDetails, StartDate, EndDate, Medications 
@@ -366,11 +441,14 @@ WHERE PatientID = @patientID;
 8. Manual Data Input Page
 ```sql
 -- Insert manual health data input
-INSERT INTO ManualDataInputs (PatientID, InputDate, BloodSugarLevel, HeartRate, BloodPressure, ActivityLevel, EnteredBy) 
-VALUES (@PatientID, GETDATE(), @BloodSugarLevel, @HeartRate, @BloodPressure, @ActivityLevel, @EnteredBy);
+INSERT INTO ManualDataInputs (PatientID, InputDate, BloodSugarLevel, 
+HeartRate, BloodPressure, ActivityLevel, EnteredBy) 
+VALUES (@PatientID, GETDATE(), @BloodSugarLevel, @HeartRate, 
+@BloodPressure, @ActivityLevel, @EnteredBy);
 
 -- Retrieve manual data inputs for a patient
-SELECT InputID, InputDate, BloodSugarLevel, HeartRate, BloodPressure, ActivityLevel 
+SELECT InputID, InputDate, BloodSugarLevel, HeartRate, 
+BloodPressure, ActivityLevel 
 FROM ManualDataInputs 
 WHERE PatientID = @patientID 
 ORDER BY InputDate DESC;
@@ -379,7 +457,8 @@ ORDER BY InputDate DESC;
 9. Reports Generation Page
 ```sql
 -- Insert a new report
-INSERT INTO Reports (PatientID, ReportType, ReportContent, GeneratedDate, GeneratedBy) 
+INSERT INTO Reports (PatientID, ReportType, ReportContent, 
+GeneratedDate, GeneratedBy) 
 VALUES (@PatientID, @ReportType, @ReportContent, GETDATE(), @GeneratedBy);
 
 -- Retrieve reports for a specific patient

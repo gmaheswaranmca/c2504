@@ -8,60 +8,97 @@
 ===========================abstract=============================
 Abstract for the Electronic Health Record (EHR) Management System
 
-The Electronic Health Record (EHR) Management System is a secure, cloud-based solution designed to enable healthcare institutions to efficiently store, retrieve, and manage patient medical records. The system facilitates seamless communication between healthcare providers, allowing them to access patient information such as health history, appointments, medications, lab results, and billing records in real time. The platform supports role-based access for doctors, nurses, and administrative staff, ensuring that patient data is handled with high security and privacy.
+The Electronic Health Record (EHR) Management System is a secure, 
+cloud-based solution designed 
+to enable healthcare institutions 
+to efficiently store, retrieve, and manage patient medical records. 
+The system facilitates seamless communication 
+between healthcare providers, allowing them 
+to access patient information 
+such as health history, appointments, medications, 
+lab results, and billing records in real time. 
+The platform supports role-based access 
+for doctors, nurses, and administrative staff, 
+ensuring that patient data is handled with high security and privacy.
 
-The system offers core features such as patient registration, appointment scheduling, health record management, medication prescriptions, lab test result tracking, and billing. It is designed to improve healthcare workflow, enhance decision-making, and promote patient care by offering an integrated, scalable, and user-friendly platform. Additionally, the EHR system complies with regulatory standards for healthcare data protection, ensuring the confidentiality and integrity of patient information.
+The system offers core features such as 
+patient registration, appointment scheduling, health record management, 
+medication prescriptions, lab test result tracking, and billing. 
+It is designed to improve healthcare workflow, enhance decision-making, and 
+promote patient care by offering an integrated, scalable, and 
+user-friendly platform. Additionally, 
+the EHR system complies with regulatory standards 
+for healthcare data protection, ensuring the confidentiality and 
+integrity of patient information.
 
-This comprehensive system enables healthcare providers to deliver better, faster, and more coordinated care, streamlining operations and enhancing the overall patient experience.
+This comprehensive system enables healthcare providers 
+to deliver better, faster, and more coordinated care, 
+streamlining operations and enhancing the overall patient experience.
 
 ===========================pages=============================
 Pages of the EHR Management System App
 
 1. User Login Page
-   - Function: Allows healthcare professionals and administrators to log into the system securely.
+   - Function: Allows healthcare professionals and administrators 
+   to log into the system securely.
 
 2. Dashboard
-   - Function: Provides an overview of key metrics, patient statistics, and quick access to functionalities like patient search and recent activities.
+   - Function: Provides an overview of key metrics, patient statistics, 
+   and quick access to functionalities like patient search and recent activities.
 
 3. Patient Registration Page
-   - Function: Allows staff to add new patients to the system, including personal details and medical history.
+   - Function: Allows staff to add new patients to the system, 
+   including personal details and medical history.
 
 4. Patient Profile Page
-   - Function: Displays detailed information about a specific patient, including demographics, medical history, medications, and allergies.
+   - Function: Displays detailed information about a specific patient, 
+   including demographics, medical history, medications, and allergies.
 
 5. EHR Records Management Page
-   - Function: Enables healthcare providers to view, add, edit, or delete patient health records.
+   - Function: Enables healthcare providers 
+   to view, add, edit, or delete patient health records.
 
 6. Appointment Scheduling Page
-   - Function: Allows users to schedule and manage patient appointments, including notifications for upcoming appointments.
+   - Function: Allows users to schedule and manage patient appointments, 
+   including notifications for upcoming appointments.
 
 7. Medication Management Page
-   - Function: Facilitates the management of prescribed medications, including dosage information and refill requests.
+   - Function: Facilitates the management of prescribed medications, 
+   including dosage information and refill requests.
 
 8. Billing and Insurance Page
-   - Function: Displays billing information and allows for the management of insurance details, payments, and claims.
+   - Function: Displays billing information and allows 
+   for the management of insurance details, payments, and claims.
 
 9. Reporting Page
-   - Function: Generates reports on patient records, treatment outcomes, and billing statistics for administrative purposes.
+   - Function: Generates reports on patient records, treatment outcomes, and 
+   billing statistics for administrative purposes.
 
 10. Audit Trail Page
-    - Function: Provides a log of user activities within the system for security and compliance purposes.
+    - Function: Provides a log of user activities within the system 
+    for security and compliance purposes.
 
 11. User Management Page
-    - Function: Allows administrators to manage user accounts, roles, and permissions within the system.
+    - Function: Allows administrators to manage user accounts, 
+    roles, and permissions within the system.
 
 12. Settings Page
-    - Function: Enables users to configure system settings, notifications, and preferences.
+    - Function: Enables users to configure system settings, 
+    notifications, and preferences.
 
 13. Help and Support Page
-    - Function: Provides resources for users, including FAQs, guides, and contact information for support.
+    - Function: Provides resources for users, 
+    including FAQs, guides, and contact information for support.
 
 Additional Features (Optional)
 - Telemedicine Integration Page
-  - Function: Allows for remote consultations and video appointments with patients.
+  - Function: Allows for remote consultations and 
+  video appointments with patients.
 
 - Patient Portal
-  - Function: Enables patients to access their records, request refills, and communicate with their healthcare providers.
+  - Function: Enables patients 
+  to access their records, request refills, and 
+  communicate with their healthcare providers.
 ===========================about database=============================
 ===========================database tables=============================
 
@@ -295,22 +332,31 @@ Here's an overview of the key entities and their relationships:
 
 2. Patients
    - Represents individual patients in the system.
-   - Attributes: `PatientID`, `FirstName`, `LastName`, `DateOfBirth`, `Gender`, `ContactNumber`, `Address`, `Email`, `MedicalHistory`, `Allergies`, `CreatedAt`.
+   - Attributes: `PatientID`, `FirstName`, `LastName`, 
+   `DateOfBirth`, `Gender`, `ContactNumber`, `Address`, 
+   `Email`, `MedicalHistory`, `Allergies`, `CreatedAt`.
    - Relationships:
-     - One-to-Many (1:M) with `EHRRecords`, where each patient can have multiple health records.
-     - One-to-Many (1:M) with `Appointments`, as a patient can have multiple appointments with healthcare providers.
-     - One-to-Many (1:M) with `Medications`, since a patient can be prescribed multiple medications.
-     - One-to-Many (1:M) with `Billing` and `Insurance` to track payments and insurance details for each patient.
-     - One-to-Many (1:M) with `LabResults` for storing multiple lab test results.
+     - One-to-Many (1:M) with `EHRRecords`, 
+     where each patient can have multiple health records.
+     - One-to-Many (1:M) with `Appointments`, 
+     as a patient can have multiple appointments with healthcare providers.
+     - One-to-Many (1:M) with `Medications`, 
+     since a patient can be prescribed multiple medications.
+     - One-to-Many (1:M) with `Billing` and `Insurance` 
+     to track payments and insurance details for each patient.
+     - One-to-Many (1:M) with `LabResults` 
+     for storing multiple lab test results.
 
 ---
 
 3. EHRRecords
    - Represents electronic health records associated with each patient.
-   - Attributes: `RecordID`, `PatientID`, `UserID`, `RecordType`, `Description`, `DateOfEntry`.
+   - Attributes: `RecordID`, `PatientID`, `UserID`, 
+   `RecordType`, `Description`, `DateOfEntry`.
    - Relationships:
      - Many-to-One (M:1) with `Patients` as each record belongs to one patient.
-     - Many-to-One (M:1) with `Users` (healthcare professionals), as each record is created or updated by a specific doctor or nurse.
+     - Many-to-One (M:1) with `Users` (healthcare professionals), 
+     as each record is created or updated by a specific doctor or nurse.
 
 ---
 

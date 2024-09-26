@@ -8,15 +8,29 @@
         activity levels) and 
     generate personalized health insights.
 
-
-
 Abstract for the "Personalized Health Tracker" Application
 
-The "Personalized Health Tracker" is a healthcare-focused application designed to monitor and manage a user’s daily health metrics, including heart rate, blood pressure, and activity levels. By collecting real-time data, the app generates personalized health insights that empower users to track their well-being, set fitness or health goals, and sync health data from external devices such as fitness trackers. The application also offers users historical health data visualization and notification alerts for proactive health management. 
+The "Personalized Health Tracker" is 
+a healthcare-focused application designed 
+to monitor and manage a user’s daily health metrics, 
+including heart rate, blood pressure, and activity levels. 
+By collecting real-time data, the app generates personalized health insights 
+that empower users to track their well-being, 
+set fitness or health goals, and sync health data 
+from external devices such as fitness trackers. 
+The application also offers users historical health data visualization and 
+notification alerts for proactive health management. 
 
-Built using the C#, WPF, and SQL Server, the system ensures scalability, efficient data storage, and real-time access to health information. Users can interact with the platform through a secure and user-friendly interface, allowing for regular updates of health metrics and insights generated using data analytics.
+Built using the C#, WPF, and SQL Server, the system ensures scalability, 
+efficient data storage, and real-time access to health information. 
+Users can interact with the platform through a secure and 
+user-friendly interface, allowing 
+for regular updates of health metrics and insights generated using data analytics.
 
-With the integration of goal tracking, device synchronization, and health history maintenance, the app provides a comprehensive solution for individuals looking to optimize their health and wellness based on personalized, data-driven insights.
+With the integration of goal tracking, device synchronization, and 
+health history maintenance, the app provides a comprehensive solution 
+for individuals looking to optimize their health and 
+wellness based on personalized, data-driven insights.
 ===========================app=============================
 
 1. Home Page
@@ -102,11 +116,6 @@ With the integration of goal tracking, device synchronization, and health histor
      - FAQs.
      - Contact form for tech or health-related inquiries.
      - Live chat or email support.
-
-
-
-
-
 ===========================about database=============================
 
 
@@ -148,11 +157,14 @@ With the integration of goal tracking, device synchronization, and health histor
    - Fields:
      - `GoalID` (Primary Key, `INT`, Identity): Unique identifier for each goal.
      - `UserID` (Foreign Key, `INT`): Reference to the `Users` table.
-     - `GoalType` (`NVARCHAR(100)`): Type of goal (e.g., "Lower Blood Pressure", "Increase Steps").
-     - `TargetValue` (`DECIMAL(10, 2)`): Target value for the goal (e.g., target blood pressure or activity level).
+     - `GoalType` (`NVARCHAR(100)`): Type of goal 
+     (e.g., "Lower Blood Pressure", "Increase Steps").
+     - `TargetValue` (`DECIMAL(10, 2)`): Target value for the goal 
+     (e.g., target blood pressure or activity level).
      - `StartDate` (`DATETIME`): The date when the goal was set.
      - `EndDate` (`DATETIME`): The expected completion date for the goal.
-     - `Status` (`NVARCHAR(50)`): Current status of the goal (e.g., "Active", "Completed").
+     - `Status` (`NVARCHAR(50)`): Current status of the goal 
+     (e.g., "Active", "Completed").
 
 5. DeviceSync Table
    - Purpose: Stores information about user devices or external apps syncing health data.
@@ -182,13 +194,17 @@ With the integration of goal tracking, device synchronization, and health histor
      - `SentAt` (`DATETIME`): Timestamp when the notification was sent.
 
 Relationships Between Tables:
-- Users has a one-to-many relationship with `HealthMetrics`, `HealthInsights`, `Goals`, `DeviceSync`, `HealthHistory`, and `Notifications`.
+- Users has a one-to-many relationship with `HealthMetrics`, 
+`HealthInsights`, `Goals`, `DeviceSync`, `HealthHistory`, and `Notifications`.
 - HealthMetrics stores the daily health data for each user.
-- HealthInsights stores health insights derived from the data in `HealthMetrics`.
+- HealthInsights stores health insights derived 
+from the data in `HealthMetrics`.
 - Goals tracks users’ health-related objectives and their progress.
-- DeviceSync records data from external devices, which can be linked to health metrics.
+- DeviceSync records data from external devices, 
+which can be linked to health metrics.
 - HealthHistory keeps a record of past health metrics for users.
-- Notifications provides alerts or updates to users about their health status or app activities.
+- Notifications provides alerts or updates to users 
+about their health status or app activities.
 
 ER Diagram Overview:
 1. Users → *1-to-many* → HealthMetrics
@@ -274,13 +290,21 @@ CREATE TABLE Notifications (
 ```
 
 Explanation:
-1. Users Table: Contains user information such as name, email, password, date of birth, gender, and timestamps.
-2. HealthMetrics Table: Stores daily health metrics for users like heart rate, blood pressure, activity levels, and the date of the metrics.
-3. HealthInsights Table: Stores personalized health insights generated from the user's metrics.
-4. Goals Table: Allows users to set health-related goals and track their progress.
-5. DeviceSync Table: Stores information about syncing with external devices such as fitness trackers.
-6. HealthHistory Table: Maintains a record of past health metrics for tracking purposes.
-7. Notifications Table: Manages notifications sent to users for health alerts, reminders, or insights.
+1. Users Table: Contains user information 
+such as name, email, password, date of birth, gender, and timestamps.
+2. HealthMetrics Table: Stores daily health metrics 
+for users like heart rate, blood pressure, activity levels, and 
+the date of the metrics.
+3. HealthInsights Table: Stores personalized health insights 
+generated from the user's metrics.
+4. Goals Table: Allows users to set health-related goals and 
+track their progress.
+5. DeviceSync Table: Stores information about syncing 
+with external devices such as fitness trackers.
+6. HealthHistory Table: Maintains a record of past 
+health metrics for tracking purposes.
+7. Notifications Table: Manages notifications sent 
+to users for health alerts, reminders, or insights.
 
 
 ===========================SQL planner for each page=============================
@@ -316,7 +340,9 @@ Explanation:
 - Action: Insert a new health metric record for the user.
 - SQL Statement:
    ```sql
-   INSERT INTO HealthMetrics (UserID, HeartRate, BloodPressureSystolic, BloodPressureDiastolic, ActivityLevel, MetricDate, CreatedAt)
+   INSERT INTO HealthMetrics 
+   (UserID, HeartRate, BloodPressureSystolic, BloodPressureDiastolic, 
+   ActivityLevel, MetricDate, CreatedAt)
    VALUES (1, 72, 120, 80, 10000, GETDATE(), GETDATE());
    ```
 
@@ -391,14 +417,17 @@ Explanation:
 - SQL Statement:
    ```sql
    UPDATE Users
-   SET Name = 'John Doe Updated', Email = 'john.updated@example.com', DateOfBirth = '1990-02-02', UpdatedAt = GETDATE()
+   SET Name = 'John Doe Updated', Email = 'john.updated@example.com', 
+   DateOfBirth = '1990-02-02', UpdatedAt = GETDATE()
    WHERE UserID = 1;
    ```
 
 13. Delete Account Page
 - Action: Delete a user’s account and cascade delete all related health data.
 - SQL Statements:
-   1. Delete related records (if foreign key constraints are set to `ON DELETE CASCADE`, this step may not be required):
+   1. Delete related records (if foreign key constraints are 
+   set to `ON DELETE CASCADE`, 
+   this step may not be required):
       ```sql
       DELETE FROM HealthMetrics WHERE UserID = 1;
       DELETE FROM HealthInsights WHERE UserID = 1;
@@ -416,5 +445,8 @@ Explanation:
 ---
 
 Note:
-- Replace `1` in `UserID = 1` with the actual user ID from the application’s session data.
-- Ensure that security and proper data handling mechanisms, like hashed passwords and parameterized queries (to prevent SQL injection), are applied at the application level.
+- Replace `1` in `UserID = 1` with the actual user ID 
+from the application’s session data.
+- Ensure that security and proper data handling mechanisms, 
+like hashed passwords and parameterized queries (to prevent SQL injection), 
+are applied at the application level.
