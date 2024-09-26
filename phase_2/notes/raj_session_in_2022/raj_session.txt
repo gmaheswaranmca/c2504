@@ -1,0 +1,773 @@
+Rajagopalan P
+he used programiz.com/csharp-programming/online-compiler/
+
+o Choosing the loop 
+o function : Why 
+o OOP : Why 
+
+
+if requirement from customer,
+ask question to get clear.
+-------------------------------------
+loops: for, while, do-while
+-------------------------------------
+when to use what?
+	number of iterations is known,
+	go for for loop.
+	
+	if not known, go for one other loops.
+-------------------------------------	
+for loop:
+	printing number bt 1 and 100
+-------------------------------------	
+keep on adding a number till we get zero number.		
+	int sum = 0, a;
+	do {
+		a = int.Parse(Console.ReadLine());
+		sum += a;
+	}
+	while(a != 0);
+-------------------------------------
+keep on adding a number till we get negative number.	
+	int sum = 0, a;
+	a = int.Parse(Console.ReadLine());
+	while(a >= 0){
+		sum += a;
+		a = int.Parse(Console.ReadLine());	
+	}
+-------------------------------------
+Functions: Focus on reusability
+-------------------------------------
+Add two integers
+	Worst Design
+-------------------------------------
+public static void add()
+{
+	int a = int.Parse(Console.ReadLine());
+	int b = int.Parse(Console.ReadLine());
+	int sum = a + b;
+	Console.WriteLine("The sum is: " + sum);
+}	
+public static void Main(string[] args)
+{
+	add();
+}
+-------------------------------------
+the function gets data only from keyboard.
+the function puts sum on console.
+These two happening inside the function.
+
+user of the function is another programmer.
+function will be used by many users(programmers)
+Here, another programer may require to use add functionality
+not to read, add, print all inside the function. 	
+-------------------------------------
+public static void add(int a, int b)
+{
+	int sum = a + b;
+	Console.WriteLine("The sum is: " + sum);
+}	
+public static void Main(string[] args)
+{
+	int a = int.Parse(Console.ReadLine());
+	int b = int.Parse(Console.ReadLine());
+	add(a,b);
+}
+-------------------------------------
+	==>
+-------------------------------------		
+public static void add(int a, int b)
+{
+	int sum = a + b;
+	return sum;
+}	
+public static void Main(string[] args)
+{
+	int a = int.Parse(Console.ReadLine());
+	int b = int.Parse(Console.ReadLine());
+	int sum = add(a,b);
+	Console.WriteLine("The sum is: " + sum);
+}
+-------------------------------------
+Add two integers
+	Best Design
+-------------------------------------	
+public static void add(int a, int b)
+{
+	int sum = a + b;
+	return sum;
+}	
+public static void Main(string[] args)
+{
+	int x = add(4,5);
+	int y = add(10,add(2,3));
+}
+-------------------------------------
+Functions:
+	Chances are that you may never write code 
+	for console input/output in your career.
+-------------------------------------
+Object Oriented Programming: Why
+-------------------------------------
+
+In bank, manager, cashier,
+customers.
+
+public static void Main(String[] args)
+{
+	int cardNo1;
+	String name1;
+	int cvv1;
+	double limit1;
+
+
+	int cardNo1;
+	String name1;
+	int cvv1;
+	double limit1;
+}
+
+not only credit card, 
+account, manager, etc.		
+
+
+int cardNo1;
+String name1;
+int cvv1;
+double limit1; 
+these variables together form the credit card.
+-----------------------
+	we can see now the card names.
+-----------------------
+public class CreditCard
+{
+	private int cardNo;
+	private String name;
+	private int cvv;
+	private double limit; 
+	public CreditCard(int cardNo, String name,
+		int cvv, double limit)
+	{
+		this.cardNo = cardNo;
+		this.name = name;
+		this.cvv = cvv;
+		this.limit = limit;
+	}
+	
+	public double purchase(double amount)
+	{
+		return 0.0;
+	}
+	public void payBill(double amount)
+	{
+	}
+} 
+
+public static void Main(String[] args)
+{
+	CreditCard card1 = new CreditCard();
+	card1.purchase(5000);
+	CreditCard card2 = new CreditCard();
+	card2.payBill(2000);
+	CreditCard card3 = new CreditCard();
+}
+-------------------------------------
+coding standard:
+	class name is noun
+	function name is verb 
+	name of the class is not plural
+	name of the class is singular 
+-------------------------------------
+Programmer 1 is created CreditCard 
+Programmer 2 is using CreaditCard	
+-------------------------------------
+What is objecte oriented programming?
+encapsulation
+who is benefitted?	
+-------------------------------------
+
+public class CreditCard
+{
+	private int cardNo;
+	private String name;
+	private int cvv;
+	private double limit; 
+	public CreditCard(int cardNo, String name,
+		int cvv, double limit)
+	{
+		this.cardNo = cardNo;
+		this.name = name;
+		this.cvv = cvv;
+		this.limit = limit;
+	}
+	public void SetLimit(double amount)
+	{
+		if(amount <= 300000)
+		{
+			amount = 300000;
+		}
+		else
+		{
+			//error
+		}
+	}
+	public double purchase(double amount)
+	{
+		return 0.0;
+	}
+	public void payBill(double amount)
+	{
+	}
+} 
+
+
+abstract: you need not know about the details 
+encapsulation: you cannot know about the details
+	i will not do mistake accidently
+-------------------------------------
+Object Oriented Programming: 
+Parameters of member function 
+-------------------------------------	
+Class ComplexNumber
+{
+	private int real;
+	private int imaginary;
+	public ComplexNumber()
+	{
+		real = 0;
+		imaginary = 0;
+	}
+	public ComplexNumber(int real, int imaginary)
+	{
+		this.real = real;
+		this.imaginary = imaginary;
+	}
+	public void Display()
+	{
+		Console.WriteLine($"{real} + {imaginary} i");
+	}
+	public ComplexNumber add(ComplexNumber c2)
+	{
+		ComplexNumber sum = new ComplexNumber();
+		sum.read = real + c2.real;
+		sum.imaginary = imaginary + c2.imaginary;
+		return sum;
+	}
+	public ComplexNumber add(ComplexNumber c2, ComplexNumber c3)
+	{
+		ComplexNumber sum = new ComplexNumber();
+		sum.read = real + c2.real + c3.real;
+		sum.imaginary = imaginary + c2.imaginary + c3.imaginary;
+		return sum;
+	}
+}
+
+Main()
+{
+	ComplexNumber c1 = new ComplexNumber(10,20);
+	ComplexNumber c2 = new ComplexNumber(15,25);
+	c1.Display();
+	c2.Display();
+	ComplexNumber c3 = c1.add(c2);
+	c3.Display();
+	ComplexNumber c4 = c1.add(c2,c3);
+}
+-------------------------------------
+Object Oriented Programming: 
+	Objects as parameters and return values 
+-------------------------------------	
+Object Oriented Programming: 
+	Polimorphism
+-------------------------------------	
+Object Oriented Programming: 
+	Inheritance, overriding,
+	interface, abstract class 
+-------------------------------------	
+
+Class ComplexNumber
+{
+	private int real;
+	private int imaginary;
+	public ComplexNumber()
+	{
+		real = 0;
+		imaginary = 0;
+	}
+	public ComplexNumber(int real, int imaginary)
+	{
+		this.real = real;
+		this.imaginary = imaginary;
+	}
+	public override string ToString()
+	{
+		return $"{real} + {imaginary} i";
+	}
+	public ComplexNumber add(ComplexNumber c2)
+	{
+		ComplexNumber sum = new ComplexNumber();
+		sum.read = real + c2.real;
+		sum.imaginary = imaginary + c2.imaginary;
+		return sum;
+	}
+	public ComplexNumber add(ComplexNumber c2, ComplexNumber c3)
+	{
+		ComplexNumber sum = new ComplexNumber();
+		sum.read = real + c2.real + c3.real;
+		sum.imaginary = imaginary + c2.imaginary + c3.imaginary;
+		return sum;
+	}
+}
+
+Main()
+{
+	ComplexNumber c1 = new ComplexNumber(10,20);
+	ComplexNumber c2 = new ComplexNumber(15,25);
+	ComplexNumber c3 = new ComplexNumber(5,10);
+	ComplexNumber sum1 = c1.add(c2);
+	ComplexNumber sum2 = c1.add(c2,c3);
+	ComplexNumber sum2 = c1.add(c2,c3);
+	Console.WriteLine(c1);
+	Console.WriteLine(c2);
+	Console.WriteLine(c3);
+	Console.WriteLine(sum1);
+	Console.WriteLine(sum2);
+}
+
+-------------------------------------
+	Inheritance 	
+		if "derived class" "is a" "base class"
+		
+		if and only if, there "is a" relationship 
+		bt derived and base class.
+-------------------------------------
+using System;
+public class Person
+{
+	private String name;
+	public Person(String name)
+	{
+		this.name = name;
+	}
+	public virtual void Display()
+	{
+		Console.WriteLine("Name: " + name);
+	}
+}
+
+public class Student : Person
+{
+	private int classNo;
+	public Student(String name, int classNo)
+	{
+		base(name);
+		this.classNo = classNo;
+	}
+	public override void Display()
+	{
+		base.Display();
+		Console.WriteLine("classNo: " + classNo);
+	}
+}
+
+public class Employee : Person
+{
+	private double salary;
+	public Student(String name, double salary)
+	{
+		base(name);
+		this.salary = salary;
+	}
+	public override void Display()
+	{
+		base.Display();
+		Console.WriteLine("salary: " + salary);
+	}
+}
+
+
+
+public class Program
+{
+	public void static Main()
+	{
+		Person p = new Person("raj");
+		p.Display();
+		p = new Student("raj",4);
+		p.Display();
+		p = new Employee("raj",5000);
+		p.Display();
+		Console.Read();
+	}
+}
+-------------------------------------
+
+
+using System;
+
+
+      public class Person
+    {
+        private String name;
+        public Person(String name)
+        {
+            this.name = name;
+        }
+        public virtual void Display()
+        {
+            Console.WriteLine("Name: " + name);
+        }
+    }
+
+    public class Student : Person
+    {
+        private int classNo;
+        public Student(String name, int classNo) : base(name)
+        {
+           
+            this.classNo = classNo;
+        }
+        public override void Display()
+        {
+            base.Display();
+            Console.WriteLine("classNo: " + classNo);
+        }
+    }
+
+    public class Employee : Person
+    {
+        private double salary;
+        public Employee(String name, double salary) : base(name)
+        {
+            
+            this.salary = salary;
+        }
+        public override void Display()
+        {
+            base.Display();
+            Console.WriteLine("salary: " + salary);
+        }
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+		Person p = new Person("raj");
+		p.Display();
+		p = new Student("raj",4);
+		p.Display();
+		p = new Employee("raj",5000);
+		p.Display();
+		Console.Read();
+	}
+-------------------------------------
+
+
+
+-------------------------------------
+      public class Person
+    {
+        private String name;
+        public Person(String name)
+        {
+            this.name = name;
+        }
+        public virtual void Display()
+        {
+            Console.WriteLine("Name: " + name);
+        }
+    }
+
+    public class Student : Person
+    {
+        private int classNo;
+        public Student(String name, int classNo) : base(name)
+        {
+           
+            this.classNo = classNo;
+        }
+        public override void Display()
+        {
+            base.Display();
+            Console.WriteLine("classNo: " + classNo);
+        }
+    }
+
+    public class Employee : Person
+    {
+        private double salary;
+        public Employee(String name, double salary) : base(name)
+        {
+            
+            this.salary = salary;
+        }
+        public override void Display()
+        {
+            base.Display();
+            Console.WriteLine("salary: " + salary);
+        }
+    }
+
+    public class Tester
+    {
+        public void test(Person p)
+        {
+            p.Display();
+        }
+        
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+            Person p = new Person("raj");
+            Student s = new Student("raj", 4);
+            Employee e = new Employee("raj", 5000);
+
+            Tester t = new Tester();
+            t.test(p);
+            t.test(s);
+            t.test(e);
+            Console.Read();
+        }
+    }
+-------------------------------------
+
+	One test function is enough for family of classes 
+	--> dynamic binding/dynamic polymorphism/runtime binding etc
+-------------------------------------
+
+public class Shape
+{
+	
+}
+
+public class Circle
+{
+	private float radius;
+	private int color;
+	public Circle(float radius)
+	{
+		this.radius = radius;
+	}
+	public void SetColor(int color)
+	{
+		this.color = color;
+	}
+	public void Draw()
+	{
+		Console.WriteLine("Circle");
+	}
+}	
+
+public class Rectangle
+{
+	private float length;
+	private float width;
+	private int color;
+	public Circle(float radius, float width)
+	{
+		this.width = width;
+		this.width = width;
+	}
+	public void SetColor(int color)
+	{
+		this.color = color;
+	}
+	public void Draw()
+	{
+		Console.WriteLine("Rectangle");
+	}
+}	
+
+public class Square
+{
+	private float side;
+	private int color;
+	public Circle(float side)
+	{
+		this.side = side;
+		this.width = width;
+	}
+	public void SetColor(int color)
+	{
+		this.color = color;
+	}
+	public void Draw()
+	{
+		Console.WriteLine("Square");
+	}
+}	
+
+-------------------------------------
+
+
+
+-------------------------------------
+    public abstract class Shape
+    {
+        private int color;
+        public void SetColor(int color)
+        {
+            this.color = color;
+        }
+        abstract public void Draw();
+    }
+
+    public class Circle:Shape
+    {
+        private float radius;
+
+        public Circle(float radius)
+        {
+            this.radius = radius;
+        }
+
+        public override void Draw()
+        {
+            Console.WriteLine("Circle");
+        }
+    }
+
+    public class Rectangle : Shape
+    {
+        private float length;
+        private float width;
+
+        public Rectangle(float radius, float width)
+        {
+            this.width = width;
+            this.width = width;
+        }
+
+        public override void Draw()
+        {
+            Console.WriteLine("Rectangle");
+        }
+    }
+
+    public class Square : Shape
+    {
+        private float side;
+
+        public Square(float side)
+        {
+            this.side = side;
+        }
+
+        public override void Draw()
+        {
+            Console.WriteLine("Square");
+        }
+    }
+
+    public class Tester
+    {
+        public void test(Shape s)
+        {
+            s.SetColor(1);
+            s.Draw();
+        }
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+
+            Circle s1 = new Circle( 5);
+            Rectangle s2 = new Rectangle( 10, 5);
+            Square s3 = new Square( 4);
+
+            Tester t = new Tester();
+            t.test(s1);
+            t.test(s2);
+            t.test(s3);
+            Console.Read();
+        }
+    }
+-------------------------------------	
+
+
+
+-------------------------------------
+ public interface Shape
+    {
+        
+        public void Draw();
+    }
+
+    public class Circle:Shape
+    {
+        private float radius;
+
+        public Circle(float radius)
+        {
+            this.radius = radius;
+        }
+
+        public  void Draw()
+        {
+            Console.WriteLine("Circle");
+        }
+    }
+
+    public class Rectangle : Shape
+    {
+        private float length;
+        private float width;
+
+        public Rectangle(float radius, float width)
+        {
+            this.width = width;
+            this.width = width;
+        }
+
+        public  void Draw()
+        {
+            Console.WriteLine("Rectangle");
+        }
+    }
+
+    public class Square : Shape
+    {
+        private float side;
+
+        public Square(float side)
+        {
+            this.side = side;
+        }
+
+        public  void Draw()
+        {
+            Console.WriteLine("Square");
+        }
+    }
+
+    public class Tester
+    {
+        public void test(Shape s)
+        { 
+            s.Draw();
+        }
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+
+            Circle s1 = new Circle( 5);
+            Rectangle s2 = new Rectangle( 10, 5);
+            Square s3 = new Square( 4);
+
+            Tester t = new Tester();
+            t.test(s1);
+            t.test(s2);
+            t.test(s3);
+            Console.Read();
+        }
+    }
+-------------------------------------	
+

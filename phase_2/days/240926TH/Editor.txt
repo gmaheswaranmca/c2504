@@ -10,3 +10,764 @@ Editor
 ============================================================
     Text File (*.txt) | JSON File (*.json) 
 ============================================================
+frmEditor.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Example2Project
+{
+    public partial class frmEditor : Form
+    {
+        public frmEditor()
+        {
+            InitializeComponent();
+        }
+
+        private void btnRed_Click(object sender, EventArgs e)
+        {
+            txtEditor.BackColor = Color.IndianRed;
+            staColor.Text = txtEditor.BackColor.ToString();
+        }
+
+        private void btnBlue_Click(object sender, EventArgs e)
+        {
+            txtEditor.BackColor = Color.PaleTurquoise;
+            staColor.Text = txtEditor.BackColor.ToString();
+        }
+
+        private void btnGreen_Click(object sender, EventArgs e)
+        {
+            txtEditor.BackColor = Color.PaleGreen;
+            staColor.Text = txtEditor.BackColor.ToString();
+        }
+
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            dlgColor.Color = txtEditor.BackColor;
+            var result = dlgColor.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtEditor.BackColor = dlgColor.Color;
+                staColor.Text = txtEditor.BackColor.ToString();
+            }
+        }
+
+        private void btnForeColor_Click(object sender, EventArgs e)
+        {
+            dlgColor.Color = txtEditor.ForeColor;
+            var result = dlgColor.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtEditor.ForeColor = dlgColor.Color;
+                staForeColor.Text = txtEditor.ForeColor.ToString();
+            }
+        }
+
+        private void mnuRedBg_Click(object sender, EventArgs e)
+        {
+            btnRed_Click(null, null);
+        }
+
+        private void mnuBlueBg_Click(object sender, EventArgs e)
+        {
+            btnBlue_Click(null, null);
+        }
+
+        private void mnuGreenBg_Click(object sender, EventArgs e)
+        {
+            btnGreen_Click(null, null);
+        }
+
+        private void mnuBg_Click(object sender, EventArgs e)
+        {
+            btnColor_Click(null, null);
+        }
+
+        private void mnuFg_Click(object sender, EventArgs e)
+        {
+            btnForeColor_Click(null, null);
+        }
+
+        private void mnuRed2_Click(object sender, EventArgs e)
+        {
+            btnRed_Click(null, null);
+        }
+
+        private void mnuBlue2_Click(object sender, EventArgs e)
+        {
+            btnBlue_Click(null, null);
+        }
+
+        private void mnuGreen2_Click(object sender, EventArgs e)
+        {
+            btnGreen_Click(null, null);
+        }
+
+        private void mnuFont_Click(object sender, EventArgs e)
+        {
+            dlgFont.Font = txtEditor.Font;
+            var result = dlgFont.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                txtEditor.Font = dlgFont.Font;
+            }
+        }
+
+        private void mnuAlignLeft_Click(object sender, EventArgs e)
+        {
+            txtEditor.TextAlign = HorizontalAlignment.Left;
+        }
+
+        private void mnuAlignCenter_Click(object sender, EventArgs e)
+        {
+            txtEditor.TextAlign = HorizontalAlignment.Center;
+        }
+
+        private void mnuAlignRight_Click(object sender, EventArgs e)
+        {
+            txtEditor.TextAlign = HorizontalAlignment.Right;
+        }
+
+        private void mnuSave_Click(object sender, EventArgs e)
+        {
+            var result = dlgSave.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                var fileName = dlgSave.FileName;
+                //logic to save 
+                FileStream fs = null;
+                StreamWriter sw = null;
+                try        {
+                    fs = new FileStream(fileName, FileMode.Create);
+                    sw = new StreamWriter(fs);
+                    sw.Write(txtEditor.Text);
+                }
+                catch (FileNotFoundException ex) {
+                    MessageBox.Show($"{ex.Message}");
+                }
+                catch (IOException ex) {
+                    MessageBox.Show($"{ex.Message}");
+                }
+                catch (Exception ex) {
+                    MessageBox.Show($"{ex.Message}");
+                }
+                finally    {
+                    if(sw != null) {
+                        sw.Close();
+                    } if(fs != null) { 
+                        fs.Close();
+                    }
+                }
+                
+            }
+        }
+
+        private void mnuOpen_Click(object sender, EventArgs e)
+        {
+            var result = dlgOpen.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                var fileName = dlgOpen.FileName;
+                //logic to save 
+                FileStream fs = null;
+                StreamReader sr = null;
+                try{
+                    fs = new FileStream(fileName, FileMode.Open);
+                    sr = new StreamReader(fs);
+                    txtEditor.Text = sr.ReadToEnd ();
+                }
+                catch (FileNotFoundException ex){
+                    MessageBox.Show($"{ex.Message}");
+                }
+                catch (IOException ex) {
+                    MessageBox.Show($"{ex.Message}");
+                }
+                catch (Exception ex){
+                    MessageBox.Show($"{ex.Message}");
+                }
+                finally {
+                    if (sr != null){
+                        sr.Close();
+                    }
+                    if (fs != null) {
+                        fs.Close();
+                    }
+                }
+
+            }
+        }
+
+        private void toolLeft_Click(object sender, EventArgs e)
+        {
+            mnuAlignLeft_Click(null, null);
+        }
+
+        private void toolCenter_Click(object sender, EventArgs e)
+        {
+            mnuAlignCenter_Click(null, null);
+        }
+
+        private void toolRight_Click(object sender, EventArgs e)
+        {
+            mnuAlignRight_Click(null, null);
+        }
+    }
+}
+
+```
+frmEditor.Designer.cs 
+```
+namespace Example2Project
+{
+    partial class frmEditor
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.txtEditor = new System.Windows.Forms.TextBox();
+            this.mnuEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuRed2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBlue2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuGreen2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlBottom = new System.Windows.Forms.Panel();
+            this.btnForeColor = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.btnGreen = new System.Windows.Forms.Button();
+            this.btnBlue = new System.Windows.Forms.Button();
+            this.btnRed = new System.Windows.Forms.Button();
+            this.dlgColor = new System.Windows.Forms.ColorDialog();
+            this.mnuBar = new System.Windows.Forms.MenuStrip();
+            this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRedBg = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBlueBg = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuGreenBg = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBg = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuFg = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFormat = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuAlignLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAlignCenter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAlignRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.staPage = new System.Windows.Forms.StatusStrip();
+            this.staColor = new System.Windows.Forms.ToolStripStatusLabel();
+            this.staForeColor = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dlgFont = new System.Windows.Forms.FontDialog();
+            this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
+            this.dlgSave = new System.Windows.Forms.SaveFileDialog();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolLeft = new System.Windows.Forms.ToolStripButton();
+            this.toolCenter = new System.Windows.Forms.ToolStripButton();
+            this.toolRight = new System.Windows.Forms.ToolStripButton();
+            this.mnuEditor.SuspendLayout();
+            this.pnlBottom.SuspendLayout();
+            this.mnuBar.SuspendLayout();
+            this.staPage.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTitle.Font = new System.Drawing.Font("Verdana", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(0, 49);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(613, 60);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Editor App";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtEditor
+            // 
+            this.txtEditor.BackColor = System.Drawing.Color.PaleGreen;
+            this.txtEditor.ContextMenuStrip = this.mnuEditor;
+            this.txtEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEditor.Location = new System.Drawing.Point(0, 109);
+            this.txtEditor.Multiline = true;
+            this.txtEditor.Name = "txtEditor";
+            this.txtEditor.Size = new System.Drawing.Size(613, 185);
+            this.txtEditor.TabIndex = 1;
+            this.txtEditor.Text = "I am Maheswaran.\r\nTrainer of WPF with C# batch.\r\nQuest Global.";
+            // 
+            // mnuEditor
+            // 
+            this.mnuEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRed2,
+            this.mnuBlue2,
+            this.mnuGreen2});
+            this.mnuEditor.Name = "mnuEditor";
+            this.mnuEditor.Size = new System.Drawing.Size(205, 70);
+            // 
+            // mnuRed2
+            // 
+            this.mnuRed2.Name = "mnuRed2";
+            this.mnuRed2.Size = new System.Drawing.Size(204, 22);
+            this.mnuRed2.Text = "Red Background Color";
+            this.mnuRed2.Click += new System.EventHandler(this.mnuRed2_Click);
+            // 
+            // mnuBlue2
+            // 
+            this.mnuBlue2.Name = "mnuBlue2";
+            this.mnuBlue2.Size = new System.Drawing.Size(204, 22);
+            this.mnuBlue2.Text = "Blue Background Color";
+            this.mnuBlue2.Click += new System.EventHandler(this.mnuBlue2_Click);
+            // 
+            // mnuGreen2
+            // 
+            this.mnuGreen2.Name = "mnuGreen2";
+            this.mnuGreen2.Size = new System.Drawing.Size(204, 22);
+            this.mnuGreen2.Text = "Green Background Color";
+            this.mnuGreen2.Click += new System.EventHandler(this.mnuGreen2_Click);
+            // 
+            // pnlBottom
+            // 
+            this.pnlBottom.Controls.Add(this.btnForeColor);
+            this.pnlBottom.Controls.Add(this.label2);
+            this.pnlBottom.Controls.Add(this.label1);
+            this.pnlBottom.Controls.Add(this.btnColor);
+            this.pnlBottom.Controls.Add(this.btnGreen);
+            this.pnlBottom.Controls.Add(this.btnBlue);
+            this.pnlBottom.Controls.Add(this.btnRed);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(0, 294);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(613, 100);
+            this.pnlBottom.TabIndex = 2;
+            // 
+            // btnForeColor
+            // 
+            this.btnForeColor.Location = new System.Drawing.Point(379, 21);
+            this.btnForeColor.Name = "btnForeColor";
+            this.btnForeColor.Size = new System.Drawing.Size(118, 36);
+            this.btnForeColor.TabIndex = 4;
+            this.btnForeColor.Text = "Pick Color";
+            this.btnForeColor.UseVisualStyleBackColor = true;
+            this.btnForeColor.Click += new System.EventHandler(this.btnForeColor_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(376, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Foreground";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(8, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Background";
+            // 
+            // btnColor
+            // 
+            this.btnColor.Location = new System.Drawing.Point(266, 21);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(75, 36);
+            this.btnColor.TabIndex = 1;
+            this.btnColor.Text = "...";
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // btnGreen
+            // 
+            this.btnGreen.BackColor = System.Drawing.Color.PaleGreen;
+            this.btnGreen.Location = new System.Drawing.Point(185, 21);
+            this.btnGreen.Name = "btnGreen";
+            this.btnGreen.Size = new System.Drawing.Size(75, 36);
+            this.btnGreen.TabIndex = 0;
+            this.btnGreen.Text = "Green";
+            this.btnGreen.UseVisualStyleBackColor = false;
+            this.btnGreen.Click += new System.EventHandler(this.btnGreen_Click);
+            // 
+            // btnBlue
+            // 
+            this.btnBlue.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnBlue.Location = new System.Drawing.Point(104, 21);
+            this.btnBlue.Name = "btnBlue";
+            this.btnBlue.Size = new System.Drawing.Size(75, 36);
+            this.btnBlue.TabIndex = 0;
+            this.btnBlue.Text = "Blue";
+            this.btnBlue.UseVisualStyleBackColor = false;
+            this.btnBlue.Click += new System.EventHandler(this.btnBlue_Click);
+            // 
+            // btnRed
+            // 
+            this.btnRed.BackColor = System.Drawing.Color.IndianRed;
+            this.btnRed.Location = new System.Drawing.Point(23, 21);
+            this.btnRed.Name = "btnRed";
+            this.btnRed.Size = new System.Drawing.Size(75, 36);
+            this.btnRed.TabIndex = 0;
+            this.btnRed.Text = "Red";
+            this.btnRed.UseVisualStyleBackColor = false;
+            this.btnRed.Click += new System.EventHandler(this.btnRed_Click);
+            // 
+            // mnuBar
+            // 
+            this.mnuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuFile,
+            this.mnuColor,
+            this.mnuFormat});
+            this.mnuBar.Location = new System.Drawing.Point(0, 0);
+            this.mnuBar.Name = "mnuBar";
+            this.mnuBar.Size = new System.Drawing.Size(613, 24);
+            this.mnuBar.TabIndex = 6;
+            this.mnuBar.Text = "menuStrip1";
+            // 
+            // mnuFile
+            // 
+            this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuOpen,
+            this.toolStripSeparator3,
+            this.mnuSave});
+            this.mnuFile.Name = "mnuFile";
+            this.mnuFile.Size = new System.Drawing.Size(37, 20);
+            this.mnuFile.Text = "File";
+            // 
+            // mnuOpen
+            // 
+            this.mnuOpen.Name = "mnuOpen";
+            this.mnuOpen.Size = new System.Drawing.Size(112, 22);
+            this.mnuOpen.Text = "Open...";
+            this.mnuOpen.Click += new System.EventHandler(this.mnuOpen_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(109, 6);
+            // 
+            // mnuSave
+            // 
+            this.mnuSave.Name = "mnuSave";
+            this.mnuSave.Size = new System.Drawing.Size(112, 22);
+            this.mnuSave.Text = "Save...";
+            this.mnuSave.Click += new System.EventHandler(this.mnuSave_Click);
+            // 
+            // mnuColor
+            // 
+            this.mnuColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRedBg,
+            this.mnuBlueBg,
+            this.mnuGreenBg,
+            this.mnuBg,
+            this.toolStripSeparator1,
+            this.mnuFg});
+            this.mnuColor.Name = "mnuColor";
+            this.mnuColor.Size = new System.Drawing.Size(48, 20);
+            this.mnuColor.Text = "Color";
+            // 
+            // mnuRedBg
+            // 
+            this.mnuRedBg.Name = "mnuRedBg";
+            this.mnuRedBg.Size = new System.Drawing.Size(212, 22);
+            this.mnuRedBg.Text = "Red Background Color";
+            this.mnuRedBg.Click += new System.EventHandler(this.mnuRedBg_Click);
+            // 
+            // mnuBlueBg
+            // 
+            this.mnuBlueBg.Name = "mnuBlueBg";
+            this.mnuBlueBg.Size = new System.Drawing.Size(212, 22);
+            this.mnuBlueBg.Text = "Blue Backgroud Color";
+            this.mnuBlueBg.Click += new System.EventHandler(this.mnuBlueBg_Click);
+            // 
+            // mnuGreenBg
+            // 
+            this.mnuGreenBg.Name = "mnuGreenBg";
+            this.mnuGreenBg.Size = new System.Drawing.Size(212, 22);
+            this.mnuGreenBg.Text = "Green Background Color";
+            this.mnuGreenBg.Click += new System.EventHandler(this.mnuGreenBg_Click);
+            // 
+            // mnuBg
+            // 
+            this.mnuBg.Name = "mnuBg";
+            this.mnuBg.Size = new System.Drawing.Size(212, 22);
+            this.mnuBg.Text = "Other Background Color...";
+            this.mnuBg.Click += new System.EventHandler(this.mnuBg_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
+            // 
+            // mnuFg
+            // 
+            this.mnuFg.Name = "mnuFg";
+            this.mnuFg.Size = new System.Drawing.Size(212, 22);
+            this.mnuFg.Text = "Foreground Color...";
+            this.mnuFg.Click += new System.EventHandler(this.mnuFg_Click);
+            // 
+            // mnuFormat
+            // 
+            this.mnuFormat.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuFont,
+            this.toolStripSeparator2,
+            this.mnuAlignLeft,
+            this.mnuAlignCenter,
+            this.mnuAlignRight});
+            this.mnuFormat.Name = "mnuFormat";
+            this.mnuFormat.Size = new System.Drawing.Size(57, 20);
+            this.mnuFormat.Text = "Format";
+            // 
+            // mnuFont
+            // 
+            this.mnuFont.Name = "mnuFont";
+            this.mnuFont.Size = new System.Drawing.Size(140, 22);
+            this.mnuFont.Text = "Font...";
+            this.mnuFont.Click += new System.EventHandler(this.mnuFont_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(137, 6);
+            // 
+            // mnuAlignLeft
+            // 
+            this.mnuAlignLeft.Image = global::Example2Project.Properties.Resources.left;
+            this.mnuAlignLeft.Name = "mnuAlignLeft";
+            this.mnuAlignLeft.Size = new System.Drawing.Size(140, 22);
+            this.mnuAlignLeft.Text = "Align Left";
+            this.mnuAlignLeft.Click += new System.EventHandler(this.mnuAlignLeft_Click);
+            // 
+            // mnuAlignCenter
+            // 
+            this.mnuAlignCenter.Image = global::Example2Project.Properties.Resources.center;
+            this.mnuAlignCenter.Name = "mnuAlignCenter";
+            this.mnuAlignCenter.Size = new System.Drawing.Size(140, 22);
+            this.mnuAlignCenter.Text = "Align Center";
+            this.mnuAlignCenter.Click += new System.EventHandler(this.mnuAlignCenter_Click);
+            // 
+            // mnuAlignRight
+            // 
+            this.mnuAlignRight.Image = global::Example2Project.Properties.Resources.right;
+            this.mnuAlignRight.Name = "mnuAlignRight";
+            this.mnuAlignRight.Size = new System.Drawing.Size(140, 22);
+            this.mnuAlignRight.Text = "Align Right";
+            this.mnuAlignRight.Click += new System.EventHandler(this.mnuAlignRight_Click);
+            // 
+            // staPage
+            // 
+            this.staPage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.staColor,
+            this.staForeColor});
+            this.staPage.Location = new System.Drawing.Point(0, 394);
+            this.staPage.Name = "staPage";
+            this.staPage.Size = new System.Drawing.Size(613, 22);
+            this.staPage.TabIndex = 7;
+            this.staPage.Text = "statusStrip1";
+            // 
+            // staColor
+            // 
+            this.staColor.Name = "staColor";
+            this.staColor.Size = new System.Drawing.Size(60, 17);
+            this.staColor.Text = "IndianRed";
+            // 
+            // staForeColor
+            // 
+            this.staForeColor.Name = "staForeColor";
+            this.staForeColor.Size = new System.Drawing.Size(0, 17);
+            // 
+            // dlgOpen
+            // 
+            this.dlgOpen.FileName = "mytext1.txt";
+            this.dlgOpen.Filter = "Text File (*.txt) | JSON File (*.json)";
+            // 
+            // dlgSave
+            // 
+            this.dlgSave.FileName = "mytext1.txt";
+            this.dlgSave.Filter = "Text File (*.txt) | JSON File (*.json)";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolLeft,
+            this.toolCenter,
+            this.toolRight});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(613, 25);
+            this.toolStrip1.TabIndex = 8;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolLeft
+            // 
+            this.toolLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolLeft.Image = global::Example2Project.Properties.Resources.left;
+            this.toolLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolLeft.Name = "toolLeft";
+            this.toolLeft.Size = new System.Drawing.Size(23, 22);
+            this.toolLeft.Text = "toolStripButton1";
+            this.toolLeft.Click += new System.EventHandler(this.toolLeft_Click);
+            // 
+            // toolCenter
+            // 
+            this.toolCenter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolCenter.Image = global::Example2Project.Properties.Resources.center;
+            this.toolCenter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolCenter.Name = "toolCenter";
+            this.toolCenter.Size = new System.Drawing.Size(23, 22);
+            this.toolCenter.Text = "toolStripButton2";
+            this.toolCenter.Click += new System.EventHandler(this.toolCenter_Click);
+            // 
+            // toolRight
+            // 
+            this.toolRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolRight.Image = global::Example2Project.Properties.Resources.right;
+            this.toolRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolRight.Name = "toolRight";
+            this.toolRight.Size = new System.Drawing.Size(23, 22);
+            this.toolRight.Text = "toolStripButton3";
+            this.toolRight.Click += new System.EventHandler(this.toolRight_Click);
+            // 
+            // frmEditor
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(613, 416);
+            this.Controls.Add(this.txtEditor);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.pnlBottom);
+            this.Controls.Add(this.staPage);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.mnuBar);
+            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Name = "frmEditor";
+            this.Text = "Editor App";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.mnuEditor.ResumeLayout(false);
+            this.pnlBottom.ResumeLayout(false);
+            this.pnlBottom.PerformLayout();
+            this.mnuBar.ResumeLayout(false);
+            this.mnuBar.PerformLayout();
+            this.staPage.ResumeLayout(false);
+            this.staPage.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.TextBox txtEditor;
+        private System.Windows.Forms.Panel pnlBottom;
+        private System.Windows.Forms.Button btnGreen;
+        private System.Windows.Forms.Button btnBlue;
+        private System.Windows.Forms.Button btnRed;
+        private System.Windows.Forms.Button btnColor;
+        private System.Windows.Forms.ColorDialog dlgColor;
+        private System.Windows.Forms.Button btnForeColor;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MenuStrip mnuBar;
+        private System.Windows.Forms.StatusStrip staPage;
+        private System.Windows.Forms.ToolStripStatusLabel staColor;
+        private System.Windows.Forms.ToolStripStatusLabel staForeColor;
+        private System.Windows.Forms.ToolStripMenuItem mnuFile;
+        private System.Windows.Forms.ToolStripMenuItem mnuColor;
+        private System.Windows.Forms.ToolStripMenuItem mnuRedBg;
+        private System.Windows.Forms.ToolStripMenuItem mnuBlueBg;
+        private System.Windows.Forms.ToolStripMenuItem mnuGreenBg;
+        private System.Windows.Forms.ToolStripMenuItem mnuBg;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mnuFg;
+        private System.Windows.Forms.ContextMenuStrip mnuEditor;
+        private System.Windows.Forms.ToolStripMenuItem mnuRed2;
+        private System.Windows.Forms.ToolStripMenuItem mnuBlue2;
+        private System.Windows.Forms.ToolStripMenuItem mnuGreen2;
+        private System.Windows.Forms.ToolStripMenuItem mnuFormat;
+        private System.Windows.Forms.ToolStripMenuItem mnuFont;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mnuAlignLeft;
+        private System.Windows.Forms.ToolStripMenuItem mnuAlignCenter;
+        private System.Windows.Forms.ToolStripMenuItem mnuAlignRight;
+        private System.Windows.Forms.FontDialog dlgFont;
+        private System.Windows.Forms.ToolStripMenuItem mnuOpen;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mnuSave;
+        private System.Windows.Forms.OpenFileDialog dlgOpen;
+        private System.Windows.Forms.SaveFileDialog dlgSave;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolLeft;
+        private System.Windows.Forms.ToolStripButton toolCenter;
+        private System.Windows.Forms.ToolStripButton toolRight;
+    }
+}
+
+
+```
+Program.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Example2Project
+{
+    internal static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmEditor());
+        }
+    }
+}
+
+``` 
