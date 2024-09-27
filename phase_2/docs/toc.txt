@@ -46,7 +46,8 @@ Windows Presentation Foundation
 			with windows, menus, dialogs, toolbars and other common user interface features
 		9.	Use threading in WPF
 		10.	Create thread and multithread applications using WPF
-		11.	Able to create and use Behaviours to enhance interactivity and reduce code-behind in WPF applications.
+		11.	Able to create and use Behaviours to enhance interactivity and 
+		reduce code-behind in WPF applications.
 		12.	
 	Topics:
 		1.	Introduction to WPF

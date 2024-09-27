@@ -1,0 +1,279 @@
+ProjectName: Example13Project 
+
+        MDI : Not supported by WPF 
+        Alternative is here for MDI. 
+
+App.Xaml
+```
+<Application x:Class="Example13Project.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Example13Project"
+             StartupUri="MenuWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
+```
+
+
+Example13Config.cs  
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Example13Project
+{
+    static class Example13Config
+    {
+        public static MainWindow FrmMain { get; set; } = null;
+        public static SumCalcWindow FrmSumCalc { get; set; } = null;
+    }
+}
+```
+
+
+MainWindow.Xaml 
+```
+<Window x:Class="Example13Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example13Project"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Canvas >
+        <Border Canvas.Left="386" 
+                Canvas.Top="76" 
+                BorderBrush="Black" 
+                BorderThickness="1" Padding="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBlock x:Name="lblCount"  TextWrapping="Wrap" 
+                        Text="0"  
+                        Width="50" Height="50" 
+                        FontSize="18"
+                        TextAlignment="Center"
+                        />
+        </Border>
+        <Button x:Name="btnPlus" Content="+" Canvas.Left="321" Canvas.Top="164" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Height="82" FontSize="36" FontWeight="Bold" Click="btnPlus_Click"/>
+        <Button x:Name="btnMinus" Content="-" Canvas.Left="459" Canvas.Top="166" HorizontalAlignment="Center" VerticalAlignment="Top" Width="82" Height="79" FontSize="36" FontWeight="Bold" Click="btnMinus_Click"/>
+    </Canvas>
+</Window>
+```
+
+
+MainWindow.Xaml.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Example13Project
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+        private int count = 0;
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        {
+            count++;
+            lblCount.Text = count.ToString();
+        }
+
+        private void btnMinus_Click(object sender, RoutedEventArgs e)
+        {
+            count--;
+            lblCount.Text = count.ToString();
+        }
+    }
+}
+
+```
+
+
+SumCalcWindow.xaml
+```
+<Window x:Class="Example13Project.SumCalcWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example13Project"
+        mc:Ignorable="d"
+        Title="SumCalcWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <TextBlock x:Name="lblNumber1" Canvas.Left="159" TextWrapping="Wrap" Text="Number 1" Canvas.Top="63"/>
+        <TextBlock x:Name="lblNumber2" Canvas.Left="160" TextWrapping="Wrap" Text="Number 2" Canvas.Top="143"/>
+        <TextBlock x:Name="lblSum" Canvas.Left="160" TextWrapping="Wrap" Text="Sum" Canvas.Top="224"/>
+        <TextBox x:Name="txtNumber1" Canvas.Left="320" TextWrapping="Wrap" Canvas.Top="64" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtNumber2" Canvas.Left="320" TextWrapping="Wrap" Canvas.Top="144" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtSum" Canvas.Left="320" TextWrapping="Wrap" Canvas.Top="224" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
+        <Button x:Name="btnFindSum" Content="Find Sum" Canvas.Left="319" Canvas.Top="304" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Click="btnFindSum_Click"/>
+
+    </Canvas>
+</Window>
+```
+
+SumCalcWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example13Project
+{
+    /// <summary>
+    /// Interaction logic for SumCalcWindow.xaml
+    /// </summary>
+    public partial class SumCalcWindow : Window
+    {
+        public SumCalcWindow()
+        {
+            InitializeComponent();
+            
+        }
+        private bool IsNum(string numStr)
+        {
+            try {
+                int.Parse(numStr);
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
+        private void btnFindSum_Click(object sender, RoutedEventArgs e)
+        {
+            if(!IsNum(txtNumber1.Text)) {
+                MessageBox.Show("Please enter number1");
+                txtNumber1.Focus();
+                txtNumber1.SelectAll();
+                return;
+            }
+            if (!IsNum(txtNumber2.Text)) {
+                MessageBox.Show("Please enter number2");
+                txtNumber2.Focus();
+                txtNumber2.SelectAll();
+                return;
+            }
+            int number1 = int.Parse(txtNumber1.Text);
+            int number2 = int.Parse(txtNumber2.Text);
+            int sum = number1 + number2;
+            txtSum.Text = sum.ToString();
+        }
+
+        private void btnMenuCounter_Click(object sender, RoutedEventArgs e)
+        {
+            Example13Config.FrmMain.Show();
+            Example13Config.FrmMain.Activate();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel=true;
+            this.Hide();
+        }
+    }
+}
+```
+
+
+MenuWindow.xaml
+```
+<Window x:Class="Example13Project.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example13Project"
+        mc:Ignorable="d"
+        Title="MenuWindow" Height="450" Width="800">
+    <Canvas>
+        <Button x:Name="btnMenuCounter" Content="Counter" Canvas.Left="310" Canvas.Top="144" Width="80" Height="34" RenderTransformOrigin="0.228,0.514" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnMenuCounter_Click"/>
+        <Button x:Name="btnMenuSumCalc" Content="Sum Calc" Canvas.Left="398" Canvas.Top="145" Width="80" Height="34" RenderTransformOrigin="0.228,0.514" Click="btnMenuSumCalc_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+    </Canvas>
+</Window>
+```
+
+
+MenuWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example13Project
+{
+    /// <summary>
+    /// Interaction logic for MenuWindow.xaml
+    /// </summary>
+    public partial class MenuWindow : Window
+    {
+        public MenuWindow()
+        {
+            InitializeComponent();
+            if (Example13Config.FrmMain == null)
+                Example13Config.FrmMain = new MainWindow();
+            if (Example13Config.FrmSumCalc == null)
+                Example13Config.FrmSumCalc = new SumCalcWindow();
+        }
+        private void btnMenuSumCalc_Click(object sender, RoutedEventArgs e)
+        {
+            Example13Config.FrmSumCalc.Show();
+            Example13Config.FrmSumCalc.Activate();
+        }
+
+        private void btnMenuCounter_Click(object sender, RoutedEventArgs e)
+        {
+            Example13Config.FrmMain.Show();
+            Example13Config.FrmMain.Activate();
+        }
+
+        
+    }
+
+    
+
+}
+```
