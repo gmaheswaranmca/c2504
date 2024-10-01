@@ -1,0 +1,861 @@
+App.xaml
+```
+<Application x:Class="Example14Project.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Example14Project"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
+
+```
+
+MainWindow.xaml
+```
+<Window x:Class="Example14Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Brushes and Panels" Height="450" Width="800" Closed="Window_Closed">
+    <Canvas>
+        <Button x:Name="btnSolidColor" Content="Solid Color" Canvas.Left="80" Canvas.Top="64" HorizontalAlignment="Left" VerticalAlignment="Center" Width="158" Height="48" Click="btnSolidColor_Click"/>
+        <Button x:Name="btnLinearGradient" Content="Linear Gradient" Canvas.Left="277" Canvas.Top="66" Width="158" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnLinearGradient_Click"/>
+        <Button x:Name="btnRadialGradient" Content="Radial Gradient" Canvas.Left="478" Canvas.Top="67" Width="158" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnRadialGradient_Click"/>
+        <Button x:Name="btnImage" Content="Image" Canvas.Left="80" Canvas.Top="145" Width="158" Height="48" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnImage_Click"/>
+        <Button x:Name="btnVisual" Content="Visual" Canvas.Left="280" Canvas.Top="145" Width="158" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnVisual_Click"/>
+        <TextBlock Canvas.Left="23" TextWrapping="Wrap" Text="Brushes" Canvas.Top="27"/>
+
+
+        <Button x:Name="btnStack" Content="Stack" Canvas.Left="80" Canvas.Top="261" Width="158" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnStack_Click"/>
+        <Button x:Name="btnWrap" Content="Wrap" Canvas.Left="277" Canvas.Top="263" Width="158" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnWrap_Click"/>
+        <Button x:Name="btnCanvas" Content="Canvas" Canvas.Left="478" Canvas.Top="264" Width="158" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnCanvas_Click"/>
+        <Button x:Name="btnGrid" Content="Grid" Canvas.Left="80" Canvas.Top="342" Width="158" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnGrid_Click"/>
+        <Button x:Name="btnDock" Content="Dock" Canvas.Left="280" Canvas.Top="342" Width="158" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnDock_Click"/>
+        <TextBlock Canvas.Left="23" TextWrapping="Wrap" Text="Panels" Canvas.Top="224" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+    </Canvas>
+</Window>
+
+```
+
+MainWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+            
+        }
+        private void btnSolidColor_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmSolid.Show();
+        }
+        private void btnLinearGradient_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmLinearGradient.Show();
+        }
+        private void btnRadialGradient_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmRadialGradient.Show();
+        }
+        private void btnImage_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmImage.Show();
+        }
+        private void btnVisual_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmVisual.Show();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void btnStack_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmStack.Show();
+        }
+        private void btnWrap_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmWrap.Show();
+        }
+        private void btnCanvas_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmCanvas.Show();
+        }
+        private void btnGrid_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmGrid.Show();
+        }
+        private void btnDock_Click(object sender, RoutedEventArgs e)
+        {
+            FormConfig.FrmDock.Show();
+        }
+    }
+}
+
+```
+
+
+SolidWindow.xaml
+```
+<Window x:Class="Example14Project.SolidWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Solid Brush" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <Rectangle Height="131" Canvas.Left="227" Stroke="Black" Canvas.Top="69" Width="215">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="Aqua"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Ellipse Height="162" Canvas.Left="526" Stroke="Black" Canvas.Top="125" Width="169">
+            <Ellipse.Fill>
+                <SolidColorBrush Color="Orange"/>
+            </Ellipse.Fill>   
+        </Ellipse>
+
+    </Canvas>
+</Window>
+
+```
+
+SolidWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for SolidWindow.xaml
+    /// </summary>
+    public partial class SolidWindow : Window
+    {
+        public SolidWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+LinearGradientWindow.xaml
+```
+<Window x:Class="Example14Project.LinearGradientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Linear Gradient Brush" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <Rectangle Height="131" Canvas.Left="227" Stroke="Black" Canvas.Top="69" Width="215">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Blue" Offset="1" />
+                    <GradientStop Color="Green" Offset="0" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Ellipse Height="162" Canvas.Left="526" Stroke="Black" Canvas.Top="125" Width="169">
+            <Ellipse.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Orange" Offset="0" />
+                    <GradientStop Color="Purple" Offset="0.75" />
+                    <GradientStop Color="Red" Offset="1" />
+                </LinearGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+
+    </Canvas>
+</Window>
+
+```
+
+LinearGradientWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for LinearGradientWindow.xaml
+    /// </summary>
+    public partial class LinearGradientWindow : Window
+    {
+        public LinearGradientWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+
+RadialGradientWindow.xaml
+```
+<Window x:Class="Example14Project.RadialGradientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Radial Gradient Brush" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <Rectangle Height="131" Canvas.Left="227" Stroke="Black" Canvas.Top="69" Width="215">
+            <Rectangle.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="Yellow" Offset="0" />
+                    <GradientStop Color="Green" Offset="1" />
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Ellipse Height="162" Canvas.Left="526" Stroke="Black" Canvas.Top="125" Width="169">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="Yellow" Offset="1" />
+                    <GradientStop Color="Orange" Offset="0" />
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+    </Canvas>
+</Window>
+
+```
+
+RadialGradientWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for RadialGradientWindow.xaml
+    /// </summary>
+    public partial class RadialGradientWindow : Window
+    {
+        public RadialGradientWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+
+ImageWindow.xaml
+```
+<Window x:Class="Example14Project.ImageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Image Brush" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <Ellipse Height="162" Canvas.Left="526" Stroke="Black" Canvas.Top="125" Width="169">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/pattern1.png" Stretch="None" TileMode="FlipXY" Opacity="1" AlignmentX="Center"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Rectangle Height="132" Canvas.Left="348" Stroke="Black" Canvas.Top="187" Width="137" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/parrot.jpg" Stretch="UniformToFill" TileMode="FlipXY" Opacity="0.1" AlignmentX="Center"/>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Canvas>
+</Window>
+
+```
+
+ImageWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for ImageWindow.xaml
+    /// </summary>
+    public partial class ImageWindow : Window
+    {
+        public ImageWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+
+VisualWindow.xaml
+```
+<Window x:Class="Example14Project.VisualWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Visual Brush" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <Ellipse Height="162" Canvas.Left="526" Stroke="Black" Canvas.Top="125" Width="169">
+            <Ellipse.Fill>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <TextBlock Text="Hello World" Foreground="Red" FontSize="30"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Rectangle Height="132" Canvas.Left="348" Stroke="Black" Canvas.Top="187" Width="137" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Rectangle.Fill>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <TextBlock Text="Hello World" Foreground="Red" FontSize="30"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Canvas>
+</Window>
+
+```
+
+VisualWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for VisualWindow.xaml
+    /// </summary>
+    public partial class VisualWindow : Window
+    {
+        public VisualWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+
+StackWindow.xaml
+```
+<Window x:Class="Example14Project.StackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Stack Panel" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <StackPanel Orientation="Horizontal"
+                    Canvas.Left="100" Canvas.Top="100"
+                    Width="400" Height="100">
+            <Button Content="Button 1" Width="140"/>
+            <Button Content="Button 2" Width="140"/>
+            <Button Content="Button 3" Width="140"/>
+            <Button Content="Button 4" Width="140"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical"
+            Canvas.Left="550" Canvas.Top="50"
+            Width="100" Height="300">
+            <Button Content="Button 1" Height="110"/>
+            <Button Content="Button 2" Height="110"/>
+            <Button Content="Button 3" Height="110"/>
+            <Button Content="Button 4" Height="110"/>
+        </StackPanel>
+    </Canvas>
+</Window>
+
+```
+
+StackWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for StackWindow.xaml
+    /// </summary>
+    public partial class StackWindow : Window
+    {
+        public StackWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+
+WrapWindow.xaml
+```
+<Window x:Class="Example14Project.WrapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Wrap Panel" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <WrapPanel Orientation="Horizontal"
+            Canvas.Left="100" Canvas.Top="100"
+            Width="400" Height="100">
+            <Button Content="Button 1" Width="140"/>
+            <Button Content="Button 2" Width="140"/>
+            <Button Content="Button 3" Width="140"/>
+            <Button Content="Button 4" Width="140"/>
+        </WrapPanel>
+        <WrapPanel Orientation="Vertical"
+    Canvas.Left="550" Canvas.Top="50"
+    Width="100" Height="300">
+            <Button Content="Button 1" Height="110"/>
+            <Button Content="Button 2" Height="110"/>
+            <Button Content="Button 3" Height="110"/>
+            <Button Content="Button 4" Height="110"/>
+        </WrapPanel>
+    </Canvas>
+</Window>
+
+```
+
+WrapWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for WrapWindow.xaml
+    /// </summary>
+    public partial class WrapWindow : Window
+    {
+        public WrapWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+
+DockWindow.xaml
+```
+<Window x:Class="Example14Project.DockWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Dock Panel" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <DockPanel LastChildFill="True" Canvas.Left="10" Canvas.Top="10"
+                   Width="400" Height="400">            
+            <Button Content="Top Button" DockPanel.Dock="Top"/>
+            <Button Content="Top Button" DockPanel.Dock="Top"/>
+            <Button Content="Bottom Button" DockPanel.Dock="Bottom"/>
+            <Button Content="Left Button" DockPanel.Dock="Left"/>
+            <Button Content="Right Button" DockPanel.Dock="Right"/>
+            
+            <Button Content="Main Content"/>
+        </DockPanel>
+
+        <DockPanel LastChildFill="True" Canvas.Left="450" Canvas.Top="10"
+           Width="300" Height="300">
+            <Button Content="Top Button" DockPanel.Dock="Top"/>
+            <Button Content="Right Button" DockPanel.Dock="Right"/>
+            <Button Content="Main Content"/>
+        </DockPanel>
+    </Canvas>
+</Window>
+
+```
+
+DockWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for DockWindow.xaml
+    /// </summary>
+    public partial class DockWindow : Window
+    {
+        public DockWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+
+CanvasWindow.xaml
+```
+<Window x:Class="Example14Project.CanvasWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Canvas Panel" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas Width="330" Height="328"
+         Background="Bisque" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <TextBlock Canvas.Left="-2" TextWrapping="Wrap" Text="Time" Canvas.Top="9" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="158" TextWrapping="Wrap" Text="09:00" Canvas.Top="6" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Canvas.Left="4" TextWrapping="Wrap" Text="Itenary" Canvas.Top="69" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="160" TextWrapping="Wrap" Text="Napier Musiem" Canvas.Top="66" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Canvas.Left="4" TextWrapping="Wrap" Text="Description" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="160" TextWrapping="Wrap" Text="Explore the rich collection of historical artifacts and art pieces at the Napier Museum, an architectural gem that offers a glimpse into Kerala's rich cultural heritage." Canvas.Top="124" Width="125" HorizontalAlignment="Center" VerticalAlignment="Top" Height="65"/>
+        <TextBlock Canvas.Left="3" TextWrapping="Wrap" Text="Price" Canvas.Top="229" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="160" TextWrapping="Wrap" Text="Rs.20" Canvas.Top="226" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.417,3.621"/>
+        <Button Content="Create Itenary" Canvas.Top="274" HorizontalAlignment="Center" VerticalAlignment="Top" Width="160"/>
+
+    </Canvas>
+</Window>
+
+```
+
+CanvasWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for CanvasWindow.xaml
+    /// </summary>
+    public partial class CanvasWindow : Window
+    {
+        public CanvasWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+
+GridWindow.xaml
+```
+<Window x:Class="Example14Project.GridWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="Grid Panel" Height="450" Width="800" Closing="Window_Closing">
+    
+        <Grid Background="AliceBlue" >
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="Time"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" Text="09:00"   HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Itenary"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Text="Napier Musiem" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Description"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Text="Explore the rich collection of historical artifacts and art pieces at the Napier Museum, an architectural gem that offers a glimpse into Kerala's rich cultural heritage." HorizontalAlignment="Left" VerticalAlignment="Top" Height="65"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" Text="Price"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Text="Rs.20" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Button Grid.Row="4" Grid.Column="0" Content="Create Itenary"  HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" />
+        </Grid>
+       
+    
+</Window>
+
+```
+
+GridWindow.xaml.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for GridWindow.xaml
+    /// </summary>
+    public partial class GridWindow : Window
+    {
+        public GridWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+```
+
+FormConfig.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace Example14Project
+{
+    static class FormConfig
+    {
+        public static Window FrmSolid { get; set; } = new SolidWindow();
+        public static Window FrmLinearGradient { get; set; } = new LinearGradientWindow();
+        public static Window FrmRadialGradient { get; set; } = new RadialGradientWindow();
+        public static Window FrmImage { get; set; } = new ImageWindow();
+        public static Window FrmVisual { get; set; } = new VisualWindow();
+
+        public static Window FrmStack { get; set; } = new StackWindow();
+        public static Window FrmWrap { get; set; } = new WrapWindow();
+        public static Window FrmCanvas { get; set; } = new CanvasWindow();
+        public static Window FrmGrid { get; set; } = new GridWindow();
+        public static Window FrmDock { get; set; } = new DockWindow();
+
+    }
+}
+
+```

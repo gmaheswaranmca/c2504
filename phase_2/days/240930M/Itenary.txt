@@ -1,0 +1,31 @@
+DayItenary 
+    - ID 
+    - Time 
+    - Itenary 
+    - Description 
+    - Price 
+
+Itenary List   !!! IternaryListWindow.xaml
+    <New Itenary>  
+    ID Time     Itenary         About       Price 
+    1  09:00    
+
+    <Edit>    <Delete> 
+
+New Itenary 
+    ID          :
+    Time        :
+    Itenary     :
+    About       : 
+    Price       :   
+
+    <Create Itenary>
+
+Edit Itenary 
+    ID          :
+    Time        :
+    Itenary     :
+    About       : 
+    Price       :   
+
+    <Update Itenary>

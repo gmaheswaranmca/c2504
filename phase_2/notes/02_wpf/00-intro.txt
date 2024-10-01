@@ -111,7 +111,8 @@ Here are the key types of brushes in WPF:
    - Usage: Commonly used for backgrounds and borders where only a single color is needed.
 
 2. LinearGradientBrush
-   - Purpose: Fills an area with a linear gradient that transitions between two or more colors.
+   - Purpose: Fills an area with a linear gradient that 
+   transitions between two or more colors.
    - Example:
      ```xml
      <Rectangle Width="100" Height="100">
@@ -126,7 +127,8 @@ Here are the key types of brushes in WPF:
    - Usage: Useful for creating smooth color transitions (e.g., from top to bottom or left to right).
 
 3. RadialGradientBrush
-   - Purpose: Fills an area with a radial gradient that spreads from a central point outward.
+   - Purpose: Fills an area with a radial gradient 
+   that spreads from a central point outward.
    - Example:
      ```xml
      <Ellipse Width="100" Height="100">

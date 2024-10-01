@@ -1,0 +1,709 @@
+
+    Write a function in C# that takes an integer as input and returns the exponent of 2 for that integer. The input integer must be a positive power of 2. If the input is not a positive power of 2, the function should throw an appropriate exception.
+    using System;
+
+    class Program
+    {
+        static void Main()
+        {
+            int number = 16; // Example number
+            int exponent = GetExponentOf2(number);
+            Console.WriteLine($"The exponent of 2 for {number} is {exponent}");
+        }
+
+        static int GetExponentOf2(int number)
+        {
+            if (number <= 0 || (number & (number - 1)) != 0)
+            {
+                throw new ArgumentException("The number must be a positive power of 2.");
+            }
+
+            int exponent = 0;
+            while (number > 1)
+            {
+                number >>= 1; // Right shift the number by 1 (divide by 2)
+                exponent++;
+            }
+
+            return exponent;
+        }
+    }
+    You can create a program in C# to print numbers from 1 to 100, replacing multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both 3 and 5 with "FizzBuzz".
+
+    using System;
+
+    class Program
+    {
+        static void Main()
+        {
+            for (int i = 1; i <= 100; i++)
+            {
+                if (i % 3 == 0 && i % 5 == 0)
+                {
+                    Console.WriteLine("FizzBuzz");
+                }
+                else if (i % 3 == 0)
+                {
+                    Console.WriteLine("Fizz");
+                }
+                else if (i % 5 == 0)
+                {
+                    Console.WriteLine("Buzz");
+                }
+                else
+                {
+                    Console.WriteLine(i);
+                }
+            }
+        }
+    }
+    using System;
+
+    class Program
+    {
+        static void Main()
+        {
+            for (int i = 1; i <= 100; i++)
+            {
+                bool divisibleBy3 = i % 3 == 0;
+                bool divisibleBy5 = i % 5 == 0;
+
+                if (divisibleBy3 && divisibleBy5)
+                {
+                    Console.WriteLine("FizzBuzz");
+                }
+                else
+                {
+                    if (divisibleBy3)
+                    {
+                        Console.WriteLine("Fizz");
+                    }
+                    if (divisibleBy5)
+                    {
+                        Console.WriteLine("Buzz");
+                    }
+                    if (!divisibleBy3 && !divisibleBy5)
+                    {
+                        Console.WriteLine(i);
+                    }
+                }
+            }
+        }
+    }
+    *Updated Problem Statement:*
+
+    Write a function in C# that takes an integer as input and returns the exponent of 2 for that integer. The input integer must be a positive power of 2. If the input is not a positive power of 2, the function should return -1.
+    using System;
+
+    class Program
+    {
+        static void Main()
+        {
+            int number = 16; // Example number
+            int exponent = GetExponentOf2(number);
+            if (exponent != -1)
+            {
+                Console.WriteLine($"The exponent of 2 for {number} is {exponent}");
+            }
+            else
+            {
+                Console.WriteLine($"{number} is not a positive power of 2");
+            }
+        }
+
+        static int GetExponentOf2(int number)
+        {
+            if (number <= 0 || (number & (number - 1)) != 0)
+            {
+                return -1; // Not a power of 2
+            }
+
+            int exponent = 0;
+            while (number > 1)
+            {
+                number >>= 1; // Right shift the number by 1 (divide by 2)
+                exponent++;
+            }
+
+            return exponent;
+        }
+    }
+
+    Create an abstract class Shape with an abstract method Area(). Then, define a Rectangle class that inherits from the Shape class and implements the Area() method to calculate the area of the rectangle. Finally, demonstrate how to call the Area() method using a reference of type Shape that points to an instance of Rectangle.
+    using System;
+
+    abstract class Shape
+    {
+        // Abstract method for calculating area
+        public abstract double Area();
+    }
+
+    class Rectangle : Shape
+    {
+        private double length;
+        private double width;
+
+        // Constructor to initialize the length and width of the rectangle
+        public Rectangle(double length, double width)
+        {
+            this.length = length;
+            this.width = width;
+        }
+
+        // Override the Area method to calculate the area of the rectangle
+        public override double Area()
+        {
+            return length * width;
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            // Create a Rectangle object
+            Shape shape = new Rectangle(5.0, 3.0);
+
+            // Call the Area method using the Shape reference
+            double area = shape.Area();
+            Console.WriteLine($"The area of the rectangle is: {area}");
+        }
+    }
+
+    *Problem Statement:*
+
+    Create an abstract class Animal with an abstract method MakeSound(). Then, define two classes, Cat and Dog, that inherit from the Animal class and implement the MakeSound() method to simulate the sounds a cat and a dog make, respectively. Demonstrate calling the MakeSound() method for both Cat and Dog objects.    using System;
+
+    abstract class Animal
+    {
+        // Abstract method for making a sound
+        public abstract void MakeSound();
+    }
+
+    class Cat : Animal
+    {
+        // Override the MakeSound method to simulate a cat's sound
+        public override void MakeSound()
+        {
+            Console.WriteLine("Meow");
+        }
+    }
+
+    class Dog : Animal
+    {
+        // Override the MakeSound method to simulate a dog's sound
+        public override void MakeSound()
+        {
+            Console.WriteLine("Woof");
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            // Create a Cat object
+            Animal cat = new Cat();
+            cat.MakeSound(); // Output: Meow
+
+            // Create a Dog object
+            Animal dog = new Dog();
+            dog.MakeSound(); // Output: Woof
+        }
+    }
+
+    *Problem Statement:*
+
+    Create a base class Product with a virtual method Display(). Then, define two derived classes: ElectronicProduct with properties {Name, Price, WarrantyPeriod} and GroceryProduct with properties {Name, Price, ExpiryDate}. Implement the Display() method in both derived classes to output the details of the products. Finally, create objects of both ElectronicProduct and GroceryProduct, and demonstrate displaying their details using the Display() method.
+    using System;
+
+    class Product
+    {
+        public string Name { get; set; }
+        public double Price { get; set; }
+
+        // Virtual method for displaying product details
+        public virtual void Display()
+        {
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"Price: {Price}");
+        }
+    }
+
+    class ElectronicProduct : Product
+    {
+        public int WarrantyPeriod { get; set; } // Warranty period in months
+
+        // Override the Display method to include WarrantyPeriod
+        public override void Display()
+        {
+            base.Display(); // Call the base class Display method
+            Console.WriteLine($"Warranty Period: {WarrantyPeriod} months");
+        }
+    }
+
+    class GroceryProduct : Product
+    {
+        public DateTime ExpiryDate { get; set; }
+
+        // Override the Display method to include ExpiryDate
+        public override void Display()
+        {
+            base.Display(); // Call the base class Display method
+            Console.WriteLine($"Expiry Date: {ExpiryDate.ToShortDateString()}");
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            // Create an ElectronicProduct object
+            ElectronicProduct laptop = new ElectronicProduct
+            {
+                Name = "Laptop",
+                Price = 1200.99,
+                WarrantyPeriod = 24
+            };
+
+            // Create a GroceryProduct object
+            GroceryProduct milk = new GroceryProduct
+            {
+                Name = "Milk",
+                Price = 2.99,
+                ExpiryDate = new DateTime(2024, 9, 10)
+            };
+
+            // Display details of both products
+            Console.WriteLine("Electronic Product Details:");
+            laptop.Display();
+
+            Console.WriteLine("\nGrocery Product Details:");
+            milk.Display();
+        }
+    }
+
+    For dynamic binding
+    class Program
+    {
+        static void Main()
+        {
+            // Create a reference of type Product and assign an ElectronicProduct object
+            Product product1 = new ElectronicProduct
+            {
+                Name = "Laptop",
+                Price = 1200.99,
+                WarrantyPeriod = 24
+            };
+
+            // Create another reference of type Product and assign a GroceryProduct object
+            Product product2 = new GroceryProduct
+            {
+                Name = "Milk",
+                Price = 2.99,
+                ExpiryDate = new DateTime(2024, 9, 10)
+            };
+
+            // Display details using dynamic binding
+            Console.WriteLine("Electronic Product Details:");
+            product1.Display(); // Calls ElectronicProduct's Display method
+            Console.WriteLine();
+
+            Console.WriteLine("Grocery Product Details:");
+            product2.Display(); // Calls GroceryProduct's Display method
+        }
+    }
+
+    Tell about you.
+    Asked about loops.
+    Asked about Topics covered.
+
+    Problem Statement:
+
+    Write a function in C# that takes an integer as input and checks whether the number is positive, negative, or zero. The function should return "Positive" if the number is greater than zero, "Negative" if the number is less than zero, and "Zero" if the number is equal to zero. Demonstrate the function by passing different integers and displaying the corresponding return value.
+
+    using System;
+
+    class Program
+    {
+        static void Main()
+        {
+            // Test the function with different integers
+            Console.WriteLine(CheckNumber(10));    // Output: Positive
+            Console.WriteLine(CheckNumber(-5));    // Output: Negative
+            Console.WriteLine(CheckNumber(0));     // Output: Zero
+        }
+
+        static string CheckNumber(int number)
+        {
+            if (number > 0)
+            {
+                return "Positive";
+            }
+            else if (number < 0)
+            {
+                return "Negative";
+            }
+            else
+            {
+                return "Zero";
+            }
+        }
+    }
+
+    [4:46 pm, 29/8/2024] Maheswaran Govindaraju: Write a function in C# that takes a string as input and counts the number of characters in the string using a while loop. The function should return the total count of characters. Demonstrate the function by passing a string and displaying the character count.
+    [4:48 pm, 29/8/2024] Maheswaran Govindaraju: Write a function in C# that takes a string as input and counts the number of characters in the string using a for loop. The function should return the total count of characters. Demonstrate the function by passing a string and displaying the character count.
+    [4:54 pm, 29/8/2024] Maheswaran Govindaraju: Write a function in C# that takes a string as input and counts the number of characters in the string using a foreach loop. The function should return the total count of characters. Demonstrate the function by passing a string and displaying the character count.
+    using System;
+
+    class Program
+    {
+        static void Main()
+        {
+            string input = "Hello, World!";
+            int characterCount = CountCharacters(input);
+            Console.WriteLine($"The number of characters in the string is: {characterCount}");
+        }
+
+        static int CountCharacters(string str)
+        {
+            int count = 0;
+
+            foreach (char c in str)
+            {
+                count++;
+            }
+
+            return count;
+        }
+    }
+Anugrah 
+    1. Use of inheritance .
+    2. Purpose of a base class.
+    3. Does abstract method have a definition inside abstract class.
+    4. Can we create an object for abstract class 
+    5. What is a compiler
+    6. How will you fix errors in your code
+    7. Debugger
+    8. Version of .net we are using 
+    9. .net architecture 
+    10. Solution explorer 
+    11. Exception handling 
+    12. Threading
+    13. Questions regarding College main project 
+    14. Creating an application that displays images in a given folder (approach and view on this)
+
+Anjana NK
+    1.what is class ,object 
+    2.Fundamental concepts in oops
+    3.What is Hierarchical inheritance.Write program for that. While writing the code ,asked questions related to code and also related to object creation.
+    4.Abstract class , Abstract method.
+    5.What is Polymorphism.Write a program for Run time polymorphism.Questions related to code were asked
+    6.What is Namespace
+    7.Static class and partial class
+    8.what are the Access modifiers in c# .
+    9.Difference between internal and  protected internal 
+    10. What is interface . Is  interface can object. Write program for interface
+    11. What is Enum .what is it's purpose 
+    12. What is continue statement.what is it's purpose 
+    13. What is CLR
+
+    Problem Statement:
+
+    Create a C# program with two classes: Employee and EmployeeManagement.
+
+    Class Employee:
+
+    Properties: Id (int), Name (string), and IsHandicapped (bool) to indicate if the employee is handicapped.
+    Class EmployeeManagement:
+
+    Contains a list of Employee objects.
+    Methods:
+    AddEmployee(Employee employee): Adds an employee to the list.
+    DisplayAllEmployees(): Displays the details of all employees.
+    DisplayHandicappedEmployees(): Displays the details of employees who are handicapped.
+    RemoveHandicappedEmployees(): Removes all employees who are handicapped from the list.
+    Demonstrate the functionality by:
+
+    Creating several Employee objects.
+    Adding them to an EmployeeManagement instance.
+    Calling methods to display all employees, display handicapped employees, and remove handicapped employees, showing the updated list after removal.
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    class Employee
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsHandicapped { get; set; }
+
+        public Employee(int id, string name, bool isHandicapped)
+        {
+            Id = id;
+            Name = name;
+            IsHandicapped = isHandicapped;
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {Id}, Name: {Name}, Handicapped: {IsHandicapped}";
+        }
+    }
+
+    class EmployeeManagement
+    {
+        private List<Employee> employees = new List<Employee>();
+
+        // Add an employee to the list
+        public void AddEmployee(Employee employee)
+        {
+            employees.Add(employee);
+        }
+
+        // Display all employees
+        public void DisplayAllEmployees()
+        {
+            foreach (var employee in employees)
+            {
+                Console.WriteLine(employee);
+            }
+        }
+
+        // Display handicapped employees
+        public void DisplayHandicappedEmployees()
+        {
+            var handicappedEmployees = employees.Where(e => e.IsHandicapped).ToList();
+            foreach (var employee in handicappedEmployees)
+            {
+                Console.WriteLine(employee);
+            }
+        }
+
+        // Remove all handicapped employees
+        public void RemoveHandicappedEmployees()
+        {
+            employees = employees.Where(e => !e.IsHandicapped).ToList();
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            // Create EmployeeManagement instance
+            EmployeeManagement empManagement = new EmployeeManagement();
+
+            // Add employees
+            empManagement.AddEmployee(new Employee(1, "John Doe", false));
+            empManagement.AddEmployee(new Employee(2, "Jane Smith", true));
+            empManagement.AddEmployee(new Employee(3, "Alice Johnson", false));
+            empManagement.AddEmployee(new Employee(4, "Bob Brown", true));
+
+            // Display all employees
+            Console.WriteLine("All Employees:");
+            empManagement.DisplayAllEmployees();
+            Console.WriteLine();
+
+            // Display handicapped employees
+            Console.WriteLine("Handicapped Employees:");
+            empManagement.DisplayHandicappedEmployees();
+            Console.WriteLine();
+
+            // Remove handicapped employees
+            empManagement.RemoveHandicappedEmployees();
+
+            // Display all employees after removal
+            Console.WriteLine("All Employees After Removal:");
+            empManagement.DisplayAllEmployees();
+        }
+    }
+Alan 
+    1.write a function to return odd or even
+    2.create another private method and 
+    store that function into an integer variable 
+    3.find top 5 students with highest mark from a student table
+    4.find total number of students  ,
+    avoid counting student name multiple time from a table.
+    5. Static and abstract class difference 
+    6. Abstract and virtual method
+    7. Access specifiers
+    8. Private and protected difference 
+    9. Scrum
+    10. Write switch case with 3 cases
+    11. What will happen if case one is called and 
+    there is no break statement in it. 
+    And what will happen if there is no condition in case one
+Rishwin 
+    1. Write a program to find the highest number from 10 numbers.
+    (user should input numbers)
+    2. Told me to clarify the question , 
+    like to ask him questions about the problem.
+    3. The highest number should be returned from a function , 
+    do exception handling , do unit testing.
+
+Gladsy
+    .flowchart related questions 
+    .what is database
+    . oops concepts 
+    .advantage of abstract over interface.
+    .what is normalisation
+    . CLR 
+    Client server architecture 
+    .what is for loop,while loop,nested if,switch,do while
+    . advantages of web applications 
+    .static and dynamic pages
+    .write select,update,queries
+    .what is nested queries
+    .joins
+    . different type of keys
+    . static class ,abstract class
+    .casing of method name and its parameters
+    .coding standards 
+    . From the given table explain how normalisation is performed.
+    .explain a particular pyramid pattern can build.
+    .coding question:
+    Write a C# program that continuously prompts the user to enter a number. The program should add the entered number to the previous valid number if it is divisible by 3 or 5 and display the sum. If the number is not divisible by 3 or 5, display a message indicating this. The program should terminate when the user types any particular character. Additionally, handle invalid input by prompting the user to enter a valid number.
+    . Overriding question for class    vehicle and derived class car
+Ann Maria
+    What is the difference in Java and c#
+    What is platform independent 
+    .net framework 
+    .net core
+    What is oops
+    What is paradigm 
+    Difference between oops and functional programming 
+    Method over loading and overriding with examples in c#
+    What is abstract class
+    Example for abstract class
+    What is final class
+
+    No coding questions
+
+Ashna Maria
+    1.What are access modifiers in C#?
+    2.What is the difference between public and protected 
+    3.What is encapsulation 
+    4.What is inheritance 
+    5.Explain hierarchical inheritance 
+    6. Abstraction
+    7.Write a program to read 10 numbers from the user, find their sum, and handle possible exceptions.
+    What programming languages are covered in the MCA  then asked what is the difference between C and C++
+    Asked to open the inherence program done in class and asked questions from it
+    These are the questions  asked in the interview
+    In visual studio
+
+Ashwin 30/8/24. 2:30 - 3 
+    Explain OOPS concepts briefly 
+    Explain polymorphism 
+    Explain abstraction
+    Explain encapsulation 
+    Compare abstractiona nd encapsulation
+    Explain method overloading and overriding with example 
+    How error handling is done
+    How debugging is done
+    What are coding standards
+    No coding qn asked
+
+Sahla
+    1.Overriding and overloading difference
+    2.use of throw new Argument exception
+    3.overloading example
+    4.overriding example
+    5.inheritance and abstraction difference
+    6.main concepts  of oops
+    7.what is oops
+    8. what is a class
+    9. ⁠use of try and catch
+    10. ⁠difference between properties and fields
+    11. ⁠use of get and set
+
+    asked to explain a code  of inheritance ,that we have done before
+
+    no new coding questions were asked
+
+
+Girish
+    -Introduce first
+    -Why you into computer engineering field
+    -What are the responsibilities of computer engineer
+    -What have you learned in training
+    -shown a code of (virtual and override used it) then 
+    what are oops concept used in it?asked qn from code and about output
+
+    -what is oops
+    -what is encapsulation
+    -types of polymorphism
+    -What is interface? Is possible to have mutiple interface in same class
+    -what is abstraction
+
+    - what is a constructor
+    - what is copy constructor
+    -what is an abstract class
+
+    -what is assembly language
+    -High level language, does c#  
+    High level?
+
+    -Given a question to code....
+
+    - Datatypes in c#
+    - static method
+    - static class
+    -why database
+    -what is normalization
+    -foriegn key
+    -use of index
+    -types of index and  is it possible to have 2 clustured index
+    -how to connect a databese
+
+    -Design pattern
+    -web application 
+    -how to connect client and server 
+    -how to handle exception
+    -what is logger
+    -what is CLR 
+    C# Online Compiler | .NET Fiddle (dotnetfiddle.net)
+    C# Online Compiler | .NET Fiddle
+    Test your C# code online with .NET Fiddle code editor.    
+    Calculate discounted amount based on below criteria    
+    - Age less than 10 years apply 50 % discount
+    - Age between 11 - 18 apply 55 %
+    - Age between 19 - 60 no discount
+    - Age above 61 - Apply 65 %    
+    Input - Date of birth and actual amount.
+    Use static method
+    -features of c#
+
+Dijol 
+    1.Introduce yourself
+    2.Partial class and why it is using ,whether it can be used for small projects also?
+    3.String Builder
+    4.Constructor Chaining
+    5.Static class and Abstract cls difference
+    6.Encapsulation why it is using
+    7.Const and readonly difference 
+    8.Why should we use an abstract class when encapsulation can be achieved with a
+    normal class by making fields private and exposing relevant details through 
+    properties or methods?
+    9.Can a derived class in C# use parameters from the parent class constructor in its own constructor? 
+    If yes, how can this be achieved?
+    10.why we are using Interfaces and why multiple inheritence is not supported
+    11.How we can destroy the methods
+    12.How can we ensure that cleanup is performed when an object is destroyed, similar to destructors in C#?
+    13.What is a Garbage collector
+    14.PSUEDOCODE for reversing a string without using any buildin functions
+    15.Private constructor also
+    16.College project details
+
+Athulya,
+    Questions
+    Introduce yourself
+    Types of classes
+    Abstract class implementation 
+    What is exception handling 
+    Declare a constructor and explain parameters 
+    Pass values :code
+    Sum of digits: code
+    Implement a code which explains the features of oops concept 
+    (Explain Inheritance  overriding and overloading with example ): code

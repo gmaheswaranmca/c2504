@@ -1,0 +1,266 @@
+Model : Iternary {Id, Time, IternaryName, About, Price}.
+Here Id is auto generated number. Price is double. 
+All other properties are string.
+Views: 
+    Add Iternary Window and 
+    Iternary List Window. 
+We have main window named Itenary List Window. 
+On New Itenary button on Itenary List Window will 
+open the New Iternary Window. 
+
+The instance of the New Itenary Window is maintained 
+IternaryConfig static class as property.
+This instance is called from Iternary List Window. 
+
+Name ViewModel is IternaryViewModel.
+IternaryViewModel 
+    has 
+        properties SelectedIternary 
+        and Itenaries
+        and CreateIternary command to add new itenary. 
+
+Conduct databinding using MVVM.
+
+
+
+
+
+Here’s a basic structure 
+for creating a WPF application with a 
+Contact Form using the MVVM pattern. 
+The application will include 
+an Add Contact, 
+Edit Contact, and 
+Table Page to display all contacts.
+
+MVVM Structure:
+1. Model: Represents the data structure (Contact).
+2. ViewModel: Handles the business logic and data binding.
+3. View: Represents the UI (XAML).
+
+1. Model (Contact.cs):
+Define a `Contact` class with properties like Name, Phone, Email, Type, and Priority.
+
+```csharp
+public class Contact
+{
+    public string Name { get; set; }
+    public string Phone { get; set; }
+    public string Email { get; set; }
+    public string Type { get; set; } // Home or Office
+    public int Priority { get; set; } // 1 to 5
+}
+```
+
+2. ViewModel (ContactsViewModel.cs):
+The ViewModel will handle adding, editing, and storing contacts.
+
+```csharp
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+public class ContactsViewModel : INotifyPropertyChanged
+{
+    private Contact _selectedContact;
+    
+    public ObservableCollection<Contact> Contacts { get; set; }
+    public Contact SelectedContact
+    {
+        get { return _selectedContact; }
+        set { _selectedContact = value; OnPropertyChanged(); }
+    }
+
+    public ContactsViewModel()
+    {
+        Contacts = new ObservableCollection<Contact>();
+        SelectedContact = new Contact();
+    }
+
+    // Command to Add Contact
+    public void AddContact()
+    {
+        Contacts.Add(new Contact
+        {
+            Name = SelectedContact.Name,
+            Phone = SelectedContact.Phone,
+            Email = SelectedContact.Email,
+            Type = SelectedContact.Type,
+            Priority = SelectedContact.Priority
+        });
+        SelectedContact = new Contact(); // Reset after adding
+    }
+
+    // Command to Edit Contact
+    public void EditContact(Contact contact)
+    {
+        // Logic to edit a contact (based on index or other mechanism)
+    }
+
+    // INotifyPropertyChanged implementation
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string name = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+}
+```
+
+3. View (AddContactView.xaml):
+A form to add or edit contacts. 
+The `Type` is represented with radio buttons, 
+and `Priority` is a ComboBox.
+
+```xml
+<Window x:Class="ContactApp.AddContactView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Contact" Height="350" Width="400">
+    <Grid>
+        <StackPanel Margin="20">
+            <TextBlock Text="Name" />
+            <TextBox Text="{Binding SelectedContact.Name}" />
+
+            <TextBlock Text="Phone" Margin="0,10,0,0" />
+            <TextBox Text="{Binding SelectedContact.Phone}" />
+
+            <TextBlock Text="Email" Margin="0,10,0,0" />
+            <TextBox Text="{Binding SelectedContact.Email}" />
+
+            <TextBlock Text="Type" Margin="0,10,0,0" />
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Content="Home" GroupName="Type" 
+                             IsChecked="{Binding SelectedContact.Type, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Home}" />
+                <RadioButton Content="Office" GroupName="Type" 
+                             IsChecked="{Binding SelectedContact.Type, Converter={StaticResource StringToBooleanConverter}, ConverterParameter=Office}" />
+            </StackPanel>
+
+            <TextBlock Text="Priority" Margin="0,10,0,0" />
+            <ComboBox SelectedValue="{Binding SelectedContact.Priority}">
+                <ComboBoxItem Content="1" />
+                <ComboBoxItem Content="2" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="4" />
+                <ComboBoxItem Content="5" />
+            </ComboBox>
+
+            <Button Content="Add Contact" Command="{Binding AddContactCommand}" Margin="0,20,0,0" />
+        </StackPanel>
+    </Grid>
+</Window>
+```
+
+4. View (ContactsTableView.xaml):
+This view displays all the contacts in a simple table.
+
+```xml
+<Window x:Class="ContactApp.ContactsTableView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Contacts" Height="350" Width="400">
+    <Grid>
+        <DataGrid ItemsSource="{Binding Contacts}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
+```
+
+5. MainWindow.xaml:
+The main window can serve as a navigation point between Add Contact and Contacts Table.
+
+```xml
+<Window x:Class="ContactApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Main Window" Height="300" Width="300">
+    <StackPanel Margin="20">
+        <Button Content="Add Contact" Command="{Binding NavigateToAddContactCommand}" />
+        <Button Content="View Contacts" Command="{Binding NavigateToContactsTableCommand}" />
+    </StackPanel>
+</Window>
+```
+
+6. MainViewModel.cs:
+This ViewModel will manage the navigation between different pages (Add Contact and Contacts Table).
+
+```csharp
+public class MainViewModel
+{
+    public ICommand NavigateToAddContactCommand { get; }
+    public ICommand NavigateToContactsTableCommand { get; }
+
+    public MainViewModel()
+    {
+        NavigateToAddContactCommand = new RelayCommand(NavigateToAddContact);
+        NavigateToContactsTableCommand = new RelayCommand(NavigateToContactsTable);
+    }
+
+    private void NavigateToAddContact()
+    {
+        // Logic to navigate to AddContactView
+        var addContactView = new AddContactView();
+        addContactView.DataContext = new ContactsViewModel();
+        addContactView.Show();
+    }
+
+    private void NavigateToContactsTable()
+    {
+        // Logic to navigate to ContactsTableView
+        var contactsTableView = new ContactsTableView();
+        contactsTableView.DataContext = new ContactsViewModel();
+        contactsTableView.Show();
+    }
+}
+```
+
+7. RelayCommand.cs (Helper class for commands):
+Implement the `RelayCommand` to handle button commands in the ViewModel.
+
+```csharp
+using System;
+using System.Windows.Input;
+
+public class RelayCommand : ICommand
+{
+    private Action _execute;
+    private Func<bool> _canExecute;
+
+    public RelayCommand(Action execute, Func<bool> canExecute = null)
+    {
+        _execute = execute;
+        _canExecute = canExecute;
+    }
+
+    public bool CanExecute(object parameter) => _canExecute == null || _canExecute();
+
+    public void Execute(object parameter) => _execute();
+
+    public event EventHandler CanExecuteChanged
+    {
+        add { CommandManager.RequerySuggested += value; }
+        remove { CommandManager.RequerySuggested -= value; }
+    }
+}
+```
+
+Summary:
+This project has the following features:
+1. Add Contact: Users can enter the contact information, 
+including name, phone, email, type (via radio buttons), and priority (via ComboBox).
+2. Edit Contact: The form can be reused for editing 
+by preloading the selected contact.
+3. Table View: A simple grid to display all contacts.
+4. MVVM: Separation of concerns with Models (Contact), 
+ViewModels (business logic), and Views (UI).
+
+This WPF application can be extended 
+with more functionality such as validation, 
+confirmation dialogs, and 
+better user interaction.

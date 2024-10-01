@@ -1,4 +1,4 @@
-27/09/2024 Fri monring/evening: 
+01/10/2024 Tue morning/evening: 
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
 [  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
 [  ]Anjana E R, 		[  ]Anjana N K,
@@ -11,7 +11,7 @@
 [  ]Rishwin R Kanth,	[  ]Sahla. R, 			
 [  ]Sharon Rose, 		[  ]Yahkoob P, 
 
-26/09/2024 Thu monring/evening: 
+30/09/2024 Mon morning/evening: 
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
 [  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
 [  ]Anjana E R, 		[  ]Anjana N K,
@@ -24,8 +24,13 @@
 [  ]Rishwin R Kanth,	[  ]Sahla. R, 			
 [  ]Sharon Rose, 		[  ]Yahkoob P, 
 
+	WPF 
+		MDI Like 
+		Brushes 
+		Panels 
+		MVVM started 
 
-25/09/2024 Wed monring/evening: 
+27/09/2024 Fri morning/evening: 
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
 [  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
 [  ]Anjana E R, 		[  ]Anjana N K,
@@ -37,7 +42,46 @@
 [  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
 [  ]Rishwin R Kanth,	[  ]Sahla. R, 			
 [  ]Sharon Rose, 		[  ]Yahkoob P, 
+WPF 
+	Counter 
+	Square Calc 
+	Sum Calc 
+	MDI Kind from 
+		one form 
+			to multiple forms call 
+	- Discussed about designs using UML draw,io 
+	
 
+26/09/2024 Thu morning/evening: 
+[  ]Aaryaka P Nath, 	[  ]Abijith K, 			
+[  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
+[  ]Anjana E R, 		[  ]Anjana N K,
+[  ]Ann Mariya Jaimon, 	[  ]Anugrah Krishnan, 	 					
+[  ]Ashna Mariya Shaji, [  ]Ashwin V, 			
+[  ]Collin Francy, 		[  ]Dijol Davis,	    		    
+[  ]Gladsy Joshy,	    [  ]Girish K V, 
+[  ]Gopika V, 	        [  ]Keerthana Jayalal K		
+[  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
+[  ]Rishwin R Kanth,	[  ]Sahla. R, 			
+[  ]Sharon Rose, 		[  ]Yahkoob P, 
+	Winforms handson on 		 
+		editor 
+	- Case Study design by WinForms UI started 
+
+25/09/2024 Wed morning/evening: 
+[  ]Aaryaka P Nath, 	[  ]Abijith K, 			
+[  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
+[  ]Anjana E R, 		[  ]Anjana N K,
+[  ]Ann Mariya Jaimon, 	[  ]Anugrah Krishnan, 	 					
+[  ]Ashna Mariya Shaji, [  ]Ashwin V, 			
+[  ]Collin Francy, 		[  ]Dijol Davis,	    		    
+[  ]Gladsy Joshy,	    [  ]Girish K V, 
+[  ]Gopika V, 	        [  ]Keerthana Jayalal K		
+[  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
+[  ]Rishwin R Kanth,	[  ]Sahla. R, 			
+[  ]Sharon Rose, 		[  ]Yahkoob P, 
+	Winforms handsib on 		 
+		MDI
 
 Ashwin, Keerthana, Collin, 
 	Sharon, Neha, Dijol, Gladsy 
@@ -60,7 +104,9 @@ Minnu, Yahkoop, Anjana ER, Ashna,
 [  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
 [  ]Rishwin R Kanth,	[  ]Sahla. R, 			
 [  ]Sharon Rose, 		[  ]Yahkoob P, 
-
+	Winforms - hands on  
+		sum calc 
+		square calc 
 10:12am : team meeting 
 ended at : noon 3:45pm
 Installations of packages in VS happened.
@@ -77,7 +123,7 @@ Installations of packages in VS happened.
 [  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
 [  ]Rishwin R Kanth,	[  ]Sahla. R, 			
 [  ]Sharon Rose, 		[  ]Yahkoob P, 
-
+	Winforms - Intro 
 Visual Studio we have. Not packages installable. 
 Need IT support. 
 
