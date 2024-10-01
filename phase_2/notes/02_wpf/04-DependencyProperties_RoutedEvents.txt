@@ -1,0 +1,146 @@
+1. Dependency Properties
+Dependency Properties are a special type of property in WPF, 
+designed to support advanced property functionality, 
+such as data binding, styling, animation, and value inheritance. 
+They provide more features compared to traditional .NET properties, 
+making them essential in WPF development.
+
+a. Dependency Properties
+- Dependency properties are registered with the WPF property system and 
+managed by the framework, 
+which enables features like default values, inheritance, 
+and efficient storage.
+- Key benefits include:
+  - Integration with WPF's data binding and animation system.
+  - Change notifications, 
+  which are automatically triggered when the property value changes.
+  - Memory optimization because the property values 
+  are stored only when necessary.
+
+Example:
+```csharp
+public class MyControl : Control
+{
+    // Registering a dependency property
+    public static readonly DependencyProperty MyProperty =
+        DependencyProperty.Register("MyProperty", typeof(string), typeof(MyControl),
+            new PropertyMetadata("Default Value", OnMyPropertyChanged));
+
+    // CLR wrapper for the dependency property
+    public string MyProperty
+    {
+        get { return (string)GetValue(MyProperty); }
+        set { SetValue(MyProperty, value); }
+    }
+
+    // Callback method to handle property change
+    private static void OnMyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        // Property changed logic
+    }
+}
+```
+
+b. Change Notification
+- WPF automatically triggers a notification 
+when a dependency property's value changes, 
+enabling the UI to update in real-time. 
+This is useful for scenarios like data binding, 
+where UI elements react to changes in data sources.
+
+c. Property Value Inheritance
+- Property value inheritance allows child elements 
+to inherit the value of a property from their parent element. 
+For example, if a `TextBlock` inside a `StackPanel` 
+does not have a `FontSize` explicitly set, 
+it can inherit the `FontSize` from its parent.
+
+d. Support for Multiple Providers
+- Multiple providers allow the value of a dependency property 
+to be set by various sources, such as:
+  - Local value: Set directly in XAML or code.
+  - Styles and Templates: Set through WPF styling and templating.
+  - Data Binding: Automatically updated via a data binding system.
+  - Animations: Temporarily changes the property during an animation.
+
+WPF's property system prioritizes these sources, 
+using the highest priority value.
+
+2. Routed Events
+Routed Events extend the traditional event system 
+by allowing events to travel through the UI element tree. 
+This makes it easier to handle events 
+at different points in the element hierarchy.
+
+e. Routed Events
+- Routed events in WPF enable event handling 
+beyond just the control that triggers the event, 
+allowing events to be routed 
+through the visual tree of elements.
+- Routed events are defined similarly 
+to dependency properties, 
+and you can register and raise them 
+within your custom controls.
+
+Example:
+```csharp
+public class MyControl : Control
+{
+    // Registering a routed event
+    public static readonly RoutedEvent MyCustomEvent =
+        EventManager.RegisterRoutedEvent("MyCustomEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MyControl));
+
+    // CLR wrapper for the event
+    public event RoutedEventHandler MyCustomEvent
+    {
+        add { AddHandler(MyCustomEvent, value); }
+        remove { RemoveHandler(MyCustomEvent, value); }
+    }
+
+    // Raising the routed event
+    protected virtual void RaiseMyCustomEvent()
+    {
+        RoutedEventArgs newEventArgs = new RoutedEventArgs(MyCustomEvent);
+        RaiseEvent(newEventArgs);
+    }
+}
+```
+
+f. Routing Strategies
+There are three main routing strategies for events in WPF:
+
+- Bubbling: The event is raised from the source element and 
+travels up the visual tree to the root element. 
+For example, a button click event can be handled 
+by the button itself or by a parent container 
+like a `Grid` or `Window`. Most user-input events use bubbling.
+  
+- Tunneling: The event starts from the root element and 
+tunnels down the visual tree to the source element. 
+This is often used in combination with bubbling. 
+WPF tunneling events are prefixed with "Preview", 
+like `PreviewMouseDown`.
+
+- Direct: The event is raised and handled by the source element itself. 
+Direct routing behaves like traditional .NET events.
+
+Example: Bubbling and Tunneling
+```xaml
+<Grid PreviewMouseDown="Grid_PreviewMouseDown" MouseDown="Grid_MouseDown">
+    <Button Content="Click Me" PreviewMouseDown="Button_PreviewMouseDown" MouseDown="Button_MouseDown" />
+</Grid>
+```
+
+In this case:
+- The `PreviewMouseDown` event (tunneling) starts from the `Grid` and 
+moves down to the `Button`.
+- The `MouseDown` event (bubbling) starts from the `Button` and 
+moves up to the `Grid`.
+
+Summary:
+- Dependency Properties provide enhanced functionality 
+like change notification, value inheritance, and support for multiple providers.
+- Routed Events enable event handling across 
+a tree of UI elements with three routing strategies: 
+bubbling, tunneling, and direct. 
+This makes handling complex UI interactions more flexible in WPF applications.

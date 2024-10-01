@@ -88,7 +88,7 @@ Windows Presentation Foundation
 			d.	Support for Multiple Providers
 			e.	Routed Events
 			f.	Routing Strategies
-			5.	WPF GUI
+		5.	WPF GUI
 			a.	WPF Controls(Button,Label,TextBox,ToolTip,RadioButton,CheckBox,ListBox,ComboBox)
 			b.	Layouts (sizing, positioning, Transforms, canvas, shapes, stackpanel, wrappanel, dockpanel, Grid, scrolling, scalling)
 			c.	Dialogs (Message boxes, Win32 common dialogs, Custom modal dialogs, Custom modeless dialogs)

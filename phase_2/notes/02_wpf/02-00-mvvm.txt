@@ -1,0 +1,254 @@
+MVVM (Model-View-ViewModel) Pattern
+
+MVVM is an architectural design pattern primarily used 
+in WPF (Windows Presentation Foundation), Silverlight, and 
+other XAML-based technologies. 
+It helps in the separation of concerns 
+by organizing the user interface (UI) code 
+into three distinct layers: Model, View, and ViewModel.
+
+a. MVVM Introduction
+- Model: Represents the application's data and business logic. 
+It is responsible for handling the underlying data and 
+should be independent of the UI.
+- View: Represents the UI or the presentation layer. 
+The view binds to the ViewModel and displays the data to the user.
+- ViewModel: Acts as a bridge between 
+the Model and the View. 
+It contains the logic for interacting 
+with the Model and exposes data to the View through data binding.
+
+Overview:
+- Model: Pure data logic.
+- View: UI design (XAML).
+- ViewModel: Mediator that binds the View to the Model.
+
+b. MVVM Advantages
+1. Separation of concerns: 
+Business logic is separated from UI, 
+making code more maintainable.
+2. Testability: 
+The ViewModel can be tested independently of the View.
+3. Reusability: 
+ViewModels can be reused across different views, 
+and views can be swapped out or changed easily 
+without affecting the business logic.
+4. Data Binding: 
+WPF provides powerful data binding 
+that allows the View to automatically 
+reflect changes made in the ViewModel.
+5. Maintainability: 
+MVVM results in a cleaner, 
+more maintainable codebase 
+because of its modular structure.
+
+c. MVVM First Application
+
+Steps:
+1. Create the Model: 
+Define a simple data structure.
+2. Create the ViewModel: 
+Bind the model's data and expose it for binding to the View.
+3. Create the View (XAML): 
+Use data binding to bind the ViewModel's properties to UI elements.
+
+Example:
+```csharp
+// Model
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+// ViewModel
+public class PersonViewModel : INotifyPropertyChanged
+{
+    private Person person;
+
+    public string Name
+    {
+        get { return person.Name; }
+        set
+        {
+            if (person.Name != value)
+            {
+                person.Name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+    }
+
+    public int Age
+    {
+        get { return person.Age; }
+        set
+        {
+            if (person.Age != value)
+            {
+                person.Age = value;
+                OnPropertyChanged("Age");
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+```
+
+```xaml
+<!-- View (XAML) -->
+<Window x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MVVM Example" Height="350" Width="525">
+    <Grid>
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+        <TextBox Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="0,30,0,0" />
+    </Grid>
+</Window>
+```
+
+d. MVVM - Hooking up Views
+Views are responsible for the UI and 
+are created using XAML in WPF. 
+To hook up a view, bind the `DataContext` of the view 
+to the corresponding ViewModel. 
+The DataContext in WPF binds the UI to the ViewModel.
+
+```csharp
+public MainWindow()
+{
+    InitializeComponent();
+    DataContext = new PersonViewModel(); // Hooking up ViewModel to View
+}
+```
+
+e. MVVM - Hooking up ViewModel
+The ViewModel is connected to the View 
+via the `DataContext` property. 
+By setting the `DataContext` to an instance of the ViewModel, 
+the UI elements bind to properties in the ViewModel.
+
+f. MVVM - WPF Data Binding
+Data binding in MVVM is the key mechanism 
+that connects the ViewModel and the View. 
+It allows UI elements (e.g., TextBox, Label) 
+to automatically display values from the ViewModel and 
+update these values when the ViewModel changes.
+
+Two-way binding example:
+```xaml
+<TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+```
+In this example, any changes made in the `TextBox` 
+will update the `Name` property in the ViewModel, 
+and vice versa.
+
+g. MVVM - WPF Data Templates
+Data templates allow you to define how data is presented in the UI. 
+It separates the visual representation from the data itself.
+
+Example:
+```xaml
+<Window.Resources>
+    <DataTemplate DataType="{x:Type local:PersonViewModel}">
+        <StackPanel>
+            <TextBlock Text="{Binding Name}" />
+            <TextBlock Text="{Binding Age}" />
+        </StackPanel>
+    </DataTemplate>
+</Window.Resources>
+```
+
+In this example, whenever a `PersonViewModel` is displayed, 
+it will automatically use the defined DataTemplate.
+
+h. MVVM - ViewModel Communications
+ViewModels often need to communicate with each other, 
+especially in large applications. 
+Some common techniques for communication include:
+1. Events: A ViewModel can expose events 
+that other ViewModels can subscribe to.
+2. Messenger pattern: Use a messaging service or mediator 
+to pass messages between ViewModels.
+
+Example using Messenger pattern:
+```csharp
+public class Messenger
+{
+    public event Action<string> MessageSent;
+
+    public void Send(string message)
+    {
+        MessageSent?.Invoke(message);
+    }
+}
+```
+
+i. MVVM - Hierarchies & Navigation
+In MVVM applications, navigation between views is 
+typically managed by the ViewModel. 
+For instance, a main ViewModel may manage multiple child ViewModels, 
+or there could be a navigation ViewModel 
+to switch between different pages or views.
+
+Example of hierarchical ViewModel:
+```csharp
+public class MainViewModel
+{
+    public ViewModelBase CurrentViewModel { get; set; }
+    public ICommand NavigateCommand { get; }
+
+    public MainViewModel()
+    {
+        NavigateCommand = new RelayCommand(Navigate);
+    }
+
+    private void Navigate(object parameter)
+    {
+        if (parameter.ToString() == "ViewA")
+            CurrentViewModel = new ViewAViewModel();
+        else if (parameter.ToString() == "ViewB")
+            CurrentViewModel = new ViewBViewModel();
+    }
+}
+```
+
+j. MVVM - Validations
+In MVVM, validation of user input can be implemented in the ViewModel. 
+You can use the `IDataErrorInfo` or `INotifyDataErrorInfo` interfaces 
+for validation.
+
+Example using `IDataErrorInfo`:
+```csharp
+public class PersonViewModel : IDataErrorInfo
+{
+    public string Name { get; set; }
+    
+    public string this[string columnName]
+    {
+        get
+        {
+            if (columnName == "Name")
+            {
+                if (string.IsNullOrWhiteSpace(Name))
+                    return "Name cannot be empty";
+            }
+            return null;
+        }
+    }
+
+    public string Error => null;
+}
+```
+
+Summary:
+MVVM promotes a clean separation between UI and business logic, 
+improving maintainability, testability, and reusability. 
+Key concepts such as data binding, templating, and validation 
+in MVVM help to create scalable and robust WPF applications.

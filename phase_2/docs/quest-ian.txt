@@ -10,7 +10,11 @@
 [  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
 [  ]Rishwin R Kanth,	[  ]Sahla. R, 			
 [  ]Sharon Rose, 		[  ]Yahkoob P, 
-
+	MVVM Learning continued 
+		ViewModel property with Window binding 
+			UI Inside Window Binding 
+			List UI and its Item binding for DataGrid 
+			Command binding for Functional Buttons 
 30/09/2024 Mon morning/evening: 
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
 [  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
