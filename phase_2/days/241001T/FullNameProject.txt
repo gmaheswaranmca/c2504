@@ -1,0 +1,25 @@
+Project: FullNameProject 
+
+Window: FullNameWindow              _Closed 
+    lblFirstName, txtFirstName                          <-- TextBlock(s)
+    lblLastName, txtLastName                            <-- TextBlock(s)
+    btnEdit 
+Window: EditFullNameWindow          _Closing   WindowClose 
+    lblFirstName, txtFirstName
+    lblLastName, txtLastName
+    btnUpdate 
+Model: PersonModel 
+    { FirstName, LastName }
+public delegate void DClose();
+ModelView: PersonModelView:INotifyPropertyChanged
+    PropertyChanged
+    void OnPropertChanged(string propName)
+    {Person, EditablePerson }
+    UpdateCommand 
+    PersonModelView()
+    EditClose 
+    Update()
+RelayCommand : ICommand 
+FullNameConfig:
+    FrmEditFullName : EditFullNameWindow
+    PersonModelViewInstance : PersonModelView

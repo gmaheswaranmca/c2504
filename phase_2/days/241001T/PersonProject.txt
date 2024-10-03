@@ -1,0 +1,36 @@
+Project: PersonProject
+Window: 2
+    DisplayPersonWindow     _Closed     
+    EditPersonWindow        _Closing    WindowClose 
+UI:
+    DisplayPersonWindow
+        TextBlock       TextBlock 
+        TextBlock       TextBlock 
+        Button : btnEdit 
+    EditPersonWindow
+        TextBlock       TextBox 
+        TextBlock       TextBox 
+        Button : btnUpdate
+Model:
+    PersonModel 
+        FirstName
+        LastName 
+RelayCommand: ICommand      <---------------Copy 
+public delegate void DClose();
+ViewModel: 
+    PersonViewModel : INotifyPropertyChanged 
+        PropertyChanged
+        OnPropertyChanged(string)
+        DisplayPerson   _displayPerson 
+        EditablePerson  _editablePerson 
+        ICommand UpdateCommand 
+        PersonViewModel()   
+            DisplayPerson = new PersonModel{FirstName="Maheswaran",LastName="G"};
+            EditablePerson = new PersonModel();
+            UpdateCommand = new RelayCommand(Update);
+        Update()
+        EditClose 
+PersonConfig 
+    FrmEditPerson
+    VueModel 
+    static PersonConfig()
