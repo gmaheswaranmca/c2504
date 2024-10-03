@@ -1,0 +1,154 @@
+EditorWindow.xaml 
+```
+<Window x:Class="Example14Project.EditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example14Project"
+        mc:Ignorable="d"
+        Title="EditorWindow" Height="450" Width="800" Closing="Window_Closing">
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="29">
+            <Menu>
+                <MenuItem Header="File">
+                    <MenuItem x:Name="btnOpen" Header="Open..." Click="btnOpen_Click"/>
+                    <Separator/>
+                    <MenuItem x:Name="btnSave" Header="Save..." Click="btnSave_Click"/>
+                    <MenuItem x:Name="btnFont" Header="Font..." Click="btnFont_Click"/>
+                </MenuItem>
+            
+                <MenuItem Header="Background Color">
+                    <MenuItem x:Name="mnuRed" Header="Red" Click="mnuRed_Click"/>
+                    <MenuItem x:Name="mnuBlue" Header="Blue" Click="mnuBlue_Click"/>
+                    <MenuItem x:Name="mnuMoreBackColor" Header="More Color..." Click="mnuMoreBackColor_Click"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="29">
+            <ToolBarPanel>
+                <ToolBar>
+                    <Button x:Name="btnLeft" Content="Left" Click="btnLeft_Click"/>
+                    <Button x:Name="btnCenter" Content="Center" Click="btnCenter_Click"/>
+                    <Button  x:Name="btnRight" Content="Right" Click="btnRight_Click"/>
+                </ToolBar>
+            </ToolBarPanel>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <StatusBar>
+                <TextBlock x:Name="txtStatus"/>
+            </StatusBar>
+        </StackPanel>
+        <DockPanel LastChildFill="True">
+            <TextBox x:Name="txtEditor"
+                    AcceptsReturn="True" Margin="5,5,5,5" 
+                     Text="C# and WPF"/>
+            
+        </DockPanel>
+        
+    </DockPanel>
+</Window>
+```
+
+EditorWindow.xaml.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Example14Project
+{
+    /// <summary>
+    /// Interaction logic for EditorWindow.xaml
+    /// </summary>
+    public partial class EditorWindow : Window
+    {
+        public EditorWindow()
+        {
+            InitializeComponent();
+        }
+        private System.Windows.Forms.OpenFileDialog dlgOpen = new System.Windows.Forms.OpenFileDialog();
+        private System.Windows.Forms.SaveFileDialog dlgSave = new System.Windows.Forms.SaveFileDialog();
+        private System.Windows.Forms.FontDialog dlgFont = new System.Windows.Forms.FontDialog();
+        private System.Windows.Forms.ColorDialog dlgColor = new System.Windows.Forms.ColorDialog();
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+        private void btnLeft_Click(object sender, RoutedEventArgs e)
+        {
+            txtEditor.HorizontalContentAlignment = HorizontalAlignment.Left;
+            txtStatus.Text = "Left Aligned";
+        }
+        private void btnCenter_Click(object sender, RoutedEventArgs e)
+        {
+            txtEditor.HorizontalContentAlignment = HorizontalAlignment.Center;
+            txtStatus.Text = "Center Aligned";
+        }
+        private void btnRight_Click(object sender, RoutedEventArgs e)
+        {
+            txtEditor.HorizontalContentAlignment = HorizontalAlignment.Right;
+            txtStatus.Text = "Right Aligned";
+        }
+        private void mnuRed_Click(object sender, RoutedEventArgs e)
+        {
+            txtEditor.Background = Brushes.PaleGoldenrod;
+        }
+        private void mnuBlue_Click(object sender, RoutedEventArgs e)
+        {
+            txtEditor.Background = Brushes.Cyan;
+        }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            var result = dlgOpen.ShowDialog();
+            using(FileStream fs = new FileStream(dlgOpen.FileName, FileMode.Open))
+            {
+                using(StreamReader sr = new StreamReader(fs))
+                {
+                    txtEditor.Text = sr.ReadToEnd();
+                }
+            }
+        }
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var result = dlgSave.ShowDialog();
+            using (FileStream fs = new FileStream(dlgSave.FileName, FileMode.Create))
+            {
+                using (StreamWriter sr = new StreamWriter(fs))
+                {
+                    sr.Write(txtEditor.Text);
+                }
+            }
+        }
+        private void btnFont_Click(object sender, RoutedEventArgs e)
+        {
+            var result = dlgFont.ShowDialog();
+            System.Drawing.Font font = dlgFont.Font;
+            txtEditor.FontFamily = new FontFamily(font.Name);
+            txtEditor.FontSize = font.Size;
+            txtEditor.FontWeight = font.Bold ? FontWeights.Bold : FontWeights.Regular;
+            txtEditor.FontStyle = font.Italic ? FontStyles.Italic : FontStyles.Normal;
+        }
+        private void mnuMoreBackColor_Click(object sender, RoutedEventArgs e)
+        {
+            var result = dlgColor.ShowDialog();
+            System.Drawing.Color color = dlgColor.Color;
+            txtEditor.Background = new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
+        }
+    }
+}
+
+```
