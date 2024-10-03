@@ -1,0 +1,160 @@
+Menus & Commands, Toolbars & Status bars
+    a.	Menus & Commands
+        i.	Menus
+        ii.	Context Menus
+        iii.	Icons on Menu Items
+        iv.	Commands
+        v.	Keyboard Shortcuts
+        vi.	Disabling Menu Items
+        vii.	Checking Menu Item
+    b.	Toolbars and Status Bars
+        i.	Toolbars
+        ii.	Toolbars and Commands
+        iii.	Status Bars
+===============================================
+In WPF (Windows Presentation Foundation), 
+menus, commands, toolbars, and status bars are essential 
+for building interactive and user-friendly desktop applications. 
+Here is a breakdown of each of these components:
+
+a. Menus & Commands
+
+i. Menus
+Menus in WPF provide users with options to interact with the application. 
+These are typically used for file operations, editing, and other functionalities.
+- XAML Example:
+```xml
+<Menu>
+    <MenuItem Header="File">
+        <MenuItem Header="New" />
+        <MenuItem Header="Open" />
+        <MenuItem Header="Save" />
+        <Separator />
+        <MenuItem Header="Exit" />
+    </MenuItem>
+    <MenuItem Header="Edit">
+        <MenuItem Header="Undo" />
+        <MenuItem Header="Redo" />
+    </MenuItem>
+</Menu>
+```
+
+ii. Context Menus
+Context menus are right-click menus 
+that provide options relevant to the current context 
+(e.g., text editing, file operations).
+- XAML Example:
+```xml
+<Button Content="Right-click me">
+    <Button.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Copy" />
+            <MenuItem Header="Paste" />
+        </ContextMenu>
+    </Button.ContextMenu>
+</Button>
+```
+
+iii. Icons on Menu Items
+Adding icons to menu items enhances 
+the visual experience and helps users quickly identify actions.
+- XAML Example:
+```xml
+<MenuItem Header="Open">
+    <MenuItem.Icon>
+        <Image Source="Images/open.png" Width="16" Height="16" />
+    </MenuItem.Icon>
+</MenuItem>
+```
+
+iv. Commands
+WPF commands provide a way to handle user actions 
+like clicking a button or selecting a menu item. 
+Commands are typically used to separate logic from UI.
+- XAML Example (Binding a command to a menu item):
+```xml
+<MenuItem Header="Save" Command="ApplicationCommands.Save" />
+```
+- Code-behind Example:
+```csharp
+private void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+{
+    // Save logic here
+}
+
+public MainWindow()
+{
+    InitializeComponent();
+    CommandBindings.Add(new CommandBinding(ApplicationCommands.Save, SaveCommandExecuted));
+}
+```
+
+v. Keyboard Shortcuts
+Keyboard shortcuts (hotkeys) can be assigned to menu items 
+for quicker access to commands.
+- XAML Example:
+```xml
+<MenuItem Header="Save" Command="ApplicationCommands.Save" InputGestureText="Ctrl+S" />
+```
+
+vi. Disabling Menu Items
+Menu items can be dynamically enabled or disabled based 
+on certain conditions (e.g., when no file is open).
+- XAML Example:
+```xml
+<MenuItem Header="Save" IsEnabled="{Binding IsFileOpen}" />
+```
+
+vii. Checking Menu Item
+Checked menu items are used for toggle actions 
+(e.g., enabling or disabling options).
+- XAML Example:
+```xml
+<MenuItem Header="Show Toolbar" IsCheckable="True" IsChecked="True" />
+```
+
+b. Toolbars and Status Bars
+
+i. Toolbars
+Toolbars in WPF provide quick access to frequently 
+used commands and actions.
+- XAML Example:
+```xml
+<ToolBarTray>
+    <ToolBar Header="File">
+        <Button Content="New" />
+        <Button Content="Open" />
+        <Button Content="Save" />
+    </ToolBar>
+</ToolBarTray>
+```
+
+ii. Toolbars and Commands
+Just like menus, toolbars can be bound to commands 
+to separate UI from logic.
+- XAML Example:
+```xml
+<ToolBar>
+    <Button Command="ApplicationCommands.New" Content="New" />
+    <Button Command="ApplicationCommands.Save" Content="Save" />
+</ToolBar>
+```
+
+iii. Status Bars
+Status bars display information 
+about the current state of the application 
+(e.g., file status, progress).
+- XAML Example:
+```xml
+<StatusBar>
+    <StatusBarItem>
+        <TextBlock Text="Ready" />
+    </StatusBarItem>
+    <StatusBarItem>
+        <ProgressBar Width="100" Height="15" IsIndeterminate="True" />
+    </StatusBarItem>
+</StatusBar>
+```
+
+This provides an overview of how to use menus, commands, toolbars, 
+and status bars in WPF applications.
