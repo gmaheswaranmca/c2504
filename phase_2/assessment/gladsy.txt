@@ -37,8 +37,14 @@ AccountMemRepo [IAccountRepo]
 BankMemRepo [IBankRepo]
     Reports like filtered accounts 
     Plan few reports exportable to CSV, JSON, XML.
+        1. group by interest_rate 
+            find total balance for each rate
 
-
+            visualize using OxyPlot or 
+            LiveChart  
+        2. group by transaction_count 
+            find total balance for count 
+        Exports to CSV, JSON, XML
 
 AccountFileJsonRepo
 AccountFileXmlRepo
@@ -47,7 +53,8 @@ AccountFileCsvRepo
 AccountSqlRepo
 
 On every deposit and withdraw, 
-send the mail to the account holder.
+send the mail to the account holder
+by raising the 'event'.
 
 
 All solid principles should be followed. 
@@ -63,9 +70,9 @@ App Config to switch the database
 between Memory, SQL, File JSON, File XML, 
 File Binary, File CSV.
 
+Backup and Restore data to and from file.
 
 Inherit the account class based on the acccount type.
-
 
 Implement some animation 
 after withdrawal
@@ -73,6 +80,12 @@ ie stop actities to the app
 just run animation.
 
 Use Timer to stop activities 
-for 30 secs min.
+for 30 secs min. Include the 30 secs 
+animation with progress bar. 
 
-Sorting the accounts based on balance.
+Sorting the accounts based on balance
+using LINQ.
+
+Future:
+    We have the remote database 
+    access using APIs.
