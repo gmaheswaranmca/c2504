@@ -6,8 +6,7 @@ Implement MVVM based view to the WPF forms and pages.
 
 Implement login page with which only 
 we will enter into bank system. 
-
-Fixed Cre
+Fixed Credential - username password are hard coded like quest, 4321.
 
 Account
     number  (unique)
@@ -23,6 +22,9 @@ Account
     last_transaction_date
 Bank 
     name 
+    settings:                   current                             saving 
+        min balance             [           ]                       [               ]
+        max interest rate       ( ) 1% ( ) 2%  ( ) 3%  [4%] v      ( ) 1% ( ) 2%  ( ) 3% [4%]v
     accounts 
 
 AccountMemRepo [IAccountRepo]
@@ -89,3 +91,20 @@ using LINQ.
 Future:
     We have the remote database 
     access using APIs.
+
+
+
+------------------------------------- 1 hour 
+    Model : AccountModel 
+    IRepo: IAccountRepo 
+    Repo: AccountMemRepo : IAccountRepo
+    ViewModel: AccountViewModel 
+    BankConfig:
+        FrmAddAccount 
+        AccVueModel
+        FrmEditAccount (Later)
+------------------------------------- 30 mins 
+    Applying Bindings in 
+        FrmAddAccount
+        FrmListAccount 
+-------------------------------------
