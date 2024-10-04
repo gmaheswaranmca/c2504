@@ -237,7 +237,8 @@ You can load this external `ResourceDictionary` in a window or application:
 ```
 
 Application-Level Resources:
-You can define global resources that are available throughout your application by placing the `ResourceDictionary` in the `App.xaml` file:
+You can define global resources that are available throughout your application 
+by placing the `ResourceDictionary` in the `App.xaml` file:
 
 ```xml
 <Application x:Class="WpfApp.App"

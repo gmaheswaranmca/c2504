@@ -1,0 +1,37 @@
+Db: Memory - List 
+    CRUD operations 
+
+Windows:
+    AccountListWindow
+        <Create Account> 
+        List of Account Details 
+        <Edit> <Withdraw> <Deposit> <Calculate Interest>
+    CreateAccountWindow 
+    .EditAccountWindow 
+    .WithdrawTransactionWindow 
+    .DepositTransactionWindow 
+
+    Model : AccountModel 
+    IRepo: IAccountRepo 
+        void Create(model)
+        .void Update(AccountNumber,model)
+        .void Delete(AccountNumber)
+        .AccountModel ReadByNumber(AccountNumber)
+        ObservableCollection<AccountModel> ReadAll();
+    Repo: AccountMemRepo : IAccountRepo
+        
+    ViewModel: AccountViewModel 
+        private IAccountRepo _repo = new AccountMemRepo();
+        + AccountModel CreatingAccount {set; get;}
+        .+ AccountModel EditingAccount {set; get;}
+        + ObservableCollection<AccountModel> Accounts{get => _repo.ReadAll();}   
+        + ICommand CreateCommand 
+            + Create() 
+                _repo.Create(CreatingAccount)
+
+    BankConfig:
+        FrmAddAccount 
+        AccVueModel
+        FrmEditAccount (Later)
+
+
