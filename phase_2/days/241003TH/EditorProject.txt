@@ -1,0 +1,106 @@
+References to be added: 
+    System.Windows.Forms 
+    System.Windows.Drawing 
+
+MainWindow.xaml
+```
+<Window x:Class="EditorProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EditorProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Canvas>
+        <Button x:Name="btnOpen" Content="Open..." Canvas.Left="80" Canvas.Top="24" RenderTransformOrigin="-0.883,-0.749" HorizontalAlignment="Center" VerticalAlignment="Top" Width="85" Height="40" Click="btnOpen_Click"/>
+        <Button x:Name="btnSave" Content="Save..." Canvas.Left="175" Canvas.Top="24" RenderTransformOrigin="-0.883,-0.749" Width="85" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Click="btnSave_Click"/>
+        <Button x:Name="btnFont" Content="Font..." Canvas.Left="280" Canvas.Top="24" RenderTransformOrigin="-0.883,-0.749" Width="85" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Click="btnFont_Click"/>
+        <Button x:Name="btnColor" Content="Color..." Canvas.Left="380" Canvas.Top="24" RenderTransformOrigin="-0.883,-0.749" Width="85" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Click="btnColor_Click"/>
+        <TextBox  x:Name="txtEditor" AcceptsReturn="True" Canvas.Left="85" TextWrapping="Wrap" Text="C# and WPF" Canvas.Top="104" Width="390" HorizontalAlignment="Center" VerticalAlignment="Top" Height="112"/>
+
+    </Canvas>
+</Window>
+
+```
+
+
+MainWindow.xaml.cs 
+```
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace EditorProject
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new System.Windows.Forms.OpenFileDialog();
+            var result = dlg.ShowDialog();
+            using (var fs = new FileStream(dlg.FileName, FileMode.Open))
+            {
+                using (var sr = new StreamReader(fs))
+                {
+                    txtEditor.Text = sr.ReadToEnd();
+                }
+            }
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new System.Windows.Forms.SaveFileDialog();
+            var result = dlg.ShowDialog();
+            using(var fs = new FileStream(dlg.FileName,FileMode.Create))
+            {
+                using(var sw = new StreamWriter(fs))
+                {
+                    sw.Write(txtEditor.Text);
+                }
+            }
+        }
+
+        private void btnFont_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new System.Windows.Forms.FontDialog();
+            var result = dlg.ShowDialog();
+            var font = dlg.Font;
+            txtEditor.FontSize = font.Size;
+            txtEditor.FontFamily = new System.Windows.Media.FontFamily(font.Name);
+        }
+
+        private void btnColor_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new System.Windows.Forms.ColorDialog();
+            var result = dlg.ShowDialog();
+            var color = dlg.Color;
+            var newColor = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G,color.B);
+            var brush = new SolidColorBrush(newColor);
+            txtEditor.Background = brush;
+        }
+    }
+}
+
+```

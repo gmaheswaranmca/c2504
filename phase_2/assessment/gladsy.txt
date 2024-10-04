@@ -1,0 +1,61 @@
+Implement using WPF forms and pages. 
+Include almost all UIs, Layouts, Dialogues,
+Brushes etc.
+
+Implement MVVM based view to the WPF forms and pages.
+
+Implement login page with which only 
+we will enter into bank system. 
+
+Fixed Cre
+
+Account
+    number  (unique)
+    name 
+    balance 
+    type 
+    email
+    phone_number 
+Bank 
+    name 
+    accounts 
+
+AccountMemRepo [IAccountRepo]
+    Deposit                     -- Implement Business Rules also 
+    Withdraw 
+    C 
+    R 
+    U 
+    D 
+
+BankMemRepo [IBankRepo]
+    Reports like filtered accounts 
+    Plan few reports exportable to CSV, JSON, XML.
+
+
+
+AccountFileJsonRepo
+AccountFileXmlRepo
+AccountFileBinaryRepo
+AccountFileCsvRepo
+AccountSqlRepo
+
+On every deposit and withdraw, 
+send the mail to the account holder.
+
+
+All solid principles should be followed. 
+
+And add documentation comments thorought the app code.
+
+Add exception handlers and debugging informations 
+with loggers. 
+
+Conduct unit test and end to end test using MSTest.
+
+App Config to switch the database 
+between Memory, SQL, File JSON, File XML, 
+File Binary, File CSV.
+
+
+Inherit the account class based on the acccount type.
