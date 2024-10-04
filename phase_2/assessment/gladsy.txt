@@ -19,6 +19,7 @@ Account
     address             editable  
     is_active           deleting the account    updatable
     interest_percentage 
+    transaction_count
 Bank 
     name 
     accounts 
@@ -63,3 +64,12 @@ File Binary, File CSV.
 
 
 Inherit the account class based on the acccount type.
+
+
+Implement some animation 
+after withdrawal
+ie stop actities to the app 
+just run animation.
+
+Use Timer to stop activities 
+for 30 secs min.
