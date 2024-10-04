@@ -16,6 +16,9 @@ Account
     type 
     email
     phone_number 
+    address             editable  
+    is_active           deleting the account    updatable
+    interest_percentage 
 Bank 
     name 
     accounts 
@@ -26,7 +29,8 @@ AccountMemRepo [IAccountRepo]
     C 
     R 
     U 
-    D 
+    D                           -- Mark as deleted 
+    CalcluateInterestAndUpdateBalance   
 
 BankMemRepo [IBankRepo]
     Reports like filtered accounts 
