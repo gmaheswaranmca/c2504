@@ -20,6 +20,7 @@ Account
     is_active           deleting the account    updatable
     interest_percentage 
     transaction_count
+    last_transaction_date
 Bank 
     name 
     accounts 
@@ -73,3 +74,5 @@ just run animation.
 
 Use Timer to stop activities 
 for 30 secs min.
+
+Sorting the accounts based on balance.
