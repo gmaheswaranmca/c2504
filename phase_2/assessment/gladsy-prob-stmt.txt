@@ -109,3 +109,31 @@ Future:
         FrmAddAccount
         FrmListAccount 
 -------------------------------------
+
+
+AdminUser 
+	UserName
+	Password 
+
+==========================
+AdminUserRepo	: IUserRepo
+	Users 
+	[{'aaryaka'...},{'gopika'...},{'girish'...}]
+	
+	AdminUser ReadByUserName(username)
+============================
+AdminUserViewModel
+	User 
+	LoginCommnad
+		OnLogin()
+			var loginUser = _repo.ReadByUserName(User.Username);
+			if loginUser == null
+				msgbox "Invalid username/password"
+				return 
+			
+			if !loginUser.Password.Equals(User.Password) 
+				msgbox "Invalid username/password"
+				return
+			DisplayPage()
+			
+			

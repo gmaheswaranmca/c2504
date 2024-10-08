@@ -19,7 +19,7 @@ Windows:
         .AccountModel ReadByNumber(AccountNumber)
         ObservableCollection<AccountModel> ReadAll();
     Repo: AccountMemRepo : IAccountRepo
-        
+
     ViewModel: AccountViewModel 
         private IAccountRepo _repo = new AccountMemRepo();
         + AccountModel CreatingAccount {set; get;}

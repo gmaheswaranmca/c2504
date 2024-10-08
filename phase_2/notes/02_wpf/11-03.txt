@@ -1,0 +1,261 @@
+To implement light and dark themes for your WPF application, you can leverage dynamic resource dictionaries that switch between light and dark styles at runtime. Below, I will guide you through adding theme support to the `EmployeeForm.xaml`, centralizing theme resources, and allowing theme switching through a user action (like a `ToggleButton`).
+
+Steps to Add Light and Dark Themes:
+
+1. Create Theme Resource Dictionaries for light and dark themes.
+2. Modify the `App.xaml` to include theme dictionaries and allow switching between them.
+3. Update the `EmployeeForm.xaml` to reflect the theme changes dynamically.
+4. Add a theme switcher (e.g., a `ToggleButton`) to switch between light and dark themes.
+
+1. Create Theme Resource Dictionaries
+
+First, you need to define two separate resource dictionaries: one for the light theme and one for the dark theme. These dictionaries will include the color schemes and other style properties.
+
+`LightTheme.xaml`
+
+```xml
+<!-- LightTheme.xaml -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Background and Foreground Colors for Light Theme -->
+    <Color x:Key="WindowBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="ControlBackgroundColor">#F5F5F5</Color>
+    <Color x:Key="ControlForegroundColor">#000000</Color>
+    <Color x:Key="BorderBrushColor">#CCCCCC</Color>
+    <Color x:Key="AccentColor">#007ACC</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}"/>
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource ControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="{StaticResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderBrushColor}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+
+    <!-- TextBox Style -->
+    <Style TargetType="TextBox">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ControlForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="BorderBrush" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Button Style -->
+    <Style TargetType="Button">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#005A9E"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#003F6C"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- ComboBox and Other Controls... -->
+</ResourceDictionary>
+```
+
+`DarkTheme.xaml`
+
+```xml
+<!-- DarkTheme.xaml -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Background and Foreground Colors for Dark Theme -->
+    <Color x:Key="WindowBackgroundColor">#1E1E1E</Color>
+    <Color x:Key="ControlBackgroundColor">#2D2D30</Color>
+    <Color x:Key="ControlForegroundColor">#FFFFFF</Color>
+    <Color x:Key="BorderBrushColor">#3C3C3C</Color>
+    <Color x:Key="AccentColor">#007ACC</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}"/>
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource ControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="{StaticResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderBrushColor}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+
+    <!-- TextBox Style -->
+    <Style TargetType="TextBox">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ControlForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="BorderBrush" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Button Style -->
+    <Style TargetType="Button">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#005A9E"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#003F6C"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- ComboBox and Other Controls... -->
+</ResourceDictionary>
+```
+
+2. Modify `App.xaml` for Theme Switching
+
+In `App.xaml`, modify the resources to allow the switching of themes at runtime by loading either `LightTheme.xaml` or `DarkTheme.xaml`.
+
+```xml
+<!-- App.xaml -->
+<Application x:Class="YourAppNamespace.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="EmployeeForm.xaml">
+    <Application.Resources>
+        <!-- Default Theme (Light) -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/LightTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+```
+
+3. Update `EmployeeForm.xaml` to Reflect Theme Changes Dynamically
+
+In `EmployeeForm.xaml`, you will add a theme switcher (e.g., a `ToggleButton`) to let users switch between light and dark modes.
+
+```xml
+<!-- EmployeeForm.xaml -->
+<Window x:Class="YourAppNamespace.EmployeeForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:YourAppNamespace"
+        Title="Employee Form" Height="500" Width="400">
+    <Window.Resources>
+        <local:JobTitleConverter x:Key="JobTitleConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Form Title -->
+        <TextBlock Text="Employee Details" FontSize="18" FontWeight="Bold" 
+                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <!-- Theme Toggle Button -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Text="Light" Margin="5"/>
+            <ToggleButton x:Name="ThemeToggle" Checked="ThemeToggle_Checked" 
+                          Unchecked="ThemeToggle_Unchecked"/>
+            <TextBlock Text="Dark" Margin="5"/>
+        </StackPanel>
+
+        <!-- Form Fields -->
+        <StackPanel
+
+ Grid.Row="1" VerticalAlignment="Top">
+            <!-- Your form fields here -->
+        </StackPanel>
+    </Grid>
+</Window>
+```
+
+4. Implement Theme Switching in Code-Behind
+
+In `EmployeeForm.xaml.cs`, add logic to switch themes dynamically when the `ToggleButton` is checked or unchecked.
+
+```csharp
+using System.Windows;
+
+namespace YourAppNamespace
+{
+    public partial class EmployeeForm : Window
+    {
+        public EmployeeForm()
+        {
+            InitializeComponent();
+        }
+
+        private void ThemeToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            // Load Dark Theme
+            ResourceDictionary darkTheme = new ResourceDictionary
+            {
+                Source = new Uri("Themes/DarkTheme.xaml", UriKind.Relative)
+            };
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(darkTheme);
+        }
+
+        private void ThemeToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            // Load Light Theme
+            ResourceDictionary lightTheme = new ResourceDictionary
+            {
+                Source = new Uri("Themes/LightTheme.xaml", UriKind.Relative)
+            };
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(lightTheme);
+        }
+    }
+}
+```
+
+Now, you have a working light and dark theme that switches based on user interaction with a toggle button. This setup can be expanded to include additional UI elements and styles as needed.
