@@ -137,3 +137,34 @@ AdminUserViewModel
 			DisplayPage()
 			
 			
+------------------------------------------------
+https://github.com/annmariyajaimon2001/C2504Phase2/blob/main/task%2007-10-2024
+https://github.com/yahkoobp/BankManagementSystem_sln/blob/master/Code.txt
+https://github.com/Sahlasaji/c2504/tree/77ab965619376def8a37f918617c180c16a47c98/phase2/MiniCasestudy/BankAccountManagementSystem/JSON
+https://github.com/ashnamariyashaji/C2504-Phase_2/tree/main/Bank%20Management%20System
+https://github.com/anjanaer/C2504_Anjana-E-R/tree/main/BankManagement
+https://github.com/MinnuSudhak/C2504/blob/main/BankManagementSystem/BankManagementFile.txt
+
+
+https://github.com/abijithk31/c2504/tree/main
+    not single file 
+https://github.com/girishkv88/C504PHASE2/blob/ae60b8e3fb62f1edc90fcaf4734f58c2947c4883/BankManagementProject_07_0_2024
+https://github.com/GO-PI-KA/C2504/tree/main/PHASE-2/WPF
+https://github.com/AlanKuriakoseCherian/C2504/tree/main/Phase2
+    not single file 
+https://github.com/AaryakaPNath/C2504_AaryakaPNath/tree/main/Phase2/Banking%20Management%20System_Mini%20Case%20Study
+
+https://github.com/AnjanaNK3360/C2504/tree/main/Phase2-Assesment-Mini%20CaseStudy
+https://github.com/anugrahkrishnan/BankManagementProject
+
+
+https://github.com/Nehaeliza/BankingProject/blob/main/BankCode
+https://github.com/sharon5544/C2504-Phase2/tree/main/BankingProject
+    not single file 
+https://github.com/88-dijol/QUESTC2504Phase2/tree/main/BankingProject
+    not single file 
+https://github.com/gladsy-joshy/c2504Phase2/tree/main/Task-JSON
+
+https://github.com/Collinfrancy/Phase2_sln/blob/master/bankmanagement
+https://github.com/Keerthana-JK/Bank-Account-Project/tree/main/BankSystemWpfApp
+    not single file 

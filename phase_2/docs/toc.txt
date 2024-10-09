@@ -147,35 +147,36 @@ Windows Presentation Foundation
 			ii.	Understanding the DispatcherTimer class
 			iii.	Differences between DispatcherTimer and System.Threading.Timer
 			b.	Creating and Configuring DispatcherTimer
-			i.	Instantiating DispatcherTimer
-			ii.	Setting Interval property
-			iii.	Handling the Tick event
+				i.	Instantiating DispatcherTimer
+				ii.	Setting Interval property
+				iii.	Handling the Tick event
 			c.	Starting and Stopping the Timer 
-			i.	Using Start() and Stop() methods
-			ii.	IsEnabled property
+				i.	Using Start() and Stop() methods
+				ii.	IsEnabled property
 			d.	Timer Accuracy and Performance Considerations 
-			i.	Understanding timer resolution
-			ii.	Best practices for timer intervals
+				i.	Understanding timer resolution
+				ii.	Best practices for timer intervals
 			e.	Using DispatcherTimer in MVVM 
-			i.	Integrating DispatcherTimer with ViewModels
-			ii.	Binding timer state to UI elements
-			11.	Background Worker
+				i.	Integrating DispatcherTimer with ViewModels
+				ii.	Binding timer state to UI elements
+		11.	Background Worker
 			i.	Introduction to BackgroundWorker
 			ii.	Purpose and benefits of BackgroundWorker
 			iii.	Comparison with other asynchronous patterns
 			b.	Creating and Configuring BackgroundWorker
-			i.	Instantiating BackgroundWorker
-			ii.	Setting WorkerReportsProgress and WorkerSupportsCancellation properties
+				i.	Instantiating BackgroundWorker
+				ii.	Setting WorkerReportsProgress and 
+				WorkerSupportsCancellation properties
 			c.	Implementing DoWork Event Handler 
-			i.	Writing long-running operations
-			ii.	Passing arguments to the worker
+				i.	Writing long-running operations
+				ii.	Passing arguments to the worker
 			d.	Progress Reporting 
-			i.	Using ReportProgress method
-			ii.	Handling ProgressChanged event
-			iii.	Updating UI with progress information
+				i.	Using ReportProgress method
+				ii.	Handling ProgressChanged event
+				iii.	Updating UI with progress information
 			e.	Handling Work Completion 
-			i.	Implementing RunWorkerCompleted event handler
-			ii.	Accessing results and handling errors
+				i.	Implementing RunWorkerCompleted event handler
+				ii.	Accessing results and handling errors
 		12.	Multi-threaded Applications
 			a.	Creating multi-threaded applications in WPF
 			b.	Handling UI updates from background threads

@@ -1,3 +1,8 @@
+meet-id: 	veq-tasg-unw
+
+08/10/2024 Mon morning/evening: 
+Anurag, Rishwin absent due to fever.
+
 07/10/2024 Mon morning/evening: 
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
 [  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
@@ -10,6 +15,9 @@
 [  ]Minnu Sudhakaran V A, [  ]Neha Joy, 			
 [  ]Rishwin R Kanth,	[  ]Sahla. R, 			
 [  ]Sharon Rose, 		[  ]Yahkoob P, 
+
+Anurag, Rishwin absent due to fever.
+
 
 abhijith - standalone git - not seen 
 	girish anurag 
@@ -35,6 +43,7 @@ minnu - not seen
 
 
 03/10/2024 Tue morning/evening: 
+Collin absent due to fever.
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
 [  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		
 [  ]Anjana E R, 		[  ]Anjana N K,
@@ -52,6 +61,8 @@ minnu - not seen
 		Save, Open, Font, Color 
 	Case Study - Design 
 		Pages Design - Split and Do.
+
+	
 01/10/2024 Tue morning/evening: 
 [  ]Aaryaka P Nath, 	[  ]Abijith K, 			
 [  ]Alan Kuriakose Cherian,	[  ]Anurag C Ashok,		

@@ -11,6 +11,8 @@ with WPF development and SQL Server tools.
 SQL Server Table
 Create the `Employee` table in SQL Server:
 ```sql
+Create Database HrmsAppDb;
+Use HrmsAppDb;
 CREATE TABLE Employee (
     Id INT PRIMARY KEY IDENTITY(1,1),
     Name NVARCHAR(50) NOT NULL,
@@ -19,6 +21,30 @@ CREATE TABLE Employee (
     JobTitle NVARCHAR(20),
     ActiveStatus BIT
 );
+
+Select * From Employee;
+
+Insert Into Employee
+(Name, Age, Salary, JobTitle, ActiveStatus)
+Values ('Dravid', 50, 10000, 'Coach', 1),
+('Rohit', 35, 8000, 'Batsman', 1);
+C:\Users\gmahe\HrmsAppDb.mdf
+C:\Users\gmahe\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDB\EmpAppDb.mdf
+
+
+
+public MainWindow()
+{
+    InitializeComponent();
+    LoadAllEmployees();
+    grdEmployees.ItemsSource = AllEmployees;
+}
+public ObservableCollection<Employee> AllEmployees { get; set; }
+public void LoadAllEmployees()
+{
+    var context = new HrmsAppDbEntities();
+    AllEmployees = new ObservableCollection<Employee>(context.Employees.ToList());
+}
 ```
 
 Step-by-Step Guide to Implement WPF MVVM with Entity Framework

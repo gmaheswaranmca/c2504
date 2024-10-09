@@ -1473,21 +1473,3 @@ namespace BankManagementProject.Tests
 
 
 
-
-====================================================================
-1. CRUD ops with Account entity     
-    Create Window - "Box, Radio, Check, DropDown" Bindings all working 
-        validations not working.
-    Edit Window -  "Box, Radio, Check, DropDown" Bindings all working 
-        validations not working. 
-    List Window - Delete is working.
-
-2. Deposit and Withdraw - working 
-    Business Rules? Not applied. 
-
-3. Exception Handling 
-   Logger 
-   Unit Test for MemRepo
-
-4. 
-====================================================================
