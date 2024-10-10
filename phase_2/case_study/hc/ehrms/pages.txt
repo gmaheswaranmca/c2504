@@ -37,3 +37,33 @@ Actors:
     view 
         !!log of user activities
         !!for security and compliance purposes
+
+1. User Management Page   Yahkoop 
+    - Function: Allows administrators to manage user accounts, 
+    roles, and permissions within the system.
+
+12. Settings Page          Yahkoop
+    - Function: Enables users to configure system settings, 
+    notifications, and preferences.
+
+13. Help and Support Page  Yahkoop
+    - Function: Provides resources for users, 
+    including FAQs, guides, and contact information for support.
+
+
+
+===================================
+repo 
+    - ehrms 
+    - cdmd 
+    - docs 
+        - ehrms 
+        - cdmd 
+    - anjana 
+    - annmariya
+    - ashnamariya
+    - minnu 
+    - yahkoop 
+    - rishwin 
+    - sahla 
+===================================
