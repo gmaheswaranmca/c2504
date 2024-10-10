@@ -1,3 +1,7 @@
+Nugget 
+    Microsoft.ReportingServices.ReportViewerControl.Winforms
+
+
 To create a simple printable report using RDLC that displays a table of employee data with the fields: Name, Salary, and Age, follow the steps outlined below:
 
 Step-by-Step Guide to Create an RDLC Report
