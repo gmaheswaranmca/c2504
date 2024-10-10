@@ -451,4 +451,83 @@ SELECT
 FROM 
     HelpArticles;  -- Assuming you have a HelpArticles table
 ```
+===================================================
 
+Absolutely! Here's a set of sample data 
+for each of the tables in your project, 
+which you can use to populate the tables and 
+test the functionality of your "Smart Manufacturing Analytics Dashboard."
+
+1. `Users` Table:
+```sql
+INSERT INTO Users (Username, PasswordHash, Role)
+VALUES 
+    ('admin', 'hashedpassword1', 'Admin'),
+    ('operator1', 'hashedpassword2', 'Operator'),
+    ('operator2', 'hashedpassword3', 'Operator'),
+    ('manager1', 'hashedpassword4', 'Manager');
+```
+
+2. `ProductionLines` Table:
+```sql
+INSERT INTO ProductionLines (LineName, Status)
+VALUES 
+    ('Line A', 'Active'),
+    ('Line B', 'Active'),
+    ('Line C', 'Inactive'),
+    ('Line D', 'Active');
+```
+
+3. `ProductionMetrics` Table:
+Here's sample data for metrics like production rate, efficiency, and quality rate.
+```sql
+INSERT INTO ProductionMetrics (LineID, MetricDate, ProductionRate, Efficiency, QualityRate, Downtime)
+VALUES 
+    (1, '2024-10-01 08:00:00', 200.50, 92.50, 98.00, 1.5),
+    (1, '2024-10-01 09:00:00', 195.00, 90.00, 99.00, 0.5),
+    (2, '2024-10-01 08:00:00', 220.00, 95.50, 97.50, 0.2),
+    (2, '2024-10-01 09:00:00', 215.00, 94.00, 98.20, 1.0),
+    (3, '2024-10-01 08:00:00', 0.00, 0.00, 0.00, 8.0),  -- Inactive Line
+    (4, '2024-10-01 08:00:00', 180.00, 85.00, 95.50, 2.0),
+    (4, '2024-10-01 09:00:00', 185.00, 87.00, 96.00, 1.5);
+```
+
+4. `Alerts` Table:
+Here's some sample alert data for various production lines.
+```sql
+INSERT INTO Alerts (LineID, AlertDate, AlertType, Severity, Message)
+VALUES 
+    (1, '2024-10-01 08:15:00', 'Machine Failure', 'High', 'Machine stopped due to overheating.'),
+    (2, '2024-10-01 09:05:00', 'Quality Issue', 'Medium', 'Quality rate dropped below 95%.'),
+    (4, '2024-10-01 08:30:00', 'Downtime', 'Low', 'Scheduled maintenance ongoing.'),
+    (4, '2024-10-01 09:10:00', 'Machine Failure', 'High', 'Unexpected shutdown.');
+```
+
+5. `Settings` Table:
+Here are some configuration settings that might affect the system's operation.
+```sql
+INSERT INTO Settings (SettingKey, SettingValue)
+VALUES 
+    ('ProductionRateThreshold', '180'),
+    ('EfficiencyThreshold', '90'),
+    ('AlertEmail', 'admin@factory.com'),
+    ('DowntimeAlertThreshold', '2');  -- Hours
+```
+
+6. `ProductionTrends` Table:
+This table will store historical trend data for your production lines.
+```sql
+INSERT INTO ProductionTrends (LineID, TrendDate, AverageProductionRate, AverageEfficiency, AverageQualityRate)
+VALUES 
+    (1, '2024-09-30', 198.50, 91.75, 98.50),
+    (2, '2024-09-30', 212.00, 93.50, 97.20),
+    (4, '2024-09-30', 183.00, 86.50, 95.75);
+```
+
+---
+
+Usage:
+- After running these `INSERT` statements, your tables will be populated with sample data that you can use for development and testing.
+- You can modify this data further to meet specific scenarios you want to test (e.g., edge cases, high vs low efficiency, various alert types, etc.).
+
+Would you like any additional data, or help with visualizing this data in your dashboard?
