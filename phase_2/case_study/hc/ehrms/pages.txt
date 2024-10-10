@@ -1,0 +1,39 @@
+Actors: 
+    Admin, Doctor, Nurse, Receptionist 
+1. Login Page               Yahkoop 
+2. Dashboard                Anjana
+3. Patient Registration     Anjana
+        Add Patient 
+4. Patient Profile          Anjana
+        View Patient 
+5. EHR Management           Sahla 
+    Health Record 
+    add 
+    list page 
+    view/edit delete 
+6. Appointment Schedule     Sahla
+    add 
+    list page 
+        ! notification as highlighting for upcoming appointments 
+    view/edit   cancel                  !!!delete
+7. Medication Management Page (Prescription)    Mariya 
+    add 
+    list page 
+        ! refill request 
+    edit delete 
+8. Billing and Insuration Page                  Mariya
+    add 
+    Billing Details 
+        !If payment method is 'Insurance'
+            Insuration Details 
+    edit delete 
+9. Reports                      YAMS
+    1. Patient Records 
+    2. Treatment Outcomes 
+    3. Billing Statistics 
+10. Audit Trail Page                Anjana 
+    list and view 
+        audit trails list 
+    view 
+        !!log of user activities
+        !!for security and compliance purposes

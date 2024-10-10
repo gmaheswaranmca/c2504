@@ -28,7 +28,7 @@ namespace BankManagementProject
        
         static AccountConfig()
         {
-            VueModel = new AccountViewModel();
+            VueModel = new class ();
             FrmAccountManagement =new AccountManagementWindow();
             FrmDepositAccount=new DepositWindow();
             FrmWithdrawWindow=new WithdrawWindow();

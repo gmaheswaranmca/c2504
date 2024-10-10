@@ -1,0 +1,1402 @@
+Account Config.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace BankManagementProject
+{
+    public static class AccountConfig
+    {   
+        public static AccountManagementWindow FrmAccountManagement =null;
+        public static AddAccountWindow FrmAddAccount=null;
+        public static EditAccountWindow FrmEditAccount = null;
+        public static DashBoardWindow FrmDashboard =null;
+
+        public static DepositWindow FrmDepositAccount = null;
+
+        public static WithdrawWindow FrmWithdrawWindow = null;
+
+        public static AccountViewModel VueModel = null;
+       
+        static AccountConfig()
+        {
+            VueModel = new AccountViewModel();
+            FrmAccountManagement =new AccountManagementWindow();
+            FrmDepositAccount=new DepositWindow();
+            FrmWithdrawWindow=new WithdrawWindow();
+            FrmAddAccount = new AddAccountWindow();
+            FrmEditAccount = new EditAccountWindow();
+            FrmDashboard = new DashBoardWindow();
+        }
+    }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Account Exception.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankManagementProject
+{
+    /// <summary>
+    /// Represents the userdefined exception class
+    /// </summary>
+    public class AccountException : Exception
+    {
+        public AccountException() : base() { }
+
+        public AccountException(string message) : base(message) { }
+
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AccountManagementWIndow.xaml
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<Window x:Class="BankManagementProject.AccountManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementProject" d:DataContext="{d:DesignInstance Type=local:AccountViewModel}"
+        mc:Ignorable="d"
+        Title="AccountManagementWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <Button x:Name="btnAdd" Content="ADD" Canvas.Left="210" Canvas.Top="260" HorizontalAlignment="Center" 
+                VerticalAlignment="Top" Width="102" Height="57" Click="btnAdd_Click" Background="gray"/>
+        <Button x:Name="btnEdit" Content="EDIT" Canvas.Left="380" Canvas.Top="260" HorizontalAlignment="Left" 
+                Height="57" VerticalAlignment="Center" Width="100" RenderTransformOrigin="0.48,-0.115" Click="btnEdit_Click" Background="gray"/>
+        <DataGrid x:Name="grdAccount" Height="201" Width="449" SelectionMode="Single" ItemsSource="{Binding Accounts}"
+                  HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="169" 
+                  AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccount , Mode=TwoWay}" IsReadOnly="True" 
+                  AreRowDetailsFrozen="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Account No" Binding="{Binding AccNo}"/>
+                <DataGridTextColumn Header="Name"  Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Balance"  Binding="{Binding Balance}"/>
+                <DataGridTextColumn Header="Account Type"  Binding="{Binding AccType}"/>
+                <DataGridTextColumn Header="Email"  Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Phone No"  Binding="{Binding PhNo}"/>
+                <DataGridTextColumn Header="Address"  Binding="{Binding Address}"/>
+                <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive}"/>
+                <DataGridTextColumn Header="Interest Percentage" Binding="{Binding InterestPercentage}"/>
+                <DataGridTextColumn Header="Transaction Count" Binding="{Binding TransactionCount}"/>
+                <DataGridTextColumn Header="Last Transaction Date" Binding="{Binding LastTransactionDate}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnDelete" Content="DELETE" Canvas.Left="524" Canvas.Top="260" 
+            Height="57" Width="100" RenderTransformOrigin="0.48,-0.115" HorizontalAlignment="Left" VerticalAlignment="Center" Click="btnDelete_Click" Command="{Binding DeleteCommand}" Background="gray"/>
+        <TextBlock Canvas.Left="237" TextWrapping="Wrap" Text="SORTBY" Background="Gray" FontSize="12" Canvas.Top="356" Height="32" Width="75" TextAlignment="Center"/>
+        <Button x:Name="btnSortName" Content="Name" Background="Gray" Canvas.Left="380" Canvas.Top="356" HorizontalAlignment="Left" VerticalAlignment="Center" Height="32" Width="82" Command="{Binding SortByNameCommand}"  />
+        <Button x:Name="btnSortPhnNo" Content="Phone Number" Background="Gray" Canvas.Left="524" Canvas.Top="356" Height="32" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SortByNumCommand}"/>
+
+    </Canvas>
+</Window>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+AccountManagementWindow.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Linq;
+using System.Collections.ObjectModel;
+
+namespace BankManagementProject
+{
+    /// <summary>
+    /// Interaction logic for AccountManagementWindow.xaml
+    /// </summary>
+    public partial class AccountManagementWindow : Window
+    {
+        public AccountManagementWindow()
+        {
+            InitializeComponent();
+            DataContext = AccountConfig.VueModel;
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AccountConfig.FrmAddAccount.Show();
+            
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (grdAccount.SelectedIndex == -1)
+            {
+                var result = MessageBox.Show(messageBoxText: "Please select Account details to edit",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+                return;
+            }
+            AccountConfig.FrmEditAccount.Show();
+
+        }
+
+       
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (grdAccount.SelectedIndex == -1)
+            {
+                var result = MessageBox.Show(messageBoxText: "Please select Account details to Delete",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+                return;
+            }
+            AccountViewModel viewModel = new AccountViewModel();
+            viewModel.Delete();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AccountMemoryRepo.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+
+namespace BankManagementProject
+{
+    public class AccountMemoryRepo : IAccountRepo
+    {
+        private static AccountMemoryRepo _instance;
+        public ObservableCollection<AccountModel> accounts = new ObservableCollection<AccountModel>()
+        {
+            new AccountModel
+            {
+                AccNo = 1234,
+                Name = "Alan",
+                Balance = 0,
+                AccType = "savings",
+                Email = "alan@gmail.com",
+                PhNo = "789456123",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+             new AccountModel
+            {
+                AccNo = 1964,
+                Name = "Girish",
+                Balance = 0,
+                AccType = "savings",
+                Email = "girish@gmail.com",
+                PhNo = "789456123",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+              new AccountModel
+            {
+                AccNo = 1134,
+                Name = "Abhijith",
+                Balance = 0,
+                AccType = "savings",
+                Email = "abhijith@gmail.com",
+                PhNo = "789456123",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+               new AccountModel
+            {
+                AccNo = 1034,
+                Name = "Keerthana",
+                Balance = 0,
+                AccType = "Current",
+                Email = "keerthana@gmail.com",
+                PhNo = "7894547623",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+                new AccountModel
+            {
+                AccNo = 2434,
+                Name = "Neha",
+                Balance = 0,
+                AccType = "savings",
+                Email = "neha@gmail.com",
+                PhNo = "7894783223",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+                 new AccountModel
+            {
+                AccNo = 9654,
+                Name = "Gopika",
+                Balance = 0,
+                AccType = "current",
+                Email = "gopika@gmail.com",
+                PhNo = "789456123",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+             new AccountModel
+            {
+                AccNo = 1345,
+                Name = "Anugrah",
+                Balance = 0,
+                AccType = "Current",
+                Email = "anugrah@gmail.com",
+                PhNo = "786456123",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+              new AccountModel
+            {
+                AccNo = 1974,
+                Name = "Rishwin",
+                Balance = 0,
+                AccType = "savings",
+                Email = "rishwin@gmail.com",
+                PhNo = "789456853",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+               new AccountModel
+            {
+                AccNo = 6326,
+                Name = "Ashwin",
+                Balance = 0,
+                AccType = "current",
+                Email = "ashwin@gmail.com",
+                PhNo = "789736123",
+                Address = "xxx street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+            new AccountModel
+            {
+                AccNo = 4567,
+                Name = "Kuriakose",
+                Balance = 0,
+                AccType = "current",
+                Email = "kuriakose@gmail.com",
+                PhNo = "4561233",
+                Address = "yyy street",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            }
+        };
+        public static AccountMemoryRepo Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new AccountMemoryRepo();
+                }
+                return _instance;
+            }
+        }
+
+        public void Create(AccountModel accModel)
+        {
+            try
+            {
+                accounts.Add(accModel);
+            }
+            catch (AccountException ae)
+            {
+                throw new AccountException("Error in creating account");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void UpdateAccount(AccountModel accModel)
+        {
+            try
+            {
+                var existingAccount = accounts.FirstOrDefault(a => a.AccNo == accModel.AccNo);
+                if (existingAccount != null)
+                {
+                    existingAccount.Address = accModel.Address;
+                }
+                else
+                {
+                    throw new AccountException("Account doesn't exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public ObservableCollection<AccountModel> ReadAllAccount()
+        {
+            try
+            {
+                return accounts;
+            }
+            catch (AccountException ae)
+            {
+                throw new AccountException("Error reading accounts");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void DeleteAccount(AccountModel accModel)
+        {
+
+            foreach (var ac in accounts)
+            {
+                if (ac.AccNo == accModel.AccNo)
+                {
+                    ac.Address = accModel.Address;
+                }
+            }
+        }
+
+        public void Deposit(int acNo, int Amount)
+        {
+            try
+            {
+                var account = accounts.FirstOrDefault(a => a.AccNo == acNo);
+                if (account != null)
+                {
+                    account.Balance = account.Balance + Amount;
+                    account.LastTransactionDate = DateTime.Now;
+                    account.TransactionCount = account.TransactionCount + 1;
+
+                }
+                else
+                {
+                    throw new AccountException("Account Not Found , Please input valid account number");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public void Withdraw(int acNo, int Amount)
+        {
+            try
+            {
+                var account = accounts.FirstOrDefault(a => a.AccNo == acNo);
+                if (account != null)
+                {
+                    if (account.Balance < Amount)
+                    {
+                        //throw new AccountException("Insufficient balance");'
+                        MessageBox.Show("Insufficient balance");
+
+                    }
+                    account.Balance = account.Balance - Amount;
+                    account.LastTransactionDate = DateTime.Now;
+                    account.TransactionCount = account.TransactionCount + 1;
+
+                }
+                else
+                {
+                    //throw new AccountException("Account Not Found , Please input valid account number");
+                    MessageBox.Show("Account not Found , Please input valid account number");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void CalculateInterestAndUpdateBalance()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<AccountModel> SortByName()
+        {
+            return new ObservableCollection<AccountModel>(accounts.OrderBy(ac => ac.Name));
+        }
+        public ObservableCollection<AccountModel> SortByNum()
+        {
+            return new ObservableCollection<AccountModel>(accounts.OrderBy(ac => ac.PhNo));
+        }
+
+
+
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AccountModel.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankManagementProject
+{
+    public class AccountModel : INotifyPropertyChanged
+    {
+        private decimal _balance;
+        public int AccNo { get; set; }
+        public string Name { get; set; }
+        public decimal Balance
+        {
+            get { return _balance; }
+            set
+            {
+                _balance = value;
+                OnPropertyChanged(nameof(Balance));
+            }
+        }
+        public string AccType { get; set; }
+        public String Email { get; set; }
+        public String PhNo { get; set; }
+
+        private string _address;
+
+        public string Address
+        {
+            get { return _address; }
+            set
+            {
+                _address = value;
+                OnPropertyChanged(nameof(Address));
+            }
+        }
+
+        public bool IsActive { get; set; }
+        public string InterestPercentage { get; set; }
+
+        private int _transactionCount;
+
+        public int TransactionCount
+        {
+            get { return _transactionCount; }
+            set
+            {
+                _transactionCount = value;
+                OnPropertyChanged(nameof(TransactionCount));
+            }
+        }
+
+        private DateTime _lastTrasnsactionDate;
+
+        public DateTime LastTransactionDate
+        {
+            get { return _lastTrasnsactionDate; }
+            set
+            {
+                _lastTrasnsactionDate = value;
+                OnPropertyChanged(nameof(LastTransactionDate));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AccountViewModel.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Net;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+
+
+namespace BankManagementProject
+{
+    public delegate void DWidnowClose();
+    public class AccountViewModel : INotifyPropertyChanged
+    {
+        public DWidnowClose NewWindowClose;
+        public DWidnowClose EditWindowClose;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private int _filter;
+        public int Filter
+        {
+            get
+            {
+                return _filter;
+            }
+            set
+            {
+                _filter = value;
+                OnPropertyChanged(nameof(Filter));
+            }
+        }
+        private int _accountNumber;
+
+        public int AccountNumber
+        {
+            get { return _accountNumber; }
+            set
+            {
+                _accountNumber = value;
+                OnPropertyChanged(nameof(AccountNumber));
+            }
+
+        }
+
+        private int _amount;
+
+        public int Amount
+        {
+            get { return _amount; }
+            set
+            {
+                _amount = value;
+                OnPropertyChanged(nameof(Amount));
+            }
+        }
+
+        private AccountModel _newAccount = null;
+        public AccountModel NewAccount
+        {
+            get => _newAccount;
+            set { _newAccount = value; OnPropertyChanged(nameof(NewAccount)); }
+        }
+        //
+        private AccountModel _selectedAccount = null;
+        public AccountModel SelectedAccount
+        {
+            get => _selectedAccount;
+            set { _selectedAccount = value; OnPropertyChanged(nameof(SelectedAccount)); }
+        }
+        
+
+        private IAccountRepo _repo = new AccountMemoryRepo();
+        private ObservableCollection<AccountModel> _accounts = null;
+        public ObservableCollection<AccountModel> Accounts
+        {
+           
+            get
+            {
+                if(Filter == 1)
+                {
+                    return _repo.SortByName();
+                    
+                }
+                else if(Filter == 2)
+                {
+                    return _repo.SortByNum();
+                }
+                return _repo.ReadAllAccount();
+                
+            }
+            set
+            {
+                _accounts = value;
+                OnPropertyChanged(nameof(Accounts));
+            }
+        }
+        public ICommand CreateCommand { get; }
+        public ICommand UpdateCommand { get; }
+        public ICommand DeleteCommand { get; }
+
+        public ICommand WithdrawCommand { get; }
+        public ICommand DepositCommand { get; }
+
+        public ICommand SortByNumCommand { get; }   
+
+        public ICommand SortByNameCommand { get; }
+        
+
+        public AccountViewModel()
+        {
+            this.NewAccount = new AccountModel
+            {
+                AccNo = 0,
+                Name = "",
+                Balance = 0,
+                AccType = "savings",
+                Email = " sample@gmail.com",
+                PhNo = "xxxx-xxxx",
+                Address = "",
+                IsActive = true,
+                InterestPercentage = "0",
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now
+            };
+
+
+
+            CreateCommand = new RelayCommand(Create);
+            UpdateCommand = new RelayCommand(Update);
+            DeleteCommand = new RelayCommand(Delete);
+            WithdrawCommand = new RelayCommand(Withdraw);
+            DepositCommand = new RelayCommand(Deposit);
+            SortByNameCommand = new RelayCommand(SortName);
+            SortByNumCommand = new RelayCommand(SortNumber);
+
+
+        }
+        public void Create()
+        {
+            AccountModel newAccount = new AccountModel
+            {
+                AccNo = NewAccount.AccNo,
+                Name = NewAccount.Name,
+                Balance = NewAccount.Balance,
+                AccType = NewAccount.AccType,
+                Email = NewAccount.Email,
+                PhNo = NewAccount.PhNo,
+                Address = NewAccount.Address,
+                IsActive = NewAccount.IsActive,
+                InterestPercentage = NewAccount.InterestPercentage,
+                TransactionCount = NewAccount.TransactionCount,
+                LastTransactionDate = NewAccount.LastTransactionDate
+            };
+            var result = MessageBox.Show(messageBoxText: "Are you sure to create?",
+                    caption: "Confirm",
+                    button: MessageBoxButton.YesNo,
+                    icon: MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
+            _repo.Create(newAccount);
+            this.NewAccount = new AccountModel { AccNo = 0, Name = "", Balance = 0, AccType = "", Email = "", PhNo = "", Address = "", IsActive = false, InterestPercentage = "0", TransactionCount = 0, LastTransactionDate = DateTime.Now };
+            
+            result = MessageBox.Show(messageBoxText: "Created Successfully",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+
+            if (NewWindowClose != null)
+            {
+                NewWindowClose();
+            }
+        }
+
+        public void Update()
+        {
+            if (this.SelectedAccount == null)
+            {
+                return;
+            }
+
+            _repo.UpdateAccount(this.SelectedAccount);
+            this.SelectedAccount = this.SelectedAccount;
+            var result = MessageBox.Show(messageBoxText: "Updated Successfully",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+
+            if (EditWindowClose != null)
+            {
+                EditWindowClose();
+            }
+        }
+        public void Delete()
+        {
+            if (this.SelectedAccount == null)
+            {
+                return;
+            }
+            this.Accounts.Remove(this.SelectedAccount);
+            this.SelectedAccount = null;
+        }
+        public void Withdraw()
+        {
+            var result = MessageBox.Show(messageBoxText: "Are you sure to Withdraw?",
+                   caption: "Confirm",
+                   button: MessageBoxButton.YesNo,
+                   icon: MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
+            _repo.Withdraw(AccountNumber, Amount);
+            this.AccountNumber = 0;
+            this.Amount = 0;
+        }
+        public void Deposit()
+        {
+            var result = MessageBox.Show(messageBoxText: "Are you sure to Deposit?",
+                   caption: "Confirm",
+                   button: MessageBoxButton.YesNo,
+                   icon: MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
+            _repo.Deposit(AccountNumber, Amount);
+
+
+            this.AccountNumber = 0;
+            this.Amount = 0;
+        }
+        public void SortName()
+        {
+            
+            Filter = 1;
+            OnPropertyChanged(nameof(Accounts));
+        }
+        public void SortNumber()
+        {
+            Filter = 2;
+            OnPropertyChanged(nameof(Accounts));
+        }
+
+    }
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+AddAccountWindow.xaml
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<Window x:Class="BankManagementProject.AddAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementProject"
+        mc:Ignorable="d"
+        Title="AddAccountWindow" Height="450" Width="800">
+    <Canvas>
+        <TextBlock x:Name="lblAccountNo" Canvas.Left="210" TextWrapping="Wrap" Text="Account No" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="106"/>
+        <TextBox x:Name="txtAccountNo" Canvas.Left="401" TextWrapping="Wrap" Text="{Binding NewAccount.AccNo}" Canvas.Top="8" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblName" Canvas.Left="210" TextWrapping="Wrap" Text="Name" Canvas.Top="50" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtName" Canvas.Left="401" TextWrapping="Wrap" Text="{Binding NewAccount.Name}" Canvas.Top="45" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblBalance" Canvas.Left="210" TextWrapping="Wrap" Text="Balance" Canvas.Top="88" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtBalance" Canvas.Left="401" TextWrapping="Wrap" Text="{Binding NewAccount.Balance}" Canvas.Top="86" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblEmail" Canvas.Left="210" TextWrapping="Wrap" Text="Email" Canvas.Top="162" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtEmail" Canvas.Left="401" TextWrapping="Wrap" Text="{Binding NewAccount.Email}" Canvas.Top="162" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblAddress" Canvas.Left="210" TextWrapping="Wrap" Text="Address" Canvas.Top="205" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtAddress" Canvas.Left="401" TextWrapping="Wrap" Text="{Binding NewAccount.Address}"  AcceptsReturn="True" Canvas.Top="205" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblPhone" Canvas.Left="210" TextWrapping="Wrap" Text="Phone No" Canvas.Top="250" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtPhone" Canvas.Left="401" TextWrapping="Wrap" Text="{Binding NewAccount.PhNo}" Canvas.Top="250" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblAccountType" Canvas.Left="210" TextWrapping="Wrap" Text="Account Type" Canvas.Top="124" Width="106" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.519,1.694"/>
+        <TextBlock x:Name="lblRate" Canvas.Left="210" TextWrapping="Wrap" Text="Interest Rate" Canvas.Top="288" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox x:Name="cmbRate" Canvas.Left="402" Canvas.Top="287" Width="153" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding NewAccount.InterestPercentage}">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+            <ComboBoxItem Content="6"/>
+            <ComboBoxItem Content="7"/>
+            <ComboBoxItem Content="8"/>
+            <ComboBoxItem Content="9"/>
+            <ComboBoxItem Content="10"/>
+            <ComboBoxItem Content="11"/>
+            <ComboBoxItem Content="12"/>
+
+        </ComboBox>
+        <TextBlock x:Name="lblStatus" Canvas.Left="210" TextWrapping="Wrap" Text="Status" Canvas.Top="330" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <CheckBox x:Name="chkActive" Content="Active" Canvas.Left="452" Canvas.Top="331" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="True" IsEnabled="False"/>
+        <RadioButton x:Name="rdSavings"  Content="Savings" Canvas.Left="402" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="rdSavings_Checked" />
+        <RadioButton x:Name="rdCurrent" Content="Current" Canvas.Left="496" Canvas.Top="125" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Button x:Name="btnCreateAccount" Content="Create Account" Canvas.Left="622" Canvas.Top="338" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="153" Height="45" Command="{Binding CreateCommand}" Background="gray"/>
+        <TextBlock Width="150" Text="Transaction Count" Canvas.Left="65" Canvas.Top="435"/>
+        <TextBox Width="300" IsEnabled="False" Text="{Binding NewAccount.TransactionCount}" Canvas.Left="300" Canvas.Top="406" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="#FFF3EDED" Background="#FFF3EDED"/>
+        <TextBlock Width="150" Text="Last Transaction Date" Canvas.Left="311" Canvas.Top="435" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF0E0A0A"/>
+        <TextBox Width="300" IsEnabled="False" Text="{Binding NewAccount.LastTransactionDate}" Canvas.Left="16" Canvas.Top="379" BorderBrush="#FFF3EDED"/>
+
+    </Canvas>
+</Window>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AddAccountWindow.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using BankManagementProject;
+
+namespace BankManagementProject
+{
+    /// <summary>
+    /// Interaction logic for AddAccountWindow.xaml
+    /// </summary>
+    public partial class AddAccountWindow : Window
+    {
+        public AddAccountWindow()
+        {
+            InitializeComponent();
+            DataContext = AccountConfig.VueModel;
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        private void rdSavings_Checked(object sender, RoutedEventArgs e)
+        {
+            AccountConfig.VueModel.NewAccount.AccType = (string)AccountConfig.FrmAddAccount.rdSavings.Content;
+        }
+
+        private void rdCurrent_Checked(object sender, RoutedEventArgs e)
+        {
+            AccountConfig.VueModel.NewAccount.AccType = (string)AccountConfig.FrmAddAccount.rdCurrent.Content;
+
+        }
+    }
+}
+DashBoardWindow.xaml
+<Window x:Class="BankManagementProject.DashBoardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementProject"
+        mc:Ignorable="d"
+        Title="DashBoardWindow" Height="450" Width="800" Closed="Window_Closed">
+    <Canvas>
+        <Button x:Name="btnDeposit" Content="Deposit" Canvas.Left="320" Canvas.Top="144" Height="50" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Gray" Click="btnDeposit_Click"/>
+        <Button x:Name="btnAccMng" Content="Account Management" Canvas.Left="320" Canvas.Top="69" Height="50" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Gray" Click="btnAccMng_Click"/>
+        <Button x:Name="btnWithdraw" Content="Withdraw" Canvas.Left="320" Canvas.Top="224" Height="50" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Gray" Click="btnWithdraw_Click"/>
+
+    </Canvas>
+</Window>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DashBoardWindow.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace BankManagementProject
+{
+    /// <summary>
+    /// Interaction logic for DashBoardWindow.xaml
+    /// </summary>
+    public partial class DashBoardWindow : Window
+    {
+        public DashBoardWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void btnAccMng_Click(object sender, RoutedEventArgs e)
+        {
+            AccountConfig.FrmAccountManagement.Show();
+        }
+
+        private void btnDeposit_Click(object sender, RoutedEventArgs e)
+        {
+            AccountConfig.FrmDepositAccount.Show();
+        }
+
+        private void btnWithdraw_Click(object sender, RoutedEventArgs e)
+        {
+            AccountConfig.FrmWithdrawWindow.Show();
+        }
+
+        private void btnBalance_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DepositWindow.xaml
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<Window x:Class="BankManagementProject.DepositWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementProject"
+        mc:Ignorable="d"
+        Title="DepositWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <Button x:Name="btnDeposit" Content="Deposit" Command="{Binding DepositCommand}" Canvas.Left="330" Canvas.Top="239" Height="60" Width="125" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Gray" FontWeight="Bold" />
+        <TextBlock x:Name="lblAccNo" Canvas.Left="190" TextWrapping="Wrap" Text="Account Number" Canvas.Top="128" HorizontalAlignment="Left" VerticalAlignment="Center" Width="130" FontWeight="Bold"/>
+        <TextBlock x:Name="lblAmount" Canvas.Left="190" TextWrapping="Wrap" Text="Amount" Canvas.Top="169" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="txtAccNo" Text="{Binding AccountNumber}" Canvas.Left="400" TextWrapping="Wrap" Canvas.Top="126" Width="120"/>
+        <TextBox x:Name="txtAmount" Text="{Binding Amount}" Canvas.Left="400" TextWrapping="Wrap" Canvas.Top="167" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="                  DEPOSIT" Canvas.Left="245" Canvas.Top="38" HorizontalAlignment="Center" VerticalAlignment="Center" Width="275" Foreground="#FFE0D7D7" FontSize="18" FontWeight="Bold">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="Gray" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+
+    </Canvas>
+</Window>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DepositWindow.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace BankManagementProject
+{
+    /// <summary>
+    /// Interaction logic for DepositWindow.xaml
+    /// </summary>
+    public partial class DepositWindow : Window
+    {
+        public DepositWindow()
+        {
+            InitializeComponent();
+            this.DataContext = AccountConfig.VueModel;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EditAccountWindow.xaml
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<Window x:Class="BankManagementProject.EditAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementProject"
+        mc:Ignorable="d"
+        Title="EditAccountWindow" Height="450" Width="800">
+    <Canvas>
+        <TextBlock x:Name="lblAccountNo" Canvas.Left="210" TextWrapping="Wrap" Text="Account No" Canvas.Top="20" Width="106" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtAccountNo" Canvas.Left="401" TextWrapping="Wrap" Canvas.Top="18" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False" Text="{Binding SelectedAccount.AccNo}"/>
+        <TextBlock x:Name="lblName" Canvas.Left="210" TextWrapping="Wrap" Text="Name" Canvas.Top="49" Width="106" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtName"  Canvas.Left="401" TextWrapping="Wrap" Canvas.Top="49" Width="155" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" Text="{Binding SelectedAccount.Name}"/>
+        <TextBlock x:Name="lblBalance" Canvas.Left="210" TextWrapping="Wrap" Text="Balance" Canvas.Top="88" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtBalance" Canvas.Left="401" TextWrapping="Wrap" Text="{Binding SelectedAccount.Balance}" IsEnabled="False" Canvas.Top="86" Width="155" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblEmail" Canvas.Left="210" TextWrapping="Wrap" Text="Email" Canvas.Top="162" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtEmail"  Canvas.Left="401" TextWrapping="Wrap" Canvas.Top="162" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False" Text="{Binding SelectedAccount.Email}"/>
+        <TextBlock x:Name="lblAddress" Canvas.Left="210" TextWrapping="Wrap" Text="Address" Canvas.Top="205" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtAddress" Text="{Binding SelectedAccount.Address}" Canvas.Left="401" TextWrapping="Wrap"  AcceptsReturn="True" Canvas.Top="205" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblPhone" Canvas.Left="210" TextWrapping="Wrap" Text="Phone No" Canvas.Top="250" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtPhone" Canvas.Left="401" TextWrapping="Wrap" Canvas.Top="250" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False" Text="{Binding SelectedAccount.PhNo}"/>
+        <TextBlock x:Name="lblAccountType" Canvas.Left="210" TextWrapping="Wrap" Text="Account Type" Canvas.Top="117" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="lblRate" Canvas.Left="210" TextWrapping="Wrap" Text="Interest Rate" Canvas.Top="288" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox x:Name="cmbRate" Canvas.Left="402" Canvas.Top="287" Width="153" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+            <ComboBoxItem Content="6"/>
+            <ComboBoxItem Content="7"/>
+            <ComboBoxItem Content="8"/>
+            <ComboBoxItem Content="9"/>
+            <ComboBoxItem Content="10"/>
+            <ComboBoxItem Content="11"/>
+            <ComboBoxItem Content="12"/>
+
+        </ComboBox>
+        <TextBlock x:Name="lblStatus" Canvas.Left="210" TextWrapping="Wrap" Text="Status" Canvas.Top="330" Width="106" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <CheckBox x:Name="chkActive" Content="Active" Canvas.Left="452" Canvas.Top="331" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="True"/>
+        <RadioButton x:Name="rdSavings" Content="Savings" Canvas.Left="411" Canvas.Top="117" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
+        <RadioButton x:Name="rdCurrent" Content="Current" Canvas.Left="490" Canvas.Top="117" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
+        <Button x:Name="btnUpdate" Content="Update" Canvas.Left="602" Canvas.Top="338" Width="153" Height="45" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding UpdateCommand}" Background="Gray"/>
+        <TextBlock Width="150" Text="Transaction Count" Foreground="#FFF3EDED" Canvas.Left="20" Canvas.Top="408"/>
+        <TextBox Width="300" IsEnabled="False" Text="{Binding SelectedAccount.TransactionCount}" Canvas.Left="20" Canvas.Top="432" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Width="150" Text="Last Transaction Date" Foreground="#FFF3EDED" HorizontalAlignment="Left" Canvas.Top="411" VerticalAlignment="Top" Canvas.Left="20"/>
+        <TextBox Width="300" IsEnabled="False" Text="{Binding SelectedAccount.LastTransactionDate}" Canvas.Left="328" Canvas.Top="432"/>
+    </Canvas>
+</Window>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EditAccountWindow.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using BankManagementProject;
+
+
+namespace BankManagementProject
+{
+    /// <summary>
+    /// Interaction logic for EditAccountWindow.xaml
+    /// </summary>
+    public partial class EditAccountWindow : Window
+    {
+        public EditAccountWindow()
+        {
+            InitializeComponent();
+            DataContext = AccountConfig.VueModel;
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LoginPageWindow.xaml
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<Window x:Class="BankManagementProject.LoginPageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementProject"
+        mc:Ignorable="d"
+        Title="LoginPageWindow" Height="450" Width="800">
+    <Canvas>
+        <Button x:Name="btnLogin" Content="Login"  Canvas.Left="330" Canvas.Top="239" Height="60" Width="125" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Gray" FontWeight="Bold" Click="btnLogin_Click" />
+        <TextBlock x:Name="lblUserName" Canvas.Left="190" TextWrapping="Wrap" Text="UserName" Canvas.Top="128" HorizontalAlignment="Left" VerticalAlignment="Center" Width="130" FontWeight="Bold"/>
+        <TextBlock x:Name="lblPassword" Canvas.Left="190" TextWrapping="Wrap" Text="Password" Canvas.Top="169" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="txtUserName"  Canvas.Left="400" TextWrapping="Wrap" Canvas.Top="126" Width="120"/>
+        <PasswordBox x:Name="txtPassword"  Canvas.Left="400" Canvas.Top="167" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="                  LOGIN PAGE" Canvas.Left="245" Canvas.Top="38" HorizontalAlignment="Center" VerticalAlignment="Center" Width="275" Foreground="#FFE0D7D7" FontSize="18" FontWeight="Bold">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="Gray" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+    </Canvas>
+</Window>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LoginPageWindow.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace BankManagementProject
+{
+    /// <summary>
+    /// Interaction logic for LoginPageWindow.xaml
+    /// </summary>
+    public partial class LoginPageWindow : Window
+    {
+        public LoginPageWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtUserName.Text == "quest" && txtPassword.Password == "1234")
+            {
+                AccountConfig.FrmDashboard.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show(messageBoxText: $"Invalid username or password",
+                   caption: "Warning",
+                   button: MessageBoxButton.OK,
+                   icon: MessageBoxImage.Warning);
+                return;
+            }
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+WithdrawWindow.xaml
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<Window x:Class="BankManagementProject.WithdrawWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagementProject"
+        mc:Ignorable="d"
+        Title="WithdrawWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Canvas>
+        <Button x:Name="btnWithdraw" Content="Withdraw" Command="{Binding WithdrawCommand}" Canvas.Left="330" Canvas.Top="239" Height="60" Width="125" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Gray" FontWeight="Bold"/>
+        <TextBlock x:Name="lblAccNo" Canvas.Left="190" TextWrapping="Wrap" Text="Account Number" Canvas.Top="128" HorizontalAlignment="Left" VerticalAlignment="Center" Width="130" FontWeight="Bold"/>
+        <TextBlock x:Name="lblAmount" Canvas.Left="190" TextWrapping="Wrap" Text="Amount" Canvas.Top="169" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="txtAccNo" Text="{Binding AccountNumber}" Canvas.Left="400" TextWrapping="Wrap" Canvas.Top="126" Width="120"/>
+        <TextBox x:Name="txtAmount" Text="{Binding Amount}" Canvas.Left="400" TextWrapping="Wrap" Canvas.Top="167" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="                  WITHDRAW" Canvas.Left="245" Canvas.Top="38" HorizontalAlignment="Center" VerticalAlignment="Center" Width="275" Foreground="#FFE0D7D7" FontSize="18" FontWeight="Bold">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="Gray" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+
+    </Canvas>
+</Window>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+WithdrawWindow.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace BankManagementProject
+{
+    /// <summary>
+    /// Interaction logic for WithdrawWindow.xaml
+    /// </summary>
+    public partial class WithdrawWindow : Window
+    {
+        public WithdrawWindow()
+        {
+            InitializeComponent();
+            this.DataContext = AccountConfig.VueModel;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+IAccountRepo.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankManagementProject
+{
+    public interface IAccountRepo
+    {
+        void Create(AccountModel accModel);
+
+        void UpdateAccount(AccountModel accModel);
+
+        void DeleteAccount(AccountModel account);
+        void Deposit(int acNo, int Amount);
+        void Withdraw(int acNo, int Amount);
+        void CalculateInterestAndUpdateBalance();
+        ObservableCollection<AccountModel> ReadAllAccount();
+
+        ObservableCollection<AccountModel> SortByName();
+        ObservableCollection<AccountModel> SortByNum();
+
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Logger.cs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using log4net;
+
+namespace BankManagementProject
+{
+    public static class Logger
+    {
+        public static readonly ILog log = LogManager.GetLogger(typeof(Logger));
+    }
+}
+
+App.Config
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+	<configSections>
+		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+	</configSections>
+
+	<log4net>
+		<appender name="FileAppender" type="log4net.Appender.RollingFileAppender">
+			<file value="logfile.log" />
+			<appendToFile value="true" />
+			<rollingStyle value="Size" />
+			<maxSizeRollBackups value="5" />
+			<maximumFileSize value="10MB" />
+			<staticLogFileName value="true" />
+			<layout type="log4net.Layout.PatternLayout">
+				<conversionPattern value="%date [%thread] %-5level %logger - %message%newline" />
+			</layout>
+		</appender>
+		<root>
+			<level value="ALL" />
+			<appender-ref ref="FileAppender" />
+		</root>
+	</log4net>
+</configuration>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+App.xaml
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<Application x:Class="BankManagementProject.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BankManagementProject"
+             StartupUri="LoginPageWindow.xaml">
+    <Application.Resources>
+       
+    </Application.Resources>
+</Application>
