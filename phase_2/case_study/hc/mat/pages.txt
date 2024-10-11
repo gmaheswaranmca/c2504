@@ -1,0 +1,48 @@
+actor: patient, doctor, nurse 
+
+Home Page                       ! Collin 
+    if not logged in
+        tab control  
+            Patient Registration [Sign Up] ! user control
+            Patient Login                  ! user control 
+    if logged in
+        logged in page 
+            user name ! <logout> 
+            menus
+                !medications  
+                !view Adherence Tracker
+                !dashboard 
+                !Reminders & Notifications
+Dashboard                       ! Collin 
+    - Daily medication schedule
+    - Adherence percentage
+    - Recent and upcoming reminders
+
+
+Medication Page                     ! Keerthana 
+    <add medicine> <view Adherence Tracker>
+    list of medicines
+    <edit> <view schedule>
+    ! adding medicine + add schedule automatically 
+Medication Schedule Page            ! Ashwin 
+    ! medicine + date time + status 
+    list of schedule for the medicine 
+    <check-in>
+Adherence Tracking Page         ! Collin
+    detailed history of the patient's adherence
+    History of missed doses 
+    History of delayed doses 
+Check-in Page                       ! Ashwin 
+    !Confirm medicine taken or not 
+    Mark medication as taken
+    [x]Is There any Side Effect?
+    Side Effect [                   ]
+Reminders & Notifications           ! Keerthana
+Patient Profile Page                ! Ashwin 
+    
+Reports Page
+
+
+Settings Page                       ! Collin
+
+Doctor/Pharmacist Page
