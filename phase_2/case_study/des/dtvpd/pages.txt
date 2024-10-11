@@ -1,0 +1,59 @@
+Actor: 
+    Semiconductor Designer 
+1. Digital Twin Creation Page           ! dijol 
+    <Create> 
+    Twins List  
+    <Edit> <Simulation> <Collaborators> <Iterations>
+2. Simulation Management Page           ! gladsy 
+   
+    List of Simulations 
+        1   User    Status 
+        2
+        3
+        4
+        <Update Simulation Results>
+    
+    <Start> 
+    OR 
+    <Pause> 
+    Status  ()Succeeded ()Failed 
+    Notes [             ]
+    <Update Status and Stop>   
+
+    <Update Simulation Results>
+    
+3. Design Iteration Page               ! dijol 
+    <Add Iteration>
+    Iterations list 
+        #       Path        No of Simulations       Success Count    Failure Count
+        1
+        2
+        3
+
+
+4. Data Management Page             ! gladsy 
+    design specifications
+    here we will update the simulation result 
+5. Collaboration Page               ! dijol   
+    Twin : 
+    Colloborator : [Dravid]v <Add as Colloborator>    
+    Colloborators List 
+        1
+        2
+        3
+    <Remove Colloborator> 
+
+6. Help and Support         ! sharon 
+   Feedback 
+7. Home Page                !Neha 
+    Login Page 
+    OR 
+    Logged In Page 
+        user name <logout> 
+        Menus 
+8. Settings Table       ! Neha 
+9. User Management Page ! Neha 
+
+10. Performance Analysis Page !sharon 
+
+
