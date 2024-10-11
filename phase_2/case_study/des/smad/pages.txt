@@ -1,0 +1,18 @@
+actor: 
+    manager, opertor
+login page          ! girish 
+user management     ! girish
+home page           ! girish 
+    login page  - user control 
+    or 
+    logged in page - user control 
+        menus 
+        user name! loggout 
+data visualization page             !alan 
+Production Performance Monitoring   !alan 
+Bottleneck Analysis Page            !alan
+Alerts and Notifications Page       !anjana 
+Reporting and Analytics Page        !abhi 
+Integration Settings Page           !girish 
+Data Sources Overview Page          !abhi 
+Help and Support Page               !anjana 

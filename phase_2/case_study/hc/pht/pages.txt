@@ -1,0 +1,28 @@
+patient app 
+    home [menus]                        ! anurag         
+        if not logged in 
+            sign up                     ! anurag 
+            login                       ! anurag 
+        if logged in             
+            dashboard                   ! anurag 
+                view insights 
+                health metrics 
+                visual representation
+                etc 
+            Help page ...learn more             ! aaryaka 
+                FAQ                             ! aaryaka 
+            Contact Form                        ! anugrah
+            daily health metrics                ! aaryaka 
+            health insights                     ! gopika 
+            health goal and progress page       ! gopika
+            device integration and sync page    ! anugrah 
+            profile / settings page             ! anugrah 
+
+admin app 
+    user management                             ! anurag 
+    system performance monitoring               ! anurag 
+    platform analytics                          ! anurag 
+
+
+    
+    
