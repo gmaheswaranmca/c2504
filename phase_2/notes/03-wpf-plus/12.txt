@@ -1,0 +1,222 @@
+To implement a chat system in WPF using multithreading 
+without `DispatcherTimer` or 
+`BackgroundTask`, 
+we can leverage the `Thread` class from `System.Threading`. 
+In this scenario, 
+we'll create a separate thread 
+for continuously checking new messages 
+from the SQL Server database, and 
+we'll update the UI safely using `Dispatcher.Invoke`.
+
+Here’s how you can implement it:
+
+1. WPF Chat UI (XAML)
+
+```xml
+<Window x:Class="WpfChatApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Chat" Height="450" Width="800">
+    <Grid>
+        <!-- Message Display Area -->
+        <ListBox x:Name="MessagesList" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="700" Margin="10"/>
+        
+        <!-- Textbox for typing message -->
+        <TextBox x:Name="MessageTextBox" HorizontalAlignment="Left" Height="40" VerticalAlignment="Bottom" Width="600" Margin="10" />
+        
+        <!-- Button for sending the message -->
+        <Button Content="Send" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="40" Width="100" Margin="0,0,10,10" Click="SendButton_Click"/>
+    </Grid>
+</Window>
+```
+
+2. Code-Behind Using Multithreading (MainWindow.xaml.cs)
+
+```csharp
+using System;
+using System.Data.SqlClient;
+using System.Threading;
+using System.Windows;
+
+namespace WpfChatApp
+{
+    public partial class MainWindow : Window
+    {
+        private Thread _pollingThread;
+        private int currentUserID = 1;  // Example: Current user's ID
+        private int chatPartnerID = 2;  // Example: Chat partner's ID
+        private string connectionString = "your-sql-server-connection-string"; // Update this
+        private bool isRunning = true;  // Flag to control the thread loop
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            // Start the background thread for polling messages
+            _pollingThread = new Thread(PollForNewMessages);
+            _pollingThread.Start();
+        }
+
+        // Polling method that runs in a separate thread
+        private void PollForNewMessages()
+        {
+            while (isRunning)
+            {
+                try
+                {
+                    // Check for new messages in the database
+                    CheckForNewMessages();
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions, e.g., SQL issues
+                    Dispatcher.Invoke(() => MessageBox.Show($"Error fetching messages: {ex.Message}"));
+                }
+
+                // Sleep for a short interval before the next check (e.g., 5 seconds)
+                Thread.Sleep(5000);
+            }
+        }
+
+        // Fetch new messages from SQL Server
+        private void CheckForNewMessages()
+        {
+            string query = "SELECT MessageID, MessageText, SenderID, Timestamp FROM ChatMessages WHERE ReceiverID = @ReceiverID AND IsRead = 0";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ReceiverID", currentUserID);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string messageText = reader["MessageText"].ToString();
+                    int senderId = (int)reader["SenderID"];
+                    DateTime timestamp = (DateTime)reader["Timestamp"];
+
+                    // Update the UI with the new message using Dispatcher.Invoke
+                    Dispatcher.Invoke(() =>
+                    {
+                        DisplayMessage(senderId, messageText, timestamp);
+                    });
+
+                    // Mark the message as read
+                    MarkMessageAsRead((int)reader["MessageID"]);
+                }
+            }
+        }
+
+        // Display the message in the ListBox (UI)
+        private void DisplayMessage(int senderId, string messageText, DateTime timestamp)
+        {
+            string sender = senderId == currentUserID ? "You" : "Partner";
+            MessagesList.Items.Add($"{sender} [{timestamp.ToShortTimeString()}]: {messageText}");
+        }
+
+        // Mark the message as read in SQL Server
+        private void MarkMessageAsRead(int messageId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string updateQuery = "UPDATE ChatMessages SET IsRead = 1 WHERE MessageID = @MessageID";
+                SqlCommand cmd = new SqlCommand(updateQuery, conn);
+                cmd.Parameters.AddWithValue("@MessageID", messageId);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // Handle sending a new message
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            string messageText = MessageTextBox.Text;
+
+            if (!string.IsNullOrWhiteSpace(messageText))
+            {
+                SendMessage(chatPartnerID, messageText);
+                MessageTextBox.Clear(); // Clear the message box after sending
+            }
+        }
+
+        // Send a message and save it to the SQL Server
+        private void SendMessage(int receiverId, string messageText)
+        {
+            string query = "INSERT INTO ChatMessages (SenderID, ReceiverID, MessageText) VALUES (@SenderID, @ReceiverID, @MessageText)";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@SenderID", currentUserID);
+                cmd.Parameters.AddWithValue("@ReceiverID", receiverId);
+                cmd.Parameters.AddWithValue("@MessageText", messageText);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            // Optionally, display the sent message immediately in the UI
+            DisplayMessage(currentUserID, messageText, DateTime.Now);
+        }
+
+        // Clean up when the window is closed
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            // Stop the background thread safely
+            isRunning = false;
+
+            // Wait for the polling thread to finish
+            if (_pollingThread != null && _pollingThread.IsAlive)
+            {
+                _pollingThread.Join();
+            }
+        }
+    }
+}
+```
+
+Explanation of Key Changes:
+
+1. Polling in a Separate Thread: 
+   - Instead of using a timer or `BackgroundWorker`, we directly create a new thread (`_pollingThread`) to continuously check for new messages. The thread runs the `PollForNewMessages` method in an infinite loop, controlled by the `isRunning` flag.
+   - The loop includes a `Thread.Sleep(5000);` to make the thread wait for 5 seconds between each database poll, reducing CPU usage.
+
+2. Thread-Safe UI Updates: 
+   - Since WPF controls can only be updated from the UI thread, we use `Dispatcher.Invoke` to safely update the `ListBox` (or any other UI control) from the background thread.
+
+3. Graceful Thread Shutdown: 
+   - When the window is closed, we set `isRunning = false` to signal the thread to stop. The main thread then waits for the polling thread to finish using `_pollingThread.Join()`.
+
+4. Message Sending:
+   - The `SendMessage` method is synchronous here but can be made asynchronous if needed. This sends the message to the database and updates the UI by adding the message to the `ListBox`.
+
+Pros and Cons:
+
+- Pros:
+  - No timers or background tasks are used.
+  - Threads give full control over the execution and can be managed directly.
+  - Can handle continuous polling without freezing the UI.
+
+- Cons:
+  - Thread management (like stopping and joining) must be handled carefully.
+  - Using a `Thread.Sleep` introduces a delay between message checks, which could affect real-time chat performance.
+  - Threads are heavier in terms of system resources compared to tasks.
+
+Alternatives:
+- For real-time communication, 
+consider using SignalR or WebSockets 
+to avoid polling altogether and 
+push messages instantly from the server to the client. 
+This would remove the need 
+for manual thread management and improve responsiveness.
+
+This approach allows you to implement multithreading 
+in WPF for a chat system without relying 
+on `DispatcherTimer` or `BackgroundWorker`, 
+giving you full control over background execution 
+while ensuring the UI remains responsive.
