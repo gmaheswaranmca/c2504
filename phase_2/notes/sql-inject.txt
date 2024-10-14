@@ -1,0 +1,17 @@
+"SELECT Username, Password, Role 
+FROM Users 
+WHERE Username='" + txtUsername.Text + "' and Password='" + 
+txtPassword.Password + "'"
+
+
+"SELECT Username, Password, Role 
+FROM Users 
+WHERE Username='alan' and Password='123'"
+
+
+Username box:
+[alanu' OR 1=1 -- ]
+
+"SELECT Username, Password, Role 
+FROM Users 
+WHERE Username='alanu' OR 1=1 -- ' and Password='123'"
