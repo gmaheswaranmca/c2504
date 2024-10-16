@@ -1,1 +1,41 @@
- 
+actors: Super User, Admin User, Doctor, Nurse
+1. Login page 
+2. Dashboard 
+3. Patient Profile
+        Patient Phone [             ] <Search>
+
+        Patient Details 
+
+        Wearable Devices 
+        []    1   Blood Sugar  
+        []    2   Heart Rate 
+        []    3   Blood Pressure 
+        []    4   Activity 
+        
+        Add 
+
+4. Health Metrics Page
+    Patient Phone Number [              ] <Search>
+    Patient: ashna 
+        #   Device      Last Sync Date      Value 
+        1 Device 1   
+        2 Device 2  
+        3 Device 3  
+        <Sync> 
+5. Data Input Page
+    Patient Phone Number [              ] <Search>
+    Patient: ashna 
+    Type :      [               ] v 
+    Value :     [               ] 
+    <Update>
+
+    #Type    From Value | To Value | Normal Value | IsApplicable 
+
+6. Treatement Plan 
+    Patient Phone Number [              ] <Search>
+    Patient: ashna 
+    Deatails 
+        Plan : 
+        Medications : 
+        etc 
+        <Update> 
