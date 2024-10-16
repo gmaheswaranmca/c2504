@@ -1,0 +1,280 @@
+
+```csharp
+using System;
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+
+public class AccountApiRepository : IAccountRepo
+{
+    private readonly string _apiBaseUrl;
+
+    public AccountApiRepository(string apiBaseUrl)
+    {
+        _apiBaseUrl = apiBaseUrl;
+    }
+
+    // Create an account (HTTP POST)
+    public void Create(Account account)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var jsonContent = JsonConvert.SerializeObject(account);
+            var httpContent = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PostAsync("api/accounts", httpContent).Result;
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Update an account (HTTP PUT)
+    public void Update(Account account)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var jsonContent = JsonConvert.SerializeObject(account);
+            var httpContent = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PutAsync($"api/accounts/{account.AccountNumber}", httpContent).Result;
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Delete an account (HTTP DELETE)
+    public void Delete(Account account)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.DeleteAsync($"api/accounts/{account.AccountNumber}").Result;
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Deposit to an account (HTTP PUT)
+    public void Deposit(int acNo, int amount)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var depositData = new { AccountNumber = acNo, Amount = amount };
+            var jsonContent = JsonConvert.SerializeObject(depositData);
+            var httpContent = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PutAsync($"api/accounts/deposit/{acNo}", httpContent).Result;
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Withdraw from an account (HTTP PUT)
+    public void Withdrw(int acNo, int amount)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var withdrawData = new { AccountNumber = acNo, Amount = amount };
+            var jsonContent = JsonConvert.SerializeObject(withdrawData);
+            var httpContent = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PutAsync($"api/accounts/withdraw/{acNo}", httpContent).Result;
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Calculate interest and update balance (Business logic on API side)
+    public void CalculateInterestAndUpdateBalance()
+    {
+        // Placeholder for the business logic call to the API
+    }
+
+    // Read all accounts (HTTP GET)
+    public ObservableCollection<Account> ReadAll()
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.GetAsync("api/accounts").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = response.Content.ReadAsStringAsync().Result;
+                var accounts = JsonConvert.DeserializeObject<ObservableCollection<Account>>(jsonString);
+                return accounts;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+}
+```
+
+Key Changes:
+1. Synchronous Execution: 
+   - Replaced `async` methods with synchronous calls using `.Result` 
+   to block execution and wait for the task to complete.
+   - Each API request (POST, PUT, GET, DELETE) is executed synchronously.
+   
+2. Error Handling:
+   - Error handling can be added using `try-catch` blocks 
+   if needed to handle failed API calls more gracefully.
+
+===========================================================================
+
+
+
+
+with async / await 
+===========================================================================
+
+using System;
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+public class AccountApiRepository : IAccountRepo
+{
+    private readonly string _apiBaseUrl;
+
+    // Constructor to set the base URL of the API
+    public AccountApiRepository(string apiBaseUrl)
+    {
+        _apiBaseUrl = apiBaseUrl;
+    }
+
+    // Create an account (HTTP POST)
+    public async void Create(Account account)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var jsonContent = JsonConvert.SerializeObject(account);
+            var httpContent = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync("api/accounts", httpContent);
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Update an account (HTTP PUT)
+    public async void Update(Account account)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var jsonContent = JsonConvert.SerializeObject(account);
+            var httpContent = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync($"api/accounts/{account.AccountNumber}", httpContent);
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Delete an account (HTTP DELETE)
+    public async void Delete(Account account)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = await client.DeleteAsync($"api/accounts/{account.AccountNumber}");
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Deposit to an account (HTTP PUT)
+    public async void Deposit(int acNo, int amount)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var depositData = new { AccountNumber = acNo, Amount = amount };
+            var jsonContent = JsonConvert.SerializeObject(depositData);
+            var httpContent = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync($"api/accounts/deposit/{acNo}", httpContent);
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Withdraw from an account (HTTP PUT)
+    public async void Withdrw(int acNo, int amount)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var withdrawData = new { AccountNumber = acNo, Amount = amount };
+            var jsonContent = JsonConvert.SerializeObject(withdrawData);
+            var httpContent = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync($"api/accounts/withdraw/{acNo}", httpContent);
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    // Calculate interest and update balance (Business logic on API side)
+    public void CalculateInterestAndUpdateBalance()
+    {
+        // Usually, this would be a business logic handled server-side.
+        // The API should expose an endpoint for it, like 'api/accounts/calculateInterest'.
+        // Implement the call as needed once the backend logic is in place.
+    }
+
+    // Read all accounts (HTTP GET)
+    public async Task<ObservableCollection<Account>> ReadAll()
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(_apiBaseUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = await client.GetAsync("api/accounts");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var accounts = JsonConvert.DeserializeObject<ObservableCollection<Account>>(jsonString);
+                return accounts;
+            }
+
+            return null;
+        }
+    }
+}

@@ -1,0 +1,481 @@
+For a .NET Framework-based application using ADO.NET with SQL Server, 
+you will need to modify your code to directly interact with SQL Server 
+using `SqlConnection`, `SqlCommand`, and 
+other ADO.NET classes instead of using Entity Framework.
+
+Here’s how you can implement the ADO.NET version for your Account table with SQL Server.
+
+Steps:
+1. Set up SQL Server connection.
+2. Implement the `Account` model.
+3. Create the Account Repository using ADO.NET.
+4. API Controller to call Repository methods.
+
+---
+
+1. Set up SQL Server Connection
+
+You need a connection string to your SQL Server database. This can be added in the `Web.config` file.
+
+```xml
+<configuration>
+  <connectionStrings>
+    <add name="DefaultConnection"
+         connectionString="Server=your_server_name;Database=your_database_name;User Id=your_user_id;Password=your_password;"
+         providerName="System.Data.SqlClient" />
+  </connectionStrings>
+</configuration>
+```
+
+---
+
+2. Implement the `Account` Model
+
+Your `Account` model remains the same as before:
+
+```csharp
+using System;
+
+namespace AccountAPI.Models
+{
+    public class Account
+    {
+        public int AccountNumber { get; set; }
+        public string Name { get; set; }
+        public decimal Balance { get; set; }
+        public string Type { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Address { get; set; }
+        public bool IsActive { get; set; }
+        public string InterestPercentage { get; set; }
+        public int TransactionCount { get; set; }
+        public DateTime LastTransactionDate { get; set; }
+    }
+}
+```
+
+---
+
+3. Implement the Account Repository using ADO.NET
+
+Here's how to implement basic CRUD operations using ADO.NET in an `AccountRepository` class.
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using AccountAPI.Models;
+
+namespace AccountAPI.Repositories
+{
+    public class AccountRepository
+    {
+        private readonly string _connectionString;
+
+        public AccountRepository()
+        {
+            _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        }
+
+        // Create (Insert) a new Account
+        public void Create(Account account)
+        {
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO Accounts (Name, Balance, Type, Email, PhoneNumber, Address, IsActive, InterestPercentage, TransactionCount, LastTransactionDate) " +
+                    "VALUES (@Name, @Balance, @Type, @Email, @PhoneNumber, @Address, @IsActive, @InterestPercentage, @TransactionCount, @LastTransactionDate)", con);
+                
+                cmd.Parameters.AddWithValue("@Name", account.Name);
+                cmd.Parameters.AddWithValue("@Balance", account.Balance);
+                cmd.Parameters.AddWithValue("@Type", account.Type);
+                cmd.Parameters.AddWithValue("@Email", account.Email);
+                cmd.Parameters.AddWithValue("@PhoneNumber", account.PhoneNumber);
+                cmd.Parameters.AddWithValue("@Address", account.Address);
+                cmd.Parameters.AddWithValue("@IsActive", account.IsActive);
+                cmd.Parameters.AddWithValue("@InterestPercentage", account.InterestPercentage);
+                cmd.Parameters.AddWithValue("@TransactionCount", account.TransactionCount);
+                cmd.Parameters.AddWithValue("@LastTransactionDate", account.LastTransactionDate);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+        // Read (Get) all Accounts
+        public List<Account> ReadAll()
+        {
+            List<Account> accounts = new List<Account>();
+
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Accounts", con);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    accounts.Add(new Account
+                    {
+                        AccountNumber = Convert.ToInt32(reader["AccountNumber"]),
+                        Name = reader["Name"].ToString(),
+                        Balance = Convert.ToDecimal(reader["Balance"]),
+                        Type = reader["Type"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        PhoneNumber = reader["PhoneNumber"].ToString(),
+                        Address = reader["Address"].ToString(),
+                        IsActive = Convert.ToBoolean(reader["IsActive"]),
+                        InterestPercentage = reader["InterestPercentage"].ToString(),
+                        TransactionCount = Convert.ToInt32(reader["TransactionCount"]),
+                        LastTransactionDate = Convert.ToDateTime(reader["LastTransactionDate"])
+                    });
+                }
+
+                con.Close();
+            }
+
+            return accounts;
+        }
+
+        // Update an existing Account
+        public void Update(Account account)
+        {
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE Accounts SET Name=@Name, Balance=@Balance, Type=@Type, Email=@Email, PhoneNumber=@PhoneNumber, Address=@Address, " +
+                    "IsActive=@IsActive, InterestPercentage=@InterestPercentage, TransactionCount=@TransactionCount, LastTransactionDate=@LastTransactionDate WHERE AccountNumber=@AccountNumber", con);
+
+                cmd.Parameters.AddWithValue("@AccountNumber", account.AccountNumber);
+                cmd.Parameters.AddWithValue("@Name", account.Name);
+                cmd.Parameters.AddWithValue("@Balance", account.Balance);
+                cmd.Parameters.AddWithValue("@Type", account.Type);
+                cmd.Parameters.AddWithValue("@Email", account.Email);
+                cmd.Parameters.AddWithValue("@PhoneNumber", account.PhoneNumber);
+                cmd.Parameters.AddWithValue("@Address", account.Address);
+                cmd.Parameters.AddWithValue("@IsActive", account.IsActive);
+                cmd.Parameters.AddWithValue("@InterestPercentage", account.InterestPercentage);
+                cmd.Parameters.AddWithValue("@TransactionCount", account.TransactionCount);
+                cmd.Parameters.AddWithValue("@LastTransactionDate", account.LastTransactionDate);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+        // Delete an Account (Soft Delete)
+        public void Delete(int accountNumber)
+        {
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE Accounts SET IsActive = 0 WHERE AccountNumber = @AccountNumber", con);
+                cmd.Parameters.AddWithValue("@AccountNumber", accountNumber);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+        // Deposit Amount to Account
+        public void Deposit(int accountNumber, decimal amount)
+        {
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE Accounts SET Balance = Balance + @Amount, TransactionCount = TransactionCount + 1, LastTransactionDate = @LastTransactionDate WHERE AccountNumber = @AccountNumber", con);
+                cmd.Parameters.AddWithValue("@Amount", amount);
+                cmd.Parameters.AddWithValue("@AccountNumber", accountNumber);
+                cmd.Parameters.AddWithValue("@LastTransactionDate", DateTime.Now);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+        // Withdraw Amount from Account
+        public void Withdraw(int accountNumber, decimal amount)
+        {
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE Accounts SET Balance = Balance - @Amount, TransactionCount = TransactionCount + 1, LastTransactionDate = @LastTransactionDate WHERE AccountNumber = @AccountNumber AND Balance >= @Amount", con);
+                cmd.Parameters.AddWithValue("@Amount", amount);
+                cmd.Parameters.AddWithValue("@AccountNumber", accountNumber);
+                cmd.Parameters.AddWithValue("@LastTransactionDate", DateTime.Now);
+
+                con.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected == 0)
+                {
+                    throw new Exception("Insufficient balance or account not found");
+                }
+
+                con.Close();
+            }
+        }
+    }
+}
+```
+
+---
+
+4. API Controller to Call Repository Methods
+
+You can create an API controller that calls the repository methods.
+
+```csharp
+using AccountAPI.Models;
+using AccountAPI.Repositories;
+using System.Collections.Generic;
+using System.Web.Http;
+
+namespace AccountAPI.Controllers
+{
+    [RoutePrefix("api/accounts")]
+    public class AccountsController : ApiController
+    {
+        private readonly AccountRepository _repo;
+
+        public AccountsController()
+        {
+            _repo = new AccountRepository();
+        }
+
+        // GET: api/accounts
+        [HttpGet]
+        [Route("")]
+        public IEnumerable<Account> GetAccounts()
+        {
+            return _repo.ReadAll();
+        }
+
+        // GET: api/accounts/5
+        [HttpGet]
+        [Route("{id:int}")]
+        public Account GetAccount(int id)
+        {
+            var accounts = _repo.ReadAll();
+            return accounts.Find(a => a.AccountNumber == id);
+        }
+
+        // POST: api/accounts
+        [HttpPost]
+        [Route("")]
+        public IHttpActionResult CreateAccount(Account account)
+        {
+            _repo.Create(account);
+            return Ok(account);
+        }
+
+        // PUT: api/accounts/5
+        [HttpPut]
+        [Route("{id:int}")]
+        public IHttpActionResult UpdateAccount(int id, Account account)
+        {
+            if (id != account.AccountNumber)
+                return BadRequest();
+
+            _repo.Update(account);
+            return Ok(account);
+        }
+
+        // DELETE: api/accounts/5
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IHttpActionResult DeleteAccount(int id)
+        {
+            _repo.Delete(id);
+            return Ok();
+        }
+
+        // POST: api/accounts/deposit/5
+        [HttpPost]
+        [Route("deposit/{id:int}")]
+
+
+        public IHttpActionResult Deposit(int id, [FromBody] decimal amount)
+        {
+            _repo.Deposit(id, amount);
+            return Ok();
+        }
+
+        // POST: api/accounts/withdraw/5
+        [HttpPost]
+        [Route("withdraw/{id:int}")]
+        public IHttpActionResult Withdraw(int id, [FromBody] decimal amount)
+        {
+            try
+            {
+                _repo.Withdraw(id, amount);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+    }
+}
+```
+
+---
+
+Conclusion
+
+This solution uses ADO.NET to perform CRUD operations 
+on an Account table in SQL Server. 
+Each method interacts with the database 
+using `SqlConnection`, `SqlCommand`, and parameters. 
+You can expand this by adding validation, logging, 
+and error handling based on your specific requirements.
+
+
+
+ public static class WebApiConfig
+ {
+     public static void Register(HttpConfiguration config)
+     {
+
+         // Enable CORS globally
+         var cors = new EnableCorsAttribute(origins: "*", headers: "*", methods: "*");
+         config.EnableCors(cors);
+         // Web API configuration and services
+
+         // Web API routes
+         config.MapHttpAttributeRoutes();
+
+         config.Routes.MapHttpRoute(
+             name: "DefaultApi",
+             routeTemplate: "api/{controller}/{id}",
+             defaults: new { id = RouteParameter.Optional }
+         );
+     }
+ }
+
+
+CREATE TABLE Accounts
+(
+    AccountNumber INT IDENTITY(1,1) PRIMARY KEY, -- Auto-incrementing Account Number
+    Name NVARCHAR(100) NOT NULL,                -- Name of the account holder
+    Balance DECIMAL(18, 2) NOT NULL,            -- Balance amount in the account
+    Type NVARCHAR(50) NOT NULL,                 -- Type of account (e.g., Savings, Current)
+    Email NVARCHAR(100) NOT NULL,               -- Email address of the account holder
+    PhoneNumber NVARCHAR(15) NOT NULL,          -- Phone number of the account holder
+    Address NVARCHAR(255) NOT NULL,             -- Address of the account holder
+    IsActive BIT NOT NULL DEFAULT 1,            -- Status of the account (active or inactive)
+    InterestPercentage NVARCHAR(10),            -- Interest percentage (optional, depending on the account type)
+    TransactionCount INT NOT NULL DEFAULT 0,    -- Number of transactions made by the account holder
+    LastTransactionDate DATETIME                -- Date and time of the last transaction
+);
+{"AccountNumber":"11112222",
+"Name":"Dravid",
+"Balance":2000,
+"Type":"Savings Account",
+"Email":"dravid@gmail.com",
+"PhoneNumber":"1122334455",
+"Address":"Bangalore",
+"IsActive":1,
+"InterestPercentage":5,
+"TransactionCount":1,
+"LastTransactionDate":"2024-10-15"}
+
+
+{"AccountNumber":"11113333",
+"Name":"Rahul",
+"Balance":2000,
+"Type":"Savings Account",
+"Email":"rahul@gmail.com",
+"PhoneNumber":"2222334455",
+"Address":"Bangalore",
+"IsActive":1,
+"InterestPercentage":5,
+"TransactionCount":1,
+"LastTransactionDate":"2024-10-15"}
+Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BankDb;Integrated Security=True;Connect Timeout=30;Encrypt=True;
+=====================================================================================================
+
+
+If you can't find the option for creating an ASP.NET Web Application (.NET Framework) 
+in Visual Studio, 
+it could be due to a few reasons, 
+such as not having the right components installed or 
+using an incompatible version of Visual Studio. 
+Here’s how you can troubleshoot and create your project step-by-step:
+
+Troubleshooting and Creating ASP.NET Web API Project
+
+Step 1: Install the Required Components
+1. Check Visual Studio Version:
+   - Ensure you are using Visual Studio 2019 or later. 
+   If you’re using Visual Studio 2022 or later, 
+   you should still have access to .NET Framework templates.
+
+2. Install ASP.NET and Web Development Workload:
+   - Open Visual Studio Installer.
+   - Click on Modify for your Visual Studio installation.
+   - Under the Workloads tab, ensure that ASP.NET and
+    web development is checked. 
+    This workload includes templates for ASP.NET Web API.
+
+Step 2: Create a New ASP.NET Web API Project
+1. Open Visual Studio.
+2. Click on Create a new project.
+3. In the "Create a new project" window, 
+use the search bar and type ASP.NET Web API.
+4. Select the project template:
+   - For .NET Framework, look for options 
+   like ASP.NET Web Application (.NET Framework) or similar.
+   - Click Next.
+
+5. Configure Your Project:
+   - Name your project (e.g., `AccountAPI`), choose the location, and click Create.
+
+6. Choose Template:
+   - In the new dialog, select Web API as the template.
+   - Click Create.
+
+Step 3: Set Up Your Project
+Once the project is created, follow the steps 
+I provided in the previous response 
+to create your `Account` model, repository, and API controller.
+
+Alternative: Create an ASP.NET Core Web API
+If you're unable to find the .NET Framework template or prefer 
+to work with the newer technology stack, 
+you can create an ASP.NET Core Web API project. Here’s how:
+
+1. Open Visual Studio.
+2. Click on Create a new project.
+3. Search for ASP.NET Core Web API in the project template search.
+4. Select ASP.NET Core Web API and click Next.
+5. Configure your project:
+   - Name your project (e.g., `AccountAPI`), choose the location, and click Create.
+6. Choose .NET 6 or .NET 7 as the target framework and click Create.
+
+Set Up ASP.NET Core Web API
+Once your ASP.NET Core Web API project is created, you can set it up similarly to the steps provided for the .NET Framework. Here’s a brief overview:
+
+1. Add Your Model:
+   - Create a `Models` folder and add an `Account.cs` file with the same properties as mentioned before.
+
+2. Add Data Access Layer:
+   - Create a `Data` folder and add an `AccountRepository.cs` with ADO.NET implementation for SQL Server.
+
+3. Create API Controller:
+   - In the `Controllers` folder, create an `AccountsController.cs` for handling API requests.
+
+4. Configure the Connection String:
+   - Open `appsettings.json` to add your SQL Server connection string.
+
+5. Run the Application:
+   - Use `F5` to run the application and test your API using Postman or Swagger.
+
+Conclusion
+Using either ASP.NET Framework or ASP.NET Core, 
+you can create a RESTful API to manage your account data. 
+If you need further assistance with specific parts of the setup or code, 
+feel free to ask!
