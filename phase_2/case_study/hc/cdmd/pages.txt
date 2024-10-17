@@ -2,10 +2,10 @@ actors: Super User, Admin User, Doctor, Nurse
 1. Login page 
 2. Dashboard 
 3. Patient Profile
-        Patient Phone [             ] <Search>
+        <New Patient> Patient Phone [             ] <Search>
 
         Patient Details 
-
+            Patient: [ ashna ]
         Wearable Devices 
         []    1   Blood Sugar  
         []    2   Heart Rate 
@@ -39,3 +39,38 @@ actors: Super User, Admin User, Doctor, Nurse
         Medications : 
         etc 
         <Update> 
+
+
+PatientViewModel 
+    NewPatient 
+    Device1 ... {get; set;}
+
+    Create()
+        if(CrudOperation == 1)
+            _Create();
+        else 
+            _Update()
+
+    _Create()
+
+    _Update()
+
+    PhoneNumber {get; set; }
+    Patient ExistingPatient {get; set}
+
+    CrudOperation {get; set; } =1 //newpatient 
+    Search()     // var patient = _repo.Search(PhoneNumber); 
+        if(patient!=null){
+            ExistingPatient=patient;CrudOperation = 2;
+            foreach(var wdevice in patient.WearableDevices)
+            {
+                if(wdevice.DeviceType.Equals("Blood Sugar"))
+                {
+                    Device1 = true;
+                }
+                //...
+            }
+        }
+    NewPatient() //CrudOperation = 1; NewPatient = new Patient{}
+    Patient Patient{get{return CrudOperation == 1 ? NewPatient : ExistingPatient;}}
+    string OperationText { get {return CrudOperation == 1 ? "Register" : "Update";}}

@@ -1,0 +1,45 @@
+SMAD 
+    girish, anjana, alan, abhijith 
+    1. Not shutdown properly !!!
+    2. Navigations between pages becauase BL !!!
+    3. Login button in the login page !!!increase hight  
+    4. Log In, Logged In pages switch 
+        User controls 
+        !!!Not done 
+    --- Login Page is not invisible after logged in 
+    !!!--- Password Hashing is not applied 
+    5. Side bar menu in home page !!!- align left
+    6. Passwords cannot be printed in any page !!!
+        user management 
+
+        Binding issues !!! basic errors 
+
+
+        User Role can be : Machine Operator / Staff, Manager / Admin 
+    7. Pages should be maximized always other than login page 
+    8. Alerts pages title is wrong 
+
+        Alerts and Notifications are same 
+        !!!Notifications are based on alerts - WRONG 
+    9. Settings are not aware by entire team. Not learnt the domain. 
+    10. Production Report Exports are pending 
+        PDF, Excel to be changed as JSON, XML 
+
+EHRMS 
+    yahkoop, ann mariya, sahla?, anjana?
+    1. Patient Manager 
+        - completed by yahkoop but work belongs to anjana 
+    2. !!! windows to be maximized all the time 
+    3. Medical history !!! anjana -> yahkoop 
+        Dont print the id, patient id
+    4. User management !!! yahkoop
+        !!! working 
+    5. Login is based user table 
+        !!! password hashing implemented 
+    6. EHR manager !!! sahla -> yahkoop 
+    7. medication manager !!! ann mariay 
+    8. Biilling !!! ann mariay 
+    9. Appointmnet Scheduling !!! sahla 
+    10. Audit trail !!! anjana -> yahkoop 
+
+
