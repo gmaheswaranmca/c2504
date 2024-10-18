@@ -1,0 +1,156 @@
+git clone url 						#to clone from remote compute | one time 
+git checkout -b feature/mahesh 		#to create + swith branch | one time 
+
+git checkout feature/mahesh 		#to swith to branch feature/mahesh
+git checkout main 					#to swith to branch feature/mahesh
+
+git merge main						#be at branch feature/mahesh, merges from main to feature/mahesh
+									#fix conflict 
+git merge feature/mahesh			#be at branch main, merges from feature/mahesh to main
+									#update 
+
+git pull origin main				#be at branch main, pull from remote main to local main 
+git push origin feature/mahesh		#be at branch feature/mahesh, push from local feature/mahesh to remote feature/mahesh 
+
+
+git add . 							#to stage changes of the current branch 
+git commit -m "Message"				#to commit to local current branch 
+
+git status 							#to check status of current branch 
+
+
+my feature start:
+	git clone
+	git checkout -b feature/myname 
+my feature change:
+	git status .
+	git add .
+	git commit -m "message" 
+my feature update from remote main:
+	git checkout main 
+	git pull origin main 
+
+	git checkout feature/myname 
+	git merge main 				#after:check feature branch is working 
+my feature update to remote main 
+	git push orgin feature/myname 
+	
+	git checkout main 
+	git merge feature/myname #prerequisite:check feature branch is working 
+							 #after:check main branch is working 	
+	git push origin main 	 
+
+
+
+To efficiently manage the development of 
+12 pages with a team of four members 
+(3 pages each) using Git, 
+follow this workflow:
+
+1. Set Up the Project with Git
+   - Main Branch: Create a `main` (or `master`) branch, which will hold the stable version of the project. All final code will be merged here after review.
+   - Feature Branches: Each person should work in a separate feature branch. You can create individual branches for each person and their respective 3 pages.
+   
+2. Create Individual Feature Branches
+   Assign branches to each team member based on the pages they will develop. For instance:
+
+   - Developer 1: `feature/dev1-pages`
+   - Developer 2: `feature/dev2-pages`
+   - Developer 3: `feature/dev3-pages`
+   - Developer 4: `feature/dev4-pages`
+
+   Each developer will implement their assigned 3 pages in their own branch. You can also break it down further by creating separate branches for each page (optional but may help with micro-tasks):
+   
+   - `feature/home-page`
+   - `feature/about-page`
+   - `feature/contact-page`
+
+   This will keep things more modular and independent, but it's up to your team's preference.
+
+3. Develop Pages Individually
+   Each team member should:
+   - Check out their feature branch for development:
+     ```bash
+     git checkout -b feature/dev1-pages
+     ```
+   - Develop their 3 pages within this branch.
+
+4. Frequent Pulls from Main Branch
+   To avoid conflicts and keep your branch up to date, 
+   egularly pull the latest changes from the `main` branch into your feature branch:
+
+   - Pull from Main:
+     ```bash
+     git checkout main
+     git pull origin main
+     ```
+   - Switch back and merge into your feature branch:
+     ```bash
+     git checkout feature/dev1-pages
+     git merge main
+     ```
+
+   This step is crucial to ensure that any changes made to common files or 
+   by other team members are integrated into your branch without conflicts.
+
+5. Testing Locally
+   After implementing your pages, test the project locally to ensure your 3 pages work as expected and don't break other parts of the application.
+
+6. Push to Feature Branch
+   Once your 3 pages are developed and tested, push the changes to your remote feature branch:
+   ```bash
+   git add .
+   git commit -m "Developed home, about, and contact pages"
+   git push origin feature/dev1-pages
+   ```
+
+7. Open a Pull Request (PR)
+   After completing your task, 
+   open a Pull Request from your feature branch to the `main` branch. 
+   The pull request should:
+   - Be reviewed by at least one other team member.
+   - Allow team members to suggest improvements.
+   - Ensure all code merges into `main` after thorough review and testing.
+   
+   This step ensures that no untested code gets merged into the main branch.
+
+8. Merge to Main After Review
+   Once your PR is approved, merge it into the `main` branch. You can either use:
+   - Fast-forward merges for simple cases.
+   - Squash and merge to combine all your commits into one.
+   
+   This will ensure a clean history and that your 3 pages are part of the stable `main` branch.
+
+9. Handle Conflicts (If Any)
+   In case of conflicts, especially in shared resources 
+   (e.g., `App.xaml`, common styles, or global settings):
+   - Git will highlight the conflicts when you try to merge.
+   - Use a merge tool (Visual Studio, VSCode, or a Git client like GitKraken) 
+   to resolve conflicts manually.
+
+10. Repeat for All Pages
+   Follow this same workflow for the other team members as well, 
+   so that each person can push their work independently 
+   without interfering with others' work.
+
+Example Workflow for Developer 1:
+
+1. Create Branch: 
+   ```bash
+   git checkout -b feature/dev1-pages
+   ```
+2. Develop 3 Pages (Home, About, Contact).
+3. Pull Latest Changes from Main:
+   ```bash
+   git checkout main
+   git pull origin main
+   git checkout feature/dev1-pages
+   git merge main
+   ```
+4. Push Your Changes:
+   ```bash
+   git push origin feature/dev1-pages
+   ```
+5. Open a Pull Request for Review.
+
+This process keeps the work isolated, minimizes merge conflicts, and promotes team collaboration.
