@@ -1,4 +1,13 @@
-
+1. solid + design patterns
+	yahkoop, girish, alan 
+2. sql repo - gopika, sahla  
+3. json repo - sharon, gladsy   
+4. xml repo - ashna, minnu 
+5. ef repo - collin, abhijith 
+6. mvvm - nega + dijol + ashwin   
+7. exception handling + logger - anugrah, anurag 
+8. OOP - anjana, rishwin, keerthana  
+9. background jobs - aaryaka, ann mariya
 
 
 
